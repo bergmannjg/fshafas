@@ -1,0 +1,409 @@
+[
+    {
+        "direction": "Strelapark/Zoo, Stralsund",
+        "tripId": "1|394834|0|80|6032021",
+        "line": {
+            "type": "line",
+            "id": "5-nvpbus-3",
+            "fahrtNr": null,
+            "name": "Bus 3",
+            "public": true,
+            "mode": "bus",
+            "product": "bus"
+        },
+        "location": {
+            "type": "location",
+            "latitude": 54.309427,
+            "longitude": 13.077786
+        },
+        "nextStopovers": [
+            {
+                "stop": {
+                    "type": "stop",
+                    "id": "325707",
+                    "name": "Devin, Stralsund",
+                    "location": {
+                        "type": "location",
+                        "id": "325707",
+                        "latitude": 54.265496,
+                        "longitude": 13.142607
+                    },
+                    "products": {
+                        "nationalExpress": false,
+                        "national": false,
+                        "regionalExp": false,
+                        "regional": false,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": false,
+                        "taxi": false
+                    }
+                },
+                "arrival": null,
+                "plannedArrival": null,
+                "arrivalDelay": null,
+                "arrivalPlatform": null,
+                "plannedArrivalPlatform": null,
+                "departure": "2021-03-06T17:05:00+01:00",
+                "plannedDeparture": "2021-03-06T17:05:00+01:00",
+                "departureDelay": null,
+                "departurePlatform": null,
+                "plannedDeparturePlatform": null
+            },
+            {
+                "stop": {
+                    "type": "stop",
+                    "id": "952267",
+                    "name": "Hauptbahnhof, Stralsund",
+                    "location": {
+                        "type": "location",
+                        "id": "952267",
+                        "latitude": 54.309148,
+                        "longitude": 13.077723
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": false,
+                        "taxi": false
+                    }
+                },
+                "arrival": "2021-03-06T17:25:00+01:00",
+                "plannedArrival": "2021-03-06T17:25:00+01:00",
+                "arrivalDelay": null,
+                "arrivalPlatform": null,
+                "plannedArrivalPlatform": null,
+                "departure": "2021-03-06T17:25:00+01:00",
+                "plannedDeparture": "2021-03-06T17:25:00+01:00",
+                "departureDelay": null,
+                "departurePlatform": null,
+                "plannedDeparturePlatform": null
+            },
+            {
+                "stop": {
+                    "type": "stop",
+                    "id": "325731",
+                    "name": "Wolfgang-Heinze-Str., Stralsund",
+                    "location": {
+                        "type": "location",
+                        "id": "325731",
+                        "latitude": 54.312959,
+                        "longitude": 13.078541
+                    },
+                    "products": {
+                        "nationalExpress": false,
+                        "national": false,
+                        "regionalExp": false,
+                        "regional": false,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": false,
+                        "taxi": false
+                    }
+                },
+                "arrival": "2021-03-06T17:27:00+01:00",
+                "plannedArrival": "2021-03-06T17:27:00+01:00",
+                "arrivalDelay": null,
+                "arrivalPlatform": null,
+                "plannedArrivalPlatform": null,
+                "departure": "2021-03-06T17:27:00+01:00",
+                "plannedDeparture": "2021-03-06T17:27:00+01:00",
+                "departureDelay": null,
+                "departurePlatform": null,
+                "plannedDeparturePlatform": null
+            },
+            {
+                "stop": {
+                    "type": "stop",
+                    "id": "952406",
+                    "name": "Strelapark/Zoo, Stralsund",
+                    "location": {
+                        "type": "location",
+                        "id": "952406",
+                        "latitude": 54.319755,
+                        "longitude": 13.050036
+                    },
+                    "products": {
+                        "nationalExpress": false,
+                        "national": false,
+                        "regionalExp": false,
+                        "regional": false,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": false,
+                        "taxi": false
+                    }
+                },
+                "arrival": "2021-03-06T17:42:00+01:00",
+                "plannedArrival": "2021-03-06T17:42:00+01:00",
+                "arrivalDelay": null,
+                "arrivalPlatform": null,
+                "plannedArrivalPlatform": null,
+                "departure": null,
+                "plannedDeparture": null,
+                "departureDelay": null,
+                "departurePlatform": null,
+                "plannedDeparturePlatform": null
+            }
+        ],
+        "frames": [
+            {
+                "origin": {
+                    "type": "stop",
+                    "id": "952267",
+                    "name": "Hauptbahnhof, Stralsund",
+                    "location": {
+                        "type": "location",
+                        "id": "952267",
+                        "latitude": 54.309148,
+                        "longitude": 13.077723
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": false,
+                        "taxi": false
+                    }
+                },
+                "destination": {
+                    "type": "stop",
+                    "id": "325731",
+                    "name": "Wolfgang-Heinze-Str., Stralsund",
+                    "location": {
+                        "type": "location",
+                        "id": "325731",
+                        "latitude": 54.312959,
+                        "longitude": 13.078541
+                    },
+                    "products": {
+                        "nationalExpress": false,
+                        "national": false,
+                        "regionalExp": false,
+                        "regional": false,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": false,
+                        "taxi": false
+                    }
+                },
+                "t": 0
+            },
+            {
+                "origin": {
+                    "type": "stop",
+                    "id": "952267",
+                    "name": "Hauptbahnhof, Stralsund",
+                    "location": {
+                        "type": "location",
+                        "id": "952267",
+                        "latitude": 54.309148,
+                        "longitude": 13.077723
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": false,
+                        "taxi": false
+                    }
+                },
+                "destination": {
+                    "type": "stop",
+                    "id": "325731",
+                    "name": "Wolfgang-Heinze-Str., Stralsund",
+                    "location": {
+                        "type": "location",
+                        "id": "325731",
+                        "latitude": 54.312959,
+                        "longitude": 13.078541
+                    },
+                    "products": {
+                        "nationalExpress": false,
+                        "national": false,
+                        "regionalExp": false,
+                        "regional": false,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": false,
+                        "taxi": false
+                    }
+                },
+                "t": 10000
+            },
+            {
+                "origin": {
+                    "type": "stop",
+                    "id": "952267",
+                    "name": "Hauptbahnhof, Stralsund",
+                    "location": {
+                        "type": "location",
+                        "id": "952267",
+                        "latitude": 54.309148,
+                        "longitude": 13.077723
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": false,
+                        "taxi": false
+                    }
+                },
+                "destination": {
+                    "type": "stop",
+                    "id": "325731",
+                    "name": "Wolfgang-Heinze-Str., Stralsund",
+                    "location": {
+                        "type": "location",
+                        "id": "325731",
+                        "latitude": 54.312959,
+                        "longitude": 13.078541
+                    },
+                    "products": {
+                        "nationalExpress": false,
+                        "national": false,
+                        "regionalExp": false,
+                        "regional": false,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": false,
+                        "taxi": false
+                    }
+                },
+                "t": 20000
+            },
+            {
+                "origin": {
+                    "type": "stop",
+                    "id": "952267",
+                    "name": "Hauptbahnhof, Stralsund",
+                    "location": {
+                        "type": "location",
+                        "id": "952267",
+                        "latitude": 54.309148,
+                        "longitude": 13.077723
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": false,
+                        "taxi": false
+                    }
+                },
+                "destination": {
+                    "type": "stop",
+                    "id": "325731",
+                    "name": "Wolfgang-Heinze-Str., Stralsund",
+                    "location": {
+                        "type": "location",
+                        "id": "325731",
+                        "latitude": 54.312959,
+                        "longitude": 13.078541
+                    },
+                    "products": {
+                        "nationalExpress": false,
+                        "national": false,
+                        "regionalExp": false,
+                        "regional": false,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": false,
+                        "taxi": false
+                    }
+                },
+                "t": 30000
+            }
+        ],
+        "polyline": {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            13.07779,
+                            54.30943
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            13.07786,
+                            54.30978
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            13.07793,
+                            54.31012
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            13.07801,
+                            54.31047
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+]

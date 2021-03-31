@@ -1,0 +1,12 @@
+{
+  "name": "fs-hafas-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "fshafas.bundle.js",
+  "types": "fshafas.bundle.d.ts",
+  "dependencies": {
+    "@types/hafas-client": "^5.12.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

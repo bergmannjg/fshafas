@@ -1,0 +1,145 @@
+[
+    {
+        "type": "stop",
+        "id": "8010338",
+        "name": "Stralsund Hbf",
+        "location": {
+            "type": "location",
+            "id": "8010338",
+            "latitude": 54.308438,
+            "longitude": 13.078028
+        },
+        "products": {
+            "nationalExpress": true,
+            "national": true,
+            "regionalExp": true,
+            "regional": true,
+            "suburban": false,
+            "bus": true,
+            "ferry": false,
+            "subway": false,
+            "tram": false,
+            "taxi": false
+        },
+        "distance": 50
+    },
+    {
+        "type": "stop",
+        "id": "952267",
+        "name": "Hauptbahnhof, Stralsund",
+        "location": {
+            "type": "location",
+            "id": "952267",
+            "latitude": 54.309148,
+            "longitude": 13.077723
+        },
+        "products": {
+            "nationalExpress": true,
+            "national": true,
+            "regionalExp": true,
+            "regional": true,
+            "suburban": false,
+            "bus": true,
+            "ferry": false,
+            "subway": false,
+            "tram": false,
+            "taxi": false
+        },
+        "station": {
+            "type": "station",
+            "id": "8010338",
+            "name": "Stralsund Hbf",
+            "location": {
+                "type": "location",
+                "id": "8010338",
+                "latitude": 54.308438,
+                "longitude": 13.078028
+            },
+            "products": {
+                "nationalExpress": true,
+                "national": true,
+                "regionalExp": true,
+                "regional": true,
+                "suburban": false,
+                "bus": true,
+                "ferry": false,
+                "subway": false,
+                "tram": false,
+                "taxi": false
+            }
+        },
+        "distance": 81
+    },
+    {
+        "type": "stop",
+        "id": "8087030",
+        "name": "Stralsund Alte Rostocker Str.",
+        "location": {
+            "type": "location",
+            "id": "8087030",
+            "latitude": 54.308977,
+            "longitude": 13.076374
+        },
+        "products": {
+            "nationalExpress": false,
+            "national": false,
+            "regionalExp": false,
+            "regional": true,
+            "suburban": false,
+            "bus": false,
+            "ferry": false,
+            "subway": false,
+            "tram": false,
+            "taxi": false
+        },
+        "distance": 122
+    },
+    {
+        "type": "stop",
+        "id": "8079454",
+        "name": "Stralsund Bahnhofstraße",
+        "location": {
+            "type": "location",
+            "id": "8079454",
+            "latitude": 54.306991,
+            "longitude": 13.079952
+        },
+        "products": {
+            "nationalExpress": false,
+            "national": false,
+            "regionalExp": true,
+            "regional": true,
+            "suburban": false,
+            "bus": false,
+            "ferry": false,
+            "subway": false,
+            "tram": false,
+            "taxi": false
+        },
+        "distance": 203
+    },
+    {
+        "type": "stop",
+        "id": "952415",
+        "name": "Barther Straße, Stralsund",
+        "location": {
+            "type": "location",
+            "id": "952415",
+            "latitude": 54.310245,
+            "longitude": 13.073705
+        },
+        "products": {
+            "nationalExpress": false,
+            "national": false,
+            "regionalExp": false,
+            "regional": false,
+            "suburban": false,
+            "bus": true,
+            "ferry": false,
+            "subway": false,
+            "tram": false,
+            "taxi": false
+        },
+        "distance": 345
+    }
+]

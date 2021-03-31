@@ -1,0 +1,1639 @@
+[
+    {
+        "tripId": "1|213329|2|80|6032021",
+        "stop": {
+            "type": "stop",
+            "id": "8010338",
+            "name": "Stralsund Hbf",
+            "location": {
+                "type": "location",
+                "id": "8010338",
+                "latitude": 54.308438,
+                "longitude": 13.078028
+            },
+            "products": {
+                "nationalExpress": true,
+                "national": true,
+                "regionalExp": true,
+                "regional": true,
+                "suburban": false,
+                "bus": true,
+                "ferry": false,
+                "subway": false,
+                "tram": false,
+                "taxi": false
+            },
+            "lines": [
+                {
+                    "type": "line",
+                    "id": "ice",
+                    "fahrtNr": null,
+                    "name": "ICE",
+                    "public": true,
+                    "mode": "train",
+                    "product": "nationalExpress"
+                },
+                {
+                    "type": "line",
+                    "id": "ic",
+                    "fahrtNr": null,
+                    "name": "IC",
+                    "public": true,
+                    "mode": "train",
+                    "product": "national"
+                },
+                {
+                    "type": "line",
+                    "id": "uex",
+                    "fahrtNr": null,
+                    "name": "UEX",
+                    "public": true,
+                    "mode": "train",
+                    "product": "regionalExp"
+                },
+                {
+                    "type": "line",
+                    "id": "re",
+                    "fahrtNr": null,
+                    "name": "RE",
+                    "public": true,
+                    "mode": "train",
+                    "product": "regional"
+                },
+                {
+                    "type": "line",
+                    "id": "re",
+                    "fahrtNr": null,
+                    "name": "RE",
+                    "public": true,
+                    "mode": "train",
+                    "product": "regional"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-1",
+                    "fahrtNr": null,
+                    "name": "Bus 1",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-3",
+                    "fahrtNr": null,
+                    "name": "Bus 3",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-4",
+                    "fahrtNr": null,
+                    "name": "Bus 4",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-6",
+                    "fahrtNr": null,
+                    "name": "Bus 6",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-8",
+                    "fahrtNr": null,
+                    "name": "Bus 8",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-9",
+                    "fahrtNr": null,
+                    "name": "Bus 9",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-30",
+                    "fahrtNr": null,
+                    "name": "Bus 30",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-60",
+                    "fahrtNr": null,
+                    "name": "Bus 60",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-302",
+                    "fahrtNr": null,
+                    "name": "Bus 302",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-304",
+                    "fahrtNr": null,
+                    "name": "Bus 304",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-305",
+                    "fahrtNr": null,
+                    "name": "Bus 305",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-306",
+                    "fahrtNr": null,
+                    "name": "Bus 306",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-308",
+                    "fahrtNr": null,
+                    "name": "Bus 308",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-309",
+                    "fahrtNr": null,
+                    "name": "Bus 309",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-310",
+                    "fahrtNr": null,
+                    "name": "Bus 310",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                }
+            ]
+        },
+        "when": "2021-03-06T12:04:00+01:00",
+        "plannedWhen": "2021-03-06T12:04:00+01:00",
+        "delay": null,
+        "platform": "3",
+        "plannedPlatform": "3",
+        "direction": "Neustrelitz Hbf",
+        "provenance": null,
+        "line": {
+            "type": "line",
+            "id": "re-5",
+            "fahrtNr": "13059",
+            "name": "RE 5",
+            "public": true,
+            "adminCode": "800158",
+            "mode": "train",
+            "product": "regional",
+            "operator": {
+                "type": "operator",
+                "id": "db-regio-ag-nordost",
+                "name": "DB Regio AG Nordost"
+            },
+            "additionalName": "RE 5"
+        },
+        "remarks": []
+    },
+    {
+        "tripId": "1|394814|1|80|6032021",
+        "stop": {
+            "type": "stop",
+            "id": "952267",
+            "name": "Hauptbahnhof, Stralsund",
+            "location": {
+                "type": "location",
+                "id": "952267",
+                "latitude": 54.309148,
+                "longitude": 13.077723
+            },
+            "products": {
+                "nationalExpress": true,
+                "national": true,
+                "regionalExp": true,
+                "regional": true,
+                "suburban": false,
+                "bus": true,
+                "ferry": false,
+                "subway": false,
+                "tram": false,
+                "taxi": false
+            },
+            "station": {
+                "type": "station",
+                "id": "8010338",
+                "name": "Stralsund Hbf",
+                "location": {
+                    "type": "location",
+                    "id": "8010338",
+                    "latitude": 54.308438,
+                    "longitude": 13.078028
+                },
+                "products": {
+                    "nationalExpress": true,
+                    "national": true,
+                    "regionalExp": true,
+                    "regional": true,
+                    "suburban": false,
+                    "bus": true,
+                    "ferry": false,
+                    "subway": false,
+                    "tram": false,
+                    "taxi": false
+                },
+                "lines": [
+                    {
+                        "type": "line",
+                        "id": "ice",
+                        "fahrtNr": null,
+                        "name": "ICE",
+                        "public": true,
+                        "mode": "train",
+                        "product": "nationalExpress"
+                    },
+                    {
+                        "type": "line",
+                        "id": "ic",
+                        "fahrtNr": null,
+                        "name": "IC",
+                        "public": true,
+                        "mode": "train",
+                        "product": "national"
+                    },
+                    {
+                        "type": "line",
+                        "id": "uex",
+                        "fahrtNr": null,
+                        "name": "UEX",
+                        "public": true,
+                        "mode": "train",
+                        "product": "regionalExp"
+                    },
+                    {
+                        "type": "line",
+                        "id": "re",
+                        "fahrtNr": null,
+                        "name": "RE",
+                        "public": true,
+                        "mode": "train",
+                        "product": "regional"
+                    },
+                    {
+                        "type": "line",
+                        "id": "re",
+                        "fahrtNr": null,
+                        "name": "RE",
+                        "public": true,
+                        "mode": "train",
+                        "product": "regional"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-1",
+                        "fahrtNr": null,
+                        "name": "Bus 1",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-3",
+                        "fahrtNr": null,
+                        "name": "Bus 3",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-4",
+                        "fahrtNr": null,
+                        "name": "Bus 4",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-6",
+                        "fahrtNr": null,
+                        "name": "Bus 6",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-8",
+                        "fahrtNr": null,
+                        "name": "Bus 8",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-9",
+                        "fahrtNr": null,
+                        "name": "Bus 9",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-30",
+                        "fahrtNr": null,
+                        "name": "Bus 30",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-60",
+                        "fahrtNr": null,
+                        "name": "Bus 60",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-302",
+                        "fahrtNr": null,
+                        "name": "Bus 302",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-304",
+                        "fahrtNr": null,
+                        "name": "Bus 304",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-305",
+                        "fahrtNr": null,
+                        "name": "Bus 305",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-306",
+                        "fahrtNr": null,
+                        "name": "Bus 306",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-308",
+                        "fahrtNr": null,
+                        "name": "Bus 308",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-309",
+                        "fahrtNr": null,
+                        "name": "Bus 309",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-310",
+                        "fahrtNr": null,
+                        "name": "Bus 310",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    }
+                ]
+            },
+            "lines": [
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-1",
+                    "fahrtNr": null,
+                    "name": "Bus 1",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-3",
+                    "fahrtNr": null,
+                    "name": "Bus 3",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-4",
+                    "fahrtNr": null,
+                    "name": "Bus 4",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-6",
+                    "fahrtNr": null,
+                    "name": "Bus 6",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-8",
+                    "fahrtNr": null,
+                    "name": "Bus 8",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-9",
+                    "fahrtNr": null,
+                    "name": "Bus 9",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-30",
+                    "fahrtNr": null,
+                    "name": "Bus 30",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-60",
+                    "fahrtNr": null,
+                    "name": "Bus 60",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-302",
+                    "fahrtNr": null,
+                    "name": "Bus 302",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-304",
+                    "fahrtNr": null,
+                    "name": "Bus 304",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-305",
+                    "fahrtNr": null,
+                    "name": "Bus 305",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-306",
+                    "fahrtNr": null,
+                    "name": "Bus 306",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-308",
+                    "fahrtNr": null,
+                    "name": "Bus 308",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-309",
+                    "fahrtNr": null,
+                    "name": "Bus 309",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-310",
+                    "fahrtNr": null,
+                    "name": "Bus 310",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                }
+            ]
+        },
+        "when": "2021-03-06T12:06:00+01:00",
+        "plannedWhen": "2021-03-06T12:06:00+01:00",
+        "delay": null,
+        "platform": null,
+        "plannedPlatform": null,
+        "direction": "Devin, Stralsund",
+        "provenance": null,
+        "line": {
+            "type": "line",
+            "id": "5-nvpbus-3",
+            "fahrtNr": "14999",
+            "name": "Bus 3",
+            "public": true,
+            "adminCode": "nvpBUS",
+            "mode": "bus",
+            "product": "bus",
+            "operator": {
+                "type": "operator",
+                "id": "nahreisezug",
+                "name": "Nahreisezug"
+            }
+        },
+        "remarks": []
+    },
+    {
+        "tripId": "1|395318|3|80|6032021",
+        "stop": {
+            "type": "stop",
+            "id": "952267",
+            "name": "Hauptbahnhof, Stralsund",
+            "location": {
+                "type": "location",
+                "id": "952267",
+                "latitude": 54.309148,
+                "longitude": 13.077723
+            },
+            "products": {
+                "nationalExpress": true,
+                "national": true,
+                "regionalExp": true,
+                "regional": true,
+                "suburban": false,
+                "bus": true,
+                "ferry": false,
+                "subway": false,
+                "tram": false,
+                "taxi": false
+            },
+            "station": {
+                "type": "station",
+                "id": "8010338",
+                "name": "Stralsund Hbf",
+                "location": {
+                    "type": "location",
+                    "id": "8010338",
+                    "latitude": 54.308438,
+                    "longitude": 13.078028
+                },
+                "products": {
+                    "nationalExpress": true,
+                    "national": true,
+                    "regionalExp": true,
+                    "regional": true,
+                    "suburban": false,
+                    "bus": true,
+                    "ferry": false,
+                    "subway": false,
+                    "tram": false,
+                    "taxi": false
+                },
+                "lines": [
+                    {
+                        "type": "line",
+                        "id": "ice",
+                        "fahrtNr": null,
+                        "name": "ICE",
+                        "public": true,
+                        "mode": "train",
+                        "product": "nationalExpress"
+                    },
+                    {
+                        "type": "line",
+                        "id": "ic",
+                        "fahrtNr": null,
+                        "name": "IC",
+                        "public": true,
+                        "mode": "train",
+                        "product": "national"
+                    },
+                    {
+                        "type": "line",
+                        "id": "uex",
+                        "fahrtNr": null,
+                        "name": "UEX",
+                        "public": true,
+                        "mode": "train",
+                        "product": "regionalExp"
+                    },
+                    {
+                        "type": "line",
+                        "id": "re",
+                        "fahrtNr": null,
+                        "name": "RE",
+                        "public": true,
+                        "mode": "train",
+                        "product": "regional"
+                    },
+                    {
+                        "type": "line",
+                        "id": "re",
+                        "fahrtNr": null,
+                        "name": "RE",
+                        "public": true,
+                        "mode": "train",
+                        "product": "regional"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-1",
+                        "fahrtNr": null,
+                        "name": "Bus 1",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-3",
+                        "fahrtNr": null,
+                        "name": "Bus 3",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-4",
+                        "fahrtNr": null,
+                        "name": "Bus 4",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-6",
+                        "fahrtNr": null,
+                        "name": "Bus 6",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-8",
+                        "fahrtNr": null,
+                        "name": "Bus 8",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-9",
+                        "fahrtNr": null,
+                        "name": "Bus 9",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-30",
+                        "fahrtNr": null,
+                        "name": "Bus 30",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-60",
+                        "fahrtNr": null,
+                        "name": "Bus 60",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-302",
+                        "fahrtNr": null,
+                        "name": "Bus 302",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-304",
+                        "fahrtNr": null,
+                        "name": "Bus 304",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-305",
+                        "fahrtNr": null,
+                        "name": "Bus 305",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-306",
+                        "fahrtNr": null,
+                        "name": "Bus 306",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-308",
+                        "fahrtNr": null,
+                        "name": "Bus 308",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-309",
+                        "fahrtNr": null,
+                        "name": "Bus 309",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-310",
+                        "fahrtNr": null,
+                        "name": "Bus 310",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    }
+                ]
+            },
+            "lines": [
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-1",
+                    "fahrtNr": null,
+                    "name": "Bus 1",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-3",
+                    "fahrtNr": null,
+                    "name": "Bus 3",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-4",
+                    "fahrtNr": null,
+                    "name": "Bus 4",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-6",
+                    "fahrtNr": null,
+                    "name": "Bus 6",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-8",
+                    "fahrtNr": null,
+                    "name": "Bus 8",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-9",
+                    "fahrtNr": null,
+                    "name": "Bus 9",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-30",
+                    "fahrtNr": null,
+                    "name": "Bus 30",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-60",
+                    "fahrtNr": null,
+                    "name": "Bus 60",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-302",
+                    "fahrtNr": null,
+                    "name": "Bus 302",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-304",
+                    "fahrtNr": null,
+                    "name": "Bus 304",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-305",
+                    "fahrtNr": null,
+                    "name": "Bus 305",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-306",
+                    "fahrtNr": null,
+                    "name": "Bus 306",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-308",
+                    "fahrtNr": null,
+                    "name": "Bus 308",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-309",
+                    "fahrtNr": null,
+                    "name": "Bus 309",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-310",
+                    "fahrtNr": null,
+                    "name": "Bus 310",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                }
+            ]
+        },
+        "when": "2021-03-06T12:06:00+01:00",
+        "plannedWhen": "2021-03-06T12:06:00+01:00",
+        "delay": null,
+        "platform": null,
+        "plannedPlatform": null,
+        "direction": "Viermorgen, Stralsund",
+        "provenance": null,
+        "line": {
+            "type": "line",
+            "id": "5-nvpbus-4",
+            "fahrtNr": "16984",
+            "name": "Bus 4",
+            "public": true,
+            "adminCode": "nvpBUS",
+            "mode": "bus",
+            "product": "bus",
+            "operator": {
+                "type": "operator",
+                "id": "nahreisezug",
+                "name": "Nahreisezug"
+            }
+        },
+        "remarks": []
+    },
+    {
+        "tripId": "1|395261|3|80|6032021",
+        "stop": {
+            "type": "stop",
+            "id": "952267",
+            "name": "Hauptbahnhof, Stralsund",
+            "location": {
+                "type": "location",
+                "id": "952267",
+                "latitude": 54.309148,
+                "longitude": 13.077723
+            },
+            "products": {
+                "nationalExpress": true,
+                "national": true,
+                "regionalExp": true,
+                "regional": true,
+                "suburban": false,
+                "bus": true,
+                "ferry": false,
+                "subway": false,
+                "tram": false,
+                "taxi": false
+            },
+            "station": {
+                "type": "station",
+                "id": "8010338",
+                "name": "Stralsund Hbf",
+                "location": {
+                    "type": "location",
+                    "id": "8010338",
+                    "latitude": 54.308438,
+                    "longitude": 13.078028
+                },
+                "products": {
+                    "nationalExpress": true,
+                    "national": true,
+                    "regionalExp": true,
+                    "regional": true,
+                    "suburban": false,
+                    "bus": true,
+                    "ferry": false,
+                    "subway": false,
+                    "tram": false,
+                    "taxi": false
+                },
+                "lines": [
+                    {
+                        "type": "line",
+                        "id": "ice",
+                        "fahrtNr": null,
+                        "name": "ICE",
+                        "public": true,
+                        "mode": "train",
+                        "product": "nationalExpress"
+                    },
+                    {
+                        "type": "line",
+                        "id": "ic",
+                        "fahrtNr": null,
+                        "name": "IC",
+                        "public": true,
+                        "mode": "train",
+                        "product": "national"
+                    },
+                    {
+                        "type": "line",
+                        "id": "uex",
+                        "fahrtNr": null,
+                        "name": "UEX",
+                        "public": true,
+                        "mode": "train",
+                        "product": "regionalExp"
+                    },
+                    {
+                        "type": "line",
+                        "id": "re",
+                        "fahrtNr": null,
+                        "name": "RE",
+                        "public": true,
+                        "mode": "train",
+                        "product": "regional"
+                    },
+                    {
+                        "type": "line",
+                        "id": "re",
+                        "fahrtNr": null,
+                        "name": "RE",
+                        "public": true,
+                        "mode": "train",
+                        "product": "regional"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-1",
+                        "fahrtNr": null,
+                        "name": "Bus 1",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-3",
+                        "fahrtNr": null,
+                        "name": "Bus 3",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-4",
+                        "fahrtNr": null,
+                        "name": "Bus 4",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-6",
+                        "fahrtNr": null,
+                        "name": "Bus 6",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-8",
+                        "fahrtNr": null,
+                        "name": "Bus 8",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-9",
+                        "fahrtNr": null,
+                        "name": "Bus 9",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-30",
+                        "fahrtNr": null,
+                        "name": "Bus 30",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-60",
+                        "fahrtNr": null,
+                        "name": "Bus 60",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-302",
+                        "fahrtNr": null,
+                        "name": "Bus 302",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-304",
+                        "fahrtNr": null,
+                        "name": "Bus 304",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-305",
+                        "fahrtNr": null,
+                        "name": "Bus 305",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-306",
+                        "fahrtNr": null,
+                        "name": "Bus 306",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-308",
+                        "fahrtNr": null,
+                        "name": "Bus 308",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-309",
+                        "fahrtNr": null,
+                        "name": "Bus 309",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    },
+                    {
+                        "type": "line",
+                        "id": "5-nvpbus-310",
+                        "fahrtNr": null,
+                        "name": "Bus 310",
+                        "public": true,
+                        "mode": "bus",
+                        "product": "bus"
+                    }
+                ]
+            },
+            "lines": [
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-1",
+                    "fahrtNr": null,
+                    "name": "Bus 1",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-3",
+                    "fahrtNr": null,
+                    "name": "Bus 3",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-4",
+                    "fahrtNr": null,
+                    "name": "Bus 4",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-6",
+                    "fahrtNr": null,
+                    "name": "Bus 6",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-8",
+                    "fahrtNr": null,
+                    "name": "Bus 8",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-9",
+                    "fahrtNr": null,
+                    "name": "Bus 9",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-30",
+                    "fahrtNr": null,
+                    "name": "Bus 30",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-60",
+                    "fahrtNr": null,
+                    "name": "Bus 60",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-302",
+                    "fahrtNr": null,
+                    "name": "Bus 302",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-304",
+                    "fahrtNr": null,
+                    "name": "Bus 304",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-305",
+                    "fahrtNr": null,
+                    "name": "Bus 305",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-306",
+                    "fahrtNr": null,
+                    "name": "Bus 306",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-308",
+                    "fahrtNr": null,
+                    "name": "Bus 308",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-309",
+                    "fahrtNr": null,
+                    "name": "Bus 309",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-310",
+                    "fahrtNr": null,
+                    "name": "Bus 310",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                }
+            ]
+        },
+        "when": "2021-03-06T12:12:00+01:00",
+        "plannedWhen": "2021-03-06T12:12:00+01:00",
+        "delay": null,
+        "platform": null,
+        "plannedPlatform": null,
+        "direction": "Kleiner Wiesenweg, Stralsund",
+        "provenance": null,
+        "line": {
+            "type": "line",
+            "id": "5-nvpbus-4",
+            "fahrtNr": "16812",
+            "name": "Bus 4",
+            "public": true,
+            "adminCode": "nvpBUS",
+            "mode": "bus",
+            "product": "bus",
+            "operator": {
+                "type": "operator",
+                "id": "nahreisezug",
+                "name": "Nahreisezug"
+            }
+        },
+        "remarks": []
+    },
+    {
+        "tripId": "1|214777|0|80|6032021",
+        "stop": {
+            "type": "stop",
+            "id": "8010338",
+            "name": "Stralsund Hbf",
+            "location": {
+                "type": "location",
+                "id": "8010338",
+                "latitude": 54.308438,
+                "longitude": 13.078028
+            },
+            "products": {
+                "nationalExpress": true,
+                "national": true,
+                "regionalExp": true,
+                "regional": true,
+                "suburban": false,
+                "bus": true,
+                "ferry": false,
+                "subway": false,
+                "tram": false,
+                "taxi": false
+            },
+            "lines": [
+                {
+                    "type": "line",
+                    "id": "ice",
+                    "fahrtNr": null,
+                    "name": "ICE",
+                    "public": true,
+                    "mode": "train",
+                    "product": "nationalExpress"
+                },
+                {
+                    "type": "line",
+                    "id": "ic",
+                    "fahrtNr": null,
+                    "name": "IC",
+                    "public": true,
+                    "mode": "train",
+                    "product": "national"
+                },
+                {
+                    "type": "line",
+                    "id": "uex",
+                    "fahrtNr": null,
+                    "name": "UEX",
+                    "public": true,
+                    "mode": "train",
+                    "product": "regionalExp"
+                },
+                {
+                    "type": "line",
+                    "id": "re",
+                    "fahrtNr": null,
+                    "name": "RE",
+                    "public": true,
+                    "mode": "train",
+                    "product": "regional"
+                },
+                {
+                    "type": "line",
+                    "id": "re",
+                    "fahrtNr": null,
+                    "name": "RE",
+                    "public": true,
+                    "mode": "train",
+                    "product": "regional"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-1",
+                    "fahrtNr": null,
+                    "name": "Bus 1",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-3",
+                    "fahrtNr": null,
+                    "name": "Bus 3",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-4",
+                    "fahrtNr": null,
+                    "name": "Bus 4",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-6",
+                    "fahrtNr": null,
+                    "name": "Bus 6",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-8",
+                    "fahrtNr": null,
+                    "name": "Bus 8",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-9",
+                    "fahrtNr": null,
+                    "name": "Bus 9",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-30",
+                    "fahrtNr": null,
+                    "name": "Bus 30",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-60",
+                    "fahrtNr": null,
+                    "name": "Bus 60",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-302",
+                    "fahrtNr": null,
+                    "name": "Bus 302",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-304",
+                    "fahrtNr": null,
+                    "name": "Bus 304",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-305",
+                    "fahrtNr": null,
+                    "name": "Bus 305",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-306",
+                    "fahrtNr": null,
+                    "name": "Bus 306",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-308",
+                    "fahrtNr": null,
+                    "name": "Bus 308",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-309",
+                    "fahrtNr": null,
+                    "name": "Bus 309",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                },
+                {
+                    "type": "line",
+                    "id": "5-nvpbus-310",
+                    "fahrtNr": null,
+                    "name": "Bus 310",
+                    "public": true,
+                    "mode": "bus",
+                    "product": "bus"
+                }
+            ]
+        },
+        "when": "2021-03-06T12:17:00+01:00",
+        "plannedWhen": "2021-03-06T12:17:00+01:00",
+        "delay": 0,
+        "platform": "1",
+        "plannedPlatform": "1",
+        "direction": "Falkenberg(Elster)",
+        "provenance": null,
+        "line": {
+            "type": "line",
+            "id": "re-3",
+            "fahrtNr": "3311",
+            "name": "RE 3",
+            "public": true,
+            "adminCode": "800158",
+            "mode": "train",
+            "product": "regional",
+            "operator": {
+                "type": "operator",
+                "id": "db-regio-ag-nordost",
+                "name": "DB Regio AG Nordost"
+            },
+            "additionalName": "RE 3"
+        },
+        "remarks": []
+    }
+]

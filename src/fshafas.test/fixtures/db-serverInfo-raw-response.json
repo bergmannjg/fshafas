@@ -1,0 +1,49 @@
+{
+    "ver": "1.15",
+    "ext": "DB.R19.04.a",
+    "lang": "eng",
+    "id": "4g26gmkwwqsgxwwx",
+    "cInfo": {
+        "code": "OK",
+        "url": "",
+        "msg": ""
+    },
+    "svcResL": [
+        {
+            "meth": "ServerInfo",
+            "err": "OK",
+            "res": {
+                "common": {
+                    "locL": [],
+                    "prodL": [],
+                    "polyL": [],
+                    "layerL": [
+                        {
+                            "id": "standard",
+                            "name": "standard",
+                            "index": 0,
+                            "annoCnt": 0
+                        }
+                    ],
+                    "crdSysL": [
+                        {
+                            "id": "standard",
+                            "index": 0,
+                            "type": "WGS84",
+                            "dim": 3
+                        }
+                    ],
+                    "opL": [],
+                    "remL": [],
+                    "icoL": []
+                },
+                "fpB": "20201213",
+                "fpE": "20211211",
+                "sD": "20210308",
+                "sT": "091337",
+                "enc": "ISO-8859-1",
+                "planrtTS": "1615191045"
+            }
+        }
+    ]
+}

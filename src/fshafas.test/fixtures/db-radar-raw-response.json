@@ -1,0 +1,233 @@
+{
+    "ver": "1.15",
+    "ext": "DB.R19.04.a",
+    "lang": "eng",
+    "id": "4eiq9m42iwskhgwx",
+    "cInfo": {
+        "code": "OK",
+        "url": "",
+        "msg": ""
+    },
+    "svcResL": [
+        {
+            "meth": "JourneyGeoPos",
+            "err": "OK",
+            "res": {
+                "common": {
+                    "locL": [
+                        {
+                            "lid": "A=1@O=Devin, Stralsund@X=13142607@Y=54265496@U=80@L=325707@",
+                            "type": "S",
+                            "name": "Devin, Stralsund",
+                            "icoX": 0,
+                            "extId": "325707",
+                            "state": "F",
+                            "crd": {
+                                "x": 13142607,
+                                "y": 54265496,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Hauptbahnhof, Stralsund@X=13077723@Y=54309148@U=80@L=952267@",
+                            "type": "S",
+                            "name": "Hauptbahnhof, Stralsund",
+                            "icoX": 0,
+                            "extId": "952267",
+                            "state": "F",
+                            "crd": {
+                                "x": 13077723,
+                                "y": 54309148,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 47
+                        },
+                        {
+                            "lid": "A=1@O=Wolfgang-Heinze-Str., Stralsund@X=13078541@Y=54312959@U=80@L=325731@",
+                            "type": "S",
+                            "name": "Wolfgang-Heinze-Str., Stralsund",
+                            "icoX": 0,
+                            "extId": "325731",
+                            "state": "F",
+                            "crd": {
+                                "x": 13078541,
+                                "y": 54312959,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Strelapark/Zoo, Stralsund@X=13050036@Y=54319755@U=80@L=952406@",
+                            "type": "S",
+                            "name": "Strelapark/Zoo, Stralsund",
+                            "icoX": 0,
+                            "extId": "952406",
+                            "state": "F",
+                            "crd": {
+                                "x": 13050036,
+                                "y": 54319755,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 32
+                        }
+                    ],
+                    "prodL": [
+                        {
+                            "name": "Bus 3",
+                            "nameS": "3",
+                            "icoX": 0,
+                            "cls": 32,
+                            "prodCtx": {
+                                "name": "Bus    3",
+                                "line": "3",
+                                "lineId": "5_nvpBUS_3",
+                                "matchId": "",
+                                "catOut": "Bus     ",
+                                "catOutS": "Bus",
+                                "catOutL": "Bus"
+                            }
+                        }
+                    ],
+                    "polyL": [],
+                    "layerL": [
+                        {
+                            "id": "standard",
+                            "name": "standard",
+                            "index": 0,
+                            "annoCnt": 0
+                        }
+                    ],
+                    "crdSysL": [
+                        {
+                            "id": "standard",
+                            "index": 0,
+                            "type": "WGS84",
+                            "dim": 3
+                        }
+                    ],
+                    "opL": [],
+                    "remL": [],
+                    "icoL": [
+                        {
+                            "res": "Bus"
+                        }
+                    ]
+                },
+                "date": "20210306",
+                "time": "172508",
+                "jnyL": [
+                    {
+                        "jid": "1|394834|0|80|6032021",
+                        "date": "20210306",
+                        "prodX": 0,
+                        "dirTxt": "Strelapark/Zoo, Stralsund",
+                        "dirGeo": 7,
+                        "stopL": [
+                            {
+                                "locX": 0,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "170500"
+                            },
+                            {
+                                "locX": 1,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "172500",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "172500"
+                            },
+                            {
+                                "locX": 2,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "172700",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "172700"
+                            },
+                            {
+                                "locX": 3,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "174200"
+                            }
+                        ],
+                        "proc": 7,
+                        "pos": {
+                            "x": 13077786,
+                            "y": 54309427
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                10000,
+                                20000,
+                                30000
+                            ],
+                            "proc": [
+                                7,
+                                16,
+                                25,
+                                34
+                            ],
+                            "fLocX": [
+                                1,
+                                1,
+                                1,
+                                1
+                            ],
+                            "tLocX": [
+                                2,
+                                2,
+                                2,
+                                2
+                            ],
+                            "dirGeo": [
+                                7,
+                                7,
+                                7,
+                                7
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "poly": {
+                                "delta": true,
+                                "dim": 2,
+                                "crdEncYX": "}hnjIegynAeAMcAMeAO",
+                                "crdEncS": "NNNN",
+                                "crdEncF": "????"
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    }
+                ],
+                "layerX": 0,
+                "crdSysX": 0,
+                "fpB": "20201213",
+                "fpE": "20211211",
+                "planrtTS": "1615047790"
+            }
+        }
+    ]
+}

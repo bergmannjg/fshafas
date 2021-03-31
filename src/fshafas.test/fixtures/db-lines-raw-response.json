@@ -1,0 +1,529 @@
+{
+    "ver": "1.20",
+    "ext": "VAO.11",
+    "lang": "eng",
+    "id": "rqkaeikigw4dxi4k",
+    "err": "OK",
+    "cInfo": {
+        "code": "OK",
+        "url": "",
+        "msg": ""
+    },
+    "svcResL": [
+        {
+            "meth": "LineMatch",
+            "err": "OK",
+            "res": {
+                "common": {
+                    "locL": [],
+                    "prodL": [
+                        {
+                            "pid": "L::1::::B0420913982::obb-1-S1-V-j21-1::*",
+                            "name": "S1",
+                            "nameS": "S1",
+                            "icoX": 1,
+                            "cls": 2,
+                            "oprX": 0,
+                            "prodCtx": {
+                                "name": "S1",
+                                "line": "S1",
+                                "lineId": "obb-1-S1-V-j21-1",
+                                "catOut": ""
+                            },
+                            "himIdL": [
+                                "HIM_FREETEXT_131203",
+                                "HIM_FREETEXT_131207"
+                            ]
+                        },
+                        {
+                            "pid": "L::1::::B3472872807::obb-1-S1-K-j21-1::*",
+                            "name": "S1",
+                            "nameS": "S1",
+                            "icoX": 1,
+                            "cls": 2,
+                            "oprX": 1,
+                            "prodCtx": {
+                                "name": "S1",
+                                "line": "S1",
+                                "lineId": "obb-1-S1-K-j21-1",
+                                "catOut": ""
+                            },
+                            "himIdL": [
+                                "HIM_FREETEXT_130085",
+                                "HIM_FREETEXT_130086",
+                                "HIM_FREETEXT_130087",
+                                "HIM_FREETEXT_130088",
+                                "HIM_FREETEXT_130089",
+                                "HIM_FREETEXT_130090",
+                                "HIM_FREETEXT_130091",
+                                "HIM_FREETEXT_130092",
+                                "HIM_FREETEXT_130093",
+                                "HIM_FREETEXT_131023",
+                                "HIM_FREETEXT_131024",
+                                "HIM_FREETEXT_131218"
+                            ]
+                        },
+                        {
+                            "pid": "L::1::::B3472872807::obb-1-S1-M-j21-1::*",
+                            "name": "S1",
+                            "nameS": "S1",
+                            "icoX": 1,
+                            "cls": 2,
+                            "oprX": 1,
+                            "prodCtx": {
+                                "name": "S1",
+                                "line": "S1",
+                                "lineId": "obb-1-S1-M-j21-1",
+                                "catOut": ""
+                            },
+                            "himIdL": [
+                                "HIM_FREETEXT_124859",
+                                "HIM_FREETEXT_130013",
+                                "HIM_FREETEXT_130015",
+                                "HIM_FREETEXT_131028",
+                                "HIM_FREETEXT_131029",
+                                "HIM_FREETEXT_131940"
+                            ]
+                        },
+                        {
+                            "pid": "L::1::::B3472872807::obb-1-S1-O-j21-1::*",
+                            "name": "S1",
+                            "nameS": "S1",
+                            "icoX": 1,
+                            "cls": 2,
+                            "oprX": 1,
+                            "prodCtx": {
+                                "name": "S1",
+                                "line": "S1",
+                                "lineId": "obb-1-S1-O-j21-1",
+                                "catOut": ""
+                            }
+                        },
+                        {
+                            "pid": "L::1::::B3472872807::obb-1-S1-V-j21-1::*",
+                            "name": "S1",
+                            "nameS": "S1",
+                            "icoX": 1,
+                            "cls": 2,
+                            "oprX": 1,
+                            "prodCtx": {
+                                "name": "S1",
+                                "line": "S1",
+                                "lineId": "obb-1-S1-V-j21-1",
+                                "catOut": ""
+                            },
+                            "himIdL": [
+                                "HIM_FREETEXT_126738",
+                                "HIM_FREETEXT_130257",
+                                "HIM_FREETEXT_131201",
+                                "HIM_FREETEXT_131202",
+                                "HIM_FREETEXT_131204",
+                                "HIM_FREETEXT_131205",
+                                "HIM_FREETEXT_131206",
+                                "HIM_FREETEXT_131207",
+                                "HIM_FREETEXT_131208",
+                                "HIM_FREETEXT_131209",
+                                "HIM_FREETEXT_131211",
+                                "HIM_FREETEXT_131213"
+                            ]
+                        },
+                        {
+                            "pid": "L::1::::B3472872807::obb-1-S1-W-j21-1::*",
+                            "name": "S1",
+                            "nameS": "S1",
+                            "icoX": 1,
+                            "cls": 2,
+                            "oprX": 1,
+                            "prodCtx": {
+                                "name": "S1",
+                                "line": "S1",
+                                "lineId": "obb-1-S1-W-j21-1",
+                                "catOut": ""
+                            },
+                            "himIdL": [
+                                "HIM_FREETEXT_126823",
+                                "HIM_FREETEXT_129270",
+                                "HIM_FREETEXT_129340",
+                                "HIM_FREETEXT_131974",
+                                "HIM_FREETEXT_127573",
+                                "HIM_FREETEXT_132022",
+                                "HIM_FREETEXT_132021",
+                                "HIM_FREETEXT_130462"
+                            ]
+                        },
+                        {
+                            "pid": "L::1::::B3472872807::obb-1-S1W-j21-1::*",
+                            "name": "S1",
+                            "nameS": "S1",
+                            "icoX": 1,
+                            "cls": 2,
+                            "oprX": 1,
+                            "prodCtx": {
+                                "name": "S1",
+                                "line": "S1",
+                                "lineId": "obb-1-S1W-j21-1",
+                                "catOut": ""
+                            },
+                            "himIdL": [
+                                "HIM_FREETEXT_127567",
+                                "HIM_FREETEXT_129270",
+                                "HIM_FREETEXT_130459",
+                                "HIM_FREETEXT_130461",
+                                "HIM_FREETEXT_131178",
+                                "HIM_FREETEXT_131179",
+                                "HIM_FREETEXT_131180",
+                                "HIM_FREETEXT_131181",
+                                "HIM_FREETEXT_131182",
+                                "HIM_FREETEXT_131183",
+                                "HIM_FREETEXT_127573",
+                                "HIM_FREETEXT_130462"
+                            ]
+                        },
+                        {
+                            "pid": "L::1::::B0221607530::svv-42-50-j21-1::*",
+                            "name": "S1",
+                            "nameS": "S1",
+                            "icoX": 1,
+                            "cls": 2,
+                            "oprX": 2,
+                            "prodCtx": {
+                                "name": "S1",
+                                "line": "S1",
+                                "lineId": "svv-42-50-j21-1",
+                                "catOut": ""
+                            }
+                        }
+                    ],
+                    "polyL": [],
+                    "layerL": [
+                        {
+                            "id": "standard",
+                            "name": "standard",
+                            "index": 0,
+                            "annoCnt": 0
+                        }
+                    ],
+                    "crdSysL": [
+                        {
+                            "id": "standard",
+                            "index": 0,
+                            "type": "WGS84"
+                        }
+                    ],
+                    "opL": [
+                        {
+                            "name": "Montafonerbahn AG",
+                            "icoX": 0
+                        },
+                        {
+                            "name": "OEBB",
+                            "icoX": 2
+                        },
+                        {
+                            "name": "Salzburg AG - Salzburger Lokalbahn",
+                            "icoX": 3
+                        }
+                    ],
+                    "remL": [],
+                    "txtInstL": [],
+                    "icoL": [
+                        {
+                            "txt": "Montafonerbahn AG"
+                        },
+                        {
+                            "res": "prod_comm_t",
+                            "txtS": "S1",
+                            "fg": {
+                                "r": 255,
+                                "g": 255,
+                                "b": 255
+                            },
+                            "bg": {
+                                "r": 0,
+                                "g": 157,
+                                "b": 221
+                            }
+                        },
+                        {
+                            "txt": "OEBB"
+                        },
+                        {
+                            "txt": "Salzburg AG - Salzburger Lokalbahn"
+                        }
+                    ],
+                    "dirL": [
+                        {
+                            "txt": "Bludenz Bahnhof",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "Schruns Bahnhof",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "Bregenz Hafen Bahnhof",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Lindau-Insel",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Bregenz Bahnhof",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Lochau Bahnhof",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Lienz Bahnhof",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "Friesach Bahnhof",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Spittal-Millstätter See Bahnhof",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "Hermagor Bahnhof",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "Sillian Bahnhof",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "St. Veit an der Glan Bahnhof",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Unzmarkt Bahnhof",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Villach Hbf",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "Klagenfurt Hbf",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Villach Hbf",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Graz Hbf",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "Bruck/Mur Bahnhof",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Spielfeld-Straß Bahnhof",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "Mürzzuschlag",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Graz Hbf",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Leibnitz Bahnhof",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "Werndorf Bahnhof",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "Linz/Donau Hauptbahnhof",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Garsten Bahnhof",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "Kleinreifling Bahnhof",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "Weißenbach-St.Gallen Bahnhof",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "St. Valentin Bahnhof",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "Passau Hauptbahnhof",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Amstetten Bahnhof",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "Gänserndorf Bahnhof",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Wien Süßenbrunn",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Mödling Bahnhof",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "Wien Meidling",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Wien Leopoldau",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Wien Floridsdorf",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Marchegg Bahnhof",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Wien Meidling",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "Wien Praterstern",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "Lamprechtshausen Bahnhof",
+                            "flg": "H"
+                        },
+                        {
+                            "txt": "Salzburg Hauptbahnhof",
+                            "flg": "R"
+                        },
+                        {
+                            "txt": "Bürmoos Bahnhof",
+                            "flg": "R"
+                        }
+                    ]
+                },
+                "lineL": [
+                    {
+                        "lineId": "obb-1-S1-V-j21-1",
+                        "prodX": 0,
+                        "dirRefL": [
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            5
+                        ]
+                    },
+                    {
+                        "lineId": "obb-1-S1-K-j21-1",
+                        "prodX": 1,
+                        "dirRefL": [
+                            6,
+                            7,
+                            8,
+                            9,
+                            10,
+                            11,
+                            12,
+                            13,
+                            14,
+                            15
+                        ]
+                    },
+                    {
+                        "lineId": "obb-1-S1-M-j21-1",
+                        "prodX": 2,
+                        "dirRefL": [
+                            16,
+                            17,
+                            18,
+                            19,
+                            20,
+                            21,
+                            22
+                        ]
+                    },
+                    {
+                        "lineId": "obb-1-S1-O-j21-1",
+                        "prodX": 3,
+                        "dirRefL": [
+                            23,
+                            24,
+                            25,
+                            26,
+                            27,
+                            28,
+                            29
+                        ]
+                    },
+                    {
+                        "lineId": "obb-1-S1-V-j21-1",
+                        "prodX": 4,
+                        "dirRefL": [
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            5
+                        ]
+                    },
+                    {
+                        "lineId": "obb-1-S1-W-j21-1",
+                        "prodX": 5,
+                        "dirRefL": [
+                            30,
+                            31,
+                            32,
+                            33,
+                            34,
+                            35
+                        ]
+                    },
+                    {
+                        "lineId": "obb-1-S1W-j21-1",
+                        "prodX": 6,
+                        "dirRefL": [
+                            30,
+                            34,
+                            35,
+                            36,
+                            37,
+                            38
+                        ]
+                    },
+                    {
+                        "lineId": "svv-42-50-j21-1",
+                        "prodX": 7,
+                        "dirRefL": [
+                            39,
+                            40,
+                            41
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

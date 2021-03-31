@@ -1,0 +1,88 @@
+namespace FsHafas.Parser
+
+module internal Polyline =
+
+    open System
+    open FsHafas
+
+#if FABLE_COMPILER
+    open Fable.Core
+
+    type GooglePolyline = { decode: string -> float [] [] }
+
+    [<ImportDefault("google-polyline")>]
+    let defaultObject: GooglePolyline = jsNative
+
+#else
+    open PolylinerNet
+
+    let polyliner = Polyliner()
+#endif
+
+    let round (f: float) = System.Math.Round(f, 5)
+
+    let defaultFeatureCollection: Client.FeatureCollection =
+        { ``type`` = Some "FeatureCollection"
+          features = Array.empty }
+
+    let private polylineDecode (xy: string) =
+#if FABLE_COMPILER
+        defaultObject.decode xy
+#else
+        polyliner.Decode xy
+        |> Seq.map (fun p -> [| p.Latitude; p.Longitude |])
+#endif
+    let parsePolyline (ctx: Context) (p: Raw.RawPoly): Client.FeatureCollection =
+        let features =
+            polylineDecode p.crdEncYX
+            |> Seq.map<_, Client.Feature>
+                (fun p ->
+                    { ``type`` = Some "Feature"
+                      properties = obj ()
+                      geometry =
+                          { ``type`` = Some "Point"
+                            coordinates = [| (round p.[1]); (round p.[0]) |] } })
+            |> Seq.toArray
+
+        { defaultFeatureCollection with
+              features = features }
+
+    let ``calculate distance`` (p1Latitude, p1Longitude) (p2Latitude, p2Longitude) =
+        let r = 6371.0 // km
+
+        let dLat =
+            (p2Latitude - p1Latitude) * Math.PI / 180.0
+
+        let dLon =
+            (p2Longitude - p1Longitude) * Math.PI / 180.0
+
+        let lat1 = p1Latitude * Math.PI / 180.0
+        let lat2 = p2Latitude * Math.PI / 180.0
+
+        let a =
+            Math.Sin(dLat / 2.0) * Math.Sin(dLat / 2.0)
+            + Math.Sin(dLon / 2.0)
+              * Math.Sin(dLon / 2.0)
+              * Math.Cos(lat1)
+              * Math.Cos(lat2)
+
+        let c =
+            2.0 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1.0 - a))
+
+        r * c
+
+    let distanceOfFeatureCollection (fc: Client.FeatureCollection) =
+        let latLonPoints =
+            fc.features
+            |> Array.map (fun f -> (f.geometry.coordinates.[1], f.geometry.coordinates.[0]))
+
+        latLonPoints
+        |> Array.mapi
+            (fun i _ ->
+                if i > 0 then
+                    let prev = latLonPoints.[i - 1]
+                    let curr = latLonPoints.[i]
+                    ``calculate distance`` prev curr
+                else
+                    0.0)
+        |> Array.sum

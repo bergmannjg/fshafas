@@ -1,0 +1,720 @@
+{
+    "ver": "1.15",
+    "ext": "DB.R19.04.a",
+    "lang": "eng",
+    "id": "4tixdmikiakcwgwx",
+    "cInfo": {
+        "code": "OK",
+        "url": "",
+        "msg": ""
+    },
+    "svcResL": [
+        {
+            "meth": "JourneyDetails",
+            "err": "OK",
+            "res": {
+                "common": {
+                    "locL": [
+                        {
+                            "lid": "A=1@O=Berlin Südkreuz@X=13365315@Y=52475043@U=80@L=8011113@",
+                            "type": "S",
+                            "name": "Berlin Südkreuz",
+                            "icoX": 0,
+                            "extId": "8011113",
+                            "state": "F",
+                            "crd": {
+                                "x": 13365863,
+                                "y": 52476230,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 63
+                        },
+                        {
+                            "lid": "A=1@O=Ostseebad Binz@X=13600508@Y=54404820@U=80@L=8011191@",
+                            "type": "S",
+                            "name": "Ostseebad Binz",
+                            "icoX": 0,
+                            "extId": "8011191",
+                            "state": "F",
+                            "crd": {
+                                "x": 13600356,
+                                "y": 54404883,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 47
+                        },
+                        {
+                            "lid": "A=1@O=Berlin Hbf (tief)@X=13369549@Y=52525589@U=80@L=8098160@",
+                            "type": "S",
+                            "name": "Berlin Hbf (tief)",
+                            "icoX": 0,
+                            "extId": "8098160",
+                            "state": "F",
+                            "crd": {
+                                "x": 13368892,
+                                "y": 52525850,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 447,
+                            "entry": true
+                        },
+                        {
+                            "lid": "A=1@O=Berlin Gesundbrunnen@X=13388516@Y=52548961@U=80@L=8011102@",
+                            "type": "S",
+                            "name": "Berlin Gesundbrunnen",
+                            "icoX": 0,
+                            "extId": "8011102",
+                            "state": "F",
+                            "crd": {
+                                "x": 13391060,
+                                "y": 52548656,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 191
+                        },
+                        {
+                            "lid": "A=1@O=Eberswalde Hbf@X=13797058@Y=52834018@U=80@L=8010093@",
+                            "type": "S",
+                            "name": "Eberswalde Hbf",
+                            "icoX": 0,
+                            "extId": "8010093",
+                            "state": "F",
+                            "crd": {
+                                "x": 13797138,
+                                "y": 52834063,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 555
+                        },
+                        {
+                            "lid": "A=1@O=Angermünde@X=13996357@Y=53015223@U=80@L=8010004@",
+                            "type": "S",
+                            "name": "Angermünde",
+                            "icoX": 0,
+                            "extId": "8010004",
+                            "state": "F",
+                            "crd": {
+                                "x": 13995845,
+                                "y": 53015861,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 555
+                        },
+                        {
+                            "lid": "A=1@O=Prenzlau@X=13866535@Y=53321611@U=80@L=8010282@",
+                            "type": "S",
+                            "name": "Prenzlau",
+                            "icoX": 0,
+                            "extId": "8010282",
+                            "state": "F",
+                            "crd": {
+                                "x": 13866472,
+                                "y": 53321620,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 555
+                        },
+                        {
+                            "lid": "A=1@O=Pasewalk@X=13988878@Y=53515356@U=80@L=8010268@",
+                            "type": "S",
+                            "name": "Pasewalk",
+                            "icoX": 0,
+                            "extId": "8010268",
+                            "state": "F",
+                            "crd": {
+                                "x": 13989391,
+                                "y": 53515311,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 43
+                        },
+                        {
+                            "lid": "A=1@O=Anklam@X=13701826@Y=53856101@U=80@L=8011044@",
+                            "type": "S",
+                            "name": "Anklam",
+                            "icoX": 0,
+                            "extId": "8011044",
+                            "state": "F",
+                            "crd": {
+                                "x": 13701817,
+                                "y": 53856101,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 11
+                        },
+                        {
+                            "lid": "A=1@O=Züssow@X=13548191@Y=53973877@U=80@L=8010396@",
+                            "type": "S",
+                            "name": "Züssow",
+                            "icoX": 0,
+                            "extId": "8010396",
+                            "state": "F",
+                            "crd": {
+                                "x": 13548883,
+                                "y": 53973365,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 11
+                        },
+                        {
+                            "lid": "A=1@O=Greifswald@X=13370259@Y=54092921@U=80@L=8010139@",
+                            "type": "S",
+                            "name": "Greifswald",
+                            "icoX": 0,
+                            "extId": "8010139",
+                            "state": "F",
+                            "crd": {
+                                "x": 13370340,
+                                "y": 54092921,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 43
+                        },
+                        {
+                            "lid": "A=1@O=Stralsund Hbf@X=13077318@Y=54308627@U=80@L=8010338@",
+                            "type": "S",
+                            "name": "Stralsund Hbf",
+                            "icoX": 0,
+                            "extId": "8010338",
+                            "state": "F",
+                            "crd": {
+                                "x": 13078028,
+                                "y": 54308438,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 47
+                        },
+                        {
+                            "lid": "A=1@O=Bergen auf Rügen@X=13417821@Y=54420497@U=80@L=8010033@",
+                            "type": "S",
+                            "name": "Bergen auf Rügen",
+                            "icoX": 0,
+                            "extId": "8010033",
+                            "state": "F",
+                            "crd": {
+                                "x": 13418198,
+                                "y": 54420668,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 47
+                        }
+                    ],
+                    "prodL": [
+                        {
+                            "name": "ICE 1045",
+                            "number": "1045",
+                            "icoX": 0,
+                            "cls": 1,
+                            "oprX": 0,
+                            "prodCtx": {
+                                "name": "ICE 1045",
+                                "num": "1045",
+                                "matchId": "14",
+                                "catOut": "ICE",
+                                "catOutS": "ICE",
+                                "catOutL": "Intercity-Express",
+                                "catIn": "ICE",
+                                "catCode": "0",
+                                "admin": "80____"
+                            }
+                        }
+                    ],
+                    "polyL": [],
+                    "layerL": [
+                        {
+                            "id": "standard",
+                            "name": "standard",
+                            "index": 0,
+                            "annoCnt": 0
+                        }
+                    ],
+                    "crdSysL": [
+                        {
+                            "id": "standard",
+                            "index": 0,
+                            "type": "WGS84",
+                            "dim": 3
+                        }
+                    ],
+                    "opL": [
+                        {
+                            "name": "DB Fernverkehr AG",
+                            "icoX": 1
+                        }
+                    ],
+                    "remL": [
+                        {
+                            "type": "A",
+                            "code": "NJ",
+                            "prio": 100,
+                            "icoX": 2,
+                            "txtN": "Any local transport tickets are valid (Berlin Südkreuz - Prenzlau)"
+                        },
+                        {
+                            "type": "A",
+                            "code": "CK",
+                            "prio": 200,
+                            "icoX": 2,
+                            "txtN": "Komfort Check-in possible (visit bahn.de/kci for more information)"
+                        },
+                        {
+                            "type": "A",
+                            "code": "PB",
+                            "prio": 200,
+                            "icoX": 2,
+                            "txtN": "Medical-grade masks must be worn"
+                        },
+                        {
+                            "type": "A",
+                            "code": "FR",
+                            "prio": 260,
+                            "icoX": 3,
+                            "txtN": "Bicycles conveyed - subject to reservation"
+                        },
+                        {
+                            "type": "A",
+                            "code": "FB",
+                            "prio": 260,
+                            "icoX": 4,
+                            "txtN": "Number of bicycles conveyed limited"
+                        },
+                        {
+                            "type": "A",
+                            "code": "BR",
+                            "prio": 450,
+                            "icoX": 5,
+                            "txtN": "Bordrestaurant"
+                        },
+                        {
+                            "type": "A",
+                            "code": "EH",
+                            "prio": 560,
+                            "icoX": 2,
+                            "txtN": "vehicle-mounted access aid"
+                        }
+                    ],
+                    "icoL": [
+                        {
+                            "res": "ICE"
+                        },
+                        {
+                            "res": "D",
+                            "txt": "DB Fernverkehr AG"
+                        },
+                        {
+                            "res": "attr_info"
+                        },
+                        {
+                            "res": "attr_bike_r"
+                        },
+                        {
+                            "res": "attr_bike"
+                        },
+                        {
+                            "res": "attr_resto"
+                        }
+                    ],
+                    "tcocL": [
+                        {
+                            "c": "FIRST",
+                            "r": 1
+                        },
+                        {
+                            "c": "SECOND",
+                            "r": 1
+                        }
+                    ]
+                },
+                "journey": {
+                    "jid": "1|262474|0|80|27032021",
+                    "date": "20210327",
+                    "prodX": 0,
+                    "status": "P",
+                    "isRchbl": true,
+                    "stopL": [
+                        {
+                            "locX": 0,
+                            "idx": 0,
+                            "dProdX": 0,
+                            "dPlatfS": "6",
+                            "dInR": true,
+                            "dTimeS": "153200",
+                            "dProgType": "PROGNOSED",
+                            "dTZOffset": 60,
+                            "type": "N"
+                        },
+                        {
+                            "locX": 2,
+                            "idx": 1,
+                            "aProdX": 0,
+                            "aOutS": false,
+                            "aOutR": false,
+                            "aTZOffset": 60,
+                            "dProdX": 0,
+                            "dPlatfS": "5",
+                            "dInR": true,
+                            "dTimeS": "154600",
+                            "dTZOffset": 60,
+                            "type": "N"
+                        },
+                        {
+                            "locX": 3,
+                            "idx": 2,
+                            "aProdX": 0,
+                            "aOutS": false,
+                            "aOutR": false,
+                            "aTZOffset": 60,
+                            "dProdX": 0,
+                            "dPlatfS": "10",
+                            "dInR": true,
+                            "dTimeS": "155200",
+                            "dTrnCmpSX": {
+                                "tcocX": [
+                                    0,
+                                    1
+                                ]
+                            },
+                            "dTZOffset": 60,
+                            "type": "N"
+                        },
+                        {
+                            "locX": 4,
+                            "idx": 3,
+                            "aProdX": 0,
+                            "aPlatfS": "3",
+                            "aOutR": true,
+                            "aTimeS": "161700",
+                            "aTZOffset": 60,
+                            "dProdX": 0,
+                            "dPlatfS": "3",
+                            "dInR": true,
+                            "dTimeS": "161900",
+                            "dTrnCmpSX": {
+                                "tcocX": [
+                                    0,
+                                    1
+                                ]
+                            },
+                            "dTZOffset": 60,
+                            "type": "N"
+                        },
+                        {
+                            "locX": 5,
+                            "idx": 4,
+                            "aProdX": 0,
+                            "aPlatfS": "3",
+                            "aOutR": true,
+                            "aTimeS": "163500",
+                            "aTZOffset": 60,
+                            "dProdX": 0,
+                            "dPlatfS": "3",
+                            "dInR": true,
+                            "dTimeS": "163700",
+                            "dTrnCmpSX": {
+                                "tcocX": [
+                                    0,
+                                    1
+                                ]
+                            },
+                            "dTZOffset": 60,
+                            "type": "N"
+                        },
+                        {
+                            "locX": 6,
+                            "idx": 5,
+                            "aProdX": 0,
+                            "aPlatfS": "2",
+                            "aOutR": true,
+                            "aTimeS": "165900",
+                            "aTZOffset": 60,
+                            "dProdX": 0,
+                            "dPlatfS": "2",
+                            "dInR": true,
+                            "dTimeS": "170100",
+                            "dTrnCmpSX": {
+                                "tcocX": [
+                                    0,
+                                    1
+                                ]
+                            },
+                            "dTZOffset": 60,
+                            "type": "N"
+                        },
+                        {
+                            "locX": 7,
+                            "idx": 6,
+                            "aProdX": 0,
+                            "aPlatfS": "1",
+                            "aOutR": true,
+                            "aTimeS": "171700",
+                            "aTZOffset": 60,
+                            "dProdX": 0,
+                            "dPlatfS": "1",
+                            "dInR": true,
+                            "dTimeS": "171900",
+                            "dTrnCmpSX": {
+                                "tcocX": [
+                                    0,
+                                    1
+                                ]
+                            },
+                            "dTZOffset": 60,
+                            "type": "N"
+                        },
+                        {
+                            "locX": 8,
+                            "idx": 7,
+                            "aProdX": 0,
+                            "aPlatfS": "1",
+                            "aOutR": true,
+                            "aTimeS": "174500",
+                            "aTZOffset": 60,
+                            "dProdX": 0,
+                            "dPlatfS": "1",
+                            "dInR": true,
+                            "dTimeS": "174700",
+                            "dTrnCmpSX": {
+                                "tcocX": [
+                                    0,
+                                    1
+                                ]
+                            },
+                            "dTZOffset": 60,
+                            "type": "N"
+                        },
+                        {
+                            "locX": 9,
+                            "idx": 8,
+                            "aProdX": 0,
+                            "aPlatfS": "1",
+                            "aOutR": true,
+                            "aTimeS": "175700",
+                            "aTZOffset": 60,
+                            "dProdX": 0,
+                            "dPlatfS": "1",
+                            "dInR": true,
+                            "dTimeS": "175900",
+                            "dTrnCmpSX": {
+                                "tcocX": [
+                                    0,
+                                    1
+                                ]
+                            },
+                            "dTZOffset": 60,
+                            "type": "N"
+                        },
+                        {
+                            "locX": 10,
+                            "idx": 9,
+                            "aProdX": 0,
+                            "aPlatfS": "1",
+                            "aOutR": true,
+                            "aTimeS": "181000",
+                            "aTZOffset": 60,
+                            "dProdX": 0,
+                            "dPlatfS": "1",
+                            "dInR": true,
+                            "dTimeS": "181200",
+                            "dTrnCmpSX": {
+                                "tcocX": [
+                                    0,
+                                    1
+                                ]
+                            },
+                            "dTZOffset": 60,
+                            "type": "N"
+                        },
+                        {
+                            "locX": 11,
+                            "idx": 10,
+                            "aProdX": 0,
+                            "aPlatfS": "2",
+                            "aOutR": true,
+                            "aTimeS": "183300",
+                            "aTZOffset": 60,
+                            "dProdX": 0,
+                            "dPlatfS": "2",
+                            "dInR": true,
+                            "dTimeS": "183900",
+                            "dTrnCmpSX": {
+                                "tcocX": [
+                                    0,
+                                    1
+                                ]
+                            },
+                            "dTZOffset": 60,
+                            "type": "N"
+                        },
+                        {
+                            "locX": 12,
+                            "idx": 11,
+                            "aProdX": 0,
+                            "aPlatfS": "2",
+                            "aOutR": true,
+                            "aTimeS": "190300",
+                            "aTZOffset": 60,
+                            "dProdX": 0,
+                            "dPlatfS": "2",
+                            "dInR": true,
+                            "dTimeS": "190600",
+                            "dTrnCmpSX": {
+                                "tcocX": [
+                                    0,
+                                    1
+                                ]
+                            },
+                            "dTZOffset": 60,
+                            "type": "N"
+                        },
+                        {
+                            "locX": 1,
+                            "idx": 12,
+                            "aProdX": 0,
+                            "aPlatfS": "3",
+                            "aOutR": true,
+                            "aTimeS": "192900",
+                            "aProgType": "PROGNOSED",
+                            "aTZOffset": 60,
+                            "type": "N"
+                        }
+                    ],
+                    "sDaysL": [
+                        {
+                            "sDaysB": "F06FD7FFFFBFFFFFFFF3FFFFFFFFFFF9F7F801FFFFC78FF62C5FBF7EFDFBF7EFDFBF7EFDFBF7EFDFBF7EFDFBF7E0",
+                            "fLocX": 0,
+                            "tLocX": 1
+                        }
+                    ],
+                    "msgL": [
+                        {
+                            "type": "REM",
+                            "remX": 0,
+                            "fLocX": 0,
+                            "tLocX": 6,
+                            "fIdx": 0,
+                            "tIdx": 5,
+                            "tagL": [
+                                "RES_JNY_DTL"
+                            ]
+                        },
+                        {
+                            "type": "REM",
+                            "remX": 1,
+                            "fLocX": 0,
+                            "tLocX": 1,
+                            "fIdx": 0,
+                            "tIdx": 12,
+                            "tagL": [
+                                "RES_JNY_DTL"
+                            ]
+                        },
+                        {
+                            "type": "REM",
+                            "remX": 2,
+                            "fLocX": 0,
+                            "tLocX": 1,
+                            "fIdx": 0,
+                            "tIdx": 12,
+                            "tagL": [
+                                "RES_JNY_DTL"
+                            ]
+                        },
+                        {
+                            "type": "REM",
+                            "remX": 3,
+                            "fLocX": 0,
+                            "tLocX": 1,
+                            "fIdx": 0,
+                            "tIdx": 12,
+                            "tagL": [
+                                "RES_JNY_DTL"
+                            ]
+                        },
+                        {
+                            "type": "REM",
+                            "remX": 4,
+                            "fLocX": 0,
+                            "tLocX": 1,
+                            "fIdx": 0,
+                            "tIdx": 12,
+                            "tagL": [
+                                "RES_JNY_DTL"
+                            ]
+                        },
+                        {
+                            "type": "REM",
+                            "remX": 5,
+                            "fLocX": 0,
+                            "tLocX": 1,
+                            "fIdx": 0,
+                            "tIdx": 12,
+                            "tagL": [
+                                "RES_JNY_DTL"
+                            ]
+                        },
+                        {
+                            "type": "REM",
+                            "remX": 6,
+                            "fLocX": 0,
+                            "tLocX": 1,
+                            "fIdx": 0,
+                            "tIdx": 12,
+                            "tagL": [
+                                "RES_JNY_DTL"
+                            ]
+                        }
+                    ],
+                    "subscr": "F",
+                    "dTrnCmpSX": {
+                        "tcocX": [
+                            0,
+                            1
+                        ]
+                    }
+                },
+                "fpB": "20201213",
+                "fpE": "20211211",
+                "planrtTS": "1616852205"
+            }
+        }
+    ]
+}

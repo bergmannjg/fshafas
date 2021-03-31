@@ -1,0 +1,429 @@
+namespace FsHafas
+
+module internal Format =
+
+    open FsHafas
+
+#if FABLE_COMPILER
+    open Fable.Core
+#endif
+
+    let private maybeGetOptionValue<'a, 'b> (opt: 'a option) (getter: 'a -> 'b option) =
+        match opt with
+        | Some (value) -> getter value
+        | None -> None
+
+    let private getOptionValue<'a, 'b> (opt: 'a option) (getter: 'a -> 'b option) (defaultOpt: 'a) =
+        let defaultValue =
+            match getter defaultOpt with
+            | Some value -> value
+            | None -> failwith "getOptionValue: value expected"
+
+        match opt with
+        | Some (value) ->
+            match getter value with
+            | Some result -> result
+            | None -> defaultValue
+        | None -> defaultValue
+
+    let formatDate (dt: System.DateTime) = dt.ToString("yyyyMMdd")
+    let formatTime (dt: System.DateTime) = dt.ToString("HHmmss")
+
+    let private formatProductsBitmask (profile: Profile) (products: Client.Products) =
+        profile.products
+        |> Array.filter (fun p -> products.[p.id])
+        |> Array.fold (fun bitmask p -> p.bitmasks.[0] ||| bitmask) 0
+
+    let private makeFilters (profile: Profile) (products: Client.Products) =
+        let bitmask = formatProductsBitmask profile products
+
+        let filters : Raw.JnyFltr [] =
+            if bitmask <> 0 then
+                [| { ``type`` = "PROD"
+                     mode = "INC"
+                     value = bitmask.ToString()
+                     meta = None } |]
+            else
+                [||]
+
+        filters
+
+    let locationRequest (profile: Profile) (name: string) (opt: Client.LocationsOptions option) : Raw.LocMatchRequest =
+        let fuzzy =
+            getOptionValue opt (fun v -> v.fuzzy) Default.LocationsOptions
+
+        let results =
+            getOptionValue opt (fun v -> v.results) Default.LocationsOptions
+
+        { input =
+              { loc =
+                    { ``type`` = "ALL"
+                      name = Some(name + (if fuzzy then "?" else ""))
+                      lid = None }
+                maxLoc = results
+                field = "S" } }
+
+    let private makeLocLTypeS (profile: Profile) (id: string) : Raw.Loc =
+        { ``type`` = "S"
+          name = None
+          lid = Some("A=1@L=" + (profile.formatStation id) + "@") }
+
+    let private makeLoclTypeA (location: Client.Location) : Raw.Loc =
+        let x =
+            match location.longitude with
+            | Some (f) -> (Coordinate.fromFloat f)
+            | None -> raise (System.ArgumentException("location.longitude"))
+
+        let y =
+            match location.latitude with
+            | Some (f) -> (Coordinate.fromFloat f)
+            | None -> raise (System.ArgumentException("location.latitude"))
+
+        let xs = x.ToString()
+        let ys = y.ToString()
+
+        match location.address with
+        | Some name ->
+            { ``type`` = "A"
+              name = Some(name)
+              lid = Some("A=2@O=" + name + "@X=" + xs + "@Y=" + ys + "@") }
+        | None ->
+            { ``type`` = "A"
+              name = None
+              lid = Some("A=1@X=" + xs + "@Y=" + ys + "@") }
+
+    let stationBoardRequest
+        (profile: Profile)
+        (``type``: string)
+        (name: string)
+        (opt: Client.DeparturesArrivalsOptions option)
+        : Raw.StationBoardRequest =
+        let dt =
+            getOptionValue opt (fun v -> v.``when``) Default.DeparturesArrivalsOptions
+
+        let date = formatDate dt
+        let time = formatTime dt
+
+        let duration =
+            getOptionValue opt (fun v -> v.duration) Default.DeparturesArrivalsOptions
+
+        let stopovers =
+            profile.departuresGetPasslist
+            && getOptionValue opt (fun v -> v.stopovers) Default.DeparturesArrivalsOptions
+
+        let includeRelatedStations =
+            profile.departuresStbFltrEquiv
+            && getOptionValue opt (fun v -> v.includeRelatedStations) Default.DeparturesArrivalsOptions
+
+        let products =
+            getOptionValue opt (fun v -> v.products) Default.DeparturesArrivalsOptions
+
+        let filters : Raw.JnyFltr [] = makeFilters profile products
+
+        { ``type`` = ``type``
+          date = date
+          time = time
+          stbLoc = makeLocLTypeS profile name
+          jnyFltrL = filters
+          dur = duration
+          getPasslist = stopovers
+          stbFltrEquiv = includeRelatedStations }
+
+    let reconstructionRequest
+        (profile: Profile)
+        (refreshToken: string)
+        (opt: Client.RefreshJourneyOptions option)
+        : Raw.ReconstructionRequest =
+        let polylines =
+            getOptionValue opt (fun v -> v.polylines) Default.RefreshJourneyOptions
+
+        let stopovers =
+            getOptionValue opt (fun v -> v.stopovers) Default.RefreshJourneyOptions
+
+        let tickets =
+            getOptionValue opt (fun v -> v.tickets) Default.RefreshJourneyOptions
+
+        { getIST = true
+          getPasslist = stopovers
+          getPolyline = polylines
+          getTariff = tickets
+          ctxRecon = Some refreshToken }
+
+    let journeyMatchRequest
+        (profile: Profile)
+        (lineName: string)
+        (opt: Client.TripsByNameOptions option)
+        : Raw.JourneyMatchRequest =
+
+        let date =
+            maybeGetOptionValue opt (fun v -> v.``when``)
+            |> Option.map formatDate
+
+        { input = lineName; date = date }
+
+    let locDetailsRequest
+        (profile: Profile)
+        (stop: U2<string, Client.Stop>)
+        (opt: Client.StopOptions option)
+        : Raw.LocDetailsRequest =
+
+        let id =
+            match stop with
+            | U2.Case1 s -> s
+            | U2.Case2 s when s.id.IsSome -> s.id.Value
+            | _ -> raise (System.ArgumentException("Stop expected"))
+
+        { locL = [| makeLocLTypeS profile id |] }
+
+    let locGeoPosRequest
+        (profile: Profile)
+        (location: Client.Location)
+        (opt: Client.NearByOptions option)
+        : Raw.LocGeoPosRequest =
+
+        let results =
+            getOptionValue opt (fun v -> v.results) Default.NearByOptions
+
+        let stops =
+            getOptionValue opt (fun v -> v.stops) Default.NearByOptions
+
+        let distance =
+            getOptionValue opt (fun v -> v.distance) Default.NearByOptions
+
+        let products =
+            getOptionValue opt (fun v -> v.products) Default.NearByOptions
+
+        let filters : Raw.JnyFltr [] = makeFilters profile products
+
+        let x =
+            match location.longitude with
+            | Some (f) -> (Coordinate.fromFloat f)
+            | None -> raise (System.ArgumentException("location.longitude"))
+
+        let y =
+            match location.latitude with
+            | Some (f) -> (Coordinate.fromFloat f)
+            | None -> raise (System.ArgumentException("location.latitude"))
+
+        { ring =
+              { cCrd = { x = x; y = y }
+                maxDist = distance
+                minDist = 0 }
+          locFltrL = filters
+          getPOIs = false
+          getStops = stops
+          maxLoc = results }
+
+    let locGeoReachRequest
+        (profile: Profile)
+        (location: Client.Location)
+        (opt: Client.ReachableFromOptions option)
+        : Raw.LocGeoReachRequest =
+
+        let dt =
+            getOptionValue opt (fun v -> v.``when``) Default.ReachableFromOptions
+
+        let date = formatDate dt
+        let time = formatTime dt
+
+        let maxDuration =
+            getOptionValue opt (fun v -> v.maxDuration) Default.ReachableFromOptions
+
+        let maxTransfers =
+            getOptionValue opt (fun v -> v.maxTransfers) Default.ReachableFromOptions
+
+        let products =
+            getOptionValue opt (fun v -> v.products) Default.ReachableFromOptions
+
+        let filters : Raw.JnyFltr [] = makeFilters profile products
+
+        { loc = makeLoclTypeA location
+          maxDur = maxDuration
+          maxChg = maxTransfers
+          date = date
+          time = time
+          period = 120
+          jnyFltrL = filters }
+
+    let journeyGeoPosRequest
+        (profile: Profile)
+        (rect: Client.BoundingBox)
+        (opt: Client.RadarOptions option)
+        : Raw.JourneyGeoPosRequest =
+
+        if (rect.north <= rect.south) then
+            raise (System.ArgumentException("north must be larger than south."))
+
+        if (rect.east <= rect.west) then
+            raise (System.ArgumentException("east must be larger than west."))
+
+        let dt =
+            getOptionValue opt (fun v -> v.``when``) Default.RadarOptions
+
+        let date = formatDate dt
+        let time = formatTime dt
+
+        let results =
+            getOptionValue opt (fun v -> v.results) Default.RadarOptions
+
+        let duration =
+            getOptionValue opt (fun v -> v.duration) Default.RadarOptions
+
+        let frames =
+            getOptionValue opt (fun v -> v.frames) Default.RadarOptions
+
+        let products =
+            getOptionValue opt (fun v -> v.products) Default.RadarOptions
+
+        let filters : Raw.JnyFltr [] = makeFilters profile products
+
+        { maxJny = results
+          onlyRT = false
+          date = date
+          time = time
+          rect =
+              { llCrd =
+                    { x = Coordinate.fromFloat rect.west
+                      y = Coordinate.fromFloat rect.south
+                      z = None
+                      ``type`` = None
+                      layerX = None
+                      crdSysX = None }
+                urCrd =
+                    { x = Coordinate.fromFloat rect.east
+                      y = Coordinate.fromFloat rect.north
+                      z = None
+                      ``type`` = None
+                      layerX = None
+                      crdSysX = None } }
+          perSize = duration * 1000
+          perStep = duration / frames * 1000
+          ageOfReport = true
+          jnyFltrL = filters
+          trainPosMode = "CALC" }
+
+    let tripRequest
+        (profile: Profile)
+        (id: string)
+        (name: string)
+        (opt: Client.TripOptions option)
+        : Raw.JourneyDetailsRequest =
+
+        let polyline =
+            getOptionValue opt (fun v -> v.polyline) Default.TripOptions
+
+        { jid = id
+          name = name
+          getPolyline = polyline }
+
+    let lineMatchRequest (profile: Profile) (query: string) (opt: Client.LinesOptions option) : Raw.LineMatchRequest =
+        { input = query }
+
+    let himSearchRequest (profile: Profile) (opt: Client.RemarksOptions option) : Raw.HimSearchRequest =
+
+        let dt =
+            getOptionValue opt (fun v -> v.from) Default.RemarksOptions
+
+        let date = formatDate dt
+        let time = formatTime dt
+
+        let results =
+            getOptionValue opt (fun v -> v.results) Default.RemarksOptions
+
+        let polylines =
+            getOptionValue opt (fun v -> v.polylines) Default.RemarksOptions
+
+        let products =
+            getOptionValue opt (fun v -> v.products) Default.RemarksOptions
+
+        let filters : Raw.JnyFltr [] = makeFilters profile products
+
+        { himFltrL = filters
+          getPolyline = polylines
+          maxNum = results
+          dateB = date
+          timeB = time }
+
+    let private makeLocType (profile: Profile) (s: U4<string, Client.Station, Client.Stop, Client.Location>) =
+        match s with
+        | U4.Case1 v -> makeLocLTypeS profile v
+        | U4.Case2 v when v.id.IsSome -> makeLocLTypeS profile v.id.Value
+        | U4.Case3 v when v.id.IsSome -> makeLocLTypeS profile v.id.Value
+        | U4.Case4 v -> makeLoclTypeA v
+        | _ -> raise (System.ArgumentException("makeLocType"))
+
+    let journeyRequest
+        (profile: Profile)
+        (from: U4<string, Client.Station, Client.Stop, Client.Location>)
+        (``to``: U4<string, Client.Station, Client.Stop, Client.Location>)
+        (opt: Client.JourneysOptions option)
+        : Raw.TripSearchRequest =
+
+        match opt with
+        | Some opt ->
+            if
+                opt.arrival.IsSome
+                && not (profile.journeysOutFrwd)
+            then
+                raise (System.ArgumentException("opt.arrival is unsupported"))
+
+            if opt.earlierThan.IsSome then
+                raise (System.ArgumentException("opt.earlierThan nyi")) // todo
+
+            if opt.laterThan.IsSome then
+                raise (System.ArgumentException("opt.laterThan nyi")) // todo
+        | None -> ()
+
+        let dt =
+            match opt with
+            | Some optV when optV.arrival.IsSome -> optV.arrival.Value
+            | _ -> getOptionValue opt (fun v -> v.departure) Default.JourneysOptions
+
+        let date = formatDate dt
+        let time = formatTime dt
+
+        let outFrwd =
+            if opt.IsSome && opt.Value.arrival.IsSome then
+                false
+            else
+                true
+
+        let results =
+            getOptionValue opt (fun v -> v.results) Default.JourneysOptions
+
+        let stopovers =
+            getOptionValue opt (fun v -> v.stopovers) Default.JourneysOptions
+
+        let transferTime =
+            getOptionValue opt (fun v -> v.transferTime) Default.JourneysOptions
+
+        let tickets =
+            getOptionValue opt (fun v -> v.tickets) Default.JourneysOptions
+
+        let polylines =
+            getOptionValue opt (fun v -> v.polylines) Default.JourneysOptions
+
+        let products =
+            getOptionValue opt (fun v -> v.products) Default.JourneysOptions
+
+        let filters : Raw.JnyFltr [] = makeFilters profile products
+
+        profile.transformJourneysQuery
+            opt
+            { getPasslist = stopovers
+              maxChg = -1
+              minChgTime = transferTime
+              depLocL = [| makeLocType profile from |]
+              arrLocL = [| makeLocType profile ``to`` |]
+              jnyFltrL = filters
+              gisFltrL = [||]
+              getTariff = tickets
+              ushrp = true
+              getPT = true
+              getIV = false
+              getPolyline = polylines
+              outDate = date
+              outTime = time
+              numF = results
+              outFrwd = outFrwd
+              trfReq = None }

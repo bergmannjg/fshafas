@@ -1,0 +1,50 @@
+{
+    "lang": "en",
+    "svcReqL": [
+        {
+            "meth": "JourneyGeoPos",
+            "req": {
+                "maxJny": 5,
+                "onlyRT": false,
+                "date": "20210306",
+                "time": "172508",
+                "rect": {
+                    "llCrd": {
+                        "x": 13077028,
+                        "y": 54297438
+                    },
+                    "urCrd": {
+                        "x": 13079028,
+                        "y": 54319438
+                    }
+                },
+                "perSize": 30000,
+                "perStep": 10000,
+                "ageOfReport": true,
+                "jnyFltrL": [
+                    {
+                        "type": "PROD",
+                        "mode": "INC",
+                        "value": "1023"
+                    }
+                ],
+                "trainPosMode": "CALC"
+            },
+            "cfg": {
+                "rtMode": "HYBRID"
+            }
+        }
+    ],
+    "client": {
+        "id": "DB",
+        "v": "16040000",
+        "type": "IPH",
+        "name": "DB Navigator"
+    },
+    "ext": "DB.R19.04.a",
+    "ver": "1.15",
+    "auth": {
+        "type": "AID",
+        "aid": "n91dB8Z77MLdoR0K"
+    }
+}

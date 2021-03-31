@@ -1,0 +1,613 @@
+{
+    "origin": {
+        "type": "stop",
+        "id": "8011113",
+        "name": "Berlin Südkreuz",
+        "location": {
+            "type": "location",
+            "id": "8011113",
+            "latitude": 52.47623,
+            "longitude": 13.365863
+        },
+        "products": {
+            "nationalExpress": true,
+            "national": true,
+            "regionalExp": true,
+            "regional": true,
+            "suburban": true,
+            "bus": true,
+            "ferry": false,
+            "subway": false,
+            "tram": false,
+            "taxi": false
+        }
+    },
+    "destination": {
+        "type": "stop",
+        "id": "8011191",
+        "name": "Ostseebad Binz",
+        "location": {
+            "type": "location",
+            "id": "8011191",
+            "latitude": 54.404883,
+            "longitude": 13.600356
+        },
+        "products": {
+            "nationalExpress": true,
+            "national": true,
+            "regionalExp": true,
+            "regional": true,
+            "suburban": false,
+            "bus": true,
+            "ferry": false,
+            "subway": false,
+            "tram": false,
+            "taxi": false
+        }
+    },
+    "departure": "2021-03-27T15:32:00+01:00",
+    "plannedDeparture": "2021-03-27T15:32:00+01:00",
+    "departureDelay": null,
+    "arrival": "2021-03-27T19:29:00+01:00",
+    "plannedArrival": "2021-03-27T19:29:00+01:00",
+    "arrivalDelay": null,
+    "reachable": true,
+    "line": {
+        "type": "line",
+        "id": "ice-1045",
+        "fahrtNr": "1045",
+        "name": "ICE 1045",
+        "public": true,
+        "adminCode": "80____",
+        "mode": "train",
+        "product": "nationalExpress",
+        "operator": {
+            "type": "operator",
+            "id": "db-fernverkehr-ag",
+            "name": "DB Fernverkehr AG"
+        }
+    },
+    "direction": null,
+    "arrivalPlatform": "3",
+    "plannedArrivalPlatform": "3",
+    "departurePlatform": "6",
+    "plannedDeparturePlatform": "6",
+    "stopovers": [
+        {
+            "stop": {
+                "type": "stop",
+                "id": "8011113",
+                "name": "Berlin Südkreuz",
+                "location": {
+                    "type": "location",
+                    "id": "8011113",
+                    "latitude": 52.47623,
+                    "longitude": 13.365863
+                },
+                "products": {
+                    "nationalExpress": true,
+                    "national": true,
+                    "regionalExp": true,
+                    "regional": true,
+                    "suburban": true,
+                    "bus": true,
+                    "ferry": false,
+                    "subway": false,
+                    "tram": false,
+                    "taxi": false
+                }
+            },
+            "arrival": null,
+            "plannedArrival": null,
+            "arrivalDelay": null,
+            "arrivalPlatform": null,
+            "plannedArrivalPlatform": null,
+            "departure": "2021-03-27T15:32:00+01:00",
+            "plannedDeparture": "2021-03-27T15:32:00+01:00",
+            "departureDelay": null,
+            "departurePlatform": "6",
+            "plannedDeparturePlatform": "6",
+            "remarks": [
+                {
+                    "type": "hint",
+                    "code": "NJ",
+                    "text": "Any local transport tickets are valid (Berlin Südkreuz - Prenzlau)"
+                }
+            ]
+        },
+        {
+            "stop": {
+                "type": "stop",
+                "id": "8098160",
+                "name": "Berlin Hbf (tief)",
+                "location": {
+                    "type": "location",
+                    "id": "8098160",
+                    "latitude": 52.52585,
+                    "longitude": 13.368892
+                },
+                "products": {
+                    "nationalExpress": true,
+                    "national": true,
+                    "regionalExp": true,
+                    "regional": true,
+                    "suburban": true,
+                    "bus": true,
+                    "ferry": false,
+                    "subway": true,
+                    "tram": true,
+                    "taxi": false
+                }
+            },
+            "arrival": null,
+            "plannedArrival": null,
+            "arrivalDelay": null,
+            "arrivalPlatform": null,
+            "plannedArrivalPlatform": null,
+            "departure": "2021-03-27T15:46:00+01:00",
+            "plannedDeparture": "2021-03-27T15:46:00+01:00",
+            "departureDelay": null,
+            "departurePlatform": "5",
+            "plannedDeparturePlatform": "5",
+            "remarks": [
+                {
+                    "type": "hint",
+                    "code": "NJ",
+                    "text": "Any local transport tickets are valid (Berlin Südkreuz - Prenzlau)"
+                }
+            ]
+        },
+        {
+            "stop": {
+                "type": "stop",
+                "id": "8011102",
+                "name": "Berlin Gesundbrunnen",
+                "location": {
+                    "type": "location",
+                    "id": "8011102",
+                    "latitude": 52.548656,
+                    "longitude": 13.39106
+                },
+                "products": {
+                    "nationalExpress": true,
+                    "national": true,
+                    "regionalExp": true,
+                    "regional": true,
+                    "suburban": true,
+                    "bus": true,
+                    "ferry": false,
+                    "subway": true,
+                    "tram": false,
+                    "taxi": false
+                }
+            },
+            "arrival": null,
+            "plannedArrival": null,
+            "arrivalDelay": null,
+            "arrivalPlatform": null,
+            "plannedArrivalPlatform": null,
+            "departure": "2021-03-27T15:52:00+01:00",
+            "plannedDeparture": "2021-03-27T15:52:00+01:00",
+            "departureDelay": null,
+            "departurePlatform": "10",
+            "plannedDeparturePlatform": "10",
+            "remarks": [
+                {
+                    "type": "hint",
+                    "code": "NJ",
+                    "text": "Any local transport tickets are valid (Berlin Südkreuz - Prenzlau)"
+                }
+            ]
+        },
+        {
+            "stop": {
+                "type": "stop",
+                "id": "8010093",
+                "name": "Eberswalde Hbf",
+                "location": {
+                    "type": "location",
+                    "id": "8010093",
+                    "latitude": 52.834063,
+                    "longitude": 13.797138
+                },
+                "products": {
+                    "nationalExpress": true,
+                    "national": true,
+                    "regionalExp": false,
+                    "regional": true,
+                    "suburban": false,
+                    "bus": true,
+                    "ferry": false,
+                    "subway": false,
+                    "tram": false,
+                    "taxi": true
+                }
+            },
+            "arrival": "2021-03-27T16:17:00+01:00",
+            "plannedArrival": "2021-03-27T16:17:00+01:00",
+            "arrivalDelay": null,
+            "arrivalPlatform": "3",
+            "plannedArrivalPlatform": "3",
+            "departure": "2021-03-27T16:19:00+01:00",
+            "plannedDeparture": "2021-03-27T16:19:00+01:00",
+            "departureDelay": null,
+            "departurePlatform": "3",
+            "plannedDeparturePlatform": "3",
+            "remarks": [
+                {
+                    "type": "hint",
+                    "code": "NJ",
+                    "text": "Any local transport tickets are valid (Berlin Südkreuz - Prenzlau)"
+                }
+            ]
+        },
+        {
+            "stop": {
+                "type": "stop",
+                "id": "8010004",
+                "name": "Angermünde",
+                "location": {
+                    "type": "location",
+                    "id": "8010004",
+                    "latitude": 53.015861,
+                    "longitude": 13.995845
+                },
+                "products": {
+                    "nationalExpress": true,
+                    "national": true,
+                    "regionalExp": false,
+                    "regional": true,
+                    "suburban": false,
+                    "bus": true,
+                    "ferry": false,
+                    "subway": false,
+                    "tram": false,
+                    "taxi": true
+                }
+            },
+            "arrival": "2021-03-27T16:35:00+01:00",
+            "plannedArrival": "2021-03-27T16:35:00+01:00",
+            "arrivalDelay": null,
+            "arrivalPlatform": "3",
+            "plannedArrivalPlatform": "3",
+            "departure": "2021-03-27T16:37:00+01:00",
+            "plannedDeparture": "2021-03-27T16:37:00+01:00",
+            "departureDelay": null,
+            "departurePlatform": "3",
+            "plannedDeparturePlatform": "3",
+            "remarks": [
+                {
+                    "type": "hint",
+                    "code": "NJ",
+                    "text": "Any local transport tickets are valid (Berlin Südkreuz - Prenzlau)"
+                }
+            ]
+        },
+        {
+            "stop": {
+                "type": "stop",
+                "id": "8010282",
+                "name": "Prenzlau",
+                "location": {
+                    "type": "location",
+                    "id": "8010282",
+                    "latitude": 53.32162,
+                    "longitude": 13.866472
+                },
+                "products": {
+                    "nationalExpress": true,
+                    "national": true,
+                    "regionalExp": false,
+                    "regional": true,
+                    "suburban": false,
+                    "bus": true,
+                    "ferry": false,
+                    "subway": false,
+                    "tram": false,
+                    "taxi": true
+                }
+            },
+            "arrival": "2021-03-27T16:59:00+01:00",
+            "plannedArrival": "2021-03-27T16:59:00+01:00",
+            "arrivalDelay": null,
+            "arrivalPlatform": "2",
+            "plannedArrivalPlatform": "2",
+            "departure": "2021-03-27T17:01:00+01:00",
+            "plannedDeparture": "2021-03-27T17:01:00+01:00",
+            "departureDelay": null,
+            "departurePlatform": "2",
+            "plannedDeparturePlatform": "2",
+            "remarks": [
+                {
+                    "type": "hint",
+                    "code": "NJ",
+                    "text": "Any local transport tickets are valid (Berlin Südkreuz - Prenzlau)"
+                }
+            ]
+        },
+        {
+            "stop": {
+                "type": "stop",
+                "id": "8010268",
+                "name": "Pasewalk",
+                "location": {
+                    "type": "location",
+                    "id": "8010268",
+                    "latitude": 53.515311,
+                    "longitude": 13.989391
+                },
+                "products": {
+                    "nationalExpress": true,
+                    "national": true,
+                    "regionalExp": false,
+                    "regional": true,
+                    "suburban": false,
+                    "bus": true,
+                    "ferry": false,
+                    "subway": false,
+                    "tram": false,
+                    "taxi": false
+                }
+            },
+            "arrival": "2021-03-27T17:17:00+01:00",
+            "plannedArrival": "2021-03-27T17:17:00+01:00",
+            "arrivalDelay": null,
+            "arrivalPlatform": "1",
+            "plannedArrivalPlatform": "1",
+            "departure": "2021-03-27T17:19:00+01:00",
+            "plannedDeparture": "2021-03-27T17:19:00+01:00",
+            "departureDelay": null,
+            "departurePlatform": "1",
+            "plannedDeparturePlatform": "1"
+        },
+        {
+            "stop": {
+                "type": "stop",
+                "id": "8011044",
+                "name": "Anklam",
+                "location": {
+                    "type": "location",
+                    "id": "8011044",
+                    "latitude": 53.856101,
+                    "longitude": 13.701817
+                },
+                "products": {
+                    "nationalExpress": true,
+                    "national": true,
+                    "regionalExp": false,
+                    "regional": true,
+                    "suburban": false,
+                    "bus": false,
+                    "ferry": false,
+                    "subway": false,
+                    "tram": false,
+                    "taxi": false
+                }
+            },
+            "arrival": "2021-03-27T17:45:00+01:00",
+            "plannedArrival": "2021-03-27T17:45:00+01:00",
+            "arrivalDelay": null,
+            "arrivalPlatform": "1",
+            "plannedArrivalPlatform": "1",
+            "departure": "2021-03-27T17:47:00+01:00",
+            "plannedDeparture": "2021-03-27T17:47:00+01:00",
+            "departureDelay": null,
+            "departurePlatform": "1",
+            "plannedDeparturePlatform": "1"
+        },
+        {
+            "stop": {
+                "type": "stop",
+                "id": "8010396",
+                "name": "Züssow",
+                "location": {
+                    "type": "location",
+                    "id": "8010396",
+                    "latitude": 53.973365,
+                    "longitude": 13.548883
+                },
+                "products": {
+                    "nationalExpress": true,
+                    "national": true,
+                    "regionalExp": false,
+                    "regional": true,
+                    "suburban": false,
+                    "bus": false,
+                    "ferry": false,
+                    "subway": false,
+                    "tram": false,
+                    "taxi": false
+                }
+            },
+            "arrival": "2021-03-27T17:57:00+01:00",
+            "plannedArrival": "2021-03-27T17:57:00+01:00",
+            "arrivalDelay": null,
+            "arrivalPlatform": "1",
+            "plannedArrivalPlatform": "1",
+            "departure": "2021-03-27T17:59:00+01:00",
+            "plannedDeparture": "2021-03-27T17:59:00+01:00",
+            "departureDelay": null,
+            "departurePlatform": "1",
+            "plannedDeparturePlatform": "1"
+        },
+        {
+            "stop": {
+                "type": "stop",
+                "id": "8010139",
+                "name": "Greifswald",
+                "location": {
+                    "type": "location",
+                    "id": "8010139",
+                    "latitude": 54.092921,
+                    "longitude": 13.37034
+                },
+                "products": {
+                    "nationalExpress": true,
+                    "national": true,
+                    "regionalExp": false,
+                    "regional": true,
+                    "suburban": false,
+                    "bus": true,
+                    "ferry": false,
+                    "subway": false,
+                    "tram": false,
+                    "taxi": false
+                }
+            },
+            "arrival": "2021-03-27T18:10:00+01:00",
+            "plannedArrival": "2021-03-27T18:10:00+01:00",
+            "arrivalDelay": null,
+            "arrivalPlatform": "1",
+            "plannedArrivalPlatform": "1",
+            "departure": "2021-03-27T18:12:00+01:00",
+            "plannedDeparture": "2021-03-27T18:12:00+01:00",
+            "departureDelay": null,
+            "departurePlatform": "1",
+            "plannedDeparturePlatform": "1"
+        },
+        {
+            "stop": {
+                "type": "stop",
+                "id": "8010338",
+                "name": "Stralsund Hbf",
+                "location": {
+                    "type": "location",
+                    "id": "8010338",
+                    "latitude": 54.308438,
+                    "longitude": 13.078028
+                },
+                "products": {
+                    "nationalExpress": true,
+                    "national": true,
+                    "regionalExp": true,
+                    "regional": true,
+                    "suburban": false,
+                    "bus": true,
+                    "ferry": false,
+                    "subway": false,
+                    "tram": false,
+                    "taxi": false
+                }
+            },
+            "arrival": "2021-03-27T18:33:00+01:00",
+            "plannedArrival": "2021-03-27T18:33:00+01:00",
+            "arrivalDelay": null,
+            "arrivalPlatform": "2",
+            "plannedArrivalPlatform": "2",
+            "departure": "2021-03-27T18:39:00+01:00",
+            "plannedDeparture": "2021-03-27T18:39:00+01:00",
+            "departureDelay": null,
+            "departurePlatform": "2",
+            "plannedDeparturePlatform": "2"
+        },
+        {
+            "stop": {
+                "type": "stop",
+                "id": "8010033",
+                "name": "Bergen auf Rügen",
+                "location": {
+                    "type": "location",
+                    "id": "8010033",
+                    "latitude": 54.420668,
+                    "longitude": 13.418198
+                },
+                "products": {
+                    "nationalExpress": true,
+                    "national": true,
+                    "regionalExp": true,
+                    "regional": true,
+                    "suburban": false,
+                    "bus": true,
+                    "ferry": false,
+                    "subway": false,
+                    "tram": false,
+                    "taxi": false
+                }
+            },
+            "arrival": "2021-03-27T19:03:00+01:00",
+            "plannedArrival": "2021-03-27T19:03:00+01:00",
+            "arrivalDelay": null,
+            "arrivalPlatform": "2",
+            "plannedArrivalPlatform": "2",
+            "departure": "2021-03-27T19:06:00+01:00",
+            "plannedDeparture": "2021-03-27T19:06:00+01:00",
+            "departureDelay": null,
+            "departurePlatform": "2",
+            "plannedDeparturePlatform": "2"
+        },
+        {
+            "stop": {
+                "type": "stop",
+                "id": "8011191",
+                "name": "Ostseebad Binz",
+                "location": {
+                    "type": "location",
+                    "id": "8011191",
+                    "latitude": 54.404883,
+                    "longitude": 13.600356
+                },
+                "products": {
+                    "nationalExpress": true,
+                    "national": true,
+                    "regionalExp": true,
+                    "regional": true,
+                    "suburban": false,
+                    "bus": true,
+                    "ferry": false,
+                    "subway": false,
+                    "tram": false,
+                    "taxi": false
+                }
+            },
+            "arrival": "2021-03-27T19:29:00+01:00",
+            "plannedArrival": "2021-03-27T19:29:00+01:00",
+            "arrivalDelay": null,
+            "arrivalPlatform": "3",
+            "plannedArrivalPlatform": "3",
+            "departure": null,
+            "plannedDeparture": null,
+            "departureDelay": null,
+            "departurePlatform": null,
+            "plannedDeparturePlatform": null
+        }
+    ],
+    "remarks": [
+        {
+            "text": "Komfort Check-in possible (visit bahn.de/kci for more information)",
+            "type": "hint",
+            "code": "komfort-checkin",
+            "summary": "Komfort-Checkin available"
+        },
+        {
+            "type": "hint",
+            "code": "PB",
+            "text": "Medical-grade masks must be worn"
+        },
+        {
+            "text": "Bicycles conveyed - subject to reservation",
+            "type": "hint",
+            "code": "bicycle-conveyance-reservation",
+            "summary": "bicycles conveyed, subject to reservation"
+        },
+        {
+            "text": "Number of bicycles conveyed limited",
+            "type": "hint",
+            "code": "bicycle-conveyance",
+            "summary": "bicycles conveyed"
+        },
+        {
+            "text": "Bordrestaurant",
+            "type": "hint",
+            "code": "on-board-restaurant",
+            "summary": "Bordrestaurant available"
+        },
+        {
+            "text": "vehicle-mounted access aid",
+            "type": "hint",
+            "code": "boarding-ramp",
+            "summary": "vehicle-mounted boarding ramp available"
+        }
+    ],
+    "loadFactor": "low-to-medium",
+    "id": "1|262474|0|80|27032021"
+}
