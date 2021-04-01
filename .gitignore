@@ -10,6 +10,7 @@ bin/
 obj/
 test-fixtures/
 
+fs-hafas-client-*.tgz
 fshafas.bundle.js
 fshafas.bundle.js.map
 fshafas.bundle.js..LICENSE.txt

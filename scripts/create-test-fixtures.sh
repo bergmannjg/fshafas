@@ -156,13 +156,10 @@ EOF
   "version": "1.0.0",
   "description": "create test-fixtures",
   "main": "index.js",
-  "scripts": {
-    "copy": "cp -r ../src/fshafas.fable.package/fs-hafas-client/ ./private_modules/"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fs-hafas-client": "file:private_modules/fs-hafas-client",
+    "fs-hafas-client": "file:../src/fshafas.fable.package/fs-hafas-client-1.0.0.tgz",
     "google-polyline": "^1.0.3",
     "hafas-client": "^5.15.1",
     "isomorphic-fetch": "^2.2.1",
@@ -175,7 +172,6 @@ EOF
 }
 EOF
 
-  mkdir private_modules
   npm install
 
 else

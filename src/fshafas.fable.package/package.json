@@ -2,7 +2,9 @@
   "private": true,
   "scripts": {
     "build": "npx webpack --mode development --devtool source-map --config webpack.config.js",
-    "build-prod": "rm -f fs-hafas-client/fshafas.bundle.js.map && npx webpack --mode production --no-devtool --config webpack.config.js"
+    "postbuild": "npm pack fs-hafas-client/",
+    "build-prod": "rm -f fs-hafas-client/fshafas.bundle.js.map && npx webpack --mode production --no-devtool --config webpack.config.js",
+    "postbuild-prod": "npm pack fs-hafas-client/"
   },
   "dependencies": {
     "@babel/compat-data": "^7.12.13",
