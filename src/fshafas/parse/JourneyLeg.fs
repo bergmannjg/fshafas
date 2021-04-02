@@ -64,7 +64,7 @@ module internal JourneyLeg =
         let remarks =
             match stopover.remarks, hint with
             | Some remarks, Some hint -> remarks
-            | None, Some hint -> [| hint |]
+            | None, Some hint when hint.IsSome -> [| hint.Value |]
             | _ -> Array.empty
 
         { stopover with remarks = Some remarks }
@@ -157,6 +157,8 @@ module internal JourneyLeg =
                             |> Some
                         | None -> None
 
+                    let remarks = Common.msgLToRemarks ctx msgL
+
                     leg <-
                         { leg with
                               tripId = Some jny.jid
@@ -165,7 +167,7 @@ module internal JourneyLeg =
                               line = line
                               stopovers = stopoversWithRemarks
                               polyline = polyline
-                              remarks = Common.msgLToRemarks ctx msgL })
+                              remarks = remarks })
 
         { leg with
               origin = origin

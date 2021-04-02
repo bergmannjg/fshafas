@@ -2,7 +2,7 @@
     "ver": "1.15",
     "ext": "DB.R19.04.a",
     "lang": "eng",
-    "id": "ws626giqwqkt9i8g",
+    "id": "dzk6hiqiwicg9gwx",
     "cInfo": {
         "code": "OK",
         "url": "",
@@ -15,6 +15,108 @@
             "res": {
                 "common": {
                     "locL": [
+                        {
+                            "lid": "A=1@O=Bielefeld Hbf@X=8532723@Y=52029259@U=80@L=8000036@",
+                            "type": "S",
+                            "name": "Bielefeld Hbf",
+                            "icoX": 0,
+                            "extId": "8000036",
+                            "state": "F",
+                            "crd": {
+                                "x": 8532777,
+                                "y": 52029421,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 303
+                        },
+                        {
+                            "lid": "A=1@O=Berlin Hbf@X=13369549@Y=52525589@U=80@L=8011160@",
+                            "type": "S",
+                            "name": "Berlin Hbf",
+                            "icoX": 0,
+                            "extId": "8011160",
+                            "state": "F",
+                            "crd": {
+                                "x": 13369629,
+                                "y": 52524924,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 447
+                        },
+                        {
+                            "lid": "A=1@O=Hannover Hbf@X=9741017@Y=52376764@U=80@L=8000152@",
+                            "type": "S",
+                            "name": "Hannover Hbf",
+                            "icoX": 0,
+                            "extId": "8000152",
+                            "state": "F",
+                            "crd": {
+                                "x": 9741763,
+                                "y": 52377079,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 319
+                        },
+                        {
+                            "lid": "A=1@O=Braunschweig Hbf@X=10540293@Y=52252218@U=80@L=8000049@",
+                            "type": "S",
+                            "name": "Braunschweig Hbf",
+                            "icoX": 0,
+                            "extId": "8000049",
+                            "state": "F",
+                            "crd": {
+                                "x": 10540436,
+                                "y": 52252128,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 299
+                        },
+                        {
+                            "lid": "A=1@O=Wolfsburg Hbf@X=10787784@Y=52429495@U=80@L=8006552@",
+                            "type": "S",
+                            "name": "Wolfsburg Hbf",
+                            "icoX": 0,
+                            "extId": "8006552",
+                            "state": "F",
+                            "crd": {
+                                "x": 10787757,
+                                "y": 52429495,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 555
+                        },
+                        {
+                            "lid": "A=1@O=Berlin-Spandau@X=13196902@Y=52534650@U=80@L=8010404@",
+                            "type": "S",
+                            "name": "Berlin-Spandau",
+                            "icoX": 0,
+                            "extId": "8010404",
+                            "state": "F",
+                            "crd": {
+                                "x": 13200947,
+                                "y": 52533787,
+                                "z": 0,
+                                "type": "WGS84",
+                                "layerX": 0,
+                                "crdSysX": 0
+                            },
+                            "pCls": 191
+                        },
                         {
                             "lid": "A=1@O=Berlin Hbf (tief)@X=13369549@Y=52525589@U=80@L=8098160@",
                             "type": "S",
@@ -35,435 +137,59 @@
                             "mMastLocX": 1
                         },
                         {
-                            "lid": "A=1@O=Berlin Hbf@X=13369549@Y=52525589@U=80@L=8011160@",
+                            "lid": "A=1@O=Herford@X=8663642@Y=52119609@U=80@L=8000162@",
                             "type": "S",
-                            "name": "Berlin Hbf",
+                            "name": "Herford",
                             "icoX": 0,
-                            "extId": "8011160",
+                            "extId": "8000162",
                             "state": "F",
                             "crd": {
-                                "x": 13369629,
-                                "y": 52524924,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 447
-                        },
-                        {
-                            "lid": "A=1@O=Stralsund Hbf@X=13077318@Y=54308627@U=80@L=8010338@",
-                            "type": "S",
-                            "name": "Stralsund Hbf",
-                            "icoX": 0,
-                            "extId": "8010338",
-                            "state": "F",
-                            "crd": {
-                                "x": 13078028,
-                                "y": 54308438,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 47
-                        },
-                        {
-                            "lid": "A=1@O=Berlin Gesundbrunnen@X=13388516@Y=52548961@U=80@L=8011102@",
-                            "type": "S",
-                            "name": "Berlin Gesundbrunnen",
-                            "icoX": 0,
-                            "extId": "8011102",
-                            "state": "F",
-                            "crd": {
-                                "x": 13391060,
-                                "y": 52548656,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 191
-                        },
-                        {
-                            "lid": "A=1@O=Bernau(b Berlin)@X=13592643@Y=52675565@U=80@L=8013470@",
-                            "type": "S",
-                            "name": "Bernau(b Berlin)",
-                            "icoX": 0,
-                            "extId": "8013470",
-                            "state": "F",
-                            "crd": {
-                                "x": 13593110,
-                                "y": 52675979,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 59
-                        },
-                        {
-                            "lid": "A=1@O=Eberswalde Hbf@X=13797058@Y=52834018@U=80@L=8010093@",
-                            "type": "S",
-                            "name": "Eberswalde Hbf",
-                            "icoX": 0,
-                            "extId": "8010093",
-                            "state": "F",
-                            "crd": {
-                                "x": 13797138,
-                                "y": 52834063,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 555
-                        },
-                        {
-                            "lid": "A=1@O=Britz@X=13821104@Y=52873265@U=80@L=8010064@",
-                            "type": "S",
-                            "name": "Britz",
-                            "icoX": 3,
-                            "extId": "8010064",
-                            "state": "F",
-                            "crd": {
-                                "x": 13821059,
-                                "y": 52873283,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 40
-                        },
-                        {
-                            "lid": "A=1@O=Chorin@X=13869717@Y=52903541@U=80@L=8011314@",
-                            "type": "S",
-                            "name": "Chorin",
-                            "icoX": 4,
-                            "extId": "8011314",
-                            "state": "F",
-                            "crd": {
-                                "x": 13870014,
-                                "y": 52903756,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 8
-                        },
-                        {
-                            "lid": "A=1@O=Angermünde@X=13996357@Y=53015223@U=80@L=8010004@",
-                            "type": "S",
-                            "name": "Angermünde",
-                            "icoX": 0,
-                            "extId": "8010004",
-                            "state": "F",
-                            "crd": {
-                                "x": 13995845,
-                                "y": 53015861,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 555
-                        },
-                        {
-                            "lid": "A=1@O=Wilmersdorf(Angerm)@X=13892460@Y=53111632@U=80@L=8013313@",
-                            "type": "S",
-                            "name": "Wilmersdorf(Angerm)",
-                            "icoX": 3,
-                            "extId": "8013313",
-                            "state": "F",
-                            "crd": {
-                                "x": 13892523,
-                                "y": 53111641,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 552
-                        },
-                        {
-                            "lid": "A=1@O=Warnitz(Uckermark)@X=13876684@Y=53182027@U=80@L=8013238@",
-                            "type": "S",
-                            "name": "Warnitz(Uckermark)",
-                            "icoX": 3,
-                            "extId": "8013238",
-                            "state": "F",
-                            "crd": {
-                                "x": 13876594,
-                                "y": 53182179,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 8
-                        },
-                        {
-                            "lid": "A=1@O=Seehausen(Uckermark)@X=13884199@Y=53221363@U=80@L=8012968@",
-                            "type": "S",
-                            "name": "Seehausen(Uckermark)",
-                            "icoX": 3,
-                            "extId": "8012968",
-                            "state": "F",
-                            "crd": {
-                                "x": 13884559,
-                                "y": 53220986,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 552
-                        },
-                        {
-                            "lid": "A=1@O=Prenzlau@X=13866535@Y=53321611@U=80@L=8010282@",
-                            "type": "S",
-                            "name": "Prenzlau",
-                            "icoX": 0,
-                            "extId": "8010282",
-                            "state": "F",
-                            "crd": {
-                                "x": 13866472,
-                                "y": 53321620,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 555
-                        },
-                        {
-                            "lid": "A=1@O=Nechlin@X=13902879@Y=53440925@U=80@L=8012418@",
-                            "type": "S",
-                            "name": "Nechlin",
-                            "icoX": 3,
-                            "extId": "8012418",
-                            "state": "F",
-                            "crd": {
-                                "x": 13902897,
-                                "y": 53440835,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 552
-                        },
-                        {
-                            "lid": "A=1@O=Pasewalk@X=13988878@Y=53515356@U=80@L=8010268@",
-                            "type": "S",
-                            "name": "Pasewalk",
-                            "icoX": 0,
-                            "extId": "8010268",
-                            "state": "F",
-                            "crd": {
-                                "x": 13989391,
-                                "y": 53515311,
+                                "x": 8663741,
+                                "y": 52119654,
                                 "z": 0,
                                 "type": "WGS84",
                                 "layerX": 0,
                                 "crdSysX": 0
                             },
                             "pCls": 43
-                        },
-                        {
-                            "lid": "A=1@O=Jatznick@X=13937667@Y=53603063@U=80@L=8010179@",
-                            "type": "S",
-                            "name": "Jatznick",
-                            "icoX": 1,
-                            "extId": "8010179",
-                            "state": "F",
-                            "crd": {
-                                "x": 13937568,
-                                "y": 53603045,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 40
-                        },
-                        {
-                            "lid": "A=1@O=Ferdinandshof@X=13881916@Y=53660091@U=80@L=8011536@",
-                            "type": "S",
-                            "name": "Ferdinandshof",
-                            "icoX": 1,
-                            "extId": "8011536",
-                            "state": "F",
-                            "crd": {
-                                "x": 13881853,
-                                "y": 53660064,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 8
-                        },
-                        {
-                            "lid": "A=1@O=Ducherow@X=13796024@Y=53766137@U=80@L=8011438@",
-                            "type": "S",
-                            "name": "Ducherow",
-                            "icoX": 1,
-                            "extId": "8011438",
-                            "state": "F",
-                            "crd": {
-                                "x": 13796698,
-                                "y": 53765121,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 40
-                        },
-                        {
-                            "lid": "A=1@O=Anklam@X=13701826@Y=53856101@U=80@L=8011044@",
-                            "type": "S",
-                            "name": "Anklam",
-                            "icoX": 0,
-                            "extId": "8011044",
-                            "state": "F",
-                            "crd": {
-                                "x": 13701817,
-                                "y": 53856101,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 11
-                        },
-                        {
-                            "lid": "A=1@O=Klein Bünzow@X=13622442@Y=53923655@U=80@L=8012021@",
-                            "type": "S",
-                            "name": "Klein Bünzow",
-                            "icoX": 1,
-                            "extId": "8012021",
-                            "state": "F",
-                            "crd": {
-                                "x": 13622451,
-                                "y": 53923610,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 8
-                        },
-                        {
-                            "lid": "A=1@O=Züssow@X=13548191@Y=53973877@U=80@L=8010396@",
-                            "type": "S",
-                            "name": "Züssow",
-                            "icoX": 0,
-                            "extId": "8010396",
-                            "state": "F",
-                            "crd": {
-                                "x": 13548883,
-                                "y": 53973365,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 11
-                        },
-                        {
-                            "lid": "A=1@O=Groß Kiesow@X=13480619@Y=54013718@U=80@L=8011723@",
-                            "type": "S",
-                            "name": "Groß Kiesow",
-                            "icoX": 4,
-                            "extId": "8011723",
-                            "state": "F",
-                            "crd": {
-                                "x": 13480637,
-                                "y": 54013700,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 8
-                        },
-                        {
-                            "lid": "A=1@O=Greifswald Süd@X=13396660@Y=54076444@U=80@L=8011694@",
-                            "type": "S",
-                            "name": "Greifswald Süd",
-                            "icoX": 4,
-                            "extId": "8011694",
-                            "state": "F",
-                            "crd": {
-                                "x": 13397316,
-                                "y": 54076022,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 40
-                        },
-                        {
-                            "lid": "A=1@O=Greifswald@X=13370259@Y=54092921@U=80@L=8010139@",
-                            "type": "S",
-                            "name": "Greifswald",
-                            "icoX": 0,
-                            "extId": "8010139",
-                            "state": "F",
-                            "crd": {
-                                "x": 13370340,
-                                "y": 54092921,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 43
-                        },
-                        {
-                            "lid": "A=1@O=Miltzow@X=13201010@Y=54199264@U=80@L=8012358@",
-                            "type": "S",
-                            "name": "Miltzow",
-                            "icoX": 3,
-                            "extId": "8012358",
-                            "state": "F",
-                            "crd": {
-                                "x": 13201055,
-                                "y": 54199291,
-                                "z": 0,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 8
                         }
                     ],
                     "prodL": [
                         {
-                            "name": "RE 3314",
-                            "nameS": "RE",
-                            "number": "3314",
-                            "icoX": 1,
-                            "cls": 8,
+                            "name": "ICE 845",
+                            "number": "845",
+                            "icoX": 0,
+                            "cls": 1,
                             "oprX": 0,
                             "prodCtx": {
-                                "name": "RE  3314",
-                                "num": "3314",
-                                "matchId": "3",
-                                "catOut": "RE",
-                                "catOutS": "RE",
-                                "catOutL": "Regional-Express",
-                                "catIn": "RE",
-                                "catCode": "3",
-                                "admin": "800158",
-                                "addName": "RE     3"
-                            },
-                            "addName": "RE 3"
+                                "name": "ICE  845",
+                                "num": "845",
+                                "matchId": "10",
+                                "catOut": "ICE",
+                                "catOutS": "ICE",
+                                "catOutL": "Intercity-Express",
+                                "catIn": "ICE",
+                                "catCode": "0",
+                                "admin": "80____"
+                            }
+                        },
+                        {
+                            "name": "ICE 1545",
+                            "number": "1545",
+                            "icoX": 0,
+                            "cls": 1,
+                            "oprX": 0,
+                            "prodCtx": {
+                                "name": "ICE 1545",
+                                "num": "1545",
+                                "matchId": "14",
+                                "catOut": "ICE",
+                                "catOutS": "ICE",
+                                "catOutL": "Intercity-Express",
+                                "catIn": "ICE",
+                                "catCode": "0",
+                                "admin": "80____"
+                            }
                         }
                     ],
                     "polyL": [],
@@ -485,38 +211,117 @@
                     ],
                     "opL": [
                         {
-                            "name": "DB Regio AG Nordost",
-                            "icoX": 2
+                            "name": "DB Fernverkehr AG",
+                            "icoX": 1
                         }
                     ],
                     "remL": [
                         {
+                            "type": "D",
+                            "code": "",
+                            "icoX": 2,
+                            "txtN": "Part of route blocked",
+                            "sIdx": 0
+                        },
+                        {
+                            "type": "O",
+                            "code": "",
+                            "icoX": 2,
+                            "txtN": "(additional stop)"
+                        },
+                        {
+                            "type": "O",
+                            "code": "",
+                            "icoX": 3,
+                            "txtN": "entrance and exit not possible"
+                        },
+                        {
+                            "type": "A",
+                            "code": "CK",
+                            "prio": 200,
+                            "icoX": 4,
+                            "txtN": "Komfort Check-in possible (visit bahn.de/kci for more information)"
+                        },
+                        {
                             "type": "A",
                             "code": "PB",
                             "prio": 200,
-                            "icoX": 5,
+                            "icoX": 4,
                             "txtN": "Medical-grade masks must be worn"
+                        },
+                        {
+                            "type": "A",
+                            "code": "BR",
+                            "prio": 450,
+                            "icoX": 5,
+                            "txtN": "Bordrestaurant"
+                        },
+                        {
+                            "type": "M",
+                            "code": "",
+                            "icoX": 6,
+                            "txtS": "ICE 845: Wolfsburg Hbf->Berlin Hbf: Störung.",
+                            "txtN": "Im Raum Wolfsburg Hbf ist der Zugverkehr beeinträchtigt. Die Züge halten nicht in Wolfsburg Hbf. In der Folge kommt es jetzt zu Verspätungen und Teilausfällen. Bitte überprüfen Sie den Zuglauf in der Reiseauskunft. Weitere Informationen finden Sie auf bahn.de/aktuell",
+                            "url": "https://www.bahn.de/p/view/service/aktuell/index.shtml",
+                            "sIdx": 0
+                        },
+                        {
+                            "type": "M",
+                            "code": "",
+                            "icoX": 7,
+                            "txtS": "ICE 845: Wolfsburg Hbf->Berlin-Spandau: Information.",
+                            "txtN": "Einzelne Züge halten zusätzlich in Stendal Hbf. Bitte prüfen Sie Ihre Reiseverbindung vor Ihrer Reise.",
+                            "sIdx": 0
+                        },
+                        {
+                            "type": "M",
+                            "code": "",
+                            "icoX": 7,
+                            "txtS": "ICE 845: Bielefeld Hbf->Berlin Hbf: Information.",
+                            "txtN": "No WC for mobility impaired passengers in coach 35. If a change in booking is required for travellers with reduced mobility, our Mobility Service Centre can be reached at +49 30 65212888.",
+                            "sIdx": 0
+                        },
+                        {
+                            "type": "C",
+                            "code": "",
+                            "icoX": 6,
+                            "txtN": "Current information available."
+                        },
+                        {
+                            "type": "A",
+                            "code": "FR",
+                            "prio": 260,
+                            "icoX": 8,
+                            "txtN": "Bicycles conveyed - subject to reservation"
                         },
                         {
                             "type": "A",
                             "code": "FB",
                             "prio": 260,
-                            "icoX": 6,
+                            "icoX": 9,
                             "txtN": "Number of bicycles conveyed limited"
                         },
                         {
-                            "type": "A",
-                            "code": "EH",
-                            "prio": 560,
-                            "icoX": 5,
-                            "txtN": "vehicle-mounted access aid"
+                            "type": "M",
+                            "code": "",
+                            "icoX": 7,
+                            "txtS": "ICE 1545: Bielefeld Hbf->Berlin Hbf (tief): Information.",
+                            "txtN": "Alternative: RE 4 (26409) Richtung Dortmund: Aachen Hbf ab 07:23 Uhr, Herzogenrath 07:38 Uhr, Geilenkirchen 07:47 Uhr, Erkelenz 08:01 Uhr, Rheydt Hbf 08:08 Uhr, M¿gladbach Hbf an 08:12 Uhr. Weiter mit RE 42 (10119) Richtung Münster: M¿gladbach Hbf ab 08:22 Uhr, Viersen 08:31 Uhr, Krefeld Hbf 08:41 Uhr. Ab Duisburg weiter mit ICE 545.",
+                            "url": "https://reiseauskunft.bahn.de/bin/traininfo.exe/dn/663930/491570/706130/131755/80?rt=1&amp;date=02.04.21&amp;",
+                            "sIdx": 0
                         },
                         {
-                            "type": "A",
-                            "code": "SN",
-                            "prio": 580,
-                            "icoX": 7,
-                            "txtN": "SnackPoint/Snacks on board the train"
+                            "type": "P",
+                            "code": "",
+                            "icoX": 3,
+                            "txtN": "Journey cancelled",
+                            "sIdx": 0
+                        },
+                        {
+                            "type": "C",
+                            "code": "",
+                            "icoX": 3,
+                            "txtN": "Journey cancelled."
                         }
                     ],
                     "icoL": [
@@ -524,602 +329,429 @@
                             "res": "ICE"
                         },
                         {
-                            "res": "RE"
+                            "res": "D",
+                            "txt": "DB Fernverkehr AG"
                         },
                         {
-                            "res": "RE",
-                            "txt": "DB Regio AG Nordost"
+                            "res": "Empty"
                         },
                         {
-                            "res": "Bus"
-                        },
-                        {
-                            "res": "DPN"
+                            "res": "cancel"
                         },
                         {
                             "res": "attr_info"
                         },
                         {
-                            "res": "attr_bike"
+                            "res": "attr_resto"
                         },
                         {
-                            "res": "attr_bistro"
+                            "res": "HimWarn"
+                        },
+                        {
+                            "res": "HimInfo"
+                        },
+                        {
+                            "res": "attr_bike_r"
+                        },
+                        {
+                            "res": "attr_bike"
+                        }
+                    ],
+                    "tcocL": [
+                        {
+                            "c": "FIRST",
+                            "r": 3
+                        },
+                        {
+                            "c": "SECOND",
+                            "r": 3
                         }
                     ]
                 },
                 "outConL": [
                     {
                         "cid": "C-0",
-                        "date": "20210313",
-                        "dur": "031000",
+                        "date": "20210402",
+                        "dur": "023600",
                         "chg": 0,
                         "sDays": {
-                            "sDaysR": "runs daily ",
-                            "sDaysB": "F07FF7FFFFFFFFFFFFF3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0"
+                            "sDaysR": "runs daily, not 24. Apr until 21. May 2021, 23. May,  25. May until 2. Jul 2021 ",
+                            "sDaysB": "FFFFFFFFFFFF3FFFFFFFFFFFFFFFFFFFF0000000A0000000003FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0"
                         },
+                        "isAlt": true,
                         "dep": {
                             "locX": 0,
-                            "idx": 14,
+                            "idx": 8,
                             "dProdX": 0,
-                            "dPlatfS": "8",
+                            "dPlatfS": "2",
                             "dInR": true,
-                            "dTimeS": "163200",
-                            "dTimeR": "163300",
+                            "dTimeS": "093800",
+                            "dTimeR": "095600",
                             "dProgType": "PROGNOSED",
-                            "dTZOffset": 60,
+                            "dTrnCmpSX": {
+                                "tcocX": [
+                                    0,
+                                    1
+                                ]
+                            },
+                            "dTZOffset": 120,
+                            "msgL": [
+                                {
+                                    "type": "REM",
+                                    "remX": 0,
+                                    "txtC": {
+                                        "r": 204,
+                                        "g": 0,
+                                        "b": 0,
+                                        "a": 255
+                                    },
+                                    "prio": 478,
+                                    "fIdx": -1,
+                                    "tIdx": -1,
+                                    "tagL": [
+                                        "RES_LOC_H3"
+                                    ]
+                                }
+                            ],
                             "type": "N"
                         },
                         "arr": {
-                            "locX": 2,
-                            "idx": 37,
-                            "aPlatfS": "1",
+                            "locX": 1,
+                            "idx": 13,
+                            "aPlatfS": "11",
                             "aOutR": true,
-                            "aTimeS": "194300",
-                            "aTimeR": "194300",
+                            "aTimeS": "121400",
+                            "aTimeR": "123200",
                             "aProgType": "PROGNOSED",
-                            "aTZOffset": 60,
+                            "aTZOffset": 120,
                             "type": "N"
                         },
                         "secL": [
                             {
                                 "type": "JNY",
-                                "icoX": 1,
+                                "icoX": 0,
                                 "dep": {
                                     "locX": 0,
-                                    "idx": 14,
+                                    "idx": 8,
                                     "dProdX": 0,
-                                    "dPlatfS": "8",
+                                    "dPlatfS": "2",
                                     "dInR": true,
-                                    "dTimeS": "163200",
-                                    "dTimeR": "163300",
+                                    "dTimeS": "093800",
+                                    "dTimeR": "095600",
                                     "dProgType": "PROGNOSED",
-                                    "dTZOffset": 60,
+                                    "dTrnCmpSX": {
+                                        "tcocX": [
+                                            0,
+                                            1
+                                        ],
+                                        "tcM": 1
+                                    },
+                                    "dTZOffset": 120,
+                                    "msgL": [
+                                        {
+                                            "type": "REM",
+                                            "remX": 0,
+                                            "txtC": {
+                                                "r": 204,
+                                                "g": 0,
+                                                "b": 0,
+                                                "a": 255
+                                            },
+                                            "prio": 478,
+                                            "fIdx": -1,
+                                            "tIdx": -1,
+                                            "tagL": [
+                                                "RES_LOC_H3"
+                                            ]
+                                        }
+                                    ],
                                     "type": "N"
                                 },
                                 "arr": {
-                                    "locX": 2,
-                                    "idx": 37,
-                                    "aPlatfS": "1",
+                                    "locX": 1,
+                                    "idx": 13,
+                                    "aPlatfS": "11",
                                     "aOutR": true,
-                                    "aTimeS": "194300",
-                                    "aTimeR": "194300",
+                                    "aTimeS": "121400",
+                                    "aTimeR": "123200",
                                     "aProgType": "PROGNOSED",
-                                    "aTZOffset": 60,
+                                    "aTrnCmpSX": {
+                                        "tcM": 1
+                                    },
+                                    "aTZOffset": 120,
                                     "type": "N"
                                 },
                                 "jny": {
-                                    "jid": "1|225642|0|80|13032021",
+                                    "jid": "1|1575584|0|80|2042021",
                                     "prodX": 0,
-                                    "dirTxt": "Stralsund Hbf",
+                                    "dirTxt": "Berlin Ostbahnhof",
+                                    "dirFlg": "1",
                                     "status": "P",
                                     "isRchbl": true,
                                     "stopL": [
                                         {
                                             "locX": 0,
-                                            "idx": 14,
-                                            "dProdX": 0,
-                                            "dPlatfS": "8",
-                                            "dInR": true,
-                                            "dTimeS": "163200",
-                                            "dTimeR": "163300",
-                                            "dProgType": "PROGNOSED",
-                                            "dDirTxt": "Stralsund Hbf",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 3,
-                                            "idx": 15,
-                                            "aProdX": 0,
-                                            "aPlatfS": "9",
-                                            "aOutR": true,
-                                            "aTimeS": "163600",
-                                            "aTimeR": "163700",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "9",
-                                            "dInR": true,
-                                            "dTimeS": "163900",
-                                            "dTimeR": "163900",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 4,
-                                            "idx": 16,
-                                            "aProdX": 0,
-                                            "aPlatfS": "5",
-                                            "aOutR": true,
-                                            "aTimeS": "165200",
-                                            "aTimeR": "165300",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "5",
-                                            "dInR": true,
-                                            "dTimeS": "165400",
-                                            "dTimeR": "165500",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 5,
-                                            "idx": 17,
-                                            "aProdX": 0,
-                                            "aPlatfS": "3",
-                                            "aOutR": true,
-                                            "aTimeS": "170700",
-                                            "aTimeR": "170700",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "3",
-                                            "dInR": true,
-                                            "dTimeS": "170900",
-                                            "dTimeR": "171000",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 6,
-                                            "idx": 18,
-                                            "aProdX": 0,
-                                            "aPlatfS": "1",
-                                            "aOutR": true,
-                                            "aTimeS": "171300",
-                                            "aTimeR": "171300",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "1",
-                                            "dInR": true,
-                                            "dTimeS": "171300",
-                                            "dTimeR": "171400",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 7,
-                                            "idx": 19,
-                                            "aProdX": 0,
-                                            "aPlatfS": "1",
-                                            "aOutR": true,
-                                            "aTimeS": "171700",
-                                            "aTimeR": "171700",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "1",
-                                            "dInR": true,
-                                            "dTimeS": "171800",
-                                            "dTimeR": "171800",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 8,
-                                            "idx": 20,
-                                            "aProdX": 0,
-                                            "aPlatfS": "3",
-                                            "aOutR": true,
-                                            "aTimeS": "172800",
-                                            "aTimeR": "172800",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "3",
-                                            "dInR": true,
-                                            "dTimeS": "173300",
-                                            "dTimeR": "173300",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 9,
-                                            "idx": 21,
-                                            "aProdX": 0,
-                                            "aPlatfS": "1",
-                                            "aOutR": true,
-                                            "aTimeS": "174100",
-                                            "aTimeR": "174100",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "1",
-                                            "dInR": true,
-                                            "dTimeS": "174100",
-                                            "dTimeR": "174200",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 10,
-                                            "idx": 22,
-                                            "aProdX": 0,
-                                            "aPlatfS": "1",
-                                            "aOutR": true,
-                                            "aTimeS": "174800",
-                                            "aTimeR": "174900",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "1",
-                                            "dInR": true,
-                                            "dTimeS": "174900",
-                                            "dTimeR": "175000",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 11,
-                                            "idx": 23,
-                                            "aProdX": 0,
-                                            "aPlatfS": "1",
-                                            "aOutR": true,
-                                            "aTimeS": "175200",
-                                            "aTimeR": "175300",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "1",
-                                            "dInR": true,
-                                            "dTimeS": "175300",
-                                            "dTimeR": "175400",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 12,
-                                            "idx": 24,
-                                            "aProdX": 0,
-                                            "aPlatfS": "2",
-                                            "aOutR": true,
-                                            "aTimeS": "180000",
-                                            "aTimeR": "180100",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
+                                            "idx": 8,
                                             "dProdX": 0,
                                             "dPlatfS": "2",
                                             "dInR": true,
-                                            "dTimeS": "180100",
-                                            "dTimeR": "180200",
+                                            "dTimeS": "093800",
+                                            "dTimeR": "095600",
                                             "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 13,
-                                            "idx": 25,
-                                            "aProdX": 0,
-                                            "aPlatfS": "1",
-                                            "aOutR": true,
-                                            "aTimeS": "180900",
-                                            "aTimeR": "181000",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "1",
-                                            "dInR": true,
-                                            "dTimeS": "181000",
-                                            "dTimeR": "181100",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 14,
-                                            "idx": 26,
-                                            "aProdX": 0,
-                                            "aPlatfS": "1",
-                                            "aOutR": true,
-                                            "aTimeS": "181600",
-                                            "aTimeR": "181700",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "1",
-                                            "dInR": true,
-                                            "dTimeS": "181800",
-                                            "dTimeR": "181900",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 15,
-                                            "idx": 27,
-                                            "aProdX": 0,
-                                            "aPlatfS": "2",
-                                            "aOutR": true,
-                                            "aTimeS": "182600",
-                                            "aTimeR": "182600",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "2",
-                                            "dInR": true,
-                                            "dTimeS": "182600",
-                                            "dTimeR": "182700",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 16,
-                                            "idx": 28,
-                                            "aProdX": 0,
-                                            "aPlatfS": "1",
-                                            "aOutR": true,
-                                            "aTimeS": "183100",
-                                            "aTimeR": "183200",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "1",
-                                            "dInR": true,
-                                            "dTimeS": "183200",
-                                            "dTimeR": "183300",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 17,
-                                            "idx": 29,
-                                            "aProdX": 0,
-                                            "aPlatfS": "1",
-                                            "aOutR": true,
-                                            "aTimeS": "184000",
-                                            "aTimeR": "184100",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "1",
-                                            "dInR": true,
-                                            "dTimeS": "184100",
-                                            "dTimeR": "184100",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 18,
-                                            "idx": 30,
-                                            "aProdX": 0,
-                                            "aPlatfS": "1",
-                                            "aOutR": true,
-                                            "aTimeS": "185000",
-                                            "aTimeR": "185000",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "1",
-                                            "dInR": true,
-                                            "dTimeS": "185100",
-                                            "dTimeR": "185100",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 19,
-                                            "idx": 31,
-                                            "aProdX": 0,
-                                            "aPlatfS": "1",
-                                            "aOutR": true,
-                                            "aTimeS": "185700",
-                                            "aTimeR": "185700",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "1",
-                                            "dInR": true,
-                                            "dTimeS": "185700",
-                                            "dTimeR": "185800",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 20,
-                                            "idx": 32,
-                                            "aProdX": 0,
-                                            "aPlatfS": "2",
-                                            "aOutR": true,
-                                            "aTimeS": "190300",
-                                            "aTimeR": "190300",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "2",
-                                            "dInR": true,
-                                            "dTimeS": "190500",
-                                            "dTimeR": "190500",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 21,
-                                            "idx": 33,
-                                            "aProdX": 0,
-                                            "aPlatfS": "1",
-                                            "aOutR": true,
-                                            "aTimeS": "191000",
-                                            "aTimeR": "191000",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "1",
-                                            "dInR": true,
-                                            "dTimeS": "191000",
-                                            "dTimeR": "191000",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 22,
-                                            "idx": 34,
-                                            "aProdX": 0,
-                                            "aPlatfS": "1",
-                                            "aOutR": true,
-                                            "aTimeS": "191700",
-                                            "aTimeR": "191700",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "1",
-                                            "dInR": true,
-                                            "dTimeS": "191700",
-                                            "dTimeR": "191800",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 23,
-                                            "idx": 35,
-                                            "aProdX": 0,
-                                            "aPlatfS": "1",
-                                            "aOutR": true,
-                                            "aTimeS": "192000",
-                                            "aTimeR": "192000",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "1",
-                                            "dInR": true,
-                                            "dTimeS": "192100",
-                                            "dTimeR": "192100",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
-                                            "type": "N"
-                                        },
-                                        {
-                                            "locX": 24,
-                                            "idx": 36,
-                                            "aProdX": 0,
-                                            "aPlatfS": "1",
-                                            "aOutR": true,
-                                            "aTimeS": "193100",
-                                            "aTimeR": "193100",
-                                            "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
-                                            "dProdX": 0,
-                                            "dPlatfS": "1",
-                                            "dInR": true,
-                                            "dTimeS": "193200",
-                                            "dTimeR": "193200",
-                                            "dProgType": "PROGNOSED",
-                                            "dTZOffset": 60,
+                                            "dDirTxt": "Berlin Ostbahnhof",
+                                            "dDirFlg": "1",
+                                            "dTrnCmpSX": {
+                                                "tcocX": [
+                                                    0,
+                                                    1
+                                                ]
+                                            },
+                                            "dTZOffset": 120,
+                                            "msgL": [
+                                                {
+                                                    "type": "REM",
+                                                    "remX": 0,
+                                                    "txtC": {
+                                                        "r": 204,
+                                                        "g": 0,
+                                                        "b": 0,
+                                                        "a": 255
+                                                    },
+                                                    "prio": 478,
+                                                    "fIdx": -1,
+                                                    "tIdx": -1,
+                                                    "tagL": [
+                                                        "RES_LOC_H3"
+                                                    ]
+                                                }
+                                            ],
                                             "type": "N"
                                         },
                                         {
                                             "locX": 2,
-                                            "idx": 37,
+                                            "idx": 9,
                                             "aProdX": 0,
-                                            "aPlatfS": "1",
+                                            "aPlatfS": "9",
                                             "aOutR": true,
-                                            "aTimeS": "194300",
-                                            "aTimeR": "194300",
+                                            "aTimeS": "102800",
+                                            "aTimeR": "104600",
                                             "aProgType": "PROGNOSED",
-                                            "aTZOffset": 60,
+                                            "aTZOffset": 120,
+                                            "dProdX": 0,
+                                            "dPlatfS": "9",
+                                            "dInR": true,
+                                            "dTimeS": "103100",
+                                            "dTimeR": "104900",
+                                            "dProgType": "PROGNOSED",
+                                            "dTrnCmpSX": {
+                                                "tcocX": [
+                                                    0,
+                                                    1
+                                                ]
+                                            },
+                                            "dTZOffset": 120,
+                                            "type": "N"
+                                        },
+                                        {
+                                            "locX": 3,
+                                            "idx": 10,
+                                            "aProdX": 0,
+                                            "aPlatfS": "7",
+                                            "aOutR": true,
+                                            "aTimeS": "110000",
+                                            "aTimeR": "111800",
+                                            "aProgType": "PROGNOSED",
+                                            "aTZOffset": 120,
+                                            "dProdX": 0,
+                                            "dPlatfS": "7",
+                                            "dInR": true,
+                                            "dTimeS": "110100",
+                                            "dTimeR": "111900",
+                                            "dProgType": "PROGNOSED",
+                                            "dTrnCmpSX": {
+                                                "tcocX": [
+                                                    0,
+                                                    1
+                                                ]
+                                            },
+                                            "dTZOffset": 120,
+                                            "isAdd": true,
+                                            "msgL": [
+                                                {
+                                                    "type": "REM",
+                                                    "remX": 1,
+                                                    "prio": 478,
+                                                    "fIdx": -1,
+                                                    "tIdx": -1,
+                                                    "tagL": [
+                                                        "RES_LOC_H3"
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "N"
+                                        },
+                                        {
+                                            "locX": 4,
+                                            "idx": 11,
+                                            "aProdX": 0,
+                                            "aOutR": false,
+                                            "aTimeS": "110300",
+                                            "aCncl": true,
+                                            "aTZOffset": 120,
+                                            "dProdX": 0,
+                                            "dInR": false,
+                                            "dTimeS": "110500",
+                                            "dCncl": true,
+                                            "dTrnCmpSX": {
+                                                "tcocX": [
+                                                    0,
+                                                    1
+                                                ]
+                                            },
+                                            "dTZOffset": 120,
+                                            "msgL": [
+                                                {
+                                                    "type": "REM",
+                                                    "remX": 2,
+                                                    "txtC": {
+                                                        "r": 204,
+                                                        "g": 0,
+                                                        "b": 0,
+                                                        "a": 255
+                                                    },
+                                                    "prio": 478,
+                                                    "fIdx": -1,
+                                                    "tIdx": -1,
+                                                    "tagL": [
+                                                        "RES_LOC_H3"
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "N"
+                                        },
+                                        {
+                                            "locX": 5,
+                                            "idx": 12,
+                                            "aProdX": 0,
+                                            "aPlatfS": "6",
+                                            "aOutR": true,
+                                            "aTimeS": "115900",
+                                            "aTimeR": "121700",
+                                            "aProgType": "PROGNOSED",
+                                            "aTZOffset": 120,
+                                            "dProdX": 0,
+                                            "dInS": false,
+                                            "dInR": false,
+                                            "dProgType": "PROGNOSED",
+                                            "dTrnCmpSX": {
+                                                "tcocX": [
+                                                    0,
+                                                    1
+                                                ]
+                                            },
+                                            "dTZOffset": 120,
+                                            "type": "N"
+                                        },
+                                        {
+                                            "locX": 1,
+                                            "idx": 13,
+                                            "aProdX": 0,
+                                            "aPlatfS": "11",
+                                            "aOutR": true,
+                                            "aTimeS": "121400",
+                                            "aTimeR": "123200",
+                                            "aProgType": "PROGNOSED",
+                                            "aTZOffset": 120,
                                             "type": "N"
                                         }
                                     ],
-                                    "ctxRecon": "T$A=1@O=Berlin Hbf (tief)@L=8098160@a=128@$A=1@O=Stralsund Hbf@L=8010338@a=128@$202103131632$202103131943$RE  3314$$1$$$",
+                                    "ctxRecon": "T$A=1@O=Bielefeld Hbf@L=8000036@a=128@$A=1@O=Berlin Hbf@L=8011160@a=128@$202104020938$202104021214$ICE  845$$3$$$",
                                     "msgL": [
-                                        {
-                                            "type": "REM",
-                                            "remX": 0,
-                                            "fLocX": 0,
-                                            "tLocX": 2,
-                                            "fIdx": 14,
-                                            "tIdx": 37,
-                                            "tagL": [
-                                                "RES_JNY_DTL"
-                                            ]
-                                        },
-                                        {
-                                            "type": "REM",
-                                            "remX": 1,
-                                            "fLocX": 0,
-                                            "tLocX": 2,
-                                            "fIdx": 14,
-                                            "tIdx": 37,
-                                            "tagL": [
-                                                "RES_JNY_DTL_L"
-                                            ]
-                                        },
-                                        {
-                                            "type": "REM",
-                                            "remX": 2,
-                                            "fLocX": 0,
-                                            "tLocX": 2,
-                                            "fIdx": 14,
-                                            "tIdx": 37,
-                                            "tagL": [
-                                                "RES_JNY_DTL"
-                                            ]
-                                        },
                                         {
                                             "type": "REM",
                                             "remX": 3,
                                             "fLocX": 0,
-                                            "tLocX": 2,
-                                            "fIdx": 14,
-                                            "tIdx": 37,
+                                            "tLocX": 1,
+                                            "fIdx": 8,
+                                            "tIdx": 13,
+                                            "tagL": [
+                                                "RES_JNY_DTL"
+                                            ]
+                                        },
+                                        {
+                                            "type": "REM",
+                                            "remX": 4,
+                                            "fLocX": 0,
+                                            "tLocX": 1,
+                                            "fIdx": 8,
+                                            "tIdx": 13,
+                                            "tagL": [
+                                                "RES_JNY_DTL"
+                                            ]
+                                        },
+                                        {
+                                            "type": "REM",
+                                            "remX": 5,
+                                            "fLocX": 0,
+                                            "tLocX": 1,
+                                            "fIdx": 8,
+                                            "tIdx": 13,
                                             "tagL": [
                                                 "RES_JNY_DTL_L"
                                             ]
+                                        },
+                                        {
+                                            "type": "REM",
+                                            "remX": 6,
+                                            "prio": 240,
+                                            "fIdx": -1,
+                                            "tIdx": -1,
+                                            "tagL": [
+                                                "RES_CON_FTR_H3"
+                                            ]
+                                        },
+                                        {
+                                            "type": "REM",
+                                            "remX": 7,
+                                            "prio": 240,
+                                            "fIdx": -1,
+                                            "tIdx": -1,
+                                            "tagL": [
+                                                "RES_CON_FTR_H3"
+                                            ]
+                                        },
+                                        {
+                                            "type": "REM",
+                                            "remX": 8,
+                                            "prio": 240,
+                                            "fIdx": -1,
+                                            "tIdx": -1,
+                                            "tagL": [
+                                                "RES_CON_FTR_H3"
+                                            ]
                                         }
                                     ],
-                                    "subscr": "F"
+                                    "subscr": "F",
+                                    "dTrnCmpSX": {
+                                        "tcocX": [
+                                            0,
+                                            1
+                                        ]
+                                    }
                                 },
                                 "resState": "N",
                                 "resRecommendation": "N"
                             }
                         ],
-                        "ctxRecon": "¶HKI¶T$A=1@O=Berlin Hbf (tief)@L=8098160@a=128@$A=1@O=Stralsund Hbf@L=8010338@a=128@$202103131632$202103131943$RE  3314$$1$$$",
+                        "ctxRecon": "¶HKI¶T$A=1@O=Bielefeld Hbf@L=8000036@a=128@$A=1@O=Berlin Hbf@L=8011160@a=128@$202104020938$202104021214$ICE  845$$3$$$",
                         "trfRes": {
                             "statusCode": "OK",
                             "fareSetL": [
                                 {
                                     "fareL": [
                                         {
-                                            "prc": 4200,
-                                            "isFromPrice": true,
+                                            "prc": 9460,
+                                            "isFromPrice": false,
                                             "isPartPrice": false,
                                             "isBookable": true,
                                             "isUpsell": false,
@@ -1130,6 +762,24 @@
                                 }
                             ]
                         },
+                        "msgL": [
+                            {
+                                "type": "REM",
+                                "remX": 9,
+                                "txtC": {
+                                    "r": 204,
+                                    "g": 0,
+                                    "b": 0,
+                                    "a": 255
+                                },
+                                "prio": 200,
+                                "fIdx": -1,
+                                "tIdx": -1,
+                                "tagL": [
+                                    "SUM_CON_FTR_H3"
+                                ]
+                            }
+                        ],
                         "conSubscr": "F",
                         "resState": "N",
                         "resRecommendation": "N",
@@ -1139,24 +789,381 @@
                         "showARSLink": false,
                         "sotCtxt": {
                             "cnLocX": 0,
-                            "calcDate": "20210313",
-                            "jid": "1|225642|0|80|-1",
+                            "calcDate": "20210402",
+                            "jid": "1|1575584|0|80|-1",
                             "locMode": "FROM_START",
                             "pLocX": 0,
                             "reqMode": "UNKNOWN",
                             "sectX": 0,
-                            "calcTime": "155246"
+                            "calcTime": "095400"
                         },
-                        "cksum": "0cf9e179_3"
+                        "cksum": "811c92e7_3",
+                        "dTrnCmpSX": {
+                            "tcocX": [
+                                0,
+                                1
+                            ]
+                        }
+                    },
+                    {
+                        "cid": "C-1",
+                        "date": "20210402",
+                        "dur": "024500",
+                        "chg": 0,
+                        "sDays": {
+                            "sDaysR": "runs Mo - Sa, not 5. Apr, 24. May ",
+                            "sDaysB": "063068000000000000000000003F3EFDFBF7EFDF9F7EFDFBF7EFDFBF7EFDFBF7EFDFBF7EFDFBF7EFDFBF7EFDFBF0"
+                        },
+                        "isNotRdbl": true,
+                        "badSecRefX": 0,
+                        "dep": {
+                            "locX": 0,
+                            "idx": 14,
+                            "dProdX": 1,
+                            "dInR": false,
+                            "dTimeS": "100600",
+                            "dCncl": true,
+                            "dTZOffset": 120,
+                            "msgL": [
+                                {
+                                    "type": "REM",
+                                    "remX": 0,
+                                    "txtC": {
+                                        "r": 204,
+                                        "g": 0,
+                                        "b": 0,
+                                        "a": 255
+                                    },
+                                    "prio": 478,
+                                    "fIdx": -1,
+                                    "tIdx": -1,
+                                    "tagL": [
+                                        "RES_LOC_H3"
+                                    ]
+                                }
+                            ],
+                            "type": "N"
+                        },
+                        "arr": {
+                            "locX": 6,
+                            "idx": 19,
+                            "aProdX": 1,
+                            "aOutR": false,
+                            "aTimeS": "125100",
+                            "aCncl": true,
+                            "aTZOffset": 120,
+                            "type": "N"
+                        },
+                        "secL": [
+                            {
+                                "type": "JNY",
+                                "icoX": 0,
+                                "dep": {
+                                    "locX": 0,
+                                    "idx": 14,
+                                    "dProdX": 1,
+                                    "dInR": false,
+                                    "dTimeS": "100600",
+                                    "dCncl": true,
+                                    "dTrnCmpSX": {
+                                        "tcM": 1
+                                    },
+                                    "dTZOffset": 120,
+                                    "msgL": [
+                                        {
+                                            "type": "REM",
+                                            "remX": 0,
+                                            "txtC": {
+                                                "r": 204,
+                                                "g": 0,
+                                                "b": 0,
+                                                "a": 255
+                                            },
+                                            "prio": 478,
+                                            "fIdx": -1,
+                                            "tIdx": -1,
+                                            "tagL": [
+                                                "RES_LOC_H3"
+                                            ]
+                                        }
+                                    ],
+                                    "type": "N"
+                                },
+                                "arr": {
+                                    "locX": 6,
+                                    "idx": 19,
+                                    "aProdX": 1,
+                                    "aOutR": false,
+                                    "aTimeS": "125100",
+                                    "aCncl": true,
+                                    "aTrnCmpSX": {
+                                        "tcM": 1
+                                    },
+                                    "aTZOffset": 120,
+                                    "type": "N"
+                                },
+                                "jny": {
+                                    "jid": "1|265463|0|80|2042021",
+                                    "prodX": 1,
+                                    "dirTxt": "Berlin Hbf (tief)",
+                                    "status": "P",
+                                    "isCncl": true,
+                                    "isRchbl": false,
+                                    "stopL": [
+                                        {
+                                            "locX": 0,
+                                            "idx": 14,
+                                            "dProdX": 1,
+                                            "dInR": false,
+                                            "dTimeS": "100600",
+                                            "dCncl": true,
+                                            "dDirTxt": "Berlin Hbf (tief)",
+                                            "dTZOffset": 120,
+                                            "msgL": [
+                                                {
+                                                    "type": "REM",
+                                                    "remX": 0,
+                                                    "txtC": {
+                                                        "r": 204,
+                                                        "g": 0,
+                                                        "b": 0,
+                                                        "a": 255
+                                                    },
+                                                    "prio": 478,
+                                                    "fIdx": -1,
+                                                    "tIdx": -1,
+                                                    "tagL": [
+                                                        "RES_LOC_H3"
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "N"
+                                        },
+                                        {
+                                            "locX": 7,
+                                            "idx": 15,
+                                            "aProdX": 1,
+                                            "aOutR": false,
+                                            "aTimeS": "101400",
+                                            "aCncl": true,
+                                            "aTZOffset": 120,
+                                            "dProdX": 1,
+                                            "dInR": false,
+                                            "dTimeS": "101600",
+                                            "dCncl": true,
+                                            "dTZOffset": 120,
+                                            "type": "N"
+                                        },
+                                        {
+                                            "locX": 2,
+                                            "idx": 16,
+                                            "aProdX": 1,
+                                            "aOutR": false,
+                                            "aTimeS": "110100",
+                                            "aCncl": true,
+                                            "aTZOffset": 120,
+                                            "dProdX": 1,
+                                            "dInR": false,
+                                            "dTimeS": "110400",
+                                            "dCncl": true,
+                                            "dTZOffset": 120,
+                                            "type": "N"
+                                        },
+                                        {
+                                            "locX": 4,
+                                            "idx": 17,
+                                            "aProdX": 1,
+                                            "aOutR": false,
+                                            "aTimeS": "113500",
+                                            "aCncl": true,
+                                            "aTZOffset": 120,
+                                            "dProdX": 1,
+                                            "dInR": false,
+                                            "dTimeS": "113600",
+                                            "dCncl": true,
+                                            "dTZOffset": 120,
+                                            "type": "N"
+                                        },
+                                        {
+                                            "locX": 5,
+                                            "idx": 18,
+                                            "aProdX": 1,
+                                            "aOutR": false,
+                                            "aTimeS": "123800",
+                                            "aCncl": true,
+                                            "aTZOffset": 120,
+                                            "dProdX": 1,
+                                            "dInS": false,
+                                            "dInR": false,
+                                            "dCncl": true,
+                                            "dTZOffset": 120,
+                                            "type": "N"
+                                        },
+                                        {
+                                            "locX": 6,
+                                            "idx": 19,
+                                            "aProdX": 1,
+                                            "aOutR": false,
+                                            "aTimeS": "125100",
+                                            "aCncl": true,
+                                            "aTZOffset": 120,
+                                            "type": "N"
+                                        }
+                                    ],
+                                    "ctxRecon": "T$A=1@O=Bielefeld Hbf@L=8000036@a=128@$A=1@O=Berlin Hbf (tief)@L=8098160@a=128@$202104021006$202104021251$ICE 1545$$1$$$",
+                                    "msgL": [
+                                        {
+                                            "type": "REM",
+                                            "remX": 3,
+                                            "fLocX": 0,
+                                            "tLocX": 6,
+                                            "fIdx": 14,
+                                            "tIdx": 19,
+                                            "tagL": [
+                                                "RES_JNY_DTL"
+                                            ]
+                                        },
+                                        {
+                                            "type": "REM",
+                                            "remX": 4,
+                                            "fLocX": 0,
+                                            "tLocX": 6,
+                                            "fIdx": 14,
+                                            "tIdx": 19,
+                                            "tagL": [
+                                                "RES_JNY_DTL"
+                                            ]
+                                        },
+                                        {
+                                            "type": "REM",
+                                            "remX": 10,
+                                            "fLocX": 0,
+                                            "tLocX": 6,
+                                            "fIdx": 14,
+                                            "tIdx": 19,
+                                            "tagL": [
+                                                "RES_JNY_DTL_L"
+                                            ]
+                                        },
+                                        {
+                                            "type": "REM",
+                                            "remX": 11,
+                                            "fLocX": 0,
+                                            "tLocX": 6,
+                                            "fIdx": 14,
+                                            "tIdx": 19,
+                                            "tagL": [
+                                                "RES_JNY_DTL_L"
+                                            ]
+                                        },
+                                        {
+                                            "type": "REM",
+                                            "remX": 5,
+                                            "fLocX": 0,
+                                            "tLocX": 6,
+                                            "fIdx": 14,
+                                            "tIdx": 19,
+                                            "tagL": [
+                                                "RES_JNY_DTL_L"
+                                            ]
+                                        },
+                                        {
+                                            "type": "REM",
+                                            "remX": 12,
+                                            "prio": 240,
+                                            "fIdx": -1,
+                                            "tIdx": -1,
+                                            "tagL": [
+                                                "RES_CON_FTR_H3"
+                                            ]
+                                        },
+                                        {
+                                            "type": "REM",
+                                            "remX": 13,
+                                            "txtC": {
+                                                "r": 204,
+                                                "g": 0,
+                                                "b": 0,
+                                                "a": 255
+                                            },
+                                            "prio": 373,
+                                            "fIdx": -1,
+                                            "tIdx": -1,
+                                            "tagL": [
+                                                "RES_JNY_H3"
+                                            ]
+                                        }
+                                    ],
+                                    "subscr": "F"
+                                },
+                                "resState": "N",
+                                "resRecommendation": "N"
+                            }
+                        ],
+                        "ctxRecon": "¶HKI¶T$A=1@O=Bielefeld Hbf@L=8000036@a=128@$A=1@O=Berlin Hbf (tief)@L=8098160@a=128@$202104021006$202104021251$ICE 1545$$1$$$",
+                        "trfRes": {
+                            "statusCode": "OK",
+                            "fareSetL": [
+                                {
+                                    "fareL": [
+                                        {
+                                            "prc": 9460,
+                                            "isFromPrice": false,
+                                            "isPartPrice": false,
+                                            "isBookable": false,
+                                            "isUpsell": false,
+                                            "targetCtx": "X",
+                                            "buttonText": "Booking not possible"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "msgL": [
+                            {
+                                "type": "REM",
+                                "remX": 14,
+                                "txtC": {
+                                    "r": 204,
+                                    "g": 0,
+                                    "b": 0,
+                                    "a": 255
+                                },
+                                "prio": 200,
+                                "fIdx": -1,
+                                "tIdx": -1,
+                                "tagL": [
+                                    "SUM_CON_FTR_H3"
+                                ]
+                            }
+                        ],
+                        "conSubscr": "F",
+                        "resState": "N",
+                        "resRecommendation": "N",
+                        "recState": "U",
+                        "sotRating": 0,
+                        "isSotCon": false,
+                        "showARSLink": false,
+                        "sotCtxt": {
+                            "cnLocX": 0,
+                            "calcDate": "20210402",
+                            "jid": "1|265463|0|80|-1",
+                            "locMode": "FROM_START",
+                            "pLocX": 0,
+                            "reqMode": "UNKNOWN",
+                            "sectX": 0,
+                            "calcTime": "095400"
+                        },
+                        "cksum": "84972567_3"
                     }
                 ],
-                "outCtxScrB": "2|OB|MT#11#133472#133472#133663#133663#0#0#485#133428#1#-2147482598#0#1#2|PDH#821ddda41c8508102172fc4ec6d92a7c|RD#13032021|RT#154846|US#1",
-                "outCtxScrF": "2|OF|MT#11#133472#133472#133663#133663#0#0#485#133428#1#-2147482598#0#1#2|PDH#821ddda41c8508102172fc4ec6d92a7c|RD#13032021|RT#154846|US#1",
+                "outCtxScrB": "2|OB|MT#11#161886#161886#162051#162051#0#0#485#161870#1#-2147482598#0#1#2|PDH#e9157199b2f317961529e78de5a96d9e|RD#2042021|RT#95000|US#1",
+                "outCtxScrF": "2|OF|MT#11#161886#161886#162051#162051#0#0#485#161870#1#-2147482598#0#1#2|PDH#e9157199b2f317961529e78de5a96d9e|RD#2042021|RT#95000|US#1",
                 "fpB": "20201213",
                 "fpE": "20211211",
                 "bfATS": -1,
                 "bfIOSTS": -1,
-                "planrtTS": "1615646983"
+                "planrtTS": "1617349907"
             }
         }
     ]

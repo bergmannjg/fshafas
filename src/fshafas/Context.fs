@@ -30,7 +30,7 @@ type CommonData =
     { operators: Client.Operator []
       locations: U3<Station, Stop, Location> []
       lines: Client.Line []
-      hints: U3<Client.Hint, Client.Status, Client.Warning> [] }
+      hints: (U3<Client.Hint, Client.Status, Client.Warning> option) [] }
 
 type When =
     { ``when``: string option

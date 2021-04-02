@@ -30,7 +30,6 @@ module internal Common =
         let hints =
             c.remL
             |> Array.map (fun p -> ctx2.profile.parseHint ctx2 p)
-            |> Array.choose id
 
         let locations = ctx2.profile.parseLocations ctx2 c.locL
 
@@ -97,4 +96,5 @@ module internal Common =
     let msgLToRemarks (ctx: Context) (msgL: Raw.RawMsg [] option) =
         msgL
         |> mapArray ctx.common.hints (fun x -> x.remX)
+        |> Array.choose id
         |> toOption
