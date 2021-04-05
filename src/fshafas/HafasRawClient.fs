@@ -60,26 +60,24 @@ type HafasRawClient(endpoint: string, salt: string, cfg: Raw.Cfg, baseRequest: R
         log "request:" json
 
         async {
-            try
-                let! result = httpClient.PostAsync endpoint salt json
+            let! result = httpClient.PostAsync endpoint salt json
 
-                log "response:" result
+            log "response:" result
 
-                let response = decode result
+            let response = decode result
 
-                if response.svcResL.Length = 1 then
-                    let svcRes = response.svcResL.[0]
+            if response.svcResL.Length = 1 then
+                let svcRes = response.svcResL.[0]
 
-                    match svcRes.err, svcRes.errTxt with
-                    | Some err, Some errTxt when err <> "OK" -> return raise (System.Exception(err + ":" + errTxt))
-                    | Some err, _ when err <> "OK" -> return raise (System.Exception(err))
-                    | _ -> return Some(svcRes.res)
-                else
-                    match response.err, response.errTxt with
-                    | Some err, Some errTxt -> return raise (System.Exception(err + ":" + errTxt))
-                    | Some err, _ -> return raise (System.Exception(err))
-                    | _ -> return None
-            with ex -> return raise (System.Exception(ex.Message))
+                match svcRes.err, svcRes.errTxt with
+                | Some err, Some errTxt when err <> "OK" -> return raise (System.Exception(err + ":" + errTxt))
+                | Some err, _ when err <> "OK" -> return raise (System.Exception(err))
+                | _ -> return Some(svcRes.res)
+            else
+                match response.err, response.errTxt with
+                | Some err, Some errTxt -> return raise (System.Exception(err + ":" + errTxt))
+                | Some err, _ -> return raise (System.Exception(err))
+                | _ -> return None
         }
 
     member __.Dispose() = httpClient.Dispose()

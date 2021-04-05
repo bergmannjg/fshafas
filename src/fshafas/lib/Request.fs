@@ -46,8 +46,8 @@ module internal Request =
             |> Promise.bind (fun res -> res.text ())
             |> Promise.catch
                 (fun ex ->
-                    printfn "%s" ex.Message
-                    "")
+                    printfn "PostAsync: %s" ex.Message
+                    raise ex)
             |> Async.AwaitPromise
 
 #else
