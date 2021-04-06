@@ -43,7 +43,9 @@ module internal Request =
                   RequestProperties.Body(fromStringtoJsonBody json) ]
 
             fetch urlchecksum properties
-            |> Promise.bind (fun res -> res.text ())
+            |> Promise.bind (fun res ->
+                if not res.Ok then raise (System.Exception(res.StatusText)) 
+                res.text ())
             |> Promise.catch
                 (fun ex ->
                     printfn "PostAsync: %s" ex.Message

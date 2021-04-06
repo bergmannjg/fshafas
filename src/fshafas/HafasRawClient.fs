@@ -77,7 +77,7 @@ type HafasRawClient(endpoint: string, salt: string, cfg: Raw.Cfg, baseRequest: R
                 match response.err, response.errTxt with
                 | Some err, Some errTxt -> return raise (System.Exception(err + ":" + errTxt))
                 | Some err, _ -> return raise (System.Exception(err))
-                | _ -> return None
+                | _ -> return raise (System.Exception("invalid response"))
         }
 
     member __.Dispose() = httpClient.Dispose()
