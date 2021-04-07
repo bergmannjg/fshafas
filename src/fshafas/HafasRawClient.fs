@@ -53,7 +53,7 @@ type HafasRawClient(endpoint: string, salt: string, cfg: Raw.Cfg, baseRequest: R
         Serializer.Deserialize<Raw.RawResponse>(json)
 #endif
 
-    let asyncPost (request: Raw.RawRequest) : Async<Raw.RawResult option> =
+    let asyncPost (request: Raw.RawRequest) : Async<Raw.RawResult> =
 
         let json = encode request
 
@@ -72,7 +72,7 @@ type HafasRawClient(endpoint: string, salt: string, cfg: Raw.Cfg, baseRequest: R
                 match svcRes.err, svcRes.errTxt with
                 | Some err, Some errTxt when err <> "OK" -> return raise (System.Exception(err + ":" + errTxt))
                 | Some err, _ when err <> "OK" -> return raise (System.Exception(err))
-                | _ -> return Some(svcRes.res)
+                | _ -> return svcRes.res
             else
                 match response.err, response.errTxt with
                 | Some err, Some errTxt -> return raise (System.Exception(err + ":" + errTxt))
@@ -84,92 +84,90 @@ type HafasRawClient(endpoint: string, salt: string, cfg: Raw.Cfg, baseRequest: R
 
     member __.AsyncLocMatch(locMatchRequest: Raw.LocMatchRequest) =
         async {
-            match! asyncPost (makeRequest "LocMatch" (U13.Case1 locMatchRequest)) with
-            | Some (res) when res.``match``.IsSome -> return (res.common, Some res, res.``match``.Value.locL)
+            let! res = asyncPost (makeRequest "LocMatch" (U13.Case1 locMatchRequest))
+
+            match res.``match`` with
+            | Some ``match`` -> return (res.common, Some res, ``match``.locL)
             | _ -> return (None, None, Array.empty)
         }
 
     member __.AsyncTripSearch(tripSearchRequest: Raw.TripSearchRequest) =
         async {
-            match! asyncPost (makeRequest "TripSearch" (U13.Case2 tripSearchRequest)) with
-            | Some (res) -> return (res.common, Some res, res.outConL)
-            | None -> return (None, None, None)
+            let! res = asyncPost (makeRequest "TripSearch" (U13.Case2 tripSearchRequest))
+            return (res.common, Some res, res.outConL)
         }
 
     member __.AsyncJourneyDetails(journeyDetailsRequest: Raw.JourneyDetailsRequest) =
         async {
-            match! asyncPost (makeRequest "JourneyDetails" (U13.Case3 journeyDetailsRequest)) with
-            | Some (res) -> return (res.common, Some res, res.journey)
-            | None -> return (None, None, None)
+            let! res = asyncPost (makeRequest "JourneyDetails" (U13.Case3 journeyDetailsRequest))
+            return (res.common, Some res, res.journey)
         }
 
     member __.AsyncStationBoard(stationBoardRequest: Raw.StationBoardRequest) =
         async {
-            match! asyncPost (makeRequest "StationBoard" (U13.Case4 stationBoardRequest)) with
-            | Some (res) -> return (res.common, Some res, res.jnyL)
-            | None -> return (None, None, None)
+            let! res = asyncPost (makeRequest "StationBoard" (U13.Case4 stationBoardRequest))
+            return (res.common, Some res, res.jnyL)
         }
 
     member __.AsyncReconstruction(reconstructionRequest: Raw.ReconstructionRequest) =
         async {
-            match! asyncPost (makeRequest "Reconstruction" (U13.Case5 reconstructionRequest)) with
-            | Some (res) -> return (res.common, Some res, res.outConL)
-            | None -> return (None, None, None)
+            let! res = asyncPost (makeRequest "Reconstruction" (U13.Case5 reconstructionRequest))
+            return (res.common, Some res, res.outConL)
         }
 
     member __.AsyncJourneyMatch(journeyMatchRequest: Raw.JourneyMatchRequest) =
         async {
-            match! asyncPost (makeRequest "JourneyMatch" (U13.Case6 journeyMatchRequest)) with
-            | Some (res) -> return (res.common, Some res, res.jnyL)
-            | None -> return (None, None, None)
+            let! res = asyncPost (makeRequest "JourneyMatch" (U13.Case6 journeyMatchRequest))
+            return (res.common, Some res, res.jnyL)
         }
 
     member __.AsyncLocGeoPos(locGeoPosRequest: Raw.LocGeoPosRequest) =
         async {
-            match! asyncPost (makeRequest "LocGeoPos" (U13.Case7 locGeoPosRequest)) with
-            | Some (res) when res.locL.IsSome -> return (res.common, Some res, res.locL.Value)
+            let! res = asyncPost (makeRequest "LocGeoPos" (U13.Case7 locGeoPosRequest))
+
+            match res.locL with
+            | Some locL -> return (res.common, Some res, locL)
             | _ -> return (None, None, Array.empty)
         }
 
     member __.AsyncLocGeoReach(locGeoReachRequest: Raw.LocGeoReachRequest) =
         async {
-            match! asyncPost (makeRequest "LocGeoReach" (U13.Case8 locGeoReachRequest)) with
-            | Some (res) when res.posL.IsSome -> return (res.common, Some res, res.posL.Value)
+            let! res = asyncPost (makeRequest "LocGeoReach" (U13.Case8 locGeoReachRequest))
+
+            match res.posL with
+            | Some posL -> return (res.common, Some res, posL)
             | _ -> return (None, None, Array.empty)
         }
 
     member __.AsyncLocDetails(locDetailsRequest: Raw.LocDetailsRequest) =
         async {
-            match! asyncPost (makeRequest "LocDetails" (U13.Case9 locDetailsRequest)) with
-            | Some (res) when res.locL.IsSome && res.locL.Value.Length > 0 ->
-                return (res.common, Some res, Some res.locL.Value.[0])
+            let! res = asyncPost (makeRequest "LocDetails" (U13.Case9 locDetailsRequest))
+
+            match res.locL with
+            | Some locL when locL.Length > 0 -> return (res.common, Some res, Some locL.[0])
             | _ -> return (None, None, None)
         }
 
     member __.AsyncJourneyGeoPos(journeyGeoPosRequest: Raw.JourneyGeoPosRequest) =
         async {
-            match! asyncPost (makeRequest "JourneyGeoPos" (U13.Case10 journeyGeoPosRequest)) with
-            | Some (res) -> return (res.common, Some res, res.jnyL)
-            | _ -> return (None, None, None)
+            let! res = asyncPost (makeRequest "JourneyGeoPos" (U13.Case10 journeyGeoPosRequest))
+            return (res.common, Some res, res.jnyL)
         }
 
     member __.AsyncHimSearch(himSearchRequest: Raw.HimSearchRequest) =
         async {
-            match! asyncPost (makeRequest "HimSearch" (U13.Case11 himSearchRequest)) with
-            | Some (res) -> return (res.common, Some res, res.msgL)
-            | _ -> return (None, None, None)
+            let! res = asyncPost (makeRequest "HimSearch" (U13.Case11 himSearchRequest))
+            return (res.common, Some res, res.msgL)
         }
 
     member __.AsyncLineMatch(lineMatchRequest: Raw.LineMatchRequest) =
         async {
-            match! asyncPost (makeRequest "LineMatch" (U13.Case12 lineMatchRequest)) with
-            | Some (res) -> return (res.common, Some res, res.lineL)
-            | _ -> return (None, None, None)
+            let! res = asyncPost (makeRequest "LineMatch" (U13.Case12 lineMatchRequest))
+            return (res.common, Some res, res.lineL)
         }
 
     member __.AsyncServerInfo(serverInfoRequest: Raw.ServerInfoRequest) =
         async {
-            match! asyncPost (makeRequest "ServerInfo" (U13.Case13 serverInfoRequest)) with
-            | Some (res) -> return (res.common, Some res)
-            | _ -> return (None, None)
+            let! res = asyncPost (makeRequest "ServerInfo" (U13.Case13 serverInfoRequest))
+            return (res.common, Some res)
         }
