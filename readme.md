@@ -12,10 +12,17 @@ The library exposes  3 interfaces:
 
 1) a direct (`raw`) interface to the hafas endpoints,
 2) a F# async based interface corresponding to hafas-client api,
-3) a JS promise based interface corresponding to the TS [Type definitions](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/hafas-client/index.d.ts) for hafas-client, which
-   compiles via Fable to a JavaScript library, this library and the original hafas-client can be used interchangeably.
+3) a JS promise based interface corresponding to the TS [Type definitions](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/hafas-client/index.d.ts) for hafas-client.
 
-The following diagram should commute:
+## Compilation to JavaScript
+
+The JS promise based interface compiles via Fable to a JavaScript library, this library and the original hafas-client can be used almost interchangeably.
+
+Differences:
+
+* *String Literal Unions* are compiled via ts2fable to F# Discriminated Unions and these are compiled via Fable to Jvascript classes. The mapping *.toString().toLowerCase()* can eliminate the differences.
+
+The following diagram should commute modulo the aforementioned differences:
 
 JavaScript/TypeScript | Transformation | F# |
 :---------------:|:--------:|:------:|
