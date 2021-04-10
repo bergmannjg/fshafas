@@ -6,13 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../fshafas/fshafas.fsproj">
-        <Name>fshafas.fsproj</Name>
-    </ProjectReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="FSharp.Core" Version="5.0.1" />
+    <ProjectReference Include="../fshafas/fshafas.fsproj"/>
   </ItemGroup>
 
 </Project>

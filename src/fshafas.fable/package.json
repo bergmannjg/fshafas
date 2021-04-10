@@ -1,10 +1,6 @@
 {
   "private": true,
   "type": "module",
-  "scripts": {
-    "build": "dotnet fable ./fshafas.fable.fsproj --typedArrays false --outDir build",
-    "test": "node build/App.js"
-  },
   "dependencies": {
     "google-polyline": "^1.0.3",
     "isomorphic-fetch": "^2.2.1",

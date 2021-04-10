@@ -20,9 +20,12 @@ rm -f RawHafasClientTypes.fs
 mkdir node_modules
 
 # import hafas-client types
-# wget -q https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/types/hafas-client/index.d.ts
-# wget -q https://raw.githubusercontent.com/bergmannjg/hafas-client/add-types-in-jsdoc/index.d.ts
-cp ../../../forks/hafas-client/index.d.ts .
+if [ "$1" = "remote" ]; then
+    # wget -q https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/types/hafas-client/index.d.ts
+    wget -q https://raw.githubusercontent.com/bergmannjg/hafas-client/add-types-in-jsdoc/index.d.ts
+else
+    cp ../../../forks/hafas-client/index.d.ts .
+fi
 mkdir node_modules/@types
 mkdir node_modules/@types/hafas-client
 
@@ -40,8 +43,11 @@ dotnet run --project ./Transformer.fsproj FsHafas HafasClientTypes.fs ../../src/
 rm -f HafasClientTypes.fs
 
 # import raw hafas-client types
-# wget -q https://raw.githubusercontent.com/bergmannjg/hafas-client/add-types-in-jsdoc/types-raw-api.ts
-cp ../../../forks/hafas-client/types-raw-api.ts .
+if [ "$1" = "remote" ]; then
+    wget -q https://raw.githubusercontent.com/bergmannjg/hafas-client/add-types-in-jsdoc/types-raw-api.ts
+else
+    cp ../../../forks/hafas-client/types-raw-api.ts .
+fi
 sed -i '/createClient/d' types-raw-api.ts
 sed -i '/any/d' types-raw-api.ts
 

@@ -2,6 +2,7 @@
 .ionide/
 .ipynb_checkpoints/
 .nuget/
+.fake
 
 node_modules/
 private_modules/
@@ -9,6 +10,8 @@ build/
 bin/
 obj/
 test-fixtures/
+
+build.fsx.lock
 
 fs-hafas-client-*.tgz
 fshafas.bundle.js

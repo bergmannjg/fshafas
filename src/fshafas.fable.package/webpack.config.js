@@ -20,7 +20,7 @@ module.exports = {
     __dirname: false,
     __filename: false,
   },
-  entry: './fshafas.fable.fsproj',
+  entry: './build/Lib.js',
   output: {
     path: path.join(__dirname, "./fs-hafas-client"),
     filename: 'fshafas.bundle.js',
@@ -29,17 +29,7 @@ module.exports = {
   },
   plugins: [ ],
   module: {
-    rules: [{
-        test: /\.fs(x|proj)?$/,
-        use: {
-          loader: "fable-loader",
-          options: {
-            typedArrays: false,
-            babel: babelOptions,
-            define: ["WEBPACK"]
-          }
-        }
-      },
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,

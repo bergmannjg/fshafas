@@ -46,7 +46,9 @@ type HafasAsyncClient(profile: FsHafas.Profile) =
         Serializer.addConverters ([| Serializer.UnionConverter<Client.ProductTypeMode>() |])
 #endif
 
+#if !FABLE_COMPILER
     static member toTask<'a>(async: Async<'a>) : Threading.Tasks.Task<'a> = Async.StartAsTask(async)
+#endif
 
     member __.AsyncJourneys
         (from: U4<string, Station, Stop, Location>)

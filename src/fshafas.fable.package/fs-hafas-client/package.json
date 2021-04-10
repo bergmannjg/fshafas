@@ -4,9 +4,12 @@
   "description": "",
   "main": "fshafas.bundle.js",
   "types": "fshafas.bundle.d.ts",
-  "dependencies": {
-    "@types/hafas-client": "^5.12.0"
-  },
-  "author": "",
+  "files": [
+		"fshafas.bundle.js",
+		"fshafas.bundle.d.ts",
+		"hafas-client.d.ts",
+    "fshafas.bundle.js.LICENSE.txt"
+	],
+  "author": "Jürgen Bergmann",
   "license": "ISC"
 }

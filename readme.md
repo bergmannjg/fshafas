@@ -37,15 +37,15 @@ Requirements are:
 * [dotnet SDK 5](https://dotnet.microsoft.com/download)
 * [node.js](https://nodejs.org/en/)
 
-Run `./scripts/build.sh` at the root folder.
+Run `./build.sh` or `./build.cmd` at the root folder.
 
 Targets are:
 
-* *lib*: compile to dotnet dll,
-* *test*: compile to dotnet dll and run tests,
-* *csharp*: compile example C# program using the fshafas lib,
-* *fable*: compile F# program via Fable to JavaScript,
-* *pack*: compile lib via fable and webpack to a npm package.
+* *BuildLib*: compile to dotnet dll,
+* *Test*: compile to dotnet dll and run tests,
+* *BuildCSharp*: compile example C# program using the fshafas lib,
+* *BuildFableApp*: compile F# program via Fable to JavaScript,
+* *BuildNpmPack*: compile lib via fable and webpack to a npm package.
 
 Utility scripts:
 
