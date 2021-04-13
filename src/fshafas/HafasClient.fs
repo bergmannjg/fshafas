@@ -1,15 +1,18 @@
-namespace FsHafas
+namespace FsHafas.Api
 
 #if FABLE_COMPILER
-
 open Fable.Core
 open Fable.Core.JsInterop
-open FsHafas
-open Client
+#endif
 
-type HafasClient(profile: FsHafas.Profile) =
-    let client = new Api.HafasAsyncClient(profile)
+open FsHafas.Client
 
+/// <summary>JS promise based interface corresponding to hafas-client</summary>
+type HafasClient(id: FsHafas.Client.ProfileId) =
+    let client =
+        new FsHafas.Api.HafasAsyncClient(id)
+
+#if FABLE_COMPILER
     [<Emit("typeof $1")>]
     let jsTypeof (_: obj) : string = jsNative
 
@@ -17,19 +20,17 @@ type HafasClient(profile: FsHafas.Profile) =
     let jsTypeField (o: obj) : string = jsNative
 
     // get cases at runtime
-    let makeCaseOfU4
-        (v: U4<string, Client.Station, Client.Stop, Client.Location>)
-        : U4<string, Client.Station, Client.Stop, Client.Location> =
+    let makeCaseOfU4 (v: U4<string, Station, Stop, Location>) : U4<string, Station, Stop, Location> =
         if jsTypeof v = "string" then
             U4.Case1(unbox<string> v)
         else if (jsTypeField v) = "station" then
-            let s = unbox<Client.Station> v
+            let s = unbox<Station> v
             U4.Case2 { Default.Station with id = s.id }
         else if (jsTypeField v) = "stop" then
-            let s = unbox<Client.Stop> v
+            let s = unbox<Stop> v
             U4.Case3 { Default.Stop with id = s.id }
         else if (jsTypeField v) = "location" then
-            let l = unbox<Client.Location> v
+            let l = unbox<Location> v
 
             U4.Case4
                 { Default.Location with
@@ -42,21 +43,21 @@ type HafasClient(profile: FsHafas.Profile) =
             raise (System.ArgumentException("string|Station|Stop|Location expected"))
 
     // get cases at runtime
-    let makeCaseOfU2StringStation (v: U2<string, Client.Station>) : U2<string, Client.Station> =
+    let makeCaseOfU2StringStation (v: U2<string, Station>) : U2<string, Station> =
         if jsTypeof v = "string" then
             U2.Case1(unbox<string> v)
         else if (jsTypeField v) = "station" then
-            let s = unbox<Client.Station> v
+            let s = unbox<Station> v
             U2.Case2 { Default.Station with id = s.id }
         else
             raise (System.ArgumentException("string|Station expected"))
 
     // get cases at runtime
-    let makeCaseOfU2StringStop (v: U2<string, Client.Stop>) : U2<string, Client.Stop> =
+    let makeCaseOfU2StringStop (v: U2<string, Stop>) : U2<string, Stop> =
         if jsTypeof v = "string" then
             U2.Case1(unbox<string> v)
         else if (jsTypeField v) = "stop" then
-            let s = unbox<Client.Stop> v
+            let s = unbox<Stop> v
             U2.Case2 { Default.Stop with id = s.id }
         else
             raise (System.ArgumentException("string|Stop expected"))
@@ -67,9 +68,9 @@ type HafasClient(profile: FsHafas.Profile) =
             raise (System.ArgumentException("string expected"))
 
     // make Location at runtime
-    let makeLocation (v: Client.Location) : Client.Location =
+    let makeLocation (v: Location) : Location =
         if (jsTypeField v) = "location" then
-            let l = unbox<Client.Location> v
+            let l = unbox<Location> v
 
             { Default.Location with
                   id = l.id
@@ -79,102 +80,136 @@ type HafasClient(profile: FsHafas.Profile) =
         else
             raise (System.ArgumentException("Location expected"))
 
-    let validateBoundingBox (v: Client.BoundingBox) =
+    let validateBoundingBox (v: BoundingBox) =
         if jsTypeof v.north <> "number"
            || jsTypeof v.west <> "number"
            || jsTypeof v.south <> "number"
            || jsTypeof v.east <> "number" then
             raise (System.ArgumentException("BoundingBox expected"))
+#endif
 
     interface FsHafas.Client.HafasClient with
 
         member __.journeys
-            (from: U4<string, Client.Station, Client.Stop, Client.Location>)
-            (``to``: U4<string, Client.Station, Client.Stop, Client.Location>)
-            (opt: Client.JourneysOptions option)
+            (from: U4<string, Station, Stop, Location>)
+            (``to``: U4<string, Station, Stop, Location>)
+            (opt: JourneysOptions option)
             =
-            client.AsyncJourneys (makeCaseOfU4 from) (makeCaseOfU4 ``to``) opt
+#if FABLE_COMPILER
+            client.AsyncJourneys(makeCaseOfU4 from) (makeCaseOfU4 ``to``) opt
             |> Async.StartAsPromise
+#else
+            client.AsyncJourneys from ``to`` opt
+#endif
 
-        member __.refreshJourney
-            (refreshToken: string)
-            (opt: Client.RefreshJourneyOptions option)
-            : JS.Promise<Client.Journey> =
+        member __.refreshJourney (refreshToken: string) (opt: RefreshJourneyOptions option) =
+#if FABLE_COMPILER
             validateString refreshToken
 
             client.AsyncRefreshJourney refreshToken opt
             |> Async.StartAsPromise
+#else
+            client.AsyncRefreshJourney refreshToken opt
+#endif
 
-        member __.trip (id: string) (name: string) (opt: Client.TripOptions option) : JS.Promise<Client.Trip> =
+        member __.trip (id: string) (name: string) (opt: TripOptions option) =
+#if FABLE_COMPILER
             validateString id
 
             client.AsyncTrip id name opt
             |> Async.StartAsPromise
+#else
+            client.AsyncTrip id name opt
+#endif
 
-        member __.departures
-            (id: U2<string, Client.Station>)
-            (opt: Client.DeparturesArrivalsOptions option)
-            : JS.Promise<array<Client.Alternative>> =
-            client.AsyncDepartures (makeCaseOfU2StringStation id) opt
+        member __.departures (id: U2<string, Station>) (opt: DeparturesArrivalsOptions option) =
+#if FABLE_COMPILER
+            client.AsyncDepartures(makeCaseOfU2StringStation id) opt
             |> Async.StartAsPromise
+#else
+            client.AsyncDepartures id opt
+#endif
 
-        member __.arrivals
-            (id: U2<string, Client.Station>)
-            (opt: Client.DeparturesArrivalsOptions option)
-            : JS.Promise<array<Client.Alternative>> =
-            client.AsyncArrivals (makeCaseOfU2StringStation id) opt
+        member __.arrivals (id: U2<string, Station>) (opt: DeparturesArrivalsOptions option) =
+#if FABLE_COMPILER
+            client.AsyncArrivals(makeCaseOfU2StringStation id) opt
             |> Async.StartAsPromise
+#else
+            client.AsyncArrivals id opt
+#endif
 
-        member __.locations
-            (name: string)
-            (opt: Client.LocationsOptions option)
-            : JS.Promise<array<U3<Client.Station, Client.Stop, Client.Location>>> =
+        member __.locations (name: string) (opt: LocationsOptions option) =
+#if FABLE_COMPILER
             validateString name
 
             client.AsyncLocations name opt
             |> Async.StartAsPromise
+#else
+            client.AsyncLocations name opt
+#endif
 
-        member __.stop
-            (stop: U2<string, Stop>)
-            (opt: Client.StopOptions option)
-            : JS.Promise<U3<Client.Station, Client.Stop, Client.Location>> =
-            client.AsyncStop (makeCaseOfU2StringStop stop) opt
+        member __.stop (stop: U2<string, Stop>) (opt: StopOptions option) =
+#if FABLE_COMPILER
+            client.AsyncStop(makeCaseOfU2StringStop stop) opt
             |> Async.StartAsPromise
+#else
+            client.AsyncStop stop opt
+#endif
 
-        member __.nearby
-            (location: Client.Location)
-            (opt: Client.NearByOptions option)
-            : JS.Promise<array<U3<Client.Station, Client.Stop, Client.Location>>> =
-            client.AsyncNearby (makeLocation location) opt
+        member __.nearby (location: Location) (opt: NearByOptions option) =
+#if FABLE_COMPILER
+            client.AsyncNearby(makeLocation location) opt
             |> Async.StartAsPromise
+#else
+            client.AsyncNearby location opt
+#endif
 
-        member __.reachableFrom
-            (location: Client.Location)
-            (opt: Client.ReachableFromOptions option)
-            : JS.Promise<array<Client.Duration>> =
-            client.AsyncReachableFrom (makeLocation location) opt
+        member __.reachableFrom (location: Location) (opt: ReachableFromOptions option) =
+#if FABLE_COMPILER
+            client.AsyncReachableFrom(makeLocation location) opt
             |> Async.StartAsPromise
+#else
+            client.AsyncReachableFrom location opt
+#endif
 
-        member __.radar (x: Client.BoundingBox) (opt: Client.RadarOptions option) : JS.Promise<array<Client.Movement>> =
+        member __.radar (x: BoundingBox) (opt: RadarOptions option) =
+#if FABLE_COMPILER
             validateBoundingBox x
             client.AsyncRadar x opt |> Async.StartAsPromise
+#else
+            client.AsyncRadar x opt
+#endif
 
-        member __.tripsByName (name: string) (opt: Client.TripsByNameOptions option) : JS.Promise<array<Client.Trip>> =
+        member __.tripsByName (name: string) (opt: TripsByNameOptions option) =
+#if FABLE_COMPILER
             validateString name
 
             client.AsyncTripsByName name opt
             |> Async.StartAsPromise
+#else
+            client.AsyncTripsByName name opt
+#endif
 
-        member __.remarks(opt: Client.RemarksOptions option) : JS.Promise<array<Client.Warning>> =
+        member __.remarks(opt: RemarksOptions option) =
+#if FABLE_COMPILER
             client.AsyncRemarks opt |> Async.StartAsPromise
+#else
+            client.AsyncRemarks opt
+#endif
 
-        member __.lines (query: string) (opt: Client.LinesOptions option) : JS.Promise<array<Client.Line>> =
+        member __.lines (query: string) (opt: LinesOptions option) =
+#if FABLE_COMPILER
             validateString query
 
             client.AsyncLines query opt
             |> Async.StartAsPromise
+#else
+            client.AsyncLines query opt
+#endif
 
-        member __.serverInfo(opt: Client.ServerOptions option) : JS.Promise<Client.ServerInfo> =
+        member __.serverInfo(opt: ServerOptions option) =
+#if FABLE_COMPILER
             client.AsyncServerInfo opt |> Async.StartAsPromise
-
+#else
+            client.AsyncServerInfo opt
 #endif

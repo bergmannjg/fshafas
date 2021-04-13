@@ -2,10 +2,9 @@ namespace FsHafas.Parser
 
 module internal ProductsBitmask =
 
-    open FsHafas
-    open Client
+    open FsHafas.Client
 
-    let parseBitmask (ctx: Context) (bitmask: int) : Client.Products =
+    let parseBitmask (ctx: Context) (bitmask: int) : FsHafas.Client.Products =
         ctx.profile.products
         |> Array.fold
             (fun m p ->

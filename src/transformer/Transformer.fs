@@ -14,6 +14,7 @@ let private checker = FSharpChecker.Create()
 type TransformerOptions =
     { prelude: string option
       postlude: string option
+      useRecursiveTypes: bool
       escapeIdent: string -> string
       transformType: string -> string
       excludesType: string -> bool
@@ -146,14 +147,20 @@ let private visitTypeDefn typeDefn options =
 
     let transform = options.transformsTypeDefn (toString id)
 
+    let typeSymbol =
+        if options.useRecursiveTypes then
+            "and"
+        else
+            "type"
+
     if (transform.IsSome) then
-        sprintf "type %s = %s" (toString id) transform.Value
+        sprintf "%s %s = %s" typeSymbol (toString id) transform.Value
         |> lines.Add
     else
         () /// problems with 'Format Document'
 
         if not (options.excludesType (toString id)) then
-            (sprintf "type %s = " (toString id))
+            (sprintf "%s %s = " typeSymbol (toString id))
             + (if isRecord then "{" else "")
             |> lines.Add
 

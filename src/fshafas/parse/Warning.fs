@@ -2,9 +2,9 @@ namespace FsHafas.Parser
 
 module internal Warning =
 
-    open FsHafas
+    open FsHafas.Client
 
-    let private parseMsgEdge (ctx: Context) (e: Raw.RawHimMsgEdge) : Client.Edge =
+    let private parseMsgEdge (ctx: Context) (e: FsHafas.Raw.RawHimMsgEdge) : FsHafas.Client.Edge =
         { fromLoc = Common.getElementAtSome e.fLocX ctx.common.locations
           toLoc = Common.getElementAtSome e.tLocX ctx.common.locations
           dir = e.dir
@@ -15,7 +15,7 @@ module internal Warning =
                     ``type`` = None }
           icon = None }
 
-    let private parseMsgEvent (ctx: Context) (e: Raw.RawHimMsgEvent) : Client.Event =
+    let private parseMsgEvent (ctx: Context) (e: FsHafas.Raw.RawHimMsgEvent) : FsHafas.Client.Event =
         { fromLoc = Common.getElementAtSome e.fLocX ctx.common.locations
           toLoc = Common.getElementAtSome e.tLocX ctx.common.locations
           start = ctx.profile.parseDateTime ctx e.fDate (Some e.fTime) None
@@ -27,7 +27,7 @@ module internal Warning =
         | Some date -> ctx.profile.parseDateTime ctx date time None
         | _ -> None
 
-    let parseWarning (ctx: Context) (w: Raw.RawHim) : Client.Warning =
+    let parseWarning (ctx: Context) (w: FsHafas.Raw.RawHim) : FsHafas.Client.Warning =
 
         let products =
             w.prod

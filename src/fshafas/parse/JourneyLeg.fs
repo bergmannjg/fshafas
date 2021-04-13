@@ -2,7 +2,7 @@ namespace FsHafas.Parser
 
 module internal JourneyLeg =
 
-    open FsHafas
+    open FsHafas.Client
 
     let parsePlatform (ctx: Context) (platfS: string option) (platfR: string option) (cncl: bool option) : Platform =
         let planned = platfS
@@ -23,7 +23,7 @@ module internal JourneyLeg =
           fromIndex: int
           toIndex: int }
 
-    let private getRemarkRange (msg: Raw.RawMsg) (common: CommonData) (stopovers: Client.StopOver []) =
+    let private getRemarkRange (msg: FsHafas.Raw.RawMsg) (common: CommonData) (stopovers: FsHafas.Client.StopOver []) =
         let fromLoc =
             Common.getElementAtSome msg.fLocX common.locations
             |> U2StationStop.FromSomeU3StationStopLocation
@@ -52,12 +52,12 @@ module internal JourneyLeg =
                   toIndex = toIndex }
         | _ -> None
 
-    let private getRemarkRanges (msgL: Raw.RawMsg []) (commonData: CommonData) (stopovers: Client.StopOver []) =
+    let private getRemarkRanges (msgL: FsHafas.Raw.RawMsg []) (commonData: CommonData) (stopovers: FsHafas.Client.StopOver []) =
         msgL
         |> Array.map (fun msg -> getRemarkRange msg commonData stopovers)
         |> Array.choose id
 
-    let private applyRemarkRange (remarkRange: RemarkRange) (commonData: CommonData) (stopover: Client.StopOver) =
+    let private applyRemarkRange (remarkRange: RemarkRange) (commonData: CommonData) (stopover: FsHafas.Client.StopOver) =
         let hint =
             Common.getElementAt remarkRange.remX commonData.hints
 
@@ -71,7 +71,7 @@ module internal JourneyLeg =
 
     let private applyRemarkRanges
         (commonData: CommonData)
-        (stopovers: Client.StopOver [])
+        (stopovers: FsHafas.Client.StopOver [])
         (remarkRanges: RemarkRange [])
         =
         stopovers
@@ -86,7 +86,7 @@ module internal JourneyLeg =
                 | Some range -> applyRemarkRange range commonData s
                 | None -> s)
 
-    let parseJourneyLeg (ctx: Context) (pt: Raw.RawSec) (date: string) : Client.Leg =
+    let parseJourneyLeg (ctx: Context) (pt: FsHafas.Raw.RawSec) (date: string) : FsHafas.Client.Leg =
         let mutable leg = Default.Leg
 
         let origin =

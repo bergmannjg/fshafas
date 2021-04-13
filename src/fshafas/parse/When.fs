@@ -2,7 +2,6 @@ namespace FsHafas.Parser
 
 module internal When =
 
-    open FsHafas
     open System
 
     let defaultWhen =
@@ -18,12 +17,12 @@ module internal When =
         (timeR: string option)
         (tzOffset: int option)
         (cncl: bool option)
-        : When =
+        : ParsedWhen =
         let (dtPlanned, strPlanned) =
-            Parser.DateTime.parseDateTimeEx ctx.profile date timeS tzOffset
+            FsHafas.Parser.DateTime.parseDateTimeEx ctx.profile date timeS tzOffset
 
         let (dtPrognosed, strPrognosed) =
-            Parser.DateTime.parseDateTimeEx ctx.profile date timeR tzOffset
+            FsHafas.Parser.DateTime.parseDateTimeEx ctx.profile date timeR tzOffset
 
         let delay =
             match dtPrognosed, dtPlanned with

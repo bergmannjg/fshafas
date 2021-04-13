@@ -6,7 +6,7 @@ module internal Location =
     open Fable.Core
 #endif
 
-    open FsHafas
+    open FsHafas.Client
     open System.Text.RegularExpressions
 
     type Lid =
@@ -38,7 +38,7 @@ module internal Location =
 
     let private leadingZeros = Regex(@"^0+")
 
-    let private parseLocationPhase1 (ctx: Context) (i: int) (locl: Raw.RawLoc []) =
+    let private parseLocationPhase1 (ctx: Context) (i: int) (locl: FsHafas.Raw.RawLoc []) =
         let l = locl.[i]
         let lid = parseLid l.lid
 
@@ -121,8 +121,8 @@ module internal Location =
 
     let private parseLocationPhase2
         (i: int)
-        (l: Raw.RawLoc)
-        (locations: (Raw.RawLoc * U3<Client.Station, Client.Stop, Client.Location>) [])
+        (l: FsHafas.Raw.RawLoc)
+        (locations: (FsHafas.Raw.RawLoc * U3<FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>) [])
         =
         let station =
             match l.mMastLocX with
@@ -144,7 +144,7 @@ module internal Location =
         | (_, location) -> location
 
     /// parse in 2 phases to avoid recursion
-    let parseLocations (ctx: Context) (locL: Raw.RawLoc []) =
+    let parseLocations (ctx: Context) (locL: FsHafas.Raw.RawLoc []) =
         let locations =
             locL
             |> Array.mapi (fun i _ -> parseLocationPhase1 ctx i locL)

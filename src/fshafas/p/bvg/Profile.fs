@@ -1,8 +1,8 @@
 namespace FsHafas.Profiles
 
+/// <exclude>Db</exclude>
 module Bvg =
 
-    open FsHafas
     open FsHafas.Client
     open System.Text.RegularExpressions
 
@@ -10,45 +10,45 @@ module Bvg =
     open Fable.Core
 #endif
 
-    let private products : Client.ProductType [] =
+    let private products : ProductType [] =
         [| { id = "suburban"
-             mode = Client.ProductTypeMode.Train
+             mode = ProductTypeMode.Train
              bitmasks = [| 1 |]
              name = "S-Bahn"
              short = "S"
              ``default`` = true }
            { id = "subway"
-             mode = Client.ProductTypeMode.Train
+             mode = ProductTypeMode.Train
              bitmasks = [| 2 |]
              name = "U-Bahn"
              short = "U"
              ``default`` = true }
            { id = "tram"
-             mode = Client.ProductTypeMode.Train
+             mode = ProductTypeMode.Train
              bitmasks = [| 4 |]
              name = "Tram"
              short = "T"
              ``default`` = true }
            { id = "bus"
-             mode = Client.ProductTypeMode.Bus
+             mode = ProductTypeMode.Bus
              bitmasks = [| 8 |]
              name = "Bus"
              short = "B"
              ``default`` = true }
            { id = "ferry"
-             mode = Client.ProductTypeMode.Watercraft
+             mode = ProductTypeMode.Watercraft
              bitmasks = [| 16 |]
              name = "Fähre"
              short = "F"
              ``default`` = true }
            { id = "express"
-             mode = Client.ProductTypeMode.Train
+             mode = ProductTypeMode.Train
              bitmasks = [| 32 |]
              name = "IC/ICE"
              short = "E"
              ``default`` = true }
            { id = "regional"
-             mode = Client.ProductTypeMode.Train
+             mode = ProductTypeMode.Train
              bitmasks = [| 64 |]
              name = "RB/RE"
              short = "R"
@@ -63,7 +63,7 @@ module Bvg =
         else
             raise (System.ArgumentException("station id: " + id))
 
-    let private req : Raw.RawRequest =
+    let private req : FsHafas.Raw.RawRequest =
         { lang = "de"
           svcReqL = [||]
           client =
@@ -78,7 +78,7 @@ module Bvg =
                 aid = "Mz0YdF9Fgx0Mb9" } }
 
     let getProfile () =
-        let profile = Api.Parser.defaultProfile
+        let profile = FsHafas.Api.Parser.defaultProfile
 
         { profile with
               locale = "de-DE"

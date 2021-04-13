@@ -1,4 +1,4 @@
-namespace FsHafas
+namespace FsHafas.Client
 
 module internal Request =
 
@@ -60,7 +60,7 @@ module internal Request =
 
     type HttpClient() =
 
-        let log msg o = Log.Print msg o
+        let log msg o = FsHafas.Client.Log.Print msg o
 
         let createHandler () =
             let handler = new Http.HttpClientHandler()

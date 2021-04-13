@@ -2,8 +2,7 @@ namespace FsHafas.Parser
 
 module internal Journey =
 
-    open FsHafas
-    open Client
+    open FsHafas.Client
 
     let bytes =
         [| 0 .. 7 |]
@@ -35,7 +34,7 @@ module internal Journey =
                     m)
             (IndexMap<string, bool>(false))
 
-    let parseJourney (ctx: Context) (j: Raw.RawOutCon) : Journey =
+    let parseJourney (ctx: Context) (j: FsHafas.Raw.RawOutCon) : Journey =
         let legs =
             j.secL
             |> Array.map (fun l -> ctx.profile.parseJourneyLeg ctx l j.date)

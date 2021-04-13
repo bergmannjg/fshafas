@@ -3,6 +3,7 @@
 .ipynb_checkpoints/
 .nuget/
 .fake
+.fsdocs/
 
 node_modules/
 private_modules/
@@ -10,6 +11,9 @@ build/
 bin/
 obj/
 test-fixtures/
+output/
+tmp/
+gh-pages/
 
 build.fsx.lock
 

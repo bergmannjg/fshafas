@@ -3,7 +3,7 @@ namespace FsHafas.Parser
 module internal Polyline =
 
     open System
-    open FsHafas
+    open FsHafas.Client
 
 #if FABLE_COMPILER
     open Fable.Core
@@ -21,7 +21,7 @@ module internal Polyline =
 
     let round (f: float) = System.Math.Round(f, 5)
 
-    let defaultFeatureCollection: Client.FeatureCollection =
+    let defaultFeatureCollection: FsHafas.Client.FeatureCollection =
         { ``type`` = Some "FeatureCollection"
           features = Array.empty }
 
@@ -32,10 +32,10 @@ module internal Polyline =
         polyliner.Decode xy
         |> Seq.map (fun p -> [| p.Latitude; p.Longitude |])
 #endif
-    let parsePolyline (ctx: Context) (p: Raw.RawPoly): Client.FeatureCollection =
+    let parsePolyline (ctx: Context) (p: FsHafas.Raw.RawPoly): FsHafas.Client.FeatureCollection =
         let features =
             polylineDecode p.crdEncYX
-            |> Seq.map<_, Client.Feature>
+            |> Seq.map<_, FsHafas.Client.Feature>
                 (fun p ->
                     { ``type`` = Some "Feature"
                       properties = obj ()
@@ -71,7 +71,7 @@ module internal Polyline =
 
         r * c
 
-    let distanceOfFeatureCollection (fc: Client.FeatureCollection) =
+    let distanceOfFeatureCollection (fc: FsHafas.Client.FeatureCollection) =
         let latLonPoints =
             fc.features
             |> Array.map (fun f -> (f.geometry.coordinates.[1], f.geometry.coordinates.[0]))

@@ -1,3 +1,5 @@
+// examples using HafasAsyncClient
+
 // use arg '--fsi-server-input-codepage:28591' for unicode characters
 #r "nuget:FSharp.SystemTextJson"
 #r "nuget:Polyliner.Net"
@@ -6,9 +8,9 @@
 #r "../src/fshafas/bin/Debug/net5.0/fshafas.dll"
 
 open FsHafas
-open FsHafas.Default
+open FsHafas.Client
 
-Serializer.addConverters ([| Serializer.UnionConverter<Client.ProductTypeMode>() |])
+Api.HafasAsyncClient.initSerializer ()
 
 Log.Debug <-
     fsi.CommandLineArgs
@@ -16,8 +18,8 @@ Log.Debug <-
 
 let id =
     match fsi.CommandLineArgs
-          |> Array.tryFind (fun (arg: string) -> arg.StartsWith("--Profile."))
-          |> Option.map (fun s -> s.Replace("--Profile.", "")) with
+          |> Array.tryFind (fun (arg: string) -> arg.StartsWith("--ProfileId."))
+          |> Option.map (fun s -> s.Replace("--ProfileId.", "")) with
     | Some "Db" -> ProfileId.Db
     | Some "Bvg" -> ProfileId.Bvg
     | Some "Svv" -> ProfileId.Svv
@@ -31,177 +33,188 @@ let args =
 let products =
     Interactive.productsOfMode id Client.ProductTypeMode.Train
 
-let locations () =
-    let name =
-        if id = ProfileId.Bvg then
-            "Alexanderplatz"
-        else
-            "Bielefeld"
+let locations (name: string) =
+    use client = new Api.HafasAsyncClient(id)
 
-    let locations =
-        Interactive.locations
-            id
-            name
-            { Default.LocationsOptions with
-                  results = Some 3
-                  linesOfStops = Some true }
+    async {
+        let! locations = client.AsyncLocations name (Some Default.LocationsOptions)
 
-    FsHafas.Printf.Short.Locations locations
-    |> printfn "%s"
+        Printf.Short.Locations locations |> printfn "%s"
+    }
+    |> Async.RunSynchronously
 
-let journeys () =
-    let from =
-        if id = ProfileId.Bvg then
-            "Alexanderplatz"
-        else
-            "Bielefeld"
+let journeys (fromId: string) (toId: string) =
+    use client = new Api.HafasAsyncClient(id)
 
-    let ``to`` =
-        if id = ProfileId.Bvg then
-            "Nollendorfplatz"
-        else
-            "Berlin"
+    async {
+        let! journeys =
+            client.AsyncJourneys
+                (U4.Case1 fromId)
+                (U4.Case1 toId)
+                (Some
+                    { Default.JourneysOptions with
+                          results = Some 1
+                          products = Some products
+                          stopovers = None
+                          polylines = Some true })
 
-    let journeys =
-        Interactive.journeys
-            id
-            from
-            ``to``
-            { Default.JourneysOptions with
-                  results = Some 1
-                  products = Some products
-                  stopovers = None
-                  polylines = Some true }
-
-    FsHafas.Printf.Short.Journeys journeys
-    |> printfn "%s"
+        Printf.Short.Journeys journeys |> printfn "%s"
+    }
+    |> Async.RunSynchronously
 
 let refreshJourney (refreshToken: string) =
-    printfn "refreshJourney:"
+    printfn "refreshJourney: %s" refreshToken
 
-    let journey =
-        Interactive.refreshJourney id refreshToken Default.RefreshJourneyOptions
+    use client = new Api.HafasAsyncClient(id)
 
-    FsHafas.Printf.Short.Journey 0 journey
-    |> printfn "%s"
+    async {
+        let! journey = client.AsyncRefreshJourney refreshToken None
 
-let departures () =
-    let departures =
-        Interactive.departures
-            id
-            "Bielefeld"
-            { Default.DeparturesArrivalsOptions with
-                  products = Some products }
+        FsHafas.Printf.Short.Journey 0 journey
+        |> printfn "%s"
+    }
+    |> Async.RunSynchronously
 
-    FsHafas.Printf.Short.Alternatives departures
-    |> printfn "%s"
+let departures (name: string) =
+    use client = new Api.HafasAsyncClient(id)
 
-let trips () =
-    printfn "tripsByName:"
+    async {
+        let! departures = client.AsyncDepartures(U2.Case1 name) None
 
-    let trips =
-        Interactive.tripsByName
-            id
-            "ICE 846"
-            { Default.TripsByNameOptions with
-                  ``when`` = Some System.DateTime.Now }
+        FsHafas.Printf.Short.Alternatives departures
+        |> printfn "%s"
+    }
+    |> Async.RunSynchronously
 
-    FsHafas.Printf.Short.Trips trips |> printfn "%s"
+let trips (name: string) =
+    use client = new Api.HafasAsyncClient(id)
+
+    async {
+        let! trips = client.AsyncTripsByName name None
+
+        FsHafas.Printf.Short.Trips trips |> printfn "%s"
+    }
+    |> Async.RunSynchronously
 
 let nearby () =
-    printfn "nearby:"
+    use client = new Api.HafasAsyncClient(id)
 
-    let locations =
-        Interactive.nearby
-            id
-            { Default.Location with
-                  latitude = Some 54.308438
-                  longitude = Some 13.078028 }
-            { Default.NearByOptions with
-                  results = Some 10
-                  distance = Some 5000
-                  products = Some products }
+    async {
+        let! locations =
+            client.AsyncNearby
+                { Default.Location with
+                      latitude = Some 54.308438
+                      longitude = Some 13.078028 }
+                (Some
+                    { Default.NearByOptions with
+                          results = Some 10
+                          distance = Some 5000
+                          products = Some products })
 
-    FsHafas.Printf.Short.Locations locations
-    |> printfn "%s"
+        FsHafas.Printf.Short.Locations locations
+        |> printfn "%s"
+    }
+    |> Async.RunSynchronously
 
 let reachableFrom () =
-    printfn "reachableFrom:"
+    use client = new Api.HafasAsyncClient(id)
 
-    let durations =
-        Interactive.reachableFrom
-            id
-            { Default.Location with
-                  latitude = Some 54.308438
-                  longitude = Some 13.078028 }
-            { Default.ReachableFromOptions with
-                  maxTransfers = Some 0
-                  maxDuration = Some 10 }
+    async {
+        let! durations =
+            client.AsyncReachableFrom
+                { Default.Location with
+                      latitude = Some 54.308438
+                      longitude = Some 13.078028 }
+                (Some
+                    { Default.ReachableFromOptions with
+                          maxTransfers = Some 0
+                          maxDuration = Some 10 })
 
-    FsHafas.Printf.Short.Durations durations
-    |> printfn "%s"
+        FsHafas.Printf.Short.Durations durations
+        |> printfn "%s"
+    }
+    |> Async.RunSynchronously
 
 let radar () =
-    printfn "radar:"
+    use client = new Api.HafasAsyncClient(id)
 
-    let movements =
-        Interactive.radar
-            id
-            { north = 52.039421
-              west = 8.522777
-              south = 52.019421
-              east = 8.542777 }
-            { Default.RadarOptions with
-                  results = Some 60
-                  duration = Some 1800
-                  frames = Some 100
-                  products = Some products }
+    async {
+        let! movements =
+            client.AsyncRadar
+                { north = 52.039421
+                  west = 8.522777
+                  south = 52.019421
+                  east = 8.542777 }
+                (Some
+                    { Default.RadarOptions with
+                          results = Some 60
+                          duration = Some 1800
+                          frames = Some 100
+                          products = Some products })
 
-    FsHafas.Printf.Short.Movements movements
-    |> printfn "%s"
+        FsHafas.Printf.Short.Movements movements
+        |> printfn "%s"
+    }
+    |> Async.RunSynchronously
 
-let stop () =
-    printfn "stop:"
+let stop (name: string) =
+    use client = new Api.HafasAsyncClient(id)
 
-    let stop =
-        Interactive.stop id "8010338" Default.StopOptions
+    async {
+        let! stop = client.AsyncStop(U2.Case1 name) None
 
-    FsHafas.Printf.Short.U3StationStopLocation 0 stop
-    |> printfn "%s"
+        FsHafas.Printf.Short.U3StationStopLocation 0 stop
+        |> printfn "%s"
+    }
+    |> Async.RunSynchronously
 
 let remarks () =
-    printfn "remarks:"
+    use client = new Api.HafasAsyncClient(id)
 
-    let warnings = Interactive.remarks id
+    async {
+        let! warnings = client.AsyncRemarks None
 
-    FsHafas.Printf.Short.Warnings warnings
-    |> printfn "%s"
+        FsHafas.Printf.Short.Warnings warnings
+        |> printfn "%s"
+    }
+    |> Async.RunSynchronously
 
-let lines () =
-    printfn "lines:"
+let lines (name: string) =
+    use client = new Api.HafasAsyncClient(id)
 
-    let lines = Interactive.lines id "S1"
+    async {
+        let! lines = client.AsyncLines name None
 
-    FsHafas.Printf.Short.Lines lines |> printfn "%s"
+        FsHafas.Printf.Short.Lines lines |> printfn "%s"
+    }
+    |> Async.RunSynchronously
 
 let serverInfo () =
-    printfn "serverInfo:"
+    use client = new Api.HafasAsyncClient(id)
 
-    let serverInfo = Interactive.serverInfo id
+    async {
+        let! serverInfo = client.AsyncServerInfo None
 
-    printfn "%A" serverInfo
+        printfn "%A" serverInfo
+    }
+    |> Async.RunSynchronously
 
 match args with
-| [| "locations" |] -> locations ()
-| [| "journeys" |] -> journeys ()
-| [| "refreshJourney"; token |] -> refreshJourney (token)
-| [| "departures" |] -> departures ()
-| [| "trips" |] -> trips ()
+| [| "locations"; name |] -> locations name
+| [| "journeys"; fromId; toId |] -> journeys fromId toId
+| [| "journeys" |] -> journeys "8000152" "8011160"
+| [| "refreshJourney"; token |] -> refreshJourney token
+| [| "departures"; name |] -> departures name
+| [| "departures" |] -> departures "8000152"
+| [| "trips"; name |] -> trips name
+| [| "trips" |] -> trips "ICE 846"
 | [| "nearby" |] -> nearby ()
 | [| "reachableFrom" |] -> reachableFrom ()
 | [| "radar" |] -> radar ()
-| [| "stop" |] -> stop ()
+| [| "stop"; name |] -> stop name
+| [| "stop" |] -> stop "8000152"
 | [| "remarks" |] -> remarks ()
-| [| "lines" |] -> lines ()
+| [| "lines"; name |] -> lines name
+| [| "lines" |] -> lines "S1"
 | [| "serverInfo" |] -> serverInfo ()
 | _ -> printfn "unkown args %A" args

@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <RepositoryUrl>https://github.com/bergmannjg/fshafas</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -40,7 +43,6 @@
     <Compile Include="HafasAsyncClient.fs" />
     <Compile Include="HafasClient.fs" />
     <Compile Include="Print.fs" />
-    <Compile Include="Interactive.fs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,13 +3,13 @@ namespace FsHafas.Parser
 module internal Trip =
 
     open System
-    open FsHafas
+    open FsHafas.Client
 
-    let parseTrip (ctx: Context) (j: Raw.RawJny): Client.Trip =
+    let parseTrip (ctx: Context) (j: FsHafas.Raw.RawJny): FsHafas.Client.Trip =
 
         match j.stopL with
         | Some stopL when stopL.Length > 1 ->
-            let rawSecL: Raw.RawSec =
+            let rawSecL: FsHafas.Raw.RawSec =
                 { ``type`` = "JNY"
                   icoX = None
                   dep = RawDep.FromRawStopL stopL.[0]
@@ -29,6 +29,6 @@ module internal Trip =
                 ctx.profile.parseJourneyLeg ctx rawSecL date
 
             match leg.tripId with
-            | Some tripId -> Trip.FromLeg tripId leg
+            | Some tripId -> ToTrip.FromLeg tripId leg
             | _ -> raise (System.ArgumentException("parseTrip failed"))
         | _ -> raise (System.ArgumentException("parseTrip failed"))

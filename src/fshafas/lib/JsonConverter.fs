@@ -1,8 +1,8 @@
 namespace FsHafas.Api
 
-open FsHafas
+open FsHafas.Client
 
-/// json converter to erase U2<_,_> and U3<_,_,_> unions
+/// <exclude>Converter</exclude>
 module Converter =
 
     open System
@@ -156,7 +156,7 @@ module Converter =
             Activator.CreateInstance(converterType, uc) :?> JsonConverter
 
     type IndexMapValueConverter<'S, 'T when 'S: comparison>(defaultValue: 'T) =
-        inherit JsonConverter<Client.IndexMap<'S, 'T>>()
+        inherit JsonConverter<IndexMap<'S, 'T>>()
 
         override this.Read(reader: byref<Utf8JsonReader>, _typ: Type, options: JsonSerializerOptions) =
             JsonSerializer.Deserialize<Map<'S, 'T>>(&reader, options)
@@ -164,9 +164,9 @@ module Converter =
                 (fun m kv ->
                     m.[kv.Key] <- kv.Value
                     m)
-                (Client.IndexMap<'S, 'T>(defaultValue))
+                (IndexMap<'S, 'T>(defaultValue))
 
-        override this.Write(writer: Utf8JsonWriter, value: Client.IndexMap<'S, 'T>, options: JsonSerializerOptions) =
+        override this.Write(writer: Utf8JsonWriter, value: IndexMap<'S, 'T>, options: JsonSerializerOptions) =
             raise (System.NotImplementedException(""))
 
     type IndexMapConverter<'S, 'T when 'S: comparison>(defaultValue: 'T) =
@@ -174,7 +174,7 @@ module Converter =
 
         override this.CanConvert(t: Type) : bool =
             t.IsGenericType
-            && t.GetGenericTypeDefinition() = typedefof<Client.IndexMap<'S, 'T>>
+            && t.GetGenericTypeDefinition() = typedefof<IndexMap<'S, 'T>>
 
         override this.CreateConverter(typeToConvert: Type, _options: JsonSerializerOptions) : JsonConverter =
             let types =

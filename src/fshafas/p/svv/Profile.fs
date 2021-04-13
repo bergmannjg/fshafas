@@ -1,65 +1,65 @@
 namespace FsHafas.Profiles
 
+/// <exclude>Db</exclude>
 module Svv =
 
-    open FsHafas
     open FsHafas.Client
 
 #if FABLE_COMPILER
     open Fable.Core
 #endif
 
-    let private products : Client.ProductType [] =
+    let private products : ProductType [] =
         [| { id = "bahn-s-bahn"
-             mode = Client.ProductTypeMode.Train
+             mode = ProductTypeMode.Train
              bitmasks = [| 1; 2 |]
              name = "Bahn & S-Bahn"
              short = "S/Zug"
              ``default`` = true }
            { id = "u-bahn"
-             mode = Client.ProductTypeMode.Train
+             mode = ProductTypeMode.Train
              bitmasks = [| 4 |]
              name = "U-Bahn"
              short = "U"
              ``default`` = true }
            { id = "strassenbahn"
-             mode = Client.ProductTypeMode.Train
+             mode = ProductTypeMode.Train
              bitmasks = [| 16 |]
              name = "Strassenbahn"
              short = "Str"
              ``default`` = true }
            { id = "fernbus"
-             mode = Client.ProductTypeMode.Bus
+             mode = ProductTypeMode.Bus
              bitmasks = [| 32 |]
              name = "Fernbus"
              short = "Bus"
              ``default`` = true }
            { id = "regionalbus"
-             mode = Client.ProductTypeMode.Bus
+             mode = ProductTypeMode.Bus
              bitmasks = [| 64 |]
              name = "Regionalbus"
              short = "Bus"
              ``default`` = true }
            { id = "stadtbus"
-             mode = Client.ProductTypeMode.Bus
+             mode = ProductTypeMode.Bus
              bitmasks = [| 128 |]
              name = "Stadtbus"
              short = "Bus"
              ``default`` = true }
            { id = "seilbahn-zahnradbahn"
-             mode = Client.ProductTypeMode.Gondola
+             mode = ProductTypeMode.Gondola
              bitmasks = [| 256 |]
              name = "Seil-/Zahnradbahn"
              short = "Seil-/Zahnradbahn"
              ``default`` = true }
            { id = "schiff"
-             mode = Client.ProductTypeMode.Watercraft
+             mode = ProductTypeMode.Watercraft
              bitmasks = [| 512 |]
              name = "Schiff"
              short = "F"
              ``default`` = true } |]
 
-    let private req : Raw.RawRequest =
+    let private req : FsHafas.Raw.RawRequest =
         { lang = "de"
           svcReqL = [||]
           client =
@@ -74,7 +74,7 @@ module Svv =
                 aid = "wf7mcf9bv3nv8g5f" } }
 
     let getProfile () =
-        let profile = Api.Parser.defaultProfile
+        let profile = FsHafas.Api.Parser.defaultProfile
 
         { profile with
               locale = "at-DE"

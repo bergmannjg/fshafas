@@ -1,4 +1,4 @@
-namespace FsHafas
+namespace FsHafas.Client
 
 module internal Coordinate =
 
@@ -8,9 +8,9 @@ module internal Coordinate =
 
 module internal RawDep =
 
-    open FsHafas
+    open FsHafas.Client
 
-    let FromRawStopL (s: Raw.RawStop) : Raw.RawDep =
+    let FromRawStopL (s: FsHafas.Raw.RawStop) : FsHafas.Raw.RawDep =
         { locX = Some s.locX
           idx = s.idx
           dProdX = s.dProdX
@@ -29,9 +29,9 @@ module internal RawDep =
 
 module internal RawArr =
 
-    open FsHafas
+    open FsHafas.Client
 
-    let FromRawStopL (s: Raw.RawStop) : Raw.RawArr =
+    let FromRawStopL (s: FsHafas.Raw.RawStop) : FsHafas.Raw.RawArr =
         { locX = Some s.locX
           idx = s.idx
           aPlatfS = s.aPlatfS
@@ -47,11 +47,11 @@ module internal RawArr =
           aPltfR = s.aPltfR }
 
 
-module internal Trip =
+module internal ToTrip =
 
-    open FsHafas
+    open FsHafas.Client
 
-    let FromLeg (id: string) (l: Client.Leg) : Client.Trip =
+    let FromLeg (id: string) (l: FsHafas.Client.Leg) : FsHafas.Client.Trip =
         { id = id
           origin = l.origin
           destination = l.destination
@@ -93,19 +93,19 @@ module internal U2StationStop =
     open Fable.Core
 #endif
 
-    open FsHafas
-    open Client
+    open FsHafas.Client
+    open FsHafas.Client
 
     let FromU3StationStopLocation (u3: U3<Station, Stop, Location>) =
         match u3 with
-        | U3.Case1 s -> U2<Client.Station, Client.Stop>.Case1 s |> Some
-        | U3.Case2 s -> U2<Client.Station, Client.Stop>.Case2 s |> Some
+        | U3.Case1 s -> U2<FsHafas.Client.Station, FsHafas.Client.Stop>.Case1 s |> Some
+        | U3.Case2 s -> U2<FsHafas.Client.Station, FsHafas.Client.Stop>.Case2 s |> Some
         | _ -> None
 
     let FromSomeU3StationStopLocation (u3: U3<Station, Stop, Location> option) =
         match u3 with
-        | Some (U3.Case1 s) -> U2<Client.Station, Client.Stop>.Case1 s |> Some
-        | Some (U3.Case2 s) -> U2<Client.Station, Client.Stop>.Case2 s |> Some
+        | Some (U3.Case1 s) -> U2<FsHafas.Client.Station, FsHafas.Client.Stop>.Case1 s |> Some
+        | Some (U3.Case2 s) -> U2<FsHafas.Client.Station, FsHafas.Client.Stop>.Case2 s |> Some
         | _ -> None
 
 module internal U2StopLocation =
@@ -114,24 +114,25 @@ module internal U2StopLocation =
     open Fable.Core
 #endif
 
-    open FsHafas
-    open Client
+    open FsHafas.Client
+    open FsHafas.Client
 
     let FromU3StationStopLocation (u3: U3<Station, Stop, Location>) =
         match u3 with
-        | U3.Case2 s -> U2<Client.Stop, Client.Location>.Case1 s |> Some
-        | U3.Case3 s -> U2<Client.Stop, Client.Location>.Case2 s |> Some
+        | U3.Case2 s -> U2<FsHafas.Client.Stop, FsHafas.Client.Location>.Case1 s |> Some
+        | U3.Case3 s -> U2<FsHafas.Client.Stop, FsHafas.Client.Location>.Case2 s |> Some
         | _ -> None
 
     let FromSomeU3StationStopLocation (u3: U3<Station, Stop, Location> option) =
         match u3 with
-        | Some (U3.Case2 s) -> U2<Client.Stop, Client.Location>.Case1 s |> Some
-        | Some (U3.Case3 s) -> U2<Client.Stop, Client.Location>.Case2 s |> Some
+        | Some (U3.Case2 s) -> U2<FsHafas.Client.Stop, FsHafas.Client.Location>.Case1 s |> Some
+        | Some (U3.Case3 s) -> U2<FsHafas.Client.Stop, FsHafas.Client.Location>.Case2 s |> Some
         | _ -> None
 
+/// <exclude>ClientProfile</exclude>
 module ClientProfile =
 
-    let FromFsHafasProfile (profile: FsHafas.Profile) : Client.Profile =
+    let FromFsHafasProfile (profile: FsHafas.Parser.Profile) : FsHafas.Client.Profile =
         { locale = profile.locale
           timezone = profile.timezone
           endpoint = profile.endpoint
@@ -145,8 +146,8 @@ module ClientProfile =
           remarks = profile.remarks
           remarksGetPolyline = None
           lines = profile.lines }
-
-
+ 
+/// <exclude>MergeOptions</exclude>
 module MergeOptions =
 
     open FsHafas.Client
@@ -159,16 +160,16 @@ module MergeOptions =
             | None -> defaultValue
         | None -> defaultValue
 
-    let JourneysOptions (options: Options) (opt: JourneysOptions option) =
+    let JourneysOptions (options: FsHafas.Parser.Options) (opt: JourneysOptions option) =
         { options with
               stopovers = getOptionValue opt (fun v -> v.stopovers) options.stopovers
               firstClass = getOptionValue opt (fun v -> v.firstClass) options.firstClass }
 
-    let LocationsOptions (options: Options) (opt: LocationsOptions option) =
+    let LocationsOptions (options: FsHafas.Parser.Options) (opt: LocationsOptions option) =
         { options with
               linesOfStops = getOptionValue opt (fun v -> v.linesOfStops) options.linesOfStops }
 
-    let NearByOptions (options: Options) (opt: NearByOptions option) =
+    let NearByOptions (options: FsHafas.Parser.Options) (opt: NearByOptions option) =
         { options with
               linesOfStops = getOptionValue opt (fun v -> v.linesOfStops) options.linesOfStops }
 
@@ -421,7 +422,7 @@ module Default =
           frames = None
           polyline = None }
 
-    let Alternative : Client.Alternative =
+    let Alternative : FsHafas.Client.Alternative =
         { tripId = ""
           direction = None
           location = None
@@ -458,7 +459,7 @@ module Default =
           journeys = None
           realtimeDataFrom = None }
 
-    let Line : Client.Line =
+    let Line : FsHafas.Client.Line =
         { ``type`` = Some "line"
           id = None
           name = None

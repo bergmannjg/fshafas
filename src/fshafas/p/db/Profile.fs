@@ -1,8 +1,8 @@
 namespace FsHafas.Profiles
 
+/// <exclude>Db</exclude>
 module Db =
 
-    open FsHafas
     open FsHafas.Client
     open System.Text.RegularExpressions
 
@@ -10,69 +10,69 @@ module Db =
     open Fable.Core
 #endif
 
-    let private products : Client.ProductType [] =
+    let private products : ProductType [] =
         [| { id = "nationalExpress"
-             mode = Client.ProductTypeMode.Train
+             mode = ProductTypeMode.Train
              bitmasks = [| 1 |]
              name = "InterCityExpress"
              short = "ICE"
              ``default`` = true }
            { id = "national"
-             mode = Client.ProductTypeMode.Train
+             mode = ProductTypeMode.Train
              bitmasks = [| 2 |]
              name = "InterCity & EuroCity"
              short = "IC/EC"
              ``default`` = true }
            { id = "regionalExp"
-             mode = Client.ProductTypeMode.Train
+             mode = ProductTypeMode.Train
              bitmasks = [| 4 |]
              name = "RegionalExpress & InterRegio"
              short = "RE/IR"
              ``default`` = true }
            { id = "regional"
-             mode = Client.ProductTypeMode.Train
+             mode = ProductTypeMode.Train
              bitmasks = [| 8 |]
              name = "Regio"
              short = "RB"
              ``default`` = true }
            { id = "suburban"
-             mode = Client.ProductTypeMode.Train
+             mode = ProductTypeMode.Train
              bitmasks = [| 16 |]
              name = "S-Bahn"
              short = "S"
              ``default`` = true }
            { id = "bus"
-             mode = Client.ProductTypeMode.Bus
+             mode = ProductTypeMode.Bus
              bitmasks = [| 32 |]
              name = "Bus"
              short = "B"
              ``default`` = true }
            { id = "ferry"
-             mode = Client.ProductTypeMode.Watercraft
+             mode = ProductTypeMode.Watercraft
              bitmasks = [| 64 |]
              name = "Ferry"
              short = "F"
              ``default`` = true }
            { id = "subway"
-             mode = Client.ProductTypeMode.Train
+             mode = ProductTypeMode.Train
              bitmasks = [| 128 |]
              name = "U-Bahn"
              short = "U"
              ``default`` = true }
            { id = "tram"
-             mode = Client.ProductTypeMode.Train
+             mode = ProductTypeMode.Train
              bitmasks = [| 256 |]
              name = "Tram"
              short = "T"
              ``default`` = true }
            { id = "taxi"
-             mode = Client.ProductTypeMode.Taxi
+             mode = ProductTypeMode.Taxi
              bitmasks = [| 512 |]
              name = "Group Taxi"
              short = "Taxi"
              ``default`` = true } |]
 
-    type private Hint =
+    type private HintByCode =
         { ``type``: string
           code: string
           summary: string }
@@ -236,7 +236,7 @@ module Db =
            ("additional stop", "additional-stopover")
            ("platform change", "changed platform") |]
 
-    let private parseHintByCode (parsed: Client.Hint) (raw: Raw.RawRem) : Client.Hint =
+    let private parseHintByCode (parsed: Hint) (raw: FsHafas.Raw.RawRem) : Hint =
         if raw.``type`` = "K" then
             match raw.txtN with
             | Some (value) -> { parsed with text = value }
@@ -262,7 +262,7 @@ module Db =
         else
             parsed
 
-    let private parseStatusByCode (parsed: Client.Status) (raw: Raw.RawRem) : Client.Status =
+    let private parseStatusByCode (parsed: Status) (raw: FsHafas.Raw.RawRem) : Status =
         if raw.``type`` = "K" then
             match raw.txtN with
             | Some (value) -> { parsed with text = value }
@@ -280,16 +280,16 @@ module Db =
             parsed
 
     let private parseHint
-        (parsed: U3<Client.Hint, Client.Status, Client.Warning> option)
-        (h: Raw.RawRem)
-        : U3<Client.Hint, Client.Status, Client.Warning> option =
+        (parsed: U3<Hint, Status, Warning> option)
+        (h: FsHafas.Raw.RawRem)
+        : U3<Hint, Status, Warning> option =
         match parsed with
         | Some (U3.Case1 parsedHint) -> U3.Case1(parseHintByCode parsedHint h) |> Some
         | Some (U3.Case2 parsedStatus) -> U3.Case2(parseStatusByCode parsedStatus h) |> Some
         | _ -> parsed
 
 
-    let private parseLineWithAdditionalName (parsed: Client.Line) (p: Raw.RawProd) : Client.Line =
+    let private parseLineWithAdditionalName (parsed: Line) (p: FsHafas.Raw.RawProd) : Line =
         match p.addName with
         | Some _ ->
             { parsed with
@@ -304,7 +304,7 @@ module Db =
            "very-high"
            "exceptionally-high" |]
 
-    let parseLoadFactor (opt: Options) (tcocL: Raw.RawTcoc []) (tcocX: int []) : string option =
+    let parseLoadFactor (opt: FsHafas.Parser.Options) (tcocL: FsHafas.Raw.RawTcoc []) (tcocX: int []) : string option =
         let cls =
             if opt.firstClass then
                 "FIRST"
@@ -315,7 +315,7 @@ module Db =
         | Some tcoc when tcoc.r.IsSome -> Some(loadFactors.[tcoc.r.Value])
         | _ -> None
 
-    let parseJourneyLegWithLoadFactor (parsed: Client.Leg) (ctx: Context) (pt: Raw.RawSec) (date: string) : Client.Leg =
+    let parseJourneyLegWithLoadFactor (parsed: Leg) (ctx: FsHafas.Parser.Context) (pt: FsHafas.Raw.RawSec) (date: string) : Leg =
         let tcocX =
             match pt.jny with
             | Some jny ->
@@ -337,7 +337,7 @@ module Db =
 
         | _ -> parsed
 
-    let parseArrOrDepWithLoadFactor (parsed: Client.Alternative) (ctx: Context) (d: Raw.RawJny) : Client.Alternative =
+    let parseArrOrDepWithLoadFactor (parsed: Alternative) (ctx: FsHafas.Parser.Context) (d: FsHafas.Raw.RawJny) : Alternative =
         let tcocX =
             match d.stbStop with
             | Some stbStop ->
@@ -359,7 +359,7 @@ module Db =
 
         | _ -> parsed
 
-    let private parseJourneyWithPrice (parsed: Client.Journey) (raw: Raw.RawOutCon) : Client.Journey =
+    let private parseJourneyWithPrice (parsed: Journey) (raw: FsHafas.Raw.RawOutCon) : Journey =
         match raw.trfRes with
         | Some trfRes when
             trfRes.fareSetL.Length > 0
@@ -384,7 +384,7 @@ module Db =
         else
             raise (System.ArgumentException("station id: " + id))
 
-    let bikeFltr : Raw.JnyFltr =
+    let bikeFltr : FsHafas.Raw.JnyFltr =
         { ``type`` = "BC"
           mode = "INC"
           value = ""
@@ -417,7 +417,7 @@ module Db =
                 0
         | _ -> 0
 
-    let transformJourneysQuery (opt: Client.JourneysOptions option) (q: Raw.TripSearchRequest) : Raw.TripSearchRequest =
+    let transformJourneysQuery (opt: JourneysOptions option) (q: FsHafas.Raw.TripSearchRequest) : FsHafas.Raw.TripSearchRequest =
         let bike =
             getOptionValue opt (fun v -> v.bike) Default.JourneysOptions
 
@@ -435,7 +435,7 @@ module Db =
             | Some opt when opt.loyaltyCard.IsSome -> Some(formatLoyaltyCard firstClass opt.loyaltyCard.Value)
             | _ -> None
 
-        let trfReq : Raw.TrfReq =
+        let trfReq : FsHafas.Raw.TrfReq =
             { jnyCl = if firstClass then 1 else 2
               tvlrProf =
                   [| { ``type`` = "E"
@@ -446,7 +446,7 @@ module Db =
               trfReq = Some trfReq
               jnyFltrL = jnyFltrL }
 
-    let private req : Raw.RawRequest =
+    let private req : FsHafas.Raw.RawRequest =
         { lang = "de"
           svcReqL = [||]
           client =
@@ -461,7 +461,7 @@ module Db =
                 aid = "n91dB8Z77MLdoR0K" } }
 
     let getProfile () =
-        let profile = Api.Parser.defaultProfile
+        let profile = FsHafas.Api.Parser.defaultProfile
 
         { profile with
               locale = "de-DE"
@@ -480,14 +480,14 @@ module Db =
               formatStation = formatStation
               transformJourneysQuery = transformJourneysQuery
               parseJourney =
-                  (fun (ctx: Context) (p: Raw.RawOutCon) -> parseJourneyWithPrice (profile.parseJourney ctx p) p)
+                  (fun (ctx: FsHafas.Parser.Context) (p: FsHafas.Raw.RawOutCon) -> parseJourneyWithPrice (profile.parseJourney ctx p) p)
               parseJourneyLeg =
-                  (fun (ctx: Context) (pt: Raw.RawSec) (date: string) ->
+                  (fun (ctx: FsHafas.Parser.Context) (pt: FsHafas.Raw.RawSec) (date: string) ->
                       parseJourneyLegWithLoadFactor (profile.parseJourneyLeg ctx pt date) ctx pt date)
               parseDeparture =
-                  (fun (ctx: Context) (pt: Raw.RawJny) ->
+                  (fun (ctx: FsHafas.Parser.Context) (pt: FsHafas.Raw.RawJny) ->
                       parseArrOrDepWithLoadFactor (profile.parseDeparture ctx pt) ctx pt)
-              parseHint = (fun (ctx: Context) (p: Raw.RawRem) -> parseHint (profile.parseHint ctx p) p)
+              parseHint = (fun (ctx: FsHafas.Parser.Context) (p: FsHafas.Raw.RawRem) -> parseHint (profile.parseHint ctx p) p)
               parseLine =
-                  (fun (ctx: Context) (p: Raw.RawProd) -> parseLineWithAdditionalName (profile.parseLine ctx p) p)
+                  (fun (ctx: FsHafas.Parser.Context) (p: FsHafas.Raw.RawProd) -> parseLineWithAdditionalName (profile.parseLine ctx p) p)
               reachableFrom = Some true }

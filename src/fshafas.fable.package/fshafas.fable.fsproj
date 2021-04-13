@@ -34,7 +34,6 @@
     <Compile Include="../fshafas/p/svv/Profile.fs" />
     <Compile Include="../fshafas/HafasAsyncClient.fs" />
     <Compile Include="../fshafas/Print.fs" />
-    <Compile Include="../fshafas/Interactive.fs" />
     <Compile Include="../fshafas/HafasClient.fs" />
     <Compile Include="Lib.fs" />
   </ItemGroup>

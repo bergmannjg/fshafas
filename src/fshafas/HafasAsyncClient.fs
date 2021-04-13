@@ -1,16 +1,26 @@
 namespace FsHafas.Api
+/// <namespacedoc>
+///   <summary>FsHafas client apis</summary>
+/// </namespacedoc>
 
 open System
-open FsHafas
-open Client
+open FsHafas.Client
+open FsHafas.Client
 
 #if FABLE_COMPILER
 open Fable.Core
 #endif
 
-type HafasAsyncClient(profile: FsHafas.Profile) =
+/// <summary>F# async based interface corresponding to hafas-client</summary>
+type HafasAsyncClient(id: FsHafas.Client.ProfileId) =
 
-    let log msg o = Log.Print msg o
+    let log msg o = FsHafas.Client.Log.Print msg o
+
+    let profile =
+        match id with
+        | Db -> FsHafas.Profiles.Db.getProfile ()
+        | Bvg -> FsHafas.Profiles.Bvg.getProfile ()
+        | Svv -> FsHafas.Profiles.Svv.getProfile ()
 
     let cfg =
         match profile.cfg with
@@ -23,7 +33,7 @@ type HafasAsyncClient(profile: FsHafas.Profile) =
         | None -> raise (System.ArgumentException("profile.baseRequest"))
 
     let httpClient =
-        Api.HafasRawClient(profile.endpoint, profile.salt, cfg, baseRequest)
+        FsHafas.Api.HafasRawClient(profile.endpoint, profile.salt, cfg, baseRequest)
 
     let enabled (value: bool option) =
         match value with
@@ -43,7 +53,7 @@ type HafasAsyncClient(profile: FsHafas.Profile) =
 #if FABLE_COMPILER
         ()
 #else
-        Serializer.addConverters ([| Serializer.UnionConverter<Client.ProductTypeMode>() |])
+        Serializer.addConverters ([| Serializer.UnionConverter<FsHafas.Client.ProductTypeMode>() |])
 #endif
 
 #if !FABLE_COMPILER
@@ -93,7 +103,7 @@ type HafasAsyncClient(profile: FsHafas.Profile) =
         (opt: DeparturesArrivalsOptions option)
         : Async<array<Alternative>> =
         async {
-            let ``type`` = Parser.ArrivalOrDeparture.DEP
+            let ``type`` = FsHafas.Parser.ArrivalOrDeparture.DEP
 
             let! (common, res, journey) =
                 httpClient.AsyncStationBoard(Format.stationBoardRequest profile ``type`` (getIdU2 name) opt)
@@ -110,7 +120,7 @@ type HafasAsyncClient(profile: FsHafas.Profile) =
         (opt: DeparturesArrivalsOptions option)
         : Async<array<Alternative>> =
         async {
-            let ``type`` = Parser.ArrivalOrDeparture.ARR
+            let ``type`` = FsHafas.Parser.ArrivalOrDeparture.ARR
 
             let! (common, res, journey) =
                 httpClient.AsyncStationBoard(Format.stationBoardRequest profile ``type`` (getIdU2 name) opt)
@@ -177,7 +187,8 @@ type HafasAsyncClient(profile: FsHafas.Profile) =
     member __.AsyncTripsByName (lineName: string) (opt: TripsByNameOptions option) : Async<array<Trip>> =
         async {
             if enabled profile.tripsByName then
-                let! (common, res, journey) = httpClient.AsyncJourneyMatch(Format.journeyMatchRequest profile lineName opt)
+                let! (common, res, journey) =
+                    httpClient.AsyncJourneyMatch(Format.journeyMatchRequest profile lineName opt)
 
                 return Parser.parseTrips journey (Parser.parseCommon profile Parser.defaultOptions common res)
             else
@@ -211,4 +222,5 @@ type HafasAsyncClient(profile: FsHafas.Profile) =
             return Parser.parseServerInfo res (Parser.parseCommon profile Parser.defaultOptions common res)
         }
 
-    member __.distanceOfJourney(j: Journey) = Parser.Journey.distanceOfJourney j
+    member __.distanceOfJourney(j: Journey) =
+        FsHafas.Parser.Journey.distanceOfJourney j

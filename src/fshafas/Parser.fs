@@ -1,12 +1,13 @@
 namespace FsHafas.Api
 
-open FsHafas
-open Client
+open FsHafas.Parser
+open FsHafas.Client
 
 #if FABLE_COMPILER
 open Fable.Core
 #endif
 
+/// <exclude>Parser</exclude>
 module Parser =
 
     let defaultCommonData : CommonData =
@@ -36,25 +37,25 @@ module Parser =
           departuresStbFltrEquiv = true
           formatStation = id
           transformJourneysQuery = (fun _ q -> q)
-          parseCommon = Parser.Common.parseCommon
-          parseArrival = Parser.ArrivalOrDeparture.parseArrival
-          parseDeparture = Parser.ArrivalOrDeparture.parseDeparture
-          parseHint = Parser.Hint.parseHint
-          parsePolyline = Parser.Polyline.parsePolyline
-          parseLocations = Parser.Location.parseLocations
-          parseLine = Parser.Line.parseLine
-          parseJourney = Parser.Journey.parseJourney
-          parseJourneyLeg = Parser.JourneyLeg.parseJourneyLeg
-          parseMovement = Parser.Movement.parseMovement
-          parseOperator = Parser.Operator.parseOperator
-          parsePlatform = Parser.JourneyLeg.parsePlatform
-          parseStopover = Parser.Stopover.parseStopover
-          parseStopovers = Parser.Stopover.parseStopovers
-          parseTrip = Parser.Trip.parseTrip
-          parseWhen = Parser.When.parseWhen
-          parseDateTime = Parser.DateTime.parseDateTime
-          parseBitmask = Parser.ProductsBitmask.parseBitmask
-          parseWarning = Parser.Warning.parseWarning }
+          parseCommon = Common.parseCommon
+          parseArrival = ArrivalOrDeparture.parseArrival
+          parseDeparture = ArrivalOrDeparture.parseDeparture
+          parseHint = Hint.parseHint
+          parsePolyline = Polyline.parsePolyline
+          parseLocations = Location.parseLocations
+          parseLine = Line.parseLine
+          parseJourney = Journey.parseJourney
+          parseJourneyLeg = JourneyLeg.parseJourneyLeg
+          parseMovement = Movement.parseMovement
+          parseOperator = Operator.parseOperator
+          parsePlatform = JourneyLeg.parsePlatform
+          parseStopover = Stopover.parseStopover
+          parseStopovers = Stopover.parseStopovers
+          parseTrip = Trip.parseTrip
+          parseWhen = When.parseWhen
+          parseDateTime = DateTime.parseDateTime
+          parseBitmask = ProductsBitmask.parseBitmask
+          parseWarning = Warning.parseWarning }
 
     let defaultOptions : Options =
         { remarks = true
@@ -66,17 +67,17 @@ module Parser =
           linesOfStops = true
           firstClass = false }
 
-    let createContext (profile: FsHafas.Profile) (opt: Options) (res: Raw.RawResult) : Context =
+    let createContext (profile: FsHafas.Parser.Profile) (opt: Options) (res: FsHafas.Raw.RawResult) : Context =
         { profile = profile
           opt = opt
           common = defaultCommonData
           res = res }
 
     let parseCommon
-        (profile: FsHafas.Profile)
+        (profile: FsHafas.Parser.Profile)
         (opt: Options)
-        (common: Raw.RawCommon option)
-        (res: Raw.RawResult option)
+        (common: FsHafas.Raw.RawCommon option)
+        (res: FsHafas.Raw.RawResult option)
         =
         match res, common with
         | Some (res), Some (common) ->
@@ -87,7 +88,7 @@ module Parser =
             |> Some
         | _ -> None
 
-    let parseLocation (locL: Raw.RawLoc option) (ctx: Context option) =
+    let parseLocation (locL: FsHafas.Raw.RawLoc option) (ctx: Context option) =
         match ctx, locL with
         | Some (ctx), Some (locL) ->
             let locs =
@@ -96,17 +97,17 @@ module Parser =
             locs.[0]
         | _ -> U3.Case3 Default.Location
 
-    let parseLocations (locL: Raw.RawLoc []) (ctx: Context option) =
+    let parseLocations (locL: FsHafas.Raw.RawLoc []) (ctx: Context option) =
         match ctx with
         | Some (ctx) -> locL |> ctx.profile.parseLocations ctx
         | _ -> Array.empty
 
-    let parseMovements (jnyL: Raw.RawJny [] option) (ctx: Context option) =
+    let parseMovements (jnyL: FsHafas.Raw.RawJny [] option) (ctx: Context option) =
         match ctx, jnyL with
         | Some ctx, Some jnyL -> jnyL |> Array.map (ctx.profile.parseMovement ctx)
         | _ -> Array.empty
 
-    let private addToMap (m: Map<int, array<int>>) (p: Raw.RawPos) =
+    let private addToMap (m: Map<int, array<int>>) (p: FsHafas.Raw.RawPos) =
         if m.ContainsKey p.dur then
             let l = m.[p.dur]
             let m0 = m.Remove p.dur
@@ -116,10 +117,10 @@ module Parser =
 
     let private getLocations (ctx: Context) (locXs: array<int>) =
         locXs
-        |> Array.map (fun locx -> Parser.Common.getElementAt locx ctx.common.locations)
+        |> Array.map (fun locx -> Common.getElementAt locx ctx.common.locations)
         |> Array.choose id
 
-    let parseDurations (posL: Raw.RawPos []) (ctx: Context option) =
+    let parseDurations (posL: FsHafas.Raw.RawPos []) (ctx: Context option) =
         match ctx with
         | Some (ctx) ->
             posL
@@ -131,12 +132,12 @@ module Parser =
                       stations = getLocations ctx locXs })
         | _ -> Array.empty
 
-    let parseJourney (outConL: Raw.RawOutCon [] option) (ctx: Context option) =
+    let parseJourney (outConL: FsHafas.Raw.RawOutCon [] option) (ctx: Context option) =
         match ctx, outConL with
         | Some (ctx), Some (outConL) when outConL.Length > 0 -> ctx.profile.parseJourney ctx outConL.[0]
         | _ -> Default.Journey
 
-    let parseJourneys (outConL: Raw.RawOutCon [] option) (ctx: Context option) =
+    let parseJourneys (outConL: FsHafas.Raw.RawOutCon [] option) (ctx: Context option) =
         match ctx, outConL with
         | Some (ctx), Some (outConL) ->
             let journeys =
@@ -151,19 +152,19 @@ module Parser =
                   journeys = journeys }
         | _ -> Default.Journeys
 
-    let parseTrip (journey: Raw.RawJny option) (ctx: Context option) =
+    let parseTrip (journey: FsHafas.Raw.RawJny option) (ctx: Context option) =
         match ctx, journey with
         | Some (ctx), Some (journey) -> journey |> ctx.profile.parseTrip ctx
         | _ -> raise (System.ArgumentException("parseTrip failed"))
 
-    let parseTrips (journeys: Raw.RawJny [] option) (ctx: Context option) =
+    let parseTrips (journeys: FsHafas.Raw.RawJny [] option) (ctx: Context option) =
         match ctx, journeys with
         | Some (ctx), Some (journeys) ->
             journeys
             |> Array.map (fun j -> ctx.profile.parseTrip ctx j)
         | _ -> raise (System.ArgumentException("parseTrip failed"))
 
-    let parseLine (l: Raw.RawLine) (ctx: Context) =
+    let parseLine (l: FsHafas.Raw.RawLine) (ctx: Context) =
         let dirl =
             match ctx.res.common with
             | Some common ->
@@ -174,37 +175,38 @@ module Parser =
 
         let directions =
             l.dirRefL
-            |> Array.map (fun d -> Parser.Common.getElementAt d dirl)
+            |> Array.map (fun d -> Common.getElementAt d dirl)
             |> Array.choose id
             |> Array.map (fun d -> d.txt)
 
-        match Parser.Common.getElementAt l.prodX ctx.common.lines with
+        match Common.getElementAt l.prodX ctx.common.lines with
         | Some line ->
             Some
                 { line with
                       directions = Some directions }
         | None -> None
 
-    let parseLines (lines: Raw.RawLine [] option) (ctx: Context option) =
+    let parseLines (lines: FsHafas.Raw.RawLine [] option) (ctx: Context option) =
         match ctx, lines with
         | Some (ctx), Some (lines) ->
             lines
             |> Array.map (fun l -> parseLine l ctx)
             |> Array.choose id
+        | Some (ctx), None -> Array.empty
         | _ -> raise (System.ArgumentException("parseLines failed"))
 
-    let parseWarnings (msgL: Raw.RawHim [] option) (ctx: Context option) =
+    let parseWarnings (msgL: FsHafas.Raw.RawHim [] option) (ctx: Context option) =
         match ctx, msgL with
         | Some (ctx), Some (msgL) ->
             msgL
             |> Array.map (fun j -> ctx.profile.parseWarning ctx j)
         | _ -> raise (System.ArgumentException("parseWarnings failed"))
 
-    let parseDeparturesArrivals (``type``: string) (jnyL: Raw.RawJny [] option) (ctx: Context option) =
+    let parseDeparturesArrivals (``type``: string) (jnyL: FsHafas.Raw.RawJny [] option) (ctx: Context option) =
         match ctx, jnyL with
         | Some ctx, Some jnyL ->
             let parse =
-                if ``type`` = Parser.ArrivalOrDeparture.DEP then
+                if ``type`` = ArrivalOrDeparture.DEP then
                     ctx.profile.parseDeparture
                 else
                     ctx.profile.parseArrival
@@ -214,7 +216,7 @@ module Parser =
             |> Seq.sortBy
                 (fun d ->
                     try
-                        Parser.DateTime.ParseIsoString d.``when``.Value
+                        DateTime.ParseIsoString d.``when``.Value
                     with ex ->
                         printfn "%s" ex.Message
                         System.DateTimeOffset.Now)
@@ -222,7 +224,7 @@ module Parser =
 
         | _ -> Array.empty
 
-    let parseServerInfo (res: Raw.RawResult option) (ctx: Context option) =
+    let parseServerInfo (res: FsHafas.Raw.RawResult option) (ctx: Context option) =
         match ctx, res with
         | Some (ctx), Some (res) ->
 

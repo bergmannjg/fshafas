@@ -2,12 +2,12 @@ namespace FsHafas.Parser
 
 module internal ArrivalOrDeparture =
 
-    open FsHafas
+    open FsHafas.Client
 
     let DEP = "DEP"
     let ARR = "ARR"
 
-    let private parseDepartureArrival (``type``: string) (ctx: Context) (d: Raw.RawJny) : Client.Alternative =
+    let private parseDepartureArrival (``type``: string) (ctx: Context) (d: FsHafas.Raw.RawJny) : FsHafas.Client.Alternative =
 
         let (locX, xTimeS, xTimeR, xTZOffset, xCncl, xPlatfS, xPlatfR) =
             if ``type`` = DEP then
@@ -27,7 +27,7 @@ module internal ArrivalOrDeparture =
         let plt =
             ctx.profile.parsePlatform ctx xPlatfS xPlatfR xCncl
 
-        let filter (s: Client.StopOver) =
+        let filter (s: FsHafas.Client.StopOver) =
             match s.passBy with
             | Some (passBy) -> not passBy
             | None -> true
@@ -61,6 +61,6 @@ module internal ArrivalOrDeparture =
               nextStopovers = stopovers
               remarks = remarks }
 
-    let parseDeparture (ctx: Context) (d: Raw.RawJny) : Client.Alternative = parseDepartureArrival DEP ctx d
+    let parseDeparture (ctx: Context) (d: FsHafas.Raw.RawJny) : FsHafas.Client.Alternative = parseDepartureArrival DEP ctx d
 
-    let parseArrival (ctx: Context) (d: Raw.RawJny) : Client.Alternative = parseDepartureArrival ARR ctx d
+    let parseArrival (ctx: Context) (d: FsHafas.Raw.RawJny) : FsHafas.Client.Alternative = parseDepartureArrival ARR ctx d

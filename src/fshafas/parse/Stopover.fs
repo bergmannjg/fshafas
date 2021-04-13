@@ -2,9 +2,9 @@ namespace FsHafas.Parser
 
 module internal Stopover =
 
-    open FsHafas
+    open FsHafas.Client
 
-    let defaultStopover : Client.StopOver =
+    let defaultStopover : FsHafas.Client.StopOver =
         { stop = None
           departure = None
           departureDelay = None
@@ -25,7 +25,7 @@ module internal Stopover =
           passBy = None
           cancelled = None }
 
-    let parseStopover (ctx: Context) (st: Raw.RawStop) (date: string) : Client.StopOver =
+    let parseStopover (ctx: Context) (st: FsHafas.Raw.RawStop) (date: string) : FsHafas.Client.StopOver =
         let stop =
             Common.getElementAt st.locX ctx.common.locations
             |> U2StationStop.FromSomeU3StationStopLocation
@@ -66,7 +66,7 @@ module internal Stopover =
               remarks = Common.msgLToRemarks ctx st.msgL
               passBy = passBy }
 
-    let parseStopovers (ctx: Context) (stopL: Raw.RawStop [] option) (date: string) : Client.StopOver [] option =
+    let parseStopovers (ctx: Context) (stopL: FsHafas.Raw.RawStop [] option) (date: string) : FsHafas.Client.StopOver [] option =
         match stopL with
         | Some (stopL) ->
             stopL

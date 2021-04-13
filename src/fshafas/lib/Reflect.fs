@@ -1,5 +1,6 @@
 namespace FsHafas.Reflect
 
+/// <exclude>FsHafas.Reflect</exclude>
 module Traverse =
 
     open System
@@ -134,6 +135,7 @@ module Traverse =
 
     let traverse (evt: TraverseEvent) (o: obj) = common evt 0 "" o
 
+/// <exclude>FsHafas.Reflect</exclude>
 module Compare =
 
     open System

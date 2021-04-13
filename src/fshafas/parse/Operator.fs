@@ -2,16 +2,16 @@ namespace FsHafas.Parser
 
 module internal Operator =
 
-    open FsHafas
+    open FsHafas.Client
 
     let private slug (s: string) = Slug.slugify s
 
-    let defaultOperator: Client.Operator =
+    let defaultOperator: FsHafas.Client.Operator =
         { ``type`` = Some "operator"
           id = ""
           name = "" }
 
-    let parseOperator (ctx: Context) (a: Raw.RawOp): Client.Operator =
+    let parseOperator (ctx: Context) (a: FsHafas.Raw.RawOp): FsHafas.Client.Operator =
         let name = a.name.Trim()
 
         { defaultOperator with

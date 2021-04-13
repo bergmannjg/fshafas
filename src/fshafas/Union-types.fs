@@ -1,4 +1,4 @@
-namespace FsHafas
+namespace FsHafas.Client
 
 #if !FABLE_COMPILER
 
@@ -26,6 +26,7 @@ open Fable.Core
 #if FABLE_COMPILER
 [<Erase>]
 #endif
+/// <exclude>U13</exclude>
 type U13<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm> =
     | Case1 of 'a
     | Case2 of 'b

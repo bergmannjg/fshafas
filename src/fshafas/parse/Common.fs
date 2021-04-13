@@ -6,17 +6,17 @@ module internal Common =
     open Fable.Core
 #endif
 
-    open FsHafas
+    open FsHafas.Client
 
-    let private updateOperators (ctx: Context) (ops: Client.Operator []) =
+    let private updateOperators (ctx: Context) (ops: FsHafas.Client.Operator []) =
         { ctx with
               common = { ctx.common with operators = ops } }
 
-    let private updateLines (ctx: Context) (lines: Client.Line []) =
+    let private updateLines (ctx: Context) (lines: FsHafas.Client.Line []) =
         { ctx with
               common = { ctx.common with lines = lines } }
 
-    let parseCommon (ctx: Context) (c: Raw.RawCommon) =
+    let parseCommon (ctx: Context) (c: FsHafas.Raw.RawCommon) =
         let ctx1 =
             c.opL
             |> Array.map (fun op -> ctx.profile.parseOperator ctx op)
@@ -49,7 +49,7 @@ module internal Common =
         | Some index when index < arr.Length -> Some arr.[index]
         | _ -> None
 
-    let getArray<'a> (common: Raw.RawCommon option) (getter: Raw.RawCommon -> 'a [] option) =
+    let getArray<'a> (common: FsHafas.Raw.RawCommon option) (getter: FsHafas.Raw.RawCommon -> 'a [] option) =
         match common with
         | Some common ->
             match getter common with
@@ -59,8 +59,8 @@ module internal Common =
 
     /// map index array to elements of array from RawCommon 
     let mapIndexArray<'a>
-        (common: Raw.RawCommon option)
-        (getTargetArray: Raw.RawCommon -> 'a [] option)
+        (common: FsHafas.Raw.RawCommon option)
+        (getTargetArray: FsHafas.Raw.RawCommon -> 'a [] option)
         (indexArr: int [] option)
         =
         let elements = getArray common getTargetArray
@@ -93,7 +93,7 @@ module internal Common =
         else
             None
 
-    let msgLToRemarks (ctx: Context) (msgL: Raw.RawMsg [] option) =
+    let msgLToRemarks (ctx: Context) (msgL: FsHafas.Raw.RawMsg [] option) =
         msgL
         |> mapArray ctx.common.hints (fun x -> x.remX)
         |> Array.choose id

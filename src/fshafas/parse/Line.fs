@@ -2,16 +2,16 @@ namespace FsHafas.Parser
 
 module internal Line =
 
-    open FsHafas
+    open FsHafas.Client
 
     let private slug (s: string) = Slug.slugify s |> Some
 
-    let private filterProducts (products: Client.Products) =
+    let private filterProducts (products: FsHafas.Client.Products) =
         let fields = products.Keys
 
         fields |> Seq.filter (fun kv -> products.[kv])
 
-    let parseLine (ctx: Context) (p: Raw.RawProd) : Client.Line =
+    let parseLine (ctx: Context) (p: FsHafas.Raw.RawProd) : FsHafas.Client.Line =
         let mutable line = Default.Line
 
         let name = p.addName |> Option.orElse (Some p.name)

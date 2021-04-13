@@ -1,4 +1,7 @@
 namespace FsHafas.Printf
+/// <namespacedoc>
+///   <summary>Print client types</summary>
+/// </namespacedoc>
 
 module Short =
 
@@ -6,8 +9,8 @@ module Short =
     open Fable.Core
 #endif
 
-    open FsHafas
-    open Client
+    open FsHafas.Client
+    open FsHafas.Client
 
     let nl = "\n"
 
@@ -165,7 +168,8 @@ module Short =
 
     let Journey (ident: int) (journey: Journey) =
         let distS () =
-            let distance = Parser.Journey.distanceOfJourney journey
+            let distance =
+                FsHafas.Parser.Journey.distanceOfJourney journey
 
             if distance > 0.0 then
                 let identS = String.replicate (ident + 2) " "
@@ -179,13 +183,17 @@ module Short =
             | Some price ->
                 let identS = String.replicate (ident + 2) " "
 
-                sprintf "%sprice: %.2f %s" identS price.amount price.currency + nl
+                sprintf "%sprice: %.2f %s" identS price.amount price.currency
+                + nl
             | None -> ""
 
         printfnS ident "jouney:" (Some "")
         + Legs ident journey.legs
         + price
         + distS ()
+        + match journey.refreshToken with
+          | Some refreshToken -> printfnS ident "refreshToken: '" (Some(refreshToken + "'"))
+          | None -> ""
 
     let private JourneyItems (ident: int) (journeys: Journey []) =
         journeys

@@ -1,4 +1,5 @@
-﻿module Serializer
+﻿/// <exclude>Serializer</exclude>
+module Serializer
 
 open System.Text.Json
 open System.Text.Json.Serialization

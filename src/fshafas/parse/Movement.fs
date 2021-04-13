@@ -6,9 +6,9 @@ module internal Movement =
     open Fable.Core
 #endif
 
-    open FsHafas
+    open FsHafas.Client
 
-    let parseMovement (ctx: Context) (m: Raw.RawJny) =
+    let parseMovement (ctx: Context) (m: FsHafas.Raw.RawJny) =
 
         let line =
             Common.getElementAt m.prodX ctx.common.lines
@@ -29,7 +29,7 @@ module internal Movement =
             match m.ani with
             | Some (ani) ->
                 ani.mSec
-                |> Array.mapi<int, Client.Frame option>
+                |> Array.mapi<int, FsHafas.Client.Frame option>
                     (fun i ms ->
 
                         let origin =
@@ -42,7 +42,7 @@ module internal Movement =
 
                         match origin, destination with
                         | Some origin, Some destination ->
-                            let f : Client.Frame =
+                            let f : FsHafas.Client.Frame =
                                 { origin = origin
                                   destination = destination
                                   t = Some ms }
