@@ -14,33 +14,32 @@ The library exposes  3 interfaces:
 - a [F# async based interface](reference/fshafas-api-hafasasyncclient.html) corresponding to hafas-client api,
 - a [JS promise based interface](reference/fshafas-client-hafasclient.html) corresponding to the TS [Type definitions](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/hafas-client/index.d.ts) for hafas-client.
 
+The library compiles via Fable to a webpack module with [this](https://github.com/bergmannjg/fshafas/blob/main/src/fshafas.fable.package/fs-hafas-client/fshafas.bundle.d.ts) TS Type definition.
+
 ## Examples
 
-### HafasAsyncClient F\#
+### HafasAsyncClient with F\#
 
 ```fsharp
 use client = new FsHafas.Api.HafasAsyncClient(FsHafas.Client.ProfileId.Db)
 async {
-    let! x = client.AsyncLocations "Hannover" (Some Default.LocationsOptions)
+    let! locations = client.AsyncLocations "Hannover" (Some Default.LocationsOptions)
 
-    FsHafas.Printf.Short.Locations x |> printfn "%s"
+    FsHafas.Printf.Short.Locations locations |> printfn "%s"
 }
 |> Async.RunSynchronously
 ```
 
-### HafasClient F\# (compiles to JavaScript and runs with Node.js)
+### HafasClient with F\# (compiles to JavaScript and runs with Node.js)
 
 ```fsharp
-let client =
-    FsHafas.Api.HafasClient(FsHafas.Client.ProfileId.Db) :> FsHafas.Client.HafasClient
+let client = FsHafas.Api.HafasClient(FsHafas.Client.ProfileId.Db) :> FsHafas.Client.HafasClient
 
-client.locations
-    "Hannover"
-    (Some { Default.LocationsOptions with results = Some 1 })
+client.locations "Hannover" (Some { Default.LocationsOptions with results = Some 3 })
 |> Promise.iter (FsHafas.Printf.Short.Locations >> printfn "%s")
 ```
 
-### HafasAsyncClient C\#
+### HafasAsyncClient with C\#
 
 ```csharp
 using (var client = new FsHafas.Api.HafasAsyncClient(FsHafas.Client.ProfileId.Db))
@@ -51,11 +50,12 @@ using (var client = new FsHafas.Api.HafasAsyncClient(FsHafas.Client.ProfileId.Db
 }
 ```
 
-### FsHafas as a JavaScript module (also using [hafas-client library](https://github.com/public-transport/hafas-client))
+### Using the FsHafas webpack module in JavaScript (example with [hafas-client library](https://github.com/public-transport/hafas-client))
 
 ```js
 const createClient = require('hafas-client');
 const dbProfile = require('hafas-client/p/db');
+
 import { fshafas } from "fs-hafas-client";
 
 const client = choose ? fshafas.createClient('db') : createClient(dbProfile, 'agent');

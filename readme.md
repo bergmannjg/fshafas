@@ -14,6 +14,8 @@ The library exposes  3 interfaces:
 2) a F# async based interface corresponding to hafas-client api,
 3) a JS promise based interface corresponding to the TS [Type definitions](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/hafas-client/index.d.ts) for hafas-client.
 
+The library compiles via Fable to a webpack module with [this](src/fshafas.fable.package/fs-hafas-client/fshafas.bundle.d.ts) TS Type definition.
+
 ## Compilation to JavaScript
 
 The JS promise based interface compiles via Fable to a JavaScript library, this library and the original hafas-client can be used almost interchangeably.
