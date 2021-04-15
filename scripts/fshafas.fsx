@@ -31,7 +31,7 @@ let args =
     |> Array.filter (fun arg -> not (arg.StartsWith("--")))
 
 let products =
-    Interactive.productsOfMode id Client.ProductTypeMode.Train
+    Api.HafasAsyncClient.productsOfMode id Client.ProductTypeMode.Train
 
 let locations (name: string) =
     use client = new Api.HafasAsyncClient(id)

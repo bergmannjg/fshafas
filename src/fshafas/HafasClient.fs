@@ -9,8 +9,7 @@ open FsHafas.Client
 
 /// <summary>JS promise based interface corresponding to hafas-client</summary>
 type HafasClient(id: FsHafas.Client.ProfileId) =
-    let client =
-        new FsHafas.Api.HafasAsyncClient(id)
+    let client = new FsHafas.Api.HafasAsyncClient(id)
 
 #if FABLE_COMPILER
     [<Emit("typeof $1")>]
@@ -87,6 +86,23 @@ type HafasClient(id: FsHafas.Client.ProfileId) =
            || jsTypeof v.east <> "number" then
             raise (System.ArgumentException("BoundingBox expected"))
 #endif
+
+    static member Profile(id: FsHafas.Client.ProfileId) : FsHafas.Client.Profile =
+        let profile = FsHafas.Api.Parser.getProfile id
+
+        { locale = profile.locale
+          timezone = profile.timezone
+          endpoint = profile.endpoint
+          products = profile.products
+          trip = profile.trip
+          radar = profile.radar
+          refreshJourney = profile.refreshJourney
+          reachableFrom = profile.reachableFrom
+          journeysWalkingSpeed = profile.journeysWalkingSpeed
+          tripsByName = profile.tripsByName
+          remarks = profile.remarks
+          remarksGetPolyline = None
+          lines = profile.lines }
 
     interface FsHafas.Client.HafasClient with
 

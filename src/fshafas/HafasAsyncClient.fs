@@ -16,11 +16,7 @@ type HafasAsyncClient(id: FsHafas.Client.ProfileId) =
 
     let log msg o = FsHafas.Client.Log.Print msg o
 
-    let profile =
-        match id with
-        | Db -> FsHafas.Profiles.Db.getProfile ()
-        | Bvg -> FsHafas.Profiles.Bvg.getProfile ()
-        | Svv -> FsHafas.Profiles.Svv.getProfile ()
+    let profile = FsHafas.Api.Parser.getProfile id
 
     let cfg =
         match profile.cfg with
@@ -53,8 +49,17 @@ type HafasAsyncClient(id: FsHafas.Client.ProfileId) =
 #if FABLE_COMPILER
         ()
 #else
-        Serializer.addConverters ([| Serializer.UnionConverter<FsHafas.Client.ProductTypeMode>() |])
+        Serializer.addConverters ([| Converter.UnionConverter<FsHafas.Client.ProductTypeMode>() |])
 #endif
+
+    static member productsOfMode (id: ProfileId) (mode: ProductTypeMode) : Products =
+        Parser.getProfile(id).products
+        |> Array.filter (fun p -> p.mode = mode && p.name <> "Tram")
+        |> Array.fold
+            (fun m p ->
+                m.[p.id] <- true
+                m)
+            (Products(false))
 
 #if !FABLE_COMPILER
     static member toTask<'a>(async: Async<'a>) : Threading.Tasks.Task<'a> = Async.StartAsTask(async)

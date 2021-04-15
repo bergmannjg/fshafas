@@ -28,10 +28,10 @@
     <Compile Include="../fshafas/parse/Stopover.fs" />
     <Compile Include="../fshafas/parse/ProductsBitmask.fs" />
     <Compile Include="../fshafas/parse/Warning.fs" />
-    <Compile Include="../fshafas/Parser.fs" />
     <Compile Include="../fshafas/p/bvg/Profile.fs" />
     <Compile Include="../fshafas/p/db/Profile.fs" />
     <Compile Include="../fshafas/p/svv/Profile.fs" />
+    <Compile Include="../fshafas/Parser.fs" />
     <Compile Include="../fshafas/HafasAsyncClient.fs" />
     <Compile Include="../fshafas/Print.fs" />
     <Compile Include="../fshafas/HafasClient.fs" />

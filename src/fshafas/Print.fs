@@ -12,7 +12,7 @@ module Short =
     open FsHafas.Client
     open FsHafas.Client
 
-    let nl = "\n"
+    let private nl = "\n"
 
     let private printfS (ident: int) (prefix: string) (s: string option) =
         let identS = String.replicate ident " "
@@ -203,7 +203,7 @@ module Short =
         journeys.journeys
         |> Option.fold (fun s value -> s + JourneyItems 0 value) ""
 
-    let U2StationStop (ident: int) (location: U2<Station, Stop> option) =
+    let private U2StationStop (ident: int) (location: U2<Station, Stop> option) =
         match location with
         | Some (U2.Case1 s) -> Station(ident + 2) s
         | Some (U2.Case2 s) -> Stop(ident + 2) s
@@ -224,7 +224,7 @@ module Short =
         + (duration.stations
            |> Array.fold (fun s j -> s + U3StationStopLocation(ident + 2) j) "")
 
-    let StopOver (ident: int) (s: StopOver) =
+    let private StopOver (ident: int) (s: StopOver) =
         U2StationStop ident s.stop
         + printfnS (ident + 2) "departure: " s.departure
 
@@ -247,7 +247,7 @@ module Short =
         + printfnArrL ident "directions: " l.directions
         + Directions(ident + 2) l.directions
 
-    let Movement (ident: int) (m: Movement) =
+    let private Movement (ident: int) (m: Movement) =
         printfnS ident "direction: " m.direction
         + match m.line with
           | Some (line) when line.name.IsSome -> printfnS ident "Line: " line.name
@@ -289,25 +289,25 @@ module Long =
     open FSharp.Reflection
     open FsHafas.Reflect
 
-    let mutable printSome = false
-    let mutable printNone = false
-    let ident (depth: int) = 2 * depth
+    let mutable private printSome = false
+    let mutable private printNone = false
+    let private ident (depth: int) = 2 * depth
 
-    let printRecordFieldname (depth: int) (name: string) (typ: Type) =
+    let private printRecordFieldname (depth: int) (name: string) (typ: Type) =
         fprintfn stdout "%s" (sprintf "%*s%s: (%s)" (ident depth) "" name (typ.ToString()))
 
-    let printCaseInfo (depth: int) (case: UnionCaseInfo) =
+    let private printCaseInfo (depth: int) (case: UnionCaseInfo) =
         if printSome || case.Name <> "Some" then
             fprintfn stdout "%s" (sprintf "%*s%s: (%s)" (ident depth) "" case.Name (case.DeclaringType.ToString()))
 
-    let printField (depth: int) (name: string) (o: obj) =
+    let private printField (depth: int) (name: string) (o: obj) =
         if not (isNull o) then
             let typ = o.GetType()
             fprintfn stdout "%s" (sprintf "%*s%s: (%s) %A" (ident depth) "" name typ.Name o)
         else if printNone then
             fprintfn stdout "%s" (sprintf "%*s%s: %s" (ident depth) "" name "null")
 
-    let printMapField (depth: int) (name: string) (o: Map<string, bool>) =
+    let private printMapField (depth: int) (name: string) (o: Map<string, bool>) =
         let v =
             o
             |> Seq.filter (fun kv -> kv.Value)
@@ -316,10 +316,10 @@ module Long =
 
         fprintfn stdout "%s" (sprintf "%*s%s: (%s) %s" (ident depth) "" name (o.GetType().Name) v)
 
-    let printEmptyArray (depth: int) (name: string) =
+    let private printEmptyArray (depth: int) (name: string) =
         fprintfn stdout "%s" (sprintf "%*s%s: %s" (ident depth) "" name "[]")
 
-    let printUnkownType (depth: int) (t: Type) (name: string) (o: obj) =
+    let private printUnkownType (depth: int) (t: Type) (name: string) (o: obj) =
         if name = "properties" then // todo
             ()
         else if name = "icon" then // todo
@@ -327,7 +327,7 @@ module Long =
         else
             fprintfn stderr "%s" (sprintf "common: unkown type %s, field '%s', value '%A'" t.FullName name o)
 
-    let evt : Traverse.TraverseEvent =
+    let private evt : Traverse.TraverseEvent =
         { onRecordFieldname = printRecordFieldname
           onCaseInfo = printCaseInfo
           onField = printField

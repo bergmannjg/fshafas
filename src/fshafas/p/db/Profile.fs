@@ -1,7 +1,6 @@
 namespace FsHafas.Profiles
 
-/// <exclude>Db</exclude>
-module Db =
+module internal Db =
 
     open FsHafas.Client
     open System.Text.RegularExpressions
@@ -315,7 +314,12 @@ module Db =
         | Some tcoc when tcoc.r.IsSome -> Some(loadFactors.[tcoc.r.Value])
         | _ -> None
 
-    let parseJourneyLegWithLoadFactor (parsed: Leg) (ctx: FsHafas.Parser.Context) (pt: FsHafas.Raw.RawSec) (date: string) : Leg =
+    let parseJourneyLegWithLoadFactor
+        (parsed: Leg)
+        (ctx: FsHafas.Parser.Context)
+        (pt: FsHafas.Raw.RawSec)
+        (date: string)
+        : Leg =
         let tcocX =
             match pt.jny with
             | Some jny ->
@@ -337,7 +341,11 @@ module Db =
 
         | _ -> parsed
 
-    let parseArrOrDepWithLoadFactor (parsed: Alternative) (ctx: FsHafas.Parser.Context) (d: FsHafas.Raw.RawJny) : Alternative =
+    let parseArrOrDepWithLoadFactor
+        (parsed: Alternative)
+        (ctx: FsHafas.Parser.Context)
+        (d: FsHafas.Raw.RawJny)
+        : Alternative =
         let tcocX =
             match d.stbStop with
             | Some stbStop ->
@@ -417,7 +425,10 @@ module Db =
                 0
         | _ -> 0
 
-    let transformJourneysQuery (opt: JourneysOptions option) (q: FsHafas.Raw.TripSearchRequest) : FsHafas.Raw.TripSearchRequest =
+    let transformJourneysQuery
+        (opt: JourneysOptions option)
+        (q: FsHafas.Raw.TripSearchRequest)
+        : FsHafas.Raw.TripSearchRequest =
         let bike =
             getOptionValue opt (fun v -> v.bike) Default.JourneysOptions
 
@@ -460,9 +471,7 @@ module Db =
               { ``type`` = "AID"
                 aid = "n91dB8Z77MLdoR0K" } }
 
-    let getProfile () =
-        let profile = FsHafas.Api.Parser.defaultProfile
-
+    let getProfile (profile: FsHafas.Parser.Profile) =
         { profile with
               locale = "de-DE"
               timezone = "Europe/Berlin"
@@ -480,14 +489,17 @@ module Db =
               formatStation = formatStation
               transformJourneysQuery = transformJourneysQuery
               parseJourney =
-                  (fun (ctx: FsHafas.Parser.Context) (p: FsHafas.Raw.RawOutCon) -> parseJourneyWithPrice (profile.parseJourney ctx p) p)
+                  (fun (ctx: FsHafas.Parser.Context) (p: FsHafas.Raw.RawOutCon) ->
+                      parseJourneyWithPrice (profile.parseJourney ctx p) p)
               parseJourneyLeg =
                   (fun (ctx: FsHafas.Parser.Context) (pt: FsHafas.Raw.RawSec) (date: string) ->
                       parseJourneyLegWithLoadFactor (profile.parseJourneyLeg ctx pt date) ctx pt date)
               parseDeparture =
                   (fun (ctx: FsHafas.Parser.Context) (pt: FsHafas.Raw.RawJny) ->
                       parseArrOrDepWithLoadFactor (profile.parseDeparture ctx pt) ctx pt)
-              parseHint = (fun (ctx: FsHafas.Parser.Context) (p: FsHafas.Raw.RawRem) -> parseHint (profile.parseHint ctx p) p)
+              parseHint =
+                  (fun (ctx: FsHafas.Parser.Context) (p: FsHafas.Raw.RawRem) -> parseHint (profile.parseHint ctx p) p)
               parseLine =
-                  (fun (ctx: FsHafas.Parser.Context) (p: FsHafas.Raw.RawProd) -> parseLineWithAdditionalName (profile.parseLine ctx p) p)
+                  (fun (ctx: FsHafas.Parser.Context) (p: FsHafas.Raw.RawProd) ->
+                      parseLineWithAdditionalName (profile.parseLine ctx p) p)
               reachableFrom = Some true }

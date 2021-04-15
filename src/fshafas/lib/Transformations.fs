@@ -129,26 +129,7 @@ module internal U2StopLocation =
         | Some (U3.Case3 s) -> U2<FsHafas.Client.Stop, FsHafas.Client.Location>.Case2 s |> Some
         | _ -> None
 
-/// <exclude>ClientProfile</exclude>
-module ClientProfile =
-
-    let FromFsHafasProfile (profile: FsHafas.Parser.Profile) : FsHafas.Client.Profile =
-        { locale = profile.locale
-          timezone = profile.timezone
-          endpoint = profile.endpoint
-          products = profile.products
-          trip = profile.trip
-          radar = profile.radar
-          refreshJourney = profile.refreshJourney
-          reachableFrom = profile.reachableFrom
-          journeysWalkingSpeed = profile.journeysWalkingSpeed
-          tripsByName = profile.tripsByName
-          remarks = profile.remarks
-          remarksGetPolyline = None
-          lines = profile.lines }
- 
-/// <exclude>MergeOptions</exclude>
-module MergeOptions =
+module internal MergeOptions =
 
     open FsHafas.Client
 

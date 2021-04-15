@@ -10,13 +10,13 @@ open Fable.Core
 /// <exclude>Parser</exclude>
 module Parser =
 
-    let defaultCommonData : CommonData =
+    let internal defaultCommonData : CommonData =
         { operators = Array.empty
           locations = Array.empty
           lines = Array.empty
           hints = Array.empty }
 
-    let defaultProfile =
+    let internal defaultProfile =
         { locale = "de-DE"
           timezone = "Europe/Berlin"
           endpoint = ""
@@ -67,13 +67,35 @@ module Parser =
           linesOfStops = true
           firstClass = false }
 
-    let createContext (profile: FsHafas.Parser.Profile) (opt: Options) (res: FsHafas.Raw.RawResult) : Context =
+#if !FABLE_COMPILER
+    let Deserialize<'a> (response: string) =
+        Serializer.addConverters (
+            [| FsHafas.Api.Converter.UnionConverter<ProductTypeMode>()
+               FsHafas.Api.Converter.U2EraseConverter<Station, Stop>(
+                   FsHafas.Api.Converter.UnionCaseSelection.ByTagName "type"
+               )
+               FsHafas.Api.Converter.U3EraseConverter<Hint, Status, Warning>(
+                   FsHafas.Api.Converter.UnionCaseSelection.ByTagName "type"
+               )
+               FsHafas.Api.Converter.IndexMapConverter<string, bool>(false) |]
+        )
+
+        Serializer.Deserialize<'a>(response)
+#endif
+
+    let internal createContext (profile: FsHafas.Parser.Profile) (opt: Options) (res: FsHafas.Raw.RawResult) : Context =
         { profile = profile
           opt = opt
           common = defaultCommonData
           res = res }
 
-    let parseCommon
+    let internal getProfile (id: ProfileId) =
+        match id with
+        | Db -> FsHafas.Profiles.Db.getProfile (defaultProfile)
+        | Bvg -> FsHafas.Profiles.Bvg.getProfile (defaultProfile)
+        | Svv -> FsHafas.Profiles.Svv.getProfile (defaultProfile)
+
+    let internal parseCommon
         (profile: FsHafas.Parser.Profile)
         (opt: Options)
         (common: FsHafas.Raw.RawCommon option)
@@ -88,7 +110,7 @@ module Parser =
             |> Some
         | _ -> None
 
-    let parseLocation (locL: FsHafas.Raw.RawLoc option) (ctx: Context option) =
+    let internal parseLocation (locL: FsHafas.Raw.RawLoc option) (ctx: Context option) =
         match ctx, locL with
         | Some (ctx), Some (locL) ->
             let locs =
@@ -97,15 +119,33 @@ module Parser =
             locs.[0]
         | _ -> U3.Case3 Default.Location
 
-    let parseLocations (locL: FsHafas.Raw.RawLoc []) (ctx: Context option) =
+    let internal parseLocations (locL: FsHafas.Raw.RawLoc []) (ctx: Context option) =
         match ctx with
         | Some (ctx) -> locL |> ctx.profile.parseLocations ctx
         | _ -> Array.empty
 
-    let parseMovements (jnyL: FsHafas.Raw.RawJny [] option) (ctx: Context option) =
+    let parseLocationsFromResult
+        (id: FsHafas.Client.ProfileId)
+        (locL: FsHafas.Raw.RawLoc [])
+        (options: Options)
+        (res: FsHafas.Raw.RawResult)
+        =
+        let profile = getProfile id
+        parseLocations locL (parseCommon profile options res.common (Some res))
+
+    let internal parseMovements (jnyL: FsHafas.Raw.RawJny [] option) (ctx: Context option) =
         match ctx, jnyL with
         | Some ctx, Some jnyL -> jnyL |> Array.map (ctx.profile.parseMovement ctx)
         | _ -> Array.empty
+
+    let parseMovementsFromResult
+        (id: FsHafas.Client.ProfileId)
+        (jnyL: FsHafas.Raw.RawJny [] option)
+        (options: Options)
+        (res: FsHafas.Raw.RawResult)
+        =
+        let profile = getProfile id
+        parseMovements jnyL (parseCommon profile options res.common (Some res))
 
     let private addToMap (m: Map<int, array<int>>) (p: FsHafas.Raw.RawPos) =
         if m.ContainsKey p.dur then
@@ -120,7 +160,7 @@ module Parser =
         |> Array.map (fun locx -> Common.getElementAt locx ctx.common.locations)
         |> Array.choose id
 
-    let parseDurations (posL: FsHafas.Raw.RawPos []) (ctx: Context option) =
+    let internal parseDurations (posL: FsHafas.Raw.RawPos []) (ctx: Context option) =
         match ctx with
         | Some (ctx) ->
             posL
@@ -132,12 +172,21 @@ module Parser =
                       stations = getLocations ctx locXs })
         | _ -> Array.empty
 
-    let parseJourney (outConL: FsHafas.Raw.RawOutCon [] option) (ctx: Context option) =
+    let parseDurationsFromResult
+        (id: FsHafas.Client.ProfileId)
+        (posL: FsHafas.Raw.RawPos [])
+        (options: Options)
+        (res: FsHafas.Raw.RawResult)
+        =
+        let profile = getProfile id
+        parseDurations posL (parseCommon profile options res.common (Some res))
+
+    let internal parseJourney (outConL: FsHafas.Raw.RawOutCon [] option) (ctx: Context option) =
         match ctx, outConL with
         | Some (ctx), Some (outConL) when outConL.Length > 0 -> ctx.profile.parseJourney ctx outConL.[0]
         | _ -> Default.Journey
 
-    let parseJourneys (outConL: FsHafas.Raw.RawOutCon [] option) (ctx: Context option) =
+    let internal parseJourneys (outConL: FsHafas.Raw.RawOutCon [] option) (ctx: Context option) =
         match ctx, outConL with
         | Some (ctx), Some (outConL) ->
             let journeys =
@@ -152,19 +201,37 @@ module Parser =
                   journeys = journeys }
         | _ -> Default.Journeys
 
-    let parseTrip (journey: FsHafas.Raw.RawJny option) (ctx: Context option) =
+    let parseJourneysFromResult
+        (id: FsHafas.Client.ProfileId)
+        (outConL: FsHafas.Raw.RawOutCon [] option)
+        (options: Options)
+        (res: FsHafas.Raw.RawResult)
+        =
+        let profile = getProfile id
+        parseJourneys outConL (parseCommon profile options res.common (Some res))
+
+    let internal parseTrip (journey: FsHafas.Raw.RawJny option) (ctx: Context option) =
         match ctx, journey with
         | Some (ctx), Some (journey) -> journey |> ctx.profile.parseTrip ctx
         | _ -> raise (System.ArgumentException("parseTrip failed"))
 
-    let parseTrips (journeys: FsHafas.Raw.RawJny [] option) (ctx: Context option) =
+    let parseTripFromResult
+        (id: FsHafas.Client.ProfileId)
+        (journey: FsHafas.Raw.RawJny option)
+        (options: Options)
+        (res: FsHafas.Raw.RawResult)
+        =
+        let profile = getProfile id
+        parseTrip journey (parseCommon profile options res.common (Some res))
+
+    let internal parseTrips (journeys: FsHafas.Raw.RawJny [] option) (ctx: Context option) =
         match ctx, journeys with
         | Some (ctx), Some (journeys) ->
             journeys
             |> Array.map (fun j -> ctx.profile.parseTrip ctx j)
         | _ -> raise (System.ArgumentException("parseTrip failed"))
 
-    let parseLine (l: FsHafas.Raw.RawLine) (ctx: Context) =
+    let internal parseLine (l: FsHafas.Raw.RawLine) (ctx: Context) =
         let dirl =
             match ctx.res.common with
             | Some common ->
@@ -186,7 +253,7 @@ module Parser =
                       directions = Some directions }
         | None -> None
 
-    let parseLines (lines: FsHafas.Raw.RawLine [] option) (ctx: Context option) =
+    let internal parseLines (lines: FsHafas.Raw.RawLine [] option) (ctx: Context option) =
         match ctx, lines with
         | Some (ctx), Some (lines) ->
             lines
@@ -195,14 +262,32 @@ module Parser =
         | Some (ctx), None -> Array.empty
         | _ -> raise (System.ArgumentException("parseLines failed"))
 
-    let parseWarnings (msgL: FsHafas.Raw.RawHim [] option) (ctx: Context option) =
+    let parseLinesFromResult
+        (id: FsHafas.Client.ProfileId)
+        (lines: FsHafas.Raw.RawLine [] option)
+        (options: Options)
+        (res: FsHafas.Raw.RawResult)
+        =
+        let profile = getProfile id
+        parseLines lines (parseCommon profile options res.common (Some res))
+
+    let internal parseWarnings (msgL: FsHafas.Raw.RawHim [] option) (ctx: Context option) =
         match ctx, msgL with
         | Some (ctx), Some (msgL) ->
             msgL
             |> Array.map (fun j -> ctx.profile.parseWarning ctx j)
         | _ -> raise (System.ArgumentException("parseWarnings failed"))
 
-    let parseDeparturesArrivals (``type``: string) (jnyL: FsHafas.Raw.RawJny [] option) (ctx: Context option) =
+    let parseWarningsFromResult
+        (id: FsHafas.Client.ProfileId)
+        (msgL: FsHafas.Raw.RawHim [] option)
+        (options: Options)
+        (res: FsHafas.Raw.RawResult)
+        =
+        let profile = getProfile id
+        parseWarnings msgL (parseCommon profile options res.common (Some res))
+
+    let internal parseDeparturesArrivals (``type``: string) (jnyL: FsHafas.Raw.RawJny [] option) (ctx: Context option) =
         match ctx, jnyL with
         | Some ctx, Some jnyL ->
             let parse =
@@ -224,7 +309,17 @@ module Parser =
 
         | _ -> Array.empty
 
-    let parseServerInfo (res: FsHafas.Raw.RawResult option) (ctx: Context option) =
+    let parseDeparturesArrivalsFromResult
+        (id: FsHafas.Client.ProfileId)
+        (``type``: string)
+        (jnyL: FsHafas.Raw.RawJny [] option)
+        (options: Options)
+        (res: FsHafas.Raw.RawResult)
+        =
+        let profile = getProfile id
+        parseDeparturesArrivals ``type`` jnyL (parseCommon profile options res.common (Some res))
+
+    let internal parseServerInfo (res: FsHafas.Raw.RawResult option) (ctx: Context option) =
         match ctx, res with
         | Some (ctx), Some (res) ->
 

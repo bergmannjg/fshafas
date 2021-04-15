@@ -1,7 +1,6 @@
 namespace FsHafas.Profiles
 
-/// <exclude>Db</exclude>
-module Bvg =
+module internal Bvg =
 
     open FsHafas.Client
     open System.Text.RegularExpressions
@@ -77,9 +76,7 @@ module Bvg =
               { ``type`` = "AID"
                 aid = "Mz0YdF9Fgx0Mb9" } }
 
-    let getProfile () =
-        let profile = FsHafas.Api.Parser.defaultProfile
-
+    let getProfile (profile: FsHafas.Parser.Profile) =
         { profile with
               locale = "de-DE"
               timezone = "Europe/Berlin"

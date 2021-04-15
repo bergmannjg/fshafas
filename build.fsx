@@ -98,7 +98,7 @@ Target.create "CheckReleaseVersion" (fun _ ->
 )
 
 Target.create "BuildFableWebpack" (fun _ ->
-  DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.fable.package") "fable" "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode production --config ./webpack.config.js"
+  DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.fable.package") "fable" "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode production --no-devtool --config ./webpack.config.js"
   |> checkResult "BuldFableWebpack failed"
 )
 

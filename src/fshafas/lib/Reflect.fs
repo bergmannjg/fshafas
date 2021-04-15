@@ -1,6 +1,6 @@
 namespace FsHafas.Reflect
 
-/// <exclude>FsHafas.Reflect</exclude>
+/// <exclude>Compare</exclude>
 module Traverse =
 
     open System
@@ -72,7 +72,7 @@ module Traverse =
             else
                 evt.onField depth name o
 
-    and common (evt: TraverseEvent) (depth: int) (name: string) (o: obj) =
+    and private common (evt: TraverseEvent) (depth: int) (name: string) (o: obj) =
         if not (isNull o) then
             let typ = o.GetType()
 
@@ -92,7 +92,7 @@ module Traverse =
                 union evt depth name o
             else
 
-            if typ.IsArray  && typ.Name = typeof<double []>.Name then
+            if typ.IsArray && typ.Name = typeof<double []>.Name then
                 let arr = o :?> double []
 
                 arr
@@ -102,7 +102,7 @@ module Traverse =
                     evt.onEmptyArray depth name
             else
 
-            if typ.IsArray  && typ.Name = typeof<int []>.Name then
+            if typ.IsArray && typ.Name = typeof<int []>.Name then
                 let arr = o :?> int []
 
                 arr
@@ -135,7 +135,7 @@ module Traverse =
 
     let traverse (evt: TraverseEvent) (o: obj) = common evt 0 "" o
 
-/// <exclude>FsHafas.Reflect</exclude>
+/// <exclude>Compare</exclude>
 module Compare =
 
     open System
@@ -225,7 +225,7 @@ module Compare =
                 else if v1.Length <> v2.Length then
                     evt.onValuesDifferent name o1 o2
 
-    and common (evt: CompareEvent) (depth: int) (name: string) (o1: obj) (o2: obj) =
+    and private common (evt: CompareEvent) (depth: int) (name: string) (o1: obj) (o2: obj) =
         if not (isNull o1) && not (isNull o2) then
             let typ1 = o1.GetType()
             let typ2 = o2.GetType()

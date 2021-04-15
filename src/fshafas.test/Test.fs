@@ -5,20 +5,6 @@ open System
 open NUnit.Framework
 open FsHafas.Client
 open FsHafas.Reflect.Compare
-open FsHafas.Client
-
-[<SetUp>]
-let Setup () =
-    Serializer.addConverters (
-        [| Serializer.UnionConverter<ProductTypeMode>()
-           FsHafas.Api.Converter.U2EraseConverter<Station, Stop>(
-               FsHafas.Api.Converter.UnionCaseSelection.ByTagName "type"
-           )
-           FsHafas.Api.Converter.U3EraseConverter<Hint, Status, Warning>(
-               FsHafas.Api.Converter.UnionCaseSelection.ByTagName "type"
-           )
-           FsHafas.Api.Converter.IndexMapConverter<string, bool>(false) |]
-    )
 
 let checkEqual (o1: obj) (o2: obj) =
     let mutable diffs = 0
@@ -69,7 +55,7 @@ let testRunner (jsonRaw: string) (jsonResult: string) (loader: FsHafas.Raw.RawRe
 
     try
         let rawResponse =
-            Serializer.Deserialize<FsHafas.Raw.RawResponse>(jsonRaw)
+            FsHafas.Api.Parser.Deserialize<FsHafas.Raw.RawResponse>(jsonRaw)
 
         Assert.That(rawResponse.svcResL.Length, Is.EqualTo(1))
         let res = rawResponse.svcResL.[0].res
@@ -90,65 +76,57 @@ let testRunner (jsonRaw: string) (jsonResult: string) (loader: FsHafas.Raw.RawRe
     | ex -> fprintfn stderr "error: %s %s" ex.Message ex.StackTrace
 
 let loadLocations (res: FsHafas.Raw.RawResult) (expectedJson: string) =
-    let profile = FsHafas.Profiles.Db.getProfile ()
-
     let parsedResponse =
-        FsHafas.Api.Parser.parseLocations
+        FsHafas.Api.Parser.parseLocationsFromResult
+            ProfileId.Db
             res.``match``.Value.locL
-            (FsHafas.Api.Parser.parseCommon profile FsHafas.Api.Parser.defaultOptions res.common (Some res))
+            FsHafas.Api.Parser.defaultOptions
+            res
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
     let response =
-        Serializer.Deserialize<U3<Station, Stop, Location> []>(expectedJson)
+        FsHafas.Api.Parser.Deserialize<U3<Station, Stop, Location> []>(expectedJson)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
 
     (parsedResponse :> obj, response :> obj)
 
 let loadJourneys (res: FsHafas.Raw.RawResult) (expectedJson: string) =
-    let profile = FsHafas.Profiles.Db.getProfile ()
-
     let parsedResponse =
-        FsHafas.Api.Parser.parseJourneys
-            res.outConL
-            (FsHafas.Api.Parser.parseCommon profile FsHafas.Api.Parser.defaultOptions res.common (Some res))
+        FsHafas.Api.Parser.parseJourneysFromResult ProfileId.Db res.outConL FsHafas.Api.Parser.defaultOptions res
 
     Assert.That(parsedResponse.journeys.IsSome, Is.EqualTo(true))
 
     let response =
-        Serializer.Deserialize<Journeys>(expectedJson)
+        FsHafas.Api.Parser.Deserialize<Journeys>(expectedJson)
 
     Assert.That(response.journeys.IsSome, Is.EqualTo(true))
 
     (parsedResponse :> obj, response :> obj)
 
 let loadTrip (res: FsHafas.Raw.RawResult) (expectedJson: string) =
-    let profile = FsHafas.Profiles.Db.getProfile ()
-
     let parsedResponse =
-        FsHafas.Api.Parser.parseTrip
-            res.journey
-            (FsHafas.Api.Parser.parseCommon profile FsHafas.Api.Parser.defaultOptions res.common (Some res))
+        FsHafas.Api.Parser.parseTripFromResult ProfileId.Db res.journey FsHafas.Api.Parser.defaultOptions res
 
     let response =
-        Serializer.Deserialize<Trip>(expectedJson)
+        FsHafas.Api.Parser.Deserialize<Trip>(expectedJson)
 
     (parsedResponse :> obj, response :> obj)
 
 let loadDepartures (res: FsHafas.Raw.RawResult) (expectedJson: string) =
-    let profile = FsHafas.Profiles.Db.getProfile ()
-
     let parsedResponse =
-        FsHafas.Api.Parser.parseDeparturesArrivals
+        FsHafas.Api.Parser.parseDeparturesArrivalsFromResult
+            ProfileId.Db
             "DEP"
             res.jnyL
-            (FsHafas.Api.Parser.parseCommon profile FsHafas.Api.Parser.defaultOptions res.common (Some res))
+            FsHafas.Api.Parser.defaultOptions
+            res
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
     let response =
-        Serializer.Deserialize<Alternative []>(expectedJson)
+        FsHafas.Api.Parser.Deserialize<Alternative []>(expectedJson)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
 
@@ -173,19 +151,15 @@ let sortDurations (durations: Duration []) : Duration [] =
               stations = sorted })
 
 let loadReachableFrom (res: FsHafas.Raw.RawResult) (expectedJson: string) =
-    let profile = FsHafas.Profiles.Db.getProfile ()
-
     Assert.That(res.posL.IsSome, Is.EqualTo(true))
 
     let parsedResponse =
-        FsHafas.Api.Parser.parseDurations
-            res.posL.Value
-            (FsHafas.Api.Parser.parseCommon profile FsHafas.Api.Parser.defaultOptions res.common (Some res))
+        FsHafas.Api.Parser.parseDurationsFromResult ProfileId.Db res.posL.Value FsHafas.Api.Parser.defaultOptions res
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
     let response =
-        Serializer.Deserialize<Duration []>(expectedJson)
+        FsHafas.Api.Parser.Deserialize<Duration []>(expectedJson)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
     Assert.That(parsedResponse.Length, Is.EqualTo(response.Length))
@@ -197,71 +171,58 @@ let loadReachableFrom (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     (x1 :> obj, x2 :> obj)
 
 let loadNearby (res: FsHafas.Raw.RawResult) (expectedJson: string) =
-    let profile = FsHafas.Profiles.Db.getProfile ()
 
     let parsedResponse =
-        FsHafas.Api.Parser.parseLocations
+        FsHafas.Api.Parser.parseLocationsFromResult
+            ProfileId.Db
             res.locL.Value
-            (FsHafas.Api.Parser.parseCommon
-                profile
-                { FsHafas.Api.Parser.defaultOptions with
-                      linesOfStops = false }
-                res.common
-                (Some res))
+            { FsHafas.Api.Parser.defaultOptions with
+                  linesOfStops = false }
+            res
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
     let response =
-        Serializer.Deserialize<U3<Station, Stop, Location> []>(expectedJson)
+        FsHafas.Api.Parser.Deserialize<U3<Station, Stop, Location> []>(expectedJson)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
 
     (parsedResponse :> obj, response :> obj)
 
 let loadRadar (res: FsHafas.Raw.RawResult) (expectedJson: string) =
-    let profile = FsHafas.Profiles.Db.getProfile ()
-
     let parsedResponse =
-        FsHafas.Api.Parser.parseMovements
-            res.jnyL
-            (FsHafas.Api.Parser.parseCommon profile FsHafas.Api.Parser.defaultOptions res.common (Some res))
+        FsHafas.Api.Parser.parseMovementsFromResult ProfileId.Db res.jnyL FsHafas.Api.Parser.defaultOptions res
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
     let response =
-        Serializer.Deserialize<Movement []>(expectedJson)
+        FsHafas.Api.Parser.Deserialize<Movement []>(expectedJson)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
 
     (parsedResponse :> obj, response :> obj)
 
 let loadLines (res: FsHafas.Raw.RawResult) (expectedJson: string) =
-    let profile = FsHafas.Profiles.Svv.getProfile ()
-
     let parsedResponse =
-        FsHafas.Api.Parser.parseLines res.lineL (FsHafas.Api.Parser.parseCommon profile FsHafas.Api.Parser.defaultOptions res.common (Some res))
+        FsHafas.Api.Parser.parseLinesFromResult ProfileId.Svv res.lineL FsHafas.Api.Parser.defaultOptions res
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
     let response =
-        Serializer.Deserialize<Line []>(expectedJson)
+        FsHafas.Api.Parser.Deserialize<Line []>(expectedJson)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
 
     (parsedResponse :> obj, response :> obj)
 
 let loadWarnings (res: FsHafas.Raw.RawResult) (expectedJson: string) =
-    let profile = FsHafas.Profiles.Svv.getProfile ()
-
     let parsedResponse =
-        FsHafas.Api.Parser.parseWarnings
-            res.msgL
-            (FsHafas.Api.Parser.parseCommon profile FsHafas.Api.Parser.defaultOptions res.common (Some res))
+        FsHafas.Api.Parser.parseWarningsFromResult ProfileId.Svv res.msgL FsHafas.Api.Parser.defaultOptions res
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
     let response =
-        Serializer.Deserialize<Warning []>(expectedJson)
+        FsHafas.Api.Parser.Deserialize<Warning []>(expectedJson)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
 

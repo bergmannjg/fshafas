@@ -36,10 +36,10 @@
     <Compile Include="parse/Trip.fs" />
     <Compile Include="parse/ProductsBitmask.fs" />
     <Compile Include="parse/Warning.fs" />
-    <Compile Include="Parser.fs" />
     <Compile Include="p/bvg/Profile.fs" />
     <Compile Include="p/db/Profile.fs" />
     <Compile Include="p/svv/Profile.fs" />
+    <Compile Include="Parser.fs" />
     <Compile Include="HafasAsyncClient.fs" />
     <Compile Include="HafasClient.fs" />
     <Compile Include="Print.fs" />
