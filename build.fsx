@@ -104,6 +104,7 @@ Target.create "BuildFableWebpack" (fun _ ->
 
 Target.create "BuildFableWebpackDev" (fun _ ->
   DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.fable.package") "fable" "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode development --devtool source-map --config ./webpack.config.js" |> ignore
+  Npm.exec "pack fs-hafas-client/" (fun o -> { o with WorkingDirectory = "./src/fshafas.fable.package/" }) |> ignore
 )
 
 Target.create "BuildFableNpmPack" (fun _ ->

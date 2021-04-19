@@ -16,7 +16,7 @@ let createClient (profile: string) =
 let setDebug () = Log.Debug <- true
 
 let getProfile (profile: string) =
-    HafasClient(getFsHafasProfileId profile)
+    HafasClient.Profile(getFsHafasProfileId profile)
 
 let printLocations = FsHafas.Printf.Short.Locations
 let printJourneys = FsHafas.Printf.Short.Journeys
