@@ -11,7 +11,7 @@ module internal Polyline =
     type GooglePolyline = { decode: string -> float [] [] }
 
     [<ImportDefault("google-polyline")>]
-    let defaultObject: GooglePolyline = jsNative
+    let defaultObject : GooglePolyline = jsNative
 
 #else
     open PolylinerNet
@@ -21,7 +21,7 @@ module internal Polyline =
 
     let round (f: float) = System.Math.Round(f, 5)
 
-    let defaultFeatureCollection: FsHafas.Client.FeatureCollection =
+    let defaultFeatureCollection : FsHafas.Client.FeatureCollection =
         { ``type`` = Some "FeatureCollection"
           features = Array.empty }
 
@@ -32,13 +32,26 @@ module internal Polyline =
         polyliner.Decode xy
         |> Seq.map (fun p -> [| p.Latitude; p.Longitude |])
 #endif
-    let parsePolyline (ctx: Context) (p: FsHafas.Raw.RawPoly): FsHafas.Client.FeatureCollection =
+
+    let private getStop (ctx: Context) (p: FsHafas.Raw.RawPoly) (i: int) =
+        match p.ppLocRefL with
+        | Some ppLocRefL ->
+            match ppLocRefL
+                  |> Array.tryFind (fun pLocRefL -> pLocRefL.ppIdx = i) with
+            | Some pLocRefL ->
+                match Common.getElementAt pLocRefL.locX ctx.common.locations with
+                | Some (U3.Case2 s) -> s :> obj
+                | _ -> obj ()
+            | None -> obj ()
+        | None -> obj ()
+
+    let parsePolyline (ctx: Context) (poly: FsHafas.Raw.RawPoly) : FsHafas.Client.FeatureCollection =
         let features =
-            polylineDecode p.crdEncYX
-            |> Seq.map<_, FsHafas.Client.Feature>
-                (fun p ->
+            polylineDecode poly.crdEncYX
+            |> Seq.mapi<_, FsHafas.Client.Feature>
+                (fun i p ->
                     { ``type`` = Some "Feature"
-                      properties = obj ()
+                      properties = getStop ctx poly i
                       geometry =
                           { ``type`` = Some "Point"
                             coordinates = [| (round p.[1]); (round p.[0]) |] } })
