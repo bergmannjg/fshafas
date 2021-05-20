@@ -46,7 +46,11 @@ module internal Format =
 
         filters
 
-    let locationRequest (profile: FsHafas.Parser.Profile) (name: string) (opt: FsHafas.Client.LocationsOptions option) : FsHafas.Raw.LocMatchRequest =
+    let locationRequest
+        (profile: FsHafas.Parser.Profile)
+        (name: string)
+        (opt: FsHafas.Client.LocationsOptions option)
+        : FsHafas.Raw.LocMatchRequest =
         let fuzzy =
             getOptionValue opt (fun v -> v.fuzzy) Default.LocationsOptions
 
@@ -314,10 +318,17 @@ module internal Format =
           name = name
           getPolyline = polyline }
 
-    let lineMatchRequest (profile: FsHafas.Parser.Profile) (query: string) (opt: FsHafas.Client.LinesOptions option) : FsHafas.Raw.LineMatchRequest =
+    let lineMatchRequest
+        (profile: FsHafas.Parser.Profile)
+        (query: string)
+        (opt: FsHafas.Client.LinesOptions option)
+        : FsHafas.Raw.LineMatchRequest =
         { input = query }
 
-    let himSearchRequest (profile: FsHafas.Parser.Profile) (opt: FsHafas.Client.RemarksOptions option) : FsHafas.Raw.HimSearchRequest =
+    let himSearchRequest
+        (profile: FsHafas.Parser.Profile)
+        (opt: FsHafas.Client.RemarksOptions option)
+        : FsHafas.Raw.HimSearchRequest =
 
         let dt =
             getOptionValue opt (fun v -> v.from) Default.RemarksOptions
@@ -342,7 +353,10 @@ module internal Format =
           dateB = date
           timeB = time }
 
-    let private makeLocType (profile: FsHafas.Parser.Profile) (s: U4<string, FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>) =
+    let private makeLocType
+        (profile: FsHafas.Parser.Profile)
+        (s: U4<string, FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>)
+        =
         match s with
         | U4.Case1 v -> makeLocLTypeS profile v
         | U4.Case2 v when v.id.IsSome -> makeLocLTypeS profile v.id.Value
@@ -406,12 +420,18 @@ module internal Format =
 
         let filters : FsHafas.Raw.JnyFltr [] = makeFilters profile products
 
+        let viaLocL : (FsHafas.Raw.LocViaInput array) option =
+            match maybeGetOptionValue opt (fun v -> v.via) with
+            | Some via -> Some [| { loc = makeLocLTypeS profile via } |]
+            | None -> None
+
         profile.transformJourneysQuery
             opt
             { getPasslist = stopovers
               maxChg = -1
               minChgTime = transferTime
               depLocL = [| makeLocType profile from |]
+              viaLocL = viaLocL
               arrLocL = [| makeLocType profile ``to`` |]
               jnyFltrL = filters
               gisFltrL = [||]

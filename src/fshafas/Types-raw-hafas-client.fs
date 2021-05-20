@@ -439,6 +439,8 @@ type Loc =
       name: string option
       lid: string option }
 
+type LocViaInput = { loc: Loc }
+
 type LocMatchInput =
     { loc: Loc
       maxLoc: int
@@ -496,6 +498,7 @@ type TripSearchRequest =
       maxChg: int
       minChgTime: int
       depLocL: array<Loc>
+      viaLocL: array<LocViaInput> option
       arrLocL: array<Loc>
       jnyFltrL: array<JnyFltr>
       gisFltrL: array<JnyFltr>
