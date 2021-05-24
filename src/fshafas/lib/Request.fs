@@ -15,6 +15,8 @@ module internal Request =
 
     type HttpClient() =
 
+        let log msg o = FsHafas.Client.Log.Print msg o
+
         let getMd5 (json: string) (salt: string) =
 
             let bytes =
@@ -33,6 +35,8 @@ module internal Request =
                     url + "?checksum=" + checksum
                 else
                     url
+
+            log "url: " urlchecksum
 
             let properties =
                 [ RequestProperties.Method HttpMethod.POST

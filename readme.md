@@ -20,11 +20,7 @@ The library compiles via Fable to a webpack module with [this](src/fshafas.fable
 
 The JS promise based interface compiles via Fable to a JavaScript library, this library and the original hafas-client can be used almost interchangeably.
 
-Differences:
-
-* *String Literal Unions* are compiled via ts2fable to F# Discriminated Unions and these are compiled via Fable to Jvascript classes. The mapping *.toString().toLowerCase()* can eliminate the differences.
-
-The following diagram should commute modulo the aforementioned differences:
+The following diagram should commute:
 
 JavaScript/TypeScript | Transformation | F# |
 :---------------:|:--------:|:------:|

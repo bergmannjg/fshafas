@@ -23,6 +23,10 @@ open Fable.Core.JS
 
 #if !FABLE_COMPILER
 type Promise<'T> = Async<'T>
+
+[<AttributeUsage(AttributeTargets.Class)>]
+type StringEnumAttribute() =
+    inherit Attribute()
 #endif
 
 type Log() =
@@ -66,7 +70,31 @@ type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
 #endif
 """
 
+/// todo: add attributes to transformer
 let postlude = """
+    and [<StringEnum; RequireQualifiedAccess>] ProductTypeMode =
+        | [<CompiledName "train">] Train
+        | [<CompiledName "bus">] Bus
+        | [<CompiledName "watercraft">] Watercraft
+        | [<CompiledName "taxi">] Taxi
+        | [<CompiledName "gondola">] Gondola
+        | [<CompiledName "aircraft">] Aircraft
+        | [<CompiledName "car">] Car
+        | [<CompiledName "bicycle">] Bicycle
+        | [<CompiledName "walking">] Walking
+
+    and [<StringEnum; RequireQualifiedAccess>] HintType =
+        | [<CompiledName "hint">] Hint
+        | [<CompiledName "status">] Status
+        | [<CompiledName "foreign-id">] ForeignId
+        | [<CompiledName "local-fare-zone">] LocalFareZone
+        | [<CompiledName "stop-website">] StopWebsite
+        | [<CompiledName "stop-dhid">] StopDhid
+        | [<CompiledName "transit-authority">] TransitAuthority
+
+    and [<StringEnum; RequireQualifiedAccess>] WarningType =
+        | [<CompiledName "status">] Status
+        | [<CompiledName "warning">] Warning
 """
 
 let transformType str =
@@ -90,7 +118,7 @@ let escapeIdent str =
     else
         str
 
-let excludeTypes = [| "ReadonlyArray"; "IExports" |]
+let excludeTypes = [| "ReadonlyArray"; "IExports"; "ProductTypeMode"; "HintType"; "WarningType" |]
 
 let transformTypeVals =
     [| "*", "transferTime", "int option"

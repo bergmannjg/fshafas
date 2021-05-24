@@ -17,6 +17,10 @@ open Fable.Core.JS
 
 #if !FABLE_COMPILER
 type Promise<'T> = Async<'T>
+
+[<AttributeUsage(AttributeTargets.Class)>]
+type StringEnumAttribute() =
+    inherit Attribute()
 #endif
 
 type Log() =
@@ -710,26 +714,27 @@ and HafasClient =
     /// Fetches meta information from the HAFAS endpoint
     abstract member serverInfo : ServerOptions option -> Promise<ServerInfo>
 
-and ProductTypeMode =
-    | Train
-    | Bus
-    | Watercraft
-    | Taxi
-    | Gondola
-    | Aircraft
-    | Car
-    | Bicycle
-    | Walking
 
-and HintType =
-    | Hint
-    | Status
-    | ForeignId
-    | LocalFareZone
-    | StopWebsite
-    | StopDhid
-    | TransitAuthority
+and [<StringEnum; RequireQualifiedAccess>] ProductTypeMode =
+    | [<CompiledName "train">] Train
+    | [<CompiledName "bus">] Bus
+    | [<CompiledName "watercraft">] Watercraft
+    | [<CompiledName "taxi">] Taxi
+    | [<CompiledName "gondola">] Gondola
+    | [<CompiledName "aircraft">] Aircraft
+    | [<CompiledName "car">] Car
+    | [<CompiledName "bicycle">] Bicycle
+    | [<CompiledName "walking">] Walking
 
-and WarningType =
-    | Status
-    | Warning
+and [<StringEnum; RequireQualifiedAccess>] HintType =
+    | [<CompiledName "hint">] Hint
+    | [<CompiledName "status">] Status
+    | [<CompiledName "foreign-id">] ForeignId
+    | [<CompiledName "local-fare-zone">] LocalFareZone
+    | [<CompiledName "stop-website">] StopWebsite
+    | [<CompiledName "stop-dhid">] StopDhid
+    | [<CompiledName "transit-authority">] TransitAuthority
+
+and [<StringEnum; RequireQualifiedAccess>] WarningType =
+    | [<CompiledName "status">] Status
+    | [<CompiledName "warning">] Warning
