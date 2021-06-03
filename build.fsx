@@ -75,6 +75,11 @@ Target.create "BuildLib" (fun _ ->
   |> checkResult "buildLib failed"
 )
 
+Target.create "BuildWebApp" (fun _ ->
+  DotNet.exec id "build" "src/fshafas.fable.web/fsHafasWeb.fsproj" 
+  |> checkResult "buildLib failed"
+)
+
 Target.create "Test" (fun _ ->
   DotNet.exec id "test" "src/fshafas.test/fshafastest.fsproj"
   |> checkResult "Test failed"
@@ -97,14 +102,18 @@ Target.create "CheckReleaseVersion" (fun _ ->
   then raise (System.Exception(sprintf "config version, exptected: %s, actual: %s" release.AssemblyVersion config.version))
 )
 
-Target.create "BuildFableWebpack" (fun _ ->
-  DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.fable.package") "fable" "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode production --no-devtool --config ./webpack.config.js"
+Target.create "BuildFableWebpackNode" (fun _ ->
+  DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.fable.package") "fable" "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode production --no-devtool --config ./webpack.node.config.js"
   |> checkResult "BuldFableWebpack failed"
 )
 
-Target.create "BuildFableWebpackDev" (fun _ ->
-  DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.fable.package") "fable" "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode development --devtool source-map --config ./webpack.config.js" |> ignore
+Target.create "BuildFableWebpackNodeDev" (fun _ ->
+  DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.fable.package") "fable" "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode development --devtool source-map --config ./webpack.node.config.js" |> ignore
   Npm.exec "pack fs-hafas-client/" (fun o -> { o with WorkingDirectory = "./src/fshafas.fable.package/" }) |> ignore
+)
+
+Target.create "BuildFableWebpackWebDev" (fun _ ->
+  DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.fable.package") "fable" "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode development --config ./webpack.web.config.js" |> ignore
 )
 
 Target.create "BuildFableNpmPack" (fun _ ->
@@ -115,6 +124,8 @@ open Fake.Core.TargetOperators
 
 Target.create "Default" ignore
 
+Target.create "Web" ignore
+
 Target.create "Docs" ignore
 
 "BuildLib"
@@ -122,12 +133,16 @@ Target.create "Docs" ignore
 ==> "BuildCSharp"
 ==> "BuildFableApp"
 ==> "CheckReleaseVersion"
-==> "BuildFableWebpack"
+==> "BuildFableWebpackNode"
 ==> "BuildFableNpmPack"
 ==> "Default"
 
 "BuildLib"
 ==> "BuildDocs"
 ==> "Docs"
+
+"BuildFableWebpackWebDev"
+==> "BuildWebApp"
+==> "Web"
 
 Target.runOrDefault "Default"

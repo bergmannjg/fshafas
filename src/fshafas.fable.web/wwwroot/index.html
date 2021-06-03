@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>FsHafas</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>FsHafas</h1>
+        <div class="row">
+            <div class="col col-sm-1">Profile:</div>
+            <div class="col">
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" name="btnradioProfile" id="btnradioDb"
+                        autocomplete="off" checked>
+                    <label class="form-check-label" for="btnradioDb">Db</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" name="btnradioProfile" id="btnradioBvg"
+                        autocomplete="off">
+                    <label class="form-check-label mx-2" for="btnradioBvg">Bvg</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col col-sm-1">Commands:</div>
+            <div class="col">
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" name="btnradioCommands" id="idLocations"
+                        autocomplete="off" checked onclick="displayElement('locations-box');">
+                    <label class="form-check-label" for="idLocations">Locations</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" name="btnradioCommands" id="idJourneys"
+                        autocomplete="off" onclick="displayElement('journeys-box');">
+                    <label class="form-check-label mx-2" for="idLocations">Journeys</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div id='locations-box'>
+                <div class=" row mb-3">
+                    <label for="inputLocation" class="col-sm-1 col-form-label">Location</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="inputLocation">
+                    </div>
+                    <button type="submit" class="btn btn-primary col-sm-2"
+                        onclick="lookupLocation('inputLocation');">lookup
+                        location</button>
+                </div>
+
+                <br />
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Id</th>
+                            <th scope="col">Location</th>
+                        </tr>
+                    </thead>
+                    <tbody id="result-locations" />
+
+                </table>
+            </div>
+
+            <div id='journeys-box' style="display:none">
+                <div class="row mb-3">
+                    <label for="inputFrom" class="col-sm-1 col-form-label">From</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="inputFrom">
+                    </div>
+                    <label for="inputTo" class="col-sm-1 col-form-label">To</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="inputTo">
+                    </div>
+                    <button type="submit" class="btn btn-primary col-sm-2"
+                        onclick="lookupJourneys('inputFrom', 'inputTo');">lookup
+                        journeys</button>
+                </div>
+
+                <br />
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">lfd. Nr</th>
+                            <th scope="col">Start</th>
+                            <th scope="col">Ziel</th>
+                            <th scope="col">Datum</th>
+                        </tr>
+                    </thead>
+                    <tbody id="result-journeys" />
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/fshafas.bundle.js"></script>
+
+    <script src="./js/site.js" />
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

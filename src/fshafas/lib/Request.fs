@@ -10,6 +10,9 @@ module internal Request =
 
     importSideEffects "isomorphic-fetch"
 
+    [<Emit("typeof window !== 'undefined' ? (new URL(window.location)).origin : ''")>]
+    let jsWindowLocation () : string = jsNative
+
     [<ImportDefault("md5")>]
     let md5 (x: byte []) : string = jsNative
 
@@ -29,6 +32,8 @@ module internal Request =
         member __.Dispose() = ()
 
         member __.PostAsync (url: string) (salt: string) (json: string) =
+            let windowLocation = jsWindowLocation()
+
             let urlchecksum =
                 if salt.Length > 0 then
                     let checksum = getMd5 json salt
@@ -36,7 +41,14 @@ module internal Request =
                 else
                     url
 
-            log "url: " urlchecksum
+
+            let urlEscaped = 
+                if windowLocation.Length > 0 then
+                    windowLocation + "/proxy?url=" + System.Uri.EscapeDataString(urlchecksum)
+                else
+                    urlchecksum
+
+            log "url: " urlEscaped
 
             let properties =
                 [ RequestProperties.Method HttpMethod.POST
@@ -46,7 +58,7 @@ module internal Request =
                                    UserAgent "agent" ]
                   RequestProperties.Body(fromStringtoJsonBody json) ]
 
-            fetch urlchecksum properties
+            fetch urlEscaped properties
             |> Promise.bind (fun res ->
                 if not res.Ok then raise (System.Exception(res.StatusText)) 
                 res.text ())
