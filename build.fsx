@@ -16,6 +16,7 @@ open Fake.Core.TargetOperators
 open Fake.IO.Globbing.Operators
 open Fake.JavaScript
 open Fake.DotNet
+open System
 open System.Text.Json
 open System.Text.Json.Serialization
 
@@ -120,6 +121,32 @@ Target.create "BuildFableNpmPack" (fun _ ->
   Npm.exec "pack fs-hafas-client/" (fun o -> { o with WorkingDirectory = "./src/fshafas.fable.package/" }) |> ignore
 )
 
+Target.create "CopyWebBundle" (fun _ ->
+    Shell.copy "src/fshafas.fable.web/wwwroot/js/lib/" ["src/fshafas.fable.package/fs-hafas-client-web/fshafas.web.bundle.js"]
+    Shell.copy "src/fshafas.fable.web/wwwroot/js/lib/" ["src/fshafas.fable.package/fs-hafas-client/hafas-client.d.ts"]
+    Shell.copy "src/fshafas.fable.web/wwwroot/js/lib/" ["src/fshafas.fable.package/fs-hafas-client-web/fshafas.web.bundle.d.ts"]
+)
+
+Target.create "CompileTypeScript" (fun _ ->
+  /// waiting for module Fake.JavaScript.TypeScript 
+  let compile workingDirectory file = 
+        use __ = Trace.traceTask "TypeScript" ""
+        let startInfo = new Diagnostics.ProcessStartInfo(FileName = "tsc", Arguments = ("--target ES2015 --noImplicitAny " + file))
+        startInfo.WorkingDirectory <- workingDirectory
+        let callResult = 
+              startInfo
+              |> CreateProcess.ofStartInfo
+              |> CreateProcess.redirectOutput
+              |> CreateProcess.withTimeout (TimeSpan.FromMinutes 5.)
+              |> Proc.run
+
+        if callResult.ExitCode > 0 then 
+              Trace.traceError callResult.Result.Output
+              failwith "TypeScript compiler encountered errors!"
+
+  compile "./src/fshafas.fable.web/wwwroot/js/"  "site.ts"
+)
+
 open Fake.Core.TargetOperators
 
 Target.create "Default" ignore
@@ -142,6 +169,8 @@ Target.create "Docs" ignore
 ==> "Docs"
 
 "BuildFableWebpackWebDev"
+==> "CopyWebBundle"
+==> "CompileTypeScript"
 ==> "BuildWebApp"
 ==> "Web"
 

@@ -33,12 +33,12 @@
             <div class="col">
                 <div class="form-check form-check-inline">
                     <input type="radio" class="form-check-input" name="btnradioCommands" id="idLocations"
-                        autocomplete="off" checked onclick="displayElement('locations-box');">
+                        autocomplete="off" checked>
                     <label class="form-check-label" for="idLocations">Locations</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input type="radio" class="form-check-input" name="btnradioCommands" id="idJourneys"
-                        autocomplete="off" onclick="displayElement('journeys-box');">
+                        autocomplete="off">
                     <label class="form-check-label mx-2" for="idLocations">Journeys</label>
                 </div>
             </div>
@@ -51,8 +51,7 @@
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="inputLocation">
                     </div>
-                    <button type="submit" class="btn btn-primary col-sm-2"
-                        onclick="lookupLocation('inputLocation');">lookup
+                    <button type="submit" class="btn btn-primary col-sm-2" id="btnLookupLocation">lookup
                         location</button>
                 </div>
 
@@ -81,8 +80,7 @@
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="inputTo">
                     </div>
-                    <button type="submit" class="btn btn-primary col-sm-2"
-                        onclick="lookupJourneys('inputFrom', 'inputTo');">lookup
+                    <button type="submit" class="btn btn-primary col-sm-2" id="btnLookupJourneys">lookup
                         journeys</button>
                 </div>
 
@@ -94,7 +92,8 @@
                             <th scope="col">lfd. Nr</th>
                             <th scope="col">Start</th>
                             <th scope="col">Ziel</th>
-                            <th scope="col">Datum</th>
+                            <th scope="col">Abfahrt</th>
+                            <th scope="col">Ankunft</th>
                         </tr>
                     </thead>
                     <tbody id="result-journeys" />
@@ -104,9 +103,22 @@
         </div>
     </div>
 
-    <script src="./js/fshafas.bundle.js"></script>
+    <script type="module">
+        import { lookupLocation, lookupJourneys, displayElement } from './js/site.js';
 
-    <script src="./js/site.js" />
+        document.getElementById('idLocations').onclick = function () {
+            displayElement('locations-box');
+        }
+        document.getElementById('idJourneys').onclick = function () {
+            displayElement('journeys-box');
+        }
+        document.getElementById('btnLookupJourneys').onclick = function () {
+            lookupJourneys('inputFrom', 'inputTo');
+        }
+        document.getElementById('btnLookupLocation').onclick = function () {
+            lookupLocation('inputLocation');
+        }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"

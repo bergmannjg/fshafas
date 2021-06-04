@@ -5,6 +5,7 @@ open Microsoft.Extensions.DependencyInjection
 open AspNetCore.Proxy
 open AspNetCore.Proxy.Builders
 
+/// corresponds to HttpClient.PostAsync in src/fshafas/lib/Request.fs
 let addProxies (proxies: IProxiesBuilder) =
     proxies.Map(
         "/proxy",
@@ -23,8 +24,7 @@ let configureApp (app: IApplicationBuilder) =
         .UseProxies(fun proxies -> proxies |> addProxies |> ignore)
     |> ignore
 
-let configureServices (services: IServiceCollection) =
-    services.AddProxies().AddControllers() |> ignore
+let configureServices (services: IServiceCollection) = services.AddProxies() |> ignore
 
 [<EntryPoint>]
 let main _ =

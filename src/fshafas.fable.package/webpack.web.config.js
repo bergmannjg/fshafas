@@ -14,14 +14,16 @@ var babelOptions = {
 console.log("Bundling function...");
 
 module.exports = {
+  experiments: {
+    outputModule: true
+  },
   target: "web",
   entry: './build/Lib.js',
   output: {
-    path: path.join(__dirname, "../fshafas.fable.web/wwwroot/js"),
-    filename: 'fshafas.bundle.js',
+    path: path.join(__dirname, "./fs-hafas-client-web"),
+    filename: 'fshafas.web.bundle.js',
     library: {
-      name: 'fshafas',
-      type: 'umd',
+      type: 'module'
     }
   },
   plugins: [new webpack.ProvidePlugin({

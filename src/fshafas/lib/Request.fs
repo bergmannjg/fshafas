@@ -32,7 +32,6 @@ module internal Request =
         member __.Dispose() = ()
 
         member __.PostAsync (url: string) (salt: string) (json: string) =
-            let windowLocation = jsWindowLocation()
 
             let urlchecksum =
                 if salt.Length > 0 then
@@ -41,10 +40,13 @@ module internal Request =
                 else
                     url
 
+            let urlEscaped =
+                let windowLocation = jsWindowLocation ()
 
-            let urlEscaped = 
                 if windowLocation.Length > 0 then
-                    windowLocation + "/proxy?url=" + System.Uri.EscapeDataString(urlchecksum)
+                    windowLocation
+                    + "/proxy?url="
+                    + System.Uri.EscapeDataString(urlchecksum)
                 else
                     urlchecksum
 
@@ -59,9 +61,12 @@ module internal Request =
                   RequestProperties.Body(fromStringtoJsonBody json) ]
 
             fetch urlEscaped properties
-            |> Promise.bind (fun res ->
-                if not res.Ok then raise (System.Exception(res.StatusText)) 
-                res.text ())
+            |> Promise.bind
+                (fun res ->
+                    if not res.Ok then
+                        raise (System.Exception(res.StatusText))
+
+                    res.text ())
             |> Promise.catch
                 (fun ex ->
                     printfn "PostAsync: %s" ex.Message

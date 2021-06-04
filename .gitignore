@@ -20,7 +20,11 @@ build.fsx.lock
 fs-hafas-client-*.tgz
 fshafas.bundle.js
 fshafas.bundle.js.map
-fshafas.bundle.js..LICENSE.txt
+fshafas.bundle.js.LICENSE.txt
+fshafas.web.bundle.js
+
+src/fshafas.fable.web/wwwroot/js/site.js
+src/fshafas.fable.web/wwwroot/js/lib/
 
 x.txt
 
