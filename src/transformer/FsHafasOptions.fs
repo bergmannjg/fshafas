@@ -177,6 +177,13 @@ let transformTypeDefns =
             U2<string, Station> ->
             DeparturesArrivalsOptions option ->
             Promise<array<Alternative>>
+        /// Retrieves journeys from trip id to station
+        abstract member journeysFromTrip :
+            string ->
+            StopOver ->
+            U3<string, Station, Stop> ->
+            JourneysFromTripOptions option ->
+            Promise<ResizeArray<Journey>>
         /// Retrieves locations or stops
         abstract member locations : string -> LocationsOptions option -> Promise<array<U3<Station, Stop, Location>>>
         /// Retrieves information about a stop

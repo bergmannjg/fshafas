@@ -44,6 +44,23 @@ const journeys = () => {
         .catch(console.error);
 }
 
+const journeysFromTrip = async () => {
+    const hamburgHbf = '8002549'
+    const münchenHbf = '8000261'
+    const kölnHbf = '8000207'
+
+    const departure = new Date();
+    departure.setHours(departure.getHours() - 4);
+    const journeysResult = await client.journeys(hamburgHbf, münchenHbf, { departure: departure, results: 1, stopovers: true })
+    const journey = journeysResult.journeys.find(j => !j.legs[0].canceled);
+
+    const leg = journey.legs.find(l => l.line.product === 'nationalExpress')
+    const previousStopover = leg.stopovers.find(st => st.departure && new Date(st.departure) < Date.now());
+
+    const journeys = await client.journeysFromTrip(leg.tripId, previousStopover, kölnHbf, { stopovers: true });
+    console.log(JSON.stringify(journeys));
+}
+
 const trip = () => {
     client.journeys('8011160', '8010338', {
         results: 1
@@ -118,6 +135,12 @@ switch (myArgs[0]) {
     case 'journeys':
         journeys();
         break;
+    case 'journeysFromTrip':
+        journeysFromTrip().catch(error => {
+            console.error(error.message);
+            console.error(error.stack);
+        });
+        break;
     case 'trip':
         trip();
         break;
@@ -161,7 +184,7 @@ EOF
   "dependencies": {
     "fs-hafas-client": "file:../src/fshafas.fable.package/fs-hafas-client-1.0.0.tgz",
     "google-polyline": "^1.0.3",
-    "hafas-client": "^5.15.1",
+    "hafas-client": "^5.18.0",
     "isomorphic-fetch": "^2.2.1",
     "md5": "^2.3.0",
     "slugg": "^1.2.1"

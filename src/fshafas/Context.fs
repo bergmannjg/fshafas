@@ -45,6 +45,7 @@ type internal Profile =
       trip: bool option
       radar: bool option
       refreshJourney: bool option
+      journeysFromTrip: bool option
       reachableFrom: bool option
       journeysWalkingSpeed: bool option
       tripsByName: bool option

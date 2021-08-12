@@ -45,10 +45,10 @@ type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
         and set s b = jsNative
 
     [<Emit("(Object.keys($0))")>]
-    member __.Keys : 's [] = jsNative
+    member __.Keys: 's [] = jsNative
 #else
 type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
-    let mutable map : Map<'s, 'b> = Map.empty
+    let mutable map: Map<'s, 'b> = Map.empty
 
     member __.Item
         with get (s: 's) =
@@ -83,6 +83,7 @@ and Profile =
       trip: bool option
       radar: bool option
       refreshJourney: bool option
+      journeysFromTrip: bool option
       reachableFrom: bool option
       journeysWalkingSpeed: bool option
       tripsByName: bool option
@@ -102,7 +103,6 @@ and Location =
       distance: int option }
 /// Each public transportation network exposes its products as boolean properties. See {@link ProductType}
 and Products = IndexMap<string, bool>
-
 and Facilities = IndexMap<string, string>
 
 and ReisezentrumOpeningHours =
@@ -496,6 +496,27 @@ and JourneysOptions =
       loyaltyCard: LoyaltyCard option
       ``when``: DateTime option }
 
+and JourneysFromTripOptions =
+    {
+      /// return stations on the way?
+      stopovers: bool option
+      /// minimum time for a single transfer in minutes
+      transferTime: int option
+      /// 'none', 'partial' or 'complete'
+      accessibility: string option
+      /// return tickets?
+      tickets: bool option
+      /// return leg shapes?
+      polylines: bool option
+      /// parse & expose sub-stops of stations?
+      subStops: bool option
+      /// parse & expose entrances of stops/stations?
+      entrances: bool option
+      /// parse & expose hints & warnings?
+      remarks: bool option
+      /// products
+      products: Products option }
+
 and LocationsOptions =
     {
       /// find only exact matches?
@@ -695,6 +716,13 @@ and HafasClient =
     abstract member departures : U2<string, Station> -> DeparturesArrivalsOptions option -> Promise<array<Alternative>>
     /// Retrieves arrivals
     abstract member arrivals : U2<string, Station> -> DeparturesArrivalsOptions option -> Promise<array<Alternative>>
+    /// Retrieves journeys from trip id to station
+    abstract member journeysFromTrip :
+        string ->
+        StopOver ->
+        U3<string, Station, Stop> ->
+        JourneysFromTripOptions option ->
+        Promise<ResizeArray<Journey>>
     /// Retrieves locations or stops
     abstract member locations : string -> LocationsOptions option -> Promise<array<U3<Station, Stop, Location>>>
     /// Retrieves information about a stop

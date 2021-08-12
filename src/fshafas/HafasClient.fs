@@ -97,6 +97,7 @@ type HafasClient(id: FsHafas.Client.ProfileId) =
           trip = profile.trip
           radar = profile.radar
           refreshJourney = profile.refreshJourney
+          journeysFromTrip = profile.journeysFromTrip
           reachableFrom = profile.reachableFrom
           journeysWalkingSpeed = profile.journeysWalkingSpeed
           tripsByName = profile.tripsByName
@@ -154,11 +155,32 @@ type HafasClient(id: FsHafas.Client.ProfileId) =
             client.AsyncArrivals id opt
 #endif
 
+#if FABLE_COMPILER
+        member __.journeysFromTrip
+            (tripId: string)
+            (prevStopOver: StopOver)
+            (stop: U3<string, Station, Stop>)
+            (opt: JourneysFromTripOptions option)
+            : JS.Promise<ResizeArray<Journey>> =
+            raise (System.NotImplementedException(""))
+#else
+        member __.journeysFromTrip
+            (tripId: string)
+            (prevStopOver: StopOver)
+            (stop: U3<string, Station, Stop>)
+            (opt: JourneysFromTripOptions option)
+            : Async<ResizeArray<Journey>> =
+            raise (System.NotImplementedException(""))
+#endif
+
         member __.locations (name: string) (opt: LocationsOptions option) =
 #if FABLE_COMPILER
-            validateString name
+            validateString
+                name
 
-            client.AsyncLocations name opt
+            client.AsyncLocations
+                name
+                opt
             |> Async.StartAsPromise
 #else
             client.AsyncLocations name opt

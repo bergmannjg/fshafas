@@ -27,6 +27,7 @@ module Parser =
           trip = None
           radar = None
           refreshJourney = None
+          journeysFromTrip = None
           reachableFrom = None
           journeysWalkingSpeed = None
           tripsByName = None
