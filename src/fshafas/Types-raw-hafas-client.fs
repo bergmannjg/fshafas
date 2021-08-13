@@ -288,8 +288,8 @@ type RawGrid =
       title: string }
 
 type RawLoc =
-    { lid: string
-      ``type``: string
+    { lid: string option
+      ``type``: string option
       name: string
       icoX: int option
       extId: string option
