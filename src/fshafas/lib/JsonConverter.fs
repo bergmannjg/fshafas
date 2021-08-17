@@ -32,9 +32,9 @@ module internal Converter =
 
     type UnionConverter<'a>() =
         inherit JsonConverterFactory()
-        override this.CanConvert(t: Type): bool = t.Name = typedefof<'a>.Name
+        override this.CanConvert(t: Type) : bool = t.Name = typedefof<'a>.Name
 
-        override this.CreateConverter(typeToConvert: Type, _options: JsonSerializerOptions): JsonConverter =
+        override this.CreateConverter(typeToConvert: Type, _options: JsonSerializerOptions) : JsonConverter =
             let converterType =
                 typedefof<UnionValueConverter<_>>.MakeGenericType (typeToConvert)
 
@@ -141,8 +141,8 @@ module internal Converter =
 
             Activator.CreateInstance(converterType, uc) :?> JsonConverter
 
-    type U13EraseValueConverter<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm>(uc: UnionCaseSelection) =
-        inherit JsonConverter<U13<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm>>()
+    type U14EraseValueConverter<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n>(uc: UnionCaseSelection) =
+        inherit JsonConverter<U14<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n>>()
 
         override this.Read(reader: byref<Utf8JsonReader>, _typ: Type, options: JsonSerializerOptions) =
             raise (System.NotImplementedException(""))
@@ -150,38 +150,39 @@ module internal Converter =
         override this.Write
             (
                 writer: Utf8JsonWriter,
-                value: U13<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm>,
+                value: U14<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n>,
                 options: JsonSerializerOptions
             ) =
             match value with
-            | U13.Case1 v -> JsonSerializer.Serialize(writer, v, options)
-            | U13.Case2 v -> JsonSerializer.Serialize(writer, v, options)
-            | U13.Case3 v -> JsonSerializer.Serialize(writer, v, options)
-            | U13.Case4 v -> JsonSerializer.Serialize(writer, v, options)
-            | U13.Case5 v -> JsonSerializer.Serialize(writer, v, options)
-            | U13.Case6 v -> JsonSerializer.Serialize(writer, v, options)
-            | U13.Case7 v -> JsonSerializer.Serialize(writer, v, options)
-            | U13.Case8 v -> JsonSerializer.Serialize(writer, v, options)
-            | U13.Case9 v -> JsonSerializer.Serialize(writer, v, options)
-            | U13.Case10 v -> JsonSerializer.Serialize(writer, v, options)
-            | U13.Case11 v -> JsonSerializer.Serialize(writer, v, options)
-            | U13.Case12 v -> JsonSerializer.Serialize(writer, v, options)
-            | U13.Case13 v -> JsonSerializer.Serialize(writer, v, options)
+            | U14.Case1 v -> JsonSerializer.Serialize(writer, v, options)
+            | U14.Case2 v -> JsonSerializer.Serialize(writer, v, options)
+            | U14.Case3 v -> JsonSerializer.Serialize(writer, v, options)
+            | U14.Case4 v -> JsonSerializer.Serialize(writer, v, options)
+            | U14.Case5 v -> JsonSerializer.Serialize(writer, v, options)
+            | U14.Case6 v -> JsonSerializer.Serialize(writer, v, options)
+            | U14.Case7 v -> JsonSerializer.Serialize(writer, v, options)
+            | U14.Case8 v -> JsonSerializer.Serialize(writer, v, options)
+            | U14.Case9 v -> JsonSerializer.Serialize(writer, v, options)
+            | U14.Case10 v -> JsonSerializer.Serialize(writer, v, options)
+            | U14.Case11 v -> JsonSerializer.Serialize(writer, v, options)
+            | U14.Case12 v -> JsonSerializer.Serialize(writer, v, options)
+            | U14.Case13 v -> JsonSerializer.Serialize(writer, v, options)
+            | U14.Case14 v -> JsonSerializer.Serialize(writer, v, options)
 
-    type U13EraseConverter<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm>(uc: UnionCaseSelection) =
+    type U14EraseConverter<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n>(uc: UnionCaseSelection) =
         inherit JsonConverterFactory()
 
         override this.CanConvert(t: Type) : bool =
             t.IsGenericType
-            && t.GetGenericTypeDefinition() = typedefof<U13<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm>>
+            && t.GetGenericTypeDefinition() = typedefof<U14<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n>>
 
         override this.CreateConverter(typeToConvert: Type, _options: JsonSerializerOptions) : JsonConverter =
             let types =
                 typeToConvert.GetGenericArguments()
-                |> Array.take 13
+                |> Array.take 14
 
             let converterType =
-                typedefof<U13EraseValueConverter<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm>>.MakeGenericType
+                typedefof<U14EraseValueConverter<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n>>.MakeGenericType
                     (types)
 
             Activator.CreateInstance(converterType, uc) :?> JsonConverter

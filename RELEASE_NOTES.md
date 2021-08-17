@@ -4,3 +4,7 @@
 
 * initial release
 * corresponds to hafas-client version 5.15.0
+
+## 1.1.0
+
+* corresponds to hafas-client version 5.18.0

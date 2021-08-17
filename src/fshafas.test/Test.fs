@@ -43,7 +43,7 @@ let checkEqual (o1: obj) (o2: obj) =
             diffs <- diffs + 1
             fprintfn stderr "%s" (sprintf "ValuesDifferent %s: '%A' '%A'" name o1 o2)
 
-    let evt : CompareEvent =
+    let evt: CompareEvent =
         { onTypesDifferent = printTypesDifferent
           onValuesDifferent = printValuesDifferent }
 
@@ -94,7 +94,12 @@ let loadLocations (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
 let loadJourneys (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let parsedResponse =
-        FsHafas.Api.Parser.parseJourneysFromResult ProfileId.Db res.outConL FsHafas.Api.Parser.defaultOptions res
+        FsHafas.Api.Parser.parseJourneysFromResult
+            ProfileId.Db
+            res.outConL
+            { FsHafas.Api.Parser.defaultOptions with
+                  scheduledDays = true }
+            res
 
     Assert.That(parsedResponse.journeys.IsSome, Is.EqualTo(true))
 
@@ -104,6 +109,25 @@ let loadJourneys (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     Assert.That(response.journeys.IsSome, Is.EqualTo(true))
 
     (parsedResponse :> obj, response :> obj)
+
+let skipLegs (journeys: Journey []) =
+    journeys
+    |> Array.map (fun j -> { j with legs = [||] })
+
+let loadJourneyArray (res: FsHafas.Raw.RawResult) (expectedJson: string) =
+    let parsedResponse =
+        FsHafas.Api.Parser.parseJourneysArrayFromResult ProfileId.Db res.outConL FsHafas.Api.Parser.defaultOptions res
+
+    Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
+
+    let response =
+        FsHafas.Api.Parser.Deserialize<Journey []>(expectedJson)
+
+    Assert.That(response.Length > 0, Is.EqualTo(true))
+    Assert.AreEqual(response.Length, parsedResponse.Length)
+
+    // legs may differ
+    (skipLegs (parsedResponse) :> obj, skipLegs (response) :> obj)
 
 let loadTrip (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let parsedResponse =
@@ -263,3 +287,7 @@ let TestLines () =
 [<Test>]
 let TestWarnings () =
     testRunner (Fixture.jsonRemarksRawResponse ()) (Fixture.jsonRemarksResponse ()) loadWarnings
+
+[<Test>]
+let TestJourneysFromTrip () =
+    testRunner (Fixture.jsonSearchOnTripRawResponse ()) (Fixture.jsonSearchOnTripResponse ()) loadJourneyArray

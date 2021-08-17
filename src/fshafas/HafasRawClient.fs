@@ -17,7 +17,7 @@ type HafasRawClient(endpoint: string, salt: string, cfg:  FsHafas.Raw.Cfg, baseR
 
     let makeRequest
         (meth: string)
-        (parameters: U13<LocMatchRequest, TripSearchRequest, JourneyDetailsRequest, StationBoardRequest, ReconstructionRequest, JourneyMatchRequest, LocGeoPosRequest, LocGeoReachRequest, LocDetailsRequest, JourneyGeoPosRequest, HimSearchRequest, LineMatchRequest, ServerInfoRequest>)
+        (parameters: U14<LocMatchRequest, TripSearchRequest, JourneyDetailsRequest, StationBoardRequest, ReconstructionRequest, JourneyMatchRequest, LocGeoPosRequest, LocGeoReachRequest, LocDetailsRequest, JourneyGeoPosRequest, HimSearchRequest, LineMatchRequest, ServerInfoRequest, SearchOnTripRequest>)
         : RawRequest =
         let svcReqL : SvcReq =
             { cfg = cfg
@@ -43,7 +43,7 @@ type HafasRawClient(endpoint: string, salt: string, cfg:  FsHafas.Raw.Cfg, baseR
         | Error decodingError -> failwith (sprintf "was unable to decode: %s. Reason: %s" json decodingError)
 #else
     let converter =
-        Converter.U13EraseConverter<LocMatchRequest, TripSearchRequest, JourneyDetailsRequest, StationBoardRequest, ReconstructionRequest, JourneyMatchRequest, LocGeoPosRequest, LocGeoReachRequest, LocDetailsRequest, JourneyGeoPosRequest, HimSearchRequest, LineMatchRequest, ServerInfoRequest>(
+        Converter.U14EraseConverter<LocMatchRequest, TripSearchRequest, JourneyDetailsRequest, StationBoardRequest, ReconstructionRequest, JourneyMatchRequest, LocGeoPosRequest, LocGeoReachRequest, LocDetailsRequest, JourneyGeoPosRequest, HimSearchRequest, LineMatchRequest, ServerInfoRequest, SearchOnTripRequest>(
             Converter.UnionCaseSelection.Disabled
         )
 
@@ -85,7 +85,7 @@ type HafasRawClient(endpoint: string, salt: string, cfg:  FsHafas.Raw.Cfg, baseR
 
     member __.AsyncLocMatch(locMatchRequest: LocMatchRequest) =
         async {
-            let! res = asyncPost (makeRequest "LocMatch" (U13.Case1 locMatchRequest))
+            let! res = asyncPost (makeRequest "LocMatch" (U14.Case1 locMatchRequest))
 
             match res.``match`` with
             | Some ``match`` -> return (res.common, Some res, ``match``.locL)
@@ -94,37 +94,37 @@ type HafasRawClient(endpoint: string, salt: string, cfg:  FsHafas.Raw.Cfg, baseR
 
     member __.AsyncTripSearch(tripSearchRequest: TripSearchRequest) =
         async {
-            let! res = asyncPost (makeRequest "TripSearch" (U13.Case2 tripSearchRequest))
+            let! res = asyncPost (makeRequest "TripSearch" (U14.Case2 tripSearchRequest))
             return (res.common, Some res, res.outConL)
         }
 
     member __.AsyncJourneyDetails(journeyDetailsRequest: JourneyDetailsRequest) =
         async {
-            let! res = asyncPost (makeRequest "JourneyDetails" (U13.Case3 journeyDetailsRequest))
+            let! res = asyncPost (makeRequest "JourneyDetails" (U14.Case3 journeyDetailsRequest))
             return (res.common, Some res, res.journey)
         }
 
     member __.AsyncStationBoard(stationBoardRequest: StationBoardRequest) =
         async {
-            let! res = asyncPost (makeRequest "StationBoard" (U13.Case4 stationBoardRequest))
+            let! res = asyncPost (makeRequest "StationBoard" (U14.Case4 stationBoardRequest))
             return (res.common, Some res, res.jnyL)
         }
 
     member __.AsyncReconstruction(reconstructionRequest: ReconstructionRequest) =
         async {
-            let! res = asyncPost (makeRequest "Reconstruction" (U13.Case5 reconstructionRequest))
+            let! res = asyncPost (makeRequest "Reconstruction" (U14.Case5 reconstructionRequest))
             return (res.common, Some res, res.outConL)
         }
 
     member __.AsyncJourneyMatch(journeyMatchRequest: JourneyMatchRequest) =
         async {
-            let! res = asyncPost (makeRequest "JourneyMatch" (U13.Case6 journeyMatchRequest))
+            let! res = asyncPost (makeRequest "JourneyMatch" (U14.Case6 journeyMatchRequest))
             return (res.common, Some res, res.jnyL)
         }
 
     member __.AsyncLocGeoPos(locGeoPosRequest: LocGeoPosRequest) =
         async {
-            let! res = asyncPost (makeRequest "LocGeoPos" (U13.Case7 locGeoPosRequest))
+            let! res = asyncPost (makeRequest "LocGeoPos" (U14.Case7 locGeoPosRequest))
 
             match res.locL with
             | Some locL -> return (res.common, Some res, locL)
@@ -133,7 +133,7 @@ type HafasRawClient(endpoint: string, salt: string, cfg:  FsHafas.Raw.Cfg, baseR
 
     member __.AsyncLocGeoReach(locGeoReachRequest: LocGeoReachRequest) =
         async {
-            let! res = asyncPost (makeRequest "LocGeoReach" (U13.Case8 locGeoReachRequest))
+            let! res = asyncPost (makeRequest "LocGeoReach" (U14.Case8 locGeoReachRequest))
 
             match res.posL with
             | Some posL -> return (res.common, Some res, posL)
@@ -142,7 +142,7 @@ type HafasRawClient(endpoint: string, salt: string, cfg:  FsHafas.Raw.Cfg, baseR
 
     member __.AsyncLocDetails(locDetailsRequest: LocDetailsRequest) =
         async {
-            let! res = asyncPost (makeRequest "LocDetails" (U13.Case9 locDetailsRequest))
+            let! res = asyncPost (makeRequest "LocDetails" (U14.Case9 locDetailsRequest))
 
             match res.locL with
             | Some locL when locL.Length > 0 -> return (res.common, Some res, Some locL.[0])
@@ -151,24 +151,31 @@ type HafasRawClient(endpoint: string, salt: string, cfg:  FsHafas.Raw.Cfg, baseR
 
     member __.AsyncJourneyGeoPos(journeyGeoPosRequest: JourneyGeoPosRequest) =
         async {
-            let! res = asyncPost (makeRequest "JourneyGeoPos" (U13.Case10 journeyGeoPosRequest))
+            let! res = asyncPost (makeRequest "JourneyGeoPos" (U14.Case10 journeyGeoPosRequest))
             return (res.common, Some res, res.jnyL)
         }
 
     member __.AsyncHimSearch(himSearchRequest: HimSearchRequest) =
         async {
-            let! res = asyncPost (makeRequest "HimSearch" (U13.Case11 himSearchRequest))
+            let! res = asyncPost (makeRequest "HimSearch" (U14.Case11 himSearchRequest))
             return (res.common, Some res, res.msgL)
         }
 
     member __.AsyncLineMatch(lineMatchRequest: LineMatchRequest) =
         async {
-            let! res = asyncPost (makeRequest "LineMatch" (U13.Case12 lineMatchRequest))
+            let! res = asyncPost (makeRequest "LineMatch" (U14.Case12 lineMatchRequest))
             return (res.common, Some res, res.lineL)
         }
 
     member __.AsyncServerInfo(serverInfoRequest: ServerInfoRequest) =
         async {
-            let! res = asyncPost (makeRequest "ServerInfo" (U13.Case13 serverInfoRequest))
+            let! res = asyncPost (makeRequest "ServerInfo" (U14.Case13 serverInfoRequest))
             return (res.common, Some res)
         }
+
+    member __.AsyncSearchOnTrip(searchOnTripRequest: SearchOnTripRequest) =
+        async {
+            let! res = asyncPost (makeRequest "SearchOnTrip" (U14.Case14 searchOnTripRequest))
+            return (res.common, Some res, res.outConL)
+        }
+

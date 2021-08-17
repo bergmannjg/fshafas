@@ -92,6 +92,32 @@ type HafasAsyncClient(id: FsHafas.Client.ProfileId) =
                 return Default.Journey
         }
 
+    member __.AsyncJourneysFromTrip
+        (fromTripId: string)
+        (previousStopOver: StopOver)
+        (``to``: U4<string, Station, Stop, Location>)
+        (opt: JourneysFromTripOptions option)
+        : Async<array<Journey>> =
+
+        async {
+            if enabled profile.journeysFromTrip then
+                let! (common, res, outConl) =
+                    httpClient.AsyncSearchOnTrip(
+                        Format.searchOnTripRequest profile fromTripId previousStopOver ``to`` opt
+                    )
+
+                return
+                    Parser.parseJourneysArray
+                        outConl
+                        (Parser.parseCommon
+                            profile
+                            (MergeOptions.JourneysFromTripOptions Parser.defaultOptions opt)
+                            common
+                            res)
+            else
+                return [||]
+        }
+
     member __.AsyncTrip (id: string) (name: string) (opt: TripOptions option) : Async<Trip> =
 
         async {

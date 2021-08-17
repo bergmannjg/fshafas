@@ -26,7 +26,7 @@ open Fable.Core
 #if FABLE_COMPILER
 [<Erase>]
 #endif
-type U13<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm> =
+type U14<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n> =
     | Case1 of 'a
     | Case2 of 'b
     | Case3 of 'c
@@ -40,3 +40,4 @@ type U13<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm> =
     | Case11 of 'k
     | Case12 of 'l
     | Case13 of 'm
+    | Case14 of 'n

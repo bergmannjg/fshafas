@@ -57,3 +57,9 @@ let jsonNearbyRawResponse () =
 
 let jsonNearbyResponse () =
     File.ReadAllText(path + "db-nearby-response.json")
+
+let jsonSearchOnTripRawResponse () =
+    File.ReadAllText(path + "db-searchOnTrip-raw-response.json")
+
+let jsonSearchOnTripResponse () =
+    File.ReadAllText(path + "db-searchOnTrip-response.json")

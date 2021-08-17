@@ -159,28 +159,26 @@ type HafasClient(id: FsHafas.Client.ProfileId) =
         member __.journeysFromTrip
             (tripId: string)
             (prevStopOver: StopOver)
-            (stop: U3<string, Station, Stop>)
+            (``to``: U4<string, Station, Stop, Location>)
             (opt: JourneysFromTripOptions option)
-            : JS.Promise<ResizeArray<Journey>> =
-            raise (System.NotImplementedException(""))
+            : JS.Promise<array<Journey>> =
+            client.AsyncJourneysFromTrip tripId prevStopOver (makeCaseOfU4 ``to``) opt
+            |> Async.StartAsPromise
 #else
         member __.journeysFromTrip
             (tripId: string)
             (prevStopOver: StopOver)
-            (stop: U3<string, Station, Stop>)
+            (``to``: U4<string, Station, Stop, Location>)
             (opt: JourneysFromTripOptions option)
-            : Async<ResizeArray<Journey>> =
-            raise (System.NotImplementedException(""))
+            : Async<array<Journey>> =
+            client.AsyncJourneysFromTrip tripId prevStopOver ``to`` opt
 #endif
 
         member __.locations (name: string) (opt: LocationsOptions option) =
 #if FABLE_COMPILER
-            validateString
-                name
+            validateString name
 
-            client.AsyncLocations
-                name
-                opt
+            client.AsyncLocations name opt
             |> Async.StartAsPromise
 #else
             client.AsyncLocations name opt

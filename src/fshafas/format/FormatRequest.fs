@@ -6,6 +6,28 @@ module internal Format =
     open Fable.Core
 #endif
 
+    let private ParseIsoString (datetime: string) =
+        let year = datetime.Substring(0, 4) |> int
+        let month = datetime.Substring(5, 2) |> int
+        let day = datetime.Substring(8, 2) |> int
+        let hour = datetime.Substring(11, 2) |> int
+        let minute = datetime.Substring(14, 2) |> int
+
+        let tzOffset =
+            datetime.Substring(20, 2) |> int |> (*) 60
+
+        System
+            .DateTimeOffset(
+                year,
+                month,
+                day,
+                hour,
+                minute,
+                0,
+                System.TimeSpan(tzOffset / 60, 0, 0)
+            )
+            .DateTime
+
     let private maybeGetOptionValue<'a, 'b> (opt: 'a option) (getter: 'a -> 'b option) =
         match opt with
         | Some (value) -> getter value
@@ -35,11 +57,11 @@ module internal Format =
     let private makeFilters (profile: FsHafas.Parser.Profile) (products: FsHafas.Client.Products) =
         let bitmask = formatProductsBitmask profile products
 
-        let filters : FsHafas.Raw.JnyFltr [] =
+        let filters: FsHafas.Raw.JnyFltr [] =
             if bitmask <> 0 then
                 [| { ``type`` = "PROD"
                      mode = "INC"
-                     value = bitmask.ToString()
+                     value = Some(bitmask.ToString())
                      meta = None } |]
             else
                 [||]
@@ -120,7 +142,7 @@ module internal Format =
         let products =
             getOptionValue opt (fun v -> v.products) Default.DeparturesArrivalsOptions
 
-        let filters : FsHafas.Raw.JnyFltr [] = makeFilters profile products
+        let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
 
         { ``type`` = ``type``
           date = date
@@ -195,7 +217,7 @@ module internal Format =
         let products =
             getOptionValue opt (fun v -> v.products) Default.NearByOptions
 
-        let filters : FsHafas.Raw.JnyFltr [] = makeFilters profile products
+        let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
 
         let x =
             match location.longitude with
@@ -237,7 +259,7 @@ module internal Format =
         let products =
             getOptionValue opt (fun v -> v.products) Default.ReachableFromOptions
 
-        let filters : FsHafas.Raw.JnyFltr [] = makeFilters profile products
+        let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
 
         { loc = makeLoclTypeA location
           maxDur = maxDuration
@@ -277,7 +299,7 @@ module internal Format =
         let products =
             getOptionValue opt (fun v -> v.products) Default.RadarOptions
 
-        let filters : FsHafas.Raw.JnyFltr [] = makeFilters profile products
+        let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
 
         { maxJny = results
           onlyRT = false
@@ -345,7 +367,7 @@ module internal Format =
         let products =
             getOptionValue opt (fun v -> v.products) Default.RemarksOptions
 
-        let filters : FsHafas.Raw.JnyFltr [] = makeFilters profile products
+        let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
 
         { himFltrL = filters
           getPolyline = polylines
@@ -418,9 +440,9 @@ module internal Format =
         let products =
             getOptionValue opt (fun v -> v.products) Default.JourneysOptions
 
-        let filters : FsHafas.Raw.JnyFltr [] = makeFilters profile products
+        let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
 
-        let viaLocL : (FsHafas.Raw.LocViaInput array) option =
+        let viaLocL: (FsHafas.Raw.LocViaInput array) option =
             match maybeGetOptionValue opt (fun v -> v.via) with
             | Some via -> Some [| { loc = makeLocLTypeS profile via } |]
             | None -> None
@@ -445,3 +467,56 @@ module internal Format =
               numF = results
               outFrwd = outFrwd
               trfReq = None }
+
+    let searchOnTripRequest
+        (profile: FsHafas.Parser.Profile)
+        (tripId: string)
+        (previousStopover: StopOver)
+        (``to``: U4<string, FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>)
+        (opt: FsHafas.Client.JourneysFromTripOptions option)
+        : FsHafas.Raw.SearchOnTripRequest =
+
+        let prevStopId =
+            match previousStopover.stop with
+            | Some (U2.Case1 station) when station.id.IsSome -> station.id.Value
+            | Some (U2.Case2 stop) when stop.id.IsSome -> stop.id.Value
+            | _ -> raise (System.ArgumentException("previousStopover.stop must be a valid stop or station."))
+
+        let depAtPrevStop =
+            match previousStopover.departure, previousStopover.plannedDeparture with
+            | Some dt, _ -> ParseIsoString dt
+            | _, Some dt -> ParseIsoString dt
+            | _ -> raise (System.ArgumentException("previousStopover.(planned)departure is invalid."))
+
+        (* not necessary for SearchOnTrip
+        if depAtPrevStop > System.DateTime.Now then
+            raise (System.ArgumentException("previousStopover.(planned)departure must be in the past"))
+        *)
+
+        let tickets =
+            getOptionValue opt (fun v -> v.tickets) Default.JourneysFromTripOptions
+
+        let transferTime =
+            getOptionValue opt (fun v -> v.transferTime) Default.JourneysFromTripOptions
+
+        let polylines =
+            getOptionValue opt (fun v -> v.polylines) Default.JourneysFromTripOptions
+
+        let products =
+            getOptionValue opt (fun v -> v.products) Default.JourneysFromTripOptions
+
+        let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
+
+        { sotMode = "JI"
+          jid = tripId
+          locData =
+              { loc = makeLocLTypeS profile prevStopId
+                ``type`` = "DEP"
+                date = formatDate depAtPrevStop
+                time = formatTime depAtPrevStop }
+          arrLocL = [| makeLocType profile ``to`` |]
+          jnyFltrL = filters
+          getPasslist = false
+          getPolyline = polylines
+          minChgTime = transferTime
+          getTariff = tickets }

@@ -343,7 +343,7 @@ type RawIco =
       fg: RawRGB option
       bg: RawRGB option }
 
-type RawDir = { txt: string; flg: string }
+type RawDir = { txt: string; flg: string option }
 type RawTcoc = { c: string; r: int option }
 type RawHimMsgCat = { id: int }
 
@@ -377,7 +377,7 @@ type RawCommon =
       maxC: int option
       numC: int option
       himL: array<RawHim> option
-      polyL: array<RawPoly>
+      polyL: array<RawPoly> option
       dirL: array<RawDir> option
       tcocL: array<RawTcoc> option
       himMsgCatL: array<RawHimMsgCat> option
@@ -457,7 +457,7 @@ type JourneyDetailsRequest =
 type JnyFltr =
     { ``type``: string
       mode: string
-      value: string
+      value: string option
       meta: string option }
 
 type TvlrProf =
@@ -492,6 +492,23 @@ type ReconstructionRequest =
       getPolyline: bool
       getTariff: bool
       ctxRecon: string option }
+
+type LocData =
+    { loc: Loc
+      ``type``: string
+      date: string
+      time: string }
+
+type SearchOnTripRequest =
+    { sotMode: string
+      jid: string
+      locData: LocData
+      arrLocL: array<Loc>
+      jnyFltrL: array<JnyFltr>
+      getPasslist: bool
+      getPolyline: bool
+      minChgTime: int
+      getTariff: bool }
 
 type TripSearchRequest =
     { getPasslist: bool
@@ -556,7 +573,7 @@ type JourneyGeoPosRequest =
 type SvcReq =
     { cfg: Cfg
       meth: string
-      req: U13<LocMatchRequest, TripSearchRequest, JourneyDetailsRequest, StationBoardRequest, ReconstructionRequest, JourneyMatchRequest, LocGeoPosRequest, LocGeoReachRequest, LocDetailsRequest, JourneyGeoPosRequest, HimSearchRequest, LineMatchRequest, ServerInfoRequest> }
+      req: U14<LocMatchRequest, TripSearchRequest, JourneyDetailsRequest, StationBoardRequest, ReconstructionRequest, JourneyMatchRequest, LocGeoPosRequest, LocGeoReachRequest, LocDetailsRequest, JourneyGeoPosRequest, HimSearchRequest, LineMatchRequest, ServerInfoRequest, SearchOnTripRequest> }
 
 type RawRequestClient =
     { id: string

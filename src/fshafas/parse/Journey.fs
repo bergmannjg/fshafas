@@ -45,11 +45,11 @@ module internal Journey =
             |> Some
 
         let scheduledDays =
-            match j.sDays.sDaysB with
-            | Some sDaysB ->
+            match ctx.opt.scheduledDays, j.sDays.sDaysB with
+            | true, Some sDaysB ->
                 parseScheduledDays ctx sDaysB (j.date.Substring(0, 4) |> int)
                 |> Some
-            | None -> None
+            | _ -> None
 
         let cycle =
             match j.freq with
@@ -59,6 +59,11 @@ module internal Journey =
                     { min = Some(minC * 60)
                       max = Some(maxC * 60)
                       nr = freq.numC }
+                    |> Some
+                | Some minC, _ ->
+                    { min = Some(minC * 60)
+                      max = None
+                      nr = None }
                     |> Some
                 | _ -> None
             | None -> None

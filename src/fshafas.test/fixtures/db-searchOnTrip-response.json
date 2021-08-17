@@ -1,0 +1,2375 @@
+[
+    {
+        "type": "journey",
+        "legs": [
+            {
+                "origin": {
+                    "type": "stop",
+                    "id": "8000260",
+                    "name": "Würzburg Hbf",
+                    "location": {
+                        "type": "location",
+                        "id": "8000260",
+                        "latitude": 49.802163,
+                        "longitude": 9.93593
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "destination": {
+                    "type": "stop",
+                    "id": "8000013",
+                    "name": "Augsburg Hbf",
+                    "location": {
+                        "type": "location",
+                        "id": "8000013",
+                        "latitude": 48.365247,
+                        "longitude": 10.885595
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "departure": "2021-08-16T17:32:00+02:00",
+                "plannedDeparture": "2021-08-16T13:43:00+02:00",
+                "departureDelay": 60,
+                "arrival": "2021-08-16T19:31:00+02:00",
+                "plannedArrival": "2021-08-16T19:31:00+02:00",
+                "arrivalDelay": 0,
+                "reachable": true,
+                "tripId": "1|196750|0|80|16082021",
+                "line": {
+                    "type": "line",
+                    "id": "ice-881",
+                    "fahrtNr": "881",
+                    "name": "ICE 881",
+                    "public": true,
+                    "adminCode": "80____",
+                    "mode": "train",
+                    "product": "nationalExpress",
+                    "operator": {
+                        "type": "operator",
+                        "id": "db-fernverkehr-ag",
+                        "name": "DB Fernverkehr AG"
+                    }
+                },
+                "direction": "München Hbf",
+                "arrivalPlatform": "6",
+                "plannedArrivalPlatform": "6",
+                "departurePlatform": "4",
+                "plannedDeparturePlatform": "10",
+                "stopovers": [
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000260",
+                            "name": "Würzburg Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000260",
+                                "latitude": 49.802163,
+                                "longitude": 9.93593
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-16T17:29:00+02:00",
+                        "plannedArrival": "2021-08-16T17:29:00+02:00",
+                        "arrivalDelay": 0,
+                        "arrivalPlatform": "4",
+                        "plannedArrivalPlatform": "4",
+                        "departure": "2021-08-16T17:32:00+02:00",
+                        "plannedDeparture": "2021-08-16T17:31:00+02:00",
+                        "departureDelay": 60,
+                        "departurePlatform": "4",
+                        "plannedDeparturePlatform": "4"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000013",
+                            "name": "Augsburg Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000013",
+                                "latitude": 48.365247,
+                                "longitude": 10.885595
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-16T19:31:00+02:00",
+                        "plannedArrival": "2021-08-16T19:31:00+02:00",
+                        "arrivalDelay": 0,
+                        "arrivalPlatform": "6",
+                        "plannedArrivalPlatform": "6",
+                        "departure": null,
+                        "plannedDeparture": null,
+                        "departureDelay": null,
+                        "departurePlatform": null,
+                        "plannedDeparturePlatform": null
+                    }
+                ],
+                "remarks": [
+                    {
+                        "text": "Komfort Check-in possible (visit bahn.de/kci for more information)",
+                        "type": "hint",
+                        "code": "komfort-checkin",
+                        "summary": "Komfort-Checkin available"
+                    },
+                    {
+                        "type": "hint",
+                        "code": "PF",
+                        "text": "Please wear an FFP2 mask. You are legally required to do so"
+                    },
+                    {
+                        "text": "Bordrestaurant",
+                        "type": "hint",
+                        "code": "on-board-restaurant",
+                        "summary": "Bordrestaurant available"
+                    }
+                ],
+                "loadFactor": "very-high"
+            },
+            {
+                "origin": {
+                    "type": "stop",
+                    "id": "8000260",
+                    "name": "Würzburg Hbf",
+                    "location": {
+                        "type": "location",
+                        "id": "8000260",
+                        "latitude": 49.802163,
+                        "longitude": 9.93593
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "destination": {
+                    "type": "stop",
+                    "id": "8000105",
+                    "name": "Frankfurt(Main)Hbf",
+                    "location": {
+                        "type": "location",
+                        "id": "8000105",
+                        "latitude": 50.106817,
+                        "longitude": 8.663003
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": true,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "departure": "2021-08-17T04:19:00+02:00",
+                "plannedDeparture": "2021-08-17T04:19:00+02:00",
+                "departureDelay": null,
+                "arrival": "2021-08-17T06:24:00+02:00",
+                "plannedArrival": "2021-08-17T06:24:00+02:00",
+                "arrivalDelay": null,
+                "reachable": true,
+                "tripId": "1|238087|0|80|17082021",
+                "line": {
+                    "type": "line",
+                    "id": "re-55",
+                    "fahrtNr": "4600",
+                    "name": "RE 55",
+                    "public": true,
+                    "adminCode": "800772",
+                    "mode": "train",
+                    "product": "regional",
+                    "operator": {
+                        "type": "operator",
+                        "id": "db-regio-ag-bayern",
+                        "name": "DB Regio AG Bayern"
+                    },
+                    "additionalName": "RE 55"
+                },
+                "direction": "Frankfurt(Main)Hbf",
+                "arrivalPlatform": "4",
+                "plannedArrivalPlatform": "4",
+                "departurePlatform": "8",
+                "plannedDeparturePlatform": "8",
+                "stopovers": [
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000260",
+                            "name": "Würzburg Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000260",
+                                "latitude": 49.802163,
+                                "longitude": 9.93593
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": null,
+                        "plannedArrival": null,
+                        "arrivalDelay": null,
+                        "arrivalPlatform": null,
+                        "plannedArrivalPlatform": null,
+                        "departure": "2021-08-17T04:19:00+02:00",
+                        "plannedDeparture": "2021-08-17T04:19:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "8",
+                        "plannedDeparturePlatform": "8"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8006586",
+                            "name": "Würzburg-Zell",
+                            "location": {
+                                "type": "location",
+                                "id": "8006586",
+                                "latitude": 49.804941,
+                                "longitude": 9.884637
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": false,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T04:22:00+02:00",
+                        "plannedArrival": "2021-08-17T04:22:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "3",
+                        "plannedArrivalPlatform": "3",
+                        "departure": "2021-08-17T04:23:00+02:00",
+                        "plannedDeparture": "2021-08-17T04:23:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "3",
+                        "plannedDeparturePlatform": "3"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8006065",
+                            "name": "Veitshöchheim",
+                            "location": {
+                                "type": "location",
+                                "id": "8006065",
+                                "latitude": 49.831468,
+                                "longitude": 9.876188
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T04:27:00+02:00",
+                        "plannedArrival": "2021-08-17T04:27:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "2",
+                        "plannedArrivalPlatform": "2",
+                        "departure": "2021-08-17T04:27:00+02:00",
+                        "plannedDeparture": "2021-08-17T04:27:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "2",
+                        "plannedDeparturePlatform": "2"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8005864",
+                            "name": "Thüngersheim",
+                            "location": {
+                                "type": "location",
+                                "id": "8005864",
+                                "latitude": 49.878311,
+                                "longitude": 9.840195
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": false,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T04:31:00+02:00",
+                        "plannedArrival": "2021-08-17T04:31:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "1",
+                        "plannedArrivalPlatform": "1",
+                        "departure": "2021-08-17T04:32:00+02:00",
+                        "plannedDeparture": "2021-08-17T04:32:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "1",
+                        "plannedDeparturePlatform": "1"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8005049",
+                            "name": "Retzbach-Zellingen",
+                            "location": {
+                                "type": "location",
+                                "id": "8005049",
+                                "latitude": 49.905396,
+                                "longitude": 9.814189
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": true
+                            }
+                        },
+                        "arrival": "2021-08-17T04:35:00+02:00",
+                        "plannedArrival": "2021-08-17T04:35:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "1",
+                        "plannedArrivalPlatform": "1",
+                        "departure": "2021-08-17T04:36:00+02:00",
+                        "plannedDeparture": "2021-08-17T04:36:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "1",
+                        "plannedDeparturePlatform": "1"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8002845",
+                            "name": "Himmelstadt",
+                            "location": {
+                                "type": "location",
+                                "id": "8002845",
+                                "latitude": 49.923698,
+                                "longitude": 9.808256
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": false,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T04:38:00+02:00",
+                        "plannedArrival": "2021-08-17T04:38:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "2",
+                        "plannedArrivalPlatform": "2",
+                        "departure": "2021-08-17T04:39:00+02:00",
+                        "plannedDeparture": "2021-08-17T04:39:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "2",
+                        "plannedDeparturePlatform": "2"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8003189",
+                            "name": "Karlstadt(Main)",
+                            "location": {
+                                "type": "location",
+                                "id": "8003189",
+                                "latitude": 49.962935,
+                                "longitude": 9.768254
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": true
+                            }
+                        },
+                        "arrival": "2021-08-17T04:43:00+02:00",
+                        "plannedArrival": "2021-08-17T04:43:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "3",
+                        "plannedArrivalPlatform": "3",
+                        "departure": "2021-08-17T04:43:00+02:00",
+                        "plannedDeparture": "2021-08-17T04:43:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "3",
+                        "plannedDeparturePlatform": "3"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8006349",
+                            "name": "Wernfeld",
+                            "location": {
+                                "type": "location",
+                                "id": "8006349",
+                                "latitude": 50.026121,
+                                "longitude": 9.725492
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": false,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T04:49:00+02:00",
+                        "plannedArrival": "2021-08-17T04:49:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "1",
+                        "plannedArrivalPlatform": "1",
+                        "departure": "2021-08-17T04:50:00+02:00",
+                        "plannedDeparture": "2021-08-17T04:50:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "1",
+                        "plannedDeparturePlatform": "1"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000120",
+                            "name": "Gemünden(Main)",
+                            "location": {
+                                "type": "location",
+                                "id": "8000120",
+                                "latitude": 50.049942,
+                                "longitude": 9.700044
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": true
+                            }
+                        },
+                        "arrival": "2021-08-17T04:52:00+02:00",
+                        "plannedArrival": "2021-08-17T04:52:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "5",
+                        "plannedArrivalPlatform": "5",
+                        "departure": "2021-08-17T04:53:00+02:00",
+                        "plannedDeparture": "2021-08-17T04:53:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "5",
+                        "plannedDeparturePlatform": "5"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8003548",
+                            "name": "Langenprozelten",
+                            "location": {
+                                "type": "location",
+                                "id": "8003548",
+                                "latitude": 50.061547,
+                                "longitude": 9.661417
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": false,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T04:56:00+02:00",
+                        "plannedArrival": "2021-08-17T04:56:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "2",
+                        "plannedArrivalPlatform": "2",
+                        "departure": "2021-08-17T04:57:00+02:00",
+                        "plannedDeparture": "2021-08-17T04:57:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "2",
+                        "plannedDeparturePlatform": "2"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8003740",
+                            "name": "Lohr Bahnhof",
+                            "location": {
+                                "type": "location",
+                                "id": "8003740",
+                                "latitude": 50.004277,
+                                "longitude": 9.580703
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": true
+                            }
+                        },
+                        "arrival": "2021-08-17T05:03:00+02:00",
+                        "plannedArrival": "2021-08-17T05:03:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "3",
+                        "plannedArrivalPlatform": "3",
+                        "departure": "2021-08-17T05:04:00+02:00",
+                        "plannedDeparture": "2021-08-17T05:04:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "3",
+                        "plannedDeparturePlatform": "3"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8004756",
+                            "name": "Partenstein",
+                            "location": {
+                                "type": "location",
+                                "id": "8004756",
+                                "latitude": 50.037995,
+                                "longitude": 9.525222
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": true
+                            }
+                        },
+                        "arrival": "2021-08-17T05:09:00+02:00",
+                        "plannedArrival": "2021-08-17T05:09:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "1",
+                        "plannedArrivalPlatform": "1",
+                        "departure": "2021-08-17T05:09:00+02:00",
+                        "plannedDeparture": "2021-08-17T05:09:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "1",
+                        "plannedDeparturePlatform": "1"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8006426",
+                            "name": "Wiesthal",
+                            "location": {
+                                "type": "location",
+                                "id": "8006426",
+                                "latitude": 50.016979,
+                                "longitude": 9.440966
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": true
+                            }
+                        },
+                        "arrival": "2021-08-17T05:14:00+02:00",
+                        "plannedArrival": "2021-08-17T05:14:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "1",
+                        "plannedArrivalPlatform": "1",
+                        "departure": "2021-08-17T05:15:00+02:00",
+                        "plannedDeparture": "2021-08-17T05:15:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "1",
+                        "plannedDeparturePlatform": "1"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8002696",
+                            "name": "Heigenbrücken",
+                            "location": {
+                                "type": "location",
+                                "id": "8002696",
+                                "latitude": 50.022516,
+                                "longitude": 9.381116
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T05:19:00+02:00",
+                        "plannedArrival": "2021-08-17T05:19:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "1",
+                        "plannedArrivalPlatform": "1",
+                        "departure": "2021-08-17T05:19:00+02:00",
+                        "plannedDeparture": "2021-08-17T05:19:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "1",
+                        "plannedDeparturePlatform": "1"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8003582",
+                            "name": "Laufach",
+                            "location": {
+                                "type": "location",
+                                "id": "8003582",
+                                "latitude": 50.010668,
+                                "longitude": 9.277686
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T05:24:00+02:00",
+                        "plannedArrival": "2021-08-17T05:24:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "3",
+                        "plannedArrivalPlatform": "3",
+                        "departure": "2021-08-17T05:25:00+02:00",
+                        "plannedDeparture": "2021-08-17T05:25:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "3",
+                        "plannedDeparturePlatform": "3"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8002918",
+                            "name": "Hösbach",
+                            "location": {
+                                "type": "location",
+                                "id": "8002918",
+                                "latitude": 49.999728,
+                                "longitude": 9.228991
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T05:28:00+02:00",
+                        "plannedArrival": "2021-08-17T05:28:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "2",
+                        "plannedArrivalPlatform": "2",
+                        "departure": "2021-08-17T05:28:00+02:00",
+                        "plannedDeparture": "2021-08-17T05:28:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "2",
+                        "plannedDeparturePlatform": "2"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000010",
+                            "name": "Aschaffenburg Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000010",
+                                "latitude": 49.98059,
+                                "longitude": 9.143854
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T05:33:00+02:00",
+                        "plannedArrival": "2021-08-17T05:33:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "8",
+                        "plannedArrivalPlatform": "8",
+                        "departure": "2021-08-17T05:36:00+02:00",
+                        "plannedDeparture": "2021-08-17T05:36:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "8",
+                        "plannedDeparturePlatform": "8"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8003314",
+                            "name": "Kleinostheim",
+                            "location": {
+                                "type": "location",
+                                "id": "8003314",
+                                "latitude": 50.002893,
+                                "longitude": 9.072004
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": false,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T05:40:00+02:00",
+                        "plannedArrival": "2021-08-17T05:40:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "2",
+                        "plannedArrivalPlatform": "2",
+                        "departure": "2021-08-17T05:41:00+02:00",
+                        "plannedDeparture": "2021-08-17T05:41:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "2",
+                        "plannedDeparturePlatform": "2"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8001427",
+                            "name": "Dettingen(Main)",
+                            "location": {
+                                "type": "location",
+                                "id": "8001427",
+                                "latitude": 50.042571,
+                                "longitude": 9.036847
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T05:45:00+02:00",
+                        "plannedArrival": "2021-08-17T05:45:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "3",
+                        "plannedArrivalPlatform": "3",
+                        "departure": "2021-08-17T05:45:00+02:00",
+                        "plannedDeparture": "2021-08-17T05:45:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "3",
+                        "plannedDeparturePlatform": "3"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8003143",
+                            "name": "Kahl(Main)",
+                            "location": {
+                                "type": "location",
+                                "id": "8003143",
+                                "latitude": 50.076703,
+                                "longitude": 9.005358
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T05:49:00+02:00",
+                        "plannedArrival": "2021-08-17T05:49:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "3",
+                        "plannedArrivalPlatform": "3",
+                        "departure": "2021-08-17T05:49:00+02:00",
+                        "plannedDeparture": "2021-08-17T05:49:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "3",
+                        "plannedDeparturePlatform": "3"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8002425",
+                            "name": "Großkrotzenburg",
+                            "location": {
+                                "type": "location",
+                                "id": "8002425",
+                                "latitude": 50.087913,
+                                "longitude": 8.982381
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": false,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T05:51:00+02:00",
+                        "plannedArrival": "2021-08-17T05:51:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "1",
+                        "plannedArrivalPlatform": "1",
+                        "departure": "2021-08-17T05:52:00+02:00",
+                        "plannedDeparture": "2021-08-17T05:52:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "1",
+                        "plannedDeparturePlatform": "1"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8002400",
+                            "name": "Großauheim(Kr Hanau)",
+                            "location": {
+                                "type": "location",
+                                "id": "8002400",
+                                "latitude": 50.107428,
+                                "longitude": 8.943323
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": false,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T05:55:00+02:00",
+                        "plannedArrival": "2021-08-17T05:55:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "2",
+                        "plannedArrivalPlatform": "2",
+                        "departure": "2021-08-17T05:55:00+02:00",
+                        "plannedDeparture": "2021-08-17T05:55:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "2",
+                        "plannedDeparturePlatform": "2"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000150",
+                            "name": "Hanau Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000150",
+                                "latitude": 50.120903,
+                                "longitude": 8.92921
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": true
+                            }
+                        },
+                        "arrival": "2021-08-17T05:58:00+02:00",
+                        "plannedArrival": "2021-08-17T05:58:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "102",
+                        "plannedArrivalPlatform": "102",
+                        "departure": "2021-08-17T06:00:00+02:00",
+                        "plannedDeparture": "2021-08-17T06:00:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "102",
+                        "plannedDeparturePlatform": "102"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000349",
+                            "name": "Offenbach(Main)Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000349",
+                                "latitude": 50.099185,
+                                "longitude": 8.760833
+                            },
+                            "products": {
+                                "nationalExpress": false,
+                                "national": false,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T06:10:00+02:00",
+                        "plannedArrival": "2021-08-17T06:10:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "2",
+                        "plannedArrivalPlatform": "2",
+                        "departure": "2021-08-17T06:11:00+02:00",
+                        "plannedDeparture": "2021-08-17T06:11:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "2",
+                        "plannedDeparturePlatform": "2"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8002041",
+                            "name": "Frankfurt(Main)Süd",
+                            "location": {
+                                "type": "location",
+                                "id": "8002041",
+                                "latitude": 50.099302,
+                                "longitude": 8.686187
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": true,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T06:15:00+02:00",
+                        "plannedArrival": "2021-08-17T06:15:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "5",
+                        "plannedArrivalPlatform": "5",
+                        "departure": "2021-08-17T06:17:00+02:00",
+                        "plannedDeparture": "2021-08-17T06:17:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "5",
+                        "plannedDeparturePlatform": "5"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000105",
+                            "name": "Frankfurt(Main)Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000105",
+                                "latitude": 50.106817,
+                                "longitude": 8.663003
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": true,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T06:24:00+02:00",
+                        "plannedArrival": "2021-08-17T06:24:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "4",
+                        "plannedArrivalPlatform": "4",
+                        "departure": null,
+                        "plannedDeparture": null,
+                        "departureDelay": null,
+                        "departurePlatform": null,
+                        "plannedDeparturePlatform": null
+                    }
+                ],
+                "remarks": [
+                    {
+                        "type": "hint",
+                        "code": "PF",
+                        "text": "Please wear an FFP2 mask. You are legally required to do so"
+                    },
+                    {
+                        "text": "Number of bicycles conveyed limited",
+                        "type": "hint",
+                        "code": "bicycle-conveyance",
+                        "summary": "bicycles conveyed"
+                    },
+                    {
+                        "type": "hint",
+                        "code": "RC",
+                        "text": "Reservations at DB ticket machines/travel centres + many DB agencies"
+                    },
+                    {
+                        "text": "vehicle-mounted access aid",
+                        "type": "hint",
+                        "code": "boarding-ramp",
+                        "summary": "vehicle-mounted boarding ramp available"
+                    }
+                ]
+            },
+            {
+                "origin": {
+                    "type": "stop",
+                    "id": "8000105",
+                    "name": "Frankfurt(Main)Hbf",
+                    "location": {
+                        "type": "location",
+                        "id": "8000105",
+                        "latitude": 50.106817,
+                        "longitude": 8.663003
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": true,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "destination": {
+                    "type": "stop",
+                    "id": "8070003",
+                    "name": "Frankfurt(M) Flughafen Fernbf",
+                    "location": {
+                        "type": "location",
+                        "id": "8070003",
+                        "latitude": 50.052926,
+                        "longitude": 8.569776
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": false,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": false,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": false,
+                        "taxi": false
+                    }
+                },
+                "departure": "2021-08-17T06:43:00+02:00",
+                "plannedDeparture": "2021-08-17T06:43:00+02:00",
+                "departureDelay": null,
+                "arrival": "2021-08-17T06:55:00+02:00",
+                "plannedArrival": "2021-08-17T06:55:00+02:00",
+                "arrivalDelay": null,
+                "reachable": true,
+                "tripId": "1|188749|0|80|17082021",
+                "line": {
+                    "type": "line",
+                    "id": "ic-2310",
+                    "fahrtNr": "2310",
+                    "name": "IC 2310",
+                    "public": true,
+                    "adminCode": "80____",
+                    "mode": "train",
+                    "product": "national",
+                    "operator": {
+                        "type": "operator",
+                        "id": "db-fernverkehr-ag",
+                        "name": "DB Fernverkehr AG"
+                    }
+                },
+                "direction": "Westerland(Sylt)",
+                "arrivalPlatform": "Fern 7",
+                "plannedArrivalPlatform": "Fern 7",
+                "departurePlatform": "19",
+                "plannedDeparturePlatform": "19",
+                "stopovers": [
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000105",
+                            "name": "Frankfurt(Main)Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000105",
+                                "latitude": 50.106817,
+                                "longitude": 8.663003
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": true,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": null,
+                        "plannedArrival": null,
+                        "arrivalDelay": null,
+                        "arrivalPlatform": null,
+                        "plannedArrivalPlatform": null,
+                        "departure": "2021-08-17T06:43:00+02:00",
+                        "plannedDeparture": "2021-08-17T06:43:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "19",
+                        "plannedDeparturePlatform": "19"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8070003",
+                            "name": "Frankfurt(M) Flughafen Fernbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8070003",
+                                "latitude": 50.052926,
+                                "longitude": 8.569776
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": false,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T06:55:00+02:00",
+                        "plannedArrival": "2021-08-17T06:55:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "Fern 7",
+                        "plannedArrivalPlatform": "Fern 7",
+                        "departure": null,
+                        "plannedDeparture": null,
+                        "departureDelay": null,
+                        "departurePlatform": null,
+                        "plannedDeparturePlatform": null
+                    }
+                ],
+                "remarks": [
+                    {
+                        "text": "Komfort Check-in possible (visit bahn.de/kci for more information)",
+                        "type": "hint",
+                        "code": "komfort-checkin",
+                        "summary": "Komfort-Checkin available"
+                    },
+                    {
+                        "type": "hint",
+                        "code": "PF",
+                        "text": "Please wear an FFP2 mask. You are legally required to do so"
+                    },
+                    {
+                        "text": "Bicycles conveyed - subject to reservation",
+                        "type": "hint",
+                        "code": "bicycle-conveyance-reservation",
+                        "summary": "bicycles conveyed, subject to reservation"
+                    },
+                    {
+                        "text": "Number of bicycles conveyed limited",
+                        "type": "hint",
+                        "code": "bicycle-conveyance",
+                        "summary": "bicycles conveyed"
+                    },
+                    {
+                        "text": "Bordbistro",
+                        "type": "hint",
+                        "code": "on-board-bistro",
+                        "summary": "Bordbistro available"
+                    }
+                ]
+            },
+            {
+                "origin": {
+                    "type": "stop",
+                    "id": "8070003",
+                    "name": "Frankfurt(M) Flughafen Fernbf",
+                    "location": {
+                        "type": "location",
+                        "id": "8070003",
+                        "latitude": 50.052926,
+                        "longitude": 8.569776
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": false,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": false,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": false,
+                        "taxi": false
+                    }
+                },
+                "destination": {
+                    "type": "stop",
+                    "id": "8000207",
+                    "name": "Köln Hbf",
+                    "location": {
+                        "type": "location",
+                        "id": "8000207",
+                        "latitude": 50.942823,
+                        "longitude": 6.959197
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "departure": "2021-08-17T07:09:00+02:00",
+                "plannedDeparture": "2021-08-17T07:09:00+02:00",
+                "departureDelay": null,
+                "arrival": "2021-08-17T08:05:00+02:00",
+                "plannedArrival": "2021-08-17T08:05:00+02:00",
+                "arrivalDelay": null,
+                "reachable": true,
+                "tripId": "1|193094|0|80|17082021",
+                "line": {
+                    "type": "line",
+                    "id": "ice-616",
+                    "fahrtNr": "616",
+                    "name": "ICE 616",
+                    "public": true,
+                    "adminCode": "80____",
+                    "mode": "train",
+                    "product": "nationalExpress",
+                    "operator": {
+                        "type": "operator",
+                        "id": "db-fernverkehr-ag",
+                        "name": "DB Fernverkehr AG"
+                    }
+                },
+                "direction": "Duisburg Hbf",
+                "arrivalPlatform": "5",
+                "plannedArrivalPlatform": "5",
+                "departurePlatform": "Fern 6",
+                "plannedDeparturePlatform": "Fern 6",
+                "stopovers": [
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8070003",
+                            "name": "Frankfurt(M) Flughafen Fernbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8070003",
+                                "latitude": 50.052926,
+                                "longitude": 8.569776
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": false,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": null,
+                        "plannedArrival": null,
+                        "arrivalDelay": null,
+                        "arrivalPlatform": null,
+                        "plannedArrivalPlatform": null,
+                        "departure": "2021-08-17T07:09:00+02:00",
+                        "plannedDeparture": "2021-08-17T07:09:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "Fern 6",
+                        "plannedDeparturePlatform": "Fern 6"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000207",
+                            "name": "Köln Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000207",
+                                "latitude": 50.942823,
+                                "longitude": 6.959197
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T08:05:00+02:00",
+                        "plannedArrival": "2021-08-17T08:05:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "5",
+                        "plannedArrivalPlatform": "5",
+                        "departure": null,
+                        "plannedDeparture": null,
+                        "departureDelay": null,
+                        "departurePlatform": null,
+                        "plannedDeparturePlatform": null
+                    }
+                ],
+                "remarks": [
+                    {
+                        "text": "Komfort Check-in possible (visit bahn.de/kci for more information)",
+                        "type": "hint",
+                        "code": "komfort-checkin",
+                        "summary": "Komfort-Checkin available"
+                    },
+                    {
+                        "type": "hint",
+                        "code": "PF",
+                        "text": "Please wear an FFP2 mask. You are legally required to do so"
+                    },
+                    {
+                        "text": "Bicycles conveyed - subject to reservation",
+                        "type": "hint",
+                        "code": "bicycle-conveyance-reservation",
+                        "summary": "bicycles conveyed, subject to reservation"
+                    },
+                    {
+                        "text": "Number of bicycles conveyed limited",
+                        "type": "hint",
+                        "code": "bicycle-conveyance",
+                        "summary": "bicycles conveyed"
+                    },
+                    {
+                        "text": "Bordrestaurant",
+                        "type": "hint",
+                        "code": "on-board-restaurant",
+                        "summary": "Bordrestaurant available"
+                    },
+                    {
+                        "text": "vehicle-mounted access aid",
+                        "type": "hint",
+                        "code": "boarding-ramp",
+                        "summary": "vehicle-mounted boarding ramp available"
+                    }
+                ],
+                "loadFactor": "low-to-medium"
+            }
+        ],
+        "refreshToken": "¶HKI¶T$A=1@O=Hamburg-Altona@L=8002553@a=128@$A=1@O=Augsburg Hbf@L=8000013@a=128@$202108161343$202108161931$ICE  881$$1$$$$§T$A=1@O=Augsburg Hbf@L=8000013@a=128@$A=1@O=Würzburg Hbf@L=8000260@a=128@$202108162324$202108170247$NJ 40420$$1$$$$§T$A=1@O=Würzburg Hbf@L=8000260@a=128@$A=1@O=Frankfurt(Main)Hbf@L=8000105@a=128@$202108170419$202108170624$RE  4600$$1$$$$§T$A=1@O=Frankfurt(Main)Hbf@L=8000105@a=128@$A=1@O=Frankfurt(M) Flughafen Fernbf@L=8070003@a=128@$202108170643$202108170655$IC  2310$$1$$$$§T$A=1@O=Frankfurt(M) Flughafen Fernbf@L=8070003@a=128@$A=1@O=Köln Hbf@L=8000207@a=128@$202108170709$202108170805$ICE  616$$1$$$$",
+        "remarks": [],
+        "price": null
+    },
+    {
+        "type": "journey",
+        "legs": [
+            {
+                "origin": {
+                    "type": "stop",
+                    "id": "8000260",
+                    "name": "Würzburg Hbf",
+                    "location": {
+                        "type": "location",
+                        "id": "8000260",
+                        "latitude": 49.802163,
+                        "longitude": 9.93593
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "destination": {
+                    "type": "stop",
+                    "id": "8000013",
+                    "name": "Augsburg Hbf",
+                    "location": {
+                        "type": "location",
+                        "id": "8000013",
+                        "latitude": 48.365247,
+                        "longitude": 10.885595
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "departure": "2021-08-16T17:32:00+02:00",
+                "plannedDeparture": "2021-08-16T13:43:00+02:00",
+                "departureDelay": 60,
+                "arrival": "2021-08-16T19:31:00+02:00",
+                "plannedArrival": "2021-08-16T19:31:00+02:00",
+                "arrivalDelay": 0,
+                "reachable": true,
+                "tripId": "1|196750|0|80|16082021",
+                "line": {
+                    "type": "line",
+                    "id": "ice-881",
+                    "fahrtNr": "881",
+                    "name": "ICE 881",
+                    "public": true,
+                    "adminCode": "80____",
+                    "mode": "train",
+                    "product": "nationalExpress",
+                    "operator": {
+                        "type": "operator",
+                        "id": "db-fernverkehr-ag",
+                        "name": "DB Fernverkehr AG"
+                    }
+                },
+                "direction": "München Hbf",
+                "arrivalPlatform": "6",
+                "plannedArrivalPlatform": "6",
+                "departurePlatform": "4",
+                "plannedDeparturePlatform": "10",
+                "stopovers": [
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000260",
+                            "name": "Würzburg Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000260",
+                                "latitude": 49.802163,
+                                "longitude": 9.93593
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-16T17:29:00+02:00",
+                        "plannedArrival": "2021-08-16T17:29:00+02:00",
+                        "arrivalDelay": 0,
+                        "arrivalPlatform": "4",
+                        "plannedArrivalPlatform": "4",
+                        "departure": "2021-08-16T17:32:00+02:00",
+                        "plannedDeparture": "2021-08-16T17:31:00+02:00",
+                        "departureDelay": 60,
+                        "departurePlatform": "4",
+                        "plannedDeparturePlatform": "4"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000013",
+                            "name": "Augsburg Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000013",
+                                "latitude": 48.365247,
+                                "longitude": 10.885595
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-16T19:31:00+02:00",
+                        "plannedArrival": "2021-08-16T19:31:00+02:00",
+                        "arrivalDelay": 0,
+                        "arrivalPlatform": "6",
+                        "plannedArrivalPlatform": "6",
+                        "departure": null,
+                        "plannedDeparture": null,
+                        "departureDelay": null,
+                        "departurePlatform": null,
+                        "plannedDeparturePlatform": null
+                    }
+                ],
+                "remarks": [
+                    {
+                        "text": "Komfort Check-in possible (visit bahn.de/kci for more information)",
+                        "type": "hint",
+                        "code": "komfort-checkin",
+                        "summary": "Komfort-Checkin available"
+                    },
+                    {
+                        "type": "hint",
+                        "code": "PF",
+                        "text": "Please wear an FFP2 mask. You are legally required to do so"
+                    },
+                    {
+                        "text": "Bordrestaurant",
+                        "type": "hint",
+                        "code": "on-board-restaurant",
+                        "summary": "Bordrestaurant available"
+                    }
+                ],
+                "loadFactor": "very-high"
+            },
+            {
+                "origin": {
+                    "type": "stop",
+                    "id": "8000260",
+                    "name": "Würzburg Hbf",
+                    "location": {
+                        "type": "location",
+                        "id": "8000260",
+                        "latitude": 49.802163,
+                        "longitude": 9.93593
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "destination": {
+                    "type": "stop",
+                    "id": "8073368",
+                    "name": "Köln Messe/Deutz Gl.11-12",
+                    "location": {
+                        "type": "location",
+                        "id": "8073368",
+                        "latitude": 50.940602,
+                        "longitude": 6.975162
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    },
+                    "station": {
+                        "type": "station",
+                        "id": "8003368",
+                        "name": "Köln Messe/Deutz",
+                        "location": {
+                            "type": "location",
+                            "id": "8003368",
+                            "latitude": 50.940989,
+                            "longitude": 6.974578
+                        },
+                        "products": {
+                            "nationalExpress": true,
+                            "national": true,
+                            "regionalExp": true,
+                            "regional": true,
+                            "suburban": true,
+                            "bus": true,
+                            "ferry": false,
+                            "subway": false,
+                            "tram": true,
+                            "taxi": false
+                        }
+                    }
+                },
+                "departure": "2021-08-17T05:55:00+02:00",
+                "plannedDeparture": "2021-08-17T05:55:00+02:00",
+                "departureDelay": null,
+                "arrival": "2021-08-17T08:14:00+02:00",
+                "plannedArrival": "2021-08-17T08:14:00+02:00",
+                "arrivalDelay": null,
+                "reachable": true,
+                "tripId": "1|195904|0|80|17082021",
+                "line": {
+                    "type": "line",
+                    "id": "ice-824",
+                    "fahrtNr": "824",
+                    "name": "ICE 824",
+                    "public": true,
+                    "adminCode": "80____",
+                    "mode": "train",
+                    "product": "nationalExpress",
+                    "operator": {
+                        "type": "operator",
+                        "id": "db-fernverkehr-ag",
+                        "name": "DB Fernverkehr AG"
+                    }
+                },
+                "direction": "Düsseldorf Hbf",
+                "arrivalPlatform": "12",
+                "plannedArrivalPlatform": "12",
+                "departurePlatform": "9",
+                "plannedDeparturePlatform": "9",
+                "stopovers": [
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000260",
+                            "name": "Würzburg Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000260",
+                                "latitude": 49.802163,
+                                "longitude": 9.93593
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": null,
+                        "plannedArrival": null,
+                        "arrivalDelay": null,
+                        "arrivalPlatform": null,
+                        "plannedArrivalPlatform": null,
+                        "departure": "2021-08-17T05:55:00+02:00",
+                        "plannedDeparture": "2021-08-17T05:55:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "9",
+                        "plannedDeparturePlatform": "9"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000010",
+                            "name": "Aschaffenburg Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000010",
+                                "latitude": 49.98059,
+                                "longitude": 9.143854
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T06:32:00+02:00",
+                        "plannedArrival": "2021-08-17T06:32:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "8",
+                        "plannedArrivalPlatform": "8",
+                        "departure": "2021-08-17T06:33:00+02:00",
+                        "plannedDeparture": "2021-08-17T06:33:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "8",
+                        "plannedDeparturePlatform": "8"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000105",
+                            "name": "Frankfurt(Main)Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000105",
+                                "latitude": 50.106817,
+                                "longitude": 8.663003
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": true,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T07:04:00+02:00",
+                        "plannedArrival": "2021-08-17T07:04:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "7",
+                        "plannedArrivalPlatform": "7",
+                        "departure": "2021-08-17T07:10:00+02:00",
+                        "plannedDeparture": "2021-08-17T07:10:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "7",
+                        "plannedDeparturePlatform": "7"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8070003",
+                            "name": "Frankfurt(M) Flughafen Fernbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8070003",
+                                "latitude": 50.052926,
+                                "longitude": 8.569776
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": false,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": false,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": false,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T07:22:00+02:00",
+                        "plannedArrival": "2021-08-17T07:22:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "Fern 7",
+                        "plannedArrivalPlatform": "Fern 7",
+                        "departure": "2021-08-17T07:25:00+02:00",
+                        "plannedDeparture": "2021-08-17T07:25:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "Fern 7",
+                        "plannedDeparturePlatform": "Fern 7"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8073368",
+                            "name": "Köln Messe/Deutz Gl.11-12",
+                            "location": {
+                                "type": "location",
+                                "id": "8073368",
+                                "latitude": 50.940602,
+                                "longitude": 6.975162
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": true,
+                                "taxi": false
+                            },
+                            "station": {
+                                "type": "station",
+                                "id": "8003368",
+                                "name": "Köln Messe/Deutz",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8003368",
+                                    "latitude": 50.940989,
+                                    "longitude": 6.974578
+                                },
+                                "products": {
+                                    "nationalExpress": true,
+                                    "national": true,
+                                    "regionalExp": true,
+                                    "regional": true,
+                                    "suburban": true,
+                                    "bus": true,
+                                    "ferry": false,
+                                    "subway": false,
+                                    "tram": true,
+                                    "taxi": false
+                                }
+                            }
+                        },
+                        "arrival": "2021-08-17T08:14:00+02:00",
+                        "plannedArrival": "2021-08-17T08:14:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "12",
+                        "plannedArrivalPlatform": "12",
+                        "departure": null,
+                        "plannedDeparture": null,
+                        "departureDelay": null,
+                        "departurePlatform": null,
+                        "plannedDeparturePlatform": null
+                    }
+                ],
+                "remarks": [
+                    {
+                        "text": "Komfort Check-in possible (visit bahn.de/kci for more information)",
+                        "type": "hint",
+                        "code": "komfort-checkin",
+                        "summary": "Komfort-Checkin available"
+                    },
+                    {
+                        "type": "hint",
+                        "code": "PF",
+                        "text": "Please wear an FFP2 mask. You are legally required to do so"
+                    },
+                    {
+                        "text": "Bordrestaurant",
+                        "type": "hint",
+                        "code": "on-board-restaurant",
+                        "summary": "Bordrestaurant available"
+                    }
+                ],
+                "loadFactor": "low-to-medium"
+            },
+            {
+                "origin": {
+                    "type": "stop",
+                    "id": "8073368",
+                    "name": "Köln Messe/Deutz Gl.11-12",
+                    "location": {
+                        "type": "location",
+                        "id": "8073368",
+                        "latitude": 50.940602,
+                        "longitude": 6.975162
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    },
+                    "station": {
+                        "type": "station",
+                        "id": "8003368",
+                        "name": "Köln Messe/Deutz",
+                        "location": {
+                            "type": "location",
+                            "id": "8003368",
+                            "latitude": 50.940989,
+                            "longitude": 6.974578
+                        },
+                        "products": {
+                            "nationalExpress": true,
+                            "national": true,
+                            "regionalExp": true,
+                            "regional": true,
+                            "suburban": true,
+                            "bus": true,
+                            "ferry": false,
+                            "subway": false,
+                            "tram": true,
+                            "taxi": false
+                        }
+                    }
+                },
+                "destination": {
+                    "type": "stop",
+                    "id": "8083368",
+                    "name": "Köln Messe/Deutz Gl. 9-10",
+                    "location": {
+                        "type": "location",
+                        "id": "8083368",
+                        "latitude": 50.941285,
+                        "longitude": 6.974658
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    },
+                    "station": {
+                        "type": "station",
+                        "id": "8003368",
+                        "name": "Köln Messe/Deutz",
+                        "location": {
+                            "type": "location",
+                            "id": "8003368",
+                            "latitude": 50.940989,
+                            "longitude": 6.974578
+                        },
+                        "products": {
+                            "nationalExpress": true,
+                            "national": true,
+                            "regionalExp": true,
+                            "regional": true,
+                            "suburban": true,
+                            "bus": true,
+                            "ferry": false,
+                            "subway": false,
+                            "tram": true,
+                            "taxi": false
+                        }
+                    }
+                },
+                "departure": "2021-08-17T08:14:00+02:00",
+                "plannedDeparture": "2021-08-17T08:14:00+02:00",
+                "departureDelay": null,
+                "arrival": "2021-08-17T08:21:00+02:00",
+                "plannedArrival": "2021-08-17T08:21:00+02:00",
+                "arrivalDelay": null,
+                "public": true,
+                "walking": true,
+                "distance": 84
+            },
+            {
+                "origin": {
+                    "type": "stop",
+                    "id": "8083368",
+                    "name": "Köln Messe/Deutz Gl. 9-10",
+                    "location": {
+                        "type": "location",
+                        "id": "8083368",
+                        "latitude": 50.941285,
+                        "longitude": 6.974658
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    },
+                    "station": {
+                        "type": "station",
+                        "id": "8003368",
+                        "name": "Köln Messe/Deutz",
+                        "location": {
+                            "type": "location",
+                            "id": "8003368",
+                            "latitude": 50.940989,
+                            "longitude": 6.974578
+                        },
+                        "products": {
+                            "nationalExpress": true,
+                            "national": true,
+                            "regionalExp": true,
+                            "regional": true,
+                            "suburban": true,
+                            "bus": true,
+                            "ferry": false,
+                            "subway": false,
+                            "tram": true,
+                            "taxi": false
+                        }
+                    }
+                },
+                "destination": {
+                    "type": "stop",
+                    "id": "8000207",
+                    "name": "Köln Hbf",
+                    "location": {
+                        "type": "location",
+                        "id": "8000207",
+                        "latitude": 50.942823,
+                        "longitude": 6.959197
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "departure": "2021-08-17T08:21:00+02:00",
+                "plannedDeparture": "2021-08-17T08:21:00+02:00",
+                "departureDelay": null,
+                "arrival": "2021-08-17T08:23:00+02:00",
+                "plannedArrival": "2021-08-17T08:23:00+02:00",
+                "arrivalDelay": null,
+                "reachable": true,
+                "tripId": "1|214370|0|80|17082021",
+                "line": {
+                    "type": "line",
+                    "id": "4-800337-6",
+                    "fahrtNr": "30628",
+                    "name": "S 6",
+                    "public": true,
+                    "adminCode": "800337",
+                    "mode": "train",
+                    "product": "suburban",
+                    "operator": {
+                        "type": "operator",
+                        "id": "db-regio-ag-nrw",
+                        "name": "DB Regio AG NRW"
+                    }
+                },
+                "direction": "Köln-Worringen",
+                "arrivalPlatform": "11 B-C",
+                "plannedArrivalPlatform": "11 B-C",
+                "departurePlatform": "10",
+                "plannedDeparturePlatform": "10",
+                "stopovers": [
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8083368",
+                            "name": "Köln Messe/Deutz Gl. 9-10",
+                            "location": {
+                                "type": "location",
+                                "id": "8083368",
+                                "latitude": 50.941285,
+                                "longitude": 6.974658
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": true,
+                                "taxi": false
+                            },
+                            "station": {
+                                "type": "station",
+                                "id": "8003368",
+                                "name": "Köln Messe/Deutz",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8003368",
+                                    "latitude": 50.940989,
+                                    "longitude": 6.974578
+                                },
+                                "products": {
+                                    "nationalExpress": true,
+                                    "national": true,
+                                    "regionalExp": true,
+                                    "regional": true,
+                                    "suburban": true,
+                                    "bus": true,
+                                    "ferry": false,
+                                    "subway": false,
+                                    "tram": true,
+                                    "taxi": false
+                                }
+                            }
+                        },
+                        "arrival": null,
+                        "plannedArrival": null,
+                        "arrivalDelay": null,
+                        "arrivalPlatform": null,
+                        "plannedArrivalPlatform": null,
+                        "departure": "2021-08-17T08:21:00+02:00",
+                        "plannedDeparture": "2021-08-17T08:21:00+02:00",
+                        "departureDelay": null,
+                        "departurePlatform": "10",
+                        "plannedDeparturePlatform": "10"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000207",
+                            "name": "Köln Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000207",
+                                "latitude": 50.942823,
+                                "longitude": 6.959197
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2021-08-17T08:23:00+02:00",
+                        "plannedArrival": "2021-08-17T08:23:00+02:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "11 B-C",
+                        "plannedArrivalPlatform": "11 B-C",
+                        "departure": null,
+                        "plannedDeparture": null,
+                        "departureDelay": null,
+                        "departurePlatform": null,
+                        "plannedDeparturePlatform": null
+                    }
+                ],
+                "remarks": [
+                    {
+                        "type": "hint",
+                        "code": "PF",
+                        "text": "Please wear an FFP2 mask. You are legally required to do so"
+                    },
+                    {
+                        "text": "Number of bicycles conveyed limited",
+                        "type": "hint",
+                        "code": "bicycle-conveyance",
+                        "summary": "bicycles conveyed"
+                    },
+                    {
+                        "text": "vehicle-mounted access aid",
+                        "type": "hint",
+                        "code": "boarding-ramp",
+                        "summary": "vehicle-mounted boarding ramp available"
+                    }
+                ],
+                "cycle": {
+                    "min": 240,
+                    "max": 360,
+                    "nr": 25
+                }
+            }
+        ],
+        "refreshToken": "¶HKI¶T$A=1@O=Hamburg-Altona@L=8002553@a=128@$A=1@O=Augsburg Hbf@L=8000013@a=128@$202108161343$202108161931$ICE  881$$1$$$$§T$A=1@O=Augsburg Hbf@L=8000013@a=128@$A=1@O=Würzburg Hbf@L=8000260@a=128@$202108162324$202108170247$NJ 40420$$1$$$$§T$A=1@O=Würzburg Hbf@L=8000260@a=128@$A=1@O=Köln Messe/Deutz Gl.11-12@L=8073368@a=128@$202108170555$202108170814$ICE  824$$1$$$$§W$A=1@O=Köln Messe/Deutz Gl.11-12@L=8073368@a=128@$A=1@O=Köln Messe/Deutz Gl. 9-10@L=8083368@a=128@$202108170814$202108170821$$$1$$$$§T$A=1@O=Köln Messe/Deutz Gl. 9-10@L=8083368@a=128@$A=1@O=Köln Hbf@L=8000207@a=128@$202108170821$202108170823$S      6$$1$$$$",
+        "cycle": {
+            "min": 240
+        },
+        "remarks": [],
+        "price": null
+    }
+]

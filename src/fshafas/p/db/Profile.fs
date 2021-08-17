@@ -395,7 +395,7 @@ module internal Db =
     let bikeFltr : FsHafas.Raw.JnyFltr =
         { ``type`` = "BC"
           mode = "INC"
-          value = ""
+          value = None
           meta = None }
 
     let private getOptionValue<'a, 'b> (opt: 'a option) (getter: 'a -> 'b option) (defaultOpt: 'a) =
@@ -485,6 +485,7 @@ module internal Db =
               products = products
               trip = Some true
               radar = Some true
+              journeysFromTrip = Some true
               journeysOutFrwd = true
               formatStation = formatStation
               transformJourneysQuery = transformJourneysQuery

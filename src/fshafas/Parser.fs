@@ -10,7 +10,7 @@ open Fable.Core
 /// <exclude>Parser</exclude>
 module Parser =
 
-    let internal defaultCommonData : CommonData =
+    let internal defaultCommonData: CommonData =
         { operators = Array.empty
           locations = Array.empty
           lines = Array.empty
@@ -58,11 +58,11 @@ module Parser =
           parseBitmask = ProductsBitmask.parseBitmask
           parseWarning = Warning.parseWarning }
 
-    let defaultOptions : Options =
+    let defaultOptions: Options =
         { remarks = true
           stopovers = true
           polylines = true
-          scheduledDays = true
+          scheduledDays = false
           subStops = true
           entrances = true
           linesOfStops = true
@@ -187,6 +187,25 @@ module Parser =
         | Some (ctx), Some (outConL) when outConL.Length > 0 -> ctx.profile.parseJourney ctx outConL.[0]
         | _ -> Default.Journey
 
+    let internal parseJourneysArray (outConL: FsHafas.Raw.RawOutCon [] option) (ctx: Context option) =
+        match ctx, outConL with
+        | Some (ctx), Some (outConL) ->
+            let journeys =
+                outConL
+                |> Array.map (fun o -> ctx.profile.parseJourney ctx o)
+
+            journeys
+        | _ -> [||]
+
+    let parseJourneysArrayFromResult
+        (id: FsHafas.Client.ProfileId)
+        (outConL: FsHafas.Raw.RawOutCon [] option)
+        (options: Options)
+        (res: FsHafas.Raw.RawResult)
+        =
+        let profile = getProfile id
+        parseJourneysArray outConL (parseCommon profile options res.common (Some res))
+
     let internal parseJourneys (outConL: FsHafas.Raw.RawOutCon [] option) (ctx: Context option) =
         match ctx, outConL with
         | Some (ctx), Some (outConL) ->
@@ -303,7 +322,8 @@ module Parser =
                 (fun d ->
                     try
                         DateTime.ParseIsoString d.``when``.Value
-                    with ex ->
+                    with
+                    | ex ->
                         printfn "%s" ex.Message
                         System.DateTimeOffset.Now)
             |> Seq.toArray

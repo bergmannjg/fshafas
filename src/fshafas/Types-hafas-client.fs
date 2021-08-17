@@ -720,9 +720,9 @@ and HafasClient =
     abstract member journeysFromTrip :
         string ->
         StopOver ->
-        U3<string, Station, Stop> ->
+        U4<string, Station, Stop, Location> ->
         JourneysFromTripOptions option ->
-        Promise<ResizeArray<Journey>>
+        Promise<array<Journey>>
     /// Retrieves locations or stops
     abstract member locations : string -> LocationsOptions option -> Promise<array<U3<Station, Stop, Location>>>
     /// Retrieves information about a stop

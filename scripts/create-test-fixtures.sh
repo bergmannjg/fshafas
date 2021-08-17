@@ -55,10 +55,14 @@ const journeysFromTrip = async () => {
     const journey = journeysResult.journeys.find(j => !j.legs[0].canceled);
 
     const leg = journey.legs.find(l => l.line.product === 'nationalExpress')
-    const previousStopover = leg.stopovers.find(st => st.departure && new Date(st.departure) < Date.now());
+    const previousStopovers = leg.stopovers.filter(st => st.departure && new Date(st.departure) < Date.now());
 
-    const journeys = await client.journeysFromTrip(leg.tripId, previousStopover, kölnHbf, { stopovers: true });
-    console.log(JSON.stringify(journeys));
+    if (previousStopovers.length > 0) {
+        const previousStopover = previousStopovers[previousStopovers.length - 1];
+        // console.log('previousStopover:', previousStopover.stop.name, previousStopover.departure);
+        const journeys = await client.journeysFromTrip(leg.tripId, previousStopover, kölnHbf, { stopovers: true });
+        console.log(JSON.stringify(journeys));
+    }
 }
 
 const trip = () => {
@@ -182,7 +186,7 @@ EOF
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fs-hafas-client": "file:../src/fshafas.fable.package/fs-hafas-client-1.0.0.tgz",
+    "fs-hafas-client": "file:../src/fshafas.fable.package/fs-hafas-client-1.1.0.tgz",
     "google-polyline": "^1.0.3",
     "hafas-client": "^5.18.0",
     "isomorphic-fetch": "^2.2.1",
