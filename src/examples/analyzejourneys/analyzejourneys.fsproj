@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+     <ProjectReference Include="../../fshafas/fshafas.fsproj"/>
+     <PackageReference Include="FSharp.SystemTextJson" Version="0.16.6" />
+     <PackageReference Include="FSharp.Data" Version="4.2.2" />
+     <PackageReference Include="Argu" Version="6.1.1" />
+  </ItemGroup>
+
+</Project>
