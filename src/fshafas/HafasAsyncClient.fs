@@ -36,12 +36,6 @@ type HafasAsyncClient(id: FsHafas.Client.ProfileId) =
         | Some value -> value
         | None -> false
 
-    let getIdU2 (s: U2<string, Station>) =
-        match s with
-        | U2.Case1 v -> v
-        | U2.Case2 v when v.id.IsSome -> v.id.Value
-        | _ -> raise (System.ArgumentException(""))
-
     interface IDisposable with
         member __.Dispose() = httpClient.Dispose()
 
@@ -130,14 +124,14 @@ type HafasAsyncClient(id: FsHafas.Client.ProfileId) =
         }
 
     member __.AsyncDepartures
-        (name: U2<string, Station>)
+        (name: U4<string, Station, Stop, Location>)
         (opt: DeparturesArrivalsOptions option)
         : Async<array<Alternative>> =
         async {
             let ``type`` = FsHafas.Parser.ArrivalOrDeparture.DEP
 
             let! (common, res, journey) =
-                httpClient.AsyncStationBoard(Format.stationBoardRequest profile ``type`` (getIdU2 name) opt)
+                httpClient.AsyncStationBoard(Format.stationBoardRequest profile ``type`` name opt)
 
             return
                 Parser.parseDeparturesArrivals
@@ -147,14 +141,14 @@ type HafasAsyncClient(id: FsHafas.Client.ProfileId) =
         }
 
     member __.AsyncArrivals
-        (name: U2<string, Station>)
+        (name: U4<string, Station, Stop, Location>)
         (opt: DeparturesArrivalsOptions option)
         : Async<array<Alternative>> =
         async {
             let ``type`` = FsHafas.Parser.ArrivalOrDeparture.ARR
 
             let! (common, res, journey) =
-                httpClient.AsyncStationBoard(Format.stationBoardRequest profile ``type`` (getIdU2 name) opt)
+                httpClient.AsyncStationBoard(Format.stationBoardRequest profile ``type`` name opt)
 
             return
                 Parser.parseDeparturesArrivals

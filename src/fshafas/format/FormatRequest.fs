@@ -116,10 +116,22 @@ module internal Format =
               name = None
               lid = Some("A=1@X=" + xs + "@Y=" + ys + "@") }
 
+    let private makeLocType
+        (profile: FsHafas.Parser.Profile)
+        (s: U4<string, FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>)
+        =
+        match s with
+        | U4.Case1 v -> makeLocLTypeS profile v
+        | U4.Case2 v when v.id.IsSome -> makeLocLTypeS profile v.id.Value
+        | U4.Case3 v when v.id.IsSome -> makeLocLTypeS profile v.id.Value
+        | U4.Case4 v when v.id.IsSome -> makeLocLTypeS profile v.id.Value
+        | U4.Case4 v -> makeLoclTypeA v
+        | _ -> raise (System.ArgumentException("makeLocType"))
+
     let stationBoardRequest
         (profile: FsHafas.Parser.Profile)
         (``type``: string)
-        (name: string)
+        (name: U4<string, FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>)
         (opt: FsHafas.Client.DeparturesArrivalsOptions option)
         : FsHafas.Raw.StationBoardRequest =
         let dt =
@@ -147,7 +159,7 @@ module internal Format =
         { ``type`` = ``type``
           date = date
           time = time
-          stbLoc = makeLocLTypeS profile name
+          stbLoc = makeLocType profile name
           jnyFltrL = filters
           dur = duration
           getPasslist = stopovers
@@ -375,17 +387,6 @@ module internal Format =
           dateB = date
           timeB = time }
 
-    let private makeLocType
-        (profile: FsHafas.Parser.Profile)
-        (s: U4<string, FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>)
-        =
-        match s with
-        | U4.Case1 v -> makeLocLTypeS profile v
-        | U4.Case2 v when v.id.IsSome -> makeLocLTypeS profile v.id.Value
-        | U4.Case3 v when v.id.IsSome -> makeLocLTypeS profile v.id.Value
-        | U4.Case4 v -> makeLoclTypeA v
-        | _ -> raise (System.ArgumentException("makeLocType"))
-
     let journeyRequest
         (profile: FsHafas.Parser.Profile)
         (from: U4<string, FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>)
@@ -502,6 +503,9 @@ module internal Format =
         let polylines =
             getOptionValue opt (fun v -> v.polylines) Default.JourneysFromTripOptions
 
+        let stopovers =
+            getOptionValue opt (fun v -> v.stopovers) Default.JourneysFromTripOptions
+
         let products =
             getOptionValue opt (fun v -> v.products) Default.JourneysFromTripOptions
 
@@ -516,7 +520,7 @@ module internal Format =
                 time = formatTime depAtPrevStop }
           arrLocL = [| makeLocType profile ``to`` |]
           jnyFltrL = filters
-          getPasslist = false
+          getPasslist = stopovers
           getPolyline = polylines
           minChgTime = transferTime
           getTariff = tickets }

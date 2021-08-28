@@ -262,6 +262,7 @@ module Parser =
 
         let directions =
             l.dirRefL
+            |> Option.fold (fun _ d -> d) [||]
             |> Array.map (fun d -> Common.getElementAt d dirl)
             |> Array.choose id
             |> Array.map (fun d -> d.txt)
@@ -307,6 +308,18 @@ module Parser =
         let profile = getProfile id
         parseWarnings msgL (parseCommon profile options res.common (Some res))
 
+    let ParseIsoString (datetime: string) =
+        let year = datetime.Substring(0, 4) |> int
+        let month = datetime.Substring(5, 2) |> int
+        let day = datetime.Substring(8, 2) |> int
+        let hour = datetime.Substring(11, 2) |> int
+        let minute = datetime.Substring(14, 2) |> int
+
+        let tzOffset =
+            datetime.Substring(20, 2) |> int |> (*) 60
+
+        System.DateTimeOffset(year, month, day, hour, minute, 0, System.TimeSpan(tzOffset / 60, 0, 0))
+
     let internal parseDeparturesArrivals (``type``: string) (jnyL: FsHafas.Raw.RawJny [] option) (ctx: Context option) =
         match ctx, jnyL with
         | Some ctx, Some jnyL ->
@@ -321,7 +334,7 @@ module Parser =
             |> Seq.sortBy
                 (fun d ->
                     try
-                        DateTime.ParseIsoString d.``when``.Value
+                        ParseIsoString d.``when``.Value
                     with
                     | ex ->
                         printfn "%s" ex.Message

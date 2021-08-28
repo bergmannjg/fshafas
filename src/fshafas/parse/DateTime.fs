@@ -67,18 +67,6 @@ module internal DateTime =
             dt.Second
             ((dt.Offset.TotalMinutes |> int) / 60)
 
-    let ParseIsoString (datetime: string) =
-        let year = datetime.Substring(0, 4) |> int
-        let month = datetime.Substring(5, 2) |> int
-        let day = datetime.Substring(8, 2) |> int
-        let hour = datetime.Substring(11, 2) |> int
-        let minute = datetime.Substring(14, 2) |> int
-
-        let tzOffset =
-            datetime.Substring(20, 2) |> int |> (*) 60
-
-        System.DateTimeOffset(year, month, day, hour, minute, 0, System.TimeSpan(tzOffset / 60, 0, 0))
-
     let parseDateTimeEx
         (profile: FsHafas.Parser.Profile)
         (date: string)

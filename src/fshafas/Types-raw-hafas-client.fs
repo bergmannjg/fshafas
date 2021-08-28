@@ -392,9 +392,9 @@ type RawMatch =
 type RawPos = { locX: int; dur: int }
 
 type RawLine =
-    { lineId: string
+    { lineId: string option
       prodX: int
-      dirRefL: array<int>
+      dirRefL: array<int> option
       jnyL: array<RawJny> option }
 
 type RawResult =

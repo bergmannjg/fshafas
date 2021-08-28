@@ -63,7 +63,12 @@ module Short =
         printfS ident "" name + printfS ident "(" id
 
     let private Location (ident: int) (location: Location) =
-        printNameId ident location.name location.id
+        match location.name, location.address with
+        | Some _, _ -> printNameId ident location.name location.id + " "
+        | _, Some _ ->
+            printNameId ident location.address location.id
+            + " "
+        | _ -> ""
         + printLonLat ident location.longitude location.latitude
         + nl
         + printDistance (ident + 2) location.distance
@@ -71,7 +76,9 @@ module Short =
     let private Stop (ident: int) (stop: Stop) =
         printNameId ident stop.name stop.id
         + match stop.location with
-          | Some (location) -> printLonLat ident location.longitude location.latitude
+          | Some (location) ->
+              " "
+              + printLonLat ident location.longitude location.latitude
           | None -> ""
         + nl
         + printDistance (ident + 2) stop.distance
@@ -123,8 +130,31 @@ module Short =
             | None -> ""
         | None -> ""
 
-    let private Leg (ident: int) (leg: Leg) =
+    let StopOver (ident: int) (so: StopOver) =
+        match so.stop with
+        | Some (U2.Case2 s) -> printfS ident "origin: " (Some "") + Stop 0 s
+        | Some (U2.Case1 s) -> printfS ident "origin: " (Some "") + Station 0 s
+        | _ -> ""
+        + match so.departure with
+          | Some departure -> printfnS ident "departure: " so.departure
+          | None -> printfnS ident "arrival: " so.arrival
+
+    let private StopOvers (ident: int) (stopOvers: StopOver [] option) =
+        match stopOvers with
+        | Some stopOvers ->
+            printfnS ident "stopOvers: " (Some "")
+            + (stopOvers
+               |> Array.fold
+                   (fun s l ->
+                       s
+                       + (Comment(ident + 2) s)
+                       + (StopOver(ident + 2) l))
+                   "")
+        | None -> ""
+
+    let private Leg (ident: int) (leg: Leg) (short: bool) =
         match leg.origin with
+        | Some (U3.Case3 l) -> printfS ident "origin: " (Some "") + Location 0 l
         | Some (U3.Case2 s) -> printfS ident "origin: " (Some "") + Stop 0 s
         | Some (U3.Case1 s) -> printfS ident "origin: " (Some "") + Station 0 s
         | _ -> ""
@@ -133,15 +163,18 @@ module Short =
           | _ -> ""
         + printfnS ident "departure: " leg.departure
         + printfnS ident "arrival: " leg.arrival
-        + printfnArrL ident "stopovers: " leg.stopovers
-        + match leg.line with
-          | Some (line) when line.name.IsSome -> printfnS ident "Line: " line.name
-          | _ -> ""
+        + StopOvers ident leg.stopovers
         + printfnB ident "cancelled: " leg.cancelled
-        + printfnB ident "walking: " leg.walking
-        + printfnB ident "transfer: " leg.transfer
-        + ProductOfLeg ident leg
-        + Remarks ident leg.remarks
+        + if short then
+              ""
+          else
+              match leg.line with
+              | Some (line) when line.name.IsSome -> printfnS ident "Line: " line.name
+              | _ -> ""
+              + printfnB ident "walking: " leg.walking
+              + printfnB ident "transfer: " leg.transfer
+              + ProductOfLeg ident leg
+              + Remarks ident leg.remarks
 
     let private Trip (ident: int) (trip: Trip) =
         match trip.origin with
@@ -162,9 +195,18 @@ module Short =
         + printfnB ident "transfer: " trip.transfer
         + Remarks ident trip.remarks
 
-    let private Legs (ident: int) (legs: Leg []) =
+    let private Legs (ident: int) (legs: Leg []) (short: bool) =
         legs
-        |> Array.fold (fun s l -> s + (Comment(ident + 2) s) + (Leg(ident + 2) l)) ""
+        |> Array.fold
+            (fun s l ->
+                s
+                + (Comment(ident + 2) s)
+                + (Leg(ident + 2) l short))
+            ""
+
+    let JourneyLegs (ident: int) (journey: Journey) =
+        printfnS ident "jouney:" (Some "")
+        + Legs ident journey.legs true
 
     let Journey (ident: int) (journey: Journey) =
         let distS () =
@@ -188,11 +230,11 @@ module Short =
             | None -> ""
 
         printfnS ident "jouney:" (Some "")
-        + Legs ident journey.legs
+        + Legs ident journey.legs false
         + price
         + distS ()
         + match journey.refreshToken with
-          | Some refreshToken -> printfnS ident "refreshToken: '" (Some(refreshToken + "'"))
+          | Some refreshToken -> printfnS (ident + 2) "refreshToken: '" (Some(refreshToken + "'"))
           | None -> ""
 
     let private JourneyItems (ident: int) (journeys: Journey []) =
@@ -223,17 +265,6 @@ module Short =
              |> Option.map (fun d -> d.ToString()))
         + (duration.stations
            |> Array.fold (fun s j -> s + U3StationStopLocation(ident + 2) j) "")
-
-    let private StopOver (ident: int) (s: StopOver) =
-        U2StationStop ident s.stop
-        + printfnS (ident + 2) "departure: " s.departure
-
-    let StopOvers (ident: int) (stops: StopOver [] option) =
-        match stops with
-        | Some (stops) ->
-            stops
-            |> Array.fold (fun s j -> s + StopOver(ident + 2) j) ""
-        | None -> ""
 
     let private Directions (ident: int) (directions: string [] option) =
         match directions with
@@ -327,7 +358,7 @@ module Long =
         else
             fprintfn stderr "%s" (sprintf "common: unkown type %s, field '%s', value '%A'" t.FullName name o)
 
-    let private evt : Traverse.TraverseEvent =
+    let private evt: Traverse.TraverseEvent =
         { onRecordFieldname = printRecordFieldname
           onCaseInfo = printCaseInfo
           onField = printField

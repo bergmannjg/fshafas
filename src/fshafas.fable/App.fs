@@ -29,7 +29,7 @@ let f4 () =
     let client =
         HafasClient(FsHafas.Client.ProfileId.Db) :> FsHafas.Client.HafasClient
 
-    client.departures (U2.Case1 "8000036") (Some Default.DeparturesArrivalsOptions)
+    client.departures (U4.Case1 "8000036") (Some Default.DeparturesArrivalsOptions)
     |> Promise.iter (FsHafas.Printf.Short.Alternatives >> printfn "%s")
 
 let f5 () =

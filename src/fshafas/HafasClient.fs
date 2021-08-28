@@ -42,16 +42,6 @@ type HafasClient(id: FsHafas.Client.ProfileId) =
             raise (System.ArgumentException("string|Station|Stop|Location expected"))
 
     // get cases at runtime
-    let makeCaseOfU2StringStation (v: U2<string, Station>) : U2<string, Station> =
-        if jsTypeof v = "string" then
-            U2.Case1(unbox<string> v)
-        else if (jsTypeField v) = "station" then
-            let s = unbox<Station> v
-            U2.Case2 { Default.Station with id = s.id }
-        else
-            raise (System.ArgumentException("string|Station expected"))
-
-    // get cases at runtime
     let makeCaseOfU2StringStop (v: U2<string, Stop>) : U2<string, Stop> =
         if jsTypeof v = "string" then
             U2.Case1(unbox<string> v)
@@ -139,17 +129,17 @@ type HafasClient(id: FsHafas.Client.ProfileId) =
             client.AsyncTrip id name opt
 #endif
 
-        member __.departures (id: U2<string, Station>) (opt: DeparturesArrivalsOptions option) =
+        member __.departures (id: U4<string, Station, Stop, Location>) (opt: DeparturesArrivalsOptions option) =
 #if FABLE_COMPILER
-            client.AsyncDepartures(makeCaseOfU2StringStation id) opt
+            client.AsyncDepartures id opt
             |> Async.StartAsPromise
 #else
             client.AsyncDepartures id opt
 #endif
 
-        member __.arrivals (id: U2<string, Station>) (opt: DeparturesArrivalsOptions option) =
+        member __.arrivals (id: U4<string, Station, Stop, Location>) (opt: DeparturesArrivalsOptions option) =
 #if FABLE_COMPILER
-            client.AsyncArrivals(makeCaseOfU2StringStation id) opt
+            client.AsyncArrivals id opt
             |> Async.StartAsPromise
 #else
             client.AsyncArrivals id opt

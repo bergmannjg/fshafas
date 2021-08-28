@@ -169,12 +169,12 @@ let transformTypeDefns =
         abstract member trip : string -> string -> TripOptions option -> Promise<Trip>
         /// Retrieves departures
         abstract member departures :
-            U2<string, Station> ->
+            U4<string, Station, Stop, Location> ->
             DeparturesArrivalsOptions option ->
             Promise<array<Alternative>>
         /// Retrieves arrivals
         abstract member arrivals :
-            U2<string, Station> ->
+            U4<string, Station, Stop, Location> ->
             DeparturesArrivalsOptions option ->
             Promise<array<Alternative>>
         /// Retrieves journeys from trip id to station

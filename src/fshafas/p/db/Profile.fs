@@ -9,7 +9,7 @@ module internal Db =
     open Fable.Core
 #endif
 
-    let private products : ProductType [] =
+    let private products: ProductType [] =
         [| { id = "nationalExpress"
              mode = ProductTypeMode.Train
              bitmasks = [| 1 |]
@@ -371,7 +371,8 @@ module internal Db =
         match raw.trfRes with
         | Some trfRes when
             trfRes.fareSetL.Length > 0
-            && trfRes.fareSetL.[0].fareL.Length > 0 ->
+            && trfRes.fareSetL.[0].fareL.Length > 0
+            ->
             match trfRes.fareSetL.[0].fareL.[0].prc with
             | Some prc when prc > 0 ->
                 { parsed with
@@ -392,7 +393,7 @@ module internal Db =
         else
             raise (System.ArgumentException("station id: " + id))
 
-    let bikeFltr : FsHafas.Raw.JnyFltr =
+    let bikeFltr: FsHafas.Raw.JnyFltr =
         { ``type`` = "BC"
           mode = "INC"
           value = None
@@ -446,7 +447,7 @@ module internal Db =
             | Some opt when opt.loyaltyCard.IsSome -> Some(formatLoyaltyCard firstClass opt.loyaltyCard.Value)
             | _ -> None
 
-        let trfReq : FsHafas.Raw.TrfReq =
+        let trfReq: FsHafas.Raw.TrfReq =
             { jnyCl = if firstClass then 1 else 2
               tvlrProf =
                   [| { ``type`` = "E"
@@ -457,7 +458,7 @@ module internal Db =
               trfReq = Some trfReq
               jnyFltrL = jnyFltrL }
 
-    let private req : FsHafas.Raw.RawRequest =
+    let private req: FsHafas.Raw.RawRequest =
         { lang = "de"
           svcReqL = [||]
           client =
@@ -485,6 +486,8 @@ module internal Db =
               products = products
               trip = Some true
               radar = Some true
+              tripsByName = Some true
+              reachableFrom = Some true
               journeysFromTrip = Some true
               journeysOutFrwd = true
               formatStation = formatStation
@@ -502,5 +505,4 @@ module internal Db =
                   (fun (ctx: FsHafas.Parser.Context) (p: FsHafas.Raw.RawRem) -> parseHint (profile.parseHint ctx p) p)
               parseLine =
                   (fun (ctx: FsHafas.Parser.Context) (p: FsHafas.Raw.RawProd) ->
-                      parseLineWithAdditionalName (profile.parseLine ctx p) p)
-              reachableFrom = Some true }
+                      parseLineWithAdditionalName (profile.parseLine ctx p) p) }
