@@ -79,7 +79,7 @@ const trip = () => {
 }
 
 const departures = () => {
-    client.departures('8010338', { duration: 20, linesOfStops: true })
+    client.departures({ type: 'stop', id: '8010338' }, { duration: 20, linesOfStops: true })
         .then(result => { console.log(JSON.stringify(result)); })
         .catch(console.error);
 }

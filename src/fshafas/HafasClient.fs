@@ -131,7 +131,7 @@ type HafasClient(id: FsHafas.Client.ProfileId) =
 
         member __.departures (id: U4<string, Station, Stop, Location>) (opt: DeparturesArrivalsOptions option) =
 #if FABLE_COMPILER
-            client.AsyncDepartures id opt
+            client.AsyncDepartures (makeCaseOfU4 id) opt
             |> Async.StartAsPromise
 #else
             client.AsyncDepartures id opt
@@ -139,7 +139,7 @@ type HafasClient(id: FsHafas.Client.ProfileId) =
 
         member __.arrivals (id: U4<string, Station, Stop, Location>) (opt: DeparturesArrivalsOptions option) =
 #if FABLE_COMPILER
-            client.AsyncArrivals id opt
+            client.AsyncArrivals (makeCaseOfU4 id) opt
             |> Async.StartAsPromise
 #else
             client.AsyncArrivals id opt

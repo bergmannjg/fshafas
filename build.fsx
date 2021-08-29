@@ -151,6 +151,8 @@ open Fake.Core.TargetOperators
 
 Target.create "Default" ignore
 
+Target.create "Debug" ignore
+
 Target.create "Web" ignore
 
 Target.create "Docs" ignore
@@ -163,6 +165,15 @@ Target.create "Docs" ignore
 ==> "BuildFableWebpackNode"
 ==> "BuildFableNpmPack"
 ==> "Default"
+
+"BuildLib"
+==> "Test"
+==> "BuildCSharp"
+==> "BuildFableApp"
+==> "CheckReleaseVersion"
+==> "BuildFableWebpackNodeDev"
+==> "BuildFableNpmPack"
+==> "Debug"
 
 "BuildLib"
 ==> "BuildDocs"
