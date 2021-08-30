@@ -77,7 +77,7 @@ Target.create "BuildLib" (fun _ ->
 )
 
 Target.create "BuildWebApp" (fun _ ->
-  DotNet.exec id "build" "src/fshafas.fable.web/fsHafasWeb.fsproj" 
+  DotNet.exec id "build" "src/examples/fshafas.fable.web/fsHafasWeb.fsproj" 
   |> checkResult "buildLib failed"
 )
 
@@ -121,30 +121,44 @@ Target.create "BuildFableNpmPack" (fun _ ->
   Npm.exec "pack fs-hafas-client/" (fun o -> { o with WorkingDirectory = "./src/fshafas.fable.package/" }) |> ignore
 )
 
-Target.create "CopyWebBundle" (fun _ ->
-    Shell.copy "src/fshafas.fable.web/wwwroot/js/lib/" ["src/fshafas.fable.package/fs-hafas-client-web/fshafas.web.bundle.js"]
-    Shell.copy "src/fshafas.fable.web/wwwroot/js/lib/" ["src/fshafas.fable.package/fs-hafas-client/hafas-client.d.ts"]
-    Shell.copy "src/fshafas.fable.web/wwwroot/js/lib/" ["src/fshafas.fable.package/fs-hafas-client-web/fshafas.web.bundle.d.ts"]
+Target.create "BuildFableNpmPackDev" (fun _ ->
+  Npm.exec "pack fs-hafas-client/" (fun o -> { o with WorkingDirectory = "./src/fshafas.fable.package/" }) |> ignore
 )
 
+Target.create "CopyWebBundle" (fun _ ->
+    Shell.copy "src/examples/fshafas.fable.web/wwwroot/js/lib/" ["src/fshafas.fable.package/fs-hafas-client-web/fshafas.web.bundle.js"]
+    Shell.copy "src/examples/fshafas.fable.web/wwwroot/js/lib/" ["src/fshafas.fable.package/fs-hafas-client/hafas-client.d.ts"]
+    Shell.copy "src/examples/fshafas.fable.web/wwwroot/js/lib/" ["src/fshafas.fable.package/fs-hafas-client-web/fshafas.web.bundle.d.ts"]
+)
+
+let run workingDirectory file arguments = 
+      use __ = Trace.traceTask file ""
+      let startInfo = new Diagnostics.ProcessStartInfo(FileName = file, Arguments = arguments)
+      startInfo.WorkingDirectory <- workingDirectory
+      let callResult = 
+            startInfo
+            |> CreateProcess.ofStartInfo
+            |> CreateProcess.redirectOutput
+            |> CreateProcess.withTimeout (TimeSpan.FromMinutes 5.)
+            |> Proc.run
+
+      if callResult.ExitCode = 0 
+      then 
+            Trace.trace callResult.Result.Output
+      else
+            Trace.traceError callResult.Result.Output
+            failwith (file + " encountered errors!")
+
 Target.create "CompileTypeScript" (fun _ ->
-  /// waiting for module Fake.JavaScript.TypeScript 
-  let compile workingDirectory file = 
-        use __ = Trace.traceTask "TypeScript" ""
-        let startInfo = new Diagnostics.ProcessStartInfo(FileName = "tsc", Arguments = ("--target ES2015 --noImplicitAny " + file))
-        startInfo.WorkingDirectory <- workingDirectory
-        let callResult = 
-              startInfo
-              |> CreateProcess.ofStartInfo
-              |> CreateProcess.redirectOutput
-              |> CreateProcess.withTimeout (TimeSpan.FromMinutes 5.)
-              |> Proc.run
+  run "./src/examples/fshafas.fable.web/wwwroot/js/" "tsc"  ("--target ES2015 --noImplicitAny" + " site.ts")
+)
 
-        if callResult.ExitCode > 0 then 
-              Trace.traceError callResult.Result.Output
-              failwith "TypeScript compiler encountered errors!"
-
-  compile "./src/fshafas.fable.web/wwwroot/js/"  "site.ts"
+Target.create "PublishToLocalFeed" (fun _ ->
+  DotNet.exec id "pack" "src/fshafas/fshafas.fable.fsproj" 
+  |> checkResult "buildLib failed"
+  let home = Environment.environVar "HOME"
+  Shell.cleanDir (home + "/local.packages/fshafas")
+  run "./src/fshafas/" "/usr/local/bin/nuget.exe" ("add" + " bin/Debug/FsHafas." + release.AssemblyVersion + ".nupkg" + " -source " + home + "/local.packages -expand")
 )
 
 open Fake.Core.TargetOperators
@@ -172,7 +186,7 @@ Target.create "Docs" ignore
 ==> "BuildFableApp"
 ==> "CheckReleaseVersion"
 ==> "BuildFableWebpackNodeDev"
-==> "BuildFableNpmPack"
+==> "BuildFableNpmPackDev"
 ==> "Debug"
 
 "BuildLib"

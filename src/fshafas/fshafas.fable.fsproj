@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>FsHafas</PackageId>
+    <Version>1.1.0</Version>
+    <Authors>J. Bergmann</Authors>
+    <PackageTags>fable fsharp</PackageTags>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Fable.Core" Version="3.1.5" />
+    <PackageReference Include="Fable.Promise" Version="2.0.0" />
+    <PackageReference Include="Fable.Fetch" Version="2.2.0" />
+    <PackageReference Include="Thoth.Json" Version="4.1.0" />
+  </ItemGroup>
+  <PropertyGroup>
+    <DefineConstants>FABLE_COMPILER</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="lib/Slug.fs" />
+    <Compile Include="Union-types.fs" />
+    <Compile Include="Types-raw-hafas-client.fs" />
+    <Compile Include="Types-hafas-client.fs" />
+    <Compile Include="Context.fs" />
+    <Compile Include="lib/Transformations.fs" />
+    <Compile Include="lib/Request.fs" />
+    <Compile Include="HafasRawClient.fs" />
+    <Compile Include="format/FormatRequest.fs" />
+    <Compile Include="parse/DateTime.fs" />
+    <Compile Include="parse/When.fs" />
+    <Compile Include="parse/Common.fs" />
+    <Compile Include="parse/ArrivalOrDeparture.fs" />
+    <Compile Include="parse/Hint.fs" />
+    <Compile Include="parse/Location.fs" />
+    <Compile Include="parse/Line.fs" />
+    <Compile Include="parse/Movement.fs" />
+    <Compile Include="parse/Polyline.fs" />
+    <Compile Include="parse/Journey.fs" />
+    <Compile Include="parse/JourneyLeg.fs" />
+    <Compile Include="parse/Operator.fs" />
+    <Compile Include="parse/Trip.fs" />
+    <Compile Include="parse/Stopover.fs" />
+    <Compile Include="parse/ProductsBitmask.fs" />
+    <Compile Include="parse/Warning.fs" />
+    <Compile Include="p/bvg/Profile.fs" />
+    <Compile Include="p/db/Profile.fs" />
+    <Compile Include="p/svv/Profile.fs" />
+    <Compile Include="Parser.fs" />
+    <Compile Include="HafasAsyncClient.fs" />
+    <Compile Include="Print.fs" />
+    <Compile Include="HafasClient.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fshafas.fable.fsproj; **\*.fs" PackagePath="fable" />
+  </ItemGroup>
+</Project>

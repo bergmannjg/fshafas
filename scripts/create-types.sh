@@ -26,6 +26,7 @@ if [ "$1" = "remote" ]; then
 else
     cp ../../../forks/hafas-client/index.d.ts .
 fi
+cp index.d.ts ../../src/fshafas.fable.package/fs-hafas-client/hafas-client.d.ts
 mkdir node_modules/@types
 mkdir node_modules/@types/hafas-client
 

@@ -40,10 +40,8 @@ Run `./build.sh` or `./build.cmd` at the root folder.
 Targets are:
 
 * *BuildLib*: compile to dotnet dll,
+* *PublishToLocalFeed*: publish nuget package to local feed, the package can be used in Fable,
 * *Test*: compile to dotnet dll and run tests,
-* *BuildCSharp*: compile example C# program using the fshafas lib,
-* *BuildWebApp*: compile example web app using the fshafas lib,
-* *BuildFableApp*: compile F# program via Fable to JavaScript,
 * *BuildFableWebpackNode*: compile lib via fable and webpack to a npm package.
 * *BuildFableWebpackWeb*: compile lib via fable and webpack to a web target.
 
@@ -55,7 +53,7 @@ Utility scripts:
 ## Using
 
 * [fshafas.fsx](./scripts/fshafas.fsx): F# Interactive example script,
-* [App.fs](src/fshafas.fable/App.fs): F# app running with nodejs,
-* [Program.cs](src/fshafas.csharp/Program.cs): C# program using the F# lib,
+* [App.fs](src/examples/fshafas.fable.node/App.fs): F# app running with nodejs,
+* [Program.cs](src/examples/fshafas.csharp/Program.cs): C# program using the F# lib,
 * [FahrplanApp](https://github.com/bergmannjg/FahrplanApp): Android TypeScript app using the npm package,
-* [Wep App](src/fshafas.fable.web): a web app using the fshafas javascript bundle.
+* [Wep App](src/examples/fshafas.fable.web): a web app using the fshafas javascript bundle.

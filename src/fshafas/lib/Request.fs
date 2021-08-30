@@ -10,7 +10,8 @@ module internal Request =
 
     importSideEffects "isomorphic-fetch"
 
-    [<Emit("typeof window !== 'undefined' ? (new URL(window.location)).origin : ''")>]
+    /// get window location if runnimg in a brower, excluding Node.Js and React Native
+    [<Emit("typeof window !== 'undefined' && navigator.product !== 'ReactNative' ? (new URL(window.location)).origin : ''")>]
     let jsWindowLocation () : string = jsNative
 
     [<ImportDefault("md5")>]

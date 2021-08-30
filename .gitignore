@@ -17,6 +17,7 @@ gh-pages/
 
 build.fsx.lock
 
+hafas-client.d.ts
 fs-hafas-client-*.tgz
 fshafas.bundle.js
 fshafas.bundle.js.map
@@ -30,3 +31,5 @@ x.txt
 
 z*.json
 src/examples/analyzejourneys/calendar.csv
+
+*.nupkg
