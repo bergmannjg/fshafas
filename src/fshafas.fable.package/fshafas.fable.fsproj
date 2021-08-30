@@ -3,48 +3,19 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../fshafas/lib/Slug.fs" />
-    <Compile Include="../fshafas/Union-types.fs" />
-    <Compile Include="../fshafas/Types-raw-hafas-client.fs" />
-    <Compile Include="../fshafas/Types-hafas-client.fs" />
-    <Compile Include="../fshafas/Context.fs" />
-    <Compile Include="../fshafas/lib/Transformations.fs" />
-    <Compile Include="../fshafas/lib/Request.fs" />
-    <Compile Include="../fshafas/HafasRawClient.fs" />
-    <Compile Include="../fshafas/format/FormatRequest.fs" />
-    <Compile Include="../fshafas/parse/DateTime.fs" />
-    <Compile Include="../fshafas/parse/When.fs" />
-    <Compile Include="../fshafas/parse/Common.fs" />
-    <Compile Include="../fshafas/parse/ArrivalOrDeparture.fs" />
-    <Compile Include="../fshafas/parse/Hint.fs" />
-    <Compile Include="../fshafas/parse/Location.fs" />
-    <Compile Include="../fshafas/parse/Line.fs" />
-    <Compile Include="../fshafas/parse/Movement.fs" />
-    <Compile Include="../fshafas/parse/Polyline.fs" />
-    <Compile Include="../fshafas/parse/Journey.fs" />
-    <Compile Include="../fshafas/parse/JourneyLeg.fs" />
-    <Compile Include="../fshafas/parse/Operator.fs" />
-    <Compile Include="../fshafas/parse/Trip.fs" />
-    <Compile Include="../fshafas/parse/Stopover.fs" />
-    <Compile Include="../fshafas/parse/ProductsBitmask.fs" />
-    <Compile Include="../fshafas/parse/Warning.fs" />
-    <Compile Include="../fshafas/p/bvg/Profile.fs" />
-    <Compile Include="../fshafas/p/db/Profile.fs" />
-    <Compile Include="../fshafas/p/svv/Profile.fs" />
-    <Compile Include="../fshafas/Parser.fs" />
-    <Compile Include="../fshafas/HafasAsyncClient.fs" />
-    <Compile Include="../fshafas/Print.fs" />
-    <Compile Include="../fshafas/HafasClient.fs" />
     <Compile Include="Lib.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Fable.Core" Version="3.1.5" />
     <PackageReference Include="Fable.Promise" Version="2.0.0" />
     <PackageReference Include="Fable.Fetch" Version="2.2.0" />
+    <PackageReference Include="FsHafas" Version="1.1.0" />
     <PackageReference Include="Thoth.Json" Version="4.1.0" />
   </ItemGroup>
   <PropertyGroup>
     <DefineConstants>FABLE_COMPILER</DefineConstants>
   </PropertyGroup>
-
+  <PropertyGroup>
+    <RestoreSources>$(RestoreSources);$(HOME)/local.packages</RestoreSources>
+  </PropertyGroup>
 </Project>

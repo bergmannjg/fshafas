@@ -87,12 +87,12 @@ Target.create "Test" (fun _ ->
 )
 
 Target.create "BuildCSharp" (fun _ ->
-  DotNet.exec id "build" "src/fshafas.csharp/fshafas.csharp.csproj" 
+  DotNet.exec id "build" "src/examples/fshafas.csharp/fshafas.csharp.csproj" 
   |> checkResult "BuldCSharp failed"
 )
 
 Target.create "BuildFableApp" (fun _ ->
-  DotNet.exec id "fable" "./src/fshafas.fable/fshafas.fable.fsproj --typedArrays false --outDir ./src/fshafas.fable/build"
+  DotNet.exec id "fable" "./src/examples/fshafas.fable.node/fshafas.fable.fsproj --typedArrays false --outDir ./src/fshafas.fable/build"
   |> checkResult "BuldFableApp failed"
 )
 
@@ -173,18 +173,16 @@ Target.create "Docs" ignore
 
 "BuildLib"
 ==> "Test"
-==> "BuildCSharp"
-==> "BuildFableApp"
 ==> "CheckReleaseVersion"
+==> "PublishToLocalFeed"
 ==> "BuildFableWebpackNode"
 ==> "BuildFableNpmPack"
 ==> "Default"
 
 "BuildLib"
 ==> "Test"
-==> "BuildCSharp"
-==> "BuildFableApp"
 ==> "CheckReleaseVersion"
+==> "PublishToLocalFeed"
 ==> "BuildFableWebpackNodeDev"
 ==> "BuildFableNpmPackDev"
 ==> "Debug"
