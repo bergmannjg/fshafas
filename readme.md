@@ -53,7 +53,7 @@ Utility scripts:
 ## Using
 
 * [fshafas.fsx](./scripts/fshafas.fsx): F# Interactive example script,
-* [App.fs](src/examples/fshafas.fable.node/App.fs): F# app running with nodejs,
+* [Program.fs](src/examples/cli): F# app running with dotnet and nodejs,
 * [Program.cs](src/examples/fshafas.csharp/Program.cs): C# program using the F# lib,
 * [FahrplanApp](https://github.com/bergmannjg/FahrplanApp): Android TypeScript app using the npm package,
 * [Wep App](src/examples/fshafas.fable.web): a web app using the fshafas javascript bundle.

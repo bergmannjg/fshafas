@@ -1,5 +1,16 @@
 # Command Line Interface
 
+## Run with dotnet
+
+* **run**: dotnet run -p cli.fsproj -- --help
+
+## Run with node
+
+* **build**: dotnet fable cli.fable.fsproj -o build
+* **run**: node build/Program.js --help
+
+## Usage
+
 ```txt
 USAGE: cli.exe [--help] [--locations <name>] [--stop <id>] [--journeys <from> <to>] 
                [--journeysfromtrip <fromId> <toId> <newToId>]
