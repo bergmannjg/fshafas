@@ -65,7 +65,9 @@ let toProfileId s =
     | x -> failwithf "%s is out of range" x
 
 let parse (args: string list) =
-    [ valueToArg "--locations" Locations args
+    [ valueToArg "--profile" (toProfileId >> Profile) args
+      flagToArg "--debug" Debug args
+      valueToArg "--locations" Locations args
       valueToArg "--stop" Stop args
       value2ToArg "--journeys" Journeys args
       value3ToArg "--journeysfromtrip" JourneysFromTrip args
@@ -76,8 +78,6 @@ let parse (args: string list) =
       value4ToArg "--radar" (fun (n, w, s, e) -> Radar(float n, float w, float s, float e)) args
       valueToArg "--lines" Lines args
       flagToArg "--serverinfo" ServerInfo args
-      valueToArg "--profile" (toProfileId >> Profile) args
-      flagToArg "--debug" Debug args
       flagToArg "--help" Help args ]
     |> List.choose id
 
