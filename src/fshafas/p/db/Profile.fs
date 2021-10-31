@@ -1,10 +1,13 @@
 namespace FsHafas.Profiles
 
-module internal Db =
+module Db =
 
-    open FsHafas.Client
     open System.Text.RegularExpressions
 
+    open FsHafas.Client
+    open FsHafas.Endpoint
+    open FsHafas.Raw
+    
 #if FABLE_COMPILER
     open Fable.Core
 #endif
@@ -235,7 +238,7 @@ module internal Db =
            ("additional stop", "additional-stopover")
            ("platform change", "changed platform") |]
 
-    let private parseHintByCode (parsed: Hint) (raw: FsHafas.Raw.RawRem) : Hint =
+    let private parseHintByCode (parsed: Hint) (raw: RawRem) : Hint =
         if raw.``type`` = "K" then
             match raw.txtN with
             | Some (value) -> { parsed with text = value }
@@ -261,7 +264,7 @@ module internal Db =
         else
             parsed
 
-    let private parseStatusByCode (parsed: Status) (raw: FsHafas.Raw.RawRem) : Status =
+    let private parseStatusByCode (parsed: Status) (raw: RawRem) : Status =
         if raw.``type`` = "K" then
             match raw.txtN with
             | Some (value) -> { parsed with text = value }
@@ -280,7 +283,7 @@ module internal Db =
 
     let private parseHint
         (parsed: U3<Hint, Status, Warning> option)
-        (h: FsHafas.Raw.RawRem)
+        (h: RawRem)
         : U3<Hint, Status, Warning> option =
         match parsed with
         | Some (U3.Case1 parsedHint) -> U3.Case1(parseHintByCode parsedHint h) |> Some
@@ -288,7 +291,7 @@ module internal Db =
         | _ -> parsed
 
 
-    let private parseLineWithAdditionalName (parsed: Line) (p: FsHafas.Raw.RawProd) : Line =
+    let private parseLineWithAdditionalName (parsed: Line) (p: RawProd) : Line =
         match p.addName with
         | Some _ ->
             { parsed with
@@ -303,7 +306,7 @@ module internal Db =
            "very-high"
            "exceptionally-high" |]
 
-    let parseLoadFactor (opt: FsHafas.Parser.Options) (tcocL: FsHafas.Raw.RawTcoc []) (tcocX: int []) : string option =
+    let parseLoadFactor (opt: FsHafas.Endpoint.Options) (tcocL: RawTcoc []) (tcocX: int []) : string option =
         let cls =
             if opt.firstClass then
                 "FIRST"
@@ -316,8 +319,8 @@ module internal Db =
 
     let parseJourneyLegWithLoadFactor
         (parsed: Leg)
-        (ctx: FsHafas.Parser.Context)
-        (pt: FsHafas.Raw.RawSec)
+        (ctx: FsHafas.Endpoint.Context)
+        (pt: RawSec)
         (date: string)
         : Leg =
         let tcocX =
@@ -343,8 +346,8 @@ module internal Db =
 
     let parseArrOrDepWithLoadFactor
         (parsed: Alternative)
-        (ctx: FsHafas.Parser.Context)
-        (d: FsHafas.Raw.RawJny)
+        (ctx: FsHafas.Endpoint.Context)
+        (d: RawJny)
         : Alternative =
         let tcocX =
             match d.stbStop with
@@ -367,7 +370,7 @@ module internal Db =
 
         | _ -> parsed
 
-    let private parseJourneyWithPrice (parsed: Journey) (raw: FsHafas.Raw.RawOutCon) : Journey =
+    let private parseJourneyWithPrice (parsed: Journey) (raw: RawOutCon) : Journey =
         match raw.trfRes with
         | Some trfRes when
             trfRes.fareSetL.Length > 0
@@ -393,7 +396,7 @@ module internal Db =
         else
             raise (System.ArgumentException("station id: " + id))
 
-    let bikeFltr: FsHafas.Raw.JnyFltr =
+    let bikeFltr: JnyFltr =
         { ``type`` = "BC"
           mode = "INC"
           value = None
@@ -428,8 +431,8 @@ module internal Db =
 
     let transformJourneysQuery
         (opt: JourneysOptions option)
-        (q: FsHafas.Raw.TripSearchRequest)
-        : FsHafas.Raw.TripSearchRequest =
+        (q: TripSearchRequest)
+        : TripSearchRequest =
         let bike =
             getOptionValue opt (fun v -> v.bike) Default.JourneysOptions
 
@@ -447,7 +450,7 @@ module internal Db =
             | Some opt when opt.loyaltyCard.IsSome -> Some(formatLoyaltyCard firstClass opt.loyaltyCard.Value)
             | _ -> None
 
-        let trfReq: FsHafas.Raw.TrfReq =
+        let trfReq: TrfReq =
             { jnyCl = if firstClass then 1 else 2
               tvlrProf =
                   [| { ``type`` = "E"
@@ -458,7 +461,7 @@ module internal Db =
               trfReq = Some trfReq
               jnyFltrL = jnyFltrL }
 
-    let private req: FsHafas.Raw.RawRequest =
+    let private req: RawRequest =
         { lang = "de"
           svcReqL = [||]
           client =
@@ -472,7 +475,7 @@ module internal Db =
               { ``type`` = "AID"
                 aid = "n91dB8Z77MLdoR0K" } }
 
-    let getProfile (profile: FsHafas.Parser.Profile) =
+    let getProfile (profile: FsHafas.Endpoint.Profile) =
         { profile with
               locale = "de-DE"
               timezone = "Europe/Berlin"
@@ -493,16 +496,16 @@ module internal Db =
               formatStation = formatStation
               transformJourneysQuery = transformJourneysQuery
               parseJourney =
-                  (fun (ctx: FsHafas.Parser.Context) (p: FsHafas.Raw.RawOutCon) ->
+                  (fun (ctx: FsHafas.Endpoint.Context) (p: RawOutCon) ->
                       parseJourneyWithPrice (profile.parseJourney ctx p) p)
               parseJourneyLeg =
-                  (fun (ctx: FsHafas.Parser.Context) (pt: FsHafas.Raw.RawSec) (date: string) ->
+                  (fun (ctx: FsHafas.Endpoint.Context) (pt: RawSec) (date: string) ->
                       parseJourneyLegWithLoadFactor (profile.parseJourneyLeg ctx pt date) ctx pt date)
               parseDeparture =
-                  (fun (ctx: FsHafas.Parser.Context) (pt: FsHafas.Raw.RawJny) ->
+                  (fun (ctx: FsHafas.Endpoint.Context) (pt: RawJny) ->
                       parseArrOrDepWithLoadFactor (profile.parseDeparture ctx pt) ctx pt)
               parseHint =
-                  (fun (ctx: FsHafas.Parser.Context) (p: FsHafas.Raw.RawRem) -> parseHint (profile.parseHint ctx p) p)
+                  (fun (ctx: FsHafas.Endpoint.Context) (p: RawRem) -> parseHint (profile.parseHint ctx p) p)
               parseLine =
-                  (fun (ctx: FsHafas.Parser.Context) (p: FsHafas.Raw.RawProd) ->
+                  (fun (ctx: FsHafas.Endpoint.Context) (p: RawProd) ->
                       parseLineWithAdditionalName (profile.parseLine ctx p) p) }

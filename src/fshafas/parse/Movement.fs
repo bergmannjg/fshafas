@@ -7,6 +7,7 @@ module internal Movement =
 #endif
 
     open FsHafas.Client
+    open FsHafas.Endpoint
 
     let parseMovement (ctx: Context) (m: FsHafas.Raw.RawJny) =
 

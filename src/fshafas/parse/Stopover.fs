@@ -3,6 +3,7 @@ namespace FsHafas.Parser
 module internal Stopover =
 
     open FsHafas.Client
+    open FsHafas.Endpoint
 
     let defaultStopover : FsHafas.Client.StopOver =
         { stop = None

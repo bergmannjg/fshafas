@@ -123,7 +123,6 @@ module internal U2StopLocation =
 #endif
 
     open FsHafas.Client
-    open FsHafas.Client
 
     let FromU3StationStopLocation (u3: U3<Station, Stop, Location>) =
         match u3 with
@@ -148,6 +147,7 @@ module internal U2StopLocation =
 module internal MergeOptions =
 
     open FsHafas.Client
+    open FsHafas.Endpoint
 
     let private getOptionValue<'a, 'b> (opt: 'a option) (getter: 'a -> 'b option) (defaultValue: 'b) =
         match opt with
@@ -157,21 +157,21 @@ module internal MergeOptions =
             | None -> defaultValue
         | None -> defaultValue
 
-    let JourneysOptions (options: FsHafas.Parser.Options) (opt: JourneysOptions option) =
+    let JourneysOptions (options: FsHafas.Endpoint.Options) (opt: JourneysOptions option) =
         { options with
               stopovers = getOptionValue opt (fun v -> v.stopovers) options.stopovers
               scheduledDays = getOptionValue opt (fun v -> v.scheduledDays) options.scheduledDays
               firstClass = getOptionValue opt (fun v -> v.firstClass) options.firstClass }
 
-    let JourneysFromTripOptions (options: FsHafas.Parser.Options) (opt: JourneysFromTripOptions option) =
+    let JourneysFromTripOptions (options: FsHafas.Endpoint.Options) (opt: JourneysFromTripOptions option) =
         { options with
               stopovers = getOptionValue opt (fun v -> v.stopovers) options.stopovers }
 
-    let LocationsOptions (options: FsHafas.Parser.Options) (opt: LocationsOptions option) =
+    let LocationsOptions (options: FsHafas.Endpoint.Options) (opt: LocationsOptions option) =
         { options with
               linesOfStops = getOptionValue opt (fun v -> v.linesOfStops) options.linesOfStops }
 
-    let NearByOptions (options: FsHafas.Parser.Options) (opt: NearByOptions option) =
+    let NearByOptions (options: FsHafas.Endpoint.Options) (opt: NearByOptions option) =
         { options with
               linesOfStops = getOptionValue opt (fun v -> v.linesOfStops) options.linesOfStops }
 

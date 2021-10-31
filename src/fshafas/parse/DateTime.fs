@@ -2,7 +2,7 @@ namespace FsHafas.Parser
 
 module internal DateTime =
 
-    open FsHafas.Client
+    open FsHafas.Endpoint
 
 #if FABLE_COMPILER
     open Fable.Core
@@ -43,7 +43,7 @@ module internal DateTime =
 #endif
 
     /// expected format 'yyyyMMdd' and 'HHmmss'
-    let private ParseString (profile: FsHafas.Parser.Profile) (date: string) (time: string) (tzOffset: int option) =
+    let private ParseString (profile: FsHafas.Endpoint.Profile) (date: string) (time: string) (tzOffset: int option) =
         let year = date.Substring(0, 4) |> int
         let month = date.Substring(4, 2) |> int
         let day = date.Substring(6, 2) |> int
@@ -68,7 +68,7 @@ module internal DateTime =
             ((dt.Offset.TotalMinutes |> int) / 60)
 
     let parseDateTimeEx
-        (profile: FsHafas.Parser.Profile)
+        (profile: FsHafas.Endpoint.Profile)
         (date: string)
         (time: string option)
         (tzOffset: int option)

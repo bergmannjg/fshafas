@@ -12,11 +12,9 @@ open Fable.Core
 #endif
 
 /// <summary>F# async based interface corresponding to hafas-client</summary>
-type HafasAsyncClient(id: FsHafas.Client.ProfileId) =
+type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
 
     let log msg o = FsHafas.Client.Log.Print msg o
-
-    let profile = FsHafas.Api.Parser.getProfile id
 
     let cfg =
         match profile.cfg with
@@ -46,8 +44,8 @@ type HafasAsyncClient(id: FsHafas.Client.ProfileId) =
         Serializer.addConverters ([| Converter.UnionConverter<FsHafas.Client.ProductTypeMode>() |])
 #endif
 
-    static member productsOfMode (id: ProfileId) (mode: ProductTypeMode) : Products =
-        Parser.getProfile(id).products
+    static member productsOfMode (profile: FsHafas.Endpoint.Profile) (mode: ProductTypeMode) : Products =
+        profile.products
         |> Array.filter (fun p -> p.mode = mode && p.name <> "Tram")
         |> Array.fold
             (fun m p ->

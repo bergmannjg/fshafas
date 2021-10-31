@@ -4,6 +4,7 @@ module internal Trip =
 
     open System
     open FsHafas.Client
+    open FsHafas.Endpoint
 
     let parseTrip (ctx: Context) (j: FsHafas.Raw.RawJny): FsHafas.Client.Trip =
 

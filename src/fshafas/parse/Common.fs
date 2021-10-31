@@ -6,7 +6,7 @@ module internal Common =
     open Fable.Core
 #endif
 
-    open FsHafas.Client
+    open FsHafas.Endpoint
 
     let private updateOperators (ctx: Context) (ops: FsHafas.Client.Operator []) =
         { ctx with

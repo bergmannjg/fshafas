@@ -49,12 +49,12 @@ module internal Format =
     let formatDate (dt: System.DateTime) = dt.ToString("yyyyMMdd")
     let formatTime (dt: System.DateTime) = dt.ToString("HHmmss")
 
-    let private formatProductsBitmask (profile: FsHafas.Parser.Profile) (products: FsHafas.Client.Products) =
+    let private formatProductsBitmask (profile: FsHafas.Endpoint.Profile) (products: FsHafas.Client.Products) =
         profile.products
         |> Array.filter (fun p -> products.[p.id])
         |> Array.fold (fun bitmask p -> p.bitmasks.[0] ||| bitmask) 0
 
-    let private makeFilters (profile: FsHafas.Parser.Profile) (products: FsHafas.Client.Products) =
+    let private makeFilters (profile: FsHafas.Endpoint.Profile) (products: FsHafas.Client.Products) =
         let bitmask = formatProductsBitmask profile products
 
         let filters: FsHafas.Raw.JnyFltr [] =
@@ -69,7 +69,7 @@ module internal Format =
         filters
 
     let locationRequest
-        (profile: FsHafas.Parser.Profile)
+        (profile: FsHafas.Endpoint.Profile)
         (name: string)
         (opt: FsHafas.Client.LocationsOptions option)
         : FsHafas.Raw.LocMatchRequest =
@@ -87,7 +87,7 @@ module internal Format =
                 maxLoc = results
                 field = "S" } }
 
-    let private makeLocLTypeS (profile: FsHafas.Parser.Profile) (id: string) : FsHafas.Raw.Loc =
+    let private makeLocLTypeS (profile: FsHafas.Endpoint.Profile) (id: string) : FsHafas.Raw.Loc =
         { ``type`` = "S"
           name = None
           lid = Some("A=1@L=" + (profile.formatStation id) + "@") }
@@ -117,7 +117,7 @@ module internal Format =
               lid = Some("A=1@X=" + xs + "@Y=" + ys + "@") }
 
     let private makeLocType
-        (profile: FsHafas.Parser.Profile)
+        (profile: FsHafas.Endpoint.Profile)
         (s: U4<string, FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>)
         =
         match s with
@@ -129,7 +129,7 @@ module internal Format =
         | _ -> raise (System.ArgumentException("makeLocType"))
 
     let stationBoardRequest
-        (profile: FsHafas.Parser.Profile)
+        (profile: FsHafas.Endpoint.Profile)
         (``type``: string)
         (name: U4<string, FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>)
         (opt: FsHafas.Client.DeparturesArrivalsOptions option)
@@ -166,7 +166,7 @@ module internal Format =
           stbFltrEquiv = includeRelatedStations }
 
     let reconstructionRequest
-        (profile: FsHafas.Parser.Profile)
+        (profile: FsHafas.Endpoint.Profile)
         (refreshToken: string)
         (opt: FsHafas.Client.RefreshJourneyOptions option)
         : FsHafas.Raw.ReconstructionRequest =
@@ -186,7 +186,7 @@ module internal Format =
           ctxRecon = Some refreshToken }
 
     let journeyMatchRequest
-        (profile: FsHafas.Parser.Profile)
+        (profile: FsHafas.Endpoint.Profile)
         (lineName: string)
         (opt: FsHafas.Client.TripsByNameOptions option)
         : FsHafas.Raw.JourneyMatchRequest =
@@ -198,7 +198,7 @@ module internal Format =
         { input = lineName; date = date }
 
     let locDetailsRequest
-        (profile: FsHafas.Parser.Profile)
+        (profile: FsHafas.Endpoint.Profile)
         (stop: U2<string, FsHafas.Client.Stop>)
         (opt: FsHafas.Client.StopOptions option)
         : FsHafas.Raw.LocDetailsRequest =
@@ -212,7 +212,7 @@ module internal Format =
         { locL = [| makeLocLTypeS profile id |] }
 
     let locGeoPosRequest
-        (profile: FsHafas.Parser.Profile)
+        (profile: FsHafas.Endpoint.Profile)
         (location: FsHafas.Client.Location)
         (opt: FsHafas.Client.NearByOptions option)
         : FsHafas.Raw.LocGeoPosRequest =
@@ -251,7 +251,7 @@ module internal Format =
           maxLoc = results }
 
     let locGeoReachRequest
-        (profile: FsHafas.Parser.Profile)
+        (profile: FsHafas.Endpoint.Profile)
         (location: FsHafas.Client.Location)
         (opt: FsHafas.Client.ReachableFromOptions option)
         : FsHafas.Raw.LocGeoReachRequest =
@@ -282,7 +282,7 @@ module internal Format =
           jnyFltrL = filters }
 
     let journeyGeoPosRequest
-        (profile: FsHafas.Parser.Profile)
+        (profile: FsHafas.Endpoint.Profile)
         (rect: FsHafas.Client.BoundingBox)
         (opt: FsHafas.Client.RadarOptions option)
         : FsHafas.Raw.JourneyGeoPosRequest =
@@ -339,7 +339,7 @@ module internal Format =
           trainPosMode = "CALC" }
 
     let tripRequest
-        (profile: FsHafas.Parser.Profile)
+        (profile: FsHafas.Endpoint.Profile)
         (id: string)
         (name: string)
         (opt: FsHafas.Client.TripOptions option)
@@ -353,14 +353,14 @@ module internal Format =
           getPolyline = polyline }
 
     let lineMatchRequest
-        (profile: FsHafas.Parser.Profile)
+        (profile: FsHafas.Endpoint.Profile)
         (query: string)
         (opt: FsHafas.Client.LinesOptions option)
         : FsHafas.Raw.LineMatchRequest =
         { input = query }
 
     let himSearchRequest
-        (profile: FsHafas.Parser.Profile)
+        (profile: FsHafas.Endpoint.Profile)
         (opt: FsHafas.Client.RemarksOptions option)
         : FsHafas.Raw.HimSearchRequest =
 
@@ -388,7 +388,7 @@ module internal Format =
           timeB = time }
 
     let journeyRequest
-        (profile: FsHafas.Parser.Profile)
+        (profile: FsHafas.Endpoint.Profile)
         (from: U4<string, FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>)
         (``to``: U4<string, FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>)
         (opt: FsHafas.Client.JourneysOptions option)
@@ -470,7 +470,7 @@ module internal Format =
               trfReq = None }
 
     let searchOnTripRequest
-        (profile: FsHafas.Parser.Profile)
+        (profile: FsHafas.Endpoint.Profile)
         (tripId: string)
         (previousStopover: StopOver)
         (``to``: U4<string, FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>)

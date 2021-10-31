@@ -3,6 +3,7 @@ namespace FsHafas.Parser
 module internal Line =
 
     open FsHafas.Client
+    open FsHafas.Endpoint
 
     let private slug (s: string) = Slug.slugify s |> Some
 

@@ -6,11 +6,11 @@ open Fable.Core
 open FsHafas.Client
 open FsHafas.Api
 
-let id = FsHafas.Client.ProfileId.Db
+let profile = FsHafas.Profiles.Db.getProfile (FsHafas.Api.Parser.defaultProfile)
 
 let f1 () =
     let client =
-        HafasClient(FsHafas.Client.ProfileId.Db) :> FsHafas.Client.HafasClient
+        HafasClient(profile) :> FsHafas.Client.HafasClient
 
     client.locations
         "Hannover"
@@ -21,21 +21,21 @@ let f1 () =
 
 let f3 () =
     let client =
-        HafasClient(FsHafas.Client.ProfileId.Db) :> FsHafas.Client.HafasClient
+        HafasClient(profile) :> FsHafas.Client.HafasClient
 
     client.locations "Hannover" (Some Default.LocationsOptions)
     |> Promise.iter (FsHafas.Printf.Short.Locations >> printfn "%s")
 
 let f4 () =
     let client =
-        HafasClient(FsHafas.Client.ProfileId.Db) :> FsHafas.Client.HafasClient
+        HafasClient(profile) :> FsHafas.Client.HafasClient
 
     client.departures (U4.Case1 "8000036") (Some Default.DeparturesArrivalsOptions)
     |> Promise.iter (FsHafas.Printf.Short.Alternatives >> printfn "%s")
 
 let f5 () =
     let client =
-        HafasClient(FsHafas.Client.ProfileId.Db) :> FsHafas.Client.HafasClient
+        HafasClient(profile) :> FsHafas.Client.HafasClient
 
     client.journeys
         (U4.Case3

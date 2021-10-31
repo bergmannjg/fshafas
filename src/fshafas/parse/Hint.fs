@@ -3,7 +3,8 @@ namespace FsHafas.Parser
 module internal Hint =
 
     open FsHafas.Client
-
+    open FsHafas.Endpoint
+    
 #if FABLE_COMPILER
     open Fable.Core
 #endif

@@ -6,8 +6,10 @@ module internal Location =
     open Fable.Core
 #endif
 
-    open FsHafas.Client
     open System.Text.RegularExpressions
+
+    open FsHafas.Client
+    open FsHafas.Endpoint
 
     type Lid =
         { L: string option

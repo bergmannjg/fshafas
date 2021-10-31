@@ -3,6 +3,7 @@ namespace FsHafas.Parser
 module internal JourneyLeg =
 
     open FsHafas.Client
+    open FsHafas.Endpoint
 
     let parsePlatform (ctx: Context) (platfS: string option) (platfR: string option) (cncl: bool option) : Platform =
         let planned = platfS

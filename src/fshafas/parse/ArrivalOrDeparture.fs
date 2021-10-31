@@ -3,7 +3,8 @@ namespace FsHafas.Parser
 module internal ArrivalOrDeparture =
 
     open FsHafas.Client
-
+    open FsHafas.Endpoint
+    
     let DEP = "DEP"
     let ARR = "ARR"
 

@@ -3,6 +3,7 @@ namespace FsHafas.Parser
 module internal Warning =
 
     open FsHafas.Client
+    open FsHafas.Endpoint
 
     let private parseMsgEdge (ctx: Context) (e: FsHafas.Raw.RawHimMsgEdge) : FsHafas.Client.Edge =
         { fromLoc = Common.getElementAtSome e.fLocX ctx.common.locations

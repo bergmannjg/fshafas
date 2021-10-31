@@ -1,4 +1,4 @@
-namespace FsHafas.Parser
+namespace FsHafas.Endpoint
 
 #if FABLE_COMPILER
 open Fable.Core
@@ -17,24 +17,24 @@ type Options =
       linesOfStops: bool
       firstClass: bool }
 
-type internal CommonData =
+type   CommonData =
     { operators: FsHafas.Client.Operator []
       locations: U3<Station, Stop, Location> []
       lines: FsHafas.Client.Line []
       hints: (U3<FsHafas.Client.Hint, FsHafas.Client.Status, FsHafas.Client.Warning> option) [] }
 
-type internal ParsedWhen =
+type   ParsedWhen =
     { ``when``: string option
       plannedWhen: string option
       prognosedWhen: string option
       delay: int option }
 
-type internal Platform =
+type   Platform =
     { platform: string option
       plannedPlatform: string option
       prognosedPlatform: string option }
 
-type internal Profile =
+type   Profile =
     { locale: string
       timezone: string
       endpoint: string
@@ -76,7 +76,7 @@ type internal Profile =
       parseBitmask: Context -> int -> FsHafas.Client.Products
       parseWarning: Context -> FsHafas.Raw.RawHim -> FsHafas.Client.Warning }
 
-and internal Context =
+and   Context =
     { profile: Profile
       opt: Options
       common: CommonData

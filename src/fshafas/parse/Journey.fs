@@ -3,6 +3,7 @@ namespace FsHafas.Parser
 module internal Journey =
 
     open FsHafas.Client
+    open FsHafas.Endpoint
 
     let bytes =
         [| 0 .. 7 |]

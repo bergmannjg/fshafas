@@ -32,11 +32,6 @@ type Log() =
 
     static member Print (msg: string) (o: obj) = if debug then printfn "%s %A" msg o
 
-type ProfileId =
-    | Db
-    | Bvg
-    | Svv
-
 #if FABLE_COMPILER
 type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
     [<EmitIndexer>]

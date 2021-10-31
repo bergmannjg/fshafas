@@ -3,6 +3,7 @@ namespace FsHafas.Parser
 module internal ProductsBitmask =
 
     open FsHafas.Client
+    open FsHafas.Endpoint
 
     let parseBitmask (ctx: Context) (bitmask: int) : FsHafas.Client.Products =
         ctx.profile.products

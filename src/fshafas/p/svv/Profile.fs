@@ -1,6 +1,6 @@
 namespace FsHafas.Profiles
 
-module internal Svv =
+module  Svv =
 
     open FsHafas.Client
 
@@ -72,7 +72,7 @@ module internal Svv =
               { ``type`` = "AID"
                 aid = "wf7mcf9bv3nv8g5f" } }
 
-    let getProfile (profile: FsHafas.Parser.Profile) =
+    let getProfile (profile: FsHafas.Endpoint.Profile) =
         { profile with
               locale = "at-DE"
               timezone = "Europe/Vienna"

@@ -8,8 +8,8 @@ open Fable.Core.JsInterop
 open FsHafas.Client
 
 /// <summary>JS promise based interface corresponding to hafas-client</summary>
-type HafasClient(id: FsHafas.Client.ProfileId) =
-    let client = new FsHafas.Api.HafasAsyncClient(id)
+type HafasClient(profile: FsHafas.Endpoint.Profile) =
+    let client = new FsHafas.Api.HafasAsyncClient(profile)
 
 #if FABLE_COMPILER
     [<Emit("typeof $1")>]
@@ -77,9 +77,7 @@ type HafasClient(id: FsHafas.Client.ProfileId) =
             raise (System.ArgumentException("BoundingBox expected"))
 #endif
 
-    static member Profile(id: FsHafas.Client.ProfileId) : FsHafas.Client.Profile =
-        let profile = FsHafas.Api.Parser.getProfile id
-
+    static member Profile(profile: FsHafas.Endpoint.Profile) : FsHafas.Client.Profile =
         { locale = profile.locale
           timezone = profile.timezone
           endpoint = profile.endpoint
