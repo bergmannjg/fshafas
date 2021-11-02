@@ -11,6 +11,7 @@
 
   <ItemGroup>
      <ProjectReference Include="../../fshafas/fshafas.fsproj"/>
+     <ProjectReference Include="../../fshafas.profiles/fshafas.profiles.fsproj"/>
      <PackageReference Include="FSharp.SystemTextJson" Version="0.16.6" />
      <PackageReference Include="FSharp.Data" Version="4.2.2" />
      <PackageReference Include="Argu" Version="6.1.1" />

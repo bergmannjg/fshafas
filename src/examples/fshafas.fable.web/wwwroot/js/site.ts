@@ -10,7 +10,7 @@ interface LocationResult {
 }
 
 const locations = async (profile: 'db' | 'bvg', name: string) => {
-    const client = fshafas.createClient(profile);
+    const client = fshafas.createClient(fshafas.getProfile(profile));
     const result = await client.locations(name, { results: 5 });
     let arr: LocationResult[] = [];
     result.forEach(x => {
@@ -31,7 +31,7 @@ interface JourneyResult {
 }
 
 const journeys = async (profile: 'db' | 'bvg', from: string, to: string) => {
-    const client = fshafas.createClient(profile);
+    const client = fshafas.createClient(fshafas.getProfile(profile));
     const locationsFrom = await client.locations(from, { results: 1 });
     const locationsTo = await client.locations(to, { results: 1 });
     const arr: JourneyResult[] = [];

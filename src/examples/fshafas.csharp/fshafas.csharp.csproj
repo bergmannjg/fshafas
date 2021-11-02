@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="../../fshafas/fshafas.fsproj"/>
+    <ProjectReference Include="../../fshafas.profiles/fshafas.profiles.fsproj"/>
   </ItemGroup>
 
 </Project>

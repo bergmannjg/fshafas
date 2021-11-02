@@ -10,6 +10,7 @@
     <PackageReference Include="Fable.Promise" Version="2.0.0" />
     <PackageReference Include="Fable.Fetch" Version="2.2.0" />
     <PackageReference Include="FsHafas" Version="1.2.0" />
+    <PackageReference Include="FsHafas.Profiles" Version="1.2.0" />
     <PackageReference Include="Thoth.Json" Version="4.1.0" />
   </ItemGroup>
   <PropertyGroup>

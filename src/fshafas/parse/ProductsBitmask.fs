@@ -6,7 +6,7 @@ module internal ProductsBitmask =
     open FsHafas.Endpoint
 
     let parseBitmask (ctx: Context) (bitmask: int) : FsHafas.Client.Products =
-        ctx.profile.products
+        (ctx.profile :> FsHafas.Client.Profile).products
         |> Array.fold
             (fun m p ->
                 m.[p.id] <-

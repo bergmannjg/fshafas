@@ -11,7 +11,10 @@
 
   <ItemGroup>
     <ProjectReference Include="../fshafas/fshafas.fsproj">
-      <Name>JsonRpcClient.fsproj</Name>
+      <Name>fshafas.fsproj</Name>
+    </ProjectReference>
+    <ProjectReference Include="../fshafas.profiles/fshafas.profiles.fsproj">
+      <Name>fshafas.profiles.fsproj</Name>
     </ProjectReference>
   </ItemGroup>
 

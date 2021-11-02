@@ -27,7 +27,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
         | None -> raise (System.ArgumentException("profile.baseRequest"))
 
     let httpClient =
-        FsHafas.Api.HafasRawClient(profile.endpoint, profile.salt, cfg, baseRequest)
+        FsHafas.Api.HafasRawClient((profile :> FsHafas.Client.Profile).endpoint, profile.salt, cfg, baseRequest)
 
     let enabled (value: bool option) =
         match value with
@@ -45,7 +45,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
 #endif
 
     static member productsOfMode (profile: FsHafas.Endpoint.Profile) (mode: ProductTypeMode) : Products =
-        profile.products
+        (profile :> FsHafas.Client.Profile).products
         |> Array.filter (fun p -> p.mode = mode && p.name <> "Tram")
         |> Array.fold
             (fun m p ->
@@ -75,7 +75,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
     member __.AsyncRefreshJourney (refreshToken: string) (opt: RefreshJourneyOptions option) : Async<Journey> =
 
         async {
-            if enabled profile.refreshJourney then
+            if enabled (profile :> FsHafas.Client.Profile).refreshJourney then
                 let! (common, res, outConl) =
                     httpClient.AsyncReconstruction(Format.reconstructionRequest profile refreshToken opt)
 
@@ -92,7 +92,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
         : Async<array<Journey>> =
 
         async {
-            if enabled profile.journeysFromTrip then
+            if enabled (profile :> FsHafas.Client.Profile).journeysFromTrip then
                 let! (common, res, outConl) =
                     httpClient.AsyncSearchOnTrip(
                         Format.searchOnTripRequest profile fromTripId previousStopOver ``to`` opt
@@ -113,7 +113,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
     member __.AsyncTrip (id: string) (name: string) (opt: TripOptions option) : Async<Trip> =
 
         async {
-            if enabled profile.trip then
+            if enabled (profile :> FsHafas.Client.Profile).trip then
                 let! (common, res, journey) = httpClient.AsyncJourneyDetails(Format.tripRequest profile id name opt)
 
                 return Parser.parseTrip journey (Parser.parseCommon profile Parser.defaultOptions common res)
@@ -188,7 +188,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
     member __.AsyncReachableFrom (l: Location) (opt: ReachableFromOptions option) : Async<array<Duration>> =
 
         async {
-            if enabled profile.reachableFrom then
+            if enabled (profile :> FsHafas.Client.Profile).reachableFrom then
                 let! (common, res, locL) = httpClient.AsyncLocGeoReach(Format.locGeoReachRequest profile l opt)
 
                 return Parser.parseDurations locL (Parser.parseCommon profile Parser.defaultOptions common res)
@@ -199,7 +199,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
     member __.AsyncRadar (rect: BoundingBox) (opt: RadarOptions option) : Async<array<Movement>> =
 
         async {
-            if enabled profile.radar then
+            if enabled (profile :> FsHafas.Client.Profile).radar then
                 let! (common, res, jnyL) = httpClient.AsyncJourneyGeoPos(Format.journeyGeoPosRequest profile rect opt)
 
                 return Parser.parseMovements jnyL (Parser.parseCommon profile Parser.defaultOptions common res)
@@ -209,7 +209,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
 
     member __.AsyncTripsByName (lineName: string) (opt: TripsByNameOptions option) : Async<array<Trip>> =
         async {
-            if enabled profile.tripsByName then
+            if enabled (profile :> FsHafas.Client.Profile).tripsByName then
                 let! (common, res, journey) =
                     httpClient.AsyncJourneyMatch(Format.journeyMatchRequest profile lineName opt)
 
@@ -220,7 +220,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
 
     member __.AsyncRemarks(opt: RemarksOptions option) : Async<array<Warning>> =
         async {
-            if enabled profile.remarks then
+            if enabled (profile :> FsHafas.Client.Profile).remarks then
                 let! (common, res, msgL) = httpClient.AsyncHimSearch(Format.himSearchRequest profile opt)
 
                 return Parser.parseWarnings msgL (Parser.parseCommon profile Parser.defaultOptions common res)
@@ -230,7 +230,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
 
     member __.AsyncLines (query: string) (opt: LinesOptions option) : Async<array<Line>> =
         async {
-            if enabled profile.lines then
+            if enabled (profile :> FsHafas.Client.Profile).lines then
                 let! (common, res, lineL) = httpClient.AsyncLineMatch(Format.lineMatchRequest profile query opt)
 
                 return Parser.parseLines lineL (Parser.parseCommon profile Parser.defaultOptions common res)

@@ -50,7 +50,7 @@ module internal Format =
     let formatTime (dt: System.DateTime) = dt.ToString("HHmmss")
 
     let private formatProductsBitmask (profile: FsHafas.Endpoint.Profile) (products: FsHafas.Client.Products) =
-        profile.products
+        (profile :> FsHafas.Client.Profile).products
         |> Array.filter (fun p -> products.[p.id])
         |> Array.fold (fun bitmask p -> p.bitmasks.[0] ||| bitmask) 0
 
@@ -80,12 +80,12 @@ module internal Format =
             getOptionValue opt (fun v -> v.results) Default.LocationsOptions
 
         { input =
-              { loc =
-                    { ``type`` = "ALL"
-                      name = Some(name + (if fuzzy then "?" else ""))
-                      lid = None }
-                maxLoc = results
-                field = "S" } }
+            { loc =
+                { ``type`` = "ALL"
+                  name = Some(name + (if fuzzy then "?" else ""))
+                  lid = None }
+              maxLoc = results
+              field = "S" } }
 
     let private makeLocLTypeS (profile: FsHafas.Endpoint.Profile) (id: string) : FsHafas.Raw.Loc =
         { ``type`` = "S"
@@ -242,9 +242,9 @@ module internal Format =
             | None -> raise (System.ArgumentException("location.latitude"))
 
         { ring =
-              { cCrd = { x = x; y = y }
-                maxDist = distance
-                minDist = 0 }
+            { cCrd = { x = x; y = y }
+              maxDist = distance
+              minDist = 0 }
           locFltrL = filters
           getPOIs = false
           getStops = stops
@@ -318,20 +318,20 @@ module internal Format =
           date = date
           time = time
           rect =
-              { llCrd =
-                    { x = Coordinate.fromFloat rect.west
-                      y = Coordinate.fromFloat rect.south
-                      z = None
-                      ``type`` = None
-                      layerX = None
-                      crdSysX = None }
-                urCrd =
-                    { x = Coordinate.fromFloat rect.east
-                      y = Coordinate.fromFloat rect.north
-                      z = None
-                      ``type`` = None
-                      layerX = None
-                      crdSysX = None } }
+            { llCrd =
+                { x = Coordinate.fromFloat rect.west
+                  y = Coordinate.fromFloat rect.south
+                  z = None
+                  ``type`` = None
+                  layerX = None
+                  crdSysX = None }
+              urCrd =
+                { x = Coordinate.fromFloat rect.east
+                  y = Coordinate.fromFloat rect.north
+                  z = None
+                  ``type`` = None
+                  layerX = None
+                  crdSysX = None } }
           perSize = duration * 1000
           perStep = duration / frames * 1000
           ageOfReport = true
@@ -514,10 +514,10 @@ module internal Format =
         { sotMode = "JI"
           jid = tripId
           locData =
-              { loc = makeLocLTypeS profile prevStopId
-                ``type`` = "DEP"
-                date = formatDate depAtPrevStop
-                time = formatTime depAtPrevStop }
+            { loc = makeLocLTypeS profile prevStopId
+              ``type`` = "DEP"
+              date = formatDate depAtPrevStop
+              time = formatTime depAtPrevStop }
           arrLocL = [| makeLocType profile ``to`` |]
           jnyFltrL = filters
           getPasslist = stopovers

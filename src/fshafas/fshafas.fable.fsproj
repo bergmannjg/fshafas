@@ -44,10 +44,8 @@
     <Compile Include="parse/Stopover.fs" />
     <Compile Include="parse/ProductsBitmask.fs" />
     <Compile Include="parse/Warning.fs" />
-    <Compile Include="p/bvg/Profile.fs" />
-    <Compile Include="p/db/Profile.fs" />
-    <Compile Include="p/svv/Profile.fs" />
     <Compile Include="Parser.fs" />
+    <Compile Include="Profile.fs" />
     <Compile Include="HafasAsyncClient.fs" />
     <Compile Include="Print.fs" />
     <Compile Include="HafasClient.fs" />

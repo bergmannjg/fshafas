@@ -54,7 +54,7 @@ module internal DateTime =
         match tzOffset with
         | Some tzOffset ->
             System.DateTimeOffset(year, month, day, hour, minute, seconds, System.TimeSpan(tzOffset / 60, 0, 0))
-        | None -> GetDateTimeInZone(year, month, day, hour, minute, seconds, profile.timezone)
+        | None -> GetDateTimeInZone(year, month, day, hour, minute, seconds, (profile :> FsHafas.Client.Profile).timezone)
 
     let private ToIsoString (dt: System.DateTimeOffset) =
         sprintf

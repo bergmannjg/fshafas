@@ -59,9 +59,9 @@ OPTIONS:
 
 let toProfile s =
     match s with
-    | "Db" -> FsHafas.Profiles.Db.getProfile (FsHafas.Api.Parser.defaultProfile)
-    | "Bvg" -> FsHafas.Profiles.Bvg.getProfile (FsHafas.Api.Parser.defaultProfile)
-    | "Svv" -> FsHafas.Profiles.Svv.getProfile (FsHafas.Api.Parser.defaultProfile)
+    | "Db" -> FsHafas.Profiles.Db.profile
+    | "Bvg" -> FsHafas.Profiles.Bvg.profile
+    | "Svv" -> FsHafas.Profiles.Svv.profile
     | x -> failwithf "%s is out of range" x
 
 let parse (args: string list) =
@@ -86,7 +86,9 @@ let maybeArray (choose: ('a -> array<'b>)) option =
     | Some v -> choose v
     | None -> [||]
 
-let mutable profile = FsHafas.Profiles.Db.getProfile (FsHafas.Api.Parser.defaultProfile)
+let mutable profile = FsHafas.Profiles.Db.profile
+
+printfn "%s" (profile :> FsHafas.Client.Profile).locale
 
 let products () =
     let products =
@@ -144,10 +146,10 @@ let journeys (from: string, ``to``: string) =
         | Some fromLoc, Some toLoc ->
             let options =
                 { Default.JourneysOptions with
-                      results = Some 1
-                      products = (products ())
-                      stopovers = None
-                      polylines = Some true }
+                    results = Some 1
+                    products = (products ())
+                    stopovers = None
+                    polylines = Some true }
 
             let! journeys = client.AsyncJourneys fromLoc toLoc (Some options)
 
@@ -157,16 +159,17 @@ let journeys (from: string, ``to``: string) =
     |> AsyncRun
 
 let journeysFromTrip (fromId: string, toId: string, newToId: string) =
-    use client = new Api.HafasAsyncClient(FsHafas.Profiles.Db.getProfile (FsHafas.Api.Parser.defaultProfile))
+    use client =
+        new Api.HafasAsyncClient(FsHafas.Profiles.Db.profile)
 
     let departure = System.DateTime.Now.AddHours(-4.0)
 
     let options =
         { Default.JourneysOptions with
-              results = Some 1
-              departure = Some departure
-              stopovers = Some true
-              transfers = Some 0 }
+            results = Some 1
+            departure = Some departure
+            stopovers = Some true
+            transfers = Some 0 }
 
     async {
         let! journeysResult = client.AsyncJourneys(U4.Case1 fromId) (U4.Case1 toId) (Some options)
@@ -213,9 +216,7 @@ let journeysFromTrip (fromId: string, toId: string, newToId: string) =
                             tripId
                             previousStopover
                             (U4.Case1 newToId)
-                            (Some
-                                { Default.JourneysFromTripOptions with
-                                      stopovers = Some true })
+                            (Some { Default.JourneysFromTripOptions with stopovers = Some true })
                 }
 
             if journeys.Length > 0 then
@@ -271,13 +272,13 @@ let nearby (lon: float, lat: float) =
         let! locations =
             client.AsyncNearby
                 { Default.Location with
-                      latitude = Some lat
-                      longitude = Some lon }
+                    latitude = Some lat
+                    longitude = Some lon }
                 (Some
                     { Default.NearByOptions with
-                          results = Some 10
-                          distance = Some 5000
-                          products = (products ()) })
+                        results = Some 10
+                        distance = Some 5000
+                        products = (products ()) })
 
         FsHafas.Printf.Short.Locations locations
         |> printfn "%s"
@@ -291,13 +292,13 @@ let reachableFrom (lon: float, lat: float) =
         let! durations =
             client.AsyncReachableFrom
                 { Default.Location with
-                      address = Some "unused"
-                      latitude = Some lat
-                      longitude = Some lon }
+                    address = Some "unused"
+                    latitude = Some lat
+                    longitude = Some lon }
                 (Some
                     { Default.ReachableFromOptions with
-                          maxTransfers = Some 0
-                          maxDuration = Some 10 })
+                        maxTransfers = Some 0
+                        maxDuration = Some 10 })
 
         FsHafas.Printf.Short.Durations durations
         |> printfn "%s"
@@ -316,10 +317,10 @@ let radar (n: float, w: float, s: float, e: float) =
                   east = 8.542777 }
                 (Some
                     { Default.RadarOptions with
-                          results = Some 60
-                          duration = Some 1800
-                          frames = Some 100
-                          products = (products ()) })
+                        results = Some 60
+                        duration = Some 1800
+                        frames = Some 100
+                        products = (products ()) })
 
         FsHafas.Printf.Short.Movements movements
         |> printfn "%s"
@@ -330,12 +331,7 @@ let stop (name: string) =
     use client = new Api.HafasAsyncClient(profile)
 
     async {
-        let! stop =
-            client.AsyncStop
-                (U2.Case1 name)
-                (Some
-                    { Default.StopOptions with
-                          linesOfStops = Some true })
+        let! stop = client.AsyncStop(U2.Case1 name) (Some { Default.StopOptions with linesOfStops = Some true })
 
         FsHafas.Printf.Short.U3StationStopLocation 0 stop
         |> printfn "%s"

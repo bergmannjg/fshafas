@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import * as fshafas from "./lib/fshafas.web.bundle.js";
 const locations = (profile, name) => __awaiter(void 0, void 0, void 0, function* () {
-    const client = fshafas.createClient(profile);
+    const client = fshafas.createClient(fshafas.getProfile(profile));
     const result = yield client.locations(name, { results: 5 });
     let arr = [];
     result.forEach(x => {
@@ -22,7 +22,7 @@ const locations = (profile, name) => __awaiter(void 0, void 0, void 0, function*
 });
 const journeys = (profile, from, to) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
-    const client = fshafas.createClient(profile);
+    const client = fshafas.createClient(fshafas.getProfile(profile));
     const locationsFrom = yield client.locations(from, { results: 1 });
     const locationsTo = yield client.locations(to, { results: 1 });
     const arr = [];

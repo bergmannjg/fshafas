@@ -36,7 +36,7 @@ module internal Line =
         let (productid, mode) =
             match product with
             | Some kv ->
-                match ctx.profile.products
+                match (ctx.profile :> FsHafas.Client.Profile).products
                       |> Array.tryFind (fun p -> p.id = kv) with
                 | Some (product) -> (Some product.id, Some product.mode)
                 | None -> (None, None)

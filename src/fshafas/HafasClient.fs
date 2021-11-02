@@ -8,8 +8,9 @@ open Fable.Core.JsInterop
 open FsHafas.Client
 
 /// <summary>JS promise based interface corresponding to hafas-client</summary>
-type HafasClient(profile: FsHafas.Endpoint.Profile) =
-    let client = new FsHafas.Api.HafasAsyncClient(profile)
+type HafasClient(profile: FsHafas.Client.Profile) =
+    let client =
+        new FsHafas.Api.HafasAsyncClient(profile :?> FsHafas.Endpoint.Profile)
 
 #if FABLE_COMPILER
     [<Emit("typeof $1")>]
@@ -33,11 +34,11 @@ type HafasClient(profile: FsHafas.Endpoint.Profile) =
 
             U4.Case4
                 { Default.Location with
-                      id = l.id
-                      poi = l.poi
-                      address = l.address
-                      latitude = l.latitude
-                      longitude = l.longitude }
+                    id = l.id
+                    poi = l.poi
+                    address = l.address
+                    latitude = l.latitude
+                    longitude = l.longitude }
         else
             raise (System.ArgumentException("string|Station|Stop|Location expected"))
 
@@ -62,10 +63,10 @@ type HafasClient(profile: FsHafas.Endpoint.Profile) =
             let l = unbox<Location> v
 
             { Default.Location with
-                  id = l.id
-                  latitude = l.latitude
-                  longitude = l.longitude
-                  address = l.address }
+                id = l.id
+                latitude = l.latitude
+                longitude = l.longitude
+                address = l.address }
         else
             raise (System.ArgumentException("Location expected"))
 
@@ -76,22 +77,6 @@ type HafasClient(profile: FsHafas.Endpoint.Profile) =
            || jsTypeof v.east <> "number" then
             raise (System.ArgumentException("BoundingBox expected"))
 #endif
-
-    static member Profile(profile: FsHafas.Endpoint.Profile) : FsHafas.Client.Profile =
-        { locale = profile.locale
-          timezone = profile.timezone
-          endpoint = profile.endpoint
-          products = profile.products
-          trip = profile.trip
-          radar = profile.radar
-          refreshJourney = profile.refreshJourney
-          journeysFromTrip = profile.journeysFromTrip
-          reachableFrom = profile.reachableFrom
-          journeysWalkingSpeed = profile.journeysWalkingSpeed
-          tripsByName = profile.tripsByName
-          remarks = profile.remarks
-          remarksGetPolyline = None
-          lines = profile.lines }
 
     interface FsHafas.Client.HafasClient with
 
@@ -129,7 +114,7 @@ type HafasClient(profile: FsHafas.Endpoint.Profile) =
 
         member __.departures (id: U4<string, Station, Stop, Location>) (opt: DeparturesArrivalsOptions option) =
 #if FABLE_COMPILER
-            client.AsyncDepartures (makeCaseOfU4 id) opt
+            client.AsyncDepartures(makeCaseOfU4 id) opt
             |> Async.StartAsPromise
 #else
             client.AsyncDepartures id opt
@@ -137,7 +122,7 @@ type HafasClient(profile: FsHafas.Endpoint.Profile) =
 
         member __.arrivals (id: U4<string, Station, Stop, Location>) (opt: DeparturesArrivalsOptions option) =
 #if FABLE_COMPILER
-            client.AsyncArrivals (makeCaseOfU4 id) opt
+            client.AsyncArrivals(makeCaseOfU4 id) opt
             |> Async.StartAsPromise
 #else
             client.AsyncArrivals id opt

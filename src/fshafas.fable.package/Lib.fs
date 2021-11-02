@@ -1,22 +1,23 @@
 module App
 
-open Fable.Core
 open FsHafas.Client
 open FsHafas.Api
 
-let private getFsHafasProfile (name: string) : FsHafas.Endpoint.Profile =
-    match name with
-    | "db" -> FsHafas.Profiles.Db.getProfile (FsHafas.Api.Parser.defaultProfile)
-    | "bvg" -> FsHafas.Profiles.Bvg.getProfile (FsHafas.Api.Parser.defaultProfile)
-    | _ -> raise (System.ArgumentException("profile unkown: " + name))
+let dbProfile =
+    FsHafas.Profiles.Db.profile :> FsHafas.Client.Profile
 
-let createClient (profile: string) =
-    HafasClient(getFsHafasProfile (profile))
+let bvgProfile =
+    FsHafas.Profiles.Bvg.profile :> FsHafas.Client.Profile
+
+let createClient (profile: FsHafas.Client.Profile) = HafasClient(profile)
 
 let setDebug () = Log.Debug <- true
 
 let getProfile (profile: string) =
-    HafasClient.Profile(getFsHafasProfile profile)
+    match profile with
+    | "db" -> FsHafas.Profiles.Db.profile :> FsHafas.Client.Profile
+    | "bvg" -> FsHafas.Profiles.Bvg.profile :> FsHafas.Client.Profile
+    | _ -> raise (System.ArgumentException("profile unkown: " + profile))
 
 let printLocations = FsHafas.Printf.Short.Locations
 let printJourneys = FsHafas.Printf.Short.Journeys

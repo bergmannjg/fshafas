@@ -71,20 +71,20 @@ and ProductType =
 /// A profile is a specific customisation for each endpoint.
 /// It parses data from the API differently, add additional information, or enable non-default methods.
 and Profile =
-    { locale: string
-      timezone: string
-      endpoint: string
-      products: array<ProductType>
-      trip: bool option
-      radar: bool option
-      refreshJourney: bool option
-      journeysFromTrip: bool option
-      reachableFrom: bool option
-      journeysWalkingSpeed: bool option
-      tripsByName: bool option
-      remarks: bool option
-      remarksGetPolyline: bool option
-      lines: bool option }
+    abstract member locale : string 
+    abstract member timezone : string 
+    abstract member endpoint : string 
+    abstract member products : array<ProductType>
+    abstract member trip : bool option 
+    abstract member radar : bool option 
+    abstract member refreshJourney : bool option 
+    abstract member journeysFromTrip : bool option 
+    abstract member reachableFrom : bool option 
+    abstract member journeysWalkingSpeed : bool option 
+    abstract member tripsByName : bool option 
+    abstract member remarks : bool option 
+    abstract member remarksGetPolyline : bool option 
+    abstract member lines : bool option 
 /// A location object is used by other items to indicate their locations.
 and Location =
     { ``type``: string option

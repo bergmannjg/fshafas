@@ -12,7 +12,7 @@ namespace fshafas.csharp
         {
             HafasAsyncClient.initSerializer();
 
-            using (var client = new HafasAsyncClient(FsHafas.Profiles.Db.getProfile (FsHafas.Api.Parser.defaultProfile)))
+            using (var client = new HafasAsyncClient(FsHafas.Profiles.Db.profile))
             {
                 var locations = await HafasAsyncClient.toTask(client.AsyncLocations("Bielefeld", Default.LocationsOptions));
 

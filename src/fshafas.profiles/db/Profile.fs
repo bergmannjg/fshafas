@@ -7,7 +7,7 @@ module Db =
     open FsHafas.Client
     open FsHafas.Endpoint
     open FsHafas.Raw
-    
+
 #if FABLE_COMPILER
     open Fable.Core
 #endif
@@ -247,11 +247,12 @@ module Db =
 
         if raw.``type`` = "A" then
             match hintsByCode
-                  |> Array.tryFind (fun (c, _) -> c = raw.code.ToLower()) with
+                  |> Array.tryFind (fun (c, _) -> c = raw.code.ToLower())
+                with
             | Some (_, h) ->
                 { parsed with
-                      code = Some h.code
-                      summary = Some h.summary }
+                    code = Some h.code
+                    summary = Some h.summary }
             | None -> parsed
 
         else if raw.txtN.IsSome then
@@ -281,10 +282,7 @@ module Db =
         else
             parsed
 
-    let private parseHint
-        (parsed: U3<Hint, Status, Warning> option)
-        (h: RawRem)
-        : U3<Hint, Status, Warning> option =
+    let private parseHint (parsed: U3<Hint, Status, Warning> option) (h: RawRem) : U3<Hint, Status, Warning> option =
         match parsed with
         | Some (U3.Case1 parsedHint) -> U3.Case1(parseHintByCode parsedHint h) |> Some
         | Some (U3.Case2 parsedStatus) -> U3.Case2(parseStatusByCode parsedStatus h) |> Some
@@ -295,8 +293,8 @@ module Db =
         match p.addName with
         | Some _ ->
             { parsed with
-                  additionalName = parsed.name
-                  name = p.addName }
+                additionalName = parsed.name
+                name = p.addName }
         | None -> parsed
 
     let loadFactors =
@@ -317,12 +315,7 @@ module Db =
         | Some tcoc when tcoc.r.IsSome -> Some(loadFactors.[tcoc.r.Value])
         | _ -> None
 
-    let parseJourneyLegWithLoadFactor
-        (parsed: Leg)
-        (ctx: FsHafas.Endpoint.Context)
-        (pt: RawSec)
-        (date: string)
-        : Leg =
+    let parseJourneyLegWithLoadFactor (parsed: Leg) (ctx: FsHafas.Endpoint.Context) (pt: RawSec) (date: string) : Leg =
         let tcocX =
             match pt.jny with
             | Some jny ->
@@ -344,11 +337,7 @@ module Db =
 
         | _ -> parsed
 
-    let parseArrOrDepWithLoadFactor
-        (parsed: Alternative)
-        (ctx: FsHafas.Endpoint.Context)
-        (d: RawJny)
-        : Alternative =
+    let parseArrOrDepWithLoadFactor (parsed: Alternative) (ctx: FsHafas.Endpoint.Context) (d: RawJny) : Alternative =
         let tcocX =
             match d.stbStop with
             | Some stbStop ->
@@ -379,12 +368,12 @@ module Db =
             match trfRes.fareSetL.[0].fareL.[0].prc with
             | Some prc when prc > 0 ->
                 { parsed with
-                      price =
-                          Some(
-                              { amount = System.Math.Round(float (prc) / 100.0, 2)
-                                currency = "EUR"
-                                hint = None }
-                          ) }
+                    price =
+                        Some(
+                            { amount = System.Math.Round(float (prc) / 100.0, 2)
+                              currency = "EUR"
+                              hint = None }
+                        ) }
             | _ -> parsed
         | _ -> parsed
 
@@ -429,10 +418,7 @@ module Db =
                 0
         | _ -> 0
 
-    let transformJourneysQuery
-        (opt: JourneysOptions option)
-        (q: TripSearchRequest)
-        : TripSearchRequest =
+    let transformJourneysQuery (opt: JourneysOptions option) (q: TripSearchRequest) : TripSearchRequest =
         let bike =
             getOptionValue opt (fun v -> v.bike) Default.JourneysOptions
 
@@ -453,59 +439,72 @@ module Db =
         let trfReq: TrfReq =
             { jnyCl = if firstClass then 1 else 2
               tvlrProf =
-                  [| { ``type`` = "E"
-                       redtnCard = redtnCard } |]
+                [| { ``type`` = "E"
+                     redtnCard = redtnCard } |]
               cType = "PK" }
 
         { q with
-              trfReq = Some trfReq
-              jnyFltrL = jnyFltrL }
+            trfReq = Some trfReq
+            jnyFltrL = jnyFltrL }
 
     let private req: RawRequest =
         { lang = "de"
           svcReqL = [||]
           client =
-              { id = "DB"
-                v = "16040000"
-                ``type`` = "IPH"
-                name = "DB Navigator" }
+            { id = "DB"
+              v = "16040000"
+              ``type`` = "IPH"
+              name = "DB Navigator" }
           ext = "DB.R19.04.a"
           ver = "1.15"
           auth =
-              { ``type`` = "AID"
-                aid = "n91dB8Z77MLdoR0K" } }
+            { ``type`` = "AID"
+              aid = "n91dB8Z77MLdoR0K" } }
 
-    let getProfile (profile: FsHafas.Endpoint.Profile) =
-        { profile with
-              locale = "de-DE"
-              timezone = "Europe/Berlin"
-              endpoint = "https://reiseauskunft.bahn.de/bin/mgate.exe"
-              salt = "bdI8UVj40K5fvxwf"
-              cfg =
-                  Some
-                      { polyEnc = "GPA"
-                        rtMode = Some "HYBRID" }
-              baseRequest = Some req
-              products = products
-              trip = Some true
-              radar = Some true
-              tripsByName = Some true
-              reachableFrom = Some true
-              journeysFromTrip = Some true
-              journeysOutFrwd = true
-              formatStation = formatStation
-              transformJourneysQuery = transformJourneysQuery
-              parseJourney =
-                  (fun (ctx: FsHafas.Endpoint.Context) (p: RawOutCon) ->
-                      parseJourneyWithPrice (profile.parseJourney ctx p) p)
-              parseJourneyLeg =
-                  (fun (ctx: FsHafas.Endpoint.Context) (pt: RawSec) (date: string) ->
-                      parseJourneyLegWithLoadFactor (profile.parseJourneyLeg ctx pt date) ctx pt date)
-              parseDeparture =
-                  (fun (ctx: FsHafas.Endpoint.Context) (pt: RawJny) ->
-                      parseArrOrDepWithLoadFactor (profile.parseDeparture ctx pt) ctx pt)
-              parseHint =
-                  (fun (ctx: FsHafas.Endpoint.Context) (p: RawRem) -> parseHint (profile.parseHint ctx p) p)
-              parseLine =
-                  (fun (ctx: FsHafas.Endpoint.Context) (p: RawProd) ->
-                      parseLineWithAdditionalName (profile.parseLine ctx p) p) }
+    let profile = FsHafas.Api.Profile.defaultProfile()
+
+    profile._locale <- "de-DE"
+    profile._timezone <- "Europe/Berlin"
+    profile._endpoint <- "https://reiseauskunft.bahn.de/bin/mgate.exe"
+    profile.salt <- "bdI8UVj40K5fvxwf"
+
+    profile.cfg <-
+        Some
+            { polyEnc = "GPA"
+              rtMode = Some "HYBRID" }
+
+    profile.baseRequest <- Some req
+    profile._products <- products
+    profile._trip <- Some true
+    profile._radar <- Some true
+    profile._tripsByName <- Some true
+    profile._reachableFrom <- Some true
+    profile._journeysFromTrip <- Some true
+    profile.journeysOutFrwd <- true
+    profile.formatStation <- formatStation
+    profile.transformJourneysQuery <- transformJourneysQuery
+
+    let defaultParseJourney = profile.parseJourney
+
+    profile.parseJourney <-
+        (fun (ctx: FsHafas.Endpoint.Context) (p: RawOutCon) -> parseJourneyWithPrice (defaultParseJourney ctx p) p)
+
+    let defaultParseJourneyLeg = profile.parseJourneyLeg
+
+    profile.parseJourneyLeg <-
+        (fun (ctx: FsHafas.Endpoint.Context) (pt: RawSec) (date: string) ->
+            parseJourneyLegWithLoadFactor (defaultParseJourneyLeg ctx pt date) ctx pt date)
+
+    let defaultParseDeparture = profile.parseDeparture
+
+    profile.parseDeparture <-
+        (fun (ctx: FsHafas.Endpoint.Context) (pt: RawJny) ->
+            parseArrOrDepWithLoadFactor (defaultParseDeparture ctx pt) ctx pt)
+
+    let defaultParseHint = profile.parseHint
+    profile.parseHint <- (fun (ctx: FsHafas.Endpoint.Context) (p: RawRem) -> parseHint (defaultParseHint ctx p) p)
+
+    let defaultParseLine = profile.parseLine
+
+    profile.parseLine <-
+        (fun (ctx: FsHafas.Endpoint.Context) (p: RawProd) -> parseLineWithAdditionalName (defaultParseLine ctx p) p)

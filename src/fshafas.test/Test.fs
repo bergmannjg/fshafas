@@ -75,8 +75,8 @@ let testRunner (jsonRaw: string) (jsonResult: string) (loader: FsHafas.Raw.RawRe
     | :? NUnit.Framework.AssertionException as ex -> ()
     | ex -> fprintfn stderr "error: %s %s" ex.Message ex.StackTrace
 
-let dbProfile = FsHafas.Profiles.Db.getProfile (FsHafas.Api.Parser.defaultProfile)
-let svvProfile = FsHafas.Profiles.Svv.getProfile (FsHafas.Api.Parser.defaultProfile)
+let dbProfile = FsHafas.Profiles.Db.profile
+let svvProfile = FsHafas.Profiles.Svv.profile
 
 let loadLocations (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let parsedResponse =

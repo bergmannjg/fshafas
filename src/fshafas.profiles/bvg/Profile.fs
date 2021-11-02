@@ -9,7 +9,7 @@ module Bvg =
     open Fable.Core
 #endif
 
-    let private products : ProductType [] =
+    let private products: ProductType [] =
         [| { id = "suburban"
              mode = ProductTypeMode.Train
              bitmasks = [| 1 |]
@@ -62,31 +62,31 @@ module Bvg =
         else
             raise (System.ArgumentException("station id: " + id))
 
-    let private req : FsHafas.Raw.RawRequest =
+    let private req: FsHafas.Raw.RawRequest =
         { lang = "de"
           svcReqL = [||]
           client =
-              { id = "BVG"
-                v = "6020000"
-                ``type`` = "IPA"
-                name = "FahrInfo" }
+            { id = "BVG"
+              v = "6020000"
+              ``type`` = "IPA"
+              name = "FahrInfo" }
           ext = "BVG.1"
           ver = "1.21"
           auth =
-              { ``type`` = "AID"
-                aid = "Mz0YdF9Fgx0Mb9" } }
+            { ``type`` = "AID"
+              aid = "Mz0YdF9Fgx0Mb9" } }
 
-    let getProfile (profile: FsHafas.Endpoint.Profile) =
-        { profile with
-              locale = "de-DE"
-              timezone = "Europe/Berlin"
-              endpoint = "https://bvg-apps.hafas.de/bin/mgate.exe"
-              salt = ""
-              cfg = Some { polyEnc = "GPA"; rtMode = None }
-              baseRequest = Some req
-              products = products
-              trip = Some true
-              radar = Some true
-              lines = Some true
-              remarks = Some true
-              reachableFrom = Some true }
+    let profile = FsHafas.Api.Profile.defaultProfile ()
+
+    profile._locale <- "de-DE"
+    profile._timezone <- "Europe/Berlin"
+    profile._endpoint <- "https://bvg-apps.hafas.de/bin/mgate.exe"
+    profile.salt <- ""
+    profile.cfg <- Some { polyEnc = "GPA"; rtMode = None }
+    profile.baseRequest <- Some req
+    profile._products <- products
+    profile._trip <- Some true
+    profile._radar <- Some true
+    profile._lines <- Some true
+    profile._remarks <- Some true
+    profile._reachableFrom <- Some true

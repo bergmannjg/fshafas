@@ -155,10 +155,18 @@ Target.create "CompileTypeScript" (fun _ ->
 
 Target.create "PublishToLocalFeed" (fun _ ->
   DotNet.exec id "pack" "src/fshafas/fshafas.fable.fsproj" 
-  |> checkResult "buildLib failed"
+  |> checkResult "pack failed"
   let home = Environment.environVar "HOME"
+  Shell.cleanDir (home + "/.nuget/packages/fshafas")
   Shell.cleanDir (home + "/local.packages/fshafas")
   run "./src/fshafas/" "/usr/local/bin/nuget.exe" ("add" + " bin/Debug/FsHafas." + release.AssemblyVersion + ".nupkg" + " -source " + home + "/local.packages -expand")
+
+  DotNet.exec id "pack" "src/fshafas.profiles/fshafas.profiles.fable.fsproj" 
+  |> checkResult "pack failed"
+  let home = Environment.environVar "HOME"
+  Shell.cleanDir (home + "/.nuget/packages/fshafas.profiles")
+  Shell.cleanDir (home + "/local.packages/fshafas.profiles")
+  run "./src/fshafas.profiles/" "/usr/local/bin/nuget.exe" ("add" + " bin/Debug/FsHafas.Profiles." + release.AssemblyVersion + ".nupkg" + " -source " + home + "/local.packages -expand")
 )
 
 open Fake.Core.TargetOperators

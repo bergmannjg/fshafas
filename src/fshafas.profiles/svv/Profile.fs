@@ -1,6 +1,6 @@
 namespace FsHafas.Profiles
 
-module  Svv =
+module Svv =
 
     open FsHafas.Client
 
@@ -8,7 +8,7 @@ module  Svv =
     open Fable.Core
 #endif
 
-    let private products : ProductType [] =
+    let private products: ProductType [] =
         [| { id = "bahn-s-bahn"
              mode = ProductTypeMode.Train
              bitmasks = [| 1; 2 |]
@@ -58,32 +58,32 @@ module  Svv =
              short = "F"
              ``default`` = true } |]
 
-    let private req : FsHafas.Raw.RawRequest =
+    let private req: FsHafas.Raw.RawRequest =
         { lang = "de"
           svcReqL = [||]
           client =
-              { id = "VAO"
-                v = ""
-                ``type`` = "WEB"
-                name = "webapp" }
+            { id = "VAO"
+              v = ""
+              ``type`` = "WEB"
+              name = "webapp" }
           ext = "VAO.11"
           ver = "1.20"
           auth =
-              { ``type`` = "AID"
-                aid = "wf7mcf9bv3nv8g5f" } }
+            { ``type`` = "AID"
+              aid = "wf7mcf9bv3nv8g5f" } }
 
-    let getProfile (profile: FsHafas.Endpoint.Profile) =
-        { profile with
-              locale = "at-DE"
-              timezone = "Europe/Vienna"
-              endpoint = "https://fahrplan.salzburg-verkehr.at/bin/mgate.exe"
-              salt = ""
-              cfg = Some { polyEnc = "GPA"; rtMode = None }
-              baseRequest = Some req
-              products = products
-              trip = Some true
-              lines = Some true
-              remarks = Some true
-              reachableFrom = Some true
-              departuresGetPasslist = false
-              departuresStbFltrEquiv = false }
+    let profile = FsHafas.Api.Profile.defaultProfile ()
+
+    profile._locale <- "at-DE"
+    profile._timezone <- "Europe/Vienna"
+    profile._endpoint <- "https://fahrplan.salzburg-verkehr.at/bin/mgate.exe"
+    profile.salt <- ""
+    profile.cfg <- Some { polyEnc = "GPA"; rtMode = None }
+    profile.baseRequest <- Some req
+    profile._products <- products
+    profile._trip <- Some true
+    profile._lines <- Some true
+    profile._remarks <- Some true
+    profile._reachableFrom <- Some true
+    profile.departuresGetPasslist <- false
+    profile.departuresStbFltrEquiv <- false

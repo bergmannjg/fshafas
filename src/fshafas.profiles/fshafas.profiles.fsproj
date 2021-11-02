@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="bvg/Profile.fs" />
+    <Compile Include="db/Profile.fs" />
+    <Compile Include="svv/Profile.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../fshafas/fshafas.fsproj">
+      <Name>JsonRpcClient.fsproj</Name>
+    </ProjectReference>
+  </ItemGroup>
+
+</Project>

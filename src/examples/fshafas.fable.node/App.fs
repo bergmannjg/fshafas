@@ -6,7 +6,7 @@ open Fable.Core
 open FsHafas.Client
 open FsHafas.Api
 
-let profile = FsHafas.Profiles.Db.getProfile (FsHafas.Api.Parser.defaultProfile)
+let profile = FsHafas.Profiles.Db.profile
 
 let f1 () =
     let client =
@@ -36,6 +36,8 @@ let f4 () =
 let f5 () =
     let client =
         HafasClient(profile) :> FsHafas.Client.HafasClient
+
+    printfn "%A" profile.products
 
     client.journeys
         (U4.Case3
