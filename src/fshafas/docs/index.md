@@ -21,7 +21,7 @@ The library compiles via Fable to a webpack module with [this](https://github.co
 ### HafasAsyncClient with F\#
 
 ```fsharp
-use client = new FsHafas.Api.HafasAsyncClient(FsHafas.Client.ProfileId.Db)
+use client = new FsHafas.Api.HafasAsyncClient(FsHafas.Profiles.Db.profile)
 async {
     let! locations = client.AsyncLocations "Hannover" (Some Default.LocationsOptions)
 
@@ -33,7 +33,7 @@ async {
 ### HafasClient with F\# (compiles to JavaScript and runs with Node.js)
 
 ```fsharp
-let client = FsHafas.Api.HafasClient(FsHafas.Client.ProfileId.Db) :> FsHafas.Client.HafasClient
+let client = FsHafas.Api.HafasClient(FsHafas.Profiles.Db.profile) :> FsHafas.Client.HafasClient
 
 client.locations "Hannover" (Some { Default.LocationsOptions with results = Some 3 })
 |> Promise.iter (FsHafas.Printf.Short.Locations >> printfn "%s")
@@ -42,7 +42,7 @@ client.locations "Hannover" (Some { Default.LocationsOptions with results = Some
 ### HafasAsyncClient with C\#
 
 ```csharp
-using (var client = new FsHafas.Api.HafasAsyncClient(FsHafas.Client.ProfileId.Db))
+using (var client = new FsHafas.Api.HafasAsyncClient(FsHafas.Profiles.Db.profile))
 {
     var locations = await HafasAsyncClient.toTask(client.AsyncLocations("Hannover", Default.LocationsOptions));
 
@@ -58,7 +58,7 @@ const dbProfile = require('hafas-client/p/db');
 
 import { fshafas } from "fs-hafas-client";
 
-const client = choose ? fshafas.createClient('db') : createClient(dbProfile, 'agent');
+const client = choose ? fshafas.createClient(fshafas.dbProfile) : createClient(dbProfile, 'agent');
 
 const locations = () => {
     client.locations('Hannover', { results: 3, linesOfStops: true })
