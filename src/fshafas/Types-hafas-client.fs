@@ -71,20 +71,20 @@ and ProductType =
 /// A profile is a specific customisation for each endpoint.
 /// It parses data from the API differently, add additional information, or enable non-default methods.
 and Profile =
-    abstract member locale : string 
-    abstract member timezone : string 
-    abstract member endpoint : string 
+    abstract member locale : string
+    abstract member timezone : string
+    abstract member endpoint : string
     abstract member products : array<ProductType>
-    abstract member trip : bool option 
-    abstract member radar : bool option 
-    abstract member refreshJourney : bool option 
-    abstract member journeysFromTrip : bool option 
-    abstract member reachableFrom : bool option 
-    abstract member journeysWalkingSpeed : bool option 
-    abstract member tripsByName : bool option 
-    abstract member remarks : bool option 
-    abstract member remarksGetPolyline : bool option 
-    abstract member lines : bool option 
+    abstract member trip : bool option
+    abstract member radar : bool option
+    abstract member refreshJourney : bool option
+    abstract member journeysFromTrip : bool option
+    abstract member reachableFrom : bool option
+    abstract member journeysWalkingSpeed : bool option
+    abstract member tripsByName : bool option
+    abstract member remarks : bool option
+    abstract member remarksGetPolyline : bool option
+    abstract member lines : bool option
 /// A location object is used by other items to indicate their locations.
 and Location =
     { ``type``: string option
@@ -174,7 +174,8 @@ and Line =
       night: bool option
       nr: int option
       symbol: string option
-      directions: array<string> option }
+      directions: array<string> option
+      productName: string option }
 /// A route represents a single set of stations, of a single line.
 and Route =
     { ``type``: string option
@@ -358,7 +359,8 @@ and Alternative =
       previousStopovers: array<StopOver> option
       nextStopovers: array<StopOver> option
       frames: array<Frame> option
-      polyline: FeatureCollection option }
+      polyline: FeatureCollection option
+      currentTripPosition: Location option }
 /// Leg of journey
 and Leg =
     { tripId: string option
@@ -394,7 +396,8 @@ and Leg =
       cycle: Cycle option
       alternatives: array<Alternative> option
       polyline: FeatureCollection option
-      remarks: array<U3<Hint, Status, Warning>> option }
+      remarks: array<U3<Hint, Status, Warning>> option
+      currentLocation: Location option }
 
 and ScheduledDays = IndexMap<string, bool>
 /// A journey is a computed set of directions to get from A to B at a specific time.
@@ -670,10 +673,23 @@ and RadarOptions =
       /// when
       ``when``: DateTime option }
 
+and Filter =
+    { ``type``: string option
+      mode: string
+      value: string }
+
 and TripsByNameOptions =
     {
       /// departure date, undefined corresponds to Date.Now
-      ``when``: DateTime option }
+      ``when``: DateTime option
+      fromWhen: DateTime option
+      untilWhen: DateTime option
+      onlyCurrentlyRunning: bool option
+      products: Products option
+      currentlyStoppingAt: obj option
+      lineName: string option
+      operatorNames: array<string> option
+      additionalFilters: array<Filter> option }
 
 and RemarksOptions =
     { from: DateTime option

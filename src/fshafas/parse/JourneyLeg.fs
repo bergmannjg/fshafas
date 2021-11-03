@@ -158,6 +158,15 @@ module internal JourneyLeg =
                             |> Some
                         | None -> None
 
+                    let currentLocation: Location option =
+                        match jny.pos with
+                        | Some pos ->
+                            Some
+                                { Default.Location with
+                                    longitude = Some (float pos.x/1000000.0)
+                                    latitude = Some (float pos.y/1000000.0) }
+                        | None -> None
+
                     let remarks = Common.msgLToRemarks ctx msgL
 
                     leg <-
@@ -168,7 +177,8 @@ module internal JourneyLeg =
                               line = line
                               stopovers = stopoversWithRemarks
                               polyline = polyline
-                              remarks = remarks })
+                              remarks = remarks
+                              currentLocation = currentLocation })
 
         { leg with
               origin = origin

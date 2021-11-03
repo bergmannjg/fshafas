@@ -12,11 +12,7 @@ let f1 () =
     let client =
         HafasClient(profile) :> FsHafas.Client.HafasClient
 
-    client.locations
-        "Hannover"
-        (Some
-            { Default.LocationsOptions with
-                  results = Some 1 })
+    client.locations "Hannover" (Some { Default.LocationsOptions with results = Some 1 })
     |> Promise.iter (FsHafas.Printf.Short.Locations >> printfn "%s")
 
 let f3 () =
@@ -37,16 +33,12 @@ let f5 () =
     let client =
         HafasClient(profile) :> FsHafas.Client.HafasClient
 
-    printfn "%A" profile.products
+    printfn "%A" (profile :> FsHafas.Client.Profile).products
 
     client.journeys
-        (U4.Case3
-            { Default.Stop with
-                  id = Some "8000036" })
+        (U4.Case3 { Default.Stop with id = Some "8000036" })
         (U4.Case1 "8096003")
-        (Some
-            { Default.JourneysOptions with
-                  scheduledDays = Some true })
+        (Some { Default.JourneysOptions with scheduledDays = Some true })
     |> Promise.iter (FsHafas.Printf.Short.Journeys >> printfn "%s")
 
 Log.Debug <- false

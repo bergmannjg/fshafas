@@ -4,11 +4,15 @@ module internal ArrivalOrDeparture =
 
     open FsHafas.Client
     open FsHafas.Endpoint
-    
+
     let DEP = "DEP"
     let ARR = "ARR"
 
-    let private parseDepartureArrival (``type``: string) (ctx: Context) (d: FsHafas.Raw.RawJny) : FsHafas.Client.Alternative =
+    let private parseDepartureArrival
+        (``type``: string)
+        (ctx: Context)
+        (d: FsHafas.Raw.RawJny)
+        : FsHafas.Client.Alternative =
 
         let (locX, xTimeS, xTimeR, xTZOffset, xCncl, xPlatfS, xPlatfR) =
             if ``type`` = DEP then
@@ -37,31 +41,46 @@ module internal ArrivalOrDeparture =
             ctx.profile.parseStopovers ctx d.stopL d.date.Value
             |> Option.map (fun st -> st |> Array.filter filter)
 
+        let currentTripPosition: Location option =
+            match d.pos with
+            | Some pos ->
+                Some
+                    { Default.Location with
+                        longitude = Some(float pos.x / 1000000.0)
+                        latitude = Some(float pos.y / 1000000.0) }
+            | None -> None
+
         let remarks =
             if ctx.opt.remarks then
-                Common.msgLToRemarks ctx d.msgL
+                let stopMsgL =
+                    d.stbStop |> Option.fold (fun _ s -> s.msgL) None
+
+                Common.msgLToRemarks ctx (Common.appendSomeArray d.msgL stopMsgL)
                 |> Option.defaultValue Array.empty
                 |> Some
             else
                 None
 
         { Default.Alternative with
-              tripId = d.jid
-              stop = stop
-              ``when`` = w.``when``
-              plannedWhen = w.plannedWhen
-              prognosedWhen = w.prognosedWhen
-              delay = w.delay
-              platform = plt.platform
-              plannedPlatform = plt.plannedPlatform
-              prognosedPlatform = plt.prognosedPlatform
-              direction = Some d.dirTxt.Value
-              provenance = None
-              line = Common.getElementAt d.prodX ctx.common.lines
-              cancelled = d.stbStop.Value.dCncl
-              nextStopovers = stopovers
-              remarks = remarks }
+            tripId = d.jid
+            stop = stop
+            ``when`` = w.``when``
+            plannedWhen = w.plannedWhen
+            prognosedWhen = w.prognosedWhen
+            delay = w.delay
+            platform = plt.platform
+            plannedPlatform = plt.plannedPlatform
+            prognosedPlatform = plt.prognosedPlatform
+            direction = Some d.dirTxt.Value
+            provenance = None
+            line = Common.getElementAt d.prodX ctx.common.lines
+            cancelled = d.stbStop.Value.dCncl
+            nextStopovers = stopovers
+            remarks = remarks
+            currentTripPosition = currentTripPosition }
 
-    let parseDeparture (ctx: Context) (d: FsHafas.Raw.RawJny) : FsHafas.Client.Alternative = parseDepartureArrival DEP ctx d
+    let parseDeparture (ctx: Context) (d: FsHafas.Raw.RawJny) : FsHafas.Client.Alternative =
+        parseDepartureArrival DEP ctx d
 
-    let parseArrival (ctx: Context) (d: FsHafas.Raw.RawJny) : FsHafas.Client.Alternative = parseDepartureArrival ARR ctx d
+    let parseArrival (ctx: Context) (d: FsHafas.Raw.RawJny) : FsHafas.Client.Alternative =
+        parseDepartureArrival ARR ctx d

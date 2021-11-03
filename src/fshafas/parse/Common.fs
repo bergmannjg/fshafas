@@ -9,12 +9,10 @@ module internal Common =
     open FsHafas.Endpoint
 
     let private updateOperators (ctx: Context) (ops: FsHafas.Client.Operator []) =
-        { ctx with
-              common = { ctx.common with operators = ops } }
+        { ctx with common = { ctx.common with operators = ops } }
 
     let private updateLines (ctx: Context) (lines: FsHafas.Client.Line []) =
-        { ctx with
-              common = { ctx.common with lines = lines } }
+        { ctx with common = { ctx.common with lines = lines } }
 
     let parseCommon (ctx: Context) (c: FsHafas.Raw.RawCommon) =
         let ctx1 =
@@ -57,7 +55,7 @@ module internal Common =
             | None -> Array.empty
         | None -> Array.empty
 
-    /// map index array to elements of array from RawCommon 
+    /// map index array to elements of array from RawCommon
     let mapIndexArray<'a>
         (common: FsHafas.Raw.RawCommon option)
         (getTargetArray: FsHafas.Raw.RawCommon -> 'a [] option)
@@ -72,12 +70,15 @@ module internal Common =
             |> Array.choose id
         | None -> Array.empty
 
+    let appendSomeArray<'a> (arr1: 'a [] option) (arr2: 'a [] option) =
+        match arr1, arr2 with
+        | Some arr1, Some arr2 -> Some(Array.append arr1 arr2)
+        | Some arr1, None -> Some arr1
+        | None, Some arr2 -> Some arr2
+        | _ -> None
+
     /// map array with index field to elements of target array
-    let mapArray<'a, 'b>
-        (targetArray: 'b [])
-        (getIndex: 'a -> int option)
-        (sourceArray: 'a [] option)
-        =
+    let mapArray<'a, 'b> (targetArray: 'b []) (getIndex: 'a -> int option) (sourceArray: 'a [] option) =
         let elements = targetArray
 
         match sourceArray with

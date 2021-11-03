@@ -152,23 +152,20 @@ let transformTypeDefns =
        "Ids", "IndexMap<string, string>"
        "Profile",
        """
-        /// A profile is a specific customisation for each endpoint.
-        /// It parses data from the API differently, add additional information, or enable non-default methods.
-        and Profile =
-            abstract member locale : string with get, set
-            abstract member timezone : string with get, set
-            abstract member endpoint : string with get, set
-            abstract member products : array<ProductType> with get, set
-            abstract member trip : bool option with get, set
-            abstract member radar : bool option with get, set
-            abstract member refreshJourney : bool option with get, set
-            abstract member journeysFromTrip : bool option with get, set
-            abstract member reachableFrom : bool option with get, set
-            abstract member journeysWalkingSpeed : bool option with get, set
-            abstract member tripsByName : bool option with get, set
-            abstract member remarks : bool option with get, set
-            abstract member remarksGetPolyline : bool option with get, set
-            abstract member lines : bool option with get, set
+        abstract member locale : string
+        abstract member timezone : string
+        abstract member endpoint : string
+        abstract member products : array<ProductType>
+        abstract member trip : bool option
+        abstract member radar : bool option
+        abstract member refreshJourney : bool option
+        abstract member journeysFromTrip : bool option
+        abstract member reachableFrom : bool option
+        abstract member journeysWalkingSpeed : bool option
+        abstract member tripsByName : bool option
+        abstract member remarks : bool option
+        abstract member remarksGetPolyline : bool option
+        abstract member lines : bool option
        """
        "HafasClient",
        """

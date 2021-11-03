@@ -80,7 +80,7 @@ module Bvg =
 
     profile._locale <- "de-DE"
     profile._timezone <- "Europe/Berlin"
-    profile._endpoint <- "https://bvg-apps.hafas.de/bin/mgate.exe"
+    profile._endpoint <- "https://bvg.hafas.cloud/bin/mgate.exe"
     profile.salt <- ""
     profile.cfg <- Some { polyEnc = "GPA"; rtMode = None }
     profile.baseRequest <- Some req

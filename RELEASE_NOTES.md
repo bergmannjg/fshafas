@@ -12,3 +12,7 @@
 ## 1.2.0
 
 * new endpoint api
+
+## 1.3.0
+
+* corresponds to hafas-client version 5.21.0

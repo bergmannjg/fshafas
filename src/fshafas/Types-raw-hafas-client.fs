@@ -135,7 +135,8 @@ type RawStop =
       aPlatfCh: bool option
       aProgType: string option
       ``type``: string option
-      msgL: array<RawMsg> option }
+      msgL: array<RawMsg> option
+      remL: array<RawRem> option }
 
 type PpLocRef = { ppIdx: int; locX: int }
 

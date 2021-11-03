@@ -159,21 +159,18 @@ module internal MergeOptions =
 
     let JourneysOptions (options: FsHafas.Endpoint.Options) (opt: JourneysOptions option) =
         { options with
-              stopovers = getOptionValue opt (fun v -> v.stopovers) options.stopovers
-              scheduledDays = getOptionValue opt (fun v -> v.scheduledDays) options.scheduledDays
-              firstClass = getOptionValue opt (fun v -> v.firstClass) options.firstClass }
+            stopovers = getOptionValue opt (fun v -> v.stopovers) options.stopovers
+            scheduledDays = getOptionValue opt (fun v -> v.scheduledDays) options.scheduledDays
+            firstClass = getOptionValue opt (fun v -> v.firstClass) options.firstClass }
 
     let JourneysFromTripOptions (options: FsHafas.Endpoint.Options) (opt: JourneysFromTripOptions option) =
-        { options with
-              stopovers = getOptionValue opt (fun v -> v.stopovers) options.stopovers }
+        { options with stopovers = getOptionValue opt (fun v -> v.stopovers) options.stopovers }
 
     let LocationsOptions (options: FsHafas.Endpoint.Options) (opt: LocationsOptions option) =
-        { options with
-              linesOfStops = getOptionValue opt (fun v -> v.linesOfStops) options.linesOfStops }
+        { options with linesOfStops = getOptionValue opt (fun v -> v.linesOfStops) options.linesOfStops }
 
     let NearByOptions (options: FsHafas.Endpoint.Options) (opt: NearByOptions option) =
-        { options with
-              linesOfStops = getOptionValue opt (fun v -> v.linesOfStops) options.linesOfStops }
+        { options with linesOfStops = getOptionValue opt (fun v -> v.linesOfStops) options.linesOfStops }
 
 module Default =
 
@@ -217,7 +214,16 @@ module Default =
           remarks = None
           language = Some "de" }
 
-    let TripsByNameOptions: TripsByNameOptions = { ``when`` = Some System.DateTime.Now }
+    let TripsByNameOptions: TripsByNameOptions =
+        { ``when`` = Some System.DateTime.Now
+          fromWhen = None
+          untilWhen = None
+          onlyCurrentlyRunning = None
+          products = None
+          currentlyStoppingAt = None
+          lineName = None
+          operatorNames = None
+          additionalFilters = None }
 
     let NearByOptions: NearByOptions =
         { results = Some 8
@@ -388,7 +394,8 @@ module Default =
           cycle = None
           alternatives = None
           polyline = None
-          remarks = None }
+          remarks = None
+          currentLocation = None }
 
     let Trip: Trip =
         { id = ""
@@ -455,7 +462,8 @@ module Default =
           previousStopovers = None
           nextStopovers = None
           frames = None
-          polyline = None }
+          polyline = None
+          currentTripPosition = None }
 
     let Journey: Journey =
         { ``type`` = Some "journey"
@@ -489,7 +497,8 @@ module Default =
           night = None
           nr = None
           symbol = None
-          directions = None }
+          directions = None
+          productName = None }
 
     let Warning: Warning =
         { ``type`` = Some "warning"

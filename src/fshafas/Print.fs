@@ -165,6 +165,14 @@ module Short =
         + printfnS ident "arrival: " leg.arrival
         + StopOvers ident leg.stopovers
         + printfnB ident "cancelled: " leg.cancelled
+        + match leg.currentLocation with
+          | Some (location) ->
+              (String.replicate ident " ")  
+              + "currentLocation: "
+              + printLonLat 0 location.longitude location.latitude
+          | None -> ""
+        + nl
+
         + if short then
               ""
           else
