@@ -100,6 +100,12 @@ let products () =
 
     products |> Some
 
+let trains () =
+    let products =
+        Api.HafasAsyncClient.productsOfMode profile Client.ProductTypeMode.Train
+
+    products |> Some
+
 let getLocation (client: Api.HafasAsyncClient) (name: string) =
     async {
         if Regex(@"^\d{6,}$").IsMatch name then
@@ -311,16 +317,16 @@ let radar (n: float, w: float, s: float, e: float) =
     async {
         let! movements =
             client.AsyncRadar
-                { north = 52.039421
-                  west = 8.522777
-                  south = 52.019421
-                  east = 8.542777 }
+                { north = n
+                  west = w
+                  south = s
+                  east = e }
                 (Some
                     { Default.RadarOptions with
                         results = Some 60
                         duration = Some 1800
                         frames = Some 100
-                        products = (products ()) })
+                        products = (trains ()) })
 
         FsHafas.Printf.Short.Movements movements
         |> printfn "%s"

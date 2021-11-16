@@ -287,7 +287,8 @@ module Short =
         + Directions(ident + 2) l.directions
 
     let private Movement (ident: int) (m: Movement) =
-        printfnS ident "direction: " m.direction
+        printfS ident "tripId: " m.tripId
+        + printfnS ident "direction: " m.direction
         + match m.line with
           | Some (line) when line.name.IsSome -> printfnS ident "Line: " line.name
           | _ -> ""
