@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RepositoryUrl>https://github.com/bergmannjg/fshafas</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -10,9 +10,9 @@
   <ItemGroup>
     <Compile Include="lib/Serializer.fs" />
     <Compile Include="lib/Slug.fs" />
-    <Compile Include="Union-types.fs" />
-    <Compile Include="Types-raw-hafas-client.fs" />
-    <Compile Include="Types-hafas-client.fs" />
+    <Compile Include="UnionTypes.fs" />
+    <Compile Include="TypesRawHafasClient.fs" />
+    <Compile Include="TypesHafasClient.fs" />
     <Compile Include="lib/Reflect.fs" />
     <Compile Include="Context.fs" />
     <Compile Include="lib/JsonConverter.fs" />
