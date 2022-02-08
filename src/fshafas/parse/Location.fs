@@ -45,7 +45,8 @@ module internal Location =
               X = None
               Y = None }
 
-    let private leadingZeros = Regex(@"^0+")
+    let private removeLeadingZeros (s:string) = 
+        Regex.Replace(s, "^0+", "")
 
     let private parseLocationPhase1 (ctx: Context) (i: int) (locl: FsHafas.Raw.RawLoc []) =
         let l = locl.[i]
@@ -56,7 +57,7 @@ module internal Location =
             | Some extid, _ -> Some extid
             | _, Some l -> Some l
             | _ -> None
-            |> Option.map (fun s -> leadingZeros.Replace(s, ""))
+            |> Option.map removeLeadingZeros
 
         let (lon, lat) =
             match l.crd with

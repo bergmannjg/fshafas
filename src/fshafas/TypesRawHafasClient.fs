@@ -556,7 +556,9 @@ type LocGeoReachRequest =
       jnyFltrL: array<JnyFltr> }
 
 type LocDetailsRequest = { locL: array<Loc> }
+
 type ServerInfoRequest = obj
+
 type RawRect = { llCrd: RawCrd; urCrd: RawCrd }
 
 type JourneyGeoPosRequest =

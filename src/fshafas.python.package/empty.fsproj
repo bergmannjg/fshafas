@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FsHafas.Python" Version="1.4.0-alpha-004" />
+    <PackageReference Include="FsHafas.Profiles.Python" Version="1.4.0-alpha-004" />
+  </ItemGroup>
+  <PropertyGroup>
+    <DefineConstants>FABLE_COMPILER;FABLE_PY</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreSources>$(RestoreSources);$(HOME)/local.packages</RestoreSources>
+  </PropertyGroup>
+</Project>

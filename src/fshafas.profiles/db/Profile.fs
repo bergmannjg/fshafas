@@ -377,10 +377,8 @@ module Db =
             | _ -> parsed
         | _ -> parsed
 
-    let private IBNR = Regex(@"^\d{6,}$")
-
     let formatStation (id: string) =
-        if IBNR.IsMatch id then
+        if Regex.IsMatch(id, @"^\d{6,}$") then
             id
         else
             raise (System.ArgumentException("station id: " + id))
@@ -461,7 +459,7 @@ module Db =
             { ``type`` = "AID"
               aid = "n91dB8Z77MLdoR0K" } }
 
-    let profile = FsHafas.Api.Profile.defaultProfile()
+    let profile = FsHafas.Api.Profile.defaultProfile ()
 
     profile._locale <- "de-DE"
     profile._timezone <- "Europe/Berlin"

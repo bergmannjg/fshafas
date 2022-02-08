@@ -2,12 +2,19 @@
 
 ## Run with dotnet
 
-* **run**: dotnet run -p cli.fsproj -- --help
+* **run**: dotnet run --project cli.fsproj -- --help
 
 ## Run with node
 
+* npm install
 * **build**: dotnet fable cli.fable.fsproj -o build
 * **run**: node build/Program.js --help
+
+## Run with python
+
+* pip install -r requirements.txt
+* **build**: ./build-python.sh
+* **run**: python3 program.py --help
 
 ## Usage
 
@@ -24,7 +31,8 @@ OPTIONS:
     --journeys <from> <to>
                           get journeys, e.g. Hannover Berlin.
     --journeysfromtrip <fromId> <toId> <newToId>
-                          get journeys from trip, e.g. 8002549 8000261 8000207.
+                          get journeys from current position of trip <fromId> - <toId> to new target <newToId>,
+                          e.g. from trip 8002549 to 8000261 to new target 8000207.
     --departures <name>   get Departures, e.g. Hannover.
     --trips <name>        get Trips, e.g. ICE 1001.
     --nearby <lon> <lat>  get Nearby, e.g. 13.078028 54.308438.

@@ -6,6 +6,10 @@ module internal Trip =
     open FsHafas.Client
     open FsHafas.Endpoint
 
+#if FABLE_PY
+    open FsHafas.Extensions
+#endif
+
     let parseTrip (ctx: Context) (j: FsHafas.Raw.RawJny): FsHafas.Client.Trip =
 
         match j.stopL with
@@ -24,8 +28,11 @@ module internal Trip =
                 | Some date -> date
                 | None ->
                     let dt = DateTime.Now
+#if FABLE_PY
+                    sprintf "%04d%02d%02d" (DateTimeEx.year dt) (DateTimeEx.month dt) (DateTimeEx.day dt)
+#else
                     sprintf "%04d%02d%02d" dt.Year dt.Month dt.Day
-
+#endif
             let leg =
                 ctx.profile.parseJourneyLeg ctx rawSecL date
 

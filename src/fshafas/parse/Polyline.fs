@@ -6,13 +6,28 @@ module internal Polyline =
     open FsHafas.Client
     open FsHafas.Endpoint
 
+    let decode (s:string) : float [] [] =
+        [||]
+
 #if FABLE_COMPILER
     open Fable.Core
 
     type GooglePolyline = { decode: string -> float [] [] }
 
+ #if FABLE_JS
     [<ImportDefault("google-polyline")>]
     let defaultObject : GooglePolyline = jsNative
+ #else
+
+  #if FABLE_PY
+    [<ImportAll("polyline")>]
+    [<Emit("polyline.decode($1)")>]
+    let polylinedecode (_: string) : float [] []  = jsNative
+
+    let defaultObject : GooglePolyline = { decode = polylinedecode }
+  #endif
+
+ #endif
 
 #else
     open PolylinerNet

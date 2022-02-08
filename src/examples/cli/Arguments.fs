@@ -6,9 +6,34 @@ open FsHafas.Client
 
 /// see https://github.com/fable-compiler/Fable/blob/main/src/Fable.Cli/Entry.fs
 module Entry =
+
+    let allocateArray (n:int) : 'T[] = Array.create n (Unchecked.defaultof<'T>)
+
+    // see https://github.com/fable-compiler/Fable/blob/3bc6e82f7aedfc085dfe94ad5b14bf5521984da6/src/fable-library/Array.fs#L898
+    // allocates (source.Length - windowSize + 1) instead of (source.Length - windowSize) 
+    // see https://github.com/dotnet/fsharp/blob/a717e53e756866e6096618dd27afdbf0b7cbd186/src/fsharp/FSharp.Core/array.fs#L775
+    let windowedArray (windowSize: int) (source: 'T[]): 'T[][] =
+        if windowSize <= 0 then
+            failwith "windowSize must be positive"
+        let res = FSharp.Core.Operators.max 0 (source.Length - windowSize + 1) |> allocateArray
+        for i = windowSize to source.Length do
+            res.[i - windowSize] <- source.[i-windowSize..i-1]
+        res
+
+    let windowedList (windowSize: int) (xs: 'T list): 'T list list =
+#if FABLE_COMPILER
+        // workaround: allocation error in Array.windowed      
+        List.toArray xs
+        |> windowedArray windowSize
+        |> Array.map List.ofArray
+        |> List.ofArray
+#else
+        List.windowed windowSize xs
+#endif
+
     let argValue key (args: string list) =
         args
-        |> List.windowed 2
+        |> windowedList 2
         |> List.tryPick
             (function
             | [ key2; value ] when not (value.StartsWith("-")) && key = key2 -> Some value
@@ -29,7 +54,7 @@ module Entry =
 
 let private argValue2 key (args: string list) =
     args
-    |> List.windowed 3
+    |> Entry.windowedList 3
     |> List.tryPick
         (function
         | [ key2; value1; value2 ] when
@@ -41,7 +66,7 @@ let private argValue2 key (args: string list) =
 
 let private argValue3 key (args: string list) =
     args
-    |> List.windowed 4
+    |> Entry.windowedList 4
     |> List.tryPick
         (function
         | [ key2; value1; value2; value3 ] when
@@ -57,7 +82,7 @@ let private argValue3 key (args: string list) =
 
 let private argValue4 key (args: string list) =
     args
-    |> List.windowed 5
+    |> Entry.windowedList 5
     |> List.tryPick
         (function
         | [ key2; value1; value2; value3; value4 ] when

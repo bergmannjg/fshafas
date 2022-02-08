@@ -44,7 +44,11 @@ module Parser =
         Serializer.Deserialize<'a>(response)
 #endif
 
-    let internal createContext (profile: FsHafas.Endpoint.Profile) (opt: Options) (res: FsHafas.Raw.RawResult) : Context =
+    let internal createContext
+        (profile: FsHafas.Endpoint.Profile)
+        (opt: Options)
+        (res: FsHafas.Raw.RawResult)
+        : Context =
         { profile = profile
           opt = opt
           common = defaultCommonData
@@ -60,8 +64,7 @@ module Parser =
         | Some (res), Some (common) ->
             let ctx = createContext profile opt res
 
-            { ctx with
-                  common = ctx.profile.parseCommon ctx common }
+            { ctx with common = ctx.profile.parseCommon ctx common }
             |> Some
         | _ -> None
 
@@ -119,10 +122,9 @@ module Parser =
             posL
             |> Array.fold addToMap Map.empty
             |> Map.toArray
-            |> Array.map
-                (fun (d, locXs) ->
-                    { duration = Some d
-                      stations = getLocations ctx locXs })
+            |> Array.map (fun (d, locXs) ->
+                { duration = Some d
+                  stations = getLocations ctx locXs })
         | _ -> Array.empty
 
     let parseDurationsFromResult
@@ -165,10 +167,10 @@ module Parser =
                 |> Some
 
             { Default.Journeys with
-                  earlierRef = ctx.res.outCtxScrB
-                  laterRef = ctx.res.outCtxScrF
-                  realtimeDataFrom = ctx.res.planrtTS |> Option.map (fun p -> p |> int)
-                  journeys = journeys }
+                earlierRef = ctx.res.outCtxScrB
+                laterRef = ctx.res.outCtxScrF
+                realtimeDataFrom = ctx.res.planrtTS |> Option.map (fun p -> p |> int)
+                journeys = journeys }
         | _ -> Default.Journeys
 
     let parseJourneysFromResult
@@ -216,10 +218,7 @@ module Parser =
             |> Array.map (fun d -> d.txt)
 
         match Common.getElementAt l.prodX ctx.common.lines with
-        | Some line ->
-            Some
-                { line with
-                      directions = Some directions }
+        | Some line -> Some { line with directions = Some directions }
         | None -> None
 
     let internal parseLines (lines: FsHafas.Raw.RawLine [] option) (ctx: Context option) =
@@ -261,31 +260,47 @@ module Parser =
         let hour = datetime.Substring(11, 2) |> int
         let minute = datetime.Substring(14, 2) |> int
 
+#if FABLE_PY
+        // workaround: missing code DateTimeOffset
+        System.DateTime(year, month, day, hour, minute, 0)
+#else
         let tzOffset =
             datetime.Substring(20, 2) |> int |> (*) 60
 
-        System.DateTimeOffset(year, month, day, hour, minute, 0, System.TimeSpan(tzOffset / 60, 0, 0))
+        System.DateTimeOffset(year, month, day, hour, minute, 0, System.TimeSpan(tzOffset / 60, 0, 0)).DateTime
+#endif
 
     let internal parseDeparturesArrivals (``type``: string) (jnyL: FsHafas.Raw.RawJny [] option) (ctx: Context option) =
+
+        let projection =
+            fun (d: Alternative) ->
+                try
+                    ParseIsoString d.``when``.Value
+                with
+                | ex ->
+                    printfn "%s" ex.Message
+                    System.DateTime.Now
+
         match ctx, jnyL with
         | Some ctx, Some jnyL ->
-            let parse =
-                if ``type`` = ArrivalOrDeparture.DEP then
-                    ctx.profile.parseDeparture
-                else
-                    ctx.profile.parseArrival
+            try
+                let parse =
+                    if ``type`` = ArrivalOrDeparture.DEP then
+                        ctx.profile.parseDeparture
+                    else
+                        ctx.profile.parseArrival
 
-            jnyL
-            |> Array.map (fun jny -> parse ctx jny)
-            |> Seq.sortBy
-                (fun d ->
-                    try
-                        ParseIsoString d.``when``.Value
-                    with
-                    | ex ->
-                        printfn "%s" ex.Message
-                        System.DateTimeOffset.Now)
-            |> Seq.toArray
+                jnyL
+                |> Array.map (fun jny -> parse ctx jny)
+#if FABLE_PY
+                |> FsHafas.Extensions.ArrayEx.sortBy projection
+#else
+                |> Array.sortBy projection
+#endif
+            with
+            | ex ->
+                printfn "%s" ex.Message
+                Array.empty
 
         | _ -> Array.empty
 
@@ -308,8 +323,8 @@ module Parser =
                 | None -> None
 
             { Default.ServerInfo with
-                  timetableStart = res.fpB
-                  timetableEnd = res.fpE
-                  serverTime = serverTime
-                  realtimeDataUpdatedAt = res.planrtTS |> Option.map (fun p -> p |> int) }
+                timetableStart = res.fpB
+                timetableEnd = res.fpE
+                serverTime = serverTime
+                realtimeDataUpdatedAt = res.planrtTS |> Option.map (fun p -> p |> int) }
         | _ -> raise (System.ArgumentException("ServerInfo failed"))

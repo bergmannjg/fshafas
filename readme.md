@@ -4,7 +4,7 @@ Ths is a port of the JavaScript [hafas-client library](https://github.com/public
 
 The hafas endpoints Db, Bvg and Svv are supported.
 
-The F# library compiles to dotnet and JavaScript (via [Fable](https://github.com/fable-compiler/Fable)).
+The F# library compiles to dotnet and (via [Fable](https://github.com/fable-compiler/Fable)) to JavaScript  and Python.
 
 ## Interfaces
 
@@ -28,12 +28,31 @@ JavaScript/TypeScript | Transformation | F# |
  &#8659;|  | &#8659; implementation |
 hafas-client TS types, JS Program | <= [fable](https://github.com/fable-compiler/fable) <= | hafas-client F# types, F# program|
 
+## Compilation to Python
+
+Compilation to Python with **dotnet fable-py** is an alpha phase using version 4.0.0-alpha-032. All currently missing features have a comment **workaround**.
+
+Current status when running *src/examples/cli/Program.fs* with fable and fable-py (task *build.sh -t CompareJsPyResult*):
+
+|Interface method|Status|
+|---|---|
+|locations|ok|
+|stop|ok|
+|journeys|ok|
+|journeysfromtrip|ok|
+|departures|ok|
+|trips|ok|
+|nearby|ok|
+|reachablefrom|ok|
+|radar|ok|
+
 ## Building
 
 Requirements are:
 
 * [dotnet SDK 5](https://dotnet.microsoft.com/download)
-* [node.js](https://nodejs.org/en/)
+* [node.js](https://nodejs.org/en/) for target js
+* [python](https://www.python.org/) for target python
 
 Run `./build.sh` or `./build.cmd` at the root folder.
 
@@ -42,8 +61,9 @@ Targets are:
 * *BuildLib*: compile to dotnet dll,
 * *PublishToLocalFeed*: publish nuget package to local feed, the package can be used in Fable,
 * *Test*: compile to dotnet dll and run tests,
-* *BuildFableWebpackNode*: compile lib via fable and webpack to a npm package.
-* *BuildFableWebpackWeb*: compile lib via fable and webpack to a web target.
+* *BuildFableWebpackNode*: compile lib via fable and webpack to a npm package,
+* *BuildFableWebpackWeb*: compile lib via fable and webpack to a web target,
+* *Python*: compile to Python and publish nuget package and python package to local feeds
 
 Utility scripts:
 
@@ -53,7 +73,9 @@ Utility scripts:
 ## Using
 
 * [fshafas.fsx](./scripts/fshafas.fsx): F# Interactive example script,
-* [Program.fs](src/examples/cli): F# app running with dotnet and nodejs,
+* [Program.fs](src/examples/cli): F# app running with dotnet, nodejs and python,
+* [program.py](src/examples/fshafas.fable.python/program.py): python program using the fshafas package,
+* [notebook.ipynb](src/examples/fshafas.fable.python/notebook.ipynb): jupyter notebook using the fshafas package
 * [Program.cs](src/examples/fshafas.csharp/Program.cs): C# program using the F# lib,
 * [FahrplanApp](https://github.com/bergmannjg/FahrplanApp): Android TypeScript app using the npm package,
 * [Wep App](src/examples/fshafas.fable.web): a web app using the fshafas javascript bundle.

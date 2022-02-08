@@ -240,7 +240,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
 
     member __.AsyncServerInfo(opt: ServerOptions option) : Async<ServerInfo> =
         async {
-            let! (common, res) = httpClient.AsyncServerInfo(new Object())
+            let! (common, res) = httpClient.AsyncServerInfo(Format.serverInfoRequest())
 
             return Parser.parseServerInfo res (Parser.parseCommon profile Parser.defaultOptions common res)
         }

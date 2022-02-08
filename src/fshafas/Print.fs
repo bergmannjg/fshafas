@@ -130,6 +130,12 @@ module Short =
             | None -> ""
         | None -> ""
 
+    let StopOverStop (ident: int) (so: StopOver) =
+        match so.stop with
+        | Some (U2.Case2 s) -> printfS ident "" (Some "") + Stop 0 s
+        | Some (U2.Case1 s) -> printfS ident "" (Some "") + Station 0 s
+        | _ -> ""
+
     let StopOver (ident: int) (so: StopOver) =
         match so.stop with
         | Some (U2.Case2 s) -> printfS ident "origin: " (Some "") + Stop 0 s
@@ -167,7 +173,7 @@ module Short =
         + printfnB ident "cancelled: " leg.cancelled
         + match leg.currentLocation with
           | Some (location) ->
-              (String.replicate ident " ")  
+              (String.replicate ident " ")
               + "currentLocation: "
               + printLonLat 0 location.longitude location.latitude
           | None -> ""
@@ -286,14 +292,20 @@ module Short =
         + printfnArrL ident "directions: " l.directions
         + Directions(ident + 2) l.directions
 
-    let private Movement (ident: int) (m: Movement) =
-        printfS ident "tripId: " m.tripId
+    let private Movement (ident: int) (m: Movement) (withStopovers: bool) =
+        printfnS ident "tripId: " m.tripId
         + printfnS ident "direction: " m.direction
         + match m.line with
           | Some (line) when line.name.IsSome -> printfnS ident "Line: " line.name
           | _ -> ""
-        + printfnArrL ident "stopovers: " m.nextStopovers
-        + StopOvers ident m.nextStopovers
+        + (match m.location with
+           | Some location -> printLonLat ident location.longitude location.latitude
+           | None -> "")
+        + (if withStopovers then
+               printfnArrL ident "stopovers: " m.nextStopovers
+               + StopOvers ident m.nextStopovers
+           else
+               "")
 
     let Locations (locations: U3<Station, Stop, Location> []) =
         locations
@@ -303,9 +315,13 @@ module Short =
         durations
         |> Array.fold (fun s j -> s + Duration 0 j) ""
 
+    let MovementsWithStopovers (durations: Movement []) =
+        durations
+        |> Array.fold (fun s j -> s + Movement 0 j true) ""
+
     let Movements (durations: Movement []) =
         durations
-        |> Array.fold (fun s j -> s + Movement 0 j) ""
+        |> Array.fold (fun s j -> s + Movement 0 j false) ""
 
     let Alternatives (alternatives: Alternative []) =
         alternatives

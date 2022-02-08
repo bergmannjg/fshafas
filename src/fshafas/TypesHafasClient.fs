@@ -32,7 +32,7 @@ type Log() =
 
     static member Print (msg: string) (o: obj) = if debug then printfn "%s %A" msg o
 
-#if FABLE_COMPILER
+#if FABLE_JS
 type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
     [<EmitIndexer>]
     member __.Item
@@ -42,6 +42,22 @@ type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
     [<Emit("(Object.keys($0))")>]
     member __.Keys: 's [] = jsNative
 #else
+  #if FABLE_PY
+type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
+    let mutable map: Microsoft.FSharp.Collections.Map<'s, 'b> = Microsoft.FSharp.Collections.Map.empty
+
+    member __.Item
+        with get (s: 's) =
+            match map.TryFind s with
+            | Some v -> v
+            | None -> defaultValue
+        and set s b =
+            map <- map.Add(s, b)
+            ()
+
+    member __.Keys =
+        map |> Seq.map (fun kv -> kv.Key) |> Seq.toArray
+  #else
 type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
     let mutable map: Map<'s, 'b> = Map.empty
 
@@ -56,6 +72,7 @@ type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
 
     member __.Keys =
         map |> Seq.map (fun kv -> kv.Key) |> Seq.toArray
+  #endif
 #endif
 
 /// A ProductType relates to how a means of transport "works" in local context.

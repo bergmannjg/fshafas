@@ -15,6 +15,9 @@
     <PackageReference Include="Thoth.Json" Version="4.1.0" />
   </ItemGroup>
   <PropertyGroup>
+    <DefineConstants>FABLE_COMPILER;FABLE_JS</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
     <RestoreSources>$(RestoreSources);$(HOME)/local.packages</RestoreSources>
   </PropertyGroup>
 </Project>

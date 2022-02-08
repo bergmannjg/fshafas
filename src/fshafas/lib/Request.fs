@@ -2,7 +2,7 @@ namespace FsHafas.Client
 
 module internal Request =
 
-#if FABLE_COMPILER
+#if FABLE_JS
 
     open Fable.Core
     open Fable.Core.JsInterop
@@ -76,6 +76,78 @@ module internal Request =
 
 #else
 
+    #if FABLE_PY
+
+    open System.Collections.Generic
+
+    open Fable.Core
+    open Fable.Core.JsInterop
+
+    [<ImportMember("hashlib")>]
+    let private md5 (x: byte []) : obj = jsNative
+
+    [<Emit("$0.hexdigest()")>]
+    let private hexdigest (_: obj) : string = jsNative
+
+    [<Emit("$0.encode()")>]
+    let private toBytes (_: string) : byte[] = jsNative
+
+    [<Import("dumps", from="json")>]
+    [<Emit("dumps($1)")>]
+    let private dumps (json: obj): string = jsNative
+
+    [<Import("post", from="requests")>]
+    [<Emit("post($1, data=$2.encode('utf-8'), headers=$3)")>]
+    let private post (url: string) (body: string) (headers: Dictionary<string,string>): obj = jsNative
+
+    [<Emit("$0.status_code")>]
+    let private statusCode (r:obj) : int = jsNative
+
+    [<Emit("$0.text")>]
+    let private text (r:obj) : string = jsNative
+
+    [<Emit("$0.json()")>]
+    let private toJson (r:obj) : string = jsNative
+
+    type HttpClient() =
+
+        let log msg o = FsHafas.Client.Log.Print msg o
+
+        let getMd5 (json: string) (salt: string) = hexdigest (md5 (toBytes (json + salt)))
+
+        member __.Dispose() = ()
+
+        member __.PostAsync (url: string) (salt: string) (json: string) =
+
+            let urlchecksum =
+                if salt.Length > 0 then
+                    let checksum = getMd5 json salt
+                    url + "?checksum=" + checksum
+                else
+                    url
+
+            let urlEscaped = urlchecksum
+
+            log "url: " urlEscaped
+
+            let headers = Dictionary<_, _>()
+            headers.Add("Content-Type", "application/json; charset=utf-8")
+            headers.Add("Accept-Encoding", "gzip, br, deflate")
+            headers.Add("Accept", "application/json")
+            headers.Add("User-Agent", "agent")
+
+            async {
+
+                let r = post urlEscaped json headers
+                if (statusCode r) = 200 then return (dumps (toJson r))
+                else
+                    log "statusCode: " (statusCode r)
+                    log "text: " (text r)
+                    return ""
+            }
+
+    #else
+
     open System.Security.Cryptography
     open System.Text
     open System.Net
@@ -141,4 +213,5 @@ module internal Request =
                     | false -> body
             }
 
+    #endif
 #endif

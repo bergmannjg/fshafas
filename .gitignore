@@ -4,6 +4,7 @@
 .nuget/
 .fake
 .fsdocs/
+.venv/
 
 node_modules/
 private_modules/
@@ -14,8 +15,12 @@ test-fixtures/
 output/
 tmp/
 gh-pages/
+fable_modules/
+dist/
 
 build.fsx.lock
+
+*.egg-info/
 
 hafas-client.d.ts
 fs-hafas-client-*.tgz
@@ -33,3 +38,6 @@ z*.json
 src/examples/analyzejourneys/calendar.csv
 
 *.nupkg
+
+src/examples/cli/*.py
+*.pyc

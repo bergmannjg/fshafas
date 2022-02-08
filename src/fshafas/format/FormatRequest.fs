@@ -6,6 +6,10 @@ module internal Format =
     open Fable.Core
 #endif
 
+#if FABLE_PY
+    open FsHafas.Extensions
+#endif
+
     let private ParseIsoString (datetime: string) =
         let year = datetime.Substring(0, 4) |> int
         let month = datetime.Substring(5, 2) |> int
@@ -16,6 +20,17 @@ module internal Format =
         let tzOffset =
             datetime.Substring(20, 2) |> int |> (*) 60
 
+#if FABLE_PY
+        // workaround: missing code DateTimeOffset
+        System
+            .DateTime(
+                year,
+                month,
+                day,
+                hour,
+                minute,
+                0)
+#else
         System
             .DateTimeOffset(
                 year,
@@ -27,6 +42,7 @@ module internal Format =
                 System.TimeSpan(tzOffset / 60, 0, 0)
             )
             .DateTime
+#endif
 
     let private maybeGetOptionValue<'a, 'b> (opt: 'a option) (getter: 'a -> 'b option) =
         match opt with
@@ -46,8 +62,13 @@ module internal Format =
             | None -> defaultValue
         | None -> defaultValue
 
-    let formatDate (dt: System.DateTime) = dt.ToString("yyyyMMdd")
-    let formatTime (dt: System.DateTime) = dt.ToString("HHmmss")
+    let formatDate (dt: System.DateTime) = 
+#if FABLE_PY
+        DateTimeEx.formatDate dt "yyyyMMdd"
+#else
+        dt.ToString("yyyyMMdd")
+#endif
+    let formatTime (dt: System.DateTime) = dt.ToString("HHmm") + "00"
 
     let private formatProductsBitmask (profile: FsHafas.Endpoint.Profile) (products: FsHafas.Client.Products) =
         (profile :> FsHafas.Client.Profile).products
@@ -359,6 +380,8 @@ module internal Format =
         : FsHafas.Raw.LineMatchRequest =
         { input = query }
 
+    let serverInfoRequest () : FsHafas.Raw.ServerInfoRequest = new obj()
+    
     let himSearchRequest
         (profile: FsHafas.Endpoint.Profile)
         (opt: FsHafas.Client.RemarksOptions option)

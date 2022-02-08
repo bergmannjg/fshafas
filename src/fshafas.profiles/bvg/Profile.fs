@@ -53,10 +53,8 @@ module Bvg =
              short = "R"
              ``default`` = true } |]
 
-    let private IBNR = Regex(@"^\d+$")
-
     let formatStation (id: string) =
-        if IBNR.IsMatch id
+        if Regex.IsMatch(id, @"^\d{6,}$") 
            && (id.Length = 7 || id.Length = 9 || id.Length = 12) then
             id
         else
