@@ -16,3 +16,7 @@
 ## 1.3.0
 
 * corresponds to hafas-client version 5.21.0
+
+## 1.3.1
+
+* update to db api version DB.R20.12.b

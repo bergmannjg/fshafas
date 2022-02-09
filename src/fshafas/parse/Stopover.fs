@@ -37,11 +37,25 @@ module internal Stopover =
         let arr =
             ctx.profile.parseWhen ctx date st.aTimeS st.aTimeR st.aTZOffset st.aCncl
 
+        let matchPlatfS (aPlatfS: string option) (aPltfS: FsHafas.Raw.RawPltf option) =
+            match aPlatfS with
+            | Some platfS -> Some platfS
+            | None ->
+                match aPltfS with
+                | Some aPltfS -> Some aPltfS.txt
+                | _ -> None
+
+        let dPlatfS = matchPlatfS st.dPlatfS st.dPltfS
+        let dPlatfR =  matchPlatfS st.dPlatfR st.dPltfR
+
         let depPl =
-            ctx.profile.parsePlatform ctx st.dPlatfS st.dPlatfR st.dCncl
+            ctx.profile.parsePlatform ctx dPlatfS dPlatfR st.dCncl
+
+        let aPlatfS = matchPlatfS st.aPlatfS st.aPltfS
+        let aPlatfR =  matchPlatfS st.aPlatfR st.aPltfR
 
         let arrPl =
-            ctx.profile.parsePlatform ctx st.aPlatfS st.aPlatfR st.aCncl
+            ctx.profile.parsePlatform ctx aPlatfS aPlatfR st.aCncl
 
         let passBy =
             match st.dInS, st.aOutS with

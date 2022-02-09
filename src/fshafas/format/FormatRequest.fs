@@ -182,9 +182,7 @@ module internal Format =
           time = time
           stbLoc = makeLocType profile name
           jnyFltrL = filters
-          dur = duration
-          getPasslist = stopovers
-          stbFltrEquiv = includeRelatedStations }
+          dur = duration }
 
     let reconstructionRequest
         (profile: FsHafas.Endpoint.Profile)
@@ -341,18 +339,10 @@ module internal Format =
           rect =
             { llCrd =
                 { x = Coordinate.fromFloat rect.west
-                  y = Coordinate.fromFloat rect.south
-                  z = None
-                  ``type`` = None
-                  layerX = None
-                  crdSysX = None }
+                  y = Coordinate.fromFloat rect.south }
               urCrd =
                 { x = Coordinate.fromFloat rect.east
-                  y = Coordinate.fromFloat rect.north
-                  z = None
-                  ``type`` = None
-                  layerX = None
-                  crdSysX = None } }
+                  y = Coordinate.fromFloat rect.north } }
           perSize = duration * 1000
           perStep = duration / frames * 1000
           ageOfReport = true

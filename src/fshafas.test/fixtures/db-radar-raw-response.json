@@ -1,12 +1,26 @@
 {
-    "ver": "1.15",
-    "ext": "DB.R19.04.a",
+    "ver": "1.34",
+    "ext": "DB.R20.12.b",
     "lang": "eng",
-    "id": "4eiq9m42iwskhgwx",
+    "id": "irga9gixw4x8xkwg",
+    "err": "OK",
     "cInfo": {
         "code": "OK",
         "url": "",
         "msg": ""
+    },
+    "graph": {
+        "id": "standard",
+        "index": 0
+    },
+    "subGraph": {
+        "id": "global",
+        "index": 0
+    },
+    "view": {
+        "id": "standard",
+        "index": 0,
+        "type": "WGS84"
     },
     "svcResL": [
         {
@@ -16,188 +30,2374 @@
                 "common": {
                     "locL": [
                         {
-                            "lid": "A=1@O=Devin, Stralsund@X=13142607@Y=54265496@U=80@L=325707@",
+                            "lid": "A=1@O=Auf dem Sande (Speicherstadt), Hamburg@X=9989901@Y=53543869@U=81@L=694265@",
                             "type": "S",
-                            "name": "Devin, Stralsund",
+                            "name": "Auf dem Sande (Speicherstadt), Hamburg",
                             "icoX": 0,
-                            "extId": "325707",
+                            "extId": "694265",
                             "state": "F",
                             "crd": {
-                                "x": 13142607,
-                                "y": 54265496,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
+                                "x": 9989901,
+                                "y": 53543869,
+                                "floor": 0
                             },
                             "pCls": 32
                         },
                         {
-                            "lid": "A=1@O=Hauptbahnhof, Stralsund@X=13077723@Y=54309148@U=80@L=952267@",
+                            "lid": "A=1@O=Gertigstraße, Hamburg@X=10011952@Y=53581058@U=81@L=693031@",
                             "type": "S",
-                            "name": "Hauptbahnhof, Stralsund",
+                            "name": "Gertigstraße, Hamburg",
                             "icoX": 0,
-                            "extId": "952267",
+                            "extId": "693031",
                             "state": "F",
                             "crd": {
-                                "x": 13077723,
-                                "y": 54309148,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
-                            },
-                            "pCls": 47
-                        },
-                        {
-                            "lid": "A=1@O=Wolfgang-Heinze-Str., Stralsund@X=13078541@Y=54312959@U=80@L=325731@",
-                            "type": "S",
-                            "name": "Wolfgang-Heinze-Str., Stralsund",
-                            "icoX": 0,
-                            "extId": "325731",
-                            "state": "F",
-                            "crd": {
-                                "x": 13078541,
-                                "y": 54312959,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
+                                "x": 10011952,
+                                "y": 53581058,
+                                "floor": 0
                             },
                             "pCls": 32
                         },
                         {
-                            "lid": "A=1@O=Strelapark/Zoo, Stralsund@X=13050036@Y=54319755@U=80@L=952406@",
+                            "lid": "A=1@O=Goldbekplatz, Hamburg@X=10009758@Y=53583548@U=81@L=693030@",
                             "type": "S",
-                            "name": "Strelapark/Zoo, Stralsund",
+                            "name": "Goldbekplatz, Hamburg",
                             "icoX": 0,
-                            "extId": "952406",
+                            "extId": "693030",
                             "state": "F",
                             "crd": {
-                                "x": 13050036,
-                                "y": 54319755,
-                                "type": "WGS84",
-                                "layerX": 0,
-                                "crdSysX": 0
+                                "x": 10009758,
+                                "y": 53583548,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Borgweg (U), Hamburg@X=10015646@Y=53590766@U=81@L=693025@",
+                            "type": "S",
+                            "name": "Borgweg (U), Hamburg",
+                            "icoX": 0,
+                            "extId": "693025",
+                            "state": "F",
+                            "crd": {
+                                "x": 10015646,
+                                "y": 53590766,
+                                "floor": 0
+                            },
+                            "pCls": 160
+                        },
+                        {
+                            "lid": "A=1@O=Semperstraße, Hamburg@X=10017561@Y=53586532@U=81@L=693027@",
+                            "type": "S",
+                            "name": "Semperstraße, Hamburg",
+                            "icoX": 0,
+                            "extId": "693027",
+                            "state": "F",
+                            "crd": {
+                                "x": 10017561,
+                                "y": 53586532,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Niendorf Markt (U), Hamburg@X=9952173@Y=53619109@U=81@L=895349@",
+                            "type": "S",
+                            "name": "Niendorf Markt (U), Hamburg",
+                            "icoX": 0,
+                            "extId": "895349",
+                            "state": "F",
+                            "crd": {
+                                "x": 9952173,
+                                "y": 53619109,
+                                "floor": 0
+                            },
+                            "pCls": 160
+                        },
+                        {
+                            "lid": "A=1@O=Gottschalkweg, Hamburg@X=9943337@Y=53635712@U=81@L=692328@",
+                            "type": "S",
+                            "name": "Gottschalkweg, Hamburg",
+                            "icoX": 0,
+                            "extId": "692328",
+                            "state": "F",
+                            "crd": {
+                                "x": 9943337,
+                                "y": 53635712,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Vielohweg (Mitte), Hamburg@X=9945180@Y=53638526@U=81@L=692327@",
+                            "type": "S",
+                            "name": "Vielohweg (Mitte), Hamburg",
+                            "icoX": 0,
+                            "extId": "692327",
+                            "state": "F",
+                            "crd": {
+                                "x": 9945180,
+                                "y": 53638526,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Bahnhof Rahlstedt (Doberaner Weg), Hamburg@X=10153496@Y=53604618@U=81@L=895814@",
+                            "type": "S",
+                            "name": "Bahnhof Rahlstedt (Doberaner Weg), Hamburg",
+                            "icoX": 0,
+                            "extId": "895814",
+                            "state": "F",
+                            "crd": {
+                                "x": 10153496,
+                                "y": 53604618,
+                                "floor": 0
+                            },
+                            "pCls": 40
+                        },
+                        {
+                            "lid": "A=1@O=Niendorf Nord (U), Hamburg@X=9949611@Y=53640315@U=81@L=692326@",
+                            "type": "S",
+                            "name": "Niendorf Nord (U), Hamburg",
+                            "icoX": 0,
+                            "extId": "692326",
+                            "state": "F",
+                            "crd": {
+                                "x": 9949611,
+                                "y": 53640315,
+                                "floor": 0
+                            },
+                            "pCls": 160
+                        },
+                        {
+                            "lid": "A=1@O=Pommernweg, Hamburg@X=9956587@Y=53642706@U=81@L=692322@",
+                            "type": "S",
+                            "name": "Pommernweg, Hamburg",
+                            "icoX": 0,
+                            "extId": "692322",
+                            "state": "F",
+                            "crd": {
+                                "x": 9956587,
+                                "y": 53642706,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Keltenweg, Hamburg@X=9957522@Y=53645376@U=81@L=692321@",
+                            "type": "S",
+                            "name": "Keltenweg, Hamburg",
+                            "icoX": 0,
+                            "extId": "692321",
+                            "state": "F",
+                            "crd": {
+                                "x": 9957522,
+                                "y": 53645376,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Sperlingsweg, Hamburg@X=9974961@Y=53645546@U=81@L=692303@",
+                            "type": "S",
+                            "name": "Sperlingsweg, Hamburg",
+                            "icoX": 0,
+                            "extId": "692303",
+                            "state": "F",
+                            "crd": {
+                                "x": 9974961,
+                                "y": 53645546,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Krohnstiegtunnel, Norderstedt@X=9987968@Y=53649466@U=81@L=692261@",
+                            "type": "S",
+                            "name": "Krohnstiegtunnel, Norderstedt",
+                            "icoX": 0,
+                            "extId": "692261",
+                            "state": "F",
+                            "crd": {
+                                "x": 9987968,
+                                "y": 53649466,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Ermlandweg, Hamburg@X=9992094@Y=53649061@U=81@L=692309@",
+                            "type": "S",
+                            "name": "Ermlandweg, Hamburg",
+                            "icoX": 0,
+                            "extId": "692309",
+                            "state": "F",
+                            "crd": {
+                                "x": 9992094,
+                                "y": 53649061,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Berne (U) (Berner Heerweg), Hamburg@X=10138520@Y=53626705@U=81@L=895813@",
+                            "type": "S",
+                            "name": "Berne (U) (Berner Heerweg), Hamburg",
+                            "icoX": 0,
+                            "extId": "895813",
+                            "state": "F",
+                            "crd": {
+                                "x": 10138520,
+                                "y": 53626705,
+                                "floor": 0
+                            },
+                            "pCls": 160
+                        },
+                        {
+                            "lid": "A=1@O=Kienholt, Hamburg@X=10104316@Y=53621222@U=81@L=692855@",
+                            "type": "S",
+                            "name": "Kienholt, Hamburg",
+                            "icoX": 0,
+                            "extId": "692855",
+                            "state": "F",
+                            "crd": {
+                                "x": 10104316,
+                                "y": 53621222,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Fahrenkrön, Hamburg@X=10096612@Y=53619352@U=81@L=692856@",
+                            "type": "S",
+                            "name": "Fahrenkrön, Hamburg",
+                            "icoX": 0,
+                            "extId": "692856",
+                            "state": "F",
+                            "crd": {
+                                "x": 10096612,
+                                "y": 53619352,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Feldstraße (U), Hamburg@X=9969037@Y=53557308@U=81@L=694807@",
+                            "type": "S",
+                            "name": "Feldstraße (U), Hamburg",
+                            "icoX": 0,
+                            "extId": "694807",
+                            "state": "F",
+                            "crd": {
+                                "x": 9969037,
+                                "y": 53557308,
+                                "floor": 0
+                            },
+                            "pCls": 160
+                        },
+                        {
+                            "lid": "A=1@O=Hohnerkamp, Hamburg@X=10089439@Y=53617967@U=81@L=692857@",
+                            "type": "S",
+                            "name": "Hohnerkamp, Hamburg",
+                            "icoX": 0,
+                            "extId": "692857",
+                            "state": "F",
+                            "crd": {
+                                "x": 10089439,
+                                "y": 53617967,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Berner Chaussee, Hamburg@X=10080351@Y=53619073@U=81@L=693166@",
+                            "type": "S",
+                            "name": "Berner Chaussee, Hamburg",
+                            "icoX": 0,
+                            "extId": "693166",
+                            "state": "F",
+                            "crd": {
+                                "x": 10080351,
+                                "y": 53619073,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Bramfelder Dorfplatz (Heukoppel), Hamburg@X=10077411@Y=53613814@U=81@L=693167@",
+                            "type": "S",
+                            "name": "Bramfelder Dorfplatz (Heukoppel), Hamburg",
+                            "icoX": 0,
+                            "extId": "693167",
+                            "state": "F",
+                            "crd": {
+                                "x": 10077411,
+                                "y": 53613814,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Herthastraße, Hamburg@X=10074553@Y=53611981@U=81@L=895797@",
+                            "type": "S",
+                            "name": "Herthastraße, Hamburg",
+                            "icoX": 0,
+                            "extId": "895797",
+                            "state": "F",
+                            "crd": {
+                                "x": 10074553,
+                                "y": 53611981,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Steilshooper Allee, Hamburg@X=10072746@Y=53608798@U=81@L=693168@",
+                            "type": "S",
+                            "name": "Steilshooper Allee, Hamburg",
+                            "icoX": 0,
+                            "extId": "693168",
+                            "state": "F",
+                            "crd": {
+                                "x": 10072746,
+                                "y": 53608798,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Zum Dubben, Hamburg@X=9904288@Y=53473924@U=81@L=693800@",
+                            "type": "S",
+                            "name": "Zum Dubben, Hamburg",
+                            "icoX": 0,
+                            "extId": "693800",
+                            "state": "F",
+                            "crd": {
+                                "x": 9904288,
+                                "y": 53473924,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Harburg Rathaus (Hölertwiete) (S), Hamburg@X=9982000@Y=53461393@U=81@L=895289@",
+                            "type": "S",
+                            "name": "Harburg Rathaus (Hölertwiete) (S), Hamburg",
+                            "icoX": 0,
+                            "extId": "895289",
+                            "state": "F",
+                            "crd": {
+                                "x": 9982000,
+                                "y": 53461393,
+                                "floor": 0
+                            },
+                            "pCls": 56
+                        },
+                        {
+                            "lid": "A=1@O=Bahnhof Harburg, Hamburg@X=9990414@Y=53456854@U=81@L=617996@",
+                            "type": "S",
+                            "name": "Bahnhof Harburg, Hamburg",
+                            "icoX": 0,
+                            "extId": "617996",
+                            "state": "F",
+                            "crd": {
+                                "x": 9990414,
+                                "y": 53456854,
+                                "floor": 0
+                            },
+                            "pCls": 63
+                        },
+                        {
+                            "lid": "A=1@O=Meckelfeld Schulzentrum, Seevetal@X=10024231@Y=53411809@U=81@L=693666@",
+                            "type": "S",
+                            "name": "Meckelfeld Schulzentrum, Seevetal",
+                            "icoX": 0,
+                            "extId": "693666",
+                            "state": "F",
+                            "crd": {
+                                "x": 10024231,
+                                "y": 53411809,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Reeseberg, Hamburg@X=9987582@Y=53450669@U=81@L=693681@",
+                            "type": "S",
+                            "name": "Reeseberg, Hamburg",
+                            "icoX": 0,
+                            "extId": "693681",
+                            "state": "F",
+                            "crd": {
+                                "x": 9987582,
+                                "y": 53450669,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Winsener Straße (Nord), Hamburg@X=9990980@Y=53445959@U=81@L=693682@",
+                            "type": "S",
+                            "name": "Winsener Straße (Nord), Hamburg",
+                            "icoX": 0,
+                            "extId": "693682",
+                            "state": "F",
+                            "crd": {
+                                "x": 9990980,
+                                "y": 53445959,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Sieversstücken, Hamburg@X=9786107@Y=53580599@U=81@L=692638@",
+                            "type": "S",
+                            "name": "Sieversstücken, Hamburg",
+                            "icoX": 0,
+                            "extId": "692638",
+                            "state": "F",
+                            "crd": {
+                                "x": 9786107,
+                                "y": 53580599,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Musäusstraße, Hamburg@X=9816607@Y=53580455@U=81@L=692660@",
+                            "type": "S",
+                            "name": "Musäusstraße, Hamburg",
+                            "icoX": 0,
+                            "extId": "692660",
+                            "state": "F",
+                            "crd": {
+                                "x": 9816607,
+                                "y": 53580455,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Holtbarg, Hamburg@X=9822495@Y=53583611@U=81@L=692657@",
+                            "type": "S",
+                            "name": "Holtbarg, Hamburg",
+                            "icoX": 0,
+                            "extId": "692657",
+                            "state": "F",
+                            "crd": {
+                                "x": 9822495,
+                                "y": 53583611,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Bahnhof Altona, Hamburg@X=9934231@Y=53551663@U=81@L=692757@",
+                            "type": "S",
+                            "name": "Bahnhof Altona, Hamburg",
+                            "icoX": 0,
+                            "extId": "692757",
+                            "state": "F",
+                            "crd": {
+                                "x": 9934231,
+                                "y": 53551663,
+                                "floor": 0
+                            },
+                            "pCls": 63
+                        },
+                        {
+                            "lid": "A=1@O=Heerbrook, Hamburg@X=9830046@Y=53579718@U=81@L=692644@",
+                            "type": "S",
+                            "name": "Heerbrook, Hamburg",
+                            "icoX": 0,
+                            "extId": "692644",
+                            "state": "F",
+                            "crd": {
+                                "x": 9830046,
+                                "y": 53579718,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Am Botterbarg, Hamburg@X=9834927@Y=53574855@U=81@L=692645@",
+                            "type": "S",
+                            "name": "Am Botterbarg, Hamburg",
+                            "icoX": 0,
+                            "extId": "692645",
+                            "state": "F",
+                            "crd": {
+                                "x": 9834927,
+                                "y": 53574855,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Isfeldstraße, Hamburg@X=9837022@Y=53573776@U=81@L=692646@",
+                            "type": "S",
+                            "name": "Isfeldstraße, Hamburg",
+                            "icoX": 0,
+                            "extId": "692646",
+                            "state": "F",
+                            "crd": {
+                                "x": 9837022,
+                                "y": 53573776,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Langelohstraße (Nord), Hamburg@X=9846586@Y=53572833@U=81@L=692703@",
+                            "type": "S",
+                            "name": "Langelohstraße (Nord), Hamburg",
+                            "icoX": 0,
+                            "extId": "692703",
+                            "state": "F",
+                            "crd": {
+                                "x": 9846586,
+                                "y": 53572833,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Knabeweg, Hamburg@X=9856214@Y=53571934@U=81@L=692695@",
+                            "type": "S",
+                            "name": "Knabeweg, Hamburg",
+                            "icoX": 0,
+                            "extId": "692695",
+                            "state": "F",
+                            "crd": {
+                                "x": 9856214,
+                                "y": 53571934,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Elbe-Einkaufszentrum, Hamburg@X=9861904@Y=53571808@U=81@L=692704@",
+                            "type": "S",
+                            "name": "Elbe-Einkaufszentrum, Hamburg",
+                            "icoX": 0,
+                            "extId": "692704",
+                            "state": "F",
+                            "crd": {
+                                "x": 9861904,
+                                "y": 53571808,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Rissen (S), Hamburg@X=9758600@Y=53582469@U=81@L=692636@",
+                            "type": "S",
+                            "name": "Rissen (S), Hamburg",
+                            "icoX": 0,
+                            "extId": "692636",
+                            "state": "F",
+                            "crd": {
+                                "x": 9758600,
+                                "y": 53582469,
+                                "floor": 0
+                            },
+                            "pCls": 56
+                        },
+                        {
+                            "lid": "A=1@O=Mühlenberg, Hamburg@X=9822971@Y=53560760@U=81@L=895240@",
+                            "type": "S",
+                            "name": "Mühlenberg, Hamburg",
+                            "icoX": 0,
+                            "extId": "895240",
+                            "state": "F",
+                            "crd": {
+                                "x": 9822971,
+                                "y": 53560760,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Grotefendweg, Hamburg@X=9827223@Y=53566531@U=81@L=692648@",
+                            "type": "S",
+                            "name": "Grotefendweg, Hamburg",
+                            "icoX": 0,
+                            "extId": "692648",
+                            "state": "F",
+                            "crd": {
+                                "x": 9827223,
+                                "y": 53566531,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Darbovenstieg, Hamburg@X=9824428@Y=53572024@U=81@L=692647@",
+                            "type": "S",
+                            "name": "Darbovenstieg, Hamburg",
+                            "icoX": 0,
+                            "extId": "692647",
+                            "state": "F",
+                            "crd": {
+                                "x": 9824428,
+                                "y": 53572024,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Sülldorfer Landstraße, Hamburg@X=9823115@Y=53576410@U=81@L=692658@",
+                            "type": "S",
+                            "name": "Sülldorfer Landstraße, Hamburg",
+                            "icoX": 0,
+                            "extId": "692658",
+                            "state": "F",
+                            "crd": {
+                                "x": 9823115,
+                                "y": 53576410,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Naturschutzgebiet Höltigbaum, Hamburg@X=10183475@Y=53611244@U=81@L=701192@",
+                            "type": "S",
+                            "name": "Naturschutzgebiet Höltigbaum, Hamburg",
+                            "icoX": 0,
+                            "extId": "701192",
+                            "state": "F",
+                            "crd": {
+                                "x": 10183475,
+                                "y": 53611244,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Hüllenkamp, Hamburg@X=10154907@Y=53587674@U=81@L=693213@",
+                            "type": "S",
+                            "name": "Hüllenkamp, Hamburg",
+                            "icoX": 0,
+                            "extId": "693213",
+                            "state": "F",
+                            "crd": {
+                                "x": 10154907,
+                                "y": 53587674,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Potsdamer Straße, Hamburg@X=10148624@Y=53585894@U=81@L=693212@",
+                            "type": "S",
+                            "name": "Potsdamer Straße, Hamburg",
+                            "icoX": 0,
+                            "extId": "693212",
+                            "state": "F",
+                            "crd": {
+                                "x": 10148624,
+                                "y": 53585894,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Bahnhof Bergedorf, Hamburg@X=10205822@Y=53489215@U=81@L=694417@",
+                            "type": "S",
+                            "name": "Bahnhof Bergedorf, Hamburg",
+                            "icoX": 0,
+                            "extId": "694417",
+                            "state": "F",
+                            "crd": {
+                                "x": 10205822,
+                                "y": 53489215,
+                                "floor": 0
+                            },
+                            "pCls": 59
+                        },
+                        {
+                            "lid": "A=1@O=Berliner Platz, Hamburg@X=10141504@Y=53583988@U=81@L=693211@",
+                            "type": "S",
+                            "name": "Berliner Platz, Hamburg",
+                            "icoX": 0,
+                            "extId": "693211",
+                            "state": "F",
+                            "crd": {
+                                "x": 10141504,
+                                "y": 53583988,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Köpenicker Straße, Hamburg@X=10133288@Y=53584501@U=81@L=693190@",
+                            "type": "S",
+                            "name": "Köpenicker Straße, Hamburg",
+                            "icoX": 0,
+                            "extId": "693190",
+                            "state": "F",
+                            "crd": {
+                                "x": 10133288,
+                                "y": 53584501,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Kuehnstraße, Hamburg@X=10126555@Y=53582244@U=81@L=693191@",
+                            "type": "S",
+                            "name": "Kuehnstraße, Hamburg",
+                            "icoX": 0,
+                            "extId": "693191",
+                            "state": "F",
+                            "crd": {
+                                "x": 10126555,
+                                "y": 53582244,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Otto-Hahn-Schule Jenfeld, Hamburg@X=10128020@Y=53579467@U=81@L=895907@",
+                            "type": "S",
+                            "name": "Otto-Hahn-Schule Jenfeld, Hamburg",
+                            "icoX": 0,
+                            "extId": "895907",
+                            "state": "F",
+                            "crd": {
+                                "x": 10128020,
+                                "y": 53579467,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Jenfelder Allee, Hamburg@X=10126969@Y=53575080@U=81@L=693195@",
+                            "type": "S",
+                            "name": "Jenfelder Allee, Hamburg",
+                            "icoX": 0,
+                            "extId": "693195",
+                            "state": "F",
+                            "crd": {
+                                "x": 10126969,
+                                "y": 53575080,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Neißestraße, Hamburg@X=9864978@Y=53607055@U=81@L=692573@",
+                            "type": "S",
+                            "name": "Neißestraße, Hamburg",
+                            "icoX": 0,
+                            "extId": "692573",
+                            "state": "F",
+                            "crd": {
+                                "x": 9864978,
+                                "y": 53607055,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Achtern Styg, Hamburg@X=9866812@Y=53581363@U=81@L=692587@",
+                            "type": "S",
+                            "name": "Achtern Styg, Hamburg",
+                            "icoX": 0,
+                            "extId": "692587",
+                            "state": "F",
+                            "crd": {
+                                "x": 9866812,
+                                "y": 53581363,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Geranienweg, Hamburg@X=9866057@Y=53578541@U=81@L=692586@",
+                            "type": "S",
+                            "name": "Geranienweg, Hamburg",
+                            "icoX": 0,
+                            "extId": "692586",
+                            "state": "F",
+                            "crd": {
+                                "x": 9866057,
+                                "y": 53578541,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Othmarschen (S), Hamburg@X=9887199@Y=53558998@U=81@L=692732@",
+                            "type": "S",
+                            "name": "Othmarschen (S), Hamburg",
+                            "icoX": 0,
+                            "extId": "692732",
+                            "state": "F",
+                            "crd": {
+                                "x": 9887199,
+                                "y": 53558998,
+                                "floor": 0
+                            },
+                            "pCls": 56
+                        },
+                        {
+                            "lid": "A=1@O=Blomkamp, Hamburg@X=9859962@Y=53577282@U=81@L=692585@",
+                            "type": "S",
+                            "name": "Blomkamp, Hamburg",
+                            "icoX": 0,
+                            "extId": "692585",
+                            "state": "F",
+                            "crd": {
+                                "x": 9859962,
+                                "y": 53577282,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Windmühlenweg, Hamburg@X=9868987@Y=53571197@U=81@L=692698@",
+                            "type": "S",
+                            "name": "Windmühlenweg, Hamburg",
+                            "icoX": 0,
+                            "extId": "692698",
+                            "state": "F",
+                            "crd": {
+                                "x": 9868987,
+                                "y": 53571197,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Groß Flottbeker Straße, Hamburg@X=9878570@Y=53569381@U=81@L=692697@",
+                            "type": "S",
+                            "name": "Groß Flottbeker Straße, Hamburg",
+                            "icoX": 0,
+                            "extId": "692697",
+                            "state": "F",
+                            "crd": {
+                                "x": 9878570,
+                                "y": 53569381,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Böcklinstraße, Hamburg@X=9887127@Y=53562971@U=81@L=692731@",
+                            "type": "S",
+                            "name": "Böcklinstraße, Hamburg",
+                            "icoX": 0,
+                            "extId": "692731",
+                            "state": "F",
+                            "crd": {
+                                "x": 9887127,
+                                "y": 53562971,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Bostelbek, Hamburg@X=9931921@Y=53470922@U=81@L=693712@",
+                            "type": "S",
+                            "name": "Bostelbek, Hamburg",
+                            "icoX": 0,
+                            "extId": "693712",
+                            "state": "F",
+                            "crd": {
+                                "x": 9931921,
+                                "y": 53470922,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Krankenhaus Mariahilf, Hamburg@X=9936829@Y=53471003@U=81@L=693713@",
+                            "type": "S",
+                            "name": "Krankenhaus Mariahilf, Hamburg",
+                            "icoX": 0,
+                            "extId": "693713",
+                            "state": "F",
+                            "crd": {
+                                "x": 9936829,
+                                "y": 53471003,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Eißendorfer Pferdeweg (Nord), Hamburg@X=9945692@Y=53471030@U=81@L=693714@",
+                            "type": "S",
+                            "name": "Eißendorfer Pferdeweg (Nord), Hamburg",
+                            "icoX": 0,
+                            "extId": "693714",
+                            "state": "F",
+                            "crd": {
+                                "x": 9945692,
+                                "y": 53471030,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Berkefeldweg, Hamburg@X=9952695@Y=53470652@U=81@L=693715@",
+                            "type": "S",
+                            "name": "Berkefeldweg, Hamburg",
+                            "icoX": 0,
+                            "extId": "693715",
+                            "state": "F",
+                            "crd": {
+                                "x": 9952695,
+                                "y": 53470652,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Bissingstraße, Hamburg@X=9962960@Y=53469556@U=81@L=693846@",
+                            "type": "S",
+                            "name": "Bissingstraße, Hamburg",
+                            "icoX": 0,
+                            "extId": "693846",
+                            "state": "F",
+                            "crd": {
+                                "x": 9962960,
+                                "y": 53469556,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Grumbrechtstraße, Hamburg@X=9967949@Y=53468009@U=81@L=693847@",
+                            "type": "S",
+                            "name": "Grumbrechtstraße, Hamburg",
+                            "icoX": 0,
+                            "extId": "693847",
+                            "state": "F",
+                            "crd": {
+                                "x": 9967949,
+                                "y": 53468009,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Zeltplatz Altengamme, Hamburg@X=10298492@Y=53432817@U=81@L=694520@",
+                            "type": "S",
+                            "name": "Zeltplatz Altengamme, Hamburg",
+                            "icoX": 0,
+                            "extId": "694520",
+                            "state": "F",
+                            "crd": {
+                                "x": 10298492,
+                                "y": 53432817,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Warwischer Hinterdeich, Hamburg@X=10121458@Y=53425436@U=81@L=694562@",
+                            "type": "S",
+                            "name": "Warwischer Hinterdeich, Hamburg",
+                            "icoX": 0,
+                            "extId": "694562",
+                            "state": "F",
+                            "crd": {
+                                "x": 10121458,
+                                "y": 53425436,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Overwerder, Hamburg@X=10113404@Y=53430614@U=81@L=694736@",
+                            "type": "S",
+                            "name": "Overwerder, Hamburg",
+                            "icoX": 0,
+                            "extId": "694736",
+                            "state": "F",
+                            "crd": {
+                                "x": 10113404,
+                                "y": 53430614,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Hauptbahnhof/ZOB, Hamburg@X=10010334@Y=53551888@U=81@L=694887@",
+                            "type": "S",
+                            "name": "Hauptbahnhof/ZOB, Hamburg",
+                            "icoX": 0,
+                            "extId": "694887",
+                            "state": "F",
+                            "crd": {
+                                "x": 10010334,
+                                "y": 53551888,
+                                "floor": 0
+                            },
+                            "pCls": 191
+                        },
+                        {
+                            "lid": "A=1@O=Oortkatenufer, Hamburg@X=10101242@Y=53440664@U=81@L=694731@",
+                            "type": "S",
+                            "name": "Oortkatenufer, Hamburg",
+                            "icoX": 0,
+                            "extId": "694731",
+                            "state": "F",
+                            "crd": {
+                                "x": 10101242,
+                                "y": 53440664,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Oortkaten, Hamburg@X=10090418@Y=53449042@U=81@L=694738@",
+                            "type": "S",
+                            "name": "Oortkaten, Hamburg",
+                            "icoX": 0,
+                            "extId": "694738",
+                            "state": "F",
+                            "crd": {
+                                "x": 10090418,
+                                "y": 53449042,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Nagelstegel, Hamburg@X=10080414@Y=53456171@U=81@L=694732@",
+                            "type": "S",
+                            "name": "Nagelstegel, Hamburg",
+                            "icoX": 0,
+                            "extId": "694732",
+                            "state": "F",
+                            "crd": {
+                                "x": 10080414,
+                                "y": 53456171,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Ochsenwerder Elbdeich 3, Hamburg@X=10075344@Y=53457474@U=81@L=694739@",
+                            "type": "S",
+                            "name": "Ochsenwerder Elbdeich 3, Hamburg",
+                            "icoX": 0,
+                            "extId": "694739",
+                            "state": "F",
+                            "crd": {
+                                "x": 10075344,
+                                "y": 53457474,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Dorferbogen, Hamburg@X=10067190@Y=53468090@U=81@L=694742@",
+                            "type": "S",
+                            "name": "Dorferbogen, Hamburg",
+                            "icoX": 0,
+                            "extId": "694742",
+                            "state": "F",
+                            "crd": {
+                                "x": 10067190,
+                                "y": 53468090,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Schule Ochsenwerder, Hamburg@X=10074597@Y=53471560@U=81@L=694743@",
+                            "type": "S",
+                            "name": "Schule Ochsenwerder, Hamburg",
+                            "icoX": 0,
+                            "extId": "694743",
+                            "state": "F",
+                            "crd": {
+                                "x": 10074597,
+                                "y": 53471560,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Billstedt (U), Hamburg@X=10106563@Y=53542341@U=81@L=693275@",
+                            "type": "S",
+                            "name": "Billstedt (U), Hamburg",
+                            "icoX": 0,
+                            "extId": "693275",
+                            "state": "F",
+                            "crd": {
+                                "x": 10106563,
+                                "y": 53542341,
+                                "floor": 0
+                            },
+                            "pCls": 160
+                        },
+                        {
+                            "lid": "A=1@O=Boberger Drift, Hamburg@X=10170881@Y=53513648@U=81@L=694650@",
+                            "type": "S",
+                            "name": "Boberger Drift, Hamburg",
+                            "icoX": 0,
+                            "extId": "694650",
+                            "state": "F",
+                            "crd": {
+                                "x": 10170881,
+                                "y": 53513648,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Rudorffweg, Hamburg@X=10178414@Y=53512443@U=81@L=694649@",
+                            "type": "S",
+                            "name": "Rudorffweg, Hamburg",
+                            "icoX": 0,
+                            "extId": "694649",
+                            "state": "F",
+                            "crd": {
+                                "x": 10178414,
+                                "y": 53512443,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Allermöhe (S), Hamburg@X=10158566@Y=53489988@U=81@L=694675@",
+                            "type": "S",
+                            "name": "Allermöhe (S), Hamburg",
+                            "icoX": 0,
+                            "extId": "694675",
+                            "state": "F",
+                            "crd": {
+                                "x": 10158566,
+                                "y": 53489988,
+                                "floor": 0
+                            },
+                            "pCls": 48
+                        },
+                        {
+                            "lid": "A=1@O=Haempten, Hamburg@X=10192455@Y=53511760@U=81@L=694647@",
+                            "type": "S",
+                            "name": "Haempten, Hamburg",
+                            "icoX": 0,
+                            "extId": "694647",
+                            "state": "F",
+                            "crd": {
+                                "x": 10192455,
+                                "y": 53511760,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Korachstraße, Hamburg@X=10198487@Y=53510672@U=81@L=895134@",
+                            "type": "S",
+                            "name": "Korachstraße, Hamburg",
+                            "icoX": 0,
+                            "extId": "895134",
+                            "state": "F",
+                            "crd": {
+                                "x": 10198487,
+                                "y": 53510672,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Röpraredder, Hamburg@X=10210272@Y=53509917@U=81@L=694454@",
+                            "type": "S",
+                            "name": "Röpraredder, Hamburg",
+                            "icoX": 0,
+                            "extId": "694454",
+                            "state": "F",
+                            "crd": {
+                                "x": 10210272,
+                                "y": 53509917,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Harnackring, Hamburg@X=10210784@Y=53507841@U=81@L=694430@",
+                            "type": "S",
+                            "name": "Harnackring, Hamburg",
+                            "icoX": 0,
+                            "extId": "694430",
+                            "state": "F",
+                            "crd": {
+                                "x": 10210784,
+                                "y": 53507841,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Ahrensburger Kamp, Ahrensburg@X=10258121@Y=53648908@U=81@L=895265@",
+                            "type": "S",
+                            "name": "Ahrensburger Kamp, Ahrensburg",
+                            "icoX": 0,
+                            "extId": "895265",
+                            "state": "F",
+                            "crd": {
+                                "x": 10258121,
+                                "y": 53648908,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Fritz-Reuter-Straße, Ahrensburg@X=10228960@Y=53674186@U=81@L=694064@",
+                            "type": "S",
+                            "name": "Fritz-Reuter-Straße, Ahrensburg",
+                            "icoX": 0,
+                            "extId": "694064",
+                            "state": "F",
+                            "crd": {
+                                "x": 10228960,
+                                "y": 53674186,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Hermann-Löns-Straße, Ahrensburg@X=10226785@Y=53676307@U=81@L=694063@",
+                            "type": "S",
+                            "name": "Hermann-Löns-Straße, Ahrensburg",
+                            "icoX": 0,
+                            "extId": "694063",
+                            "state": "F",
+                            "crd": {
+                                "x": 10226785,
+                                "y": 53676307,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Schulzentrum Am Heimgarten, Ahrensburg@X=10220088@Y=53678959@U=81@L=694055@",
+                            "type": "S",
+                            "name": "Schulzentrum Am Heimgarten, Ahrensburg",
+                            "icoX": 0,
+                            "extId": "694055",
+                            "state": "F",
+                            "crd": {
+                                "x": 10220088,
+                                "y": 53678959,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Lilienweg, Ahrensburg@X=10223630@Y=53679400@U=81@L=694054@",
+                            "type": "S",
+                            "name": "Lilienweg, Ahrensburg",
+                            "icoX": 0,
+                            "extId": "694054",
+                            "state": "F",
+                            "crd": {
+                                "x": 10223630,
+                                "y": 53679400,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Energie-Campus Bergedorf, Hamburg@X=10203790@Y=53477151@U=81@L=223093@",
+                            "type": "S",
+                            "name": "Energie-Campus Bergedorf, Hamburg",
+                            "icoX": 0,
+                            "extId": "223093",
+                            "state": "F",
+                            "crd": {
+                                "x": 10203790,
+                                "y": 53477151,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Nettelnburger Kirchenweg, Hamburg@X=10182774@Y=53480181@U=81@L=694546@",
+                            "type": "S",
+                            "name": "Nettelnburger Kirchenweg, Hamburg",
+                            "icoX": 0,
+                            "extId": "694546",
+                            "state": "F",
+                            "crd": {
+                                "x": 10182774,
+                                "y": 53480181,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=BAB-Auffahrt Nettelnburg, Hamburg@X=10177506@Y=53475785@U=81@L=694607@",
+                            "type": "S",
+                            "name": "BAB-Auffahrt Nettelnburg, Hamburg",
+                            "icoX": 0,
+                            "extId": "694607",
+                            "state": "F",
+                            "crd": {
+                                "x": 10177506,
+                                "y": 53475785,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Reitbrooker Mühlenbrücke, Hamburg@X=10176005@Y=53467973@U=81@L=694609@",
+                            "type": "S",
+                            "name": "Reitbrooker Mühlenbrücke, Hamburg",
+                            "icoX": 0,
+                            "extId": "694609",
+                            "state": "F",
+                            "crd": {
+                                "x": 10176005,
+                                "y": 53467973,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Reitbrooker Mühle, Hamburg@X=10170746@Y=53467821@U=81@L=694610@",
+                            "type": "S",
+                            "name": "Reitbrooker Mühle, Hamburg",
+                            "icoX": 0,
+                            "extId": "694610",
+                            "state": "F",
+                            "crd": {
+                                "x": 10170746,
+                                "y": 53467821,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Vorderdeich 119, Hamburg@X=10152561@Y=53469142@U=81@L=694612@",
+                            "type": "S",
+                            "name": "Vorderdeich 119, Hamburg",
+                            "icoX": 0,
+                            "extId": "694612",
+                            "state": "F",
+                            "crd": {
+                                "x": 10152561,
+                                "y": 53469142,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Alte Schule Reitbrook, Hamburg@X=10148812@Y=53468045@U=81@L=694613@",
+                            "type": "S",
+                            "name": "Alte Schule Reitbrook, Hamburg",
+                            "icoX": 0,
+                            "extId": "694613",
+                            "state": "F",
+                            "crd": {
+                                "x": 10148812,
+                                "y": 53468045,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Heinrich-Osterath-Straße 241, Hamburg@X=10141504@Y=53456269@U=81@L=694617@",
+                            "type": "S",
+                            "name": "Heinrich-Osterath-Straße 241, Hamburg",
+                            "icoX": 0,
+                            "extId": "694617",
+                            "state": "F",
+                            "crd": {
+                                "x": 10141504,
+                                "y": 53456269,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Durchdeich (Polizei), Hamburg@X=10135805@Y=53451973@U=81@L=694618@",
+                            "type": "S",
+                            "name": "Durchdeich (Polizei), Hamburg",
+                            "icoX": 0,
+                            "extId": "694618",
+                            "state": "F",
+                            "crd": {
+                                "x": 10135805,
+                                "y": 53451973,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Elbgaustraße (S), Hamburg@X=9892917@Y=53603378@U=81@L=692600@",
+                            "type": "S",
+                            "name": "Elbgaustraße (S), Hamburg",
+                            "icoX": 0,
+                            "extId": "692600",
+                            "state": "F",
+                            "crd": {
+                                "x": 9892917,
+                                "y": 53603378,
+                                "floor": 0
+                            },
+                            "pCls": 56
+                        },
+                        {
+                            "lid": "A=1@O=Fangdieckstraße, Hamburg@X=9889546@Y=53601346@U=81@L=692601@",
+                            "type": "S",
+                            "name": "Fangdieckstraße, Hamburg",
+                            "icoX": 0,
+                            "extId": "692601",
+                            "state": "F",
+                            "crd": {
+                                "x": 9889546,
+                                "y": 53601346,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Franzosenkoppel, Hamburg@X=9880188@Y=53600879@U=81@L=692598@",
+                            "type": "S",
+                            "name": "Franzosenkoppel, Hamburg",
+                            "icoX": 0,
+                            "extId": "692598",
+                            "state": "F",
+                            "crd": {
+                                "x": 9880188,
+                                "y": 53600879,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Baumläuferweg, Hamburg@X=9876574@Y=53604349@U=81@L=692571@",
+                            "type": "S",
+                            "name": "Baumläuferweg, Hamburg",
+                            "icoX": 0,
+                            "extId": "692571",
+                            "state": "F",
+                            "crd": {
+                                "x": 9876574,
+                                "y": 53604349,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Weistritzstraße, Hamburg@X=9871351@Y=53606749@U=81@L=692572@",
+                            "type": "S",
+                            "name": "Weistritzstraße, Hamburg",
+                            "icoX": 0,
+                            "extId": "692572",
+                            "state": "F",
+                            "crd": {
+                                "x": 9871351,
+                                "y": 53606749,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Ebertallee, Hamburg@X=9888539@Y=53567844@U=81@L=692730@",
+                            "type": "S",
+                            "name": "Ebertallee, Hamburg",
+                            "icoX": 0,
+                            "extId": "692730",
+                            "state": "F",
+                            "crd": {
+                                "x": 9888539,
+                                "y": 53567844,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Mellingburgredder, Hamburg@X=10106123@Y=53668370@U=81@L=692820@",
+                            "type": "S",
+                            "name": "Mellingburgredder, Hamburg",
+                            "icoX": 0,
+                            "extId": "692820",
+                            "state": "F",
+                            "crd": {
+                                "x": 10106123,
+                                "y": 53668370,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Alsterblick, Hamburg@X=10124227@Y=53699131@U=81@L=692796@",
+                            "type": "S",
+                            "name": "Alsterblick, Hamburg",
+                            "icoX": 0,
+                            "extId": "692796",
+                            "state": "F",
+                            "crd": {
+                                "x": 10124227,
+                                "y": 53699131,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Ohlstedt (U), Hamburg@X=10138088@Y=53695347@U=81@L=692795@",
+                            "type": "S",
+                            "name": "Ohlstedt (U), Hamburg",
+                            "icoX": 0,
+                            "extId": "692795",
+                            "state": "F",
+                            "crd": {
+                                "x": 10138088,
+                                "y": 53695347,
+                                "floor": 0
+                            },
+                            "pCls": 160
+                        },
+                        {
+                            "lid": "A=1@O=Bahnhof Tonndorf, Hamburg@X=10122456@Y=53586433@U=81@L=693189@",
+                            "type": "S",
+                            "name": "Bahnhof Tonndorf, Hamburg",
+                            "icoX": 0,
+                            "extId": "693189",
+                            "state": "F",
+                            "crd": {
+                                "x": 10122456,
+                                "y": 53586433,
+                                "floor": 0
+                            },
+                            "pCls": 40
+                        },
+                        {
+                            "lid": "A=1@O=Steinbeker Grenzdamm, Hamburg@X=10150089@Y=53524111@U=81@L=694653@",
+                            "type": "S",
+                            "name": "Steinbeker Grenzdamm, Hamburg",
+                            "icoX": 0,
+                            "extId": "694653",
+                            "state": "F",
+                            "crd": {
+                                "x": 10150089,
+                                "y": 53524111,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Boberg, Hamburg@X=10167312@Y=53514421@U=81@L=694651@",
+                            "type": "S",
+                            "name": "Boberg, Hamburg",
+                            "icoX": 0,
+                            "extId": "694651",
+                            "state": "F",
+                            "crd": {
+                                "x": 10167312,
+                                "y": 53514421,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=BG Klinikum Boberg, Hamburg@X=10180176@Y=53507598@U=81@L=694642@",
+                            "type": "S",
+                            "name": "BG Klinikum Boberg, Hamburg",
+                            "icoX": 0,
+                            "extId": "694642",
+                            "state": "F",
+                            "crd": {
+                                "x": 10180176,
+                                "y": 53507598,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Grandkoppel (West), Hamburg@X=10186396@Y=53505548@U=81@L=694641@",
+                            "type": "S",
+                            "name": "Grandkoppel (West), Hamburg",
+                            "icoX": 0,
+                            "extId": "694641",
+                            "state": "F",
+                            "crd": {
+                                "x": 10186396,
+                                "y": 53505548,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Grandkoppel, Hamburg@X=10191062@Y=53503921@U=81@L=694640@",
+                            "type": "S",
+                            "name": "Grandkoppel, Hamburg",
+                            "icoX": 0,
+                            "extId": "694640",
+                            "state": "F",
+                            "crd": {
+                                "x": 10191062,
+                                "y": 53503921,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=An der Bergkoppel, Hamburg@X=10198792@Y=53500667@U=81@L=694636@",
+                            "type": "S",
+                            "name": "An der Bergkoppel, Hamburg",
+                            "icoX": 0,
+                            "extId": "694636",
+                            "state": "F",
+                            "crd": {
+                                "x": 10198792,
+                                "y": 53500667,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Lohbrügger Kirchstraße, Hamburg@X=10202775@Y=53498654@U=81@L=694422@",
+                            "type": "S",
+                            "name": "Lohbrügger Kirchstraße, Hamburg",
+                            "icoX": 0,
+                            "extId": "694422",
+                            "state": "F",
+                            "crd": {
+                                "x": 10202775,
+                                "y": 53498654,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Kurt-A.-Körber-Chaussee (Ost), Hamburg@X=10198361@Y=53488927@U=81@L=694573@",
+                            "type": "S",
+                            "name": "Kurt-A.-Körber-Chaussee (Ost), Hamburg",
+                            "icoX": 0,
+                            "extId": "694573",
+                            "state": "F",
+                            "crd": {
+                                "x": 10198361,
+                                "y": 53488927,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Heckkaten, Hamburg@X=10189318@Y=53490096@U=81@L=895207@",
+                            "type": "S",
+                            "name": "Heckkaten, Hamburg",
+                            "icoX": 0,
+                            "extId": "895207",
+                            "state": "F",
+                            "crd": {
+                                "x": 10189318,
+                                "y": 53490096,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Oberer Landweg (Eisenbahnbrücke), Hamburg@X=10185713@Y=53487768@U=81@L=694604@",
+                            "type": "S",
+                            "name": "Oberer Landweg (Eisenbahnbrücke), Hamburg",
+                            "icoX": 0,
+                            "extId": "694604",
+                            "state": "F",
+                            "crd": {
+                                "x": 10185713,
+                                "y": 53487768,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Nettelnburg (Südeingang) (S), Hamburg@X=10179762@Y=53486482@U=81@L=895661@",
+                            "type": "S",
+                            "name": "Nettelnburg (Südeingang) (S), Hamburg",
+                            "icoX": 0,
+                            "extId": "895661",
+                            "state": "F",
+                            "crd": {
+                                "x": 10179762,
+                                "y": 53486482,
+                                "floor": 0
+                            },
+                            "pCls": 48
+                        },
+                        {
+                            "lid": "A=1@O=Von-Haeften-Straße, Hamburg@X=10165362@Y=53486815@U=81@L=694543@",
+                            "type": "S",
+                            "name": "Von-Haeften-Straße, Hamburg",
+                            "icoX": 0,
+                            "extId": "694543",
+                            "state": "F",
+                            "crd": {
+                                "x": 10165362,
+                                "y": 53486815,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Von-Scheliha-Straße, Hamburg@X=10162782@Y=53485448@U=81@L=694686@",
+                            "type": "S",
+                            "name": "Von-Scheliha-Straße, Hamburg",
+                            "icoX": 0,
+                            "extId": "694686",
+                            "state": "F",
+                            "crd": {
+                                "x": 10162782,
+                                "y": 53485448,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Fiskalische Straße (Energieberg), Hamburg@X=10020428@Y=53516174@U=81@L=693367@",
+                            "type": "S",
+                            "name": "Fiskalische Straße (Energieberg), Hamburg",
+                            "icoX": 0,
+                            "extId": "693367",
+                            "state": "F",
+                            "crd": {
+                                "x": 10020428,
+                                "y": 53516174,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Veddel (S), Hamburg@X=10013327@Y=53520875@U=81@L=693366@",
+                            "type": "S",
+                            "name": "Veddel (S), Hamburg",
+                            "icoX": 0,
+                            "extId": "693366",
+                            "state": "F",
+                            "crd": {
+                                "x": 10013327,
+                                "y": 53520875,
+                                "floor": 0
+                            },
+                            "pCls": 48
+                        },
+                        {
+                            "lid": "A=1@O=Berliner Tor (Bürgerweide) (S+U), Hamburg@X=10025633@Y=53553038@U=81@L=694886@",
+                            "type": "S",
+                            "name": "Berliner Tor (Bürgerweide) (S+U), Hamburg",
+                            "icoX": 0,
+                            "extId": "694886",
+                            "state": "F",
+                            "crd": {
+                                "x": 10025633,
+                                "y": 53553038,
+                                "floor": 0
+                            },
+                            "pCls": 184
+                        },
+                        {
+                            "lid": "A=1@O=Wilhelmsburger Platz, Hamburg@X=10016401@Y=53522862@U=81@L=693365@",
+                            "type": "S",
+                            "name": "Wilhelmsburger Platz, Hamburg",
+                            "icoX": 0,
+                            "extId": "693365",
+                            "state": "F",
+                            "crd": {
+                                "x": 10016401,
+                                "y": 53522862,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Hovestieg, Hamburg@X=10021453@Y=53524776@U=81@L=693364@",
+                            "type": "S",
+                            "name": "Hovestieg, Hamburg",
+                            "icoX": 0,
+                            "extId": "693364",
+                            "state": "F",
+                            "crd": {
+                                "x": 10021453,
+                                "y": 53524776,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Veddeler Marktplatz, Hamburg@X=10023763@Y=53529397@U=81@L=693363@",
+                            "type": "S",
+                            "name": "Veddeler Marktplatz, Hamburg",
+                            "icoX": 0,
+                            "extId": "693363",
+                            "state": "F",
+                            "crd": {
+                                "x": 10023763,
+                                "y": 53529397,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Billhorner Röhrendamm, Hamburg@X=10030865@Y=53537838@U=81@L=694871@",
+                            "type": "S",
+                            "name": "Billhorner Röhrendamm, Hamburg",
+                            "icoX": 0,
+                            "extId": "694871",
+                            "state": "F",
+                            "crd": {
+                                "x": 10030865,
+                                "y": 53537838,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Billstraße, Hamburg@X=10033373@Y=53541406@U=81@L=694859@",
+                            "type": "S",
+                            "name": "Billstraße, Hamburg",
+                            "icoX": 0,
+                            "extId": "694859",
+                            "state": "F",
+                            "crd": {
+                                "x": 10033373,
+                                "y": 53541406,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Kandinskyallee (Nord), Hamburg@X=10150898@Y=53532938@U=81@L=222074@",
+                            "type": "S",
+                            "name": "Kandinskyallee (Nord), Hamburg",
+                            "icoX": 0,
+                            "extId": "222074",
+                            "state": "F",
+                            "crd": {
+                                "x": 10150898,
+                                "y": 53532938,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Reimboldweg, Hamburg@X=10227288@Y=53482653@U=81@L=895342@",
+                            "type": "S",
+                            "name": "Reimboldweg, Hamburg",
+                            "icoX": 0,
+                            "extId": "895342",
+                            "state": "F",
+                            "crd": {
+                                "x": 10227288,
+                                "y": 53482653,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Hoffmann-von-Fallersleben-Straße, Hamburg@X=10229967@Y=53481961@U=81@L=694384@",
+                            "type": "S",
+                            "name": "Hoffmann-von-Fallersleben-Straße, Hamburg",
+                            "icoX": 0,
+                            "extId": "694384",
+                            "state": "F",
+                            "crd": {
+                                "x": 10229967,
+                                "y": 53481961,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Friedhof Bergedorf (Kapelle 2), Hamburg@X=10257222@Y=53478356@U=81@L=694389@",
+                            "type": "S",
+                            "name": "Friedhof Bergedorf (Kapelle 2), Hamburg",
+                            "icoX": 0,
+                            "extId": "694389",
+                            "state": "F",
+                            "crd": {
+                                "x": 10257222,
+                                "y": 53478356,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Sternwarte (Besucherzentrum), Hamburg@X=10239577@Y=53482140@U=81@L=694377@",
+                            "type": "S",
+                            "name": "Sternwarte (Besucherzentrum), Hamburg",
+                            "icoX": 0,
+                            "extId": "694377",
+                            "state": "F",
+                            "crd": {
+                                "x": 10239577,
+                                "y": 53482140,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Friedhof Bergedorf (Kapelle 1), Hamburg@X=10245069@Y=53480819@U=81@L=694387@",
+                            "type": "S",
+                            "name": "Friedhof Bergedorf (Kapelle 1), Hamburg",
+                            "icoX": 0,
+                            "extId": "694387",
+                            "state": "F",
+                            "crd": {
+                                "x": 10245069,
+                                "y": 53480819,
+                                "floor": 0
+                            },
+                            "pCls": 32
+                        },
+                        {
+                            "lid": "A=1@O=Friedhof Bergedorf, Hamburg@X=10249977@Y=53478877@U=81@L=694388@",
+                            "type": "S",
+                            "name": "Friedhof Bergedorf, Hamburg",
+                            "icoX": 0,
+                            "extId": "694388",
+                            "state": "F",
+                            "crd": {
+                                "x": 10249977,
+                                "y": 53478877,
+                                "floor": 0
                             },
                             "pCls": 32
                         }
                     ],
                     "prodL": [
                         {
-                            "name": "Bus 3",
-                            "nameS": "3",
+                            "name": "Bus27599",
+                            "nameS": "2759992",
                             "icoX": 0,
                             "cls": 32,
                             "prodCtx": {
-                                "name": "Bus    3",
-                                "line": "3",
-                                "lineId": "5_nvpBUS_3",
-                                "matchId": "",
+                                "name": "Bus27599",
+                                "line": "2759992",
+                                "lineId": "2759992",
+                                "catOut": "Bus     ",
+                                "catOutS": "Bus",
+                                "catOutL": "Bus"
+                            }
+                        },
+                        {
+                            "name": "Bus 24",
+                            "nameS": "24",
+                            "icoX": 1,
+                            "cls": 32,
+                            "prodCtx": {
+                                "name": "Bus   24",
+                                "line": "24",
+                                "lineId": "5_hvvHHA_24",
+                                "catOut": "Bus     ",
+                                "catOutS": "Bus",
+                                "catOutL": "Bus"
+                            }
+                        },
+                        {
+                            "name": "Bus 17",
+                            "nameS": "17",
+                            "icoX": 1,
+                            "cls": 32,
+                            "prodCtx": {
+                                "name": "Bus   17",
+                                "line": "17",
+                                "lineId": "5_hvvHHA_17",
+                                "catOut": "Bus     ",
+                                "catOutS": "Bus",
+                                "catOutL": "Bus"
+                            }
+                        },
+                        {
+                            "name": "Bus 141",
+                            "nameS": "141",
+                            "icoX": 1,
+                            "cls": 32,
+                            "prodCtx": {
+                                "name": "Bus  141",
+                                "line": "141",
+                                "lineId": "5_hvvHHA_141",
+                                "catOut": "Bus     ",
+                                "catOutS": "Bus",
+                                "catOutL": "Bus"
+                            }
+                        },
+                        {
+                            "name": "Bus 1",
+                            "nameS": "1",
+                            "icoX": 1,
+                            "cls": 32,
+                            "prodCtx": {
+                                "name": "Bus    1",
+                                "line": "1",
+                                "lineId": "5_hvvVHH_1",
+                                "catOut": "Bus     ",
+                                "catOutS": "Bus",
+                                "catOutL": "Bus"
+                            }
+                        },
+                        {
+                            "name": "Bus 29",
+                            "nameS": "29",
+                            "icoX": 1,
+                            "cls": 32,
+                            "prodCtx": {
+                                "name": "Bus   29",
+                                "line": "29",
+                                "lineId": "5_hvvVHH_29",
+                                "catOut": "Bus     ",
+                                "catOutS": "Bus",
+                                "catOutL": "Bus"
+                            }
+                        },
+                        {
+                            "name": "Bus 186",
+                            "nameS": "186",
+                            "icoX": 1,
+                            "cls": 32,
+                            "prodCtx": {
+                                "name": "Bus  186",
+                                "line": "186",
+                                "lineId": "5_hvvVHH_186",
+                                "catOut": "Bus     ",
+                                "catOutS": "Bus",
+                                "catOutL": "Bus"
+                            }
+                        },
+                        {
+                            "name": "Bus 120",
+                            "nameS": "120",
+                            "icoX": 1,
+                            "cls": 32,
+                            "prodCtx": {
+                                "name": "Bus  120",
+                                "line": "120",
+                                "lineId": "5_hvvVHH_120",
+                                "catOut": "Bus     ",
+                                "catOutS": "Bus",
+                                "catOutL": "Bus"
+                            }
+                        },
+                        {
+                            "name": "Bus 12",
+                            "nameS": "12",
+                            "icoX": 1,
+                            "cls": 32,
+                            "prodCtx": {
+                                "name": "Bus   12",
+                                "line": "12",
+                                "lineId": "5_hvvVHH_12",
+                                "catOut": "Bus     ",
+                                "catOutS": "Bus",
+                                "catOutL": "Bus"
+                            }
+                        },
+                        {
+                            "name": "Bus 269",
+                            "nameS": "269",
+                            "icoX": 1,
+                            "cls": 32,
+                            "prodCtx": {
+                                "name": "Bus  269",
+                                "line": "269",
+                                "lineId": "5_hvvVHH_269",
+                                "catOut": "Bus     ",
+                                "catOutS": "Bus",
+                                "catOutL": "Bus"
+                            }
+                        },
+                        {
+                            "name": "Bus 122",
+                            "nameS": "122",
+                            "icoX": 1,
+                            "cls": 32,
+                            "prodCtx": {
+                                "name": "Bus  122",
+                                "line": "122",
+                                "lineId": "5_hvvVHH_122",
+                                "catOut": "Bus     ",
+                                "catOutS": "Bus",
+                                "catOutL": "Bus"
+                            }
+                        },
+                        {
+                            "name": "Bus 276",
+                            "nameS": "276",
+                            "icoX": 1,
+                            "cls": 32,
+                            "prodCtx": {
+                                "name": "Bus  276",
+                                "line": "276",
+                                "lineId": "5_hvvHHA_276",
+                                "catOut": "Bus     ",
+                                "catOutS": "Bus",
+                                "catOutL": "Bus"
+                            }
+                        },
+                        {
+                            "name": "Bus 154",
+                            "nameS": "154",
+                            "icoX": 1,
+                            "cls": 32,
+                            "prodCtx": {
+                                "name": "Bus  154",
+                                "line": "154",
+                                "lineId": "5_hvvHHA_154",
+                                "catOut": "Bus     ",
+                                "catOutS": "Bus",
+                                "catOutL": "Bus"
+                            }
+                        },
+                        {
+                            "name": "Bus 332",
+                            "nameS": "332",
+                            "icoX": 1,
+                            "cls": 32,
+                            "prodCtx": {
+                                "name": "Bus  332",
+                                "line": "332",
+                                "lineId": "5_hvvVHH_332",
                                 "catOut": "Bus     ",
                                 "catOutS": "Bus",
                                 "catOutL": "Bus"
                             }
                         }
                     ],
-                    "polyL": [],
-                    "layerL": [
+                    "polyL": [
                         {
-                            "id": "standard",
-                            "name": "standard",
-                            "index": 0,
-                            "annoCnt": 0
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "ia`fIcmb|@i\\qWgRiC??",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "_xjfIabu{@ma@{z@{W{}AsWs|B",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "ozgfIejt|@dQn_BpV|_ApYlY",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "qhheIci}{@dO}\\vZrKn_@qI",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "kk`fIyc}z@ha@ggAhWys@pHosB",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "kc|eIyq}z@_|@}Jka@~Jsg@|L",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "uiafIaj~|@vOj{@nGvyAdc@fQ",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "cx_fIy_f{@d_@~`@p^qiBlh@ex@",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "gpjeIoyr{@IkNNswAfHc|A",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "gwaeIcuw|@yfBrgCi{AhnCidArp@",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "iureI{tb}@nE_dBzD{_@dEyiA",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "_hrfIuxl}@e\\`p@????",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "}ykeI}ec}@p{@hf@s@bvC|kArr@",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "{jdfIsck{@nBtwAsZ|pA??",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "ak}eIoij{@ro@pF????",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "gqvfIckz|@??????",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "_zteI}q}|@vyA{cDf_@atA`Ucs@",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "eaneI_dg}@uBxeA|Q|s@[h|A",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "msseIcvc|@{VlZk`@is@agAou@",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
+                        },
+                        {
+                            "delta": true,
+                            "dim": 2,
+                            "crdEncYX": "qxleIusl}@fE{xAjR_zA??",
+                            "crdEncS": "NNNN",
+                            "crdEncF": "????"
                         }
                     ],
-                    "crdSysL": [
-                        {
-                            "id": "standard",
-                            "index": 0,
-                            "type": "WGS84",
-                            "dim": 3
-                        }
-                    ],
-                    "opL": [],
-                    "remL": [],
                     "icoL": [
                         {
                             "res": "Bus"
+                        },
+                        {
+                            "res": "prod_gen"
                         }
                     ]
                 },
-                "date": "20210306",
-                "time": "172508",
+                "date": "20220208",
+                "time": "161705",
                 "jnyL": [
                     {
-                        "jid": "1|394834|0|80|6032021",
-                        "date": "20210306",
+                        "jid": "1|1232798|0|81|8022022",
+                        "date": "20220208",
                         "prodX": 0,
-                        "dirTxt": "Strelapark/Zoo, Stralsund",
-                        "dirGeo": 7,
+                        "dirGeo": 10,
                         "stopL": [
                             {
                                 "locX": 0,
                                 "dInS": true,
                                 "dInR": true,
-                                "dTimeS": "170500"
+                                "dTimeS": "153800",
+                                "dTimeR": "155500"
                             },
                             {
                                 "locX": 1,
                                 "aOutS": true,
                                 "aOutR": true,
-                                "aTimeS": "172500",
+                                "aTimeS": "160300",
+                                "aTimeR": "161700",
                                 "dInS": true,
                                 "dInR": true,
-                                "dTimeS": "172500"
+                                "dTimeS": "160300",
+                                "dTimeR": "161700"
                             },
                             {
                                 "locX": 2,
                                 "aOutS": true,
                                 "aOutR": true,
-                                "aTimeS": "172700",
+                                "aTimeS": "160500",
+                                "aTimeR": "161900",
                                 "dInS": true,
                                 "dInR": true,
-                                "dTimeS": "172700"
+                                "dTimeS": "160500",
+                                "dTimeR": "161900"
                             },
                             {
                                 "locX": 3,
                                 "aOutS": true,
                                 "aOutR": true,
-                                "aTimeS": "174200"
+                                "aTimeS": "161200",
+                                "aTimeR": "162600"
                             }
                         ],
-                        "proc": 7,
+                        "proc": 4,
                         "pos": {
-                            "x": 13077786,
-                            "y": 54309427
+                            "x": 10011862,
+                            "y": 53581166
                         },
                         "ani": {
                             "mSec": [
                                 0,
-                                10000,
-                                20000,
-                                30000
+                                200000,
+                                400000,
+                                600000
                             ],
                             "proc": [
-                                7,
-                                16,
-                                25,
-                                34
+                                4,
+                                77,
+                                56,
+                                56
+                            ],
+                            "procAbs": [
+                                1604,
+                                1777,
+                                1856,
+                                1856
                             ],
                             "fLocX": [
                                 1,
-                                1,
-                                1,
-                                1
+                                2,
+                                4,
+                                4
                             ],
                             "tLocX": [
                                 2,
-                                2,
-                                2,
-                                2
+                                4,
+                                3,
+                                3
                             ],
                             "dirGeo": [
+                                5,
                                 7,
-                                7,
-                                7,
-                                7
+                                1,
+                                1
                             ],
                             "stcOutputX": [
                                 -1,
@@ -205,12 +2405,2016 @@
                                 -1,
                                 -1
                             ],
-                            "poly": {
-                                "delta": true,
-                                "dim": 2,
-                                "crdEncYX": "}hnjIegynAeAMcAMeAO",
-                                "crdEncS": "NNNN",
-                                "crdEncF": "????"
+                            "polyG": {
+                                "polyXL": [
+                                    0
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232773|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 1,
+                        "dirTxt": "Bahnhof Rahlstedt (Doberaner Weg), Hamburg",
+                        "dirGeo": 6,
+                        "stopL": [
+                            {
+                                "locX": 5,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "160800",
+                                "dTimeR": "160800"
+                            },
+                            {
+                                "locX": 6,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161700",
+                                "aTimeR": "161700",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161700",
+                                "dTimeR": "161700"
+                            },
+                            {
+                                "locX": 7,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161800",
+                                "aTimeR": "161800",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161800",
+                                "dTimeR": "161800"
+                            },
+                            {
+                                "locX": 8,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "173800",
+                                "aTimeR": "173800"
+                            }
+                        ],
+                        "proc": 10,
+                        "pos": {
+                            "x": 9943526,
+                            "y": 53636000
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                10,
+                                50,
+                                61,
+                                10
+                            ],
+                            "procAbs": [
+                                710,
+                                950,
+                                1161,
+                                1310
+                            ],
+                            "fLocX": [
+                                6,
+                                9,
+                                11,
+                                13
+                            ],
+                            "tLocX": [
+                                7,
+                                10,
+                                12,
+                                14
+                            ],
+                            "dirGeo": [
+                                3,
+                                2,
+                                1,
+                                31
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    1
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232772|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 2,
+                        "dirTxt": "Feldstraße (U), Hamburg",
+                        "dirGeo": 17,
+                        "stopL": [
+                            {
+                                "locX": 15,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "160800",
+                                "dTimeR": "160900"
+                            },
+                            {
+                                "locX": 16,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161600",
+                                "aTimeR": "161700",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161600",
+                                "dTimeR": "161700"
+                            },
+                            {
+                                "locX": 17,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161700",
+                                "aTimeR": "161800",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161700",
+                                "dTimeR": "161800"
+                            },
+                            {
+                                "locX": 18,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "173100",
+                                "aTimeR": "173200"
+                            }
+                        ],
+                        "proc": 10,
+                        "pos": {
+                            "x": 10103552,
+                            "y": 53621042
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                10,
+                                14,
+                                90,
+                                59
+                            ],
+                            "procAbs": [
+                                610,
+                                814,
+                                990,
+                                1159
+                            ],
+                            "fLocX": [
+                                16,
+                                19,
+                                20,
+                                22
+                            ],
+                            "tLocX": [
+                                17,
+                                20,
+                                21,
+                                23
+                            ],
+                            "dirGeo": [
+                                17,
+                                18,
+                                21,
+                                17
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    2
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232747|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 3,
+                        "dirTxt": "Meckelfeld Schulzentrum, Seevetal",
+                        "dirGeo": 28,
+                        "stopL": [
+                            {
+                                "locX": 24,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "155300",
+                                "dTimeR": "155300"
+                            },
+                            {
+                                "locX": 25,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161500",
+                                "aTimeR": "161500",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161500",
+                                "dTimeR": "161500"
+                            },
+                            {
+                                "locX": 26,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "162000",
+                                "aTimeR": "162000",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "162100",
+                                "dTimeR": "162100"
+                            },
+                            {
+                                "locX": 27,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "164300",
+                                "aTimeR": "164300"
+                            }
+                        ],
+                        "proc": 43,
+                        "pos": {
+                            "x": 9985622,
+                            "y": 53459443
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                43,
+                                0,
+                                71,
+                                73
+                            ],
+                            "procAbs": [
+                                1343,
+                                1400,
+                                1471,
+                                1573
+                            ],
+                            "fLocX": [
+                                25,
+                                26,
+                                26,
+                                28
+                            ],
+                            "tLocX": [
+                                26,
+                                28,
+                                28,
+                                29
+                            ],
+                            "dirGeo": [
+                                28,
+                                22,
+                                24,
+                                27
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    3
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232744|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 4,
+                        "dirTxt": "Bahnhof Altona, Hamburg",
+                        "dirGeo": 3,
+                        "stopL": [
+                            {
+                                "locX": 30,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "155300",
+                                "dTimeR": "155300"
+                            },
+                            {
+                                "locX": 31,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161500",
+                                "aTimeR": "161500",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161500",
+                                "dTimeR": "161500"
+                            },
+                            {
+                                "locX": 32,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161800",
+                                "aTimeR": "161800",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161800",
+                                "dTimeR": "161800"
+                            },
+                            {
+                                "locX": 33,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "165900",
+                                "aTimeR": "165900"
+                            }
+                        ],
+                        "proc": 73,
+                        "pos": {
+                            "x": 9820931,
+                            "y": 53582775
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                73,
+                                50,
+                                40,
+                                59
+                            ],
+                            "procAbs": [
+                                1073,
+                                1350,
+                                1540,
+                                1759
+                            ],
+                            "fLocX": [
+                                31,
+                                34,
+                                36,
+                                38
+                            ],
+                            "tLocX": [
+                                32,
+                                35,
+                                37,
+                                39
+                            ],
+                            "dirGeo": [
+                                28,
+                                28,
+                                31,
+                                31
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    4
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232743|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 4,
+                        "dirTxt": "Bahnhof Altona, Hamburg",
+                        "dirGeo": 5,
+                        "stopL": [
+                            {
+                                "locX": 40,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "155300",
+                                "dTimeR": "155300"
+                            },
+                            {
+                                "locX": 41,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161700",
+                                "aTimeR": "161700",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161700",
+                                "dTimeR": "161700"
+                            },
+                            {
+                                "locX": 42,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161900",
+                                "aTimeR": "161900",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161900",
+                                "dTimeR": "161900"
+                            },
+                            {
+                                "locX": 33,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "170900",
+                                "aTimeR": "170900"
+                            }
+                        ],
+                        "proc": 4,
+                        "pos": {
+                            "x": 9823169,
+                            "y": 53561021
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                4,
+                                77,
+                                97,
+                                73
+                            ],
+                            "procAbs": [
+                                1404,
+                                1577,
+                                1697,
+                                1873
+                            ],
+                            "fLocX": [
+                                41,
+                                42,
+                                43,
+                                31
+                            ],
+                            "tLocX": [
+                                42,
+                                43,
+                                44,
+                                32
+                            ],
+                            "dirGeo": [
+                                7,
+                                9,
+                                9,
+                                28
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    5
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232742|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 5,
+                        "dirTxt": "Bahnhof Bergedorf, Hamburg",
+                        "dirGeo": 18,
+                        "stopL": [
+                            {
+                                "locX": 45,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "155300",
+                                "dTimeR": "155300"
+                            },
+                            {
+                                "locX": 46,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161700",
+                                "aTimeR": "161700",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161700",
+                                "dTimeR": "161700"
+                            },
+                            {
+                                "locX": 47,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161900",
+                                "aTimeR": "162000",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161900",
+                                "dTimeR": "162000"
+                            },
+                            {
+                                "locX": 48,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "172200",
+                                "aTimeR": "172200"
+                            }
+                        ],
+                        "proc": 2,
+                        "pos": {
+                            "x": 10154727,
+                            "y": 53587629
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                2,
+                                50,
+                                40,
+                                38
+                            ],
+                            "procAbs": [
+                                1902,
+                                2050,
+                                2240,
+                                2438
+                            ],
+                            "fLocX": [
+                                46,
+                                47,
+                                50,
+                                52
+                            ],
+                            "tLocX": [
+                                47,
+                                49,
+                                51,
+                                53
+                            ],
+                            "dirGeo": [
+                                18,
+                                16,
+                                22,
+                                26
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    6
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232741|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 6,
+                        "dirTxt": "Othmarschen (S), Hamburg",
+                        "dirGeo": 23,
+                        "stopL": [
+                            {
+                                "locX": 54,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "155300",
+                                "dTimeR": "155300"
+                            },
+                            {
+                                "locX": 55,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161600",
+                                "aTimeR": "161600",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161600",
+                                "dTimeR": "161600"
+                            },
+                            {
+                                "locX": 56,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161700",
+                                "aTimeR": "161800",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161700",
+                                "dTimeR": "161800"
+                            },
+                            {
+                                "locX": 57,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "163000",
+                                "aTimeR": "163000"
+                            }
+                        ],
+                        "proc": 59,
+                        "pos": {
+                            "x": 9866371,
+                            "y": 53579700
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                59,
+                                50,
+                                93,
+                                2
+                            ],
+                            "procAbs": [
+                                1559,
+                                1750,
+                                1993,
+                                2202
+                            ],
+                            "fLocX": [
+                                55,
+                                58,
+                                59,
+                                61
+                            ],
+                            "tLocX": [
+                                56,
+                                39,
+                                60,
+                                57
+                            ],
+                            "dirGeo": [
+                                21,
+                                29,
+                                27,
+                                26
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    7
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232738|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 3,
+                        "dirTxt": "Meckelfeld Schulzentrum, Seevetal",
+                        "dirGeo": 0,
+                        "stopL": [
+                            {
+                                "locX": 62,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "162000",
+                                "dTimeR": "162000"
+                            },
+                            {
+                                "locX": 62,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "162000",
+                                "dTimeR": "162000"
+                            },
+                            {
+                                "locX": 63,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "162100",
+                                "aTimeR": "162100",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "162100",
+                                "dTimeR": "162100"
+                            },
+                            {
+                                "locX": 27,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "170300",
+                                "aTimeR": "170300"
+                            }
+                        ],
+                        "proc": 0,
+                        "pos": {
+                            "x": 9931921,
+                            "y": 53470922
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                0,
+                                50,
+                                40,
+                                10
+                            ],
+                            "procAbs": [
+                                0,
+                                50,
+                                240,
+                                410
+                            ],
+                            "fLocX": [
+                                62,
+                                62,
+                                64,
+                                66
+                            ],
+                            "tLocX": [
+                                63,
+                                63,
+                                65,
+                                67
+                            ],
+                            "dirGeo": [
+                                21,
+                                31,
+                                31,
+                                29
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    8
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232736|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 7,
+                        "dirTxt": "Hauptbahnhof/ZOB, Hamburg",
+                        "dirGeo": 11,
+                        "stopL": [
+                            {
+                                "locX": 68,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "155200",
+                                "dTimeR": "155200"
+                            },
+                            {
+                                "locX": 69,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161700",
+                                "aTimeR": "161700",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161700",
+                                "dTimeR": "161700"
+                            },
+                            {
+                                "locX": 70,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161800",
+                                "aTimeR": "161800",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161800",
+                                "dTimeR": "161800"
+                            },
+                            {
+                                "locX": 71,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "170900",
+                                "aTimeR": "170900"
+                            }
+                        ],
+                        "proc": 10,
+                        "pos": {
+                            "x": 10120658,
+                            "y": 53425958
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                10,
+                                22,
+                                90,
+                                10
+                            ],
+                            "procAbs": [
+                                2210,
+                                2522,
+                                2790,
+                                3110
+                            ],
+                            "fLocX": [
+                                69,
+                                72,
+                                74,
+                                76
+                            ],
+                            "tLocX": [
+                                70,
+                                73,
+                                75,
+                                77
+                            ],
+                            "dirGeo": [
+                                11,
+                                11,
+                                10,
+                                5
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    9
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232735|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 8,
+                        "dirTxt": "Allermöhe (S), Hamburg",
+                        "dirGeo": 30,
+                        "stopL": [
+                            {
+                                "locX": 78,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "155200",
+                                "dTimeR": "155200"
+                            },
+                            {
+                                "locX": 79,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161400",
+                                "aTimeR": "161400",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161400",
+                                "dTimeR": "161400"
+                            },
+                            {
+                                "locX": 80,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161500",
+                                "aTimeR": "161800",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161500",
+                                "dTimeR": "161800"
+                            },
+                            {
+                                "locX": 81,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "165700",
+                                "aTimeR": "170200"
+                            }
+                        ],
+                        "proc": 80,
+                        "pos": {
+                            "x": 10176940,
+                            "y": 53512686
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                80,
+                                10,
+                                97,
+                                10
+                            ],
+                            "procAbs": [
+                                1580,
+                                1810,
+                                1897,
+                                2110
+                            ],
+                            "fLocX": [
+                                79,
+                                82,
+                                82,
+                                84
+                            ],
+                            "tLocX": [
+                                80,
+                                83,
+                                83,
+                                85
+                            ],
+                            "dirGeo": [
+                                31,
+                                30,
+                                31,
+                                24
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    10
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232734|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 9,
+                        "dirTxt": "Schulzentrum Am Heimgarten, Ahrensburg",
+                        "dirGeo": 10,
+                        "stopL": [
+                            {
+                                "locX": 86,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "155200",
+                                "dTimeR": "155200"
+                            },
+                            {
+                                "locX": 87,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161700",
+                                "aTimeR": "161700",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161700",
+                                "dTimeR": "161700"
+                            },
+                            {
+                                "locX": 88,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161800",
+                                "aTimeR": "161800",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161800",
+                                "dTimeR": "161800"
+                            },
+                            {
+                                "locX": 89,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "162100",
+                                "aTimeR": "162100"
+                            }
+                        ],
+                        "proc": 10,
+                        "pos": {
+                            "x": 10228745,
+                            "y": 53674402
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                10,
+                                77,
+                                77,
+                                77
+                            ],
+                            "procAbs": [
+                                1410,
+                                1677,
+                                1677,
+                                1677
+                            ],
+                            "fLocX": [
+                                87,
+                                90,
+                                90,
+                                90
+                            ],
+                            "tLocX": [
+                                88,
+                                89,
+                                89,
+                                89
+                            ],
+                            "dirGeo": [
+                                11,
+                                30,
+                                31,
+                                24
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    11
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232733|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 10,
+                        "dirTxt": "Hauptbahnhof/ZOB, Hamburg",
+                        "dirGeo": 20,
+                        "stopL": [
+                            {
+                                "locX": 91,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "155200",
+                                "dTimeR": "155200"
+                            },
+                            {
+                                "locX": 92,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161600",
+                                "aTimeR": "161600",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161600",
+                                "dTimeR": "161600"
+                            },
+                            {
+                                "locX": 93,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161800",
+                                "aTimeR": "161800",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161800",
+                                "dTimeR": "161800"
+                            },
+                            {
+                                "locX": 71,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "171900",
+                                "aTimeR": "171900"
+                            }
+                        ],
+                        "proc": 59,
+                        "pos": {
+                            "x": 10179672,
+                            "y": 53477592
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                59,
+                                50,
+                                90,
+                                10
+                            ],
+                            "procAbs": [
+                                1159,
+                                1450,
+                                1790,
+                                2110
+                            ],
+                            "fLocX": [
+                                92,
+                                94,
+                                96,
+                                98
+                            ],
+                            "tLocX": [
+                                93,
+                                95,
+                                97,
+                                99
+                            ],
+                            "dirGeo": [
+                                22,
+                                15,
+                                22,
+                                21
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    12
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232729|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 6,
+                        "dirTxt": "Neißestraße, Hamburg",
+                        "dirGeo": 20,
+                        "stopL": [
+                            {
+                                "locX": 57,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "154400",
+                                "dTimeR": "154400"
+                            },
+                            {
+                                "locX": 100,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161500",
+                                "aTimeR": "161700",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161700",
+                                "dTimeR": "161700"
+                            },
+                            {
+                                "locX": 101,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161800",
+                                "aTimeR": "161800",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161800",
+                                "dTimeR": "161800"
+                            },
+                            {
+                                "locX": 54,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "162400",
+                                "aTimeR": "162400"
+                            }
+                        ],
+                        "proc": 10,
+                        "pos": {
+                            "x": 9892584,
+                            "y": 53603180
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                10,
+                                50,
+                                95,
+                                95
+                            ],
+                            "procAbs": [
+                                1810,
+                                2150,
+                                2395,
+                                2395
+                            ],
+                            "fLocX": [
+                                100,
+                                102,
+                                104,
+                                104
+                            ],
+                            "tLocX": [
+                                101,
+                                103,
+                                54,
+                                54
+                            ],
+                            "dirGeo": [
+                                16,
+                                13,
+                                22,
+                                21
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    13
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232722|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 6,
+                        "dirTxt": "Othmarschen (S), Hamburg",
+                        "dirGeo": 23,
+                        "stopL": [
+                            {
+                                "locX": 54,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "154300",
+                                "dTimeR": "154300"
+                            },
+                            {
+                                "locX": 105,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161600",
+                                "aTimeR": "161700",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161600",
+                                "dTimeR": "161700"
+                            },
+                            {
+                                "locX": 61,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161700",
+                                "aTimeR": "161800",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161700",
+                                "dTimeR": "161800"
+                            },
+                            {
+                                "locX": 57,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "162000",
+                                "aTimeR": "162100"
+                            }
+                        ],
+                        "proc": 10,
+                        "pos": {
+                            "x": 9888404,
+                            "y": 53567367
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                10,
+                                85,
+                                85,
+                                85
+                            ],
+                            "procAbs": [
+                                2110,
+                                2285,
+                                2285,
+                                2285
+                            ],
+                            "fLocX": [
+                                105,
+                                61,
+                                61,
+                                61
+                            ],
+                            "tLocX": [
+                                61,
+                                57,
+                                57,
+                                57
+                            ],
+                            "dirGeo": [
+                                23,
+                                13,
+                                22,
+                                21
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    14
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232707|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 11,
+                        "dirTxt": "Ohlstedt (U), Hamburg",
+                        "dirGeo": 29,
+                        "stopL": [
+                            {
+                                "locX": 106,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "153400",
+                                "dTimeR": "153500"
+                            },
+                            {
+                                "locX": 107,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161100",
+                                "aTimeR": "161500",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161100",
+                                "dTimeR": "161500"
+                            },
+                            {
+                                "locX": 108,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161400",
+                                "aTimeR": "161800"
+                            },
+                            {
+                                "locX": 108,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161400",
+                                "aTimeR": "161800"
+                            }
+                        ],
+                        "proc": 73,
+                        "pos": {
+                            "x": 10134421,
+                            "y": 53696353
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                73,
+                                73,
+                                73,
+                                73
+                            ],
+                            "procAbs": [
+                                2473,
+                                2473,
+                                2473,
+                                2473
+                            ],
+                            "fLocX": [
+                                107,
+                                107,
+                                107,
+                                107
+                            ],
+                            "tLocX": [
+                                108,
+                                108,
+                                108,
+                                108
+                            ],
+                            "dirGeo": [
+                                23,
+                                13,
+                                22,
+                                21
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    15
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232701|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 5,
+                        "dirTxt": "Bahnhof Bergedorf, Hamburg",
+                        "dirGeo": 28,
+                        "stopL": [
+                            {
+                                "locX": 109,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "153200",
+                                "dTimeR": "153200"
+                            },
+                            {
+                                "locX": 110,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161400",
+                                "aTimeR": "161700",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161400",
+                                "dTimeR": "161700"
+                            },
+                            {
+                                "locX": 111,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161700",
+                                "aTimeR": "161900",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161700",
+                                "dTimeR": "161900"
+                            },
+                            {
+                                "locX": 48,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "163200",
+                                "aTimeR": "163500"
+                            }
+                        ],
+                        "proc": 4,
+                        "pos": {
+                            "x": 10150871,
+                            "y": 53523680
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                4,
+                                77,
+                                95,
+                                10
+                            ],
+                            "procAbs": [
+                                2404,
+                                2577,
+                                2795,
+                                3010
+                            ],
+                            "fLocX": [
+                                110,
+                                111,
+                                113,
+                                115
+                            ],
+                            "tLocX": [
+                                111,
+                                112,
+                                114,
+                                116
+                            ],
+                            "dirGeo": [
+                                28,
+                                29,
+                                28,
+                                26
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    16
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232700|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 8,
+                        "dirTxt": "Allermöhe (S), Hamburg",
+                        "dirGeo": 16,
+                        "stopL": [
+                            {
+                                "locX": 78,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "153200",
+                                "dTimeR": "153200"
+                            },
+                            {
+                                "locX": 48,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161200",
+                                "aTimeR": "161300",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161400",
+                                "dTimeR": "161400"
+                            },
+                            {
+                                "locX": 117,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161800",
+                                "aTimeR": "161800",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161800",
+                                "dTimeR": "161800"
+                            },
+                            {
+                                "locX": 81,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "163700",
+                                "aTimeR": "163700"
+                            }
+                        ],
+                        "proc": 80,
+                        "pos": {
+                            "x": 10199835,
+                            "y": 53488990
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                80,
+                                22,
+                                95,
+                                10
+                            ],
+                            "procAbs": [
+                                2780,
+                                3022,
+                                3195,
+                                3510
+                            ],
+                            "fLocX": [
+                                48,
+                                118,
+                                119,
+                                121
+                            ],
+                            "tLocX": [
+                                117,
+                                119,
+                                120,
+                                122
+                            ],
+                            "dirGeo": [
+                                15,
+                                18,
+                                15,
+                                17
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    17
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232686|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 12,
+                        "dirTxt": "Berliner Tor (Bürgerweide) (S+U), Hamburg",
+                        "dirGeo": 11,
+                        "stopL": [
+                            {
+                                "locX": 26,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "153100",
+                                "dTimeR": "153100"
+                            },
+                            {
+                                "locX": 123,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161600",
+                                "aTimeR": "161600",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161600",
+                                "dTimeR": "161600"
+                            },
+                            {
+                                "locX": 124,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161900",
+                                "aTimeR": "162000",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "162000",
+                                "dTimeR": "162000"
+                            },
+                            {
+                                "locX": 125,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "163400",
+                                "aTimeR": "163400"
+                            }
+                        ],
+                        "proc": 28,
+                        "pos": {
+                            "x": 10018424,
+                            "y": 53517504
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                28,
+                                22,
+                                40,
+                                10
+                            ],
+                            "procAbs": [
+                                2328,
+                                2422,
+                                2640,
+                                2910
+                            ],
+                            "fLocX": [
+                                123,
+                                124,
+                                127,
+                                129
+                            ],
+                            "tLocX": [
+                                124,
+                                126,
+                                128,
+                                130
+                            ],
+                            "dirGeo": [
+                                11,
+                                4,
+                                5,
+                                8
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    18
+                                ]
+                            },
+                            "state": [
+                                "O",
+                                "O",
+                                "O",
+                                "O"
+                            ]
+                        },
+                        "isBase": false
+                    },
+                    {
+                        "jid": "1|1232681|0|81|8022022",
+                        "date": "20220208",
+                        "prodX": 13,
+                        "dirTxt": "Friedhof Bergedorf (Kapelle 2), Hamburg",
+                        "dirGeo": 29,
+                        "stopL": [
+                            {
+                                "locX": 131,
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "153100",
+                                "dTimeR": "153100"
+                            },
+                            {
+                                "locX": 132,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161400",
+                                "aTimeR": "161700",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161400",
+                                "dTimeR": "161700"
+                            },
+                            {
+                                "locX": 133,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "161400",
+                                "aTimeR": "161700",
+                                "dInS": true,
+                                "dInR": true,
+                                "dTimeS": "161400",
+                                "dTimeR": "161700"
+                            },
+                            {
+                                "locX": 134,
+                                "aOutS": true,
+                                "aOutR": true,
+                                "aTimeS": "162100",
+                                "aTimeR": "162400"
+                            }
+                        ],
+                        "proc": 25,
+                        "pos": {
+                            "x": 10227953,
+                            "y": 53482491
+                        },
+                        "ani": {
+                            "mSec": [
+                                0,
+                                200000,
+                                400000,
+                                600000
+                            ],
+                            "proc": [
+                                25,
+                                50,
+                                95,
+                                95
+                            ],
+                            "procAbs": [
+                                2725,
+                                3150,
+                                3395,
+                                3395
+                            ],
+                            "fLocX": [
+                                132,
+                                135,
+                                137,
+                                137
+                            ],
+                            "tLocX": [
+                                133,
+                                136,
+                                134,
+                                134
+                            ],
+                            "dirGeo": [
+                                31,
+                                30,
+                                5,
+                                8
+                            ],
+                            "stcOutputX": [
+                                -1,
+                                -1,
+                                -1,
+                                -1
+                            ],
+                            "polyG": {
+                                "polyXL": [
+                                    19
+                                ]
                             },
                             "state": [
                                 "O",
@@ -222,11 +4426,9 @@
                         "isBase": false
                     }
                 ],
-                "layerX": 0,
-                "crdSysX": 0,
                 "fpB": "20201213",
-                "fpE": "20211211",
-                "planrtTS": "1615047790"
+                "fpE": "20221210",
+                "planrtTS": "1644333311"
             }
         }
     ]

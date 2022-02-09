@@ -53,12 +53,20 @@ module internal JourneyLeg =
                   toIndex = toIndex }
         | _ -> None
 
-    let private getRemarkRanges (msgL: FsHafas.Raw.RawMsg []) (commonData: CommonData) (stopovers: FsHafas.Client.StopOver []) =
+    let private getRemarkRanges
+        (msgL: FsHafas.Raw.RawMsg [])
+        (commonData: CommonData)
+        (stopovers: FsHafas.Client.StopOver [])
+        =
         msgL
         |> Array.map (fun msg -> getRemarkRange msg commonData stopovers)
         |> Array.choose id
 
-    let private applyRemarkRange (remarkRange: RemarkRange) (commonData: CommonData) (stopover: FsHafas.Client.StopOver) =
+    let private applyRemarkRange
+        (remarkRange: RemarkRange)
+        (commonData: CommonData)
+        (stopover: FsHafas.Client.StopOver)
+        =
         let hint =
             Common.getElementAt remarkRange.remX commonData.hints
 
@@ -76,16 +84,15 @@ module internal JourneyLeg =
         (remarkRanges: RemarkRange [])
         =
         stopovers
-        |> Array.mapi
-            (fun i s ->
-                match remarkRanges
-                      |> Array.tryFind
-                          (fun r ->
-                              not r.wholeLeg
-                              && r.fromIndex <= i
-                              && r.toIndex >= i) with
-                | Some range -> applyRemarkRange range commonData s
-                | None -> s)
+        |> Array.mapi (fun i s ->
+            match remarkRanges
+                  |> Array.tryFind (fun r ->
+                      not r.wholeLeg
+                      && r.fromIndex <= i
+                      && r.toIndex >= i)
+                with
+            | Some range -> applyRemarkRange range commonData s
+            | None -> s)
 
     let parseJourneyLeg (ctx: Context) (pt: FsHafas.Raw.RawSec) (date: string) : FsHafas.Client.Leg =
         let mutable leg = Default.Leg
@@ -102,99 +109,111 @@ module internal JourneyLeg =
         let arr =
             ctx.profile.parseWhen ctx date pt.arr.aTimeS pt.arr.aTimeR pt.arr.aTZOffset pt.arr.aCncl
 
+        let matchPlatfS (aPlatfS: string option) (aPltfS: FsHafas.Raw.RawPltf option) =
+            match aPlatfS with
+            | Some platfS -> Some platfS
+            | None ->
+                match aPltfS with
+                | Some aPltfS -> Some aPltfS.txt
+                | _ -> None
+
+        let dPlatfS = matchPlatfS pt.dep.dPlatfS pt.dep.dPltfS
+        let dPlatfR =  matchPlatfS pt.dep.dPlatfR pt.dep.dPltfR
+
         let depPl =
-            ctx.profile.parsePlatform ctx pt.dep.dPlatfS pt.dep.dPlatfR pt.dep.dCncl
+            ctx.profile.parsePlatform ctx dPlatfS dPlatfR pt.dep.dCncl
+
+        let aPlatfS = matchPlatfS pt.arr.aPlatfS pt.arr.aPltfS
+        let aPlatfR =  matchPlatfS pt.arr.aPlatfR pt.arr.aPltfR
 
         let arrPl =
-            ctx.profile.parsePlatform ctx pt.arr.aPlatfS pt.arr.aPlatfR pt.arr.aCncl
+            ctx.profile.parsePlatform ctx aPlatfS aPlatfR pt.arr.aCncl
 
         if pt.``type`` = "WALK"
            || pt.``type`` = "TRSF"
            || pt.``type`` = "DEVI" then
             leg <-
                 { leg with
-                      ``public`` = Some true
-                      walking = Some true
-                      transfer = Some(pt.``type`` = "TRSF" || pt.``type`` = "DEVI") }
+                    ``public`` = Some true
+                    walking = Some true
+                    transfer = Some(pt.``type`` = "TRSF" || pt.``type`` = "DEVI") }
 
         if pt.``type`` = "JNY" then
             pt.jny
-            |> Option.iter
-                (fun jny ->
-                    let line =
-                        Common.getElementAt jny.prodX ctx.common.lines
+            |> Option.iter (fun jny ->
+                let line =
+                    Common.getElementAt jny.prodX ctx.common.lines
 
-                    let polyline =
-                        match jny.poly with
-                        | Some (value) -> Some(ctx.profile.parsePolyline ctx value)
-                        | None -> None
+                let polyline =
+                    match jny.poly with
+                    | Some (value) -> Some(ctx.profile.parsePolyline ctx value)
+                    | None -> None
 
-                    let stopovers =
-                        match ctx.opt.stopovers with
-                        | true -> ctx.profile.parseStopovers ctx jny.stopL date
-                        | _ -> None
+                let stopovers =
+                    match ctx.opt.stopovers with
+                    | true -> ctx.profile.parseStopovers ctx jny.stopL date
+                    | _ -> None
 
-                    let remarkRanges =
-                        match jny.msgL, stopovers with
-                        | Some msgL, Some stopovers -> getRemarkRanges msgL ctx.common stopovers
-                        | _ -> Array.empty
+                let remarkRanges =
+                    match jny.msgL, stopovers with
+                    | Some msgL, Some stopovers -> getRemarkRanges msgL ctx.common stopovers
+                    | _ -> Array.empty
 
-                    let stopoversWithRemarks =
-                        match stopovers with
-                        | Some stopovers ->
-                            applyRemarkRanges ctx.common stopovers remarkRanges
-                            |> Some
-                        | _ -> None
+                let stopoversWithRemarks =
+                    match stopovers with
+                    | Some stopovers ->
+                        applyRemarkRanges ctx.common stopovers remarkRanges
+                        |> Some
+                    | _ -> None
 
-                    let msgL =
-                        match jny.msgL with
-                        | Some msgL ->
-                            msgL
-                            |> Array.filter // remove msgs used in stopoversWithRemarks
-                                (fun msg ->
-                                    remarkRanges
-                                    |> Array.exists (fun r -> Some r.remX = msg.remX && not r.wholeLeg)
-                                    |> not)
-                            |> Some
-                        | None -> None
+                let msgL =
+                    match jny.msgL with
+                    | Some msgL ->
+                        msgL
+                        |> Array.filter (fun msg ->  // remove msgs used in stopoversWithRemarks
+                            remarkRanges
+                            |> Array.exists (fun r -> Some r.remX = msg.remX && not r.wholeLeg)
+                            |> not)
+                        |> Some
+                    | None -> None
 
-                    let currentLocation: Location option =
-                        match jny.pos with
-                        | Some pos ->
-                            Some
-                                { Default.Location with
-                                    longitude = Some (float pos.x/1000000.0)
-                                    latitude = Some (float pos.y/1000000.0) }
-                        | None -> None
+                let currentLocation: Location option =
+                    match jny.pos with
+                    | Some pos ->
+                        Some
+                            { Default.Location with
+                                longitude = Some(float pos.x / 1000000.0)
+                                latitude = Some(float pos.y / 1000000.0) }
+                    | None -> None
 
-                    let remarks = Common.msgLToRemarks ctx msgL
+                let remarks = Common.msgLToRemarks ctx msgL
 
-                    leg <-
-                        { leg with
-                              tripId = Some jny.jid
-                              direction = jny.dirTxt
-                              reachable = jny.isRchbl
-                              line = line
-                              stopovers = stopoversWithRemarks
-                              polyline = polyline
-                              remarks = remarks
-                              currentLocation = currentLocation })
+                leg <-
+                    { leg with
+                        tripId = Some jny.jid
+                        direction = jny.dirTxt
+                        reachable = jny.isRchbl
+                        line = line
+                        stopovers = stopoversWithRemarks
+                        polyline = polyline
+                        remarks = remarks
+                        currentLocation = currentLocation })
 
         { leg with
-              origin = origin
-              destination = destination
-              departure = dep.``when``
-              departureDelay = dep.delay
-              plannedDeparture = dep.plannedWhen
-              prognosedDeparture = dep.prognosedWhen
-              departurePlatform = depPl.platform
-              plannedDeparturePlatform = depPl.plannedPlatform
-              prognosedDeparturePlatform = depPl.prognosedPlatform
-              arrival = arr.``when``
-              arrivalDelay = arr.delay
-              plannedArrival = arr.plannedWhen
-              prognosedArrival = arr.prognosedWhen
-              arrivalPlatform = arrPl.platform
-              plannedArrivalPlatform = arrPl.plannedPlatform
-              prognosedArrivalPlatform = arrPl.prognosedPlatform
-              cancelled = pt.dep.dCncl |> Option.orElse pt.arr.aCncl }
+            origin = origin
+            destination = destination
+            departure = dep.``when``
+            departureDelay = dep.delay
+            plannedDeparture = dep.plannedWhen
+            prognosedDeparture = dep.prognosedWhen
+            departurePlatform = depPl.platform
+            plannedDeparturePlatform = depPl.plannedPlatform
+            prognosedDeparturePlatform = depPl.prognosedPlatform
+            arrival = arr.``when``
+            arrivalDelay = arr.delay
+            plannedArrival = arr.plannedWhen
+            prognosedArrival = arr.prognosedWhen
+            arrivalPlatform = arrPl.platform
+            plannedArrivalPlatform = arrPl.plannedPlatform
+            prognosedArrivalPlatform = arrPl.prognosedPlatform
+            cancelled = pt.dep.dCncl |> Option.orElse pt.arr.aCncl }

@@ -395,8 +395,9 @@ type HafasRawClient(endpoint: string, salt: string, cfg: FsHafas.Raw.Cfg, baseRe
                 else
                     let response = decode result
 
-                    if response.svcResL.Length = 1 then
-                        let svcRes = response.svcResL.[0]
+                    let svcResL = Option.defaultValue [||] response.svcResL 
+                    if svcResL.Length = 1 then
+                        let svcRes = svcResL.[0]
 
                         match svcRes.err, svcRes.errTxt with
                         | Some err, Some errTxt when err <> "OK" -> return raise (System.Exception(err + ":" + errTxt))

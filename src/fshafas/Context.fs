@@ -21,7 +21,8 @@ type CommonData =
     { operators: FsHafas.Client.Operator []
       locations: U3<Station, Stop, Location> []
       lines: FsHafas.Client.Line []
-      hints: (U3<FsHafas.Client.Hint, FsHafas.Client.Status, FsHafas.Client.Warning> option) [] }
+      hints: (U3<FsHafas.Client.Hint, FsHafas.Client.Status, FsHafas.Client.Warning> option) []
+      polylines: FeatureCollection [] }
 
 type ParsedWhen =
     { ``when``: string option

@@ -365,12 +365,12 @@ module Db =
             trfRes.fareSetL.Length > 0
             && trfRes.fareSetL.[0].fareL.Length > 0
             ->
-            match trfRes.fareSetL.[0].fareL.[0].prc with
-            | Some prc when prc > 0 ->
+            match trfRes.fareSetL.[0].fareL.[0].price with
+            | Some price when price.amount.IsSome ->
                 { parsed with
                     price =
                         Some(
-                            { amount = System.Math.Round(float (prc) / 100.0, 2)
+                            { amount = System.Math.Round(float (price.amount.Value) / 100.0, 2)
                               currency = "EUR"
                               hint = None }
                         ) }
@@ -450,11 +450,11 @@ module Db =
           svcReqL = [||]
           client =
             { id = "DB"
-              v = "16040000"
-              ``type`` = "IPH"
+              v = "19040000"
+              ``type`` = "AND"
               name = "DB Navigator" }
-          ext = "DB.R19.04.a"
-          ver = "1.15"
+          ext = "DB.R20.12.b"
+          ver = "1.34"
           auth =
             { ``type`` = "AID"
               aid = "n91dB8Z77MLdoR0K" } }

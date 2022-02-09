@@ -18,8 +18,8 @@ module internal Movement =
             match m.pos with
             | Some pos ->
                 { Default.Location with
-                      longitude = Coordinate.toFloat (pos.x) |> Some
-                      latitude = Coordinate.toFloat (pos.y) |> Some }
+                    longitude = Coordinate.toFloat (pos.x) |> Some
+                    latitude = Coordinate.toFloat (pos.y) |> Some }
                 |> Some
             | None -> None
 
@@ -30,26 +30,25 @@ module internal Movement =
             match m.ani with
             | Some (ani) ->
                 ani.mSec
-                |> Array.mapi<int, FsHafas.Client.Frame option>
-                    (fun i ms ->
+                |> Array.mapi<int, FsHafas.Client.Frame option> (fun i ms ->
 
-                        let origin =
-                            Common.getElementAt ani.fLocX.[i] ctx.common.locations
-                            |> U2StopLocation.FromSomeU3StationStopLocation
+                    let origin =
+                        Common.getElementAt ani.fLocX.[i] ctx.common.locations
+                        |> U2StopLocation.FromSomeU3StationStopLocation
 
-                        let destination =
-                            Common.getElementAt ani.tLocX.[i] ctx.common.locations
-                            |> U2StopLocation.FromSomeU3StationStopLocation
+                    let destination =
+                        Common.getElementAt ani.tLocX.[i] ctx.common.locations
+                        |> U2StopLocation.FromSomeU3StationStopLocation
 
-                        match origin, destination with
-                        | Some origin, Some destination ->
-                            let f : FsHafas.Client.Frame =
-                                { origin = origin
-                                  destination = destination
-                                  t = Some ms }
+                    match origin, destination with
+                    | Some origin, Some destination ->
+                        let f: FsHafas.Client.Frame =
+                            { origin = origin
+                              destination = destination
+                              t = Some ms }
 
-                            f |> Some
-                        | _ -> None)
+                        f |> Some
+                    | _ -> None)
                 |> Array.choose id
                 |> Some
             | None -> None
@@ -59,14 +58,23 @@ module internal Movement =
             | Some (ani) ->
                 match ani.poly with
                 | Some (value) -> Some(ctx.profile.parsePolyline ctx value)
-                | None -> None
+                | None ->
+                    match ani.polyG with
+                    | Some polyG ->
+                        let idx = polyG.polyXL.[0]
+
+                        if idx < ctx.common.polylines.Length then
+                            Some ctx.common.polylines.[idx]
+                        else
+                            None
+                    | None -> None
             | None -> None
 
         { Default.Movement with
-              direction = m.dirTxt
-              tripId = Some m.jid
-              line = line
-              location = location
-              nextStopovers = stopovers
-              frames = frames
-              polyline = polyline }
+            direction = m.dirTxt
+            tripId = Some m.jid
+            line = line
+            location = location
+            nextStopovers = stopovers
+            frames = frames
+            polyline = polyline }

@@ -14,13 +14,13 @@ module internal ArrivalOrDeparture =
         (d: FsHafas.Raw.RawJny)
         : FsHafas.Client.Alternative =
 
-        let (locX, xTimeS, xTimeR, xTZOffset, xCncl, xPlatfS, xPlatfR) =
+        let (locX, xTimeS, xTimeR, xTZOffset, xCncl, xPlatfS, xPlatfR, xPltfS, xPltfR) =
             if ``type`` = DEP then
                 let dep = RawDep.FromRawStopL d.stbStop.Value
-                (dep.locX, dep.dTimeS, dep.dTimeR, dep.dTZOffset, dep.dCncl, dep.dPlatfS, dep.dPlatfR)
+                (dep.locX, dep.dTimeS, dep.dTimeR, dep.dTZOffset, dep.dCncl, dep.dPlatfS, dep.dPlatfR, dep.dPltfS, dep.dPltfR)
             else
                 let arr = RawArr.FromRawStopL d.stbStop.Value
-                (arr.locX, arr.aTimeS, arr.aTimeR, arr.aTZOffset, arr.aCncl, arr.aPlatfS, arr.aPlatfR)
+                (arr.locX, arr.aTimeS, arr.aTimeR, arr.aTZOffset, arr.aCncl, arr.aPlatfS, arr.aPlatfR, arr.aPltfS, arr.aPltfR)
 
         let stop =
             Common.getElementAtSome locX ctx.common.locations
@@ -29,8 +29,19 @@ module internal ArrivalOrDeparture =
         let w =
             ctx.profile.parseWhen ctx d.date.Value xTimeS xTimeR xTZOffset xCncl
 
+        let matchPlatfS (aPlatfS: string option) (aPltfS: FsHafas.Raw.RawPltf option) =
+            match aPlatfS with
+            | Some platfS -> Some platfS
+            | None ->
+                match aPltfS with
+                | Some aPltfS -> Some aPltfS.txt
+                | _ -> None
+
+        let platfS = matchPlatfS xPlatfS xPltfS
+        let platfR =  matchPlatfS xPlatfR xPltfR
+
         let plt =
-            ctx.profile.parsePlatform ctx xPlatfS xPlatfR xCncl
+            ctx.profile.parsePlatform ctx platfS platfR xCncl
 
         let filter (s: FsHafas.Client.StopOver) =
             match s.passBy with

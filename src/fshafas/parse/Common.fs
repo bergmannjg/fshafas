@@ -17,24 +17,33 @@ module internal Common =
     let parseCommon (ctx: Context) (c: FsHafas.Raw.RawCommon) =
         let ctx1 =
             c.opL
+            |> Option.defaultValue [||]
             |> Array.map (fun op -> ctx.profile.parseOperator ctx op)
             |> updateOperators ctx
 
         let ctx2 =
             c.prodL
+            |> Option.defaultValue [||]
             |> Array.map (fun p -> ctx1.profile.parseLine ctx1 p)
             |> updateLines ctx
 
         let hints =
             c.remL
+            |> Option.defaultValue [||]
             |> Array.map (fun p -> ctx2.profile.parseHint ctx2 p)
 
-        let locations = ctx2.profile.parseLocations ctx2 c.locL
+        let polylines =
+            c.polyL
+            |> Option.defaultValue [||]
+            |> Array.map (fun p -> ctx2.profile.parsePolyline ctx2 p)
+
+        let locations = ctx2.profile.parseLocations ctx2 (Option.defaultValue [||] c.locL)
 
         { operators = ctx2.common.operators
           locations = locations
           lines = ctx2.common.lines
-          hints = hints }
+          hints = hints
+          polylines = polylines }
 
     let getElementAt<'a> (index: int) (arr: 'a []) =
         if index < arr.Length then

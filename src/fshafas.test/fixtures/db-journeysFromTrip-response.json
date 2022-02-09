@@ -1,0 +1,1292 @@
+[
+    {
+        "type": "journey",
+        "legs": [
+            {
+                "origin": {
+                    "type": "stop",
+                    "id": "8000260",
+                    "name": "Würzburg Hbf",
+                    "location": {
+                        "type": "location",
+                        "id": "8000260",
+                        "latitude": 49.802163,
+                        "longitude": 9.93593
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "destination": {
+                    "type": "stop",
+                    "id": "8000284",
+                    "name": "Nürnberg Hbf",
+                    "location": {
+                        "type": "location",
+                        "id": "8000284",
+                        "latitude": 49.445435,
+                        "longitude": 11.08227
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": true,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "departure": "2022-02-08T15:30:00+01:00",
+                "plannedDeparture": "2022-02-08T11:44:00+01:00",
+                "departureDelay": 0,
+                "arrival": "2022-02-08T16:24:00+01:00",
+                "plannedArrival": "2022-02-08T16:24:00+01:00",
+                "arrivalDelay": 0,
+                "reachable": true,
+                "tripId": "1|191888|0|81|8022022",
+                "line": {
+                    "type": "line",
+                    "id": "ice-789",
+                    "fahrtNr": "789",
+                    "name": "ICE 789",
+                    "public": true,
+                    "adminCode": "80____",
+                    "productName": "ICE",
+                    "mode": "train",
+                    "product": "nationalExpress",
+                    "operator": {
+                        "type": "operator",
+                        "id": "db-fernverkehr-ag",
+                        "name": "DB Fernverkehr AG"
+                    }
+                },
+                "direction": "München Hbf",
+                "currentLocation": {
+                    "type": "location",
+                    "latitude": 49.660556,
+                    "longitude": 10.39375
+                },
+                "arrivalPlatform": "9",
+                "plannedArrivalPlatform": "9",
+                "departurePlatform": "4",
+                "plannedDeparturePlatform": "10",
+                "stopovers": [
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000260",
+                            "name": "Würzburg Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000260",
+                                "latitude": 49.802163,
+                                "longitude": 9.93593
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2022-02-08T15:28:00+01:00",
+                        "plannedArrival": "2022-02-08T15:28:00+01:00",
+                        "arrivalDelay": 0,
+                        "arrivalPlatform": "4",
+                        "plannedArrivalPlatform": "4",
+                        "departure": "2022-02-08T15:30:00+01:00",
+                        "plannedDeparture": "2022-02-08T15:30:00+01:00",
+                        "departureDelay": 0,
+                        "departurePlatform": "4",
+                        "plannedDeparturePlatform": "4"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000284",
+                            "name": "Nürnberg Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000284",
+                                "latitude": 49.445435,
+                                "longitude": 11.08227
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": true,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2022-02-08T16:24:00+01:00",
+                        "plannedArrival": "2022-02-08T16:24:00+01:00",
+                        "arrivalDelay": 0,
+                        "arrivalPlatform": "9",
+                        "plannedArrivalPlatform": "9",
+                        "departure": null,
+                        "plannedDeparture": null,
+                        "departureDelay": null,
+                        "departurePlatform": null,
+                        "plannedDeparturePlatform": null
+                    }
+                ],
+                "remarks": [
+                    {
+                        "text": "Komfort Check-in possible (visit bahn.de/kci for more information)",
+                        "type": "hint",
+                        "code": "komfort-checkin",
+                        "summary": "Komfort-Checkin available"
+                    },
+                    {
+                        "type": "hint",
+                        "code": "PF",
+                        "text": "Please wear an FFP2 mask. You are legally required to do so"
+                    },
+                    {
+                        "type": "hint",
+                        "code": "3G",
+                        "text": "Nationwide «3G» rule applies on trains: valid proof must be presented"
+                    },
+                    {
+                        "text": "Bicycles conveyed - subject to reservation",
+                        "type": "hint",
+                        "code": "bicycle-conveyance-reservation",
+                        "summary": "bicycles conveyed, subject to reservation"
+                    },
+                    {
+                        "text": "Number of bicycles conveyed limited",
+                        "type": "hint",
+                        "code": "bicycle-conveyance",
+                        "summary": "bicycles conveyed"
+                    },
+                    {
+                        "text": "Bordrestaurant",
+                        "type": "hint",
+                        "code": "on-board-restaurant",
+                        "summary": "Bordrestaurant available"
+                    },
+                    {
+                        "text": "vehicle-mounted access aid",
+                        "type": "hint",
+                        "code": "boarding-ramp",
+                        "summary": "vehicle-mounted boarding ramp available"
+                    },
+                    {
+                        "type": "status",
+                        "summary": "ICE 789: Nürnberg Hbf: Information.",
+                        "code": null,
+                        "text": "No wheelchair accessible entrance door in coach 9. If a change in booking is required for travellers with reduced mobility, our Mobility Service Centre can be reached at +49 30 65212888."
+                    }
+                ],
+                "loadFactor": "low-to-medium"
+            },
+            {
+                "origin": {
+                    "type": "stop",
+                    "id": "8073368",
+                    "name": "Köln Messe/Deutz Gl.11-12",
+                    "location": {
+                        "type": "location",
+                        "id": "8073368",
+                        "latitude": 50.940602,
+                        "longitude": 6.975162
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    },
+                    "station": {
+                        "type": "station",
+                        "id": "8003368",
+                        "name": "Köln Messe/Deutz",
+                        "location": {
+                            "type": "location",
+                            "id": "8003368",
+                            "latitude": 50.940989,
+                            "longitude": 6.974578
+                        },
+                        "products": {
+                            "nationalExpress": true,
+                            "national": true,
+                            "regionalExp": true,
+                            "regional": true,
+                            "suburban": true,
+                            "bus": true,
+                            "ferry": false,
+                            "subway": false,
+                            "tram": true,
+                            "taxi": false
+                        }
+                    }
+                },
+                "destination": {
+                    "type": "stop",
+                    "id": "8003368",
+                    "name": "Köln Messe/Deutz",
+                    "location": {
+                        "type": "location",
+                        "id": "8003368",
+                        "latitude": 50.940989,
+                        "longitude": 6.974578
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "departure": "2022-02-08T20:24:00+01:00",
+                "plannedDeparture": "2022-02-08T20:24:00+01:00",
+                "departureDelay": null,
+                "arrival": "2022-02-08T20:31:00+01:00",
+                "plannedArrival": "2022-02-08T20:31:00+01:00",
+                "arrivalDelay": null,
+                "public": true,
+                "walking": true,
+                "distance": 59
+            },
+            {
+                "origin": {
+                    "type": "stop",
+                    "id": "8003368",
+                    "name": "Köln Messe/Deutz",
+                    "location": {
+                        "type": "location",
+                        "id": "8003368",
+                        "latitude": 50.940989,
+                        "longitude": 6.974578
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "destination": {
+                    "type": "stop",
+                    "id": "8000207",
+                    "name": "Köln Hbf",
+                    "location": {
+                        "type": "location",
+                        "id": "8000207",
+                        "latitude": 50.942823,
+                        "longitude": 6.959197
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "departure": "2022-02-08T20:34:00+01:00",
+                "plannedDeparture": "2022-02-08T20:34:00+01:00",
+                "departureDelay": null,
+                "arrival": "2022-02-08T20:36:00+01:00",
+                "plannedArrival": "2022-02-08T20:36:00+01:00",
+                "arrivalDelay": null,
+                "reachable": true,
+                "tripId": "1|198299|0|81|8022022",
+                "line": {
+                    "type": "line",
+                    "id": "rb-25",
+                    "fahrtNr": "10573",
+                    "name": "RB 25",
+                    "public": true,
+                    "adminCode": "800352",
+                    "productName": "RB",
+                    "mode": "train",
+                    "product": "regional",
+                    "operator": {
+                        "type": "operator",
+                        "id": "db-regio-ag-nrw",
+                        "name": "DB Regio AG NRW"
+                    },
+                    "additionalName": "RB 25"
+                },
+                "direction": "Köln Hansaring",
+                "arrivalPlatform": "11 B-C",
+                "plannedArrivalPlatform": "11 B-C",
+                "departurePlatform": "10",
+                "plannedDeparturePlatform": "10",
+                "stopovers": [
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8003368",
+                            "name": "Köln Messe/Deutz",
+                            "location": {
+                                "type": "location",
+                                "id": "8003368",
+                                "latitude": 50.940989,
+                                "longitude": 6.974578
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": null,
+                        "plannedArrival": null,
+                        "arrivalDelay": null,
+                        "arrivalPlatform": null,
+                        "plannedArrivalPlatform": null,
+                        "departure": "2022-02-08T20:34:00+01:00",
+                        "plannedDeparture": "2022-02-08T20:34:00+01:00",
+                        "departureDelay": null,
+                        "departurePlatform": "10",
+                        "plannedDeparturePlatform": "10"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000207",
+                            "name": "Köln Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000207",
+                                "latitude": 50.942823,
+                                "longitude": 6.959197
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2022-02-08T20:36:00+01:00",
+                        "plannedArrival": "2022-02-08T20:36:00+01:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "11 B-C",
+                        "plannedArrivalPlatform": "11 B-C",
+                        "departure": null,
+                        "plannedDeparture": null,
+                        "departureDelay": null,
+                        "departurePlatform": null,
+                        "plannedDeparturePlatform": null
+                    }
+                ],
+                "remarks": [
+                    {
+                        "type": "hint",
+                        "code": "PF",
+                        "text": "Please wear an FFP2 mask. You are legally required to do so"
+                    },
+                    {
+                        "type": "hint",
+                        "code": "3G",
+                        "text": "Nationwide «3G» rule applies on trains: valid proof must be presented"
+                    },
+                    {
+                        "text": "Number of bicycles conveyed limited",
+                        "type": "hint",
+                        "code": "bicycle-conveyance",
+                        "summary": "bicycles conveyed"
+                    },
+                    {
+                        "text": "vehicle-mounted access aid",
+                        "type": "hint",
+                        "code": "boarding-ramp",
+                        "summary": "vehicle-mounted boarding ramp available"
+                    },
+                    {
+                        "type": "status",
+                        "summary": "RB 10573: Köln Messe/Deutz->Köln Hbf: Information. (Quelle: zuginfo.nrw)",
+                        "code": null,
+                        "text": "Vorankündigung: Aufgrund von Bauarbeiten kommt es vom 11.02. bis 21.02.2022 zu Fahrplanänderungen zwischen Köln Hansaring und Köln Frankfurter Straße. Bitte informieren Sie sich."
+                    }
+                ]
+            }
+        ],
+        "refreshToken": "¶HKI¶T$A=1@O=Hamburg-Altona@L=8002553@a=128@$A=1@O=Nürnberg Hbf@L=8000284@a=128@$202202081144$202202081624$ICE  789$$1$$$$§T$A=1@O=Nürnberg Hbf@L=8000284@a=128@$A=1@O=Köln Messe/Deutz Gl.11-12@L=8073368@a=128@$202202081657$202202082024$ICE  620$$1$$$$§W$A=1@O=Köln Messe/Deutz Gl.11-12@L=8073368@a=128@$A=1@O=Köln Messe/Deutz@L=8003368@a=128@$202202082024$202202082031$$$1$$$$§T$A=1@O=Köln Messe/Deutz@L=8003368@a=128@$A=1@O=Köln Hbf@L=8000207@a=128@$202202082034$202202082036$RB 10573$$1$$$$",
+        "remarks": [],
+        "price": null
+    },
+    {
+        "type": "journey",
+        "legs": [
+            {
+                "origin": {
+                    "type": "stop",
+                    "id": "8000260",
+                    "name": "Würzburg Hbf",
+                    "location": {
+                        "type": "location",
+                        "id": "8000260",
+                        "latitude": 49.802163,
+                        "longitude": 9.93593
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": false,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "destination": {
+                    "type": "stop",
+                    "id": "8000284",
+                    "name": "Nürnberg Hbf",
+                    "location": {
+                        "type": "location",
+                        "id": "8000284",
+                        "latitude": 49.445435,
+                        "longitude": 11.08227
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": true,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "departure": "2022-02-08T15:30:00+01:00",
+                "plannedDeparture": "2022-02-08T11:44:00+01:00",
+                "departureDelay": 0,
+                "arrival": "2022-02-08T16:24:00+01:00",
+                "plannedArrival": "2022-02-08T16:24:00+01:00",
+                "arrivalDelay": 0,
+                "reachable": true,
+                "tripId": "1|191888|0|81|8022022",
+                "line": {
+                    "type": "line",
+                    "id": "ice-789",
+                    "fahrtNr": "789",
+                    "name": "ICE 789",
+                    "public": true,
+                    "adminCode": "80____",
+                    "productName": "ICE",
+                    "mode": "train",
+                    "product": "nationalExpress",
+                    "operator": {
+                        "type": "operator",
+                        "id": "db-fernverkehr-ag",
+                        "name": "DB Fernverkehr AG"
+                    }
+                },
+                "direction": "München Hbf",
+                "currentLocation": {
+                    "type": "location",
+                    "latitude": 49.660556,
+                    "longitude": 10.39375
+                },
+                "arrivalPlatform": "9",
+                "plannedArrivalPlatform": "9",
+                "departurePlatform": "4",
+                "plannedDeparturePlatform": "10",
+                "stopovers": [
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000260",
+                            "name": "Würzburg Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000260",
+                                "latitude": 49.802163,
+                                "longitude": 9.93593
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": false,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2022-02-08T15:28:00+01:00",
+                        "plannedArrival": "2022-02-08T15:28:00+01:00",
+                        "arrivalDelay": 0,
+                        "arrivalPlatform": "4",
+                        "plannedArrivalPlatform": "4",
+                        "departure": "2022-02-08T15:30:00+01:00",
+                        "plannedDeparture": "2022-02-08T15:30:00+01:00",
+                        "departureDelay": 0,
+                        "departurePlatform": "4",
+                        "plannedDeparturePlatform": "4"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000284",
+                            "name": "Nürnberg Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000284",
+                                "latitude": 49.445435,
+                                "longitude": 11.08227
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": true,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2022-02-08T16:24:00+01:00",
+                        "plannedArrival": "2022-02-08T16:24:00+01:00",
+                        "arrivalDelay": 0,
+                        "arrivalPlatform": "9",
+                        "plannedArrivalPlatform": "9",
+                        "departure": null,
+                        "plannedDeparture": null,
+                        "departureDelay": null,
+                        "departurePlatform": null,
+                        "plannedDeparturePlatform": null
+                    }
+                ],
+                "remarks": [
+                    {
+                        "text": "Komfort Check-in possible (visit bahn.de/kci for more information)",
+                        "type": "hint",
+                        "code": "komfort-checkin",
+                        "summary": "Komfort-Checkin available"
+                    },
+                    {
+                        "type": "hint",
+                        "code": "PF",
+                        "text": "Please wear an FFP2 mask. You are legally required to do so"
+                    },
+                    {
+                        "type": "hint",
+                        "code": "3G",
+                        "text": "Nationwide «3G» rule applies on trains: valid proof must be presented"
+                    },
+                    {
+                        "text": "Bicycles conveyed - subject to reservation",
+                        "type": "hint",
+                        "code": "bicycle-conveyance-reservation",
+                        "summary": "bicycles conveyed, subject to reservation"
+                    },
+                    {
+                        "text": "Number of bicycles conveyed limited",
+                        "type": "hint",
+                        "code": "bicycle-conveyance",
+                        "summary": "bicycles conveyed"
+                    },
+                    {
+                        "text": "Bordrestaurant",
+                        "type": "hint",
+                        "code": "on-board-restaurant",
+                        "summary": "Bordrestaurant available"
+                    },
+                    {
+                        "text": "vehicle-mounted access aid",
+                        "type": "hint",
+                        "code": "boarding-ramp",
+                        "summary": "vehicle-mounted boarding ramp available"
+                    },
+                    {
+                        "type": "status",
+                        "summary": "ICE 789: Nürnberg Hbf: Information.",
+                        "code": null,
+                        "text": "No wheelchair accessible entrance door in coach 9. If a change in booking is required for travellers with reduced mobility, our Mobility Service Centre can be reached at +49 30 65212888."
+                    }
+                ],
+                "loadFactor": "low-to-medium"
+            },
+            {
+                "origin": {
+                    "type": "stop",
+                    "id": "8073368",
+                    "name": "Köln Messe/Deutz Gl.11-12",
+                    "location": {
+                        "type": "location",
+                        "id": "8073368",
+                        "latitude": 50.940602,
+                        "longitude": 6.975162
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    },
+                    "station": {
+                        "type": "station",
+                        "id": "8003368",
+                        "name": "Köln Messe/Deutz",
+                        "location": {
+                            "type": "location",
+                            "id": "8003368",
+                            "latitude": 50.940989,
+                            "longitude": 6.974578
+                        },
+                        "products": {
+                            "nationalExpress": true,
+                            "national": true,
+                            "regionalExp": true,
+                            "regional": true,
+                            "suburban": true,
+                            "bus": true,
+                            "ferry": false,
+                            "subway": false,
+                            "tram": true,
+                            "taxi": false
+                        }
+                    }
+                },
+                "destination": {
+                    "type": "stop",
+                    "id": "8003368",
+                    "name": "Köln Messe/Deutz",
+                    "location": {
+                        "type": "location",
+                        "id": "8003368",
+                        "latitude": 50.940989,
+                        "longitude": 6.974578
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "departure": "2022-02-08T22:16:00+01:00",
+                "plannedDeparture": "2022-02-08T22:16:00+01:00",
+                "departureDelay": null,
+                "arrival": "2022-02-08T22:23:00+01:00",
+                "plannedArrival": "2022-02-08T22:23:00+01:00",
+                "arrivalDelay": null,
+                "public": true,
+                "walking": true,
+                "distance": 59
+            },
+            {
+                "origin": {
+                    "type": "stop",
+                    "id": "8003368",
+                    "name": "Köln Messe/Deutz",
+                    "location": {
+                        "type": "location",
+                        "id": "8003368",
+                        "latitude": 50.940989,
+                        "longitude": 6.974578
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "destination": {
+                    "type": "stop",
+                    "id": "8000207",
+                    "name": "Köln Hbf",
+                    "location": {
+                        "type": "location",
+                        "id": "8000207",
+                        "latitude": 50.942823,
+                        "longitude": 6.959197
+                    },
+                    "products": {
+                        "nationalExpress": true,
+                        "national": true,
+                        "regionalExp": true,
+                        "regional": true,
+                        "suburban": true,
+                        "bus": true,
+                        "ferry": false,
+                        "subway": false,
+                        "tram": true,
+                        "taxi": false
+                    }
+                },
+                "departure": "2022-02-08T22:27:00+01:00",
+                "plannedDeparture": "2022-02-08T22:27:00+01:00",
+                "departureDelay": null,
+                "arrival": "2022-02-08T22:29:00+01:00",
+                "plannedArrival": "2022-02-08T22:29:00+01:00",
+                "arrivalDelay": null,
+                "reachable": true,
+                "tripId": "1|200593|0|81|8022022",
+                "line": {
+                    "type": "line",
+                    "id": "4-8003s-12",
+                    "fahrtNr": "33275",
+                    "name": "S 12",
+                    "public": true,
+                    "adminCode": "8003S_",
+                    "productName": "S",
+                    "mode": "train",
+                    "product": "suburban",
+                    "operator": {
+                        "type": "operator",
+                        "id": "db-regio-ag-nrw",
+                        "name": "DB Regio AG NRW"
+                    }
+                },
+                "direction": "Köln-Ehrenfeld",
+                "arrivalPlatform": "11 B-C",
+                "plannedArrivalPlatform": "11 B-C",
+                "departurePlatform": "10",
+                "plannedDeparturePlatform": "10",
+                "stopovers": [
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8003368",
+                            "name": "Köln Messe/Deutz",
+                            "location": {
+                                "type": "location",
+                                "id": "8003368",
+                                "latitude": 50.940989,
+                                "longitude": 6.974578
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": null,
+                        "plannedArrival": null,
+                        "arrivalDelay": null,
+                        "arrivalPlatform": null,
+                        "plannedArrivalPlatform": null,
+                        "departure": "2022-02-08T22:27:00+01:00",
+                        "plannedDeparture": "2022-02-08T22:27:00+01:00",
+                        "departureDelay": null,
+                        "departurePlatform": "10",
+                        "plannedDeparturePlatform": "10"
+                    },
+                    {
+                        "stop": {
+                            "type": "stop",
+                            "id": "8000207",
+                            "name": "Köln Hbf",
+                            "location": {
+                                "type": "location",
+                                "id": "8000207",
+                                "latitude": 50.942823,
+                                "longitude": 6.959197
+                            },
+                            "products": {
+                                "nationalExpress": true,
+                                "national": true,
+                                "regionalExp": true,
+                                "regional": true,
+                                "suburban": true,
+                                "bus": true,
+                                "ferry": false,
+                                "subway": false,
+                                "tram": true,
+                                "taxi": false
+                            }
+                        },
+                        "arrival": "2022-02-08T22:29:00+01:00",
+                        "plannedArrival": "2022-02-08T22:29:00+01:00",
+                        "arrivalDelay": null,
+                        "arrivalPlatform": "11 B-C",
+                        "plannedArrivalPlatform": "11 B-C",
+                        "departure": null,
+                        "plannedDeparture": null,
+                        "departureDelay": null,
+                        "departurePlatform": null,
+                        "plannedDeparturePlatform": null
+                    }
+                ],
+                "remarks": [
+                    {
+                        "type": "hint",
+                        "code": "PF",
+                        "text": "Please wear an FFP2 mask. You are legally required to do so"
+                    },
+                    {
+                        "type": "hint",
+                        "code": "3G",
+                        "text": "Nationwide «3G» rule applies on trains: valid proof must be presented"
+                    },
+                    {
+                        "text": "Number of bicycles conveyed limited",
+                        "type": "hint",
+                        "code": "bicycle-conveyance",
+                        "summary": "bicycles conveyed"
+                    },
+                    {
+                        "text": "2nd class only",
+                        "type": "hint",
+                        "code": "2nd-class-only",
+                        "summary": "2. class only"
+                    }
+                ],
+                "cycle": {
+                    "min": 240,
+                    "max": 960,
+                    "nr": 15
+                },
+                "alternatives": [
+                    {
+                        "tripId": "1|200667|0|81|8022022",
+                        "line": {
+                            "type": "line",
+                            "id": "4-8003s-19",
+                            "fahrtNr": "33375",
+                            "name": "S 19",
+                            "public": true,
+                            "adminCode": "8003S_",
+                            "productName": "S",
+                            "mode": "train",
+                            "product": "suburban",
+                            "operator": {
+                                "type": "operator",
+                                "id": "db-regio-ag-nrw",
+                                "name": "DB Regio AG NRW"
+                            }
+                        },
+                        "direction": "Düren",
+                        "when": "2022-02-08T22:37:00+01:00",
+                        "plannedWhen": "2022-02-08T22:37:00+01:00",
+                        "delay": null
+                    },
+                    {
+                        "tripId": "1|200521|0|81|8022022",
+                        "line": {
+                            "type": "line",
+                            "id": "4-8003s-11",
+                            "fahrtNr": "33151",
+                            "name": "S 11",
+                            "public": true,
+                            "adminCode": "8003S_",
+                            "productName": "S",
+                            "mode": "train",
+                            "product": "suburban",
+                            "operator": {
+                                "type": "operator",
+                                "id": "db-regio-ag-nrw",
+                                "name": "DB Regio AG NRW"
+                            }
+                        },
+                        "direction": "Düsseldorf Flughafen Terminal",
+                        "when": "2022-02-08T22:41:00+01:00",
+                        "plannedWhen": "2022-02-08T22:41:00+01:00",
+                        "delay": null
+                    },
+                    {
+                        "tripId": "1|200035|0|81|8022022",
+                        "line": {
+                            "type": "line",
+                            "id": "4-800337-6",
+                            "fahrtNr": "31638",
+                            "name": "S 6",
+                            "public": true,
+                            "adminCode": "800337",
+                            "productName": "S",
+                            "mode": "train",
+                            "product": "suburban",
+                            "operator": {
+                                "type": "operator",
+                                "id": "db-regio-ag-nrw",
+                                "name": "DB Regio AG NRW"
+                            }
+                        },
+                        "direction": "Köln-Nippes",
+                        "when": "2022-02-08T22:51:00+01:00",
+                        "plannedWhen": "2022-02-08T22:51:00+01:00",
+                        "delay": null
+                    },
+                    {
+                        "tripId": "1|200597|0|81|8022022",
+                        "line": {
+                            "type": "line",
+                            "id": "4-8003s-12",
+                            "fahrtNr": "33277",
+                            "name": "S 12",
+                            "public": true,
+                            "adminCode": "8003S_",
+                            "productName": "S",
+                            "mode": "train",
+                            "product": "suburban",
+                            "operator": {
+                                "type": "operator",
+                                "id": "db-regio-ag-nrw",
+                                "name": "DB Regio AG NRW"
+                            }
+                        },
+                        "direction": "Köln-Ehrenfeld",
+                        "when": "2022-02-08T22:57:00+01:00",
+                        "plannedWhen": "2022-02-08T22:57:00+01:00",
+                        "delay": null
+                    },
+                    {
+                        "tripId": "1|200662|1|81|8022022",
+                        "line": {
+                            "type": "line",
+                            "id": "4-8003s-19",
+                            "fahrtNr": "33377",
+                            "name": "S 19",
+                            "public": true,
+                            "adminCode": "8003S_",
+                            "productName": "S",
+                            "mode": "train",
+                            "product": "suburban",
+                            "operator": {
+                                "type": "operator",
+                                "id": "db-regio-ag-nrw",
+                                "name": "DB Regio AG NRW"
+                            }
+                        },
+                        "direction": "Sindorf",
+                        "when": "2022-02-08T23:07:00+01:00",
+                        "plannedWhen": "2022-02-08T23:07:00+01:00",
+                        "delay": null
+                    },
+                    {
+                        "tripId": "1|200524|0|81|8022022",
+                        "line": {
+                            "type": "line",
+                            "id": "4-8003s-11",
+                            "fahrtNr": "33153",
+                            "name": "S 11",
+                            "public": true,
+                            "adminCode": "8003S_",
+                            "productName": "S",
+                            "mode": "train",
+                            "product": "suburban",
+                            "operator": {
+                                "type": "operator",
+                                "id": "db-regio-ag-nrw",
+                                "name": "DB Regio AG NRW"
+                            }
+                        },
+                        "direction": "Düsseldorf Hbf",
+                        "when": "2022-02-08T23:11:00+01:00",
+                        "plannedWhen": "2022-02-08T23:11:00+01:00",
+                        "delay": null
+                    },
+                    {
+                        "tripId": "1|200032|1|81|8022022",
+                        "line": {
+                            "type": "line",
+                            "id": "4-800337-6",
+                            "fahrtNr": "31640",
+                            "name": "S 6",
+                            "public": true,
+                            "adminCode": "800337",
+                            "productName": "S",
+                            "mode": "train",
+                            "product": "suburban",
+                            "operator": {
+                                "type": "operator",
+                                "id": "db-regio-ag-nrw",
+                                "name": "DB Regio AG NRW"
+                            }
+                        },
+                        "direction": "Köln-Nippes",
+                        "when": "2022-02-08T23:21:00+01:00",
+                        "plannedWhen": "2022-02-08T23:21:00+01:00",
+                        "delay": null
+                    },
+                    {
+                        "tripId": "1|200603|0|81|8022022",
+                        "line": {
+                            "type": "line",
+                            "id": "4-8003s-12",
+                            "fahrtNr": "33279",
+                            "name": "S 12",
+                            "public": true,
+                            "adminCode": "8003S_",
+                            "productName": "S",
+                            "mode": "train",
+                            "product": "suburban",
+                            "operator": {
+                                "type": "operator",
+                                "id": "db-regio-ag-nrw",
+                                "name": "DB Regio AG NRW"
+                            }
+                        },
+                        "direction": "Köln-Ehrenfeld",
+                        "when": "2022-02-08T23:27:00+01:00",
+                        "plannedWhen": "2022-02-08T23:27:00+01:00",
+                        "delay": null
+                    },
+                    {
+                        "tripId": "1|200671|0|81|8022022",
+                        "line": {
+                            "type": "line",
+                            "id": "4-8003s-19",
+                            "fahrtNr": "33379",
+                            "name": "S 19",
+                            "public": true,
+                            "adminCode": "8003S_",
+                            "productName": "S",
+                            "mode": "train",
+                            "product": "suburban",
+                            "operator": {
+                                "type": "operator",
+                                "id": "db-regio-ag-nrw",
+                                "name": "DB Regio AG NRW"
+                            }
+                        },
+                        "direction": "Düren",
+                        "when": "2022-02-08T23:37:00+01:00",
+                        "plannedWhen": "2022-02-08T23:37:00+01:00",
+                        "delay": null
+                    },
+                    {
+                        "tripId": "1|200526|0|81|8022022",
+                        "line": {
+                            "type": "line",
+                            "id": "4-8003s-11",
+                            "fahrtNr": "33155",
+                            "name": "S 11",
+                            "public": true,
+                            "adminCode": "8003S_",
+                            "productName": "S",
+                            "mode": "train",
+                            "product": "suburban",
+                            "operator": {
+                                "type": "operator",
+                                "id": "db-regio-ag-nrw",
+                                "name": "DB Regio AG NRW"
+                            }
+                        },
+                        "direction": "Düsseldorf Flughafen Terminal",
+                        "when": "2022-02-08T23:41:00+01:00",
+                        "plannedWhen": "2022-02-08T23:41:00+01:00",
+                        "delay": null
+                    },
+                    {
+                        "tripId": "1|200042|0|81|8022022",
+                        "line": {
+                            "type": "line",
+                            "id": "4-800337-6",
+                            "fahrtNr": "31642",
+                            "name": "S 6",
+                            "public": true,
+                            "adminCode": "800337",
+                            "productName": "S",
+                            "mode": "train",
+                            "product": "suburban",
+                            "operator": {
+                                "type": "operator",
+                                "id": "db-regio-ag-nrw",
+                                "name": "DB Regio AG NRW"
+                            }
+                        },
+                        "direction": "Köln-Nippes",
+                        "when": "2022-02-08T23:51:00+01:00",
+                        "plannedWhen": "2022-02-08T23:51:00+01:00",
+                        "delay": null
+                    },
+                    {
+                        "tripId": "1|200673|0|81|8022022",
+                        "line": {
+                            "type": "line",
+                            "id": "4-8003s-19",
+                            "fahrtNr": "33381",
+                            "name": "S 19",
+                            "public": true,
+                            "adminCode": "8003S_",
+                            "productName": "S",
+                            "mode": "train",
+                            "product": "suburban",
+                            "operator": {
+                                "type": "operator",
+                                "id": "db-regio-ag-nrw",
+                                "name": "DB Regio AG NRW"
+                            }
+                        },
+                        "direction": "Sindorf",
+                        "when": "2022-02-09T00:07:00+01:00",
+                        "plannedWhen": "2022-02-09T00:07:00+01:00",
+                        "delay": null
+                    },
+                    {
+                        "tripId": "1|200528|0|81|8022022",
+                        "line": {
+                            "type": "line",
+                            "id": "4-8003s-11",
+                            "fahrtNr": "33157",
+                            "name": "S 11",
+                            "public": true,
+                            "adminCode": "8003S_",
+                            "productName": "S",
+                            "mode": "train",
+                            "product": "suburban",
+                            "operator": {
+                                "type": "operator",
+                                "id": "db-regio-ag-nrw",
+                                "name": "DB Regio AG NRW"
+                            }
+                        },
+                        "direction": "Düsseldorf Hbf",
+                        "when": "2022-02-09T00:11:00+01:00",
+                        "plannedWhen": "2022-02-09T00:11:00+01:00",
+                        "delay": null
+                    },
+                    {
+                        "tripId": "1|200045|0|81|8022022",
+                        "line": {
+                            "type": "line",
+                            "id": "4-800337-6",
+                            "fahrtNr": "31644",
+                            "name": "S 6",
+                            "public": true,
+                            "adminCode": "800337",
+                            "productName": "S",
+                            "mode": "train",
+                            "product": "suburban",
+                            "operator": {
+                                "type": "operator",
+                                "id": "db-regio-ag-nrw",
+                                "name": "DB Regio AG NRW"
+                            }
+                        },
+                        "direction": "Köln-Nippes",
+                        "when": "2022-02-09T00:21:00+01:00",
+                        "plannedWhen": "2022-02-09T00:21:00+01:00",
+                        "delay": null
+                    },
+                    {
+                        "tripId": "1|200678|0|81|8022022",
+                        "line": {
+                            "type": "line",
+                            "id": "4-8003s-19",
+                            "fahrtNr": "33383",
+                            "name": "S 19",
+                            "public": true,
+                            "adminCode": "8003S_",
+                            "productName": "S",
+                            "mode": "train",
+                            "product": "suburban",
+                            "operator": {
+                                "type": "operator",
+                                "id": "db-regio-ag-nrw",
+                                "name": "DB Regio AG NRW"
+                            }
+                        },
+                        "direction": "Aachen Hbf",
+                        "when": "2022-02-09T00:37:00+01:00",
+                        "plannedWhen": "2022-02-09T00:37:00+01:00",
+                        "delay": null
+                    }
+                ]
+            }
+        ],
+        "refreshToken": "¶HKI¶T$A=1@O=Hamburg-Altona@L=8002553@a=128@$A=1@O=Nürnberg Hbf@L=8000284@a=128@$202202081144$202202081624$ICE  789$$1$$$$§T$A=1@O=Nürnberg Hbf@L=8000284@a=128@$A=1@O=Köln Messe/Deutz Gl.11-12@L=8073368@a=128@$202202081736$202202082216$ICE 1222$$1$$$$§W$A=1@O=Köln Messe/Deutz Gl.11-12@L=8073368@a=128@$A=1@O=Köln Messe/Deutz@L=8003368@a=128@$202202082216$202202082223$$$1$$$$§T$A=1@O=Köln Messe/Deutz@L=8003368@a=128@$A=1@O=Köln Hbf@L=8000207@a=128@$202202082227$202202082229$S     12$$1$$$$",
+        "cycle": {
+            "min": 240
+        },
+        "remarks": [],
+        "price": null
+    }
+]

@@ -16,4 +16,4 @@ Dependencies:
 
 * [python-slugify](https://github.com/un33k/python-slugify)
 * [requests](https://docs.python-requests.org/en/latest/)
-
+* [polyline](https://github.com/frederickjansen/polyline)

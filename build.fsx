@@ -187,7 +187,7 @@ let runWithResult workingDirectory file arguments =
             callResult.Result.Output
       else
             Trace.traceError callResult.Result.Output
-            callResult.Result.Output
+            callResult.Result.Error
 
 Target.create "CompileTypeScript" (fun _ ->
   run "./src/examples/fshafas.fable.web/wwwroot/js/" "tsc"  ("--target ES2015 --noImplicitAny" + " site.ts")

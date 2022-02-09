@@ -16,7 +16,8 @@ module Parser =
         { operators = Array.empty
           locations = Array.empty
           lines = Array.empty
-          hints = Array.empty }
+          hints = Array.empty
+          polylines = Array.empty }
 
     let defaultOptions: Options =
         { remarks = true

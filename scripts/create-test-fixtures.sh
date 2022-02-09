@@ -59,7 +59,6 @@ const journeysFromTrip = async () => {
 
     if (previousStopovers.length > 0) {
         const previousStopover = previousStopovers[previousStopovers.length - 1];
-        // console.log('previousStopover:', previousStopover.stop.name, previousStopover.departure);
         const journeys = await client.journeysFromTrip(leg.tripId, previousStopover, kölnHbf, { stopovers: true });
         console.log(JSON.stringify(journeys));
     }
@@ -188,7 +187,7 @@ EOF
   "dependencies": {
     "fs-hafas-client": "file:../src/fshafas.fable.package/fs-hafas-client-1.1.0.tgz",
     "google-polyline": "^1.0.3",
-    "hafas-client": "^5.18.0",
+    "hafas-client": "^5.22.2",
     "isomorphic-fetch": "^2.2.1",
     "md5": "^2.3.0",
     "slugg": "^1.2.1"
@@ -207,13 +206,17 @@ fi
 
 PATH2FIXTURES="../src/fshafas.test/fixtures"
 
-METHODS=('locations' 'journeys' 'trip' 'departures' 'nearby' 'reachableFrom' 'radar' 'remarks' 'lines' 'serverInfo')
+METHODS=('locations' 'journeys' 'journeysFromTrip' 'trip' 'departures' 'nearby' 'reachableFrom' 'radar' 'remarks' 'lines' 'serverInfo')
  
 for METHOD in "${METHODS[@]}"; do
   if [ ! -f "${PATH2FIXTURES}/db-${METHOD}-response.json" ]; then
     DEBUG=hafas-client node index.js ${METHOD} &> x.txt
 
     if [ ${METHOD} = "trip" ]; then
+            # cause of journeys request
+        	sed -i '1,2d' x.txt 
+    fi
+    if [ ${METHOD} = "journeysFromTrip" ]; then
             # cause of journeys request
         	sed -i '1,2d' x.txt 
     fi

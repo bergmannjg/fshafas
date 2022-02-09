@@ -17,15 +17,21 @@ module internal Line =
 
         let name = p.addName |> Option.orElse (Some p.name)
 
-        let (id, fahrtNr, adminCode) =
+        let (id, fahrtNr, adminCode, catOut) =
             match p.prodCtx with
             | Some (prodCtx) ->
                 (prodCtx.lineId
                  |> Option.orElse name
                  |> Option.bind slug,
                  prodCtx.num,
-                 prodCtx.admin)
-            | None -> (None, None, None)
+                 prodCtx.admin,
+                 prodCtx.catOut)
+            | None -> (None, None, None, None)
+
+        let productName =
+            match catOut with
+            | Some catOut when catOut <> "" -> Some(catOut.Trim())
+            | _ -> None
 
         let product =
             match p.cls with
@@ -37,7 +43,8 @@ module internal Line =
             match product with
             | Some kv ->
                 match (ctx.profile :> FsHafas.Client.Profile).products
-                      |> Array.tryFind (fun p -> p.id = kv) with
+                      |> Array.tryFind (fun p -> p.id = kv)
+                    with
                 | Some (product) -> (Some product.id, Some product.mode)
                 | None -> (None, None)
             | None -> (None, None)
@@ -46,11 +53,12 @@ module internal Line =
             Common.getElementAtSome p.oprX ctx.common.operators
 
         { line with
-              id = id
-              fahrtNr = fahrtNr
-              adminCode = adminCode
-              name = name
-              product = productid
-              mode = mode
-              operator = operator
-              ``public`` = Some true }
+            id = id
+            fahrtNr = fahrtNr
+            adminCode = adminCode
+            name = name
+            product = productid
+            productName = productName
+            mode = mode
+            operator = operator
+            ``public`` = Some true }

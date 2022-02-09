@@ -175,11 +175,7 @@ type RawPolyG = { polyXL: array<int> }
 
 type RawCrd =
     { x: int
-      y: int
-      z: int option
-      ``type``: string option
-      layerX: int option
-      crdSysX: int option }
+      y: int }
 
 type RawJny =
     { jid: string
@@ -229,8 +225,11 @@ type RawTicket =
       cur: string
       extCont: ExtCont }
 
+type RawPrice =
+    { amount: int option }
+
 type RawFare =
-    { prc: int option
+    { price: RawPrice option
       isFromPrice: bool option
       isBookable: bool option
       isUpsell: bool option
@@ -370,11 +369,11 @@ type RawHimMsgEvent =
       tTime: string }
 
 type RawCommon =
-    { locL: array<RawLoc>
-      prodL: array<RawProd>
-      remL: array<RawRem>
+    { locL: array<RawLoc> option
+      prodL: array<RawProd> option
+      remL: array<RawRem> option
       icoL: array<RawIco>
-      opL: array<RawOp>
+      opL: array<RawOp> option
       maxC: int option
       numC: int option
       himL: array<RawHim> option
@@ -429,7 +428,7 @@ type RawResponse =
       id: string option
       err: string option
       errTxt: string option
-      svcResL: array<SvcRes> }
+      svcResL: array<SvcRes> option }
 
 type Cfg =
     { polyEnc: string
@@ -476,9 +475,7 @@ type StationBoardRequest =
       time: string
       stbLoc: Loc
       jnyFltrL: array<JnyFltr>
-      dur: int
-      getPasslist: bool
-      stbFltrEquiv: bool }
+      dur: int }
 
 type HimSearchRequest =
     { himFltrL: array<JnyFltr>
