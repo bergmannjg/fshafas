@@ -4,7 +4,7 @@ Ths is a port of the JavaScript [hafas-client library](https://github.com/public
 
 The hafas endpoints Db, Bvg and Svv are supported.
 
-The F# library compiles to dotnet and JavaScript (via [Fable](https://github.com/fable-compiler/Fable)).
+The F# library compiles to dotnet and (via [Fable](https://github.com/fable-compiler/Fable)) to JavaScript and Python.
 
 ## Interfaces
 
@@ -65,4 +65,26 @@ const locations = () => {
         .then(result => { console.log(JSON.stringify(result)); })
         .catch(console.error);
 }
+```
+
+### Using the FsHafas python package 
+
+```py
+import asyncio
+import sys
+from fshafas.fable_modules.fs_hafas_profiles_python.db.profile import profile as db_profile
+from fshafas.fable_modules.fs_hafas_python.lib.transformations import Default_LocationsOptions
+from fshafas.fable_modules.fs_hafas_python.print import Locations as printLocations
+from fshafas.hafas_client import (HafasClient)
+from util import (to_locations)
+
+async def main(argv) -> int:
+    with HafasClient(db_profile) as client:
+        locations = await client.locations(argv[0], Default_LocationsOptions)
+        print(printLocations(locations))
+    return 0
+
+if __name__ == "__main__":
+    asyncio.run(main(sys.argv[1:]))
+
 ```

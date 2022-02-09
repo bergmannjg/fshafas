@@ -1,5 +1,8 @@
 namespace FsHafas.Endpoint
-
+/// <namespacedoc>
+///   <summary>FsHafas Profile Endpoint (see <a href="https://github.com/bergmannjg/fshafas/tree/main/src/fshafas.profiles">Profiles</a>)</summary>
+/// </namespacedoc>
+/// 
 #if FABLE_COMPILER
 open Fable.Core
 #endif
