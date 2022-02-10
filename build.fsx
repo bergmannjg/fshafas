@@ -242,6 +242,7 @@ Target.create "InstallPythonPackageFromLocal" (fun _ ->
   Shell.cleanDir (projDir + "fshafas/fable_modules/")
   Shell.deleteDir (projDir + "fshafas/fable_modules/")
   Shell.mv (projDir + "fable_modules/") (projDir + "fshafas")
+  Shell.Exec("bash", "fixes.sh", projDir) |> ignore
   Shell.Exec("python3", "-m pip install -e " + projDir) |> ignore
 )
 
