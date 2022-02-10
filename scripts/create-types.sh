@@ -39,7 +39,7 @@ sed -i '/CreateClient.IExports/d' HafasClientTypes.fs
 sed -i 's/U2<string, float>/string/' HafasClientTypes.fs
 
 # TRANSFORMER_DEBUG=1
-dotnet run --project ./Transformer.fsproj FsHafas HafasClientTypes.fs ../../src/fshafas/Types-hafas-client.fs
+dotnet run --project ./Transformer.fsproj FsHafas HafasClientTypes.fs ../../src/fshafas/TypesHafasClient.fs
 
 rm -f HafasClientTypes.fs
 
@@ -56,7 +56,7 @@ npx ts2fable ./types-raw-api.ts RawHafasClientTypes.fs
 sed -i 's/float/int/' RawHafasClientTypes.fs
 
 # TRANSFORMER_DEBUG=1
-dotnet run --project ./Transformer.fsproj RawHafas RawHafasClientTypes.fs ../../src/fshafas/Types-raw-hafas-client.fs
+dotnet run --project ./Transformer.fsproj RawHafas RawHafasClientTypes.fs ../../src/fshafas/TypesRawHafasClient.fs
 
 rm -f types-raw-api.ts
 rm -f RawHafasClientTypes.fs

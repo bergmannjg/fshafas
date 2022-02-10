@@ -172,10 +172,7 @@ type RawSDays =
       sDaysB: string option }
 
 type RawPolyG = { polyXL: array<int> }
-
-type RawCrd =
-    { x: int
-      y: int }
+type RawCrd = { x: int; y: int; z: int option }
 
 type RawJny =
     { jid: string
@@ -225,8 +222,7 @@ type RawTicket =
       cur: string
       extCont: ExtCont }
 
-type RawPrice =
-    { amount: int option }
+type RawPrice = { amount: int option }
 
 type RawFare =
     { price: RawPrice option
@@ -372,7 +368,7 @@ type RawCommon =
     { locL: array<RawLoc> option
       prodL: array<RawProd> option
       remL: array<RawRem> option
-      icoL: array<RawIco>
+      icoL: array<RawIco> option
       opL: array<RawOp> option
       maxC: int option
       numC: int option
@@ -553,9 +549,7 @@ type LocGeoReachRequest =
       jnyFltrL: array<JnyFltr> }
 
 type LocDetailsRequest = { locL: array<Loc> }
-
 type ServerInfoRequest = obj
-
 type RawRect = { llCrd: RawCrd; urCrd: RawCrd }
 
 type JourneyGeoPosRequest =
