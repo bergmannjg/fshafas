@@ -13,11 +13,11 @@ from .fable_modules.fable_library.string import (to_fail, printf, to_console)
 from .fable_modules.fs_hafas_python.types_hafas_client import (Profile, IndexMap_2, Station, Stop, Location, ProductType, JourneysOptions, Journeys, RefreshJourneyOptions, Journey, StopOver, JourneysFromTripOptions, TripOptions, Trip, DeparturesArrivalsOptions,
                                                                Alternative, LocationsOptions, StopOptions, Location, NearByOptions, ReachableFromOptions, Duration, BoundingBox, RadarOptions, Movement, TripsByNameOptions, RemarksOptions, Warning, LinesOptions, Line, ServerOptions, ServerInfo, Log_Print)
 from .fable_modules.fs_hafas_python.hafas_async_client import (HafasAsyncClient_productsOfMode, HafasAsyncClient, HafasAsyncClient__AsyncLocations, HafasAsyncClient__AsyncJourneys, HafasAsyncClient__AsyncJourneysFromTrip, HafasAsyncClient__AsyncRefreshJourney,
-                                                               HafasAsyncClient__AsyncDepartures, HafasAsyncClient__AsyncTripsByName, HafasAsyncClient__AsyncNearby, HafasAsyncClient__AsyncReachableFrom, HafasAsyncClient__AsyncRadar, HafasAsyncClient__AsyncStop, HafasAsyncClient__AsyncLines)
+                                                               HafasAsyncClient__AsyncDepartures, HafasAsyncClient__AsyncArrivals, HafasAsyncClient__AsyncTripsByName, HafasAsyncClient__AsyncNearby, HafasAsyncClient__AsyncReachableFrom, HafasAsyncClient__AsyncRadar, HafasAsyncClient__AsyncStop, HafasAsyncClient__AsyncLines)
 from .fable_modules.fs_hafas_python.context import (
     Profile as Profile_1)
 from .fable_modules.fs_hafas_python.lib.transformations import (
-    Default_LocationsOptions, Default_JourneysOptions, Default_Location)
+    Default_LocationsOptions, Default_JourneysOptions, Default_Location, Default_DeparturesArrivalsOptions)
 
 # todo: implement all methods of HafasAsyncClient
 
@@ -35,21 +35,6 @@ class HafasClient(IDisposable):
 
         self.profile = profile
         self.asyncClient = HafasAsyncClient(self.profile)  # pytype: disable=wrong-arg-types
-
-    async def locations(self, name: str, opt: Optional[LocationsOptions] = None) -> List[Union[Station, Stop, Location]]:
-        if (not isinstance(name, str)):
-            raise TypeError("argument name: type string expected")
-
-        if (opt is not None and not isinstance(opt, LocationsOptions)):
-            raise TypeError("argument opt: type LocationsOptions expected")
-
-        def generate() -> Async[List[Any]]:
-            def bind(_arg1: List[Any]) -> Async[List[Any]]:
-                return singleton.Return(_arg1)
-
-            return singleton.Bind(HafasAsyncClient__AsyncLocations(self.asyncClient, name, opt), bind)
-
-        return await start_as_task(singleton.Delay(generate))
 
     async def _journeys(self, _from: Union[str, Station, Stop, Location], _to: Union[str, Station, Stop, Location], opt: Optional[JourneysOptions] = None) -> Journeys:
         def generate() -> Async[Journeys]:
@@ -73,6 +58,60 @@ class HafasClient(IDisposable):
 
         return await self._journeys(_from, _to, opt)
 
+    async def departures(self, name: Union[str, Station, Stop, Location], opt: Optional[DeparturesArrivalsOptions] = None) -> List[Alternative]:
+        if (opt is not None and not isinstance(opt, DeparturesArrivalsOptions)):
+            raise TypeError("argument opt: type DeparturesArrivalsOptions expected")
+
+        def generate() -> Async[List[Alternative]]:
+            def bind(_arg1: List[Alternative]) -> Async[List[Alternative]]:
+                return singleton.Return(_arg1)
+
+            return singleton.Bind(HafasAsyncClient__AsyncDepartures(self.asyncClient, name, opt), bind)
+
+        return await start_as_task(singleton.Delay(generate))
+
+    async def arrivals(self, name: Union[str, Station, Stop, Location], opt: Optional[DeparturesArrivalsOptions] = None) -> List[Alternative]:
+        if (opt is not None and not isinstance(opt, DeparturesArrivalsOptions)):
+            raise TypeError("argument opt: type DeparturesArrivalsOptions expected")
+
+        def generate() -> Async[List[Alternative]]:
+            def bind(_arg1: List[Alternative]) -> Async[List[Alternative]]:
+                return singleton.Return(_arg1)
+
+            return singleton.Bind(HafasAsyncClient__AsyncArrivals(self.asyncClient, name, opt), bind)
+
+        return await start_as_task(singleton.Delay(generate))
+
+    async def locations(self, name: str, opt: Optional[LocationsOptions] = None) -> List[Union[Station, Stop, Location]]:
+        if (not isinstance(name, str)):
+            raise TypeError("argument name: type string expected")
+
+        if (opt is not None and not isinstance(opt, LocationsOptions)):
+            raise TypeError("argument opt: type LocationsOptions expected")
+
+        def generate() -> Async[List[Any]]:
+            def bind(_arg1: List[Any]) -> Async[List[Any]]:
+                return singleton.Return(_arg1)
+
+            return singleton.Bind(HafasAsyncClient__AsyncLocations(self.asyncClient, name, opt), bind)
+
+        return await start_as_task(singleton.Delay(generate))
+
+    async def nearby(self, l: Location, opt: Optional[NearByOptions] = None) -> List[Union[Station, Stop, Location]]:
+        if (not isinstance(l, Location)):
+            raise TypeError("argument l: type Location expected")
+
+        if (opt is not None and not isinstance(opt, NearByOptions)):
+            raise TypeError("argument opt: type NearByOptions expected")
+
+        def generate() -> Async[List[Any]]:
+            def bind(_arg1: List[Any]) -> Async[List[Any]]:
+                return singleton.Return(_arg1)
+
+            return singleton.Bind(HafasAsyncClient__AsyncNearby(self.asyncClient, l, opt), bind)
+
+        return await start_as_task(singleton.Delay(generate))
+
     async def radar(self, rect: BoundingBox, opt: Optional[RadarOptions] = None) -> List[Movement]:
         if (not isinstance(rect, BoundingBox)):
             raise TypeError("argument rect: type BoundingBox expected")
@@ -82,6 +121,21 @@ class HafasClient(IDisposable):
                 return singleton.Return(_arg1)
 
             return singleton.Bind(HafasAsyncClient__AsyncRadar(self.asyncClient, rect, opt), bind)
+
+        return await start_as_task(singleton.Delay(generate))
+
+    async def tripsByName(self, name: str, opt: Optional[TripsByNameOptions] = None) -> List[Trip]:
+        if (not isinstance(name, str)):
+            raise TypeError("argument name: type string expected")
+
+        if (opt is not None and not isinstance(opt, TripsByNameOptions)):
+            raise TypeError("argument opt: type TripsByNameOptions expected")
+
+        def generate() -> Async[List[Any]]:
+            def bind(_arg1: List[Any]) -> Async[List[Any]]:
+                return singleton.Return(_arg1)
+
+            return singleton.Bind(HafasAsyncClient__AsyncTripsByName(self.asyncClient, name, opt), bind)
 
         return await start_as_task(singleton.Delay(generate))
 

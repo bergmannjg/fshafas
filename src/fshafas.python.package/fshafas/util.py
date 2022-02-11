@@ -2,10 +2,10 @@ from __future__ import annotations
 from typing import (Optional, List, Any, Tuple, TypeVar,
                     Tuple, Awaitable, Union, Callable, Dict)
 from statistics import mean
-from fshafas.fable_modules.fable_library.array import (map)
-from fshafas.fable_modules.fs_hafas_python.types_hafas_client import (Profile, IndexMap_2, Station, Stop, Location, ProductType, JourneysOptions, Journeys, RefreshJourneyOptions, Journey, StopOver, JourneysFromTripOptions, TripOptions, Trip, DeparturesArrivalsOptions,
+from  .fable_modules.fable_library.array import (map)
+from  .fable_modules.fs_hafas_python.types_hafas_client import (Profile, IndexMap_2, Station, Stop, Location, ProductType, JourneysOptions, Journeys, RefreshJourneyOptions, Journey, StopOver, JourneysFromTripOptions, TripOptions, Trip, DeparturesArrivalsOptions,
                                                                Alternative, LocationsOptions, StopOptions, Location, NearByOptions, ReachableFromOptions, Duration, BoundingBox, RadarOptions, Movement, TripsByNameOptions, RemarksOptions, Warning, LinesOptions, Line, ServerOptions, ServerInfo, Log_Print)
-from fshafas.fable_modules.fs_hafas_python.lib.transformations import (Default_Location)
+from  .fable_modules.fs_hafas_python.lib.transformations import (Default_Location)
 
 def to_name(s: Union[Station, Stop, Location]) -> str:
     """
