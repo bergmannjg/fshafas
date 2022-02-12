@@ -34,6 +34,8 @@ src/fshafas.fable.web/wwwroot/js/lib/
 
 x.txt
 
+x.json
+y.json
 z*.json
 src/examples/analyzejourneys/calendar.csv
 

@@ -43,20 +43,35 @@ type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
     member __.Keys: 's [] = jsNative
 #else
   #if FABLE_PY
-type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
-    let mutable map: Microsoft.FSharp.Collections.Map<'s, 'b> = Microsoft.FSharp.Collections.Map.empty
+module internal Dict =
+    [<Emit("dict()")>]
+    let dict () : obj = jsNative
+
+    [<Emit("$0.get($1)")>]
+    let get<'a> (d: obj) (k: obj) : 'a = jsNative
+
+    [<Emit("$0[$1]=$2")>]
+    let set (d: obj) (k: obj) (v: obj) : unit = jsNative
+
+    [<Emit("list($0)")>]
+    let keys<'a> (d: obj) : 'a [] = jsNative
+
+type IndexMap<'s, 'b when 's :> obj and 'b: equality>(defaultValue: 'b) =
+    let dict = Dict.dict ()
 
     member __.Item
         with get (s: 's) =
-            match map.TryFind s with
-            | Some v -> v
-            | None -> defaultValue
+            let v = Dict.get<'b> dict s
+
+            if (box v) <> null then
+                v
+            else
+                defaultValue
         and set s b =
-            map <- map.Add(s, b)
+            Dict.set dict s b
             ()
 
-    member __.Keys =
-        map |> Seq.map (fun kv -> kv.Key) |> Seq.toArray
+    member __.Keys = Dict.keys<'s> dict
   #else
 type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
     let mutable map: Map<'s, 'b> = Map.empty

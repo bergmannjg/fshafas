@@ -14,24 +14,29 @@ from fshafas.fable_modules.fs_hafas_python.print import (
 from fshafas.fable_modules.fs_hafas_python.types_hafas_client import (
     Station, Stop, Location, BoundingBox, Trip)
 from fshafas.hafas_client import (HafasClient)
-from fshafas.util import (to_locations)
+from fshafas.util import (to_locations, json_encode)
 
 # example program for HafasClient
 
-
 async def main(argv: List[str]) -> int:
     try:
-        if len(argv) == 2 and argv[0] == "--locations":
+        if len(argv) == 2 and argv[0].startswith("--locations"):
             with HafasClient(db_profile) as client:
 
                 stops = await client.locations(argv[1], Default_LocationsOptions)
-                locations = to_locations(stops)
-                print(printLocations(locations))
+                if argv[0] == "--locations.json":
+                    print(json_encode(stops))
+                else:
+                    locations = to_locations(stops)
+                    print(printLocations(locations))
 
-        if len(argv) == 3 and argv[0] == "--journeys":
+        if len(argv) == 3 and argv[0].startswith("--journeys"):
             with HafasClient(db_profile) as client:
                 journeys = await client.journeys(argv[1], argv[2], Default_JourneysOptions)
-                print(printJourneys(journeys))
+                if argv[0] == "--journeys.json":
+                    print(json_encode(journeys))
+                else:
+                    print(printJourneys(journeys))
 
         if len(argv) == 2 and argv[0] == "--departures":
             with HafasClient(db_profile) as client:

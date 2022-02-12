@@ -1,11 +1,41 @@
 from __future__ import annotations
 from typing import (Optional, List, Any, Tuple, TypeVar,
                     Tuple, Awaitable, Union, Callable, Dict)
+import jsonpickle
+import json
 from statistics import mean
 from  .fable_modules.fable_library.array import (map)
 from  .fable_modules.fs_hafas_python.types_hafas_client import (Profile, IndexMap_2, Station, Stop, Location, ProductType, JourneysOptions, Journeys, RefreshJourneyOptions, Journey, StopOver, JourneysFromTripOptions, TripOptions, Trip, DeparturesArrivalsOptions,
                                                                Alternative, LocationsOptions, StopOptions, Location, NearByOptions, ReachableFromOptions, Duration, BoundingBox, RadarOptions, Movement, TripsByNameOptions, RemarksOptions, Warning, LinesOptions, Line, ServerOptions, ServerInfo, Log_Print)
 from  .fable_modules.fs_hafas_python.lib.transformations import (Default_Location)
+
+def stripNone(data):
+    if isinstance(data, dict):
+        return {k: stripNone(v) for k, v in data.items() if k is not None and v is not None}
+    elif isinstance(data, list):
+        return [stripNone(item) for item in data if item is not None]
+    elif isinstance(data, tuple):
+        return tuple(stripNone(item) for item in data if item is not None)
+    elif isinstance(data, set):
+        return {stripNone(item) for item in data if item is not None}
+    else:
+        if hasattr(data, '__dict__'):
+            return stripNone(data.__dict__.copy())
+        else:
+            return data
+
+def normalize(value: Any) -> Any:
+    """
+    normalize to JSON-able python object
+    """
+    return json.loads(json_encode(value, stripNones=True))
+                      
+def json_encode(value: Any, stripNones: Optional[bool] = True) -> str:
+    """
+    Return a JSON formatted representation of value, a Python object
+    """
+    remapped = stripNone(value) if stripNones else value
+    return jsonpickle.encode(remapped, unpicklable=False)
 
 def to_name(s: Union[Station, Stop, Location]) -> str:
     """
