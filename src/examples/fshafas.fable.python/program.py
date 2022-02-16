@@ -12,11 +12,13 @@ from fshafas.fable_modules.fs_hafas_python.print import (
     Locations as printLocations, Journeys as printJourneys, Movements as printMovements, Trips as printTrips,
     Alternatives as printAlternatives)
 from fshafas.fable_modules.fs_hafas_python.types_hafas_client import (
-    Station, Stop, Location, BoundingBox, Trip)
+    Station, Stop, Location, BoundingBox, Trip, Movement)
 from fshafas.hafas_client import (HafasClient)
-from fshafas.util import (to_locations, json_encode)
+from fshafas.util import (to_locations, json_encode, simplify)
+from inspect import signature
 
 # example program for HafasClient
+
 
 async def main(argv: List[str]) -> int:
     try:
