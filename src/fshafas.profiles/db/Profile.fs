@@ -366,7 +366,7 @@ module Db =
             && trfRes.fareSetL.[0].fareL.Length > 0
             ->
             match trfRes.fareSetL.[0].fareL.[0].price with
-            | Some price when price.amount.IsSome ->
+            | Some price when price.amount.IsSome && price.amount.Value > 0 ->
                 { parsed with
                     price =
                         Some(
