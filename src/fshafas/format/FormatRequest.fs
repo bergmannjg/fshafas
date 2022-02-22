@@ -68,8 +68,14 @@ module internal Format =
 #else
         dt.ToString("yyyyMMdd")
 #endif
-    let formatTime (dt: System.DateTime) = dt.ToString("HHmm") + "00"
-
+    
+    let formatTime (dt: System.DateTime) = 
+#if FABLE_PY
+        DateTimeEx.formatTime dt "HHmm" + "00"
+#else
+        dt.ToString("HHmm") + "00"
+#endif
+    
     let private formatProductsBitmask (profile: FsHafas.Endpoint.Profile) (products: FsHafas.Client.Products) =
         (profile :> FsHafas.Client.Profile).products
         |> Array.filter (fun p -> products.[p.id])

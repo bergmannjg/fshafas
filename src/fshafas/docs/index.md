@@ -67,24 +67,22 @@ const locations = () => {
 }
 ```
 
-### Using the FsHafas python package 
+### Using the FsHafas python package
 
 ```py
 import asyncio
 import sys
-from fshafas.fable_modules.fs_hafas_profiles_python.db.profile import profile as db_profile
-from fshafas.fable_modules.fs_hafas_python.lib.transformations import Default_LocationsOptions
-from fshafas.fable_modules.fs_hafas_python.print import Locations as printLocations
-from fshafas.hafas_client import (HafasClient)
-from util import (to_locations)
+from fshafas.fable_modules.fs_hafas_profiles_python.db.profile import profile
+from fshafas.hafas_client import HafasClient
 
 async def main(argv) -> int:
-    with HafasClient(db_profile) as client:
-        locations = await client.locations(argv[0], Default_LocationsOptions)
-        print(printLocations(locations))
+    with HafasClient(profile) as client:
+        journeys = await client.journeys(argv[0], argv[1])
+        for j in journeys.journeys:
+            for l in j.legs:
+                print(l.origin.name, l.destination.name, l.departure)
     return 0
 
 if __name__ == "__main__":
     asyncio.run(main(sys.argv[1:]))
-
 ```

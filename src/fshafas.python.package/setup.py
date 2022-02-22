@@ -1,13 +1,20 @@
 from setuptools import setup
+import pathlib
+from setuptools import setup
 
-# todo: fable_simple_json_python, fable_python and fable_library as requirements
+this_directory = pathlib.Path(__file__).parent
+README = (this_directory / "README.md").read_text()
 
 setup(
     name='fshafas',
-    version='0.0.4',
-    description='python client for hafas endpoint api',
+    version='0.0.5',
+    description='python client for HAFAS public transport APIs',
+    long_description=README,
+    long_description_content_type="text/markdown",
     url='https://github.com/bergmannjg/fshafas',
     license='MIT',
+    author="Jürgen Bergmann",
+    author_email="jbergmann@posteo.de",
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
@@ -27,7 +34,8 @@ setup(
     install_requires=[
         'requests',
         'python-slugify',
-        'polyline'
+        'polyline',
+        'jsonpickle'
     ],
     python_requires='>=3.8',
 )

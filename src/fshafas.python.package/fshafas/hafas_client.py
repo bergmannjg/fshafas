@@ -22,7 +22,7 @@ from .fable_modules.fs_hafas_python.lib.transformations import (
 # todo: implement all methods of HafasAsyncClient
 
 
-def checkProfileType(profile: Any):
+def _checkProfileType(profile: Any):
     # check, if profile is from fshafas.fable_modules.fs_hafas_profiles_python classes
     if not isinstance(profile, Profile_1):
         raise TypeError(
@@ -31,10 +31,11 @@ def checkProfileType(profile: Any):
 
 class HafasClient(IDisposable):
     def __init__(self, profile: Profile) -> None:
-        checkProfileType(profile)
+        _checkProfileType(profile)
 
         self.profile = profile
-        self.asyncClient = HafasAsyncClient(self.profile)  # pytype: disable=wrong-arg-types
+        # pytype: disable=wrong-arg-types
+        self.asyncClient = HafasAsyncClient(self.profile)
 
     async def _journeys(self, _from: Union[str, Station, Stop, Location], _to: Union[str, Station, Stop, Location], opt: Optional[JourneysOptions] = None) -> Journeys:
         def generate() -> Async[Journeys]:
@@ -46,21 +47,25 @@ class HafasClient(IDisposable):
         return await start_as_task(singleton.Delay(generate))
 
     async def journeys(self, _from: Union[str, Station, Stop, Location], _to: Union[str, Station, Stop, Location], opt: Optional[JourneysOptions] = None) -> Journeys:
+        if opt is None:
+            opt = Default_JourneysOptions
+
         if (isinstance(_from, str) and not _from.isdigit()):
-            from_locs = await self.locations(_from, Default_LocationsOptions)
+            from_locs= await self.locations(_from, Default_LocationsOptions)
             if (len(from_locs) > 0 and from_locs[0].type == "stop"):
-                _from = from_locs[0].id
+                _from= from_locs[0].id
 
         if (isinstance(_to, str) and not _to.isdigit()):
-            to_locs = await self.locations(_to, Default_LocationsOptions)
+            to_locs= await self.locations(_to, Default_LocationsOptions)
             if (len(to_locs) > 0 and to_locs[0].type == "stop"):
-                _to = to_locs[0].id
+                _to= to_locs[0].id
 
         return await self._journeys(_from, _to, opt)
 
-    async def departures(self, name: Union[str, Station, Stop, Location], opt: Optional[DeparturesArrivalsOptions] = None) -> List[Alternative]:
+    async def departures(self, name: Union[str, Station, Stop, Location], opt: Optional[DeparturesArrivalsOptions]=None) -> List[Alternative]:
         if (opt is not None and not isinstance(opt, DeparturesArrivalsOptions)):
-            raise TypeError("argument opt: type DeparturesArrivalsOptions expected")
+            raise TypeError(
+                "argument opt: type DeparturesArrivalsOptions expected")
 
         def generate() -> Async[List[Alternative]]:
             def bind(_arg1: List[Alternative]) -> Async[List[Alternative]]:
@@ -70,9 +75,10 @@ class HafasClient(IDisposable):
 
         return await start_as_task(singleton.Delay(generate))
 
-    async def arrivals(self, name: Union[str, Station, Stop, Location], opt: Optional[DeparturesArrivalsOptions] = None) -> List[Alternative]:
+    async def arrivals(self, name: Union[str, Station, Stop, Location], opt: Optional[DeparturesArrivalsOptions]=None) -> List[Alternative]:
         if (opt is not None and not isinstance(opt, DeparturesArrivalsOptions)):
-            raise TypeError("argument opt: type DeparturesArrivalsOptions expected")
+            raise TypeError(
+                "argument opt: type DeparturesArrivalsOptions expected")
 
         def generate() -> Async[List[Alternative]]:
             def bind(_arg1: List[Alternative]) -> Async[List[Alternative]]:
@@ -82,7 +88,10 @@ class HafasClient(IDisposable):
 
         return await start_as_task(singleton.Delay(generate))
 
-    async def locations(self, name: str, opt: Optional[LocationsOptions] = None) -> List[Union[Station, Stop, Location]]:
+    async def locations(self, name: str, opt: Optional[LocationsOptions]=None) -> List[Union[Station, Stop, Location]]:
+        if opt is None:
+            opt = Default_LocationsOptions
+
         if (not isinstance(name, str)):
             raise TypeError("argument name: type string expected")
 
@@ -97,7 +106,7 @@ class HafasClient(IDisposable):
 
         return await start_as_task(singleton.Delay(generate))
 
-    async def nearby(self, l: Location, opt: Optional[NearByOptions] = None) -> List[Union[Station, Stop, Location]]:
+    async def nearby(self, l: Location, opt: Optional[NearByOptions]=None) -> List[Union[Station, Stop, Location]]:
         if (not isinstance(l, Location)):
             raise TypeError("argument l: type Location expected")
 
@@ -112,7 +121,7 @@ class HafasClient(IDisposable):
 
         return await start_as_task(singleton.Delay(generate))
 
-    async def radar(self, rect: BoundingBox, opt: Optional[RadarOptions] = None) -> List[Movement]:
+    async def radar(self, rect: BoundingBox, opt: Optional[RadarOptions]=None) -> List[Movement]:
         if (not isinstance(rect, BoundingBox)):
             raise TypeError("argument rect: type BoundingBox expected")
 
@@ -124,7 +133,7 @@ class HafasClient(IDisposable):
 
         return await start_as_task(singleton.Delay(generate))
 
-    async def tripsByName(self, name: str, opt: Optional[TripsByNameOptions] = None) -> List[Trip]:
+    async def tripsByName(self, name: str, opt: Optional[TripsByNameOptions]=None) -> List[Trip]:
         if (not isinstance(name, str)):
             raise TypeError("argument name: type string expected")
 
@@ -140,10 +149,11 @@ class HafasClient(IDisposable):
         return await start_as_task(singleton.Delay(generate))
 
     def productsOfMode(self, profile: Profile, mode: str) -> IndexMap_2[str, bool]:
-        checkProfileType(profile)
+        _checkProfileType(profile)
 
-        return HafasAsyncClient_productsOfMode(profile, mode)  # pytype: disable=wrong-arg-types
+        # pytype: disable=wrong-arg-types
+        return HafasAsyncClient_productsOfMode(profile, mode)
 
     def Dispose(self) -> None:
-        __: HafasClient = self
+        __: HafasClient= self
         __.asyncClient.Dispose()

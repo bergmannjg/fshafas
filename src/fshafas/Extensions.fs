@@ -46,6 +46,13 @@ module internal DateTimeEx =
         else
             raise (System.NotImplementedException("nyi"))
 
+    // workaround: error in DateTime.ToString if minute = 0
+    let formatTime (dt: System.DateTime) (pattern: string) : string =
+        if "HHmm" = pattern then
+            sprintf "%02d%02d" (hour dt) (minute dt)
+        else
+            raise (System.NotImplementedException("nyi"))
+
     // workaround: missing code addHours
     [<Import("timedelta", from="datetime")>]
     [<Emit("$1+timedelta(hours=$2)")>]
