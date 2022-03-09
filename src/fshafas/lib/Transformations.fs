@@ -159,6 +159,7 @@ module internal MergeOptions =
 
     let JourneysOptions (options: FsHafas.Endpoint.Options) (opt: JourneysOptions option) =
         { options with
+            remarks = getOptionValue opt (fun v -> v.remarks) options.remarks
             stopovers = getOptionValue opt (fun v -> v.stopovers) options.stopovers
             scheduledDays = getOptionValue opt (fun v -> v.scheduledDays) options.scheduledDays
             firstClass = getOptionValue opt (fun v -> v.firstClass) options.firstClass }

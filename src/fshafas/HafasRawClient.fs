@@ -285,8 +285,6 @@ type HafasRawClient(endpoint: string, salt: string, cfg: FsHafas.Raw.Cfg, baseRe
 
         let req =
             match svcReq.req with
-            // workaround: U14.Case13 ServerInfoRequest has runtime type obj, case works if in first pattern
-            | U14.Case13 r -> Json.serialize r
             | U14.Case1 r -> Json.serialize r
             | U14.Case2 r -> Json.serialize r
             | U14.Case3 r -> Json.serialize r
@@ -300,6 +298,7 @@ type HafasRawClient(endpoint: string, salt: string, cfg: FsHafas.Raw.Cfg, baseRe
             | U14.Case11 r -> Json.serialize r
             | U14.Case12 r -> Json.serialize r
             | U14.Case14 r -> Json.serialize r
+            | _ -> "{}" // U14.Case13 ServerInfoRequest is empty
 
         sprintf "{\"cfg\":%s, \"meth\":\"%s\", \"req\":%s}" cfg svcReq.meth req
 

@@ -118,13 +118,13 @@ module internal JourneyLeg =
                 | _ -> None
 
         let dPlatfS = matchPlatfS pt.dep.dPlatfS pt.dep.dPltfS
-        let dPlatfR =  matchPlatfS pt.dep.dPlatfR pt.dep.dPltfR
+        let dPlatfR = matchPlatfS pt.dep.dPlatfR pt.dep.dPltfR
 
         let depPl =
             ctx.profile.parsePlatform ctx dPlatfS dPlatfR pt.dep.dCncl
 
         let aPlatfS = matchPlatfS pt.arr.aPlatfS pt.arr.aPltfS
-        let aPlatfR =  matchPlatfS pt.arr.aPlatfR pt.arr.aPltfR
+        let aPlatfR = matchPlatfS pt.arr.aPlatfR pt.arr.aPltfR
 
         let arrPl =
             ctx.profile.parsePlatform ctx aPlatfS aPlatfR pt.arr.aCncl
@@ -170,7 +170,7 @@ module internal JourneyLeg =
                     match jny.msgL with
                     | Some msgL ->
                         msgL
-                        |> Array.filter (fun msg ->  // remove msgs used in stopoversWithRemarks
+                        |> Array.filter (fun msg -> // remove msgs used in stopoversWithRemarks
                             remarkRanges
                             |> Array.exists (fun r -> Some r.remX = msg.remX && not r.wholeLeg)
                             |> not)
@@ -186,7 +186,11 @@ module internal JourneyLeg =
                                 latitude = Some(float pos.y / 1000000.0) }
                     | None -> None
 
-                let remarks = Common.msgLToRemarks ctx msgL
+                let remarks =
+                    if ctx.opt.remarks then
+                        Common.msgLToRemarks ctx msgL
+                    else
+                        None
 
                 leg <-
                     { leg with

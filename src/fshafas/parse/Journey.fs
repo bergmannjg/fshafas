@@ -15,14 +15,14 @@ module internal Journey =
     [<Emit("Buffer.from($0, 'hex')")>]
     let FromHexString (s: string) = [||]
 #else
-    #if FABLE_PY
+#if FABLE_PY
     open Fable.Core
 
     [<Emit("bytes.fromhex($0)")>]
     let FromHexString (s: string) : byte [] = jsNative
-    #else
+#else
     let FromHexString (s: string) = System.Convert.FromHexString s
-    #endif
+#endif
 #endif
 
     let private parseScheduledDays (ctx: Context) (sDays: string) (year: int) =
@@ -37,8 +37,8 @@ module internal Journey =
                     (fun (m: IndexMap<string, bool>) b ->
                         m.Item(dt.ToString("yyyy-MM-dd")) <- d &&& b <> 0uy
 #if FABLE_PY
-                        dt <- FsHafas.Extensions.DateTimeEx.addDays(dt, 1)
-#else                        
+                        dt <- FsHafas.Extensions.DateTimeEx.addDays (dt, 1)
+#else
                         dt <- dt.AddDays(1.0)
 #endif
                         m)
@@ -51,9 +51,12 @@ module internal Journey =
             |> Array.map (fun l -> ctx.profile.parseJourneyLeg ctx l j.date)
 
         let remarks =
-            Common.msgLToRemarks ctx j.msgL
-            |> Option.defaultValue Array.empty
-            |> Some
+            if ctx.opt.remarks then
+                Common.msgLToRemarks ctx j.msgL
+                |> Option.defaultValue Array.empty
+                |> Some
+            else
+                None
 
         let scheduledDays =
             match ctx.opt.scheduledDays, j.sDays.sDaysB with
@@ -80,11 +83,11 @@ module internal Journey =
             | None -> None
 
         { Default.Journey with
-              legs = legs
-              refreshToken = Some j.ctxRecon
-              remarks = remarks
-              scheduledDays = scheduledDays
-              cycle = cycle }
+            legs = legs
+            refreshToken = Some j.ctxRecon
+            remarks = remarks
+            scheduledDays = scheduledDays
+            cycle = cycle }
 
     let distanceOfJourney (j: Journey) =
         j.legs
