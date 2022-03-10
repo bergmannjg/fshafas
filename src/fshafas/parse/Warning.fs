@@ -10,11 +10,11 @@ module internal Warning =
           toLoc = Common.getElementAtSome e.tLocX ctx.common.locations
           dir = e.dir
           icoCrd =
-              Some
-                  { x = e.icoCrd.x
-                    y = e.icoCrd.y
-                    ``type`` = None }
-          icon = None }
+            Some
+                { x = e.icoCrd.x
+                  y = e.icoCrd.y
+                  ``type`` = None }
+          icon = Common.getElementAtSome e.icoX ctx.common.icons }
 
     let private parseMsgEvent (ctx: Context) (e: FsHafas.Raw.RawHimMsgEvent) : FsHafas.Client.Event =
         { fromLoc = Common.getElementAtSome e.fLocX ctx.common.locations
@@ -60,16 +60,17 @@ module internal Warning =
             s |> Option.map (fun s -> s.Replace("<br>", "\n"))
 
         { Default.Warning with
-              id = Some w.hid
-              summary = brToNewline w.head
-              text = brToNewline w.text
-              company = w.comp
-              categories = Some categories
-              priority = Some w.prio
-              validFrom = parseDateTime ctx w.sDate w.sTime
-              validUntil = parseDateTime ctx w.eDate w.eTime
-              modified = parseDateTime ctx w.lModDate w.lModTime
-              products = products
-              events = events
-              edges = edges
-              affectedLines = affectedLines }
+            id = Some w.hid
+            icon =  Common.getElementAtSome (Some w.icoX) ctx.common.icons
+            summary = brToNewline w.head
+            text = brToNewline w.text
+            company = w.comp
+            categories = Some categories
+            priority = Some w.prio
+            validFrom = parseDateTime ctx w.sDate w.sTime
+            validUntil = parseDateTime ctx w.eDate w.eTime
+            modified = parseDateTime ctx w.lModDate w.lModTime
+            products = products
+            events = events
+            edges = edges
+            affectedLines = affectedLines }

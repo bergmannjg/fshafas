@@ -30,6 +30,7 @@
     <Compile Include="format/FormatRequest.fs" />
     <Compile Include="parse/DateTime.fs" />
     <Compile Include="parse/When.fs" />
+    <Compile Include="parse/Icon.fs" />
     <Compile Include="parse/Common.fs" />
     <Compile Include="parse/ArrivalOrDeparture.fs" />
     <Compile Include="parse/Hint.fs" />

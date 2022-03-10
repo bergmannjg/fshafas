@@ -42,7 +42,7 @@ type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
     [<Emit("(Object.keys($0))")>]
     member __.Keys: 's [] = jsNative
 #else
-  #if FABLE_PY
+#if FABLE_PY
 module internal Dict =
     [<Emit("dict()")>]
     let dict () : obj = jsNative
@@ -72,7 +72,7 @@ type IndexMap<'s, 'b when 's :> obj and 'b: equality>(defaultValue: 'b) =
             ()
 
     member __.Keys = Dict.keys<'s> dict
-  #else
+#else
 type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
     let mutable map: Map<'s, 'b> = Map.empty
 
@@ -87,8 +87,12 @@ type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
 
     member __.Keys =
         map |> Seq.map (fun kv -> kv.Key) |> Seq.toArray
-  #endif
 #endif
+#endif
+
+and Icon =
+    { ``type``: string
+      title: string option }
 
 /// A ProductType relates to how a means of transport "works" in local context.
 /// Example: Even though S-Bahn and U-Bahn in Berlin are both trains, they have different operators, service patterns,
@@ -117,6 +121,7 @@ and Profile =
     abstract member remarks : bool option
     abstract member remarksGetPolyline : bool option
     abstract member lines : bool option
+
 /// A location object is used by other items to indicate their locations.
 and Location =
     { ``type``: string option
@@ -264,7 +269,7 @@ and IcoCrd =
 and Edge =
     { fromLoc: U3<Station, Stop, Location> option
       toLoc: U3<Station, Stop, Location> option
-      icon: obj option
+      icon: Icon option
       dir: int option
       icoCrd: IcoCrd option }
 
@@ -278,7 +283,7 @@ and Event =
 and Warning =
     { ``type``: string option
       id: string option
-      icon: obj option
+      icon: Icon option
       summary: string option
       text: string option
       category: string option

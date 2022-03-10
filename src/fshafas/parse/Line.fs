@@ -17,16 +17,21 @@ module internal Line =
 
         let name = p.addName |> Option.orElse (Some p.name)
 
-        let (id, fahrtNr, adminCode, catOut) =
+        let id =
             match p.prodCtx with
             | Some (prodCtx) ->
-                (prodCtx.lineId
-                 |> Option.orElse name
-                 |> Option.bind slug,
-                 prodCtx.num,
-                 prodCtx.admin,
-                 prodCtx.catOut)
-            | None -> (None, None, None, None)
+                prodCtx.lineId
+                |> Option.orElse name
+                |> Option.bind slug
+            | None -> 
+                match name with
+                | Some name -> slug name
+                | None -> None
+
+        let (fahrtNr, adminCode, catOut) =
+            match p.prodCtx with
+            | Some (prodCtx) -> (prodCtx.num, prodCtx.admin, prodCtx.catOut)
+            | None -> (None, None, None)
 
         let productName =
             match catOut with

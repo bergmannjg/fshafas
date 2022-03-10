@@ -25,6 +25,7 @@ type CommonData =
       locations: U3<Station, Stop, Location> []
       lines: FsHafas.Client.Line []
       hints: (U3<FsHafas.Client.Hint, FsHafas.Client.Status, FsHafas.Client.Warning> option) []
+      icons: Icon []
       polylines: FeatureCollection [] }
 
 type ParsedWhen =
@@ -50,6 +51,7 @@ type Profile
         parseArrival,
         parseDeparture,
         parseHint,
+        parseIcon,
         parsePolyline,
         parseLocations,
         parseLine,
@@ -87,6 +89,10 @@ type Profile
     member val parseHint: Context
         -> FsHafas.Raw.RawRem
         -> U3<FsHafas.Client.Hint, FsHafas.Client.Status, FsHafas.Client.Warning> option = parseHint with get, set
+
+    member val parseIcon: Context
+        -> FsHafas.Raw.RawIco
+        -> Icon option = parseIcon with get, set
 
     member val parsePolyline: Context -> FsHafas.Raw.RawPoly -> FsHafas.Client.FeatureCollection =
         parsePolyline with get, set

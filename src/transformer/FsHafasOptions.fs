@@ -95,6 +95,10 @@ type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
         map |> Seq.map (fun kv -> kv.Key) |> Seq.toArray
   #endif
 #endif
+
+and Icon =
+    { ``type``: string
+      title: string option }
 """
 
 /// todo: add attributes to transformer
@@ -165,6 +169,7 @@ let transformTypeVals =
        "*", "realtimeDataFrom", "int option"
        "*", "categories", "array<int> option"
        "*", "realtimeDataUpdatedAt", "int option"
+       "*", "icon", "Icon option"
        "LoyaltyCard", "discount", "int option"
        "RemarksOptions", "from", "DateTime option"
        "RemarksOptions", "``to``", "DateTime option"

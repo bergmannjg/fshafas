@@ -221,6 +221,7 @@ let transform (fromFile: string) (toFile: string) (options: TransformerOptions) 
             if
                 options.prelude.IsSome
                 && options.prelude.Value.Contains("module")
+                && not (options.prelude.Value.Contains("module internal"))
             then
                 "    "
             else

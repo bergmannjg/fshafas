@@ -12,9 +12,6 @@ let checkEqual (o1: obj) (o2: obj) =
     let printTypesDifferent (name: string) (o1: obj) (t1: Type) (o2: obj) (t2: Type) =
         if name = "properties" then
             ()
-        else if name = "icon" then
-            ()
-
         else
             diffs <- diffs + 1
             fprintfn stderr "%s" (sprintf "TypesDifferent %s: '%A' '%A'" name t1.Name t2.Name)
@@ -24,10 +21,6 @@ let checkEqual (o1: obj) (o2: obj) =
            && o1 <> null
            && o2 <> null
            && o1.ToString().Replace("-", "").ToLower() = o2.ToString().Replace("-", "").ToLower() then // ignore ids
-            ()
-        else if name = "id" && (o1 = null || o2 = null) then // ignore ids, todo
-            ()
-        else if name = "icon" && (o1 = null || o2 = null) then // ignore icon, todo
             ()
         else if name = "distance"
                 && o1 = null
@@ -52,7 +45,9 @@ let testRunner (jsonRaw: string) (jsonResult: string) (loader: FsHafas.Raw.RawRe
         let rawResponse =
             FsHafas.Api.Parser.Deserialize<FsHafas.Raw.RawResponse>(jsonRaw)
 
-        let svcResL =  Option.defaultValue [||] rawResponse.svcResL
+        let svcResL =
+            Option.defaultValue [||] rawResponse.svcResL
+
         Assert.That(svcResL.Length, Is.EqualTo(1))
         let res = svcResL.[0].res
 
@@ -97,8 +92,8 @@ let loadJourneys (res: FsHafas.Raw.RawResult) (expectedJson: string) =
             dbProfile
             res.outConL
             { FsHafas.Api.Parser.defaultOptions with
-                  scheduledDays = false
-                  remarks = false }
+                scheduledDays = false
+                remarks = false }
             res
 
     Assert.That(parsedResponse.journeys.IsSome, Is.EqualTo(true))
@@ -165,14 +160,13 @@ let idOfU3StationStopLocation (location: U3<Station, Stop, Location>) =
 
 let sortDurations (durations: Duration []) : Duration [] =
     durations
-    |> Array.map
-        (fun d ->
-            let sorted =
-                d.stations
-                |> Array.sortBy (fun s -> idOfU3StationStopLocation s)
+    |> Array.map (fun d ->
+        let sorted =
+            d.stations
+            |> Array.sortBy (fun s -> idOfU3StationStopLocation s)
 
-            { duration = d.duration
-              stations = sorted })
+        { duration = d.duration
+          stations = sorted })
 
 let loadReachableFrom (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     Assert.That(res.posL.IsSome, Is.EqualTo(true))
@@ -200,8 +194,7 @@ let loadNearby (res: FsHafas.Raw.RawResult) (expectedJson: string) =
         FsHafas.Api.Parser.parseLocationsFromResult
             dbProfile
             res.locL.Value
-            { FsHafas.Api.Parser.defaultOptions with
-                  linesOfStops = false }
+            { FsHafas.Api.Parser.defaultOptions with linesOfStops = false }
             res
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))

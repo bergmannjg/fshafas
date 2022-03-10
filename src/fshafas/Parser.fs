@@ -17,6 +17,7 @@ module Parser =
           locations = Array.empty
           lines = Array.empty
           hints = Array.empty
+          icons = Array.empty
           polylines = Array.empty }
 
     let defaultOptions: Options =

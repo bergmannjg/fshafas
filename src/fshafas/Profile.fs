@@ -19,6 +19,7 @@ module Profile =
             ArrivalOrDeparture.parseArrival,
             ArrivalOrDeparture.parseDeparture,
             Hint.parseHint,
+            Icon.parseIcon,
             Polyline.parsePolyline,
             Location.parseLocations,
             Line.parseLine,

@@ -32,6 +32,12 @@ module internal Common =
             |> Option.defaultValue [||]
             |> Array.map (fun p -> ctx2.profile.parseHint ctx2 p)
 
+        let icons =
+            c.icoL
+            |> Option.defaultValue [||]
+            |> Array.map (fun i -> ctx2.profile.parseIcon ctx2 i)
+            |> Array.choose id
+            
         let polylines =
             c.polyL
             |> Option.defaultValue [||]
@@ -43,6 +49,7 @@ module internal Common =
           locations = locations
           lines = ctx2.common.lines
           hints = hints
+          icons = icons
           polylines = polylines }
 
     let getElementAt<'a> (index: int) (arr: 'a []) =
