@@ -15,6 +15,8 @@ const createClient = require('hafas-client')
 const dbProfile = require('hafas-client/p/db')
 const bvgProfile = require('hafas-client/p/bvg')
 const svvProfile = require('hafas-client/p/svv')
+const sbbProfile = require('hafas-client/p/sbb')
+const geolib = require('geolib');
 
 const { fshafas } = require('fs-hafas-client')
 
@@ -28,20 +30,23 @@ var myArgs = process.argv.slice(2);
 const client = myArgs.indexOf("--fshafas") > 0 ? fsclient : jsclient;
 
 const locations = () => {
-    client.locations('8010338', { results: 3, linesOfStops: true })
+    const options = { results: 3, linesOfStops: true };
+    console.log(JSON.stringify(options));
+    client.locations('Hannover', options)
         .then(result => { console.log(JSON.stringify(result)); })
         .catch(console.error);
 }
 
+// Bern 8507785
+// Zürich 8503000
+
 const journeys = () => {
-    client.journeys({ type: 'stop', id: '8011160' }, '8010338', {
-        results: 1,
-        stopovers: true,
-        scheduledDays: true,
-        departure: new Date(2021, 2, 29, 13, 40)
-    })
+    const options = { results: 1, stopovers: false, scheduledDays: false };
+    console.log(JSON.stringify(options));
+    client.journeys({ type: 'stop', id: '8002549' }, '8000261', options)
         .then(result => { console.log(JSON.stringify(result)); })
-        .catch(console.error);
+        .catch(err =>
+            console.error(err));
 }
 
 const journeysFromTrip = async () => {
@@ -51,7 +56,7 @@ const journeysFromTrip = async () => {
 
     const departure = new Date();
     departure.setHours(departure.getHours() - 4);
-    const journeysResult = await client.journeys(hamburgHbf, münchenHbf, { departure: departure, results: 1, stopovers: true })
+    const journeysResult = await client.journeys(hamburgHbf, münchenHbf, { departure: departure, results: 1, stopovers: true, transfers: 0 })
     const journey = journeysResult.journeys.find(j => !j.legs[0].canceled);
 
     const leg = journey.legs.find(l => l.line.product === 'nationalExpress')
@@ -59,7 +64,9 @@ const journeysFromTrip = async () => {
 
     if (previousStopovers.length > 0) {
         const previousStopover = previousStopovers[previousStopovers.length - 1];
-        const journeys = await client.journeysFromTrip(leg.tripId, previousStopover, kölnHbf, { stopovers: true });
+        const options = { stopovers: true };
+        console.log(JSON.stringify(options));
+        const journeys = await client.journeysFromTrip(leg.tripId, previousStopover, kölnHbf, options);
         console.log(JSON.stringify(journeys));
     }
 }
@@ -70,7 +77,9 @@ const trip = () => {
     })
         .then(result => {
             const leg = result.journeys[0].legs[0];
-            client.trip(leg.tripId, leg.line.name)
+            const options = {};
+            console.log(JSON.stringify(options));
+            client.trip(leg.tripId, leg.line.name, options)
                 .then(result => { console.log(JSON.stringify(result)); })
                 .catch(console.error);
         })
@@ -78,58 +87,75 @@ const trip = () => {
 }
 
 const departures = () => {
-    client.departures({ type: 'stop', id: '8010338' }, { duration: 20, linesOfStops: true })
+    const options = { duration: 20, linesOfStops: true };
+    console.log(JSON.stringify(options));
+    client.departures({ type: 'stop', id: '8010338' }, options)
         .then(result => { console.log(JSON.stringify(result)); })
         .catch(console.error);
 }
 
 const nearby = () => {
+    const options = { distance: 400 };
+    console.log(JSON.stringify(options));
     client.nearby({
         type: 'location',
         latitude: 54.308438,
         longitude: 13.078028
-    }, { distance: 400 })
+    }, options)
         .then(result => { console.log(JSON.stringify(result)); })
         .catch(console.error)
 }
 
 const reachableFrom = () => {
+    const options = { maxDuration: 10 };
+    console.log(JSON.stringify(options));
     client.reachableFrom({
         type: 'location',
         address: 'unused',
         latitude: 54.308438,
         longitude: 13.078028
-    }, {
-        maxDuration: 10
-    })
+    }, options)
         .then(result => { console.log(JSON.stringify(result)); })
         .catch(console.error)
 }
 
 const radar = () => {
+    const [southwest, northeast] = geolib.getBoundsOfDistance(
+        { latitude: 53.553533, longitude: 10.00636 },
+        20000
+    );
+
+    const options = { results: 20, duration: 600 };
+    console.log(JSON.stringify(options));
     client.radar({
-        north: 54.319438,
-        west: 13.077028,
-        south: 54.297438,
-        east: 13.079028
-    }, { results: 5, duration: 300 })
+        north: northeast.latitude,
+        west: southwest.longitude,
+        south: southwest.latitude,
+        east: northeast.longitude
+    }, options)
         .then(result => { console.log(JSON.stringify(result)); })
         .catch(console.error)
 }
 
 const lines = () => {
-    svvClient.lines('S1')
+    const options = { };
+    console.log(JSON.stringify(options));
+    svvClient.lines('S1', options)
         .then(result => { console.log(JSON.stringify(result)); })
         .catch(console.error);
 }
 
 const remarks = () => {
-    svvClient.remarks()
+    const options = { };
+    console.log(JSON.stringify(options));
+    svvClient.remarks(options)
         .then(result => { console.log(JSON.stringify(result)); })
         .catch(console.error);
 }
 const serverInfo = () => {
-    client.serverInfo()
+    const options = { };
+    console.log(JSON.stringify(options));
+    client.serverInfo(options)
         .then(result => { console.log(JSON.stringify(result)); })
         .catch(console.error);
 }
@@ -220,11 +246,13 @@ for METHOD in "${METHODS[@]}"; do
             # cause of journeys request
         	sed -i '1,2d' x.txt 
     fi
-    head -n 1 x.txt > ${PATH2FIXTURES}/db-${METHOD}-raw-request.json
+    head -n 1 x.txt > ${PATH2FIXTURES}/db-${METHOD}-options.json
 
-    head -n 2 x.txt | tail -1 > ${PATH2FIXTURES}/db-${METHOD}-raw-response.json
+    head -n 2 x.txt | tail -1 > ${PATH2FIXTURES}/db-${METHOD}-raw-request.json
 
-    head -n 3 x.txt | tail -1 > ${PATH2FIXTURES}/db-${METHOD}-response.json
+    head -n 3 x.txt | tail -1 > ${PATH2FIXTURES}/db-${METHOD}-raw-response.json
+
+    head -n 4 x.txt | tail -1 > ${PATH2FIXTURES}/db-${METHOD}-response.json
   else
     echo "skip ${METHOD}"
   fi

@@ -27,6 +27,11 @@ let checkEqual (o1: obj) (o2: obj) =
                 && o2 <> null
                 && (sprintf "%A" o2) = "Some 0" then // ignore None = Some 0
             ()
+        else if name = "remarks"
+                && o1 = null
+                && o2 <> null
+                && (sprintf "%A" o2) = "Some [||]" then // ignore None = Some [||]
+            ()
         else
             diffs <- diffs + 1
             fprintfn stderr "%s" (sprintf "ValuesDifferent %s: '%A' '%A'" name o1 o2)
