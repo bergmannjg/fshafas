@@ -4,6 +4,7 @@
 
 Every method of the HafasClient type has a test fixture of json files:
 
+* the option parameter of the method
 * the raw output of the hafas api
 * the output of the JavaScript hafas-client api
 

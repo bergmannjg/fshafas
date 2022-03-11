@@ -174,7 +174,13 @@ type RawSDays =
 type RawPolyG = { polyXL: array<int> }
 type RawCrd = { x: int; y: int; z: int option }
 
-type RawJny =
+type RawFreq =
+    { minC: int option
+      maxC: int option
+      numC: int option
+      jnyL: array<RawJny> option }
+
+and RawJny =
     { jid: string
       prodX: int
       dirTxt: string option
@@ -192,7 +198,12 @@ type RawJny =
       dTrnCmpSX: RawTrnCmpSX option
       polyG: RawPolyG option
       ani: RawAni option
-      pos: RawCrd option }
+      pos: RawCrd option 
+      freq: RawFreq option }
+
+type RawGis =
+    { dist: int option
+      depsS: string option }
 
 type RawSec =
     { ``type``: string
@@ -201,7 +212,8 @@ type RawSec =
       arr: RawArr
       jny: RawJny option
       resState: string option
-      resRecommendation: string option }
+      resRecommendation: string option
+      gis: RawGis option }
 
 type RawSotCtxt =
     { cnLocX: int option
@@ -241,11 +253,6 @@ type RawFareSet =
 type RawTrfRes =
     { statusCode: string option
       fareSetL: array<RawFareSet> }
-
-type RawFreq =
-    { minC: int option
-      maxC: int option
-      numC: int option }
 
 type RawOutCon =
     { cid: string

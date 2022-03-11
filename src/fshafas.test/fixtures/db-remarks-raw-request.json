@@ -1,1 +1,1 @@
-{"lang":"de","svcReqL":[{"meth":"HimSearch","req":{"himFltrL":[],"getPolyline":false,"maxNum":100,"dateB":"20220208","timeB":"145925"}}],"client":{"type":"WEB","id":"VAO","name":"webapp"},"ext":"VAO.11","ver":"1.39","auth":{"type":"AID","aid":"wf7mcf9bv3nv8g5f"}}
+{"lang":"de","svcReqL":[{"meth":"HimSearch","req":{"himFltrL":[],"getPolyline":false,"maxNum":100,"dateB":"20220311","timeB":"093220"}}],"client":{"type":"WEB","id":"VAO","name":"webapp"},"ext":"VAO.11","ver":"1.39","auth":{"type":"AID","aid":"wf7mcf9bv3nv8g5f"}}

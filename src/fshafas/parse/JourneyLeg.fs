@@ -136,6 +136,10 @@ module internal JourneyLeg =
                 { leg with
                     ``public`` = Some true
                     walking = Some true
+                    distance =
+                        match pt.gis with
+                        | Some gis -> gis.dist
+                        | None -> None
                     transfer = Some(pt.``type`` = "TRSF" || pt.``type`` = "DEVI") }
 
         if pt.``type`` = "JNY" then
@@ -192,6 +196,51 @@ module internal JourneyLeg =
                     else
                         None
 
+                let cycle =
+                    match jny.freq with
+                    | Some freq ->
+                        match freq.minC, freq.maxC with
+                        | Some minC, Some maxC ->
+                            { min = Some(minC * 60)
+                              max = Some(maxC * 60)
+                              nr = freq.numC }
+                            |> Some
+                        | Some minC, _ ->
+                            { min = Some(minC * 60)
+                              max = None
+                              nr = None }
+                            |> Some
+                        | _ -> None
+                    | None -> None
+
+                let parseAlternative (a: FsHafas.Raw.RawJny) : Alternative =
+                    let line =
+                        Common.getElementAt a.prodX ctx.common.lines
+
+                    let parsedWhen =
+                        match a.stopL with
+                        | Some stopL when stopL.Length > 0 ->
+                            let st0 = stopL.[0]
+                            Some(ctx.profile.parseWhen ctx date st0.dTimeS st0.dTimeR st0.dTZOffset st0.dCncl)
+                        | _ -> None
+
+                    { Default.Alternative with
+                        tripId = a.jid
+                        line = line
+                        direction = a.dirTxt
+                        ``when`` = parsedWhen |> Option.bind (fun v -> v.``when``)
+                        plannedWhen = parsedWhen |> Option.bind (fun v -> v.plannedWhen)
+                        prognosedWhen =
+                            parsedWhen
+                            |> Option.bind (fun v -> v.prognosedWhen)
+                        delay = parsedWhen |> Option.bind (fun v -> v.delay) }
+
+                let alternatives =
+                    jny.freq
+                    |> Option.bind (fun freq ->
+                        freq.jnyL
+                        |> Option.map (Array.map parseAlternative))
+
                 leg <-
                     { leg with
                         tripId = Some jny.jid
@@ -201,7 +250,9 @@ module internal JourneyLeg =
                         stopovers = stopoversWithRemarks
                         polyline = polyline
                         remarks = remarks
-                        currentLocation = currentLocation })
+                        currentLocation = currentLocation
+                        cycle = cycle
+                        alternatives = alternatives })
 
         { leg with
             origin = origin

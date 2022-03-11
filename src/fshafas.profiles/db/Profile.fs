@@ -311,7 +311,10 @@ module Db =
             else
                 "SECOND"
 
-        match tcocL |> Array.tryFind (fun t -> t.c = cls) with
+        match tcocX
+              |> Array.map (fun i -> tcocL.[i])
+              |> Array.tryFind (fun t -> t.c = cls)
+            with
         | Some tcoc when tcoc.r.IsSome -> Some(loadFactors.[tcoc.r.Value])
         | _ -> None
 

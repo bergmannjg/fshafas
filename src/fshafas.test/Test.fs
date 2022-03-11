@@ -32,6 +32,11 @@ let checkEqual (o1: obj) (o2: obj) =
                 && o2 <> null
                 && (sprintf "%A" o2) = "Some [||]" then // ignore None = Some [||]
             ()
+        else if name = "transfer"
+                && o1 <> null
+                && o2 = null
+                && (sprintf "%A" o1) = "Some false" then // ignore None = Some false
+            ()
         else
             diffs <- diffs + 1
             fprintfn stderr "%s" (sprintf "ValuesDifferent %s: '%A' '%A'" name o1 o2)
@@ -92,13 +97,16 @@ let loadLocations (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     (parsedResponse :> obj, response :> obj)
 
 let loadJourneys (res: FsHafas.Raw.RawResult) (expectedJson: string) =
+    let options =
+        FsHafas.Api.Parser.Deserialize<JourneysOptions>(Fixture.jsonJouneysResponse ())
+
     let parsedResponse =
         FsHafas.Api.Parser.parseJourneysFromResult
             dbProfile
             res.outConL
             { FsHafas.Api.Parser.defaultOptions with
-                scheduledDays = false
-                remarks = false }
+                scheduledDays = options.scheduledDays |> Option.defaultValue false
+                remarks = options.remarks |> Option.defaultValue false }
             res
 
     Assert.That(parsedResponse.journeys.IsSome, Is.EqualTo(true))
@@ -194,12 +202,14 @@ let loadReachableFrom (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     (x1 :> obj, x2 :> obj)
 
 let loadNearby (res: FsHafas.Raw.RawResult) (expectedJson: string) =
+    let options =
+        FsHafas.Api.Parser.Deserialize<NearByOptions>(Fixture.jsonNearbyOptions ())
 
     let parsedResponse =
         FsHafas.Api.Parser.parseLocationsFromResult
             dbProfile
             res.locL.Value
-            { FsHafas.Api.Parser.defaultOptions with linesOfStops = false }
+            { FsHafas.Api.Parser.defaultOptions with linesOfStops = options.linesOfStops |> Option.defaultValue false }
             res
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))

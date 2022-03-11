@@ -37,11 +37,8 @@ const locations = () => {
         .catch(console.error);
 }
 
-// Bern 8507785
-// Zürich 8503000
-
 const journeys = () => {
-    const options = { results: 1, stopovers: false, scheduledDays: false };
+    const options = { results: 1, stopovers: false, scheduledDays: false, remarks: false };
     console.log(JSON.stringify(options));
     client.journeys({ type: 'stop', id: '8002549' }, '8000261', options)
         .then(result => { console.log(JSON.stringify(result)); })
@@ -95,7 +92,7 @@ const departures = () => {
 }
 
 const nearby = () => {
-    const options = { distance: 400 };
+    const options = { distance: 400, linesOfStops: false };
     console.log(JSON.stringify(options));
     client.nearby({
         type: 'location',

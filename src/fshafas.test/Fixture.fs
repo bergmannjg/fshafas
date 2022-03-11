@@ -10,6 +10,9 @@ let jsonLocationsRawResponse () =
 let jsonLocationsResponse () =
     File.ReadAllText(path + "db-locations-response.json")
 
+let jsonJouneysOptions () =
+    File.ReadAllText(path + "db-journeys-options.json")
+
 let jsonJouneysRawResponse () =
     File.ReadAllText(path + "db-journeys-raw-response.json")
 
@@ -51,6 +54,9 @@ let jsonTripRawResponse () =
 
 let jsonTripResponse () =
     File.ReadAllText(path + "db-trip-response.json")
+
+let jsonNearbyOptions () =
+    File.ReadAllText(path + "db-nearby-options.json")
 
 let jsonNearbyRawResponse () =
     File.ReadAllText(path + "db-nearby-raw-response.json")

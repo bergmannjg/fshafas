@@ -21,7 +21,8 @@ module internal Trip =
                   arr = RawArr.FromRawStopL stopL.[stopL.Length - 1]
                   jny = Some j
                   resState = None
-                  resRecommendation = None }
+                  resRecommendation = None
+                  gis = None }
 
             let date =
                 match j.date with
