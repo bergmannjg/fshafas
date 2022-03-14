@@ -7,7 +7,8 @@ The python package is generated from [Hafas Client in F#](https://github.com/ber
 Related:
 
 * [hafas-client](https://github.com/public-transport/hafas-client) JavaScript client for HAFAS public transport APIs,
-* [FPTF](https://github.com/public-transport/friendly-public-transport-format) Friendly Public Transport Format.
+* [FPTF](https://github.com/public-transport/friendly-public-transport-format) Friendly Public Transport Format,
+* [@types/hafas-client](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/fb785106d6264285d452e2e7efb5c68c0639fbd8/types/hafas-client/index.d.ts) Type definitions for hafas-client 5.22.0.
 
 ## Example
 

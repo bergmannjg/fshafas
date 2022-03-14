@@ -21,8 +21,7 @@ mkdir node_modules
 
 # import hafas-client types
 if [ "$1" = "remote" ]; then
-    # wget -q https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/types/hafas-client/index.d.ts
-    wget -q https://raw.githubusercontent.com/bergmannjg/hafas-client/add-types-in-jsdoc/index.d.ts
+    wget -q https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/types/hafas-client/index.d.ts
 else
     cp ../../../forks/hafas-client/index.d.ts .
 fi

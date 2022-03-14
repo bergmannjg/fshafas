@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>FsHafas.Profiles</PackageId>
-    <Version>1.3.1</Version>
+    <Version>1.4.0</Version>
     <Authors>J. Bergmann</Authors>
     <PackageTags>fable fsharp</PackageTags>
   </PropertyGroup>

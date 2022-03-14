@@ -11,7 +11,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Fable.Core.Experimental" Version="4.0.0-alpha-032" />
-    <PackageReference Include="Fable.SimpleJson.Python" Version="1.0.0" />
+    <PackageReference Include="Fable.SimpleJson.Python" Version="1.2.0" />
   </ItemGroup>
   <PropertyGroup>
     <DefineConstants>FABLE_COMPILER;FABLE_PY</DefineConstants>

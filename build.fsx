@@ -244,6 +244,7 @@ Target.create "InstallPythonPackageFromLocal" (fun _ ->
   Shell.mv (projDir + "fable_modules/") (projDir + "fshafas")
   Shell.Exec("bash", "fixes.sh", projDir) |> ignore
   Shell.Exec("python3", "-m pip install -e " + projDir) |> ignore
+  Shell.Exec("python3", "-m build " + projDir) |> ignore
 )
 
 let replaceRuntimeMgs (s:string) = 
