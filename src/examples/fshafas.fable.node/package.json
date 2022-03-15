@@ -1,11 +1,13 @@
 {
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "google-polyline": "^1.0.3",
-    "isomorphic-fetch": "^2.2.1",
-    "luxon": "^1.26.0",
-    "md5": "^2.3.0",
-    "slugg": "^1.2.1"
-  }
+    "name": "example.fable.node",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/index.js",
+    "type": "module",
+    "dependencies": {
+        "fs-hafas-client": "https://github.com/bergmannjg/fshafas/releases/download/1.4.0/fs-hafas-client-1.4.0.tgz",
+        "hafas-client": "5.22.2"
+    },
+    "author": "",
+    "license": "ISC"
 }

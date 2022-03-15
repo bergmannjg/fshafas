@@ -1,6 +1,4 @@
-# F# app running with Node.js
+# TypeScript app using fshafas npm package
 
-Using fshafas nuget package from local feed.
-
-* build: dotnet fable -o build
-* run: node build/App.js
+* build: npm install && tsc
+* run: node dist/index.js journeys Berlin Hamburg

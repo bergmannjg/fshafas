@@ -11,5 +11,12 @@
     "fshafas.bundle.js.LICENSE.txt"
 	],
   "author": "Jürgen Bergmann",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "google-polyline": "^1.0.3",
+    "isomorphic-fetch": "^2.2.1",
+    "luxon": "^1.26.0",
+    "md5": "^2.3.0",
+    "slugg": "^1.2.1"
+  }
 }

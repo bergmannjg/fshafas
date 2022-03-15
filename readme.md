@@ -63,7 +63,7 @@ Targets are:
 * *Test*: compile to dotnet dll and run tests,
 * *BuildFableWebpackNode*: compile lib via fable and webpack to a npm package,
 * *BuildFableWebpackWeb*: compile lib via fable and webpack to a web target,
-* *Python*: compile to Python and publish nuget package and python package to local feeds
+* *Python*: compile to Python and publish nuget package and Python package to local feeds
 
 Utility scripts:
 
@@ -72,10 +72,10 @@ Utility scripts:
 
 ## Using
 
-* [fshafas.fsx](./scripts/fshafas.fsx): F# Interactive example script,
-* [Program.fs](src/examples/cli): F# app running with dotnet, nodejs and python,
-* [program.py](src/examples/fshafas.fable.python/program.py): python program using the fshafas package,
-* [notebook.ipynb](src/examples/fshafas.fable.python/notebook.ipynb): jupyter notebook using the fshafas package
+* [Program.fs](src/examples/cli): F# app running with dotnet, nodejs and Python,
+* [program.py](src/examples/fshafas.fable.python/program.py): python program using the fshafas Python package,
+* [notebook.ipynb](src/examples/fshafas.fable.python/notebook.ipynb): jupyter notebook using the fshafas Python package
 * [Program.cs](src/examples/fshafas.csharp/Program.cs): C# program using the F# lib,
+* [index.ts](src/examples/fshafas.fable.node/index.ts): TypeScript app using the npm package,
 * [FahrplanApp](https://github.com/bergmannjg/FahrplanApp): Android TypeScript app using the npm package,
 * [Wep App](src/examples/fshafas.fable.web): a web app using the fshafas javascript bundle.
