@@ -79,14 +79,14 @@ module Parser =
             locs.[0]
         | _ -> U3.Case3 Default.Location
 
-    let internal parseLocations (locL: FsHafas.Raw.RawLoc []) (ctx: Context option) =
-        match ctx with
-        | Some (ctx) -> locL |> ctx.profile.parseLocations ctx
+    let internal parseLocations (locL: FsHafas.Raw.RawLoc [] option) (ctx: Context option) =
+        match locL, ctx with
+        | Some locL, Some ctx -> locL |> ctx.profile.parseLocations ctx
         | _ -> Array.empty
 
     let parseLocationsFromResult
         (profile: FsHafas.Endpoint.Profile)
-        (locL: FsHafas.Raw.RawLoc [])
+        (locL: FsHafas.Raw.RawLoc [] option)
         (options: Options)
         (res: FsHafas.Raw.RawResult)
         =
@@ -269,7 +269,17 @@ module Parser =
         let tzOffset =
             datetime.Substring(20, 2) |> int |> (*) 60
 
-        System.DateTimeOffset(year, month, day, hour, minute, 0, System.TimeSpan(tzOffset / 60, 0, 0)).DateTime
+        System
+            .DateTimeOffset(
+                year,
+                month,
+                day,
+                hour,
+                minute,
+                0,
+                System.TimeSpan(tzOffset / 60, 0, 0)
+            )
+            .DateTime
 #endif
 
     let internal parseDeparturesArrivals (``type``: string) (jnyL: FsHafas.Raw.RawJny [] option) (ctx: Context option) =

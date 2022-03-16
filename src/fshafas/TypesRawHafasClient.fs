@@ -198,7 +198,7 @@ and RawJny =
       dTrnCmpSX: RawTrnCmpSX option
       polyG: RawPolyG option
       ani: RawAni option
-      pos: RawCrd option 
+      pos: RawCrd option
       freq: RawFreq option }
 
 type RawGis =
@@ -390,7 +390,7 @@ type RawCommon =
 type RawMatch =
     { field: string option
       state: string option
-      locL: array<RawLoc> }
+      locL: array<RawLoc> option }
 
 type RawPos = { locX: int; dur: int }
 

@@ -208,7 +208,7 @@ let loadNearby (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let parsedResponse =
         FsHafas.Api.Parser.parseLocationsFromResult
             dbProfile
-            res.locL.Value
+            res.locL
             { FsHafas.Api.Parser.defaultOptions with linesOfStops = options.linesOfStops |> Option.defaultValue false }
             res
 

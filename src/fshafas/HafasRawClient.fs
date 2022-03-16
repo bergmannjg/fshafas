@@ -394,7 +394,9 @@ type HafasRawClient(endpoint: string, salt: string, cfg: FsHafas.Raw.Cfg, baseRe
                 else
                     let response = decode result
 
-                    let svcResL = Option.defaultValue [||] response.svcResL 
+                    let svcResL =
+                        Option.defaultValue [||] response.svcResL
+
                     if svcResL.Length = 1 then
                         let svcRes = svcResL.[0]
 
@@ -421,7 +423,7 @@ type HafasRawClient(endpoint: string, salt: string, cfg: FsHafas.Raw.Cfg, baseRe
 
             match res.``match`` with
             | Some ``match`` -> return (res.common, Some res, ``match``.locL)
-            | _ -> return (None, None, Array.empty)
+            | _ -> return (None, None, None)
         }
 
     member __.AsyncTripSearch(tripSearchRequest: TripSearchRequest) =
@@ -458,9 +460,7 @@ type HafasRawClient(endpoint: string, salt: string, cfg: FsHafas.Raw.Cfg, baseRe
         async {
             let! res = asyncPost (makeRequest "LocGeoPos" (U14.Case7 locGeoPosRequest))
 
-            match res.locL with
-            | Some locL -> return (res.common, Some res, locL)
-            | _ -> return (None, None, Array.empty)
+            return (res.common, Some res, res.locL)
         }
 
     member __.AsyncLocGeoReach(locGeoReachRequest: LocGeoReachRequest) =
