@@ -99,13 +99,17 @@ module internal Format =
         (profile: FsHafas.Endpoint.Profile)
         (name: string)
         (opt: FsHafas.Client.LocationsOptions option)
-        : FsHafas.Raw.LocMatchRequest =
+        : string * FsHafas.Raw.LocMatchRequest =
         let fuzzy =
             getOptionValue opt (fun v -> v.fuzzy) Default.LocationsOptions
 
         let results =
             getOptionValue opt (fun v -> v.results) Default.LocationsOptions
 
+        let language =
+            getOptionValue opt (fun v -> v.language) Default.LocationsOptions
+
+        language,
         { input =
             { loc =
                 { ``type`` = "ALL"
@@ -160,7 +164,7 @@ module internal Format =
         (``type``: string)
         (name: U4<string, FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>)
         (opt: FsHafas.Client.DeparturesArrivalsOptions option)
-        : FsHafas.Raw.StationBoardRequest =
+        : string * FsHafas.Raw.StationBoardRequest =
         let dt =
             getOptionValue opt (fun v -> v.``when``) Default.DeparturesArrivalsOptions
 
@@ -183,6 +187,10 @@ module internal Format =
 
         let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
 
+        let language =
+            getOptionValue opt (fun v -> v.language) Default.DeparturesArrivalsOptions
+
+        language,
         { ``type`` = ``type``
           date = date
           time = time
@@ -194,7 +202,7 @@ module internal Format =
         (profile: FsHafas.Endpoint.Profile)
         (refreshToken: string)
         (opt: FsHafas.Client.RefreshJourneyOptions option)
-        : FsHafas.Raw.ReconstructionRequest =
+        : string * FsHafas.Raw.ReconstructionRequest =
         let polylines =
             getOptionValue opt (fun v -> v.polylines) Default.RefreshJourneyOptions
 
@@ -204,6 +212,10 @@ module internal Format =
         let tickets =
             getOptionValue opt (fun v -> v.tickets) Default.RefreshJourneyOptions
 
+        let language =
+            getOptionValue opt (fun v -> v.language) Default.RefreshJourneyOptions
+
+        language,
         { getIST = true
           getPasslist = stopovers
           getPolyline = polylines
@@ -214,19 +226,23 @@ module internal Format =
         (profile: FsHafas.Endpoint.Profile)
         (lineName: string)
         (opt: FsHafas.Client.TripsByNameOptions option)
-        : FsHafas.Raw.JourneyMatchRequest =
+        : string * FsHafas.Raw.JourneyMatchRequest =
 
         let date =
             maybeGetOptionValue opt (fun v -> v.``when``)
             |> Option.map formatDate
 
+        let language =
+            getOptionValue opt (fun v -> Some "de") Default.TripsByNameOptions
+
+        language,
         { input = lineName; date = date }
 
     let locDetailsRequest
         (profile: FsHafas.Endpoint.Profile)
         (stop: U2<string, FsHafas.Client.Stop>)
         (opt: FsHafas.Client.StopOptions option)
-        : FsHafas.Raw.LocDetailsRequest =
+        : string * FsHafas.Raw.LocDetailsRequest =
 
         let id =
             match stop with
@@ -234,13 +250,17 @@ module internal Format =
             | U2.Case2 s when s.id.IsSome -> s.id.Value
             | _ -> raise (System.ArgumentException("Stop expected"))
 
+        let language =
+            getOptionValue opt (fun v -> v.language) Default.StopOptions
+
+        language,
         { locL = [| makeLocLTypeS profile id |] }
 
     let locGeoPosRequest
         (profile: FsHafas.Endpoint.Profile)
         (location: FsHafas.Client.Location)
         (opt: FsHafas.Client.NearByOptions option)
-        : FsHafas.Raw.LocGeoPosRequest =
+        : string * FsHafas.Raw.LocGeoPosRequest =
 
         let results =
             getOptionValue opt (fun v -> v.results) Default.NearByOptions
@@ -266,6 +286,10 @@ module internal Format =
             | Some (f) -> (Coordinate.fromFloat f)
             | None -> raise (System.ArgumentException("location.latitude"))
 
+        let language =
+            getOptionValue opt (fun v -> v.language) Default.NearByOptions
+
+        language,
         { ring =
             { cCrd = { x = x; y = y }
               maxDist = distance
@@ -279,7 +303,7 @@ module internal Format =
         (profile: FsHafas.Endpoint.Profile)
         (location: FsHafas.Client.Location)
         (opt: FsHafas.Client.ReachableFromOptions option)
-        : FsHafas.Raw.LocGeoReachRequest =
+        : string * FsHafas.Raw.LocGeoReachRequest =
 
         let dt =
             getOptionValue opt (fun v -> v.``when``) Default.ReachableFromOptions
@@ -298,6 +322,10 @@ module internal Format =
 
         let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
 
+        let language =
+            getOptionValue opt (fun v -> Some "de") Default.ReachableFromOptions
+
+        language,
         { loc = makeLoclTypeA location
           maxDur = maxDuration
           maxChg = maxTransfers
@@ -310,7 +338,7 @@ module internal Format =
         (profile: FsHafas.Endpoint.Profile)
         (rect: FsHafas.Client.BoundingBox)
         (opt: FsHafas.Client.RadarOptions option)
-        : FsHafas.Raw.JourneyGeoPosRequest =
+        : string * FsHafas.Raw.JourneyGeoPosRequest =
 
         if (rect.north <= rect.south) then
             raise (System.ArgumentException("north must be larger than south."))
@@ -338,6 +366,10 @@ module internal Format =
 
         let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
 
+        let language =
+            getOptionValue opt (fun v -> Some "de") Default.RadarOptions
+
+        language,
         { maxJny = results
           onlyRT = false
           date = date
@@ -362,11 +394,15 @@ module internal Format =
         (id: string)
         (name: string)
         (opt: FsHafas.Client.TripOptions option)
-        : FsHafas.Raw.JourneyDetailsRequest =
+        : string * FsHafas.Raw.JourneyDetailsRequest =
 
         let polyline =
             getOptionValue opt (fun v -> v.polyline) Default.TripOptions
 
+        let language =
+            getOptionValue opt (fun v -> v.language) Default.TripOptions
+
+        language,
         { jid = id
           name = name
           getPolyline = polyline }
@@ -375,15 +411,20 @@ module internal Format =
         (profile: FsHafas.Endpoint.Profile)
         (query: string)
         (opt: FsHafas.Client.LinesOptions option)
-        : FsHafas.Raw.LineMatchRequest =
+        : string * FsHafas.Raw.LineMatchRequest =
+
+        let language =
+            getOptionValue opt (fun v -> v.language) Default.LinesOptions
+
+        language,
         { input = query }
 
-    let serverInfoRequest () : FsHafas.Raw.ServerInfoRequest = new obj()
+    let serverInfoRequest () : string * FsHafas.Raw.ServerInfoRequest = ("de", new obj())
     
     let himSearchRequest
         (profile: FsHafas.Endpoint.Profile)
         (opt: FsHafas.Client.RemarksOptions option)
-        : FsHafas.Raw.HimSearchRequest =
+        : string * FsHafas.Raw.HimSearchRequest =
 
         let dt =
             getOptionValue opt (fun v -> v.from) Default.RemarksOptions
@@ -402,6 +443,10 @@ module internal Format =
 
         let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
 
+        let language =
+            getOptionValue opt (fun v -> v.language) Default.RemarksOptions
+
+        language,
         { himFltrL = filters
           getPolyline = polylines
           maxNum = results
@@ -413,7 +458,7 @@ module internal Format =
         (from: U4<string, FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>)
         (``to``: U4<string, FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>)
         (opt: FsHafas.Client.JourneysOptions option)
-        : FsHafas.Raw.TripSearchRequest =
+        : string * FsHafas.Raw.TripSearchRequest =
 
         match opt with
         | Some opt ->
@@ -469,6 +514,10 @@ module internal Format =
             | Some via -> Some [| { loc = makeLocLTypeS profile via } |]
             | None -> None
 
+        let language =
+            getOptionValue opt (fun v -> v.language) Default.JourneysOptions
+
+        language,
         profile.transformJourneysQuery
             opt
             { getPasslist = stopovers
@@ -496,7 +545,7 @@ module internal Format =
         (previousStopover: StopOver)
         (``to``: U4<string, FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>)
         (opt: FsHafas.Client.JourneysFromTripOptions option)
-        : FsHafas.Raw.SearchOnTripRequest =
+        : string * FsHafas.Raw.SearchOnTripRequest =
 
         let prevStopId =
             match previousStopover.stop with
@@ -532,6 +581,10 @@ module internal Format =
 
         let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
 
+        let language =
+            getOptionValue opt (fun v -> None) Default.JourneysFromTripOptions
+
+        language,
         { sotMode = "JI"
           jid = tripId
           locData =
