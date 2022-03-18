@@ -7,7 +7,7 @@ README = (this_directory / "README.md").read_text()
 
 setup(
     name='fshafas',
-    version='0.0.6',
+    version='0.0.7',
     description='python client for HAFAS public transport APIs',
     long_description=README,
     long_description_content_type="text/markdown",

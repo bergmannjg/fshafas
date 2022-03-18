@@ -72,8 +72,7 @@ async def main(argv: List[str]) -> int:
             print(
                 "arguments: --locations name (i.e. Hannover) | --journeys from to (i.e. 8000152 8000036)")
     except Exception as e:
-        arg10: str = str(e)
-        print(arg10)
+        print("error: ", str(e))
 
     return 0
 

@@ -5,6 +5,7 @@ open FsHafas.Raw
 
 #if FABLE_COMPILER
 open Fable.Core
+open Fable.Core.JsInterop
 #endif
 
 #if FABLE_JS
@@ -403,16 +404,28 @@ type HafasRawClient(endpoint: string, salt: string, cfg: FsHafas.Raw.Cfg, baseRe
                     if svcResL.Length = 1 then
                         let svcRes = svcResL.[0]
 
-                        match svcRes.err, svcRes.errTxt with
-                        | Some err, Some errTxt when err <> "OK" -> return raise (System.Exception(err + ":" + errTxt))
-                        | Some err, _ when err <> "OK" -> return raise (System.Exception(err))
-                        | _ -> return svcRes.res
+                        match svcRes.err, svcRes.errTxt, svcRes.res with
+                        | Some err, Some errTxt, _ when err <> "OK" -> return raise (HafasError(err, errTxt))
+                        | Some err, _, _ when err <> "OK" -> return raise (HafasError(err, err))
+                        | _, _, Some res -> return res
+                        | _ -> return raise (System.Exception("invalid response"))
                     else
                         match response.err, response.errTxt with
-                        | Some err, Some errTxt -> return raise (System.Exception(err + ":" + errTxt))
-                        | Some err, _ -> return raise (System.Exception(err))
+                        | Some err, Some errTxt -> return raise (HafasError(err, errTxt))
+                        | Some err, _ -> return raise (HafasError(err, err))
                         | _ -> return raise (System.Exception("invalid response"))
             with
+            | :? (HafasError) as ex ->
+#if FABLE_JS
+                // Fable compiles HafasError as not derived from JavaScript Error
+                // here: copy HafasError fields to a JavaScript Error object and raise JavaScript Error
+                let ex1 = System.Exception(ex.Message)
+                ex1?code <- ex.code
+                ex1?isHafasError <- true
+                return raise ex1
+#else
+                return raise ex
+#endif
             | ex ->
                 printfn "error: %s" ex.Message
                 return raise (System.Exception("invalid response"))

@@ -423,7 +423,7 @@ type SvcRes =
     { meth: string
       err: string option
       errTxt: string option
-      res: RawResult }
+      res: RawResult option }
 
 type RawResponse =
     { ver: string

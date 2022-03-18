@@ -24,3 +24,7 @@
 ## 1.4.0
 
 * corresponds to hafas-client version 5.22.0
+
+## 1.4.1
+
+* update error handling

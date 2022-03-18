@@ -90,6 +90,11 @@ type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
 #endif
 #endif
 
+and HafasError(code : string, msg : string) =
+    inherit Exception(msg)
+    member e.code = code
+    member e.isHafasError = true
+
 and Icon =
     { ``type``: string
       title: string option }

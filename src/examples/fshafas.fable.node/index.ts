@@ -27,8 +27,8 @@ async function locations(name: string) {
 // retrieve journeys
 async function journeys(from: string, to: string) {
     try {
-        const fromStops = await client.locations(from, { results: 1 });
-        const toStops = await client.locations(to, { results: 1 });
+        const fromStops = parseInt(from) > 0 ? [from] : await client.locations(from, { results: 1 });
+        const toStops = parseInt(to) > 0 ? [to] : await client.locations(to, { results: 1 });
         if (fromStops.length > 0 && toStops.length > 0) {
             const result = await client.journeys(fromStops[0], toStops[0], { results: 4 })
             result.journeys?.forEach((j: Journey, nr: number) => {
@@ -37,8 +37,12 @@ async function journeys(from: string, to: string) {
                 });
             });
         }
-    } catch (error) {
-        console.error(error);
+    } catch (error: any) {
+        if (error.isHafasError) {
+            console.error('hafas error:', error);
+        } else {
+            console.error('error:', error);
+        }
     }
 }
 

@@ -61,7 +61,7 @@ let testRunner (jsonRaw: string) (jsonResult: string) (loader: FsHafas.Raw.RawRe
         Assert.That(svcResL.Length, Is.EqualTo(1))
         let res = svcResL.[0].res
 
-        let (x1, x2) = loader res jsonResult
+        let (x1, x2) = loader res.Value jsonResult
 
         let isEqual = checkEqual x1 x2
 

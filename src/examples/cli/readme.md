@@ -13,7 +13,7 @@
 ## Run with python
 
 * pip install -r requirements.txt
-* **build**: ./build-python.sh
+* **build**: dotnet fable-py cli.fable.python.fsproj
 * **run**: python3 program.py --help
 
 ## Usage

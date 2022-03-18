@@ -107,11 +107,13 @@ Target.create "CheckReleaseVersion" (fun _ ->
 )
 
 Target.create "BuildFableWebpackNode" (fun _ ->
+  Shell.cleanDir ("./src/fshafas.fable.package/build")
   DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.fable.package") "fable" "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode production --no-devtool --config ./webpack.node.config.js"
   |> checkResult "BuldFableWebpack failed"
 )
 
 Target.create "BuildFableWebpackNodeDev" (fun _ ->
+  Shell.cleanDir ("./src/fshafas.fable.package/build")
   DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.fable.package") "fable" "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode development --devtool source-map --config ./webpack.node.config.js" |> ignore
   Npm.exec "pack fs-hafas-client/" (fun o -> { o with NpmFilePath = "/usr/bin/npm"; WorkingDirectory = "./src/fshafas.fable.package/" }) |> ignore
 )
@@ -323,6 +325,12 @@ Target.create "CompareJsPyResult" (fun _ ->
   Shell.mkdir "./tmp"
   Shell.cleanDir "./tmp"
 
+  Shell.cleanDir "./src/examples/cli/build"
+  DotNet.exec (DotNet.Options.withWorkingDirectory "./src/examples/cli") "fable" "./cli.fable.fsproj -o build" |> ignore
+
+  Shell.cleanDir "./src/examples/cli/fable_modules"
+  DotNet.exec (DotNet.Options.withWorkingDirectory "./src/examples/cli") "fable-py" "./cli.fable.python.fsproj" |> ignore
+
   let results = 
     tests
     |> Array.map (fun (m,a) -> compareJsPyResult m a)
@@ -335,6 +343,9 @@ Target.create "CompareJsPyResult" (fun _ ->
 Target.create "CompareNetJsResult" (fun _ ->
   Shell.mkdir "./tmp"
   Shell.cleanDir "./tmp"
+
+  Shell.cleanDir "./src/examples/cli/build"
+  DotNet.exec (DotNet.Options.withWorkingDirectory "./src/examples/cli") "fable" "./cli.fable.fsproj -o build" |> ignore
 
   let results = 
     tests

@@ -4,6 +4,7 @@ open System.Text.RegularExpressions
 
 #if FABLE_COMPILER
 open Fable.Core
+open Fable.Core.JsInterop
 #endif
 
 open FsHafas
@@ -109,7 +110,7 @@ let trains () =
 
 let getLocation (client: Api.HafasAsyncClient) (name: string) =
     async {
-        if Regex.IsMatch(name, @"^\d{6,}$") then
+        if Regex.IsMatch(name, @"^\d+$") then
             return Some(U4.Case1 name)
         else
             let! locations = client.AsyncLocations name (Some Default.LocationsOptions)
@@ -123,19 +124,38 @@ let getLocation (client: Api.HafasAsyncClient) (name: string) =
             return (locations |> Array.tryPick (toU4 >> Some))
     }
 
+let AsyncRunCatched (computation: Async<unit>) =
+    async {
+        match! computation |> Async.Catch with
+        | Choice1Of2 r -> return r
+        | Choice2Of2 ext ->
+            match ext with
+            | :? (HafasError) as ex -> printfn "hafas error: %s %s" ex.code ex.Message
+            | e -> printfn "error: %s" e.Message
+
+            return ()
+    }
+
 #if FABLE_JS
-let AsyncRun (computation: Async<'T>) =
+let AsyncRun (computation: Async<unit>) =
     computation
     |> Async.StartAsPromise
+    |> Promise.catch (fun error ->
+        if error?isHafasError then
+            printfn "hafas error, code: %s msg: %s" error?code error.Message
+        else
+            printfn "error: %s" error.Message)
     |> ignore
 #else
 #if FABLE_PY
 let AsyncRun (computation: Async<unit>) =
     computation
+    |> AsyncRunCatched
     |> Async.StartImmediate
 #else
-let AsyncRun (computation: Async<'T>) =
+let AsyncRun (computation: Async<unit>) =
     computation
+    |> AsyncRunCatched
     |> Async.RunSynchronously
 #endif
 #endif
@@ -218,8 +238,7 @@ let journeysFromTrip (fromId: string, toId: string, newToId: string) =
 
         let hasLeft (s: StopOver) =
             s.departure
-            |> Option.exists (fun dep -> Api.Parser.ParseIsoString(dep) < System.DateTime.Now
-            )
+            |> Option.exists (fun dep -> Api.Parser.ParseIsoString(dep) < System.DateTime.Now)
 
         let previousStopover =
             stopovers
@@ -246,7 +265,11 @@ let journeysFromTrip (fromId: string, toId: string, newToId: string) =
             if journeys.Length > 0 then
                 FsHafas.Printf.Short.JourneyLegs 0 journeys.[0]
                 |> printfn "%s"
-                printfn "journey to %s found, switching at previousStopover: %s" newToId (FsHafas.Printf.Short.StopOverStop 0 previousStopover)
+
+                printfn
+                    "journey to %s found, switching at previousStopover: %s"
+                    newToId
+                    (FsHafas.Printf.Short.StopOverStop 0 previousStopover)
         | _, None -> printfn "previousStopover not found in %d stopovers" ((maybeArray id stopovers).Length)
         | _ -> printfn "journey to %s not found" newToId
     }
@@ -430,6 +453,6 @@ let main argv =
 #endif
         argv |> Array.toList |> parse |> List.iter run
     with
-    | e -> printf "error: %s" e.Message
+    | e -> printfn "main error: %s" e.Message
 
     0
