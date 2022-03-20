@@ -195,8 +195,7 @@ let journeys (from: string, ``to``: string) =
     |> AsyncRun
 
 let journeysFromTrip (fromId: string, toId: string, newToId: string) =
-    use client =
-        new Api.HafasAsyncClient(FsHafas.Profiles.Db.profile)
+    use client = new Api.HafasAsyncClient(FsHafas.Profiles.Db.profile)
 
     let departure =
 #if FABLE_PY
@@ -215,7 +214,7 @@ let journeysFromTrip (fromId: string, toId: string, newToId: string) =
             transfers = Some 0 }
 
     async {
-        let! journeysResult = client.AsyncJourneys(U4.Case1 fromId) (U4.Case1 toId) (Some options)
+        let! journeysResult = client.AsyncJourneys (U4.Case1 fromId) (U4.Case1 toId) (Some options)
 
         let journey =
             journeysResult.journeys
@@ -386,7 +385,7 @@ let stop (name: string) =
     use client = new Api.HafasAsyncClient(profile)
 
     async {
-        let! stop = client.AsyncStop(U2.Case1 name) (Some { Default.StopOptions with linesOfStops = Some true })
+        let! stop = client.AsyncStop (U2.Case1 name) (Some { Default.StopOptions with linesOfStops = Some true })
 
         FsHafas.Printf.Short.U3StationStopLocation 0 stop
         |> printfn "%s"

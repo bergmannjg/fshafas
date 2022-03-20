@@ -240,7 +240,7 @@ Target.create "PublishPythonProjToLocalNuGetFeed" (fun _ ->
 Target.create "InstallPythonPackageFromLocal" (fun _ ->
   let projDir = "src/fshafas.python.package/"
   Shell.cleanDir (projDir + "fable_modules/")
-  DotNet.exec id "fable-py" (projDir + "empty.fsproj") |> ignore
+  DotNet.exec id "fable-py" (projDir + "fshafas.fsproj") |> ignore
   Shell.cleanDir (projDir + "fshafas/fable_modules/")
   Shell.deleteDir (projDir + "fshafas/fable_modules/")
   Shell.mv (projDir + "fable_modules/") (projDir + "fshafas")

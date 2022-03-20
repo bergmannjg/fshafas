@@ -48,7 +48,7 @@ Current status when running *src/examples/cli/Program.fs* with fable and fable-p
 
 ## Building
 
-Requirements are:
+### Requirements
 
 * [dotnet SDK 5](https://dotnet.microsoft.com/download)
 * [node.js](https://nodejs.org/en/) for target js
@@ -56,7 +56,7 @@ Requirements are:
 
 Run `./build.sh` or `./build.cmd` at the root folder.
 
-Targets are:
+### Targets
 
 * *BuildLib*: compile to dotnet dll,
 * *PublishToLocalFeed*: publish nuget package to local feed, the package can be used in Fable,
@@ -65,16 +65,40 @@ Targets are:
 * *BuildFableWebpackWeb*: compile lib via fable and webpack to a web target,
 * *Python*: compile to Python and publish nuget package and Python package to local feeds
 
-Utility scripts:
+### Utility scripts
 
 * [create-types.sh](./scripts/create-types.sh): keep the F# types in sync with the corresponding TS types
 * [create-test-fixtures.sh](./scripts/create-test-fixtures.sh): create test fixtures using the JavaScript hafas-client library.
 
+### Packages
+
+There are several packages generated in the build process.
+
+#### NuGet packages
+
+The nuget packages are generated from the [fshafas](src/fshafas) projects and can be used with the dotnet tool.
+
+* fshafas and fshafas.profiles nuget packages:
+  * *dotnet build* compiles a F# program to dotnet
+  * *dotnet fable* compiles a F# program to a JavaScript program
+* fshafas.python and fshafas.python.profiles nuget packages:
+  *dotnet fable-py* compiles a F# program to a Python program.
+
+#### npm package
+
+The *fs-hafas-client-x.y.z.tgz* npm package is generated from the [fshafas.fable.package](src/fshafas.fable.package) project
+and can be used in a JavaScript program.
+
+#### Python package
+
+The *fshafas-x.y.z-py3-none-any.whl* Python package is generated from the [fshafas.python.package](src/fshafas.python.package) project
+and can be used in a Python program.
+
 ## Using
 
 * [Program.fs](src/examples/cli): F# app running with dotnet, nodejs and Python,
-* [program.py](src/examples/fshafas.fable.python/program.py): python program using the fshafas Python package,
-* [notebook.ipynb](src/examples/fshafas.fable.python/notebook.ipynb): jupyter notebook using the fshafas Python package
+* [program.py](src/examples/fshafas.fable.python/program.py): Python program using the fshafas Python package,
+* [notebook.ipynb](src/examples/fshafas.fable.python/notebook.ipynb): Jupyter notebook using the fshafas Python package
 * [Program.cs](src/examples/fshafas.csharp/Program.cs): C# program using the F# lib,
 * [index.ts](src/examples/fshafas.fable.node/index.ts): TypeScript app using the npm package,
 * [FahrplanApp](https://github.com/bergmannjg/FahrplanApp): Android TypeScript app using the npm package,

@@ -2,14 +2,11 @@ from setuptools import setup
 import pathlib
 from setuptools import setup
 
-this_directory = pathlib.Path(__file__).parent
-README = (this_directory / "README.md").read_text()
-
 setup(
     name='fshafas',
     version='0.0.7',
     description='python client for HAFAS public transport APIs',
-    long_description=README,
+    long_description=open('package.readme.md').read(),
     long_description_content_type="text/markdown",
     url='https://github.com/bergmannjg/fshafas',
     license='MIT',
