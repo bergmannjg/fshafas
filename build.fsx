@@ -31,9 +31,9 @@ type Config = { version: string }
 
 Target.create "Clean" (fun _ ->
     Shell.cleanDir "src/fshafas.fable/build"
-    Shell.cleanDir "src/fshafas.fable.package/build"
-    Shell.rm "src/fshafas.fable.package/fs-hafas-client/fshafas.bundle.js"
-    Shell.rm "src/fshafas.fable.package/fs-hafas-client/fshafas.bundle.js.map"
+    Shell.cleanDir "src/fshafas.javascript.package/build"
+    Shell.rm "src/fshafas.javascript.package/fs-hafas-client/fshafas.bundle.js"
+    Shell.rm "src/fshafas.javascript.package/fs-hafas-client/fshafas.bundle.js.map"
     projectFiles |> Seq.iter (fun x -> DotNet.exec id "clean" x |> ignore)
 )
 
@@ -100,40 +100,40 @@ Target.create "BuildFableApp" (fun _ ->
 )
 
 Target.create "CheckReleaseVersion" (fun _ ->
-  let configStr = File.readAsString("src/fshafas.fable.package/fs-hafas-client/package.json") 
+  let configStr = File.readAsString("src/fshafas.javascript.package/fs-hafas-client/package.json") 
   let config = JsonSerializer.Deserialize(configStr)
   if release.AssemblyVersion <> config.version 
   then raise (System.Exception(sprintf "config version, exptected: %s, actual: %s" release.AssemblyVersion config.version))
 )
 
 Target.create "BuildFableWebpackNode" (fun _ ->
-  Shell.cleanDir ("./src/fshafas.fable.package/build")
-  DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.fable.package") "fable" "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode production --no-devtool --config ./webpack.node.config.js"
+  Shell.cleanDir ("./src/fshafas.javascript.package/build")
+  DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.javascript.package") "fable" "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode production --no-devtool --config ./webpack.node.config.js"
   |> checkResult "BuldFableWebpack failed"
 )
 
 Target.create "BuildFableWebpackNodeDev" (fun _ ->
-  Shell.cleanDir ("./src/fshafas.fable.package/build")
-  DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.fable.package") "fable" "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode development --devtool source-map --config ./webpack.node.config.js" |> ignore
-  Npm.exec "pack fs-hafas-client/" (fun o -> { o with NpmFilePath = "/usr/bin/npm"; WorkingDirectory = "./src/fshafas.fable.package/" }) |> ignore
+  Shell.cleanDir ("./src/fshafas.javascript.package/build")
+  DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.javascript.package") "fable" "./fshafas.fable.javascript.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode development --devtool source-map --config ./webpack.node.config.js" |> ignore
+  Npm.exec "pack fs-hafas-client/" (fun o -> { o with NpmFilePath = "/usr/bin/npm"; WorkingDirectory = "./src/fshafas.javascript.package/" }) |> ignore
 )
 
 Target.create "BuildFableWebpackWebDev" (fun _ ->
-  DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.fable.package") "fable" "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode development --config ./webpack.web.config.js" |> ignore
+  DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.javascript.package") "fable" "./fshafas.fable.javascript.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode development --config ./webpack.web.config.js" |> ignore
 )
 
 Target.create "BuildFableNpmPack" (fun _ ->
-  Npm.exec "pack fs-hafas-client/" (fun o -> { o with NpmFilePath = "/usr/bin/npm"; WorkingDirectory = "./src/fshafas.fable.package/" }) |> ignore
+  Npm.exec "pack fs-hafas-client/" (fun o -> { o with NpmFilePath = "/usr/bin/npm"; WorkingDirectory = "./src/fshafas.javascript.package/" }) |> ignore
 )
 
 Target.create "BuildFableNpmPackDev" (fun _ ->
-  Npm.exec "pack fs-hafas-client/" (fun o -> { o with NpmFilePath = "/usr/bin/npm"; WorkingDirectory = "./src/fshafas.fable.package/" }) |> ignore
+  Npm.exec "pack fs-hafas-client/" (fun o -> { o with NpmFilePath = "/usr/bin/npm"; WorkingDirectory = "./src/fshafas.javascript.package/" }) |> ignore
 )
 
 Target.create "CopyWebBundle" (fun _ ->
-    Shell.copy "src/examples/fshafas.fable.web/wwwroot/js/lib/" ["src/fshafas.fable.package/fs-hafas-client-web/fshafas.web.bundle.js"]
-    Shell.copy "src/examples/fshafas.fable.web/wwwroot/js/lib/" ["src/fshafas.fable.package/fs-hafas-client/hafas-client.d.ts"]
-    Shell.copy "src/examples/fshafas.fable.web/wwwroot/js/lib/" ["src/fshafas.fable.package/fs-hafas-client-web/fshafas.web.bundle.d.ts"]
+    Shell.copy "src/examples/fshafas.fable.web/wwwroot/js/lib/" ["src/fshafas.javascript.package/fs-hafas-client-web/fshafas.web.bundle.js"]
+    Shell.copy "src/examples/fshafas.fable.web/wwwroot/js/lib/" ["src/fshafas.javascript.package/fs-hafas-client/hafas-client.d.ts"]
+    Shell.copy "src/examples/fshafas.fable.web/wwwroot/js/lib/" ["src/fshafas.javascript.package/fs-hafas-client-web/fshafas.web.bundle.d.ts"]
 )
 
 let run workingDirectory file arguments = 
@@ -151,7 +151,7 @@ let run workingDirectory file arguments =
       then 
             Trace.trace callResult.Result.Output
       else
-            Trace.traceError callResult.Result.Output
+            Trace.traceError callResult.Result.Error
             failwith (file + " encountered errors!")
 
 let runWithFailureResult workingDirectory file arguments = 
@@ -196,20 +196,20 @@ Target.create "CompileTypeScript" (fun _ ->
 )
 
 Target.create "PublishToLocalNuGetFeed" (fun _ ->
-  DotNet.exec id "pack" "src/fshafas/fshafas.fable.fsproj" 
+  DotNet.exec id "pack" "src/fshafas/fshafas.fable.javascript.fsproj" 
   |> checkResult "pack failed"
   let home = Environment.environVar "HOME"
   let release = release.AssemblyVersion
   Shell.cleanDir (home + "/.nuget/packages/fshafas/" + release)
   Shell.cleanDir (home + "/local.packages/fshafas/" + release)
-  run "./src/fshafas/" "/usr/local/bin/nuget.exe" ("add" + " bin/Debug/FsHafas." + release + ".nupkg" + " -source " + home + "/local.packages -expand")
+  run "./src/fshafas/" "/usr/local/bin/nuget.exe" ("add" + " bin/Debug/FsHafas.JavaScript." + release + ".nupkg" + " -source " + home + "/local.packages -expand")
 
-  DotNet.exec id "pack" "src/fshafas.profiles/fshafas.profiles.fable.fsproj" 
+  DotNet.exec id "pack" "src/fshafas.profiles/fshafas.profiles.fable.javascript.fsproj" 
   |> checkResult "pack failed"
   let home = Environment.environVar "HOME"
   Shell.cleanDir (home + "/.nuget/packages/fshafas.profiles/" + release)
   Shell.cleanDir (home + "/local.packages/fshafas.profiles/" + release)
-  run "./src/fshafas.profiles/" "/usr/local/bin/nuget.exe" ("add" + " bin/Debug/FsHafas.Profiles." + release + ".nupkg" + " -source " + home + "/local.packages -expand")
+  run "./src/fshafas.profiles/" "/usr/local/bin/nuget.exe" ("add" + " bin/Debug/FsHafas.Profiles.JavaScript." + release + ".nupkg" + " -source " + home + "/local.packages -expand")
 )
 
 Target.create "PublishPythonProjToLocalNuGetFeed" (fun _ ->
@@ -362,6 +362,8 @@ Target.create "Default" ignore
 
 Target.create "Debug" ignore
 
+Target.create "JavaScript" ignore
+
 Target.create "Python" ignore
 
 Target.create "Web" ignore
@@ -370,11 +372,15 @@ Target.create "Docs" ignore
 
 "BuildLib"
 ==> "Test"
+==> "Default"
+
+"BuildLib"
+==> "Test"
 ==> "CheckReleaseVersion"
 ==> "PublishToLocalNuGetFeed"
 ==> "BuildFableWebpackNode"
 ==> "BuildFableNpmPack"
-==> "Default"
+==> "JavaScript"
 
 "BuildLib"
 ==> "Test"
@@ -385,6 +391,7 @@ Target.create "Docs" ignore
 ==> "Debug"
 
 "BuildLib"
+==> "Test"
 ==> "PublishPythonProjToLocalNuGetFeed"
 ==> "InstallPythonPackageFromLocal"
 ==> "Python"

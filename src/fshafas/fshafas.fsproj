@@ -5,6 +5,10 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RepositoryUrl>https://github.com/bergmannjg/fshafas</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageId>FsHafas.JavaScript</PackageId>
+    <Version>1.4.1</Version>
+    <Authors>J. Bergmann</Authors>
+    <PackageTags>fable fsharp</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>FsHafas</PackageId>
+    <PackageId>FsHafas.JavaScript</PackageId>
     <Version>1.4.1</Version>
     <Authors>J. Bergmann</Authors>
     <PackageTags>fable fsharp</PackageTags>
@@ -52,6 +52,6 @@
     <Compile Include="HafasClient.fs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fshafas.fable.fsproj; **\*.fs" PackagePath="fable" />
+    <Content Include="fshafas.fable.javascript.fsproj; **\*.fs" PackagePath="fable" />
   </ItemGroup>
 </Project>

@@ -7,7 +7,7 @@
 ## Run with node
 
 * npm install
-* **build**: dotnet fable cli.fable.fsproj -o build
+* **build**: dotnet fable cli.fable.javascript.fsproj -o build
 * **run**: node build/Program.js --help
 
 ## Run with python

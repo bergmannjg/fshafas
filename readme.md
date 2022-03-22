@@ -14,8 +14,6 @@ The library exposes  3 interfaces:
 2) a F# async based interface corresponding to hafas-client api,
 3) a JS promise based interface corresponding to the TS [Type definitions](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/hafas-client/index.d.ts) for hafas-client.
 
-The library compiles via Fable to a webpack module with [this](src/fshafas.fable.package/fs-hafas-client/fshafas.bundle.d.ts) TS Type definition.
-
 ## Compilation to JavaScript
 
 The JS promise based interface compiles via Fable to a JavaScript library, this library and the original hafas-client can be used almost interchangeably.
@@ -59,11 +57,9 @@ Run `./build.sh` or `./build.cmd` at the root folder.
 ### Targets
 
 * *BuildLib*: compile to dotnet dll,
-* *PublishToLocalFeed*: publish nuget package to local feed, the package can be used in Fable,
 * *Test*: compile to dotnet dll and run tests,
-* *BuildFableWebpackNode*: compile lib via fable and webpack to a npm package,
-* *BuildFableWebpackWeb*: compile lib via fable and webpack to a web target,
-* *Python*: compile to Python and publish nuget package and Python package to local feeds
+* *JavaScript*: compile to JavaScript and build npm package
+* *Python*: compile to Python and build Python package
 
 ### Utility scripts
 
@@ -80,13 +76,16 @@ The nuget packages are generated from the [fshafas](src/fshafas) projects and ca
 
 * fshafas and fshafas.profiles nuget packages:
   * *dotnet build* compiles a F# program to dotnet
+* fshafas.javascript and fshafas.javascript.profiles nuget packages:
+  * the nuget package contains the F# source files and the JavaScrript specific project file
   * *dotnet fable* compiles a F# program to a JavaScript program
 * fshafas.python and fshafas.python.profiles nuget packages:
-  *dotnet fable-py* compiles a F# program to a Python program.
+  * the nuget package contains the F# source files and the Python specific project file
+  * *dotnet fable-py* compiles a F# program to a Python program.
 
 #### npm package
 
-The *fs-hafas-client-x.y.z.tgz* npm package is generated from the [fshafas.fable.package](src/fshafas.fable.package) project
+The *fs-hafas-client-x.y.z.tgz* npm package is generated from the [fshafas.javascript.package](src/fshafas.javascript.package) project
 and can be used in a JavaScript program.
 
 #### Python package
