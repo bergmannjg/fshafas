@@ -200,15 +200,15 @@ Target.create "PublishToLocalNuGetFeed" (fun _ ->
   |> checkResult "pack failed"
   let home = Environment.environVar "HOME"
   let release = release.AssemblyVersion
-  Shell.cleanDir (home + "/.nuget/packages/fshafas/" + release)
-  Shell.cleanDir (home + "/local.packages/fshafas/" + release)
+  Shell.cleanDir (home + "/.nuget/packages/fshafas.javascript/" + release)
+  Shell.cleanDir (home + "/local.packages/fshafas.javascript/" + release)
   run "./src/fshafas/" "/usr/local/bin/nuget.exe" ("add" + " bin/Debug/FsHafas.JavaScript." + release + ".nupkg" + " -source " + home + "/local.packages -expand")
 
   DotNet.exec id "pack" "src/fshafas.profiles/fshafas.profiles.fable.javascript.fsproj" 
   |> checkResult "pack failed"
   let home = Environment.environVar "HOME"
-  Shell.cleanDir (home + "/.nuget/packages/fshafas.profiles/" + release)
-  Shell.cleanDir (home + "/local.packages/fshafas.profiles/" + release)
+  Shell.cleanDir (home + "/.nuget/packages/fshafas.profiles.javascript/" + release)
+  Shell.cleanDir (home + "/local.packages/fshafas.profiles.javascript/" + release)
   run "./src/fshafas.profiles/" "/usr/local/bin/nuget.exe" ("add" + " bin/Debug/FsHafas.Profiles.JavaScript." + release + ".nupkg" + " -source " + home + "/local.packages -expand")
 )
 

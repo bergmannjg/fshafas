@@ -20,7 +20,7 @@
 
 ```txt
 USAGE: cli.exe [--help] [--locations <name>] [--stop <id>] [--journeys <from> <to>] 
-               [--journeysfromtrip <fromId> <toId> <newToId>]
+               [--journeysfromtrip <tripId> <prevStopId> <prevStopDepature> <newToId>]
                [--departures <name>] [--trips <name>] [--nearby <lon> <lat>] [--reachablefrom <lon> <lat>]
                [--radar <north> <west> <south> <east>] [--lines <name>] [--serverinfo] [--profile <db|bvg|svv>] [--debug]
 
@@ -30,9 +30,8 @@ OPTIONS:
     --stop <id>           get stop, e.g. 8000152.
     --journeys <from> <to>
                           get journeys, e.g. Hannover Berlin.
-    --journeysfromtrip <fromId> <toId> <newToId>
-                          get journeys from current position of trip <fromId> - <toId> to new target <newToId>,
-                          e.g. from trip 8002549 to 8000261 to new target 8000207.
+    --journeysfromtrip <tripId> <prevStopId> <prevStopDepature> <newToId>
+                          get journeys from  <prevStopId> of trip <tripId> to new target <newToId>.
     --departures <name>   get Departures, e.g. Hannover.
     --trips <name>        get Trips, e.g. ICE 1001.
     --nearby <lon> <lat>  get Nearby, e.g. 13.078028 54.308438.

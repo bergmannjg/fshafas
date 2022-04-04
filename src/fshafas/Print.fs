@@ -159,11 +159,12 @@ module Short =
         | None -> ""
 
     let private Leg (ident: int) (leg: Leg) (short: bool) =
-        match leg.origin with
-        | Some (U3.Case3 l) -> printfS ident "origin: " (Some "") + Location 0 l
-        | Some (U3.Case2 s) -> printfS ident "origin: " (Some "") + Stop 0 s
-        | Some (U3.Case1 s) -> printfS ident "origin: " (Some "") + Station 0 s
-        | _ -> ""
+        printfnS ident "tripId: " leg.tripId
+        + match leg.origin with
+          | Some (U3.Case3 l) -> printfS ident "origin: " (Some "") + Location 0 l
+          | Some (U3.Case2 s) -> printfS ident "origin: " (Some "") + Stop 0 s
+          | Some (U3.Case1 s) -> printfS ident "origin: " (Some "") + Station 0 s
+          | _ -> ""
         + match leg.destination with
           | Some (U3.Case2 s) -> printfS ident "destination: " (Some "") + Stop 0 s
           | _ -> ""

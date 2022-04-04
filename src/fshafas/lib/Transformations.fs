@@ -398,6 +398,26 @@ module Default =
           remarks = None
           currentLocation = None }
 
+    let StopOver: StopOver =
+        { stop = None
+          departure = None
+          departureDelay = None
+          prognosedDeparture = None
+          plannedDeparture = None
+          departurePlatform = None
+          prognosedDeparturePlatform = None
+          plannedDeparturePlatform = None
+          arrival = None
+          arrivalDelay = None
+          prognosedArrival = None
+          plannedArrival = None
+          arrivalPlatform = None
+          prognosedArrivalPlatform = None
+          plannedArrivalPlatform = None
+          remarks = None
+          passBy = None
+          cancelled = None }
+
     let Trip: Trip =
         { id = ""
           origin = None

@@ -16,7 +16,7 @@ type CliArguments =
     | Locations of name: string
     | Stop of id: string
     | Journeys of from: string * ``to``: string
-    | JourneysFromTrip of fromId: string * toId: string * newToId: string
+    | JourneysFromTrip of tripId: string * stopover: string * departure: string * newToId: string
     | Departures of name: string
     | Trips of name: string
     | Nearby of lon: float * lat: float
@@ -41,9 +41,8 @@ OPTIONS:
     --stop <id>           get stop, e.g. 8000152.
     --journeys <from> <to>
                           get journeys, e.g. Hannover Berlin.
-    --journeysfromtrip <fromId> <toId> <newToId>
-                          get journeys from current position of trip <fromId> - <toId> to new target <newToId>,
-                          e.g. from trip 8002549 to 8000261 to new target 8000207.
+    --journeysfromtrip <tripId> <prevStopId> <prevStopDepature> <newToId>
+                          get journeys from  <prevStopId> of trip <tripId> to new target <newToId>.
     --departures <name>   get Departures, e.g. Hannover.
     --trips <name>        get Trips, e.g. ICE 1001.
     --nearby <lon> <lat>  get Nearby, e.g. 13.078028 54.308438.
@@ -72,7 +71,7 @@ let parse (args: string list) =
       valueToArg "--locations" Locations args
       valueToArg "--stop" Stop args
       value2ToArg "--journeys" Journeys args
-      value3ToArg "--journeysfromtrip" JourneysFromTrip args
+      value4ToArg "--journeysfromtrip" JourneysFromTrip args
       valueToArg "--departures" Departures args
       valueToArg "--trips" Trips args
       value2ToArg "--nearby" (fun (lon, lat) -> Nearby(float lon, float lat)) args
@@ -194,83 +193,45 @@ let journeys (from: string, ``to``: string) =
     }
     |> AsyncRun
 
-let journeysFromTrip (fromId: string, toId: string, newToId: string) =
+let journeysFromTrip (tripId: string, stopover: string, departure: string, newTo: string) =
     use client = new Api.HafasAsyncClient(FsHafas.Profiles.Db.profile)
 
-    let departure =
-#if FABLE_PY
-        FsHafas.Extensions.DateTimeEx.addHours (System.DateTime.Now, -3)
-#else
-        System.DateTime.Now.AddHours(-3.0)
-#endif
-
-    printfn "departure: %s" (departure.ToString("HHmm"))
-
-    let options =
-        { Default.JourneysOptions with
-            results = Some 1
-            departure = Some departure
-            stopovers = Some true
-            transfers = Some 0 }
-
     async {
-        let! journeysResult = client.AsyncJourneys (U4.Case1 fromId) (U4.Case1 toId) (Some options)
+        let! journeys =
+            async {
+                let! stopoverLoc = getLocation client stopover
+                let! newToLoc = getLocation client newTo
 
-        let journey =
-            journeysResult.journeys
-            |> maybeArray id
-            |> Array.tryFind (fun j -> not (j.legs.[0].cancelled |> Option.contains true))
+                let stopoverId =
+                    match stopoverLoc with
+                    | Some (U4.Case1 id) -> Some id
+                    | Some (U4.Case3 stop) -> stop.id
+                    | _ -> None
 
-        journey
-        |> Option.iter (FsHafas.Printf.Short.JourneyLegs 0 >> printfn "%s")
+                match stopoverId, newToLoc with
+                | Some stopoverId, Some newToLoc ->
+                    let stop: Stop = { Default.Stop with id = Some stopoverId }
 
-        let hasProduct (product: string) (l: Leg) =
-            match l.line with
-            | Some line -> line.product |> Option.contains product
-            | None -> false
+                    let previousStopover: StopOver =
+                        { Default.StopOver with
+                            stop = Some(U2.Case2 stop)
+                            departure = Some departure }
 
-        let (tripId, stopovers) =
-            journey
-            |> maybeArray (fun x -> x.legs)
-            |> Array.tryFind (hasProduct "nationalExpress")
-            |> Option.fold (fun _ leg -> (leg.tripId, leg.stopovers)) (None, None)
-
-        let hasLeft (s: StopOver) =
-            s.departure
-            |> Option.exists (fun dep -> Api.Parser.ParseIsoString(dep) < System.DateTime.Now)
-
-        let previousStopover =
-            stopovers
-            |> maybeArray id
-            |> Array.tryFindBack hasLeft
-
-        match tripId, previousStopover with
-        | Some tripId, Some previousStopover ->
-            printfn "previousStopover:"
-
-            FsHafas.Printf.Short.StopOver 2 previousStopover
-            |> printfn "%s"
-
-            let! journeys =
-                async {
                     return!
                         client.AsyncJourneysFromTrip
                             tripId
                             previousStopover
-                            (U4.Case1 newToId)
+                            newToLoc
                             (Some { Default.JourneysFromTripOptions with stopovers = Some true })
-                }
+                | _ -> return [||]
+            }
 
-            if journeys.Length > 0 then
-                FsHafas.Printf.Short.JourneyLegs 0 journeys.[0]
-                |> printfn "%s"
-
-                printfn
-                    "journey to %s found, switching at previousStopover: %s"
-                    newToId
-                    (FsHafas.Printf.Short.StopOverStop 0 previousStopover)
-        | _, None -> printfn "previousStopover not found in %d stopovers" ((maybeArray id stopovers).Length)
-        | _ -> printfn "journey to %s not found" newToId
+        Printf.Short.Journeys
+            { earlierRef = None
+              laterRef = None
+              journeys = Some journeys
+              realtimeDataFrom = None }
+        |> printfn "%s"
     }
     |> AsyncRun
 
@@ -434,7 +395,7 @@ let run (arg: CliArguments) =
     | Locations v -> locations v
     | Journeys (f, t) -> journeys (f, t)
     | Stop v -> stop v
-    | JourneysFromTrip (f, t, n) -> journeysFromTrip (f, t, n)
+    | JourneysFromTrip (f, t, d, n) -> journeysFromTrip (f, t, d, n)
     | Departures v -> departures v
     | Trips v -> trips v
     | Nearby (lon, lat) -> nearby (lon, lat)

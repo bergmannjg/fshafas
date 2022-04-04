@@ -581,8 +581,7 @@ module internal Format =
 
         let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
 
-        let language =
-            getOptionValue opt (fun v -> None) Default.JourneysFromTripOptions
+        let language = "de"
 
         language,
         { sotMode = "JI"
