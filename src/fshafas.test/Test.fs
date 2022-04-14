@@ -74,15 +74,14 @@ let testRunner (jsonRaw: string) (jsonResult: string) (loader: FsHafas.Raw.RawRe
         Assert.That(isEqual, Is.EqualTo(true))
     with
     | :? NUnit.Framework.AssertionException as ex -> ()
-    | ex -> fprintfn stderr "error: %s %s" ex.Message ex.StackTrace
 
-let dbProfile = FsHafas.Profiles.Db.profile
-let svvProfile = FsHafas.Profiles.Svv.profile
+let loadDbProfile() = FsHafas.Profiles.Db.profile
+let loadSvvProfile() = FsHafas.Profiles.Svv.profile
 
 let loadLocations (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let parsedResponse =
         FsHafas.Api.Parser.parseLocationsFromResult
-            dbProfile
+            (loadDbProfile())
             res.``match``.Value.locL
             FsHafas.Api.Parser.defaultOptions
             res
@@ -102,7 +101,7 @@ let loadJourneys (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
     let parsedResponse =
         FsHafas.Api.Parser.parseJourneysFromResult
-            dbProfile
+            (loadDbProfile())
             res.outConL
             { FsHafas.Api.Parser.defaultOptions with
                 scheduledDays = options.scheduledDays |> Option.defaultValue false
@@ -124,7 +123,7 @@ let skipLegs (journeys: Journey []) =
 
 let loadJourneyArray (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let parsedResponse =
-        FsHafas.Api.Parser.parseJourneysArrayFromResult dbProfile res.outConL FsHafas.Api.Parser.defaultOptions res
+        FsHafas.Api.Parser.parseJourneysArrayFromResult (loadDbProfile()) res.outConL FsHafas.Api.Parser.defaultOptions res
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
@@ -139,7 +138,7 @@ let loadJourneyArray (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
 let loadTrip (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let parsedResponse =
-        FsHafas.Api.Parser.parseTripFromResult dbProfile res.journey FsHafas.Api.Parser.defaultOptions res
+        FsHafas.Api.Parser.parseTripFromResult (loadDbProfile()) res.journey FsHafas.Api.Parser.defaultOptions res
 
     let response =
         FsHafas.Api.Parser.Deserialize<Trip>(expectedJson)
@@ -147,9 +146,10 @@ let loadTrip (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     (parsedResponse :> obj, response :> obj)
 
 let loadDepartures (res: FsHafas.Raw.RawResult) (expectedJson: string) =
+    let xloadDbProfile = FsHafas.Profiles.Db.profile
     let parsedResponse =
         FsHafas.Api.Parser.parseDeparturesArrivalsFromResult
-            dbProfile
+            (loadDbProfile())
             "DEP"
             res.jnyL
             FsHafas.Api.Parser.defaultOptions
@@ -185,7 +185,7 @@ let loadReachableFrom (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     Assert.That(res.posL.IsSome, Is.EqualTo(true))
 
     let parsedResponse =
-        FsHafas.Api.Parser.parseDurationsFromResult dbProfile res.posL.Value FsHafas.Api.Parser.defaultOptions res
+        FsHafas.Api.Parser.parseDurationsFromResult (loadDbProfile()) res.posL.Value FsHafas.Api.Parser.defaultOptions res
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
@@ -207,7 +207,7 @@ let loadNearby (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
     let parsedResponse =
         FsHafas.Api.Parser.parseLocationsFromResult
-            dbProfile
+            (loadDbProfile())
             res.locL
             { FsHafas.Api.Parser.defaultOptions with linesOfStops = options.linesOfStops |> Option.defaultValue false }
             res
@@ -223,7 +223,7 @@ let loadNearby (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
 let loadRadar (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let parsedResponse =
-        FsHafas.Api.Parser.parseMovementsFromResult dbProfile res.jnyL FsHafas.Api.Parser.defaultOptions res
+        FsHafas.Api.Parser.parseMovementsFromResult (loadDbProfile()) res.jnyL FsHafas.Api.Parser.defaultOptions res
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
@@ -236,7 +236,7 @@ let loadRadar (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
 let loadLines (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let parsedResponse =
-        FsHafas.Api.Parser.parseLinesFromResult svvProfile res.lineL FsHafas.Api.Parser.defaultOptions res
+        FsHafas.Api.Parser.parseLinesFromResult (loadSvvProfile()) res.lineL FsHafas.Api.Parser.defaultOptions res
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
@@ -249,7 +249,7 @@ let loadLines (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
 let loadWarnings (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let parsedResponse =
-        FsHafas.Api.Parser.parseWarningsFromResult svvProfile res.msgL FsHafas.Api.Parser.defaultOptions res
+        FsHafas.Api.Parser.parseWarningsFromResult (loadSvvProfile()) res.msgL FsHafas.Api.Parser.defaultOptions res
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
