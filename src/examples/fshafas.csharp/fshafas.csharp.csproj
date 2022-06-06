@@ -10,4 +10,8 @@
     <ProjectReference Include="../../fshafas.profiles/fshafas.profiles.fsproj"/>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FSharp.Core" Version="6.0.1" />
+  </ItemGroup>
+
 </Project>
