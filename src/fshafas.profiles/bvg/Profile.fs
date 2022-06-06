@@ -54,8 +54,10 @@ module Bvg =
              ``default`` = true } |]
 
     let formatStation (id: string) =
-        if Regex.IsMatch(id, @"^\d{6,}$") 
-           && (id.Length = 7 || id.Length = 9 || id.Length = 12) then
+        if
+            Regex.IsMatch(id, @"^\d{6,}$")
+            && (id.Length = 7 || id.Length = 9 || id.Length = 12)
+        then
             id
         else
             raise (System.ArgumentException("station id: " + id))

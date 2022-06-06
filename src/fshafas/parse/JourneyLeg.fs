@@ -43,8 +43,7 @@ module internal JourneyLeg =
 
         match msg.remX, fromIndex, toIndex with
         | Some remX, Some fromIndex, Some toIndex ->
-            let wholeLeg =
-                fromIndex = 0 && toIndex = stopovers.Length - 1
+            let wholeLeg = fromIndex = 0 && toIndex = stopovers.Length - 1
 
             Some
                 { remX = remX
@@ -67,8 +66,7 @@ module internal JourneyLeg =
         (commonData: CommonData)
         (stopover: FsHafas.Client.StopOver)
         =
-        let hint =
-            Common.getElementAt remarkRange.remX commonData.hints
+        let hint = Common.getElementAt remarkRange.remX commonData.hints
 
         let remarks =
             match stopover.remarks, hint with
@@ -97,11 +95,9 @@ module internal JourneyLeg =
     let parseJourneyLeg (ctx: Context) (pt: FsHafas.Raw.RawSec) (date: string) : FsHafas.Client.Leg =
         let mutable leg = Default.Leg
 
-        let origin =
-            Common.getElementAtSome pt.dep.locX ctx.common.locations
+        let origin = Common.getElementAtSome pt.dep.locX ctx.common.locations
 
-        let destination =
-            Common.getElementAtSome pt.arr.locX ctx.common.locations
+        let destination = Common.getElementAtSome pt.arr.locX ctx.common.locations
 
         let dep =
             ctx.profile.parseWhen ctx date pt.dep.dTimeS pt.dep.dTimeR pt.dep.dTZOffset pt.dep.dCncl
@@ -120,14 +116,12 @@ module internal JourneyLeg =
         let dPlatfS = matchPlatfS pt.dep.dPlatfS pt.dep.dPltfS
         let dPlatfR = matchPlatfS pt.dep.dPlatfR pt.dep.dPltfR
 
-        let depPl =
-            ctx.profile.parsePlatform ctx dPlatfS dPlatfR pt.dep.dCncl
+        let depPl = ctx.profile.parsePlatform ctx dPlatfS dPlatfR pt.dep.dCncl
 
         let aPlatfS = matchPlatfS pt.arr.aPlatfS pt.arr.aPltfS
         let aPlatfR = matchPlatfS pt.arr.aPlatfR pt.arr.aPltfR
 
-        let arrPl =
-            ctx.profile.parsePlatform ctx aPlatfS aPlatfR pt.arr.aCncl
+        let arrPl = ctx.profile.parsePlatform ctx aPlatfS aPlatfR pt.arr.aCncl
 
         if pt.``type`` = "WALK"
            || pt.``type`` = "TRSF"
@@ -145,8 +139,7 @@ module internal JourneyLeg =
         if pt.``type`` = "JNY" then
             pt.jny
             |> Option.iter (fun jny ->
-                let line =
-                    Common.getElementAt jny.prodX ctx.common.lines
+                let line = Common.getElementAt jny.prodX ctx.common.lines
 
                 let polyline =
                     match jny.poly with
@@ -223,8 +216,7 @@ module internal JourneyLeg =
                     | None -> None
 
                 let parseAlternative (a: FsHafas.Raw.RawJny) : Alternative =
-                    let line =
-                        Common.getElementAt a.prodX ctx.common.lines
+                    let line = Common.getElementAt a.prodX ctx.common.lines
 
                     let parsedWhen =
                         match a.stopL with

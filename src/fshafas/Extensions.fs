@@ -1,4 +1,5 @@
 namespace FsHafas.Extensions
+
 /// temporary extensions to add code for target python
 
 #if FABLE_PY
@@ -54,14 +55,14 @@ module internal DateTimeEx =
             raise (System.NotImplementedException("nyi"))
 
     // workaround: missing code addHours
-    [<Import("timedelta", from="datetime")>]
+    [<Import("timedelta", from = "datetime")>]
     [<Emit("$1+timedelta(hours=$2)")>]
-    let addHours (dt:System.DateTime, h:int) : System.DateTime = jsNative
+    let addHours (dt: System.DateTime, h: int) : System.DateTime = jsNative
 
     // workaround: missing code addDays
-    [<Import("timedelta", from="datetime")>]
+    [<Import("timedelta", from = "datetime")>]
     [<Emit("$1+timedelta(days=$2)")>]
-    let addDays (dt:System.DateTime, h:int) : System.DateTime = jsNative
+    let addDays (dt: System.DateTime, h: int) : System.DateTime = jsNative
 
 module internal DateTimeOffsetEx =
 
@@ -78,22 +79,54 @@ module internal DateTimeOffsetEx =
     let mktzoffset (seconds: int) : obj = jsNative
 
     [<Emit("datetime.datetime($0, $1, $2, $3, $4, $5, tzinfo=$6)")>]
-    let mkDateTime (year: int) (month: int) (day: int) (hour: int) (minute: int) (second: int) (tzinfo: obj) : System.DateTime =
+    let mkDateTime
+        (year: int)
+        (month: int)
+        (day: int)
+        (hour: int)
+        (minute: int)
+        (second: int)
+        (tzinfo: obj)
+        : System.DateTime =
         jsNative
 
     [<Emit("print($0)")>]
-    let print (_:obj) : unit = jsNative
+    let print (_: obj) : unit = jsNative
 
-    type DateTimeOffsetEx (dt: System.DateTime, tzoffsetArg: int option, tzArg: string option) =
+    type DateTimeOffsetEx(dt: System.DateTime, tzoffsetArg: int option, tzArg: string option) =
         let getDateTime () =
             match tzoffsetArg, tzArg with
             | Some (tzoffsetArg), _ ->
-                mkDateTime (DateTimeEx.year dt) (DateTimeEx.month dt) (DateTimeEx.day dt) (DateTimeEx.hour dt) (DateTimeEx.minute dt) (DateTimeEx.second dt) (mktzoffset tzoffsetArg)
-            | _, Some (tz) -> mkDateTime (DateTimeEx.year dt) (DateTimeEx.month dt) (DateTimeEx.day dt) (DateTimeEx.hour dt) (DateTimeEx.minute dt) (DateTimeEx.second dt) (gettz tz)
-            | _ -> mkDateTime (DateTimeEx.year dt) (DateTimeEx.month dt) (DateTimeEx.day dt) (DateTimeEx.hour dt) (DateTimeEx.minute dt) (DateTimeEx.second dt) (gettz "Europe/Berlin")
+                mkDateTime
+                    (DateTimeEx.year dt)
+                    (DateTimeEx.month dt)
+                    (DateTimeEx.day dt)
+                    (DateTimeEx.hour dt)
+                    (DateTimeEx.minute dt)
+                    (DateTimeEx.second dt)
+                    (mktzoffset tzoffsetArg)
+            | _, Some (tz) ->
+                mkDateTime
+                    (DateTimeEx.year dt)
+                    (DateTimeEx.month dt)
+                    (DateTimeEx.day dt)
+                    (DateTimeEx.hour dt)
+                    (DateTimeEx.minute dt)
+                    (DateTimeEx.second dt)
+                    (gettz tz)
+            | _ ->
+                mkDateTime
+                    (DateTimeEx.year dt)
+                    (DateTimeEx.month dt)
+                    (DateTimeEx.day dt)
+                    (DateTimeEx.hour dt)
+                    (DateTimeEx.minute dt)
+                    (DateTimeEx.second dt)
+                    (gettz "Europe/Berlin")
 
         member __.DateTime = getDateTime ()
 
-        member __.AddDays (days:float) = DateTimeOffsetEx(DateTimeEx.addDays(dt, days |> int), tzoffsetArg, tzArg)
+        member __.AddDays(days: float) =
+            DateTimeOffsetEx(DateTimeEx.addDays (dt, days |> int), tzoffsetArg, tzArg)
 
 #endif

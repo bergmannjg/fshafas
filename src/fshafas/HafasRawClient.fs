@@ -262,14 +262,12 @@ type HafasRawClient(endpoint: string, salt: string, cfg: FsHafas.Raw.Cfg, baseRe
 
 #if FABLE_JS
     let encode (request: RawRequest) =
-        let encoder =
-            Encode.Auto.generateEncoderCached (caseStrategy = CamelCase)
+        let encoder = Encode.Auto.generateEncoderCached (caseStrategy = CamelCase)
 
         request |> encoder |> Encode.toString 0
 
     let decode (json: string) : RawResponse =
-        let decoded =
-            Decode.Auto.fromString<RawResponse> (json, caseStrategy = CamelCase)
+        let decoded = Decode.Auto.fromString<RawResponse> (json, caseStrategy = CamelCase)
 
         match decoded with
         | Ok response -> response
@@ -309,8 +307,7 @@ type HafasRawClient(endpoint: string, salt: string, cfg: FsHafas.Raw.Cfg, baseRe
     /// encode RawRequest to json and erase type U14
     let encode (request: RawRequest) =
         try
-            let svcreql =
-                "[" + (encodeSvcReq request.svcReqL.[0]) + "]"
+            let svcreql = "[" + (encodeSvcReq request.svcReqL.[0]) + "]"
 
             let client = Json.serialize request.client
             let auth = Json.serialize request.auth
@@ -398,8 +395,7 @@ type HafasRawClient(endpoint: string, salt: string, cfg: FsHafas.Raw.Cfg, baseRe
                 else
                     let response = decode result
 
-                    let svcResL =
-                        Option.defaultValue [||] response.svcResL
+                    let svcResL = Option.defaultValue [||] response.svcResL
 
                     if svcResL.Length = 1 then
                         let svcRes = svcResL.[0]

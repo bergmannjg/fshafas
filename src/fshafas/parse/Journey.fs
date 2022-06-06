@@ -6,7 +6,7 @@ module internal Journey =
     open FsHafas.Endpoint
 
     let bytes =
-        [| 0 .. 7 |]
+        [| 0..7 |]
         |> Array.map (fun x -> 1 <<< (7 - x) |> byte)
 
 #if FABLE_JS

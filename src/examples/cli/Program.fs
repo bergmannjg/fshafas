@@ -199,7 +199,7 @@ let applyJourneyOption (option: JourneyOption) (journeysOptions: JourneysOptions
     match option with
     | Id id -> { journeysOptions with products = productsOfId id }
     | Transfers nr -> { journeysOptions with transfers = Some nr }
-    | Bahncard(discount, cls) ->
+    | Bahncard (discount, cls) ->
         { journeysOptions with
             loyaltyCard =
                 Some(

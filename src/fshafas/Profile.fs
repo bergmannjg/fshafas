@@ -9,7 +9,7 @@ open Fable.Core
 
 module Profile =
 
-    let defaultProfile() =
+    let defaultProfile () =
         FsHafas.Endpoint.Profile(
             "de-DE",
             "Europe/Berlin",

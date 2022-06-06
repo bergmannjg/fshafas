@@ -1,8 +1,4 @@
 namespace FsHafas.Endpoint
-/// <namespacedoc>
-///   <summary>FsHafas Profile Endpoint (see <a href="https://github.com/bergmannjg/fshafas/tree/main/src/fshafas.profiles">Profiles</a>)</summary>
-/// </namespacedoc>
-/// 
 #if FABLE_COMPILER
 open Fable.Core
 #endif
@@ -90,9 +86,7 @@ type Profile
         -> FsHafas.Raw.RawRem
         -> U3<FsHafas.Client.Hint, FsHafas.Client.Status, FsHafas.Client.Warning> option = parseHint with get, set
 
-    member val parseIcon: Context
-        -> FsHafas.Raw.RawIco
-        -> Icon option = parseIcon with get, set
+    member val parseIcon: Context -> FsHafas.Raw.RawIco -> Icon option = parseIcon with get, set
 
     member val parsePolyline: Context -> FsHafas.Raw.RawPoly -> FsHafas.Client.FeatureCollection =
         parsePolyline with get, set

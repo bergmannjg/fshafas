@@ -37,7 +37,7 @@ module internal Common =
             |> Option.defaultValue [||]
             |> Array.map (fun i -> ctx2.profile.parseIcon ctx2 i)
             |> Array.choose id
-            
+
         let polylines =
             c.polyL
             |> Option.defaultValue [||]

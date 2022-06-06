@@ -459,8 +459,7 @@ module internal Format =
 
         let stopovers = getOptionValue opt (fun v -> v.stopovers) Default.JourneysOptions
 
-        let transfers =
-            getOptionValue opt (fun v -> v.transfers) Default.JourneysOptions
+        let transfers = getOptionValue opt (fun v -> v.transfers) Default.JourneysOptions
 
         let transferTime =
             getOptionValue opt (fun v -> v.transferTime) Default.JourneysOptions

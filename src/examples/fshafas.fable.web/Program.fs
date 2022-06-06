@@ -10,10 +10,9 @@ let addProxies (proxies: IProxiesBuilder) =
     proxies.Map(
         "/proxy",
         (fun proxy ->
-            proxy.UseHttp
-                (fun (builder: IHttpProxyBuilder) ->
-                    builder.WithEndpoint(fun context _ -> context.Request.Query.["url"].[0])
-                    |> ignore)
+            proxy.UseHttp (fun (builder: IHttpProxyBuilder) ->
+                builder.WithEndpoint(fun context _ -> context.Request.Query.["url"].[0])
+                |> ignore)
             |> ignore)
     )
 

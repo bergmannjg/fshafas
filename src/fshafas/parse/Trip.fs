@@ -10,7 +10,7 @@ module internal Trip =
     open FsHafas.Extensions
 #endif
 
-    let parseTrip (ctx: Context) (j: FsHafas.Raw.RawJny): FsHafas.Client.Trip =
+    let parseTrip (ctx: Context) (j: FsHafas.Raw.RawJny) : FsHafas.Client.Trip =
 
         match j.stopL with
         | Some stopL when stopL.Length > 1 ->
@@ -34,8 +34,7 @@ module internal Trip =
 #else
                     sprintf "%04d%02d%02d" dt.Year dt.Month dt.Day
 #endif
-            let leg =
-                ctx.profile.parseJourneyLeg ctx rawSecL date
+            let leg = ctx.profile.parseJourneyLeg ctx rawSecL date
 
             match leg.tripId with
             | Some tripId -> ToTrip.FromLeg tripId leg

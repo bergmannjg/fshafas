@@ -61,7 +61,7 @@ module internal Warning =
 
         { Default.Warning with
             id = Some w.hid
-            icon =  Common.getElementAtSome (Some w.icoX) ctx.common.icons
+            icon = Common.getElementAtSome (Some w.icoX) ctx.common.icons
             summary = brToNewline w.head
             text = brToNewline w.text
             company = w.comp

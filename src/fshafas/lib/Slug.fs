@@ -8,23 +8,20 @@ module internal Slug =
 
 #if FABLE_JS
     [<ImportDefault("slugg")>]
-    let slugify (x: string): string = jsNative
+    let slugify (x: string) : string = jsNative
 
 #else
-    #if FABLE_PY
+#if FABLE_PY
     // [<ImportMember("slugify")>]
     // let slugify (s:string) : string = nativeOnly
 
-    let slugify (s:string) : string = s
+    let slugify (s: string) : string = s
 
-    #else
+#else
     open FSlugify.SlugGenerator
 
-    let slugify (s: string): string =
-        FSlugify.SlugGenerator.slugify
-            { DefaultSlugGeneratorOptions with
-                  Separator = '-' }
-            s
+    let slugify (s: string) : string =
+        FSlugify.SlugGenerator.slugify { DefaultSlugGeneratorOptions with Separator = '-' } s
 
-    #endif
+#endif
 #endif

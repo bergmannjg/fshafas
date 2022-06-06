@@ -42,8 +42,7 @@ module Traverse =
 
         if typ.GenericTypeArguments.[0].Name = typeof<String>.Name
            && typ.GenericTypeArguments.[1].Name = typeof<Boolean>.Name then
-            let map =
-                o :?> FsHafas.Client.IndexMap<string, bool>
+            let map = o :?> FsHafas.Client.IndexMap<string, bool>
 
             map.Keys
             |> Seq.fold (fun (m: Map<_, _>) k -> m.Add(k, map.[k])) Map.empty
@@ -187,11 +186,9 @@ module Compare =
 
         if typ.GenericTypeArguments.[0].Name = typeof<String>.Name
            && typ.GenericTypeArguments.[1].Name = typeof<Boolean>.Name then
-            let map1 =
-                o1 :?> FsHafas.Client.IndexMap<string, bool>
+            let map1 = o1 :?> FsHafas.Client.IndexMap<string, bool>
 
-            let map2 =
-                o2 :?> FsHafas.Client.IndexMap<string, bool>
+            let map2 = o2 :?> FsHafas.Client.IndexMap<string, bool>
 
             if map1.Keys.Length <> map2.Keys.Length then
                 evt.onValuesDifferent name o1 o2

@@ -5,8 +5,7 @@ open System.Text.Json.Serialization
 
 let deserializeOptions = JsonSerializerOptions()
 
-let serializeOptions =
-    JsonSerializerOptions(IgnoreNullValues = true)
+let serializeOptions = JsonSerializerOptions(IgnoreNullValues = true)
 
 let addConverters (deserializeConverters: JsonConverter array) =
     if (deserializeOptions.Converters.Count = 0) then
@@ -32,8 +31,7 @@ let Serialize<'a> (o: 'a) =
     JsonSerializer.Serialize<'a>(o, serializeOptions)
 
 let SerializeWithConverter<'a> (o: 'a) (converter: JsonConverter) =
-    let serializeOptions =
-        JsonSerializerOptions(IgnoreNullValues = true)
+    let serializeOptions = JsonSerializerOptions(IgnoreNullValues = true)
 
     serializeOptions.Converters.Add(converter)
     serializeOptions.Converters.Add(JsonFSharpConverter())

@@ -24,9 +24,7 @@ type TransformerOptions =
 let private parse fileName text =
     let checker = FSharpChecker.Create()
 
-    let opts =
-        { FSharpParsingOptions.Default with
-              SourceFiles = [| fileName |] }
+    let opts = { FSharpParsingOptions.Default with SourceFiles = [| fileName |] }
 
     let parseFileResults =
         checker.ParseFile(fileName, text, opts)
@@ -149,7 +147,7 @@ let private visitTypeDefn typeDefn options =
 
     let transform = options.transformsTypeDefn (toString id)
 
-    let typeSymbol() =
+    let typeSymbol () =
         if options.useRecursiveTypes && hasFirstType then
             "and"
         else
@@ -157,13 +155,13 @@ let private visitTypeDefn typeDefn options =
             "type"
 
     if (transform.IsSome) then
-        sprintf "%s %s = %s" (typeSymbol()) (toString id) transform.Value
+        sprintf "%s %s = %s" (typeSymbol ()) (toString id) transform.Value
         |> lines.Add
     else
-        () /// problems with 'Format Document'
+        ()
 
         if not (options.excludesType (toString id)) then
-            (sprintf "%s %s = " (typeSymbol()) (toString id))
+            (sprintf "%s %s = " (typeSymbol ()) (toString id))
             + (if isRecord then "{" else "")
             |> lines.Add
 
@@ -210,15 +208,13 @@ let transform (fromFile: string) (toFile: string) (options: TransformerOptions) 
     let sw = new StreamWriter(path = toFile)
     sw.AutoFlush <- true
 
-    let tree =
-        parse fromFile (SourceText.ofString (File.ReadAllText fromFile))
+    let tree = parse fromFile (SourceText.ofString (File.ReadAllText fromFile))
 
     match tree with
     | ParsedInput.ImplFile (implFile) ->
         let (ParsedImplFileInput (fn, script, name, _, _, modules, _)) = implFile
 
-        let lines =
-            visitModulesAndNamespaces modules options
+        let lines = visitModulesAndNamespaces modules options
 
         let prefix =
             if

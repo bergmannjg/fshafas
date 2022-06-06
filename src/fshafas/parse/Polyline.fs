@@ -6,28 +6,27 @@ module internal Polyline =
     open FsHafas.Client
     open FsHafas.Endpoint
 
-    let decode (s:string) : float [] [] =
-        [||]
+    let decode (s: string) : float [] [] = [||]
 
 #if FABLE_COMPILER
     open Fable.Core
 
     type GooglePolyline = { decode: string -> float [] [] }
 
- #if FABLE_JS
+#if FABLE_JS
     [<ImportDefault("google-polyline")>]
-    let defaultObject : GooglePolyline = jsNative
- #else
+    let defaultObject: GooglePolyline = jsNative
+#else
 
-  #if FABLE_PY
-    [<ImportAll("polyline")>]
-    [<Emit("polyline.decode($1)")>]
-    let polylinedecode (_: string) : float [] []  = jsNative
+#if FABLE_PY
 
-    let defaultObject : GooglePolyline = { decode = polylinedecode }
-  #endif
 
- #endif
+
+
+
+#endif
+
+#endif
 
 #else
     open PolylinerNet
@@ -37,7 +36,7 @@ module internal Polyline =
 
     let round (f: float) = System.Math.Round(f, 5)
 
-    let defaultFeatureCollection : FsHafas.Client.FeatureCollection =
+    let defaultFeatureCollection: FsHafas.Client.FeatureCollection =
         { ``type`` = Some "FeatureCollection"
           features = Array.empty }
 
@@ -53,7 +52,8 @@ module internal Polyline =
         match p.ppLocRefL with
         | Some ppLocRefL ->
             match ppLocRefL
-                  |> Array.tryFind (fun pLocRefL -> pLocRefL.ppIdx = i) with
+                  |> Array.tryFind (fun pLocRefL -> pLocRefL.ppIdx = i)
+                with
             | Some pLocRefL ->
                 match Common.getElementAt pLocRefL.locX ctx.common.locations with
                 | Some (U3.Case2 s) -> s :> obj
@@ -64,26 +64,22 @@ module internal Polyline =
     let parsePolyline (ctx: Context) (poly: FsHafas.Raw.RawPoly) : FsHafas.Client.FeatureCollection =
         let features =
             polylineDecode poly.crdEncYX
-            |> Seq.mapi<_, FsHafas.Client.Feature>
-                (fun i p ->
-                    { ``type`` = Some "Feature"
-                      properties = getStop ctx poly i
-                      geometry =
-                          { ``type`` = Some "Point"
-                            coordinates = [| (round p.[1]); (round p.[0]) |] } })
+            |> Seq.mapi<_, FsHafas.Client.Feature> (fun i p ->
+                { ``type`` = Some "Feature"
+                  properties = getStop ctx poly i
+                  geometry =
+                    { ``type`` = Some "Point"
+                      coordinates = [| (round p.[1]); (round p.[0]) |] } })
             |> Seq.toArray
 
-        { defaultFeatureCollection with
-              features = features }
+        { defaultFeatureCollection with features = features }
 
     let ``calculate distance`` (p1Latitude, p1Longitude) (p2Latitude, p2Longitude) =
         let r = 6371.0 // km
 
-        let dLat =
-            (p2Latitude - p1Latitude) * Math.PI / 180.0
+        let dLat = (p2Latitude - p1Latitude) * Math.PI / 180.0
 
-        let dLon =
-            (p2Longitude - p1Longitude) * Math.PI / 180.0
+        let dLon = (p2Longitude - p1Longitude) * Math.PI / 180.0
 
         let lat1 = p1Latitude * Math.PI / 180.0
         let lat2 = p2Latitude * Math.PI / 180.0
@@ -95,8 +91,7 @@ module internal Polyline =
               * Math.Cos(lat1)
               * Math.Cos(lat2)
 
-        let c =
-            2.0 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1.0 - a))
+        let c = 2.0 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1.0 - a))
 
         r * c
 
@@ -106,12 +101,11 @@ module internal Polyline =
             |> Array.map (fun f -> (f.geometry.coordinates.[1], f.geometry.coordinates.[0]))
 
         latLonPoints
-        |> Array.mapi
-            (fun i _ ->
-                if i > 0 then
-                    let prev = latLonPoints.[i - 1]
-                    let curr = latLonPoints.[i]
-                    ``calculate distance`` prev curr
-                else
-                    0.0)
+        |> Array.mapi (fun i _ ->
+            if i > 0 then
+                let prev = latLonPoints.[i - 1]
+                let curr = latLonPoints.[i]
+                ``calculate distance`` prev curr
+            else
+                0.0)
         |> Array.sum

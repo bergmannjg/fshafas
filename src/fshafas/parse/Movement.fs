@@ -11,8 +11,7 @@ module internal Movement =
 
     let parseMovement (ctx: Context) (m: FsHafas.Raw.RawJny) =
 
-        let line =
-            Common.getElementAt m.prodX ctx.common.lines
+        let line = Common.getElementAt m.prodX ctx.common.lines
 
         let location =
             match m.pos with
@@ -23,8 +22,7 @@ module internal Movement =
                 |> Some
             | None -> None
 
-        let stopovers =
-            ctx.profile.parseStopovers ctx m.stopL m.date.Value
+        let stopovers = ctx.profile.parseStopovers ctx m.stopL m.date.Value
 
         let frames =
             match m.ani with

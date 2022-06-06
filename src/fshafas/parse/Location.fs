@@ -45,8 +45,7 @@ module internal Location =
               X = None
               Y = None }
 
-    let private removeLeadingZeros (s:string) = 
-        Regex.Replace(s, "^0+", "")
+    let private removeLeadingZeros (s: string) = Regex.Replace(s, "^0+", "")
 
     let private parseLocationPhase1 (ctx: Context) (i: int) (locl: FsHafas.Raw.RawLoc []) =
         let l = locl.[i]
@@ -79,12 +78,11 @@ module internal Location =
 
                 let location =
                     lon
-                    |> Option.map
-                        (fun _ ->
-                            { Default.Location with
-                                  id = id
-                                  longitude = lon
-                                  latitude = lat })
+                    |> Option.map (fun _ ->
+                        { Default.Location with
+                            id = id
+                            longitude = lon
+                            latitude = lat })
 
                 let products =
                     l.pCls
@@ -101,12 +99,12 @@ module internal Location =
                 (l,
                  U3.Case2(
                      { Default.Stop with
-                           id = id
-                           name = name
-                           location = location
-                           lines = lines
-                           products = products
-                           distance = distance }
+                         id = id
+                         name = name
+                         location = location
+                         lines = lines
+                         products = products
+                         distance = distance }
                  ))
             else
                 let address =
@@ -124,22 +122,22 @@ module internal Location =
                 (l,
                  U3.Case3(
                      { Default.Location with
-                           id = id
-                           name = name
-                           address = address
-                           longitude = lon
-                           latitude = lat
-                           distance = distance }
+                         id = id
+                         name = name
+                         address = address
+                         longitude = lon
+                         latitude = lat
+                         distance = distance }
                  ))
         | None ->
             (l,
              U3.Case3(
                  { Default.Location with
-                       id = id
-                       name = Some l.name
-                       longitude = lon
-                       latitude = lat
-                       distance = distance }
+                     id = id
+                     name = Some l.name
+                     longitude = lon
+                     latitude = lat
+                     distance = distance }
              ))
 
     let private parseLocationPhase2
@@ -154,22 +152,22 @@ module internal Location =
                 match locations.[mMastLocX] with
                 | (_, U3.Case2 stop) ->
                     { Default.Station with
-                          id = stop.id
-                          name = stop.name
-                          location = stop.location
-                          products = stop.products
-                          lines = stop.lines }
+                        id = stop.id
+                        name = stop.name
+                        location = stop.location
+                        products = stop.products
+                        lines = stop.lines }
                     |> Some
                 | _ -> None
             | Some mMastLocX when mMastLocX < commonLocations.Length ->
                 match commonLocations.[mMastLocX] with
                 | U3.Case2 stop ->
                     { Default.Station with
-                          id = stop.id
-                          name = stop.name
-                          location = stop.location
-                          products = stop.products
-                          lines = stop.lines }
+                        id = stop.id
+                        name = stop.name
+                        location = stop.location
+                        products = stop.products
+                        lines = stop.lines }
                     |> Some
                 | _ -> None
             | _ -> None
@@ -186,8 +184,7 @@ module internal Location =
 
         locations
         |> Array.mapi (fun i (l, _) -> parseLocationPhase2 i l locations ctx.common.locations)
-        |> Array.filter
-            (fun u3 ->
-                match u3 with
-                | U3.Case3 l when l.latitude = None || l.longitude = None -> false
-                | _ -> true)
+        |> Array.filter (fun u3 ->
+            match u3 with
+            | U3.Case3 l when l.latitude = None || l.longitude = None -> false
+            | _ -> true)

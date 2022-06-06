@@ -9,8 +9,7 @@ open FsHafas.Client
 
 /// <summary>JS promise based interface corresponding to hafas-client</summary>
 type HafasClient(profile: FsHafas.Client.Profile) =
-    let client =
-        new FsHafas.Api.HafasAsyncClient(profile :?> FsHafas.Endpoint.Profile)
+    let client = new FsHafas.Api.HafasAsyncClient(profile :?> FsHafas.Endpoint.Profile)
 
 #if FABLE_COMPILER
     [<Emit("typeof $1")>]
@@ -86,7 +85,7 @@ type HafasClient(profile: FsHafas.Client.Profile) =
             (opt: JourneysOptions option)
             =
 #if FABLE_COMPILER
-            client.AsyncJourneys(makeCaseOfU4 from) (makeCaseOfU4 ``to``) opt
+            client.AsyncJourneys (makeCaseOfU4 from) (makeCaseOfU4 ``to``) opt
             |> Async.StartAsPromise
 #else
             client.AsyncJourneys from ``to`` opt
@@ -114,7 +113,7 @@ type HafasClient(profile: FsHafas.Client.Profile) =
 
         member __.departures (id: U4<string, Station, Stop, Location>) (opt: DeparturesArrivalsOptions option) =
 #if FABLE_COMPILER
-            client.AsyncDepartures(makeCaseOfU4 id) opt
+            client.AsyncDepartures (makeCaseOfU4 id) opt
             |> Async.StartAsPromise
 #else
             client.AsyncDepartures id opt
@@ -122,7 +121,7 @@ type HafasClient(profile: FsHafas.Client.Profile) =
 
         member __.arrivals (id: U4<string, Station, Stop, Location>) (opt: DeparturesArrivalsOptions option) =
 #if FABLE_COMPILER
-            client.AsyncArrivals(makeCaseOfU4 id) opt
+            client.AsyncArrivals (makeCaseOfU4 id) opt
             |> Async.StartAsPromise
 #else
             client.AsyncArrivals id opt
@@ -159,7 +158,7 @@ type HafasClient(profile: FsHafas.Client.Profile) =
 
         member __.stop (stop: U2<string, Stop>) (opt: StopOptions option) =
 #if FABLE_COMPILER
-            client.AsyncStop(makeCaseOfU2StringStop stop) opt
+            client.AsyncStop (makeCaseOfU2StringStop stop) opt
             |> Async.StartAsPromise
 #else
             client.AsyncStop stop opt
@@ -167,7 +166,7 @@ type HafasClient(profile: FsHafas.Client.Profile) =
 
         member __.nearby (location: Location) (opt: NearByOptions option) =
 #if FABLE_COMPILER
-            client.AsyncNearby(makeLocation location) opt
+            client.AsyncNearby (makeLocation location) opt
             |> Async.StartAsPromise
 #else
             client.AsyncNearby location opt
@@ -175,7 +174,7 @@ type HafasClient(profile: FsHafas.Client.Profile) =
 
         member __.reachableFrom (location: Location) (opt: ReachableFromOptions option) =
 #if FABLE_COMPILER
-            client.AsyncReachableFrom(makeLocation location) opt
+            client.AsyncReachableFrom (makeLocation location) opt
             |> Async.StartAsPromise
 #else
             client.AsyncReachableFrom location opt

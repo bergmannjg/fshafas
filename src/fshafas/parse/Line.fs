@@ -23,7 +23,7 @@ module internal Line =
                 prodCtx.lineId
                 |> Option.orElse name
                 |> Option.bind slug
-            | None -> 
+            | None ->
                 match name with
                 | Some name -> slug name
                 | None -> None
@@ -54,8 +54,7 @@ module internal Line =
                 | None -> (None, None)
             | None -> (None, None)
 
-        let operator =
-            Common.getElementAtSome p.oprX ctx.common.operators
+        let operator = Common.getElementAtSome p.oprX ctx.common.operators
 
         { line with
             id = id

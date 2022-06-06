@@ -37,8 +37,7 @@ module internal DateTime =
             tzOffset: int option
         ) =
         try
-            let dt =
-                System.DateTime(year, month, day, hour, minute, seconds)
+            let dt = System.DateTime(year, month, day, hour, minute, seconds)
 
             match tzOffset with
             | Some tzOffset -> DateTimeOffsetEx.DateTimeOffsetEx(dt, Some(tzOffset * 60), None)
@@ -71,11 +70,9 @@ module internal DateTime =
         System.DateTimeOffset(year, month, day, hour, minute, seconds, System.TimeSpan(tzOffset / 60, 0, 0))
 #else
 
-        let dt =
-            NodaTime.LocalDateTime(year, month, day, hour, minute, seconds)
+        let dt = NodaTime.LocalDateTime(year, month, day, hour, minute, seconds)
 
-        let zdt =
-            dt.InZoneLeniently(NodaTime.DateTimeZoneProviders.Tzdb.[zoneId])
+        let zdt = dt.InZoneLeniently(NodaTime.DateTimeZoneProviders.Tzdb.[zoneId])
 
         zdt.ToDateTimeOffset()
 #endif
@@ -146,7 +143,6 @@ module internal DateTime =
             (None, None)
 
     let parseDateTime (ctx: Context) (date: string) (time: string option) (tzOffset: int option) : string option =
-        let (_, s) =
-            parseDateTimeEx ctx.profile date time tzOffset
+        let (_, s) = parseDateTimeEx ctx.profile date time tzOffset
 
         s

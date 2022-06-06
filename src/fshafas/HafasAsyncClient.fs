@@ -1,7 +1,4 @@
 namespace FsHafas.Api
-/// <namespacedoc>
-///   <summary>FsHafas client apis</summary>
-/// </namespacedoc>
 
 open System
 open FsHafas.Client
@@ -95,7 +92,10 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
         : Async<array<Journey>> =
 
         async {
-            if enabled (profile :> FsHafas.Client.Profile).journeysFromTrip then
+            if
+                enabled
+                    (profile :> FsHafas.Client.Profile)
+                        .journeysFromTrip then
                 let! (common, res, outConl) =
                     httpClient.AsyncSearchOnTrip(
                         Format.searchOnTripRequest profile fromTripId previousStopOver ``to`` opt

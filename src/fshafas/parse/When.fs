@@ -4,7 +4,7 @@ module internal When =
 
     open System
     open FsHafas.Endpoint
-    
+
     let defaultWhen =
         { ``when`` = None
           plannedWhen = None

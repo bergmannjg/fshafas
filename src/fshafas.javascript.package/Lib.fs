@@ -3,11 +3,9 @@ module App
 open FsHafas.Client
 open FsHafas.Api
 
-let dbProfile =
-    FsHafas.Profiles.Db.profile :> FsHafas.Client.Profile
+let dbProfile = FsHafas.Profiles.Db.profile :> FsHafas.Client.Profile
 
-let bvgProfile =
-    FsHafas.Profiles.Bvg.profile :> FsHafas.Client.Profile
+let bvgProfile = FsHafas.Profiles.Bvg.profile :> FsHafas.Client.Profile
 
 let createClient (profile: FsHafas.Client.Profile) = HafasClient(profile)
 

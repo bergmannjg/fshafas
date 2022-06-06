@@ -93,9 +93,7 @@ let getIdOfFirstStop (arr: U3<Station, Stop, Location> array) =
     arr |> Array.tryPick test
 
 let getLocationId (client: Api.HafasAsyncClient) (name: string) =
-    let options =
-        { Default.LocationsOptions with
-              results = Some 3 }
+    let options = { Default.LocationsOptions with results = Some 3 }
 
     async {
         let! locations = client.AsyncLocations name (Some options)
@@ -125,21 +123,21 @@ let getJourney
 
             let options =
                 { Default.JourneysOptions with
-                      departure = Some departure
-                      loyaltyCard =
-                          if discount <> 25 && discount <> 50 then
-                              None
-                          else
-                              Some
-                                  { ``type`` = Some "Bahncard"
-                                    discount = Some discount }
-                      polylines = Some true }
+                    departure = Some departure
+                    loyaltyCard =
+                        if discount <> 25 && discount <> 50 then
+                            None
+                        else
+                            Some
+                                { ``type`` = Some "Bahncard"
+                                  discount = Some discount }
+                    polylines = Some true }
 
             return!
                 async {
                     match fromId, toId with
                     | Some (f), Some (t) ->
-                        let! result = client.AsyncJourneys(U4.Case1 f) (U4.Case1 t) (Some options)
+                        let! result = client.AsyncJourneys (U4.Case1 f) (U4.Case1 t) (Some options)
 
                         match result.journeys with
                         | Some j when j.Length > 0 -> return Some j.[0]
@@ -164,9 +162,9 @@ let getJourneyInfo (client: Api.HafasAsyncClient) (data: JourneyData) (incrDays:
                       dtEnd = data.dtEnd
                       km = client.distanceOfJourney j
                       price =
-                          match j.price with
-                          | Some p -> p.amount
-                          | None -> 0.0 }
+                        match j.price with
+                        | Some p -> p.amount
+                        | None -> 0.0 }
         | None -> return None
     }
 
@@ -185,11 +183,9 @@ let main argv =
 
         let options = parser.Parse(argv)
 
-        let file =
-            options.GetResult(File, defaultValue = "../../../calendar.csv")
+        let file = options.GetResult(File, defaultValue = "../../../calendar.csv")
 
-        let priceInNDays =
-            options.GetResult(PriceInNDays, defaultValue = 1)
+        let priceInNDays = options.GetResult(PriceInNDays, defaultValue = 1)
 
         let dtStart =
             System.DateTime.ParseExact(options.GetResult(DateStart, defaultValue = "01/01/20"), "MM/dd/yy", null)
@@ -197,11 +193,9 @@ let main argv =
         let dtEnd =
             System.DateTime.ParseExact(options.GetResult(DateEnd, defaultValue = "08/28/21"), "MM/dd/yy", null)
 
-        let discount =
-            options.GetResult(Discount, defaultValue = Bahncard.BC25)
+        let discount = options.GetResult(Discount, defaultValue = Bahncard.BC25)
 
-        let count =
-            options.GetResult(Take, defaultValue = System.Int32.MaxValue)
+        let count = options.GetResult(Take, defaultValue = System.Int32.MaxValue)
 
         Log.Debug <- options.Contains Debug
         Api.HafasAsyncClient.initSerializer ()
@@ -211,18 +205,17 @@ let main argv =
         let journeyInfo =
             journeydata file dtStart dtEnd
             |> takeChecked count
-            |> Array.map
-                (fun d ->
-                    async {
-                        match! getJourneyInfo client d priceInNDays (LanguagePrimitives.EnumToValue discount) with
-                        | Some j ->
-                            printfn "journey: %s %s %A %.0f km, %.2f €" j.idFrom j.idTo j.dtStart j.km j.price
-                            return Some j
-                        | None ->
-                            printfn "!!journey: %s %s %A" d.ifFrom d.idTo d.dtStart
-                            return None
-                    }
-                    |> Async.RunSynchronously)
+            |> Array.map (fun d ->
+                async {
+                    match! getJourneyInfo client d priceInNDays (LanguagePrimitives.EnumToValue discount) with
+                    | Some j ->
+                        printfn "journey: %s %s %A %.0f km, %.2f €" j.idFrom j.idTo j.dtStart j.km j.price
+                        return Some j
+                    | None ->
+                        printfn "!!journey: %s %s %A" d.ifFrom d.idTo d.dtStart
+                        return None
+                }
+                |> Async.RunSynchronously)
 
         let km =
             journeyInfo

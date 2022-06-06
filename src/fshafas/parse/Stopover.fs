@@ -5,7 +5,7 @@ module internal Stopover =
     open FsHafas.Client
     open FsHafas.Endpoint
 
-    let defaultStopover : FsHafas.Client.StopOver =
+    let defaultStopover: FsHafas.Client.StopOver =
         { stop = None
           departure = None
           departureDelay = None
@@ -14,7 +14,6 @@ module internal Stopover =
           departurePlatform = None
           prognosedDeparturePlatform = None
           plannedDeparturePlatform = None
-          /// null, if first stopOver of trip
           arrival = None
           arrivalDelay = None
           prognosedArrival = None
@@ -31,11 +30,9 @@ module internal Stopover =
             Common.getElementAt st.locX ctx.common.locations
             |> U2StationStop.FromSomeU3StationStopLocation
 
-        let dep =
-            ctx.profile.parseWhen ctx date st.dTimeS st.dTimeR st.dTZOffset st.dCncl
+        let dep = ctx.profile.parseWhen ctx date st.dTimeS st.dTimeR st.dTZOffset st.dCncl
 
-        let arr =
-            ctx.profile.parseWhen ctx date st.aTimeS st.aTimeR st.aTZOffset st.aCncl
+        let arr = ctx.profile.parseWhen ctx date st.aTimeS st.aTimeR st.aTZOffset st.aCncl
 
         let matchPlatfS (aPlatfS: string option) (aPltfS: FsHafas.Raw.RawPltf option) =
             match aPlatfS with
@@ -46,16 +43,14 @@ module internal Stopover =
                 | _ -> None
 
         let dPlatfS = matchPlatfS st.dPlatfS st.dPltfS
-        let dPlatfR =  matchPlatfS st.dPlatfR st.dPltfR
+        let dPlatfR = matchPlatfS st.dPlatfR st.dPltfR
 
-        let depPl =
-            ctx.profile.parsePlatform ctx dPlatfS dPlatfR st.dCncl
+        let depPl = ctx.profile.parsePlatform ctx dPlatfS dPlatfR st.dCncl
 
         let aPlatfS = matchPlatfS st.aPlatfS st.aPltfS
-        let aPlatfR =  matchPlatfS st.aPlatfR st.aPltfR
+        let aPlatfR = matchPlatfS st.aPlatfR st.aPltfR
 
-        let arrPl =
-            ctx.profile.parsePlatform ctx aPlatfS aPlatfR st.aCncl
+        let arrPl = ctx.profile.parsePlatform ctx aPlatfS aPlatfR st.aCncl
 
         let passBy =
             match st.dInS, st.aOutS with
@@ -63,32 +58,35 @@ module internal Stopover =
             | _ -> None
 
         { defaultStopover with
-              stop = stop
-              arrival = arr.``when``
-              plannedArrival = arr.plannedWhen
-              arrivalDelay = arr.delay
-              arrivalPlatform = arrPl.platform
-              plannedArrivalPlatform = arrPl.plannedPlatform
-              prognosedArrivalPlatform = arrPl.prognosedPlatform
-              departure = dep.``when``
-              plannedDeparture = dep.plannedWhen
-              departureDelay = dep.delay
-              departurePlatform = depPl.platform
-              plannedDeparturePlatform = depPl.plannedPlatform
-              prognosedDeparturePlatform = depPl.prognosedPlatform
+            stop = stop
+            arrival = arr.``when``
+            plannedArrival = arr.plannedWhen
+            arrivalDelay = arr.delay
+            arrivalPlatform = arrPl.platform
+            plannedArrivalPlatform = arrPl.plannedPlatform
+            prognosedArrivalPlatform = arrPl.prognosedPlatform
+            departure = dep.``when``
+            plannedDeparture = dep.plannedWhen
+            departureDelay = dep.delay
+            departurePlatform = depPl.platform
+            plannedDeparturePlatform = depPl.plannedPlatform
+            prognosedDeparturePlatform = depPl.prognosedPlatform
 
-              cancelled = st.aCncl |> Option.orElse st.dCncl
-              remarks = Common.msgLToRemarks ctx st.msgL
-              passBy = passBy }
+            cancelled = st.aCncl |> Option.orElse st.dCncl
+            remarks = Common.msgLToRemarks ctx st.msgL
+            passBy = passBy }
 
-    let parseStopovers (ctx: Context) (stopL: FsHafas.Raw.RawStop [] option) (date: string) : FsHafas.Client.StopOver [] option =
+    let parseStopovers
+        (ctx: Context)
+        (stopL: FsHafas.Raw.RawStop [] option)
+        (date: string)
+        : FsHafas.Client.StopOver [] option =
         match stopL with
         | Some (stopL) ->
             stopL
-            |> Array.filter
-                (fun s ->
-                    (Common.getElementAt s.locX ctx.common.locations)
-                        .IsSome)
+            |> Array.filter (fun s ->
+                (Common.getElementAt s.locX ctx.common.locations)
+                    .IsSome)
             |> Array.map (fun s -> ctx.profile.parseStopover ctx s date)
             |> Some
         | None -> None

@@ -71,15 +71,13 @@ module Parser =
         | Some (res), None ->
             let ctx = createContext profile opt res
 
-            ctx
-            |> Some
+            ctx |> Some
         | _ -> None
 
     let internal parseLocation (locL: FsHafas.Raw.RawLoc option) (ctx: Context option) =
         match ctx, locL with
         | Some (ctx), Some (locL) ->
-            let locs =
-                [| locL |] |> ctx.profile.parseLocations ctx
+            let locs = [| locL |] |> ctx.profile.parseLocations ctx
 
             locs.[0]
         | _ -> U3.Case3 Default.Location
@@ -271,8 +269,7 @@ module Parser =
         // workaround: missing code DateTimeOffset
         System.DateTime(year, month, day, hour, minute, 0)
 #else
-        let tzOffset =
-            datetime.Substring(20, 2) |> int |> (*) 60
+        let tzOffset = datetime.Substring(20, 2) |> int |> (*) 60
 
         System
             .DateTimeOffset(

@@ -23,8 +23,7 @@ module internal Request =
 
         let getMd5 (json: string) (salt: string) =
 
-            let bytes =
-                (System.Text.Encoding.UTF8.GetBytes(json + salt))
+            let bytes = (System.Text.Encoding.UTF8.GetBytes(json + salt))
 
             md5 (bytes)
 
@@ -62,21 +61,19 @@ module internal Request =
                   RequestProperties.Body(fromStringtoJsonBody json) ]
 
             fetch urlEscaped properties
-            |> Promise.bind
-                (fun res ->
-                    if not res.Ok then
-                        raise (System.Exception(res.StatusText))
+            |> Promise.bind (fun res ->
+                if not res.Ok then
+                    raise (System.Exception(res.StatusText))
 
-                    res.text ())
-            |> Promise.catch
-                (fun ex ->
-                    printfn "PostAsync: %s" ex.Message
-                    raise ex)
+                res.text ())
+            |> Promise.catch (fun ex ->
+                printfn "PostAsync: %s" ex.Message
+                raise ex)
             |> Async.AwaitPromise
 
 #else
 
-    #if FABLE_PY
+#if FABLE_PY
 
     open System.Collections.Generic
 
@@ -90,24 +87,24 @@ module internal Request =
     let private hexdigest (_: obj) : string = jsNative
 
     [<Emit("$0.encode()")>]
-    let private toBytes (_: string) : byte[] = jsNative
+    let private toBytes (_: string) : byte [] = jsNative
 
-    [<Import("dumps", from="json")>]
+    [<Import("dumps", from = "json")>]
     [<Emit("dumps($1)")>]
-    let private dumps (json: obj): string = jsNative
+    let private dumps (json: obj) : string = jsNative
 
-    [<Import("post", from="requests")>]
+    [<Import("post", from = "requests")>]
     [<Emit("post($1, data=$2.encode('utf-8'), headers=$3)")>]
-    let private post (url: string) (body: string) (headers: Dictionary<string,string>): obj = jsNative
+    let private post (url: string) (body: string) (headers: Dictionary<string, string>) : obj = jsNative
 
     [<Emit("$0.status_code")>]
-    let private statusCode (r:obj) : int = jsNative
+    let private statusCode (r: obj) : int = jsNative
 
     [<Emit("$0.text")>]
-    let private text (r:obj) : string = jsNative
+    let private text (r: obj) : string = jsNative
 
     [<Emit("$0.json()")>]
-    let private toJson (r:obj) : string = jsNative
+    let private toJson (r: obj) : string = jsNative
 
     type HttpClient() =
 
@@ -139,14 +136,16 @@ module internal Request =
             async {
 
                 let r = post urlEscaped json headers
-                if (statusCode r) = 200 then return (dumps (toJson r))
+
+                if (statusCode r) = 200 then
+                    return (dumps (toJson r))
                 else
                     log "statusCode: " (statusCode r)
                     log "text: " (text r)
                     return ""
             }
 
-    #else
+#else
 
     open System.Security.Cryptography
     open System.Text
@@ -171,8 +170,7 @@ module internal Request =
             |> string
 
         let getMd5 (json: string) (salt: string) =
-            let bytes =
-                System.Text.Encoding.UTF8.GetBytes(json + salt)
+            let bytes = System.Text.Encoding.UTF8.GetBytes(json + salt)
 
             let hash = md5 bytes
 
@@ -192,8 +190,7 @@ module internal Request =
 
                 log "url: " urlchecksum
 
-                use content =
-                    new Http.StringContent(json, Encoding.UTF8, "application/json")
+                use content = new Http.StringContent(json, Encoding.UTF8, "application/json")
 
                 client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, br, deflate")
                 client.DefaultRequestHeaders.Add("Accept", "application/json")
@@ -213,5 +210,5 @@ module internal Request =
                     | false -> body
             }
 
-    #endif
+#endif
 #endif

@@ -1,4 +1,5 @@
 namespace FsHafas.Printf
+
 /// <namespacedoc>
 ///   <summary>Print client types</summary>
 /// </namespacedoc>
@@ -119,7 +120,7 @@ module Short =
         match remarks with
         | Some remarks ->
             remarks
-            |> Array.fold (fun s r -> s + Remark(ident + 2) r) ""
+            |> Array.fold (fun s r -> s + Remark (ident + 2) r) ""
         | None -> ""
 
     let private ProductOfLeg (ident: int) (leg: Leg) =
@@ -153,8 +154,8 @@ module Short =
                |> Array.fold
                    (fun s l ->
                        s
-                       + (Comment(ident + 2) s)
-                       + (StopOver(ident + 2) l))
+                       + (Comment (ident + 2) s)
+                       + (StopOver (ident + 2) l))
                    "")
         | None -> ""
 
@@ -220,8 +221,8 @@ module Short =
         |> Array.fold
             (fun s l ->
                 s
-                + (Comment(ident + 2) s)
-                + (Leg(ident + 2) l short))
+                + (Comment (ident + 2) s)
+                + (Leg (ident + 2) l short))
             ""
 
     let JourneyLegs (ident: int) (journey: Journey) =
@@ -230,9 +231,9 @@ module Short =
 
     let Journey (ident: int) (journey: Journey) =
         let short = true
+
         let distS () =
-            let distance =
-                FsHafas.Parser.Journey.distanceOfJourney journey
+            let distance = FsHafas.Parser.Journey.distanceOfJourney journey
 
             if distance > 0.0 then
                 let identS = String.replicate (ident + 2) " "
@@ -268,14 +269,14 @@ module Short =
 
     let private U2StationStop (ident: int) (location: U2<Station, Stop> option) =
         match location with
-        | Some (U2.Case1 s) -> Station(ident + 2) s
-        | Some (U2.Case2 s) -> Stop(ident + 2) s
+        | Some (U2.Case1 s) -> Station (ident + 2) s
+        | Some (U2.Case2 s) -> Stop (ident + 2) s
         | _ -> ""
 
     let U3StationStopLocation (ident: int) (location: U3<Station, Stop, Location>) =
         match location with
-        | U3.Case3 l -> Location(ident + 2) l
-        | U3.Case2 s -> Stop(ident + 2) s
+        | U3.Case3 l -> Location (ident + 2) l
+        | U3.Case2 s -> Stop (ident + 2) s
         | _ -> ""
 
     let Duration (ident: int) (duration: Duration) =
@@ -285,7 +286,7 @@ module Short =
             (duration.duration
              |> Option.map (fun d -> d.ToString()))
         + (duration.stations
-           |> Array.fold (fun s j -> s + U3StationStopLocation(ident + 2) j) "")
+           |> Array.fold (fun s j -> s + U3StationStopLocation (ident + 2) j) "")
 
     let private Directions (ident: int) (directions: string [] option) =
         match directions with
@@ -297,7 +298,7 @@ module Short =
     let private Line (ident: int) (l: Line) =
         printfnS ident "name: " l.name
         + printfnArrL ident "directions: " l.directions
-        + Directions(ident + 2) l.directions
+        + Directions (ident + 2) l.directions
 
     let private Movement (ident: int) (m: Movement) (withStopovers: bool) =
         printfnS ident "tripId: " m.tripId

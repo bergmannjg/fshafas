@@ -15,13 +15,13 @@ module internal Converter =
 
         static member fromString<'a>(s: string) =
             match FSharpType.GetUnionCases typeof<'a>
-                  |> Array.filter (fun case -> String.Compare(case.Name, s, StringComparison.OrdinalIgnoreCase) = 0) with
+                  |> Array.filter (fun case -> String.Compare(case.Name, s, StringComparison.OrdinalIgnoreCase) = 0)
+                with
             | [| case |] -> Some(FSharpValue.MakeUnion(case, [||]) :?> 'a)
             | _ -> None
 
         override this.Read(reader: byref<Utf8JsonReader>, _typ: Type, options: JsonSerializerOptions) =
-            let s =
-                JsonSerializer.Deserialize<string>(&reader, options)
+            let s = JsonSerializer.Deserialize<string>(&reader, options)
 
             match UnionValueConverter.fromString<'a> s with
             | Some v -> v
@@ -42,7 +42,9 @@ module internal Converter =
 
     type UnionCaseSelection =
         | Disabled
-        | ByTagName of string /// tag value is typename
+        | ByTagName of string
+
+    /// tag value is typename
 
     let private readJsonObjectWithStringProperty (reader: byref<Utf8JsonReader>, name: string) =
         use jsonDocument = JsonDocument.ParseValue(&reader)
@@ -65,8 +67,7 @@ module internal Converter =
 
             match uc with
             | ByTagName unionTagName ->
-                let (value, jsonObject) =
-                    readJsonObjectWithStringProperty (&reader, unionTagName)
+                let (value, jsonObject) = readJsonObjectWithStringProperty (&reader, unionTagName)
 
                 if value = typedefof<'S>.Name.ToLower () then
                     U2.Case1(Serializer.Deserialize<'S>(jsonObject))
@@ -93,8 +94,7 @@ module internal Converter =
                 typeToConvert.GetGenericArguments()
                 |> Array.take 2
 
-            let converterType =
-                typedefof<U2EraseValueConverter<'S, 'T>>.MakeGenericType (types)
+            let converterType = typedefof<U2EraseValueConverter<'S, 'T>>.MakeGenericType (types)
 
             Activator.CreateInstance(converterType, uc) :?> JsonConverter
 
@@ -107,8 +107,7 @@ module internal Converter =
 
             match uc with
             | ByTagName unionTagName ->
-                let (value, jsonObject) =
-                    readJsonObjectWithStringProperty (&reader, unionTagName)
+                let (value, jsonObject) = readJsonObjectWithStringProperty (&reader, unionTagName)
 
                 if value = typedefof<'S>.Name.ToLower () then
                     U3.Case1(Serializer.Deserialize<'S>(jsonObject))
