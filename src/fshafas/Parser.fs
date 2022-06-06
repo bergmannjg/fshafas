@@ -68,6 +68,11 @@ module Parser =
 
             { ctx with common = ctx.profile.parseCommon ctx common }
             |> Some
+        | Some (res), None ->
+            let ctx = createContext profile opt res
+
+            ctx
+            |> Some
         | _ -> None
 
     let internal parseLocation (locL: FsHafas.Raw.RawLoc option) (ctx: Context option) =
@@ -335,6 +340,7 @@ module Parser =
                 | None -> None
 
             { Default.ServerInfo with
+                hciVersion = res.hciVersion
                 timetableStart = res.fpB
                 timetableEnd = res.fpE
                 serverTime = serverTime

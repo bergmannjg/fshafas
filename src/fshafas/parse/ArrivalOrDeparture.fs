@@ -17,17 +17,34 @@ module internal ArrivalOrDeparture =
         let (locX, xTimeS, xTimeR, xTZOffset, xCncl, xPlatfS, xPlatfR, xPltfS, xPltfR) =
             if ``type`` = DEP then
                 let dep = RawDep.FromRawStopL d.stbStop.Value
-                (dep.locX, dep.dTimeS, dep.dTimeR, dep.dTZOffset, dep.dCncl, dep.dPlatfS, dep.dPlatfR, dep.dPltfS, dep.dPltfR)
+
+                (dep.locX,
+                 dep.dTimeS,
+                 dep.dTimeR,
+                 dep.dTZOffset,
+                 dep.dCncl,
+                 dep.dPlatfS,
+                 dep.dPlatfR,
+                 dep.dPltfS,
+                 dep.dPltfR)
             else
                 let arr = RawArr.FromRawStopL d.stbStop.Value
-                (arr.locX, arr.aTimeS, arr.aTimeR, arr.aTZOffset, arr.aCncl, arr.aPlatfS, arr.aPlatfR, arr.aPltfS, arr.aPltfR)
+
+                (arr.locX,
+                 arr.aTimeS,
+                 arr.aTimeR,
+                 arr.aTZOffset,
+                 arr.aCncl,
+                 arr.aPlatfS,
+                 arr.aPlatfR,
+                 arr.aPltfS,
+                 arr.aPltfR)
 
         let stop =
             Common.getElementAtSome locX ctx.common.locations
             |> U2StationStop.FromSomeU3StationStopLocation
 
-        let w =
-            ctx.profile.parseWhen ctx d.date.Value xTimeS xTimeR xTZOffset xCncl
+        let w = ctx.profile.parseWhen ctx d.date.Value xTimeS xTimeR xTZOffset xCncl
 
         let matchPlatfS (aPlatfS: string option) (aPltfS: FsHafas.Raw.RawPltf option) =
             match aPlatfS with
@@ -38,10 +55,9 @@ module internal ArrivalOrDeparture =
                 | _ -> None
 
         let platfS = matchPlatfS xPlatfS xPltfS
-        let platfR =  matchPlatfS xPlatfR xPltfR
+        let platfR = matchPlatfS xPlatfR xPltfR
 
-        let plt =
-            ctx.profile.parsePlatform ctx platfS platfR xCncl
+        let plt = ctx.profile.parsePlatform ctx platfS platfR xCncl
 
         let filter (s: FsHafas.Client.StopOver) =
             match s.passBy with
@@ -61,10 +77,33 @@ module internal ArrivalOrDeparture =
                         latitude = Some(float pos.y / 1000000.0) }
             | None -> None
 
+        let destination =
+            if ``type`` = DEP then
+                match d.prodL, ctx.res.common with
+                | Some prodL, Some common when prodL.Length > 0 && common.locL.IsSome ->
+                    let loc = Common.getElementAtSome prodL.[0].tLocX common.locL.Value
+
+                    ctx.profile.parseLocations ctx [| loc.Value |]
+                    |> Array.tryHead
+                | _ -> None
+            else
+                None
+
+        let origin =
+            if ``type`` = ARR then
+                match d.prodL, ctx.res.common with
+                | Some prodL, Some common when prodL.Length > 0 && common.locL.IsSome ->
+                    let loc = Common.getElementAtSome prodL.[0].fLocX common.locL.Value
+
+                    ctx.profile.parseLocations ctx [| loc.Value |]
+                    |> Array.tryHead
+                | _ -> None
+            else
+                None
+
         let remarks =
             if ctx.opt.remarks then
-                let stopMsgL =
-                    d.stbStop |> Option.fold (fun _ s -> s.msgL) None
+                let stopMsgL = d.stbStop |> Option.fold (fun _ s -> s.msgL) None
 
                 Common.msgLToRemarks ctx (Common.appendSomeArray d.msgL stopMsgL)
                 |> Option.defaultValue Array.empty
@@ -88,7 +127,9 @@ module internal ArrivalOrDeparture =
             cancelled = d.stbStop.Value.dCncl
             nextStopovers = stopovers
             remarks = remarks
-            currentTripPosition = currentTripPosition }
+            currentTripPosition = currentTripPosition
+            origin = origin
+            destination = destination }
 
     let parseDeparture (ctx: Context) (d: FsHafas.Raw.RawJny) : FsHafas.Client.Alternative =
         parseDepartureArrival DEP ctx d

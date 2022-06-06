@@ -405,26 +405,36 @@ module Db =
             | None -> defaultValue
         | None -> defaultValue
 
-    let private formatLoyaltyCard (firstClass: bool) (data: LoyaltyCard) =
+    let private formatLoyaltyCard (data: LoyaltyCard) =
+        let cls = data.``class`` |> Option.defaultValue 2
+
         match data.``type``, data.discount with
         | Some ``type``, Some discount ->
             if ``type`` = "Bahncard" then
                 if discount = 25 then
-                    if firstClass then 1 else 2
+                    if cls = 1 then 1 else 2
                 else if discount = 50 then
-                    if firstClass then 3 else 4
+                    if cls = 1 then 3 else 4
                 else
                     0
             else
                 0
         | _ -> 0
 
-    let transformJourneysQuery (opt: JourneysOptions option) (q: TripSearchRequest) : TripSearchRequest =
-        let bike =
-            getOptionValue opt (fun v -> v.bike) Default.JourneysOptions
+    let ageGroupFromAge (age: int option) =
+        match age with
+        | Some age ->
+            if age < 6 then "B"
+            else if age < 15 then "K"
+            else if age < 27 then "Y"
+            else if age < 65 then "E"
+            else "S"
+        | None -> "E"
 
-        let firstClass =
-            getOptionValue opt (fun v -> v.firstClass) Default.JourneysOptions
+    let transformJourneysQuery (opt: JourneysOptions option) (q: TripSearchRequest) : TripSearchRequest =
+        let bike = getOptionValue opt (fun v -> v.bike) Default.JourneysOptions
+
+        let firstClass = getOptionValue opt (fun v -> v.firstClass) Default.JourneysOptions
 
         let jnyFltrL =
             if bike then
@@ -434,13 +444,18 @@ module Db =
 
         let redtnCard =
             match opt with
-            | Some opt when opt.loyaltyCard.IsSome -> Some(formatLoyaltyCard firstClass opt.loyaltyCard.Value)
+            | Some opt when opt.loyaltyCard.IsSome -> Some(formatLoyaltyCard opt.loyaltyCard.Value)
             | _ -> None
 
         let trfReq: TrfReq =
             { jnyCl = if firstClass then 1 else 2
               tvlrProf =
-                [| { ``type`` = "E"
+                [| { ``type`` =
+                       (ageGroupFromAge (
+                           match opt with
+                           | Some opt -> opt.age
+                           | None -> None
+                       ))
                      redtnCard = redtnCard } |]
               cType = "PK" }
 
@@ -453,10 +468,10 @@ module Db =
           svcReqL = [||]
           client =
             { id = "DB"
-              v = "19040000"
+              v = "21120000"
               ``type`` = "AND"
               name = "DB Navigator" }
-          ext = "DB.R20.12.b"
+          ext = "DB.R21.12.a"
           ver = "1.34"
           auth =
             { ``type`` = "AID"

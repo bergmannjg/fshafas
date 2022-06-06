@@ -151,7 +151,16 @@ module internal JourneyLeg =
                 let polyline =
                     match jny.poly with
                     | Some (value) -> Some(ctx.profile.parsePolyline ctx value)
-                    | None -> None
+                    | None ->
+                        match jny.polyG with
+                        | Some polyG ->
+                            let idx = polyG.polyXL.[0]
+
+                            if idx < ctx.common.polylines.Length then
+                                Some ctx.common.polylines.[idx]
+                            else
+                                None
+                        | None -> None
 
                 let stopovers =
                     match ctx.opt.stopovers with

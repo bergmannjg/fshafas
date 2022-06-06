@@ -170,18 +170,22 @@ module Short =
           | _ -> ""
         + printfnS ident "departure: " leg.departure
         + printfnS ident "arrival: " leg.arrival
-        + StopOvers ident leg.stopovers
+        + if short then
+              ""
+          else
+              StopOvers ident leg.stopovers
         + printfnB ident "cancelled: " leg.cancelled
         + match leg.currentLocation with
           | Some (location) ->
               (String.replicate ident " ")
               + "currentLocation: "
               + printLonLat 0 location.longitude location.latitude
+              + nl
           | None -> ""
-        + nl
 
         + if short then
-              ""
+              ProductOfLeg ident leg
+              + printfnS ident "loadFactor: " leg.loadFactor
           else
               match leg.line with
               | Some (line) when line.name.IsSome -> printfnS ident "Line: " line.name
@@ -189,6 +193,7 @@ module Short =
               + printfnB ident "walking: " leg.walking
               + printfnB ident "transfer: " leg.transfer
               + ProductOfLeg ident leg
+              + printfnS ident "loadFactor: " leg.loadFactor
               + Remarks ident leg.remarks
 
     let private Trip (ident: int) (trip: Trip) =
@@ -224,6 +229,7 @@ module Short =
         + Legs ident journey.legs true
 
     let Journey (ident: int) (journey: Journey) =
+        let short = true
         let distS () =
             let distance =
                 FsHafas.Parser.Journey.distanceOfJourney journey
@@ -245,12 +251,12 @@ module Short =
             | None -> ""
 
         printfnS ident "jouney:" (Some "")
-        + Legs ident journey.legs false
+        + Legs ident journey.legs short
         + price
         + distS ()
-        + match journey.refreshToken with
-          | Some refreshToken -> printfnS (ident + 2) "refreshToken: '" (Some(refreshToken + "'"))
-          | None -> ""
+        + match short, journey.refreshToken with
+          | false, Some refreshToken -> printfnS (ident + 2) "refreshToken: '" (Some(refreshToken + "'"))
+          | _ -> ""
 
     let private JourneyItems (ident: int) (journeys: Journey []) =
         journeys

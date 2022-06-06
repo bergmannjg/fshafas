@@ -84,7 +84,7 @@ module internal Journey =
 
         { Default.Journey with
             legs = legs
-            refreshToken = Some j.ctxRecon
+            refreshToken = j.ctxRecon
             remarks = remarks
             scheduledDays = scheduledDays
             cycle = cycle }

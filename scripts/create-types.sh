@@ -25,7 +25,7 @@ if [ "$1" = "remote" ]; then
 else
     cp ../../../forks/hafas-client/index.d.ts .
 fi
-cp index.d.ts ../../src/fshafas.fable.package/fs-hafas-client/hafas-client.d.ts
+cp index.d.ts ../../src/fshafas.javascript.package/fs-hafas-client/hafas-client.d.ts
 mkdir node_modules/@types
 mkdir node_modules/@types/hafas-client
 
@@ -39,6 +39,7 @@ sed -i 's/U2<string, float>/string/' HafasClientTypes.fs
 
 # TRANSFORMER_DEBUG=1
 dotnet run --project ./Transformer.fsproj FsHafas HafasClientTypes.fs ../../src/fshafas/TypesHafasClient.fs
+dotnet fantomas ../../src/fshafas/TypesHafasClient.fs
 
 rm -f HafasClientTypes.fs
 
@@ -56,6 +57,7 @@ sed -i 's/float/int/' RawHafasClientTypes.fs
 
 # TRANSFORMER_DEBUG=1
 dotnet run --project ./Transformer.fsproj RawHafas RawHafasClientTypes.fs ../../src/fshafas/TypesRawHafasClient.fs
+dotnet fantomas ../../src/fshafas/TypesRawHafasClient.fs
 
 rm -f types-raw-api.ts
 rm -f RawHafasClientTypes.fs

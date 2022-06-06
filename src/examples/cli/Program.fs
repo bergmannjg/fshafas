@@ -16,6 +16,7 @@ type CliArguments =
     | Locations of name: string
     | Stop of id: string
     | Journeys of from: string * ``to``: string
+    | JourneysWithOptions of from: string * ``to``: string * options: string
     | JourneysFromTrip of tripId: string * stopover: string * departure: string * newToId: string
     | Departures of name: string
     | Trips of name: string
@@ -41,6 +42,8 @@ OPTIONS:
     --stop <id>           get stop, e.g. 8000152.
     --journeys <from> <to>
                           get journeys, e.g. Hannover Berlin.
+    --journeys <from> <to> <options>
+                          get journeys, e.g. Hannover "Berlin-Spandau" "ProductId:national;Transfers:0".
     --journeysfromtrip <tripId> <prevStopId> <prevStopDepature> <newToId>
                           get journeys from  <prevStopId> of trip <tripId> to new target <newToId>.
     --departures <name>   get Departures, e.g. Hannover.
@@ -70,7 +73,8 @@ let parse (args: string list) =
       flagToArg "--debug" Debug args
       valueToArg "--locations" Locations args
       valueToArg "--stop" Stop args
-      value2ToArg "--journeys" Journeys args
+      (value3ToArg "--journeys" JourneysWithOptions args
+       |> Option.orElseWith (fun () -> value2ToArg "--journeys" Journeys args))
       value4ToArg "--journeysfromtrip" JourneysFromTrip args
       valueToArg "--departures" Departures args
       valueToArg "--trips" Trips args
@@ -90,6 +94,15 @@ let maybeArray (choose: ('a -> array<'b>)) option =
 let mutable profile = FsHafas.Profiles.Db.profile
 
 printfn "%s" (profile :> FsHafas.Client.Profile).locale
+
+let productsOfId (id: string) =
+    let products = Products(false)
+
+    (Api.HafasAsyncClient.productsOfFilter profile (fun p -> p.id = id))
+        .Keys
+    |> Array.iter (fun p -> products.[p] <- true)
+
+    products |> Some
 
 let products () =
     let products =
@@ -169,8 +182,61 @@ let locations (name: string) =
     }
     |> AsyncRun
 
-let journeys (from: string, ``to``: string) =
+type JourneyOption =
+    | Id of id: string
+    | Transfers of nr: int
+    | Bahncard of discount: int * ``class``: int
+    | Age of age: int
+
+let parseJourneyOptions (args: string list) =
+    [ valueToArg "ProductId" JourneyOption.Id args
+      valueToArg "Transfers" (fun (nr) -> JourneyOption.Transfers(int nr)) args
+      value2ToArg "Bahncard" (fun (nr, cls) -> JourneyOption.Bahncard(int nr, int cls)) args
+      valueToArg "Age" (fun (age) -> JourneyOption.Age(int age)) args ]
+    |> List.choose id
+
+let applyJourneyOption (option: JourneyOption) (journeysOptions: JourneysOptions) =
+    match option with
+    | Id id -> { journeysOptions with products = productsOfId id }
+    | Transfers nr -> { journeysOptions with transfers = Some nr }
+    | Bahncard(discount, cls) ->
+        { journeysOptions with
+            loyaltyCard =
+                Some(
+                    { ``type`` = Some "Bahncard"
+                      discount = Some discount
+                      ``class`` = Some cls }
+                ) }
+    | Age age -> { journeysOptions with age = Some age }
+
+let applyJourneyOptions (options: JourneyOption list) =
+    options
+    |> List.fold (fun s o -> applyJourneyOption o s) Default.JourneysOptions
+
+let getJourneyOptions (options: string) =
+    let l = options.Split([| ':'; ';' |])
+
+    if l.Length > 0 then
+        l
+        |> Array.toList
+        |> parseJourneyOptions
+        |> applyJourneyOptions
+    else
+        Default.JourneysOptions
+
+let journeys (from: string, ``to``: string, someOptions: string option) =
     use client = new Api.HafasAsyncClient(profile)
+
+    let options =
+        match someOptions with
+        | Some options -> getJourneyOptions options
+        | None ->
+            { Default.JourneysOptions with
+                results = Some 1
+                products = (products ())
+                stopovers = None
+                polylines = Some true
+                scheduledDays = Some false }
 
     async {
         let! fromLoc = getLocation client from
@@ -178,14 +244,6 @@ let journeys (from: string, ``to``: string) =
 
         match fromLoc, toLoc with
         | Some fromLoc, Some toLoc ->
-            let options =
-                { Default.JourneysOptions with
-                    results = Some 1
-                    products = (products ())
-                    stopovers = None
-                    polylines = Some true
-                    scheduledDays = Some false }
-
             let! journeys = client.AsyncJourneys fromLoc toLoc (Some options)
 
             Printf.Short.Journeys journeys |> printfn "%s"
@@ -381,7 +439,8 @@ let serverInfo () =
         let! serverInfo = client.AsyncServerInfo None
 
         printfn
-            "timetableStart: %A, timetableEnd: %A, serverTime: %A"
+            "hciVersion: %A, timetableStart: %A, timetableEnd: %A, serverTime: %A"
+            serverInfo.hciVersion
             serverInfo.timetableStart
             serverInfo.timetableEnd
             serverInfo.serverTime
@@ -393,7 +452,8 @@ let run (arg: CliArguments) =
     | Debug -> Log.Debug <- true
     | Profile p -> profile <- p
     | Locations v -> locations v
-    | Journeys (f, t) -> journeys (f, t)
+    | Journeys (f, t) -> journeys (f, t, None)
+    | JourneysWithOptions (f, t, o) -> journeys (f, t, Some o)
     | Stop v -> stop v
     | JourneysFromTrip (f, t, d, n) -> journeysFromTrip (f, t, d, n)
     | Departures v -> departures v

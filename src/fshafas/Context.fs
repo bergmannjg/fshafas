@@ -53,7 +53,7 @@ type Profile
         parseHint,
         parseIcon,
         parsePolyline,
-        parseLocations,
+        parseLocations: Context -> FsHafas.Raw.RawLoc [] -> U3<Station, Stop, Location> [],
         parseLine,
         parseJourney,
         parseJourneyLeg,

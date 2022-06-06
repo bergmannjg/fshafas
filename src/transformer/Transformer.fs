@@ -121,6 +121,8 @@ let private visitSimple simpleRepr options =
 
     line
 
+let mutable private hasFirstType = false
+
 let private visitTypeDefn typeDefn options =
     let (SynTypeDefn.TypeDefn (typeInfo, typeRepr, members, range)) = typeDefn
     let (SynComponentInfo.ComponentInfo (_, __, _, id, xmlDoc, _, _, _)) = typeInfo
@@ -147,20 +149,21 @@ let private visitTypeDefn typeDefn options =
 
     let transform = options.transformsTypeDefn (toString id)
 
-    let typeSymbol =
-        if options.useRecursiveTypes then
+    let typeSymbol() =
+        if options.useRecursiveTypes && hasFirstType then
             "and"
         else
+            hasFirstType <- true
             "type"
 
     if (transform.IsSome) then
-        sprintf "%s %s = %s" typeSymbol (toString id) transform.Value
+        sprintf "%s %s = %s" (typeSymbol()) (toString id) transform.Value
         |> lines.Add
     else
         () /// problems with 'Format Document'
 
         if not (options.excludesType (toString id)) then
-            (sprintf "%s %s = " typeSymbol (toString id))
+            (sprintf "%s %s = " (typeSymbol()) (toString id))
             + (if isRecord then "{" else "")
             |> lines.Add
 

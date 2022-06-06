@@ -210,7 +210,7 @@ EOF
   "dependencies": {
     "fs-hafas-client": "file:../src/fshafas.fable.package/fs-hafas-client-1.1.0.tgz",
     "google-polyline": "^1.0.3",
-    "hafas-client": "^5.22.2",
+    "hafas-client": "^5.24.0",
     "isomorphic-fetch": "^2.2.1",
     "md5": "^2.3.0",
     "slugg": "^1.2.1"

@@ -15,7 +15,7 @@ module internal Line =
     let parseLine (ctx: Context) (p: FsHafas.Raw.RawProd) : FsHafas.Client.Line =
         let mutable line = Default.Line
 
-        let name = p.addName |> Option.orElse (Some p.name)
+        let name = p.addName |> Option.orElse (p.name)
 
         let id =
             match p.prodCtx with

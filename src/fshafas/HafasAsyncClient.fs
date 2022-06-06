@@ -44,14 +44,17 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
         Serializer.addConverters ([| Converter.UnionConverter<FsHafas.Client.ProductTypeMode>() |])
 #endif
 
-    static member productsOfMode (profile: FsHafas.Endpoint.Profile) (mode: ProductTypeMode) : Products =
+    static member productsOfFilter (profile: FsHafas.Endpoint.Profile) (filter: ProductType -> Boolean) : Products =
         (profile :> FsHafas.Client.Profile).products
-        |> Array.filter (fun p -> p.mode = mode && p.name <> "Tram")
+        |> Array.filter filter
         |> Array.fold
             (fun m p ->
                 m.[p.id] <- true
                 m)
             (Products(false))
+
+    static member productsOfMode (profile: FsHafas.Endpoint.Profile) (mode: ProductTypeMode) : Products =
+        HafasAsyncClient.productsOfFilter profile (fun p -> p.mode = mode && p.name <> "Tram")
 
 #if !FABLE_COMPILER
     static member toTask<'a>(async: Async<'a>) : Threading.Tasks.Task<'a> = Async.StartAsTask(async)
@@ -240,7 +243,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
 
     member __.AsyncServerInfo(opt: ServerOptions option) : Async<ServerInfo> =
         async {
-            let! (common, res) = httpClient.AsyncServerInfo(Format.serverInfoRequest())
+            let! (common, res) = httpClient.AsyncServerInfo(Format.serverInfoRequest profile opt)
 
             return Parser.parseServerInfo res (Parser.parseCommon profile Parser.defaultOptions common res)
         }

@@ -17,19 +17,11 @@ module internal Format =
         let hour = datetime.Substring(11, 2) |> int
         let minute = datetime.Substring(14, 2) |> int
 
-        let tzOffset =
-            datetime.Substring(20, 2) |> int |> (*) 60
+        let tzOffset = datetime.Substring(20, 2) |> int |> (*) 60
 
 #if FABLE_PY
         // workaround: missing code DateTimeOffset
-        System
-            .DateTime(
-                year,
-                month,
-                day,
-                hour,
-                minute,
-                0)
+        System.DateTime(year, month, day, hour, minute, 0)
 #else
         System
             .DateTimeOffset(
@@ -62,20 +54,20 @@ module internal Format =
             | None -> defaultValue
         | None -> defaultValue
 
-    let formatDate (dt: System.DateTime) = 
+    let formatDate (dt: System.DateTime) =
 #if FABLE_PY
         DateTimeEx.formatDate dt "yyyyMMdd"
 #else
         dt.ToString("yyyyMMdd")
 #endif
-    
-    let formatTime (dt: System.DateTime) = 
+
+    let formatTime (dt: System.DateTime) =
 #if FABLE_PY
         DateTimeEx.formatTime dt "HHmm" + "00"
 #else
         dt.ToString("HHmm") + "00"
 #endif
-    
+
     let private formatProductsBitmask (profile: FsHafas.Endpoint.Profile) (products: FsHafas.Client.Products) =
         (profile :> FsHafas.Client.Profile).products
         |> Array.filter (fun p -> products.[p.id])
@@ -100,14 +92,11 @@ module internal Format =
         (name: string)
         (opt: FsHafas.Client.LocationsOptions option)
         : string * FsHafas.Raw.LocMatchRequest =
-        let fuzzy =
-            getOptionValue opt (fun v -> v.fuzzy) Default.LocationsOptions
+        let fuzzy = getOptionValue opt (fun v -> v.fuzzy) Default.LocationsOptions
 
-        let results =
-            getOptionValue opt (fun v -> v.results) Default.LocationsOptions
+        let results = getOptionValue opt (fun v -> v.results) Default.LocationsOptions
 
-        let language =
-            getOptionValue opt (fun v -> v.language) Default.LocationsOptions
+        let language = getOptionValue opt (fun v -> v.language) Default.LocationsOptions
 
         language,
         { input =
@@ -165,8 +154,7 @@ module internal Format =
         (name: U4<string, FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>)
         (opt: FsHafas.Client.DeparturesArrivalsOptions option)
         : string * FsHafas.Raw.StationBoardRequest =
-        let dt =
-            getOptionValue opt (fun v -> v.``when``) Default.DeparturesArrivalsOptions
+        let dt = getOptionValue opt (fun v -> v.``when``) Default.DeparturesArrivalsOptions
 
         let date = formatDate dt
         let time = formatTime dt
@@ -209,8 +197,7 @@ module internal Format =
         let stopovers =
             getOptionValue opt (fun v -> v.stopovers) Default.RefreshJourneyOptions
 
-        let tickets =
-            getOptionValue opt (fun v -> v.tickets) Default.RefreshJourneyOptions
+        let tickets = getOptionValue opt (fun v -> v.tickets) Default.RefreshJourneyOptions
 
         let language =
             getOptionValue opt (fun v -> v.language) Default.RefreshJourneyOptions
@@ -232,11 +219,9 @@ module internal Format =
             maybeGetOptionValue opt (fun v -> v.``when``)
             |> Option.map formatDate
 
-        let language =
-            getOptionValue opt (fun v -> Some "de") Default.TripsByNameOptions
+        let language = getOptionValue opt (fun v -> Some "de") Default.TripsByNameOptions
 
-        language,
-        { input = lineName; date = date }
+        language, { input = lineName; date = date }
 
     let locDetailsRequest
         (profile: FsHafas.Endpoint.Profile)
@@ -250,11 +235,9 @@ module internal Format =
             | U2.Case2 s when s.id.IsSome -> s.id.Value
             | _ -> raise (System.ArgumentException("Stop expected"))
 
-        let language =
-            getOptionValue opt (fun v -> v.language) Default.StopOptions
+        let language = getOptionValue opt (fun v -> v.language) Default.StopOptions
 
-        language,
-        { locL = [| makeLocLTypeS profile id |] }
+        language, { locL = [| makeLocLTypeS profile id |] }
 
     let locGeoPosRequest
         (profile: FsHafas.Endpoint.Profile)
@@ -262,17 +245,13 @@ module internal Format =
         (opt: FsHafas.Client.NearByOptions option)
         : string * FsHafas.Raw.LocGeoPosRequest =
 
-        let results =
-            getOptionValue opt (fun v -> v.results) Default.NearByOptions
+        let results = getOptionValue opt (fun v -> v.results) Default.NearByOptions
 
-        let stops =
-            getOptionValue opt (fun v -> v.stops) Default.NearByOptions
+        let stops = getOptionValue opt (fun v -> v.stops) Default.NearByOptions
 
-        let distance =
-            getOptionValue opt (fun v -> v.distance) Default.NearByOptions
+        let distance = getOptionValue opt (fun v -> v.distance) Default.NearByOptions
 
-        let products =
-            getOptionValue opt (fun v -> v.products) Default.NearByOptions
+        let products = getOptionValue opt (fun v -> v.products) Default.NearByOptions
 
         let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
 
@@ -286,8 +265,7 @@ module internal Format =
             | Some (f) -> (Coordinate.fromFloat f)
             | None -> raise (System.ArgumentException("location.latitude"))
 
-        let language =
-            getOptionValue opt (fun v -> v.language) Default.NearByOptions
+        let language = getOptionValue opt (fun v -> v.language) Default.NearByOptions
 
         language,
         { ring =
@@ -305,8 +283,7 @@ module internal Format =
         (opt: FsHafas.Client.ReachableFromOptions option)
         : string * FsHafas.Raw.LocGeoReachRequest =
 
-        let dt =
-            getOptionValue opt (fun v -> v.``when``) Default.ReachableFromOptions
+        let dt = getOptionValue opt (fun v -> v.``when``) Default.ReachableFromOptions
 
         let date = formatDate dt
         let time = formatTime dt
@@ -317,13 +294,11 @@ module internal Format =
         let maxTransfers =
             getOptionValue opt (fun v -> v.maxTransfers) Default.ReachableFromOptions
 
-        let products =
-            getOptionValue opt (fun v -> v.products) Default.ReachableFromOptions
+        let products = getOptionValue opt (fun v -> v.products) Default.ReachableFromOptions
 
         let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
 
-        let language =
-            getOptionValue opt (fun v -> Some "de") Default.ReachableFromOptions
+        let language = getOptionValue opt (fun v -> Some "de") Default.ReachableFromOptions
 
         language,
         { loc = makeLoclTypeA location
@@ -346,28 +321,22 @@ module internal Format =
         if (rect.east <= rect.west) then
             raise (System.ArgumentException("east must be larger than west."))
 
-        let dt =
-            getOptionValue opt (fun v -> v.``when``) Default.RadarOptions
+        let dt = getOptionValue opt (fun v -> v.``when``) Default.RadarOptions
 
         let date = formatDate dt
         let time = formatTime dt
 
-        let results =
-            getOptionValue opt (fun v -> v.results) Default.RadarOptions
+        let results = getOptionValue opt (fun v -> v.results) Default.RadarOptions
 
-        let duration =
-            getOptionValue opt (fun v -> v.duration) Default.RadarOptions
+        let duration = getOptionValue opt (fun v -> v.duration) Default.RadarOptions
 
-        let frames =
-            getOptionValue opt (fun v -> v.frames) Default.RadarOptions
+        let frames = getOptionValue opt (fun v -> v.frames) Default.RadarOptions
 
-        let products =
-            getOptionValue opt (fun v -> v.products) Default.RadarOptions
+        let products = getOptionValue opt (fun v -> v.products) Default.RadarOptions
 
         let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
 
-        let language =
-            getOptionValue opt (fun v -> Some "de") Default.RadarOptions
+        let language = getOptionValue opt (fun v -> Some "de") Default.RadarOptions
 
         language,
         { maxJny = results
@@ -396,11 +365,9 @@ module internal Format =
         (opt: FsHafas.Client.TripOptions option)
         : string * FsHafas.Raw.JourneyDetailsRequest =
 
-        let polyline =
-            getOptionValue opt (fun v -> v.polyline) Default.TripOptions
+        let polyline = getOptionValue opt (fun v -> v.polyline) Default.TripOptions
 
-        let language =
-            getOptionValue opt (fun v -> v.language) Default.TripOptions
+        let language = getOptionValue opt (fun v -> v.language) Default.TripOptions
 
         language,
         { jid = id
@@ -413,38 +380,37 @@ module internal Format =
         (opt: FsHafas.Client.LinesOptions option)
         : string * FsHafas.Raw.LineMatchRequest =
 
-        let language =
-            getOptionValue opt (fun v -> v.language) Default.LinesOptions
+        let language = getOptionValue opt (fun v -> v.language) Default.LinesOptions
 
-        language,
-        { input = query }
+        language, { input = query }
 
-    let serverInfoRequest () : string * FsHafas.Raw.ServerInfoRequest = ("de", new obj())
-    
+    let serverInfoRequest
+        (profile: FsHafas.Endpoint.Profile)
+        (opt: ServerOptions option)
+        : string * FsHafas.Raw.ServerInfoRequest =
+        let versionInfo = getOptionValue opt (fun v -> v.versionInfo) Default.ServerOptions
+
+        "de", { getVersionInfo = versionInfo }
+
     let himSearchRequest
         (profile: FsHafas.Endpoint.Profile)
         (opt: FsHafas.Client.RemarksOptions option)
         : string * FsHafas.Raw.HimSearchRequest =
 
-        let dt =
-            getOptionValue opt (fun v -> v.from) Default.RemarksOptions
+        let dt = getOptionValue opt (fun v -> v.from) Default.RemarksOptions
 
         let date = formatDate dt
         let time = formatTime dt
 
-        let results =
-            getOptionValue opt (fun v -> v.results) Default.RemarksOptions
+        let results = getOptionValue opt (fun v -> v.results) Default.RemarksOptions
 
-        let polylines =
-            getOptionValue opt (fun v -> v.polylines) Default.RemarksOptions
+        let polylines = getOptionValue opt (fun v -> v.polylines) Default.RemarksOptions
 
-        let products =
-            getOptionValue opt (fun v -> v.products) Default.RemarksOptions
+        let products = getOptionValue opt (fun v -> v.products) Default.RemarksOptions
 
         let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
 
-        let language =
-            getOptionValue opt (fun v -> v.language) Default.RemarksOptions
+        let language = getOptionValue opt (fun v -> v.language) Default.RemarksOptions
 
         language,
         { himFltrL = filters
@@ -489,23 +455,21 @@ module internal Format =
             else
                 true
 
-        let results =
-            getOptionValue opt (fun v -> v.results) Default.JourneysOptions
+        let results = getOptionValue opt (fun v -> v.results) Default.JourneysOptions
 
-        let stopovers =
-            getOptionValue opt (fun v -> v.stopovers) Default.JourneysOptions
+        let stopovers = getOptionValue opt (fun v -> v.stopovers) Default.JourneysOptions
+
+        let transfers =
+            getOptionValue opt (fun v -> v.transfers) Default.JourneysOptions
 
         let transferTime =
             getOptionValue opt (fun v -> v.transferTime) Default.JourneysOptions
 
-        let tickets =
-            getOptionValue opt (fun v -> v.tickets) Default.JourneysOptions
+        let tickets = getOptionValue opt (fun v -> v.tickets) Default.JourneysOptions
 
-        let polylines =
-            getOptionValue opt (fun v -> v.polylines) Default.JourneysOptions
+        let polylines = getOptionValue opt (fun v -> v.polylines) Default.JourneysOptions
 
-        let products =
-            getOptionValue opt (fun v -> v.products) Default.JourneysOptions
+        let products = getOptionValue opt (fun v -> v.products) Default.JourneysOptions
 
         let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
 
@@ -514,14 +478,13 @@ module internal Format =
             | Some via -> Some [| { loc = makeLocLTypeS profile via } |]
             | None -> None
 
-        let language =
-            getOptionValue opt (fun v -> v.language) Default.JourneysOptions
+        let language = getOptionValue opt (fun v -> v.language) Default.JourneysOptions
 
         language,
         profile.transformJourneysQuery
             opt
             { getPasslist = stopovers
-              maxChg = -1
+              maxChg = transfers
               minChgTime = transferTime
               depLocL = [| makeLocType profile from |]
               viaLocL = viaLocL

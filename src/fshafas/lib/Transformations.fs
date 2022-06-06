@@ -44,7 +44,8 @@ module internal RawArr =
           aCncl = s.aCncl
           aPltfS = s.aPltfS
           aPlatfR = s.aPlatfR
-          aPltfR = s.aPltfR }
+          aPltfR = s.aPltfR
+          prodL = None }
 
 
 module internal ToTrip =
@@ -260,6 +261,7 @@ module Default =
           language = Some "de"
           scheduledDays = Some false
           firstClass = Some false
+          age = None
           loyaltyCard = None
           ``when`` = None }
 
@@ -315,7 +317,9 @@ module Default =
           polylines = Some true
           ``when`` = Some System.DateTime.Now }
 
-    let ServerOptions: ServerOptions = { language = Some "de" }
+    let ServerOptions: ServerOptions =
+        { versionInfo = Some true
+          language = Some "de" }
 
     let Location: Location =
         { ``type`` = Some "location"
@@ -484,7 +488,9 @@ module Default =
           nextStopovers = None
           frames = None
           polyline = None
-          currentTripPosition = None }
+          currentTripPosition = None
+          origin = None
+          destination = None }
 
     let Journey: Journey =
         { ``type`` = Some "journey"
@@ -542,7 +548,8 @@ module Default =
           toStops = None }
 
     let ServerInfo: ServerInfo =
-        { timetableStart = None
+        { hciVersion = None
+          timetableStart = None
           timetableEnd = None
           serverTime = None
           realtimeDataUpdatedAt = None }

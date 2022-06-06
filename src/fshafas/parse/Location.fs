@@ -146,10 +146,11 @@ module internal Location =
         (i: int)
         (l: FsHafas.Raw.RawLoc)
         (locations: (FsHafas.Raw.RawLoc * U3<FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>) [])
+        (commonLocations: U3<FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location> [])
         =
         let station =
             match l.mMastLocX with
-            | Some mMastLocX ->
+            | Some mMastLocX when mMastLocX < locations.Length ->
                 match locations.[mMastLocX] with
                 | (_, U3.Case2 stop) ->
                     { Default.Station with
@@ -160,7 +161,18 @@ module internal Location =
                           lines = stop.lines }
                     |> Some
                 | _ -> None
-            | None -> None
+            | Some mMastLocX when mMastLocX < commonLocations.Length ->
+                match commonLocations.[mMastLocX] with
+                | U3.Case2 stop ->
+                    { Default.Station with
+                          id = stop.id
+                          name = stop.name
+                          location = stop.location
+                          products = stop.products
+                          lines = stop.lines }
+                    |> Some
+                | _ -> None
+            | _ -> None
 
         match locations.[i] with
         | (_, U3.Case2 stop) -> U3.Case2({ stop with station = station })
@@ -173,7 +185,7 @@ module internal Location =
             |> Array.mapi (fun i _ -> parseLocationPhase1 ctx i locL)
 
         locations
-        |> Array.mapi (fun i (l, _) -> parseLocationPhase2 i l locations)
+        |> Array.mapi (fun i (l, _) -> parseLocationPhase2 i l locations ctx.common.locations)
         |> Array.filter
             (fun u3 ->
                 match u3 with
