@@ -6,8 +6,8 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FsHafas.Python" Version="1.5.0-alpha-008" />
-    <PackageReference Include="FsHafas.Profiles.Python" Version="1.5.0-alpha-008" />
+    <PackageReference Include="FsHafas.Python" Version="1.5.0-alpha-009" />
+    <PackageReference Include="FsHafas.Profiles.Python" Version="1.5.0-alpha-009" />
   </ItemGroup>
   <PropertyGroup>
     <DefineConstants>FABLE_COMPILER;FABLE_PY</DefineConstants>
