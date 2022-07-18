@@ -16,16 +16,14 @@ module internal Polyline =
 #if FABLE_JS
     [<ImportDefault("google-polyline")>]
     let defaultObject: GooglePolyline = jsNative
-#else
+#endif
 
 #if FABLE_PY
     [<ImportAll("polyline")>]
     [<Emit("polyline.decode($1)")>]
-    let polylinedecode (_: string) : float [] []  = jsNative
+    let polylinedecode (_: string) : float [] [] = jsNative
 
-    let defaultObject : GooglePolyline = { decode = polylinedecode }
-#endif
-
+    let defaultObject: GooglePolyline = { decode = polylinedecode }
 #endif
 
 #else

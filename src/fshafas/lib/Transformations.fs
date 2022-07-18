@@ -296,7 +296,7 @@ module Default =
           subStops = None
           entrances = None
           remarks = None
-          language = None }
+          language = Some "de" }
 
     let ReachableFromOptions: ReachableFromOptions =
         { ``when`` = Some System.DateTime.Now

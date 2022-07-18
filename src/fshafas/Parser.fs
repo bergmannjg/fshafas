@@ -289,7 +289,9 @@ module Parser =
         let projection =
             fun (d: Alternative) ->
                 try
-                    ParseIsoString d.``when``.Value
+                    match d.``when`` with
+                    | Some v -> ParseIsoString v
+                    | None -> System.DateTime.Now
                 with
                 | ex ->
                     printfn "%s" ex.Message

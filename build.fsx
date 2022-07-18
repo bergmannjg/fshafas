@@ -421,7 +421,6 @@ let compareNetJsResult (method: string) (args: string) =
     System.IO.File.WriteAllText(netFile, resultNet)
 
     let ok = runWithFailureResult "." "diff" (netFile + " " + jsFile)
-
     (method, ok)
 
 let compareJsPyResult (method: string) (args: string) =
@@ -464,7 +463,10 @@ Target.create "CompareJsPyResult" (fun _ ->
 
     Shell.cleanDir "./src/examples/cli/build"
 
-    DotNet.exec (DotNet.Options.withWorkingDirectory "./src/examples/cli") "fable" "./cli.fable.fsproj -o build"
+    DotNet.exec
+        (DotNet.Options.withWorkingDirectory "./src/examples/cli")
+        "fable"
+        "./cli.fable.javascript.fsproj -o build"
     |> ignore
 
     Shell.cleanDir "./src/examples/cli/fable_modules"
@@ -486,7 +488,10 @@ Target.create "CompareNetJsResult" (fun _ ->
 
     Shell.cleanDir "./src/examples/cli/build"
 
-    DotNet.exec (DotNet.Options.withWorkingDirectory "./src/examples/cli") "fable" "./cli.fable.fsproj -o build"
+    DotNet.exec
+        (DotNet.Options.withWorkingDirectory "./src/examples/cli")
+        "fable"
+        "./cli.fable.javascript.fsproj -o build"
     |> ignore
 
     let results =

@@ -2,7 +2,7 @@
 
 Python client for [HAFAS](https://de.wikipedia.org/wiki/HAFAS) public transport APIs.
 
-The python package is generated from [Hafas Client in F#](https://github.com/bergmannjg/fshafas/tree/1.5.0) with [fable-py](https://www.nuget.org/packages/fable-py/), a tool that translates F# source files to Python (currently a prerelease).
+The python package is generated from [Hafas Client in F#](https://github.com/bergmannjg/fshafas/tree/1.5.1) with [fable-py](https://www.nuget.org/packages/fable-py/), a tool that translates F# source files to Python (currently a prerelease).
 
 Related:
 

@@ -32,3 +32,7 @@
 ## 1.5.0
 
 * corresponds to hafas-client version 5.24.0
+
+## 1.5.1
+
+* update python package
