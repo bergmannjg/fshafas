@@ -14,7 +14,7 @@ The library exposes  3 interfaces:
 - a [F# async based interface](reference/fshafas-api-hafasasyncclient.html) corresponding to hafas-client api,
 - a [JS promise based interface](reference/fshafas-client-hafasclient.html) corresponding to the TS [Type definitions](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/hafas-client/index.d.ts) for hafas-client.
 
-The library compiles via Fable to a webpack module with [this](https://github.com/bergmannjg/fshafas/blob/main/src/fshafas.fable.package/fs-hafas-client/fshafas.bundle.d.ts) TS Type definition.
+The library compiles via Fable to a webpack module with [this](https://github.com/bergmannjg/fshafas/blob/main/src/fshafas.javascript.package/fs-hafas-client/fshafas.bundle.d.ts) TS Type definition.
 
 ## Examples
 

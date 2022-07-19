@@ -43,10 +43,11 @@ let checkResult (msg: string) (res: ProcessResult) = if not res.OK then failwith
 let checkResultUnit (msg: string) (res: ProcessResult<unit>) = if res.ExitCode <> 0 then failwith msg
 
 Target.create "BuildDocs" (fun _ ->
+    Shell.cleanDir ".fsdocs"
     DotNet.exec
         id
         "fsdocs"
-        "build --clean --projects src/fshafas/fshafas.fsproj --input src/fshafas/docs/ --output output/fshafas"
+        "build --clean --input src/fshafas/docs --output output/fshafas"
     |> ignore)
 
 Target.create "ReleaseDocs" (fun _ ->

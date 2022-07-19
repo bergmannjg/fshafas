@@ -9,6 +9,8 @@
     <Version>1.5.1</Version>
     <Authors>J. Bergmann</Authors>
     <PackageTags>fable fsharp</PackageTags>
+    <FsDocsLicenseLink>https://github.com/bergmannjg/fshafas/blob/main/LICENSE.md</FsDocsLicenseLink>
+    <FsDocsReleaseNotesLink>https://github.com/bergmannjg/fshafas/blob/main/RELEASE_NOTES.md</FsDocsReleaseNotesLink>
   </PropertyGroup>
 
   <ItemGroup>

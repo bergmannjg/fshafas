@@ -14,12 +14,6 @@
         "fake"
       ]
     },
-    "fsharp.formatting.commandtool": {
-      "version": "9.0.4",
-      "commands": [
-        "fsdocs"
-      ]
-    },
     "fantomas-tool": {
       "version": "4.7.0",
       "commands": [
@@ -30,6 +24,12 @@
       "version": "4.0.0-alpha-032",
       "commands": [
         "fable-py"
+      ]
+    },
+    "fsdocs-tool": {
+      "version": "15.0.1",
+      "commands": [
+        "fsdocs"
       ]
     }
   }
