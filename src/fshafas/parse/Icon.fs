@@ -5,10 +5,6 @@ module internal Icon =
     open FsHafas.Client
     open FsHafas.Endpoint
 
-#if FABLE_COMPILER
-    open Fable.Core
-#endif
-
     let parseIcon (ctx: Context) (i: FsHafas.Raw.RawIco) : Icon option =
         match i.res with
         | Some res when res <> "Empty" ->

@@ -2,10 +2,6 @@ namespace FsHafas.Parser
 
 module internal Movement =
 
-#if FABLE_COMPILER
-    open Fable.Core
-#endif
-
     open FsHafas.Client
     open FsHafas.Endpoint
 

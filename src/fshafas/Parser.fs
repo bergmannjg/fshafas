@@ -3,10 +3,6 @@ namespace FsHafas.Api
 open FsHafas.Parser
 open FsHafas.Client
 
-#if FABLE_COMPILER
-open Fable.Core
-#endif
-
 /// <exclude>Parser</exclude>
 module Parser =
 
@@ -308,11 +304,7 @@ module Parser =
 
                 jnyL
                 |> Array.map (fun jny -> parse ctx jny)
-#if FABLE_PY
                 |> FsHafas.Extensions.ArrayEx.sortBy projection
-#else
-                |> Array.sortBy projection
-#endif
             with
             | ex ->
                 printfn "%s" ex.Message

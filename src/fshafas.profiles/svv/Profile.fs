@@ -4,10 +4,6 @@ module Svv =
 
     open FsHafas.Client
 
-#if FABLE_COMPILER
-    open Fable.Core
-#endif
-
     let private products: ProductType [] =
         [| { id = "bahn-s-bahn"
              mode = ProductTypeMode.Train

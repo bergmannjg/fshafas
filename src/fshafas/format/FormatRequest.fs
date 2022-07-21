@@ -2,10 +2,6 @@ namespace FsHafas.Client
 
 module internal Format =
 
-#if FABLE_COMPILER
-    open Fable.Core
-#endif
-
 #if FABLE_PY
     open FsHafas.Extensions
 #endif

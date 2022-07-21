@@ -5,10 +5,6 @@ module Bvg =
     open FsHafas.Client
     open System.Text.RegularExpressions
 
-#if FABLE_COMPILER
-    open Fable.Core
-#endif
-
     let private products: ProductType [] =
         [| { id = "suburban"
              mode = ProductTypeMode.Train

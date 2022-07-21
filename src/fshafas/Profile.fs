@@ -3,10 +3,6 @@ namespace FsHafas.Api
 open FsHafas.Parser
 open FsHafas.Client
 
-#if FABLE_COMPILER
-open Fable.Core
-#endif
-
 module Profile =
 
     let defaultProfile () =

@@ -13,10 +13,6 @@ namespace FsHafas.Raw
 
 open FsHafas.Client
 
-#if FABLE_COMPILER
-open Fable.Core
-#endif
-
 """
 
 let postlude =

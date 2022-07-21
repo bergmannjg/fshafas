@@ -2,10 +2,6 @@ namespace FsHafas.Parser
 
 module internal Location =
 
-#if FABLE_COMPILER
-    open Fable.Core
-#endif
-
     open System.Text.RegularExpressions
 
     open FsHafas.Client

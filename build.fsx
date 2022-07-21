@@ -44,10 +44,8 @@ let checkResultUnit (msg: string) (res: ProcessResult<unit>) = if res.ExitCode <
 
 Target.create "BuildDocs" (fun _ ->
     Shell.cleanDir ".fsdocs"
-    DotNet.exec
-        id
-        "fsdocs"
-        "build --clean --input src/fshafas/docs --output output/fshafas"
+
+    DotNet.exec id "fsdocs" "build --clean --input src/fshafas/docs --output output/fshafas"
     |> ignore)
 
 Target.create "ReleaseDocs" (fun _ ->
@@ -84,6 +82,9 @@ Target.create "ReleaseDocsForce" (fun _ ->
 
 Target.create "BuildLib" (fun _ ->
     DotNet.exec id "build" "src/fshafas/fshafas.fsproj"
+    |> checkResult "buildLib failed"
+
+    DotNet.exec id "build" "src/fshafas.profiles/fshafas.profiles.fsproj"
     |> checkResult "buildLib failed")
 
 Target.create "BuildWebApp" (fun _ ->

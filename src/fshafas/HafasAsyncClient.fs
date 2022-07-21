@@ -4,10 +4,6 @@ open System
 open FsHafas.Client
 open FsHafas.Client
 
-#if FABLE_COMPILER
-open Fable.Core
-#endif
-
 /// <summary>F# async based interface corresponding to hafas-client</summary>
 type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
 

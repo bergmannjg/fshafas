@@ -21,6 +21,12 @@ type U4<'a, 'b, 'c, 'd> =
 
 #if FABLE_COMPILER
 open Fable.Core
+
+type U2<'a, 'b> = Fable.Core.U2<'a, 'b>
+
+type U3<'a, 'b, 'c> = Fable.Core.U3<'a, 'b, 'c>
+
+type U4<'a, 'b, 'c, 'd> = Fable.Core.U4<'a, 'b, 'c, 'd>
 #endif
 
 #if FABLE_COMPILER

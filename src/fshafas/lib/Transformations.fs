@@ -90,11 +90,6 @@ module internal ToTrip =
 
 module internal U2StationStop =
 
-#if FABLE_COMPILER
-    open Fable.Core
-#endif
-
-    open FsHafas.Client
     open FsHafas.Client
 
     let FromU3StationStopLocation (u3: U3<Station, Stop, Location>) =
@@ -118,10 +113,6 @@ module internal U2StationStop =
         | _ -> None
 
 module internal U2StopLocation =
-
-#if FABLE_COMPILER
-    open Fable.Core
-#endif
 
     open FsHafas.Client
 

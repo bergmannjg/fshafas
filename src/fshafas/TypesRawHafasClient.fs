@@ -6,11 +6,6 @@ namespace FsHafas.Raw
 
 open FsHafas.Client
 
-#if FABLE_COMPILER
-open Fable.Core
-#endif
-
-
 type RawPltf = { ``type``: string; txt: string }
 
 and RawTrnCmpSX =

@@ -6,11 +6,6 @@ namespace FsHafas.Printf
 
 module Short =
 
-#if FABLE_COMPILER
-    open Fable.Core
-#endif
-
-    open FsHafas.Client
     open FsHafas.Client
 
     let private nl = "\n"

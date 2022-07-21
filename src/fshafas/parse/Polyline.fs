@@ -8,43 +8,11 @@ module internal Polyline =
 
     let decode (s: string) : float [] [] = [||]
 
-#if FABLE_COMPILER
-    open Fable.Core
-
-    type GooglePolyline = { decode: string -> float [] [] }
-
-#if FABLE_JS
-    [<ImportDefault("google-polyline")>]
-    let defaultObject: GooglePolyline = jsNative
-#endif
-
-#if FABLE_PY
-    [<ImportAll("polyline")>]
-    [<Emit("polyline.decode($1)")>]
-    let polylinedecode (_: string) : float [] [] = jsNative
-
-    let defaultObject: GooglePolyline = { decode = polylinedecode }
-#endif
-
-#else
-    open PolylinerNet
-
-    let polyliner = Polyliner()
-#endif
-
     let round (f: float) = System.Math.Round(f, 5)
 
     let defaultFeatureCollection: FsHafas.Client.FeatureCollection =
         { ``type`` = Some "FeatureCollection"
           features = Array.empty }
-
-    let private polylineDecode (xy: string) =
-#if FABLE_COMPILER
-        defaultObject.decode xy
-#else
-        polyliner.Decode xy
-        |> Seq.map (fun p -> [| p.Latitude; p.Longitude |])
-#endif
 
     let private getStop (ctx: Context) (p: FsHafas.Raw.RawPoly) (i: int) =
         match p.ppLocRefL with
@@ -61,7 +29,7 @@ module internal Polyline =
 
     let parsePolyline (ctx: Context) (poly: FsHafas.Raw.RawPoly) : FsHafas.Client.FeatureCollection =
         let features =
-            polylineDecode poly.crdEncYX
+            FsHafas.Extensions.PolylineEx.polylineDecode poly.crdEncYX
             |> Seq.mapi<_, FsHafas.Client.Feature> (fun i p ->
                 { ``type`` = Some "Feature"
                   properties = getStop ctx poly i

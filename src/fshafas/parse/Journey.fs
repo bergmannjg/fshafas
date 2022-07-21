@@ -9,38 +9,18 @@ module internal Journey =
         [| 0..7 |]
         |> Array.map (fun x -> 1 <<< (7 - x) |> byte)
 
-#if FABLE_JS
-    open Fable.Core
-
-    [<Emit("Buffer.from($0, 'hex')")>]
-    let FromHexString (s: string) = [||]
-#else
-#if FABLE_PY
-    open Fable.Core
-
-    [<Emit("bytes.fromhex($0)")>]
-    let FromHexString (s: string) : byte [] = jsNative
-#else
-    let FromHexString (s: string) = System.Convert.FromHexString s
-#endif
-#endif
-
     let private parseScheduledDays (ctx: Context) (sDays: string) (year: int) =
 
         let mutable dt = System.DateTime(year, 1, 1)
 
-        FromHexString sDays
+        FsHafas.Extensions.ConvertEx.FromHexString sDays
         |> Seq.fold
             (fun (m: IndexMap<string, bool>) d ->
                 bytes
                 |> Array.fold
                     (fun (m: IndexMap<string, bool>) b ->
                         m.Item(dt.ToString("yyyy-MM-dd")) <- d &&& b <> 0uy
-#if FABLE_PY
                         dt <- FsHafas.Extensions.DateTimeEx.addDays (dt, 1)
-#else
-                        dt <- dt.AddDays(1.0)
-#endif
                         m)
                     m)
             (IndexMap<string, bool>(false))

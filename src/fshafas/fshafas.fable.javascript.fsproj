@@ -24,6 +24,13 @@
     <Compile Include="TypesRawHafasClient.fs" />
     <Compile Include="TypesHafasClient.fs" />
     <Compile Include="Context.fs" />
+    <Compile Include="extensions/ArrayEx.fs" />
+    <Compile Include="extensions/Convert.fs" />
+    <Compile Include="extensions/DateTimeEx.fs" />
+    <Compile Include="extensions/DateTimeOffsetEx.fs" />
+    <Compile Include="extensions/PolylineEx.fs" />
+    <Compile Include="extensions/RawRequestEx.fs" />
+    <Compile Include="extensions/RawResponse.fs" />
     <Compile Include="lib/Transformations.fs" />
     <Compile Include="lib/Request.fs" />
     <Compile Include="HafasRawClient.fs" />

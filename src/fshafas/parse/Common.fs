@@ -2,10 +2,6 @@ namespace FsHafas.Parser
 
 module internal Common =
 
-#if FABLE_COMPILER
-    open Fable.Core
-#endif
-
     open FsHafas.Endpoint
 
     let private updateOperators (ctx: Context) (ops: FsHafas.Client.Operator []) =

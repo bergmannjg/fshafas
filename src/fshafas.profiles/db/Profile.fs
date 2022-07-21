@@ -8,10 +8,6 @@ module Db =
     open FsHafas.Endpoint
     open FsHafas.Raw
 
-#if FABLE_COMPILER
-    open Fable.Core
-#endif
-
     let private products: ProductType [] =
         [| { id = "nationalExpress"
              mode = ProductTypeMode.Train

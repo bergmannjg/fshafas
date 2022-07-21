@@ -306,27 +306,65 @@ let refreshJourney (refreshToken: string) =
     }
     |> AsyncRun
 
+#if FABLE_PY
+
+module internal DateTimeEx =
+    open Fable.Core
+
+    // workaround: missing code year
+    [<Emit("$0.year")>]
+    let year (dt: obj) : int = jsNative
+
+    // workaround: missing code month
+    [<Emit("$0.month")>]
+    let month (dt: obj) : int = jsNative
+
+    // workaround: missing code day
+    [<Emit("$0.day")>]
+    let day (dt: obj) : int = jsNative
+
+    // workaround: missing code hour
+    [<Emit("$0.hour")>]
+    let hour (dt: obj) : int = jsNative
+
+    // workaround: missing code minute
+    [<Emit("$0.minute")>]
+    let minute (dt: obj) : int = jsNative
+
+    // workaround: missing code second
+    [<Emit("$0.second")>]
+    let second (dt: obj) : int = jsNative
+
+let dateOfCurrentHour () =
+    let dt = System.DateTime.Now
+    System.DateTime(DateTimeEx.year (dt), DateTimeEx.month (dt), DateTimeEx.day (dt), DateTimeEx.hour (dt), 0, 0)
+
+#else
+
+let dateOfCurrentHour () =
+    let dt = System.DateTime.Now
+    System.DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, 0, 0)
+
+#endif
+
 let departures (name: string) =
     use client = new Api.HafasAsyncClient(profile)
+
+    let options =
+        { Default.DeparturesArrivalsOptions with ``when`` = Some(dateOfCurrentHour ()) }
 
     async {
         let! loc = getLocation client name
 
         match loc with
         | Some loc ->
-            let! departures = client.AsyncDepartures loc None
+            let! departures = client.AsyncDepartures loc (Some options)
 
             FsHafas.Printf.Short.Alternatives departures
             |> printfn "%s"
         | _ -> ()
     }
     |> AsyncRun
-
-#if !FABLE_PY
-let dateOfCurrentHour () =
-    let dt = System.DateTime.Now
-    System.DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, 0, 0)
-#endif
 
 let trips (name: string) =
     use client = new Api.HafasAsyncClient(profile)
