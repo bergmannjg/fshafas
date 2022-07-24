@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Trip (fshafas)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="J. Bergmann">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/fshafas/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="/fshafas/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/fshafas/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/fshafas/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
+            <a href="/fshafas/"><img id="fsdocs-logo" src="/fshafas/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/bergmannjg/fshafas/blob/main/LICENSE.md">License</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/bergmannjg/fshafas/blob/main/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/bergmannjg/fshafas/">Source Repository</a></li>
+                
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/fshafas/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="/fshafas/">fshafas</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <div>
+  <h2>
+    Trip Type
+  </h2>
+  <dl class="fsdocs-metadata">
+    <dt>
+      Namespace: 
+      <a href="/fshafas/reference/fshafas-client.html">
+        FsHafas.Client
+      </a>
+    </dt>
+    <dt>
+      Assembly: fshafas.dll
+    </dt>
+    <dt>
+      Base Type: 
+      <code>obj</code>
+    </dt>
+    <dt>
+      All Interfaces: 
+      <code><span><a href="https://docs.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a href="/fshafas/reference/fshafas-client-trip.html">Trip</a>&gt;</span></code>
+      , 
+      <code><a href="https://docs.microsoft.com/dotnet/api/system.collections.istructuralequatable">IStructuralEquatable</a></code>
+    </dt>
+  </dl>
+  <div class="fsdocs-xmldoc">
+    <div>
+      <p class="fsdocs-summary">
+        
+ Trip – a vehicle stopping at a set of stops at specific times
+
+      </p>
+    </div>
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div>
+    <h3>
+      Record fields
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Record Field
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '502', 502)" onmouseover="showTip(event, '502', 502)">
+                <p>
+                  <a id="alternatives">
+                    <a href="#alternatives">
+                      <code>alternatives</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="502">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>alternatives</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span><span><a href="/fshafas/reference/fshafas-client-alternative.html">Alternative</a>&#32;array</span>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L297-297" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span><span><a href="/fshafas/reference/fshafas-client-alternative.html">Alternative</a>&#32;array</span>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '503', 503)" onmouseover="showTip(event, '503', 503)">
+                <p>
+                  <a id="arrival">
+                    <a href="#arrival">
+                      <code>arrival</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="503">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>arrival</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L276-276" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '504', 504)" onmouseover="showTip(event, '504', 504)">
+                <p>
+                  <a id="arrivalDelay">
+                    <a href="#arrivalDelay">
+                      <code>arrivalDelay</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="504">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>arrivalDelay</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>int&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L279-279" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>int&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '505', 505)" onmouseover="showTip(event, '505', 505)">
+                <p>
+                  <a id="arrivalPlatform">
+                    <a href="#arrivalPlatform">
+                      <code>arrivalPlatform</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="505">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>arrivalPlatform</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L280-280" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '506', 506)" onmouseover="showTip(event, '506', 506)">
+                <p>
+                  <a id="cancelled">
+                    <a href="#cancelled">
+                      <code>cancelled</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="506">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>cancelled</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>bool&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L290-290" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>bool&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '507', 507)" onmouseover="showTip(event, '507', 507)">
+                <p>
+                  <a id="cycle">
+                    <a href="#cycle">
+                      <code>cycle</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="507">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>cycle</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span><a href="/fshafas/reference/fshafas-client-cycle.html">Cycle</a>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L296-296" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span><a href="/fshafas/reference/fshafas-client-cycle.html">Cycle</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '508', 508)" onmouseover="showTip(event, '508', 508)">
+                <p>
+                  <a id="departure">
+                    <a href="#departure">
+                      <code>departure</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="508">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>departure</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L269-269" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '509', 509)" onmouseover="showTip(event, '509', 509)">
+                <p>
+                  <a id="departureDelay">
+                    <a href="#departureDelay">
+                      <code>departureDelay</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="509">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>departureDelay</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>int&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L272-272" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>int&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '510', 510)" onmouseover="showTip(event, '510', 510)">
+                <p>
+                  <a id="departurePlatform">
+                    <a href="#departurePlatform">
+                      <code>departurePlatform</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="510">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>departurePlatform</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L273-273" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '511', 511)" onmouseover="showTip(event, '511', 511)">
+                <p>
+                  <a id="destination">
+                    <a href="#destination">
+                      <code>destination</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="511">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>destination</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span><span><a href="/fshafas/reference/fshafas-client-u3-3.html">U3</a>&lt;<span><a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L268-268" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span><span><a href="/fshafas/reference/fshafas-client-u3-3.html">U3</a>&lt;<span><a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '512', 512)" onmouseover="showTip(event, '512', 512)">
+                <p>
+                  <a id="direction">
+                    <a href="#direction">
+                      <code>direction</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="512">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>direction</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L287-287" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '513', 513)" onmouseover="showTip(event, '513', 513)">
+                <p>
+                  <a id="distance">
+                    <a href="#distance">
+                      <code>distance</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="513">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>distance</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>int&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L293-293" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>int&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '514', 514)" onmouseover="showTip(event, '514', 514)">
+                <p>
+                  <a id="id">
+                    <a href="#id">
+                      <code>id</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="514">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>id</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L266-266" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '515', 515)" onmouseover="showTip(event, '515', 515)">
+                <p>
+                  <a id="line">
+                    <a href="#line">
+                      <code>line</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="515">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>line</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span><a href="/fshafas/reference/fshafas-client-line.html">Line</a>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L288-288" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span><a href="/fshafas/reference/fshafas-client-line.html">Line</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '516', 516)" onmouseover="showTip(event, '516', 516)">
+                <p>
+                  <a id="loadFactor">
+                    <a href="#loadFactor">
+                      <code>loadFactor</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="516">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>loadFactor</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L292-292" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '517', 517)" onmouseover="showTip(event, '517', 517)">
+                <p>
+                  <a id="operator">
+                    <a href="#operator">
+                      <code>operator</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="517">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>operator</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>float&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L286-286" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>float&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '518', 518)" onmouseover="showTip(event, '518', 518)">
+                <p>
+                  <a id="origin">
+                    <a href="#origin">
+                      <code>origin</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="518">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>origin</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span><span><a href="/fshafas/reference/fshafas-client-u3-3.html">U3</a>&lt;<span><a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L267-267" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span><span><a href="/fshafas/reference/fshafas-client-u3-3.html">U3</a>&lt;<span><a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '519', 519)" onmouseover="showTip(event, '519', 519)">
+                <p>
+                  <a id="plannedArrival">
+                    <a href="#plannedArrival">
+                      <code>plannedArrival</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="519">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>plannedArrival</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L277-277" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '520', 520)" onmouseover="showTip(event, '520', 520)">
+                <p>
+                  <a id="plannedArrivalPlatform">
+                    <a href="#plannedArrivalPlatform">
+                      <code>plannedArrivalPlatform</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="520">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>plannedArrivalPlatform</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L282-282" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '521', 521)" onmouseover="showTip(event, '521', 521)">
+                <p>
+                  <a id="plannedDeparture">
+                    <a href="#plannedDeparture">
+                      <code>plannedDeparture</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="521">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>plannedDeparture</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L270-270" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '522', 522)" onmouseover="showTip(event, '522', 522)">
+                <p>
+                  <a id="plannedDeparturePlatform">
+                    <a href="#plannedDeparturePlatform">
+                      <code>plannedDeparturePlatform</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="522">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>plannedDeparturePlatform</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L275-275" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '523', 523)" onmouseover="showTip(event, '523', 523)">
+                <p>
+                  <a id="polyline">
+                    <a href="#polyline">
+                      <code>polyline</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="523">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>polyline</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span><a href="/fshafas/reference/fshafas-client-featurecollection.html">FeatureCollection</a>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L298-298" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span><a href="/fshafas/reference/fshafas-client-featurecollection.html">FeatureCollection</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '524', 524)" onmouseover="showTip(event, '524', 524)">
+                <p>
+                  <a id="price">
+                    <a href="#price">
+                      <code>price</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="524">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>price</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span><a href="/fshafas/reference/fshafas-client-price.html">Price</a>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L285-285" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span><a href="/fshafas/reference/fshafas-client-price.html">Price</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '525', 525)" onmouseover="showTip(event, '525', 525)">
+                <p>
+                  <a id="prognosedArrival">
+                    <a href="#prognosedArrival">
+                      <code>prognosedArrival</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="525">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>prognosedArrival</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L271-271" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '526', 526)" onmouseover="showTip(event, '526', 526)">
+                <p>
+                  <a id="prognosedArrivalPlatform">
+                    <a href="#prognosedArrivalPlatform">
+                      <code>prognosedArrivalPlatform</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="526">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>prognosedArrivalPlatform</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L281-281" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '527', 527)" onmouseover="showTip(event, '527', 527)">
+                <p>
+                  <a id="prognosedDeparture">
+                    <a href="#prognosedDeparture">
+                      <code>prognosedDeparture</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="527">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>prognosedDeparture</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L278-278" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '528', 528)" onmouseover="showTip(event, '528', 528)">
+                <p>
+                  <a id="prognosedDeparturePlatform">
+                    <a href="#prognosedDeparturePlatform">
+                      <code>prognosedDeparturePlatform</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="528">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>prognosedDeparturePlatform</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L274-274" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '529', 529)" onmouseover="showTip(event, '529', 529)">
+                <p>
+                  <a id="public">
+                    <a href="#public">
+                      <code>public</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="529">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>public</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>bool&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L294-294" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>bool&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '530', 530)" onmouseover="showTip(event, '530', 530)">
+                <p>
+                  <a id="reachable">
+                    <a href="#reachable">
+                      <code>reachable</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="530">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>reachable</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>bool&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L289-289" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>bool&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '531', 531)" onmouseover="showTip(event, '531', 531)">
+                <p>
+                  <a id="remarks">
+                    <a href="#remarks">
+                      <code>remarks</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="531">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>remarks</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span><span><span><a href="/fshafas/reference/fshafas-client-u3-3.html">U3</a>&lt;<span><a href="/fshafas/reference/fshafas-client-hint.html">Hint</a>,&#32;<a href="/fshafas/reference/fshafas-client-status.html">Status</a>,&#32;<a href="/fshafas/reference/fshafas-client-warning.html">Warning</a></span>&gt;</span>&#32;array</span>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L299-299" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span><span><span><a href="/fshafas/reference/fshafas-client-u3-3.html">U3</a>&lt;<span><a href="/fshafas/reference/fshafas-client-hint.html">Hint</a>,&#32;<a href="/fshafas/reference/fshafas-client-status.html">Status</a>,&#32;<a href="/fshafas/reference/fshafas-client-warning.html">Warning</a></span>&gt;</span>&#32;array</span>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '532', 532)" onmouseover="showTip(event, '532', 532)">
+                <p>
+                  <a id="schedule">
+                    <a href="#schedule">
+                      <code>schedule</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="532">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>schedule</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>float&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L284-284" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>float&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '533', 533)" onmouseover="showTip(event, '533', 533)">
+                <p>
+                  <a id="stopovers">
+                    <a href="#stopovers">
+                      <code>stopovers</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="533">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>stopovers</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span><span><a href="/fshafas/reference/fshafas-client-stopover.html">StopOver</a>&#32;array</span>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L283-283" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span><span><a href="/fshafas/reference/fshafas-client-stopover.html">StopOver</a>&#32;array</span>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '534', 534)" onmouseover="showTip(event, '534', 534)">
+                <p>
+                  <a id="transfer">
+                    <a href="#transfer">
+                      <code>transfer</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="534">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>transfer</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>bool&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L295-295" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>bool&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '535', 535)" onmouseover="showTip(event, '535', 535)">
+                <p>
+                  <a id="walking">
+                    <a href="#walking">
+                      <code>walking</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="535">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>walking</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><span>bool&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/TypesHafasClient.fs#L291-291" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><span>bool&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+            
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = '/fshafas/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="/fshafas/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>

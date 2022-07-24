@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>HafasAsyncClient (fshafas)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="J. Bergmann">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/fshafas/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="/fshafas/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/fshafas/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/fshafas/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
+            <a href="/fshafas/"><img id="fsdocs-logo" src="/fshafas/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/bergmannjg/fshafas/blob/main/LICENSE.md">License</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/bergmannjg/fshafas/blob/main/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/bergmannjg/fshafas/">Source Repository</a></li>
+                
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/fshafas/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="/fshafas/">fshafas</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <div>
+  <h2>
+    HafasAsyncClient Type
+  </h2>
+  <dl class="fsdocs-metadata">
+    <dt>
+      Namespace: 
+      <a href="/fshafas/reference/fshafas-api.html">
+        FsHafas.Api
+      </a>
+    </dt>
+    <dt>
+      Assembly: fshafas.dll
+    </dt>
+    <dt>
+      Base Type: 
+      <code>obj</code>
+    </dt>
+    <dt>
+      All Interfaces: 
+      <code><a href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></code>
+    </dt>
+  </dl>
+  <div class="fsdocs-xmldoc">
+    <div>
+      <p class="fsdocs-summary">
+        F# async based interface corresponding to hafas-client
+      </p>
+    </div>
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div>
+    <h3>
+      Constructors
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Constructor
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '59', 59)" onmouseover="showTip(event, '59', 59)">
+                <p>
+                  <a id="``.ctor``">
+                    <a href="#``.ctor``">
+                      <code><span>HafasAsyncClient<span><span>(<span>profile</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="59">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>HafasAsyncClient<span><span>(<span>profile</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        profile
+                      </b>
+                      :
+                      <code><a href="/fshafas/reference/fshafas-endpoint-profile.html">Profile</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/fshafas/reference/fshafas-api-hafasasyncclient.html">HafasAsyncClient</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.#ctor`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.#ctor\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L7-7" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  profile
+                </span>
+                :
+                <code><a href="/fshafas/reference/fshafas-endpoint-profile.html">Profile</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/fshafas/reference/fshafas-api-hafasasyncclient.html">HafasAsyncClient</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>
+      Instance members
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Instance member
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '60', 60)" onmouseover="showTip(event, '60', 60)">
+                <p>
+                  <a id="AsyncArrivals">
+                    <a href="#AsyncArrivals">
+                      <code><span>this.AsyncArrivals</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="60">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AsyncArrivals</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        name
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-u4-4.html">U4</a>&lt;<span>string,&#32;<a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        opt
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-departuresarrivalsoptions.html">DeparturesArrivalsOptions</a>&#32;option</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><a href="/fshafas/reference/fshafas-client-alternative.html">Alternative</a>&#32;array</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.AsyncArrivals`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.AsyncArrivals\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L139-139" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  name
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-u4-4.html">U4</a>&lt;<span>string,&#32;<a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  opt
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-departuresarrivalsoptions.html">DeparturesArrivalsOptions</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><a href="/fshafas/reference/fshafas-client-alternative.html">Alternative</a>&#32;array</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '61', 61)" onmouseover="showTip(event, '61', 61)">
+                <p>
+                  <a id="AsyncDepartures">
+                    <a href="#AsyncDepartures">
+                      <code><span>this.AsyncDepartures</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="61">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AsyncDepartures</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        name
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-u4-4.html">U4</a>&lt;<span>string,&#32;<a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        opt
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-departuresarrivalsoptions.html">DeparturesArrivalsOptions</a>&#32;option</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><a href="/fshafas/reference/fshafas-client-alternative.html">Alternative</a>&#32;array</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.AsyncDepartures`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.AsyncDepartures\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L122-122" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  name
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-u4-4.html">U4</a>&lt;<span>string,&#32;<a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  opt
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-departuresarrivalsoptions.html">DeparturesArrivalsOptions</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><a href="/fshafas/reference/fshafas-client-alternative.html">Alternative</a>&#32;array</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '62', 62)" onmouseover="showTip(event, '62', 62)">
+                <p>
+                  <a id="AsyncJourneys">
+                    <a href="#AsyncJourneys">
+                      <code><span>this.AsyncJourneys</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="62">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AsyncJourneys</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        from
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-u4-4.html">U4</a>&lt;<span>string,&#32;<a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        to
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-u4-4.html">U4</a>&lt;<span>string,&#32;<a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        opt
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-journeysoptions.html">JourneysOptions</a>&#32;option</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<a href="/fshafas/reference/fshafas-client-journeys.html">Journeys</a>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.AsyncJourneys`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.AsyncJourneys\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L55-55" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  from
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-u4-4.html">U4</a>&lt;<span>string,&#32;<a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  to
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-u4-4.html">U4</a>&lt;<span>string,&#32;<a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  opt
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-journeysoptions.html">JourneysOptions</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<a href="/fshafas/reference/fshafas-client-journeys.html">Journeys</a>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '63', 63)" onmouseover="showTip(event, '63', 63)">
+                <p>
+                  <a id="AsyncJourneysFromTrip">
+                    <a href="#AsyncJourneysFromTrip">
+                      <code><span>this.AsyncJourneysFromTrip</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="63">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AsyncJourneysFromTrip</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        fromTripId
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        previousStopOver
+                      </b>
+                      :
+                      <code><a href="/fshafas/reference/fshafas-client-stopover.html">StopOver</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        to
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-u4-4.html">U4</a>&lt;<span>string,&#32;<a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        opt
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-journeysfromtripoptions.html">JourneysFromTripOptions</a>&#32;option</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><a href="/fshafas/reference/fshafas-client-journey.html">Journey</a>&#32;array</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.AsyncJourneysFromTrip`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.AsyncJourneysFromTrip\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L82-82" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  fromTripId
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  previousStopOver
+                </span>
+                :
+                <code><a href="/fshafas/reference/fshafas-client-stopover.html">StopOver</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  to
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-u4-4.html">U4</a>&lt;<span>string,&#32;<a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  opt
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-journeysfromtripoptions.html">JourneysFromTripOptions</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><a href="/fshafas/reference/fshafas-client-journey.html">Journey</a>&#32;array</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '64', 64)" onmouseover="showTip(event, '64', 64)">
+                <p>
+                  <a id="AsyncLines">
+                    <a href="#AsyncLines">
+                      <code><span>this.AsyncLines</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="64">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AsyncLines</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        query
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        opt
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-linesoptions.html">LinesOptions</a>&#32;option</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><a href="/fshafas/reference/fshafas-client-line.html">Line</a>&#32;array</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.AsyncLines`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.AsyncLines\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L229-229" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  query
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  opt
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-linesoptions.html">LinesOptions</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><a href="/fshafas/reference/fshafas-client-line.html">Line</a>&#32;array</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '65', 65)" onmouseover="showTip(event, '65', 65)">
+                <p>
+                  <a id="AsyncLocations">
+                    <a href="#AsyncLocations">
+                      <code><span>this.AsyncLocations</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="65">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AsyncLocations</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        name
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        opt
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-locationsoptions.html">LocationsOptions</a>&#32;option</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><span><a href="/fshafas/reference/fshafas-client-u3-3.html">U3</a>&lt;<span><a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span>&#32;array</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.AsyncLocations`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.AsyncLocations\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L156-156" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  name
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  opt
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-locationsoptions.html">LocationsOptions</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><span><a href="/fshafas/reference/fshafas-client-u3-3.html">U3</a>&lt;<span><a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span>&#32;array</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '66', 66)" onmouseover="showTip(event, '66', 66)">
+                <p>
+                  <a id="AsyncNearby">
+                    <a href="#AsyncNearby">
+                      <code><span>this.AsyncNearby</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="66">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AsyncNearby</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        l
+                      </b>
+                      :
+                      <code><a href="/fshafas/reference/fshafas-client-location.html">Location</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        opt
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-nearbyoptions.html">NearByOptions</a>&#32;option</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><span><a href="/fshafas/reference/fshafas-client-u3-3.html">U3</a>&lt;<span><a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span>&#32;array</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.AsyncNearby`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.AsyncNearby\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L175-175" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  l
+                </span>
+                :
+                <code><a href="/fshafas/reference/fshafas-client-location.html">Location</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  opt
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-nearbyoptions.html">NearByOptions</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><span><a href="/fshafas/reference/fshafas-client-u3-3.html">U3</a>&lt;<span><a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span>&#32;array</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '67', 67)" onmouseover="showTip(event, '67', 67)">
+                <p>
+                  <a id="AsyncRadar">
+                    <a href="#AsyncRadar">
+                      <code><span>this.AsyncRadar</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="67">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AsyncRadar</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        rect
+                      </b>
+                      :
+                      <code><a href="/fshafas/reference/fshafas-client-boundingbox.html">BoundingBox</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        opt
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-radaroptions.html">RadarOptions</a>&#32;option</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><a href="/fshafas/reference/fshafas-client-movement.html">Movement</a>&#32;array</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.AsyncRadar`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.AsyncRadar\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L197-197" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  rect
+                </span>
+                :
+                <code><a href="/fshafas/reference/fshafas-client-boundingbox.html">BoundingBox</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  opt
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-radaroptions.html">RadarOptions</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><a href="/fshafas/reference/fshafas-client-movement.html">Movement</a>&#32;array</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '68', 68)" onmouseover="showTip(event, '68', 68)">
+                <p>
+                  <a id="AsyncReachableFrom">
+                    <a href="#AsyncReachableFrom">
+                      <code><span>this.AsyncReachableFrom</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="68">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AsyncReachableFrom</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        l
+                      </b>
+                      :
+                      <code><a href="/fshafas/reference/fshafas-client-location.html">Location</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        opt
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-reachablefromoptions.html">ReachableFromOptions</a>&#32;option</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><a href="/fshafas/reference/fshafas-client-duration.html">Duration</a>&#32;array</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.AsyncReachableFrom`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.AsyncReachableFrom\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L186-186" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  l
+                </span>
+                :
+                <code><a href="/fshafas/reference/fshafas-client-location.html">Location</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  opt
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-reachablefromoptions.html">ReachableFromOptions</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><a href="/fshafas/reference/fshafas-client-duration.html">Duration</a>&#32;array</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '69', 69)" onmouseover="showTip(event, '69', 69)">
+                <p>
+                  <a id="AsyncRefreshJourney">
+                    <a href="#AsyncRefreshJourney">
+                      <code><span>this.AsyncRefreshJourney</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="69">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AsyncRefreshJourney</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        refreshToken
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        opt
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-refreshjourneyoptions.html">RefreshJourneyOptions</a>&#32;option</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<a href="/fshafas/reference/fshafas-client-journey.html">Journey</a>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.AsyncRefreshJourney`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.AsyncRefreshJourney\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L70-70" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  refreshToken
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  opt
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-refreshjourneyoptions.html">RefreshJourneyOptions</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<a href="/fshafas/reference/fshafas-client-journey.html">Journey</a>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '70', 70)" onmouseover="showTip(event, '70', 70)">
+                <p>
+                  <a id="AsyncRemarks">
+                    <a href="#AsyncRemarks">
+                      <code><span>this.AsyncRemarks</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="70">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AsyncRemarks</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        opt
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-remarksoptions.html">RemarksOptions</a>&#32;option</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><a href="/fshafas/reference/fshafas-client-warning.html">Warning</a>&#32;array</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.AsyncRemarks`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.AsyncRemarks\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L219-219" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  opt
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-remarksoptions.html">RemarksOptions</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><a href="/fshafas/reference/fshafas-client-warning.html">Warning</a>&#32;array</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '71', 71)" onmouseover="showTip(event, '71', 71)">
+                <p>
+                  <a id="AsyncServerInfo">
+                    <a href="#AsyncServerInfo">
+                      <code><span>this.AsyncServerInfo</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="71">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AsyncServerInfo</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        opt
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-serveroptions.html">ServerOptions</a>&#32;option</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<a href="/fshafas/reference/fshafas-client-serverinfo.html">ServerInfo</a>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.AsyncServerInfo`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.AsyncServerInfo\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L239-239" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  opt
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-serveroptions.html">ServerOptions</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<a href="/fshafas/reference/fshafas-client-serverinfo.html">ServerInfo</a>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '72', 72)" onmouseover="showTip(event, '72', 72)">
+                <p>
+                  <a id="AsyncStop">
+                    <a href="#AsyncStop">
+                      <code><span>this.AsyncStop</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="72">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AsyncStop</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        stop
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-u2-2.html">U2</a>&lt;<span>string,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a></span>&gt;</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        opt
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-stopoptions.html">StopOptions</a>&#32;option</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><a href="/fshafas/reference/fshafas-client-u3-3.html">U3</a>&lt;<span><a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.AsyncStop`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.AsyncStop\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L167-167" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  stop
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-u2-2.html">U2</a>&lt;<span>string,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a></span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  opt
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-stopoptions.html">StopOptions</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><a href="/fshafas/reference/fshafas-client-u3-3.html">U3</a>&lt;<span><a href="/fshafas/reference/fshafas-client-station.html">Station</a>,&#32;<a href="/fshafas/reference/fshafas-client-stop.html">Stop</a>,&#32;<a href="/fshafas/reference/fshafas-client-location.html">Location</a></span>&gt;</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '73', 73)" onmouseover="showTip(event, '73', 73)">
+                <p>
+                  <a id="AsyncTrip">
+                    <a href="#AsyncTrip">
+                      <code><span>this.AsyncTrip</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="73">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AsyncTrip</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        id
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        name
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        opt
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-tripoptions.html">TripOptions</a>&#32;option</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<a href="/fshafas/reference/fshafas-client-trip.html">Trip</a>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.AsyncTrip`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.AsyncTrip\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L111-111" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  id
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  name
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  opt
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-tripoptions.html">TripOptions</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<a href="/fshafas/reference/fshafas-client-trip.html">Trip</a>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '74', 74)" onmouseover="showTip(event, '74', 74)">
+                <p>
+                  <a id="AsyncTripsByName">
+                    <a href="#AsyncTripsByName">
+                      <code><span>this.AsyncTripsByName</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="74">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AsyncTripsByName</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        lineName
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        opt
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-tripsbynameoptions.html">TripsByNameOptions</a>&#32;option</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><a href="/fshafas/reference/fshafas-client-trip.html">Trip</a>&#32;array</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.AsyncTripsByName`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.AsyncTripsByName\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L208-208" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  lineName
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  opt
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-tripsbynameoptions.html">TripsByNameOptions</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;<span><a href="/fshafas/reference/fshafas-client-trip.html">Trip</a>&#32;array</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '75', 75)" onmouseover="showTip(event, '75', 75)">
+                <p>
+                  <a id="distanceOfJourney">
+                    <a href="#distanceOfJourney">
+                      <code><span>this.distanceOfJourney&#32;<span>j</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="75">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.distanceOfJourney&#32;<span>j</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        j
+                      </b>
+                      :
+                      <code><a href="/fshafas/reference/fshafas-client-journey.html">Journey</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>float</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.distanceOfJourney`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.distanceOfJourney\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L246-246" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  j
+                </span>
+                :
+                <code><a href="/fshafas/reference/fshafas-client-journey.html">Journey</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>float</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>
+      Static members
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Static member
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '76', 76)" onmouseover="showTip(event, '76', 76)">
+                <p>
+                  <a id="initSerializer">
+                    <a href="#initSerializer">
+                      <code><span>HafasAsyncClient.initSerializer&#32;<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="76">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>HafasAsyncClient.initSerializer&#32;<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.initSerializer`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.initSerializer\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L32-32" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '77', 77)" onmouseover="showTip(event, '77', 77)">
+                <p>
+                  <a id="productsOfFilter">
+                    <a href="#productsOfFilter">
+                      <code><span>HafasAsyncClient.productsOfFilter&#32;<span>profile&#32;filter</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="77">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>HafasAsyncClient.productsOfFilter&#32;<span>profile&#32;filter</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        profile
+                      </b>
+                      :
+                      <code><a href="/fshafas/reference/fshafas-endpoint-profile.html">Profile</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        filter
+                      </b>
+                      :
+                      <code><span><a href="/fshafas/reference/fshafas-client-producttype.html">ProductType</a>&#32;->&#32;<a href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/fshafas/reference/fshafas-client-products.html">Products</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.productsOfFilter`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.productsOfFilter\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L39-39" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  profile
+                </span>
+                :
+                <code><a href="/fshafas/reference/fshafas-endpoint-profile.html">Profile</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  filter
+                </span>
+                :
+                <code><span><a href="/fshafas/reference/fshafas-client-producttype.html">ProductType</a>&#32;->&#32;<a href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/fshafas/reference/fshafas-client-products.html">Products</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '78', 78)" onmouseover="showTip(event, '78', 78)">
+                <p>
+                  <a id="productsOfMode">
+                    <a href="#productsOfMode">
+                      <code><span>HafasAsyncClient.productsOfMode&#32;<span>profile&#32;mode</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="78">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>HafasAsyncClient.productsOfMode&#32;<span>profile&#32;mode</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        profile
+                      </b>
+                      :
+                      <code><a href="/fshafas/reference/fshafas-endpoint-profile.html">Profile</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        mode
+                      </b>
+                      :
+                      <code><a href="/fshafas/reference/fshafas-client-producttypemode.html">ProductTypeMode</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/fshafas/reference/fshafas-client-products.html">Products</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FsHafas.Api.HafasAsyncClient.productsOfMode`')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.productsOfMode\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L48-48" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  profile
+                </span>
+                :
+                <code><a href="/fshafas/reference/fshafas-endpoint-profile.html">Profile</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  mode
+                </span>
+                :
+                <code><a href="/fshafas/reference/fshafas-client-producttypemode.html">ProductTypeMode</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/fshafas/reference/fshafas-client-products.html">Products</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '79', 79)" onmouseover="showTip(event, '79', 79)">
+                <p>
+                  <a id="toTask">
+                    <a href="#toTask">
+                      <code><span>HafasAsyncClient.toTask&#32;<span>async</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="79">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>HafasAsyncClient.toTask&#32;<span>async</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        async
+                      </b>
+                      :
+                      <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;'a&gt;</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;'a&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('```cref:M:FsHafas.Api.HafasAsyncClient.toTask``1```')">
+                <img src="/fshafas/content/img/copy-md.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FsHafas.Api.HafasAsyncClient.toTask``1\'/>')">
+                <img src="/fshafas/content/img/copy-xml.png" class="normal"/>
+                <img src="/fshafas/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/bergmannjg/fshafas/tree/master/src/fshafas/HafasAsyncClient.fs#L52-52" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="/fshafas/content/img/github.png" class="normal"/>
+                <img src="/fshafas/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  async
+                </span>
+                :
+                <code><span><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1">Async</a>&lt;'a&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;'a&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+            
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = '/fshafas/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="/fshafas/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
