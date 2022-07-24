@@ -124,7 +124,7 @@ module Parser =
             |> Array.fold addToMap Map.empty
             |> Map.toArray
             |> Array.map (fun (d, locXs) ->
-                { duration = Some d
+                { duration = d
                   stations = getLocations ctx locXs })
         | _ -> Array.empty
 

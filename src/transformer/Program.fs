@@ -1,21 +1,7 @@
 ﻿module Program
 
-open System.Diagnostics
-
-let checkEnv (s: string) =
-    try
-        System.Environment.GetEnvironmentVariable s = "1"
-    with
-    | _ -> false
-
 [<EntryPoint>]
 let main argv =
-
-    if checkEnv "TRANSFORMER_DEBUG" then
-        use p = System.Diagnostics.Process.GetCurrentProcess()
-
-        printf "procees  %d, press any key..." p.Id
-        System.Console.ReadKey() |> ignore
 
     match argv with
     | [| target; fromFile; toFile |] ->

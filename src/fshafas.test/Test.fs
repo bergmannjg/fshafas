@@ -1,5 +1,4 @@
-// VSTEST_HOST_DEBUG=1
-module Test
+module FsHafasTest
 
 open System
 open NUnit.Framework

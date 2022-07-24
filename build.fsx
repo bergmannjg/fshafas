@@ -507,6 +507,7 @@ Target.create "CompareNetJsResult" (fun _ ->
 let sourceFiles =
     !! "src/**/*.fs" ++ "src/**/*.fsi" ++ "build.fsx"
     -- "src/**/obj/**/*.fs"
+    -- "src/**/bin/**/*.fs"
     -- "src/**/fable_modules/**/*.fs"
 
 Target.create "Format" (fun _ ->

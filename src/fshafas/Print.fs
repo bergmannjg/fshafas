@@ -278,8 +278,7 @@ module Short =
         printfnS
             ident
             "duration: "
-            (duration.duration
-             |> Option.map (fun d -> d.ToString()))
+            (Some (duration.duration.ToString()))
         + (duration.stations
            |> Array.fold (fun s j -> s + U3StationStopLocation (ident + 2) j) "")
 

@@ -2,14 +2,11 @@
 module Transformer
 
 open System.Collections.Generic
-open FSharp.Compiler.SourceCodeServices
+open FSharp.Compiler.CodeAnalysis
 open FSharp.Compiler.Text
-open FSharp.Compiler.SyntaxTree
-open FSharp.Compiler.XmlDoc
+open FSharp.Compiler.Syntax
 open System.IO
 open System
-
-let private checker = FSharpChecker.Create()
 
 type TransformerOptions =
     { prelude: string option
@@ -18,6 +15,9 @@ type TransformerOptions =
       escapeIdent: string -> string
       transformType: string -> string
       excludesType: string -> bool
+      toMemberType: string -> bool
+      isIntegerTypeVal: string -> string -> bool
+      isCase1OfU2TypeVals: string -> string -> bool
       transformsTypeVal: string -> string -> string option
       transformsTypeDefn: string -> string option }
 
@@ -30,9 +30,10 @@ let private parse fileName text =
         checker.ParseFile(fileName, text, opts)
         |> Async.RunSynchronously
 
-    match parseFileResults.ParseTree with
-    | Some tree -> tree
-    | None -> failwith "Something went wrong during parsing!"
+    if parseFileResults.ParseHadErrors then
+        failwith "Something went wrong during parsing!"
+    else
+        parseFileResults.ParseTree
 
 let private toString (lid: LongIdent) =
     String.Join(".", lid |> List.map (fun ident -> ident.idText))
@@ -63,6 +64,10 @@ let rec private visitSnyType synType options =
 
         if line.Count = 1 && strtypeName = "option" then
             line.[0] + " option"
+        else if strtypeName = "U2"
+                && line.Count = 2
+                && (options.isCase1OfU2TypeVals line.[0] line.[1]) then
+            line.[0]
         else if line.Count > 0 then
             (options.transformType (
                 strtypeName
@@ -75,7 +80,7 @@ let rec private visitSnyType synType options =
     | _ -> failwith (sprintf " - not supported SynType: %A" synType)
 
 let private visitValSig (typename: string) slotSig options =
-    let (SynValSig.ValSpfn (_, id, _, synType, _, _, _, xmlDoc, _, _, _)) = slotSig
+    let (SynValSig (_, id, _, synType, _, _, _, xmlDoc, _, _, _, _)) = slotSig
     let xmldoc = xmlDoc.ToXmlDoc(false, None)
 
     let line = List()
@@ -88,10 +93,17 @@ let private visitValSig (typename: string) slotSig options =
 
     let escText = options.escapeIdent id.idText
 
+    let strsynTypeOrg = visitSnyType synType options
+
     let strsynType =
         match options.transformsTypeVal typename escText with
         | Some transform -> transform
-        | None -> visitSnyType synType options
+        | None ->
+            if strsynTypeOrg.Contains "float"
+               && options.isIntegerTypeVal typename escText then
+                strsynTypeOrg.Replace("float", "int")
+            else
+                strsynTypeOrg
 
     line.Add(sprintf "%s: %s" escText strsynType)
 
@@ -107,14 +119,44 @@ let private visitTypeMembers (typename: string) members options =
 
     line
 
-let private visitSimple simpleRepr options =
+let getAttribute (attributes: SynAttributes) =
+    if attributes.Length > 0
+       && attributes.[0].Attributes.Length > 0 then
+        Some attributes.[0].Attributes.[0]
+    else
+        None
+
+let hasAttribute (name: string) (attributes: SynAttributes) =
+    match getAttribute attributes with
+    | Some attr when (toString attr.TypeName.Lid) = name -> true
+    | _ -> false
+
+let getAttributeValue (name: string) (defValue: string) (attributes: SynAttributes) =
+    match getAttribute attributes with
+    | Some attr when (toString attr.TypeName.Lid) = name ->
+        match attr.ArgExpr with
+        | SynExpr.Const (c, _) ->
+            match c with
+            | SynConst.String (s, _, _) -> "[<CompiledName \"" + s + "\">] "
+            | _ -> ""
+        | _ -> ""
+    | _ -> "[<CompiledName \"" + defValue + "\">] "
+
+let private visitSimple simpleRepr useCompiledNameAttr options =
     let line = List()
 
     match simpleRepr with
     | SynTypeDefnSimpleRepr.Union (_, cases, _) ->
         for case in cases do
-            let (UnionCase (_, id, _, _, _, _)) = case
-            line.Add(sprintf "| %s" id.idText)
+            let (SynUnionCase (attributes, id, _, _, _, _, _)) = case
+
+            let compiledNameAttr =
+                if useCompiledNameAttr then
+                    getAttributeValue "CompiledName" (id.idText.ToLower()) attributes
+                else
+                    ""
+
+            line.Add(sprintf "| %s%s" compiledNameAttr id.idText)
     | _ -> ()
 
     line
@@ -122,8 +164,17 @@ let private visitSimple simpleRepr options =
 let mutable private hasFirstType = false
 
 let private visitTypeDefn typeDefn options =
-    let (SynTypeDefn.TypeDefn (typeInfo, typeRepr, members, range)) = typeDefn
-    let (SynComponentInfo.ComponentInfo (_, __, _, id, xmlDoc, _, _, _)) = typeInfo
+    let (SynTypeDefn (typeInfo, typeRepr, members, range, _, _)) = typeDefn
+
+    let (SynComponentInfo (attributes, __, _, id, xmlDoc, _, _, _)) = typeInfo
+
+    let stringEnumAttr =
+        if hasAttribute "StringEnum" attributes then
+            "[<StringEnum>] "
+        else
+            ""
+
+    let useCompiledNameAttr = stringEnumAttr.Length > 0
 
     let lines = List()
     let xmlDoc = xmlDoc.ToXmlDoc(false, None)
@@ -136,7 +187,7 @@ let private visitTypeDefn typeDefn options =
     let strMembers =
         match typeRepr with
         | SynTypeDefnRepr.ObjectModel (_, members, _) -> visitTypeMembers (toString id) members options
-        | SynTypeDefnRepr.Simple (simpleRepr, _) -> visitSimple simpleRepr options
+        | SynTypeDefnRepr.Simple (simpleRepr, _) -> visitSimple simpleRepr useCompiledNameAttr options
         | _ -> failwith (sprintf " - not supported SynTypeDefnRepr: %A" typeRepr)
 
     let isRecord =
@@ -157,11 +208,30 @@ let private visitTypeDefn typeDefn options =
     if (transform.IsSome) then
         sprintf "%s %s = %s" (typeSymbol ()) (toString id) transform.Value
         |> lines.Add
+    else if (options.toMemberType (toString id)) then
+        sprintf "%s %s = " (typeSymbol ()) (toString id)
+        |> lines.Add
+
+        for strMember in strMembers do
+            if (strMember.StartsWith("//")) then
+                sprintf "        %s" strMember |> lines.Add
+            else
+                let m =
+                    if strMember.Contains "->"
+                       && strMember.EndsWith " option" then
+                        strMember.Substring(0, strMember.Length - 7) // no optional member functions
+                    else
+                        strMember
+
+                sprintf "        abstract member %s" m
+                |> lines.Add
+
+        lines.Add("       ")
     else
         ()
 
         if not (options.excludesType (toString id)) then
-            (sprintf "%s %s = " (typeSymbol ()) (toString id))
+            (sprintf "%s %s%s = " (typeSymbol ()) stringEnumAttr (toString id))
             + (if isRecord then "{" else "")
             |> lines.Add
 
@@ -184,8 +254,8 @@ let rec private visitDeclarations decls options =
         | SynModuleDecl.Types (typeDefns, range) ->
             for typeDefn in typeDefns do
                 lines.AddRange(visitTypeDefn typeDefn options)
-        | SynModuleDecl.NestedModule (lid, __, decls0, _, _) ->
-            let (SynComponentInfo.ComponentInfo (_, __, _, id, _, _, _, _)) = lid
+        | SynModuleDecl.NestedModule (lid, __, decls0, _, _, _) ->
+            let (SynComponentInfo (_, __, _, id, _, _, _, _)) = lid
             lines.AddRange(visitDeclarations decls0 options)
         | _ -> failwith (sprintf " - not supported SynModuleDecl: %A" declaration)
 
@@ -207,12 +277,13 @@ let private visitModulesAndNamespaces modulesOrNss options =
 let transform (fromFile: string) (toFile: string) (options: TransformerOptions) =
     let sw = new StreamWriter(path = toFile)
     sw.AutoFlush <- true
+    hasFirstType <- false
 
     let tree = parse fromFile (SourceText.ofString (File.ReadAllText fromFile))
 
     match tree with
     | ParsedInput.ImplFile (implFile) ->
-        let (ParsedImplFileInput (fn, script, name, _, _, modules, _)) = implFile
+        let (ParsedImplFileInput (fn, script, name, _, _, modules, _, _)) = implFile
 
         let lines = visitModulesAndNamespaces modules options
 

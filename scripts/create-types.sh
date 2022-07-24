@@ -29,15 +29,10 @@ cp index.d.ts ../../src/fshafas.javascript.package/fs-hafas-client/hafas-client.
 mkdir node_modules/@types
 mkdir node_modules/@types/hafas-client
 
-sed -i '/CreateClient.IExports/d' index.d.ts
-sed -i 's/: Array/: ReadonlyArray/' index.d.ts
 mv index.d.ts node_modules/@types/hafas-client/index.d.ts
 
 npx ts2fable node_modules/@types/hafas-client/index.d.ts HafasClientTypes.fs
-sed -i '/CreateClient.IExports/d' HafasClientTypes.fs
-sed -i 's/U2<string, float>/string/' HafasClientTypes.fs
 
-# TRANSFORMER_DEBUG=1
 dotnet run --project ./Transformer.fsproj FsHafas HafasClientTypes.fs ../../src/fshafas/TypesHafasClient.fs
 dotnet fantomas ../../src/fshafas/TypesHafasClient.fs
 
@@ -49,13 +44,13 @@ if [ "$1" = "remote" ]; then
 else
     cp ../../../forks/hafas-client/types-raw-api.ts .
 fi
-sed -i '/createClient/d' types-raw-api.ts
+sed -i '/import/d' types-raw-api.ts
+sed -i '/generated/d' types-raw-api.ts
 sed -i '/any/d' types-raw-api.ts
 
 npx ts2fable ./types-raw-api.ts RawHafasClientTypes.fs
 sed -i 's/float/int/' RawHafasClientTypes.fs
 
-# TRANSFORMER_DEBUG=1
 dotnet run --project ./Transformer.fsproj RawHafas RawHafasClientTypes.fs ../../src/fshafas/TypesRawHafasClient.fs
 dotnet fantomas ../../src/fshafas/TypesRawHafasClient.fs
 

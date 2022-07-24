@@ -2,7 +2,6 @@ namespace FsHafas.Api
 
 open System
 open FsHafas.Client
-open FsHafas.Client
 
 /// <summary>F# async based interface corresponding to hafas-client</summary>
 type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =

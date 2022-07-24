@@ -19,6 +19,7 @@
   <ItemGroup>
     <Compile Include="lib/Slug.fs" />
     <Compile Include="UnionTypes.fs" />
+    <Compile Include="ExtraTypes.fs" />
     <Compile Include="TypesRawHafasClient.fs" />
     <Compile Include="TypesHafasClient.fs" />
     <Compile Include="Context.fs" />
