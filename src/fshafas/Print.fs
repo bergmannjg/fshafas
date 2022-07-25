@@ -275,10 +275,7 @@ module Short =
         | _ -> ""
 
     let Duration (ident: int) (duration: Duration) =
-        printfnS
-            ident
-            "duration: "
-            (Some (duration.duration.ToString()))
+        printfnS ident "duration: " (Some(duration.duration.ToString()))
         + (duration.stations
            |> Array.fold (fun s j -> s + U3StationStopLocation (ident + 2) j) "")
 

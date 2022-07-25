@@ -23,16 +23,21 @@ let dashify (separator: string) (input: string) =
                 + m.Value.Substring(1, 1).ToLowerInvariant()
     )
 
+let undashify (input: string) =
+    Regex.Replace(input, "_[a-z]", (fun m -> m.Value.Substring(1, 1).ToUpperInvariant()))
+
 let dashifyProps (t: Type) =
     t.GetProperties()
     |> Array.map (fun p -> (p.Name, dashify "_" p.Name))
-    |> Array.filter (fun (n,d) -> n<>d)
+    |> Array.filter (fun (n, d) -> n <> d)
 
-typeof<FsHafas.Raw.Cfg>.Module.GetTypes()
+typeof<FsHafas.Raw.Cfg>.Module.GetTypes ()
 |> Array.filter (fun t -> t.Namespace = "FsHafas.Raw")
 |> Array.collect (fun t -> dashifyProps t)
-|> Array.sortBy (fun (n,d) -> n)
+|> Array.sortBy (fun (n, d) -> n)
 |> Array.distinct
-|> Array.iter (fun (n,d) -> printfn "(\"%s\",\"%s\")" d n)
+|> Array.iter (fun (n, d) ->
+    let undashed = undashify d
 
- 
+    if n <> undashed then
+        printfn "(\"%s\",\"%s\")" d n)
