@@ -11,7 +11,7 @@ from .fable_modules.fable_library.util import (
     create_atom, ignore, structural_hash, string_hash)
 from .fable_modules.fable_library.string import (to_fail, printf, to_console)
 from .fable_modules.fs_hafas_python.types_hafas_client import (Profile, IndexMap_2, Station, Stop, Location, ProductType, JourneysOptions, Journeys, RefreshJourneyOptions, Journey, StopOver, JourneysFromTripOptions, TripOptions, Trip, DeparturesArrivalsOptions,
-                                                               Alternative, LocationsOptions, StopOptions, Location, NearByOptions, ReachableFromOptions, Duration, BoundingBox, RadarOptions, Movement, TripsByNameOptions, RemarksOptions, Warning, LinesOptions, Line, ServerOptions, ServerInfo, Log_Print)
+                                                               Alternative, LocationsOptions, StopOptions, Location, NearByOptions, ReachableFromOptions, Duration, BoundingBox, RadarOptions, Movement, TripsByNameOptions, RemarksOptions, Warning, LinesOptions, Line, ServerOptions, ServerInfo)
 from .fable_modules.fs_hafas_python.hafas_async_client import (HafasAsyncClient_productsOfMode, HafasAsyncClient, HafasAsyncClient__AsyncLocations, HafasAsyncClient__AsyncJourneys, HafasAsyncClient__AsyncJourneysFromTrip, HafasAsyncClient__AsyncRefreshJourney,
                                                                HafasAsyncClient__AsyncDepartures, HafasAsyncClient__AsyncArrivals, HafasAsyncClient__AsyncTripsByName, HafasAsyncClient__AsyncNearby, HafasAsyncClient__AsyncReachableFrom, HafasAsyncClient__AsyncRadar, HafasAsyncClient__AsyncStop, HafasAsyncClient__AsyncLines)
 from .fable_modules.fs_hafas_python.context import (
