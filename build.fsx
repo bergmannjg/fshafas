@@ -95,17 +95,6 @@ Target.create "Test" (fun _ ->
     DotNet.exec id "test" "src/fshafas.test/fshafastest.fsproj"
     |> checkResult "Test failed")
 
-Target.create "BuildCSharp" (fun _ ->
-    DotNet.exec id "build" "src/examples/fshafas.csharp/fshafas.csharp.csproj"
-    |> checkResult "BuldCSharp failed")
-
-Target.create "BuildFableApp" (fun _ ->
-    DotNet.exec
-        id
-        "fable"
-        "./src/examples/fshafas.fable.node/fshafas.fable.fsproj --typedArrays false --outDir ./src/fshafas.fable/build"
-    |> checkResult "BuldFableApp failed")
-
 Target.create "CheckReleaseVersion" (fun _ ->
     let configStr =
         File.readAsString ("src/fshafas.javascript.package/fs-hafas-client/package.json")
@@ -243,22 +232,29 @@ Target.create "CompileTypeScript" (fun _ ->
     run "./src/examples/fshafas.fable.web/wwwroot/js/" "tsc" ("--target ES2015 --noImplicitAny" + " site.ts"))
 
 Target.create "PublishToLocalNuGetFeed" (fun _ ->
-    DotNet.exec id "pack" "src/fshafas/fshafas.fable.javascript.fsproj"
+    let version = release.AssemblyVersion
+    let versionParameter = "/p:Version=\"" + version + "\""
+
+    DotNet.exec
+        id
+        "pack"
+        (versionParameter
+         + " "
+         + "src/fshafas/fshafas.fable.javascript.fsproj")
     |> checkResult "pack failed"
 
     let home = Environment.environVar "HOME"
-    let release = release.AssemblyVersion
 
     Shell.cleanDir (
         home
         + "/.nuget/packages/fshafas.javascript/"
-        + release
+        + version
     )
 
     Shell.cleanDir (
         home
         + "/local.packages/fshafas.javascript/"
-        + release
+        + version
     )
 
     run
@@ -266,13 +262,18 @@ Target.create "PublishToLocalNuGetFeed" (fun _ ->
         "/usr/local/bin/nuget.exe"
         ("add"
          + " bin/Debug/FsHafas.JavaScript."
-         + release
+         + version
          + ".nupkg"
          + " -source "
          + home
          + "/local.packages -expand")
 
-    DotNet.exec id "pack" "src/fshafas.profiles/fshafas.profiles.fable.javascript.fsproj"
+    DotNet.exec
+        id
+        "pack"
+        (versionParameter
+         + " "
+         + "src/fshafas.profiles/fshafas.profiles.fable.javascript.fsproj")
     |> checkResult "pack failed"
 
     let home = Environment.environVar "HOME"
@@ -280,13 +281,13 @@ Target.create "PublishToLocalNuGetFeed" (fun _ ->
     Shell.cleanDir (
         home
         + "/.nuget/packages/fshafas.profiles.javascript/"
-        + release
+        + version
     )
 
     Shell.cleanDir (
         home
         + "/local.packages/fshafas.profiles.javascript/"
-        + release
+        + version
     )
 
     run
@@ -294,78 +295,13 @@ Target.create "PublishToLocalNuGetFeed" (fun _ ->
         "/usr/local/bin/nuget.exe"
         ("add"
          + " bin/Debug/FsHafas.Profiles.JavaScript."
-         + release
+         + version
          + ".nupkg"
          + " -source "
          + home
          + "/local.packages -expand"))
 
-Target.create "PublishPythonProjToLocalNuGetFeed" (fun _ ->
-    DotNet.exec id "pack" "src/fshafas/fshafas.fable.python.fsproj"
-    |> checkResult "pack failed"
-
-    let home = Environment.environVar "HOME"
-
-    let doc = loadDoc "src/fshafas/fshafas.fable.python.fsproj"
-    let release = selectXPathValue "//Version" [ ("Sdk", "Microsoft.NET.Sdk") ] doc
-
-    let docProfiles =
-        loadDoc "src/fshafas.profiles/fshafas.profiles.fable.python.fsproj"
-
-    let releaseProfiles =
-        selectXPathValue "//Version" [ ("Sdk", "Microsoft.NET.Sdk") ] docProfiles
-
-    if release <> releaseProfiles then
-        failwith "fsproj vesion mismatch"
-
-    Shell.cleanDir (
-        home
-        + "/.nuget/packages/fshafas.python/"
-        + release
-    )
-
-    Shell.cleanDir (home + "/local.packages/fshafas.python/" + release)
-
-    run
-        "./src/fshafas/"
-        "/usr/local/bin/nuget.exe"
-        ("add"
-         + " bin/Debug/FsHafas.Python."
-         + release
-         + ".nupkg"
-         + " -source "
-         + home
-         + "/local.packages -expand")
-
-    DotNet.exec id "pack" "src/fshafas.profiles/fshafas.profiles.fable.python.fsproj"
-    |> checkResult "pack failed"
-
-    let home = Environment.environVar "HOME"
-
-    Shell.cleanDir (
-        home
-        + "/.nuget/packages/fshafas.profiles.python/"
-        + release
-    )
-
-    Shell.cleanDir (
-        home
-        + "/local.packages/fshafas.profiles.python/"
-        + release
-    )
-
-    run
-        "./src/fshafas.profiles/"
-        "/usr/local/bin/nuget.exe"
-        ("add"
-         + " bin/Debug/FsHafas.Profiles.Python."
-         + release
-         + ".nupkg"
-         + " -source "
-         + home
-         + "/local.packages -expand"))
-
-let GetPyVersion (file: string) =
+let getPyVersion (file: string) =
     let setup = File.readAsString file
     let versionRegex = System.Text.RegularExpressions.Regex @"version='([0-9.]*)'"
 
@@ -376,6 +312,78 @@ let GetPyVersion (file: string) =
     else
         ""
 
+Target.create "PublishPythonProjToLocalNuGetFeed" (fun _ ->
+    let versionSuffix = getPyVersion "src/fshafas.python.package/setup.py"
+
+    let version =
+        release.AssemblyVersion
+        + "-alpha-"
+        + versionSuffix
+
+    let versionParameter = "/p:Version=\"" + version + "\""
+
+    DotNet.exec
+        id
+        "pack"
+        (versionParameter
+         + " "
+         + "src/fshafas/fshafas.fable.python.fsproj")
+    |> checkResult "pack failed"
+
+    let home = Environment.environVar "HOME"
+
+    Shell.cleanDir (
+        home
+        + "/.nuget/packages/fshafas.python/"
+        + version
+    )
+
+    Shell.cleanDir (home + "/local.packages/fshafas.python/" + version)
+
+    run
+        "./src/fshafas/"
+        "/usr/local/bin/nuget.exe"
+        ("add"
+         + " bin/Debug/FsHafas.Python."
+         + version
+         + ".nupkg"
+         + " -source "
+         + home
+         + "/local.packages -expand")
+
+    DotNet.exec
+        id
+        "pack"
+        (versionParameter
+         + " "
+         + "src/fshafas.profiles/fshafas.profiles.fable.python.fsproj")
+    |> checkResult "pack failed"
+
+    let home = Environment.environVar "HOME"
+
+    Shell.cleanDir (
+        home
+        + "/.nuget/packages/fshafas.profiles.python/"
+        + version
+    )
+
+    Shell.cleanDir (
+        home
+        + "/local.packages/fshafas.profiles.python/"
+        + version
+    )
+
+    run
+        "./src/fshafas.profiles/"
+        "/usr/local/bin/nuget.exe"
+        ("add"
+         + " bin/Debug/FsHafas.Profiles.Python."
+         + version
+         + ".nupkg"
+         + " -source "
+         + home
+         + "/local.packages -expand"))
+
 Target.create "InstallPythonPackage" (fun _ ->
     let projDir = "src/fshafas.python.package/"
 
@@ -384,7 +392,7 @@ Target.create "InstallPythonPackage" (fun _ ->
     Shell.Exec("python3", "-m pip uninstall -y fshafas")
     |> ignore
 
-    let version = GetPyVersion "src/fshafas.python.package/setup.py"
+    let version = getPyVersion "src/fshafas.python.package/setup.py"
     let wheel = "dist/fshafas-" + version + "-py3-none-any.whl"
 
     Shell.Exec("python3", "-m pip install " + projDir + wheel)
