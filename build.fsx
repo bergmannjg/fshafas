@@ -365,7 +365,32 @@ Target.create "PublishPythonProjToLocalNuGetFeed" (fun _ ->
          + home
          + "/local.packages -expand"))
 
-Target.create "InstallPythonPackageFromLocal" (fun _ ->
+let GetPyVersion (file: string) =
+    let setup = File.readAsString file
+    let versionRegex = System.Text.RegularExpressions.Regex @"version='([0-9.]*)'"
+
+    let m = versionRegex.Match setup
+
+    if m.Groups.Count > 0 then
+        m.Groups.[1].Value
+    else
+        ""
+
+Target.create "InstallPythonPackage" (fun _ ->
+    let projDir = "src/fshafas.python.package/"
+
+    Shell.cleanDir (projDir + "fshafas.egg-info/")
+
+    Shell.Exec("python3", "-m pip uninstall -y fshafas")
+    |> ignore
+
+    let version = GetPyVersion "src/fshafas.python.package/setup.py"
+    let wheel = "dist/fshafas-" + version + "-py3-none-any.whl"
+
+    Shell.Exec("python3", "-m pip install " + projDir + wheel)
+    |> ignore)
+
+Target.create "BuildPythonPackage" (fun _ ->
     let projDir = "src/fshafas.python.package/"
     Shell.cleanDir (projDir + "fable_modules/")
 
@@ -376,9 +401,6 @@ Target.create "InstallPythonPackageFromLocal" (fun _ ->
     Shell.deleteDir (projDir + "fshafas/fable_modules/")
     Shell.mv (projDir + "fable_modules/") (projDir + "fshafas")
     Shell.Exec("bash", "fixes.sh", projDir) |> ignore
-
-    Shell.Exec("python3", "-m pip install -e " + projDir)
-    |> ignore
 
     Shell.Exec("python3", "-m build " + projDir)
     |> ignore)
@@ -574,7 +596,8 @@ Target.create "Docs" ignore
 "BuildLib"
 ==> "Test"
 ==> "PublishPythonProjToLocalNuGetFeed"
-==> "InstallPythonPackageFromLocal"
+==> "BuildPythonPackage"
+==> "InstallPythonPackage"
 ==> "Python"
 
 "BuildLib" ==> "BuildDocs" ==> "Docs"
