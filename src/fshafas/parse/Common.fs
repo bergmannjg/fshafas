@@ -34,12 +34,14 @@ module internal Common =
             |> Array.map (fun i -> ctx2.profile.parseIcon ctx2 i)
             |> Array.choose id
 
+        let locations = ctx2.profile.parseLocations ctx2 (Option.defaultValue [||] c.locL)
+
+        let ctx3 = { ctx2 with common = { ctx2.common with locations = locations } }
+
         let polylines =
             c.polyL
             |> Option.defaultValue [||]
-            |> Array.map (fun p -> ctx2.profile.parsePolyline ctx2 p)
-
-        let locations = ctx2.profile.parseLocations ctx2 (Option.defaultValue [||] c.locL)
+            |> Array.map (fun p -> ctx2.profile.parsePolyline ctx3 p)
 
         { operators = ctx2.common.operators
           locations = locations

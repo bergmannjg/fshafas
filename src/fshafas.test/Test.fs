@@ -15,14 +15,79 @@ let checkEqual (actual: obj) (expected: obj) =
             diffs <- diffs + 1
             fprintfn stderr "%s" (sprintf "TypesDifferent %s: '%A' '%A'" name t1.Name t2.Name)
 
-    let lengthOfArray (o: obj) =
+    let toFeatureArray (o: obj) : Feature [] =
         let typ = o.GetType()
 
-        if typ.IsArray then
-            let arr = o :?> obj []
-            arr.Length
+        if typ.IsArray && typ.Name = "Feature[]" then
+            let arr = o :?> Feature []
+            arr
         else
-            -1
+            [||]
+
+    let convertToStop (o: obj) : obj =
+        try
+            if o = null then
+                null
+            else if o.GetType().Name = "JsonElement" then
+                let e = o :?> System.Text.Json.JsonElement
+
+                match e.TryGetProperty("type") with
+                | true, p when p.GetString() = "stop" -> FsHafas.Api.Parser.Deserialize<Stop>(e.GetRawText()) :> obj
+                | _ -> null
+            else if o.GetType().Name = "FSharpOption`1"
+                    && o.GetType().GenericTypeArguments.[0].Name = "Stop" then
+                let s = o :?> Stop option
+
+                match s with
+                | Some s when s.``type``.IsSome && s.``type``.Value = "stop" -> s :> obj
+                | _ -> null
+            else if o.GetType().Name = "Stop" then
+                o
+            else
+                null
+        with
+        | ex ->
+            fprintfn stderr "deserializeJsonElement: %s" ex.Message
+            null
+
+    let equalFeatureProperties (expectedX: obj) (actualX: obj) =
+        let expected = convertToStop expectedX
+        let actual = convertToStop actualX
+
+        let isEmptyObj (o: obj) =
+            o = null || o.ToString() = (obj ()).ToString()
+
+        if expected = null && (isEmptyObj actual) then
+            true
+        else if expected <> null && actual <> null then
+            let typ1 = actual.GetType()
+            let typ2 = expected.GetType()
+
+            if typ1.Name = "Stop" && typ2.Name = "Stop" then
+                let p1 = actual :?> Stop
+                let p2 = expected :?> Stop
+                if p1.id = p2.id then true else false
+            else
+                false
+        else
+            false
+
+    let compareFeatureArrays (expected: Feature []) (actual: Feature []) =
+        let diffs =
+            expected
+            |> Array.filter (fun f1 ->
+                not (
+                    actual
+                    |> Array.exists (fun f2 ->
+                        f1.geometry.coordinates.[0] = f2.geometry.coordinates.[0]
+                        && f1.geometry.coordinates.[1] = f2.geometry.coordinates.[1]
+                        && equalFeatureProperties f1.properties f2.properties)
+                ))
+
+        if diffs.Length > 0 then
+            fprintfn stderr "diffs: %A" diffs
+
+        diffs.Length
 
     let printValuesDifferent (name: string) (o1: obj) (o2: obj) =
         if name = "id"
@@ -45,13 +110,16 @@ let checkEqual (actual: obj) (expected: obj) =
                 && o2 = null
                 && (sprintf "%A" o1) = "Some false" then // ignore None = Some false
             ()
-        else if name = "features"
-                && o1 <> null
-                && o2 <> null
-                && Math.Abs((lengthOfArray o1) - (lengthOfArray o2))
-                   <= 2 then // ignore features difference, todo
-            fprintfn stderr "%s" (sprintf "%s length '%d' '%d'" name (lengthOfArray o1) (lengthOfArray o2))
-            ()
+        else if name = "features" && o1 <> null && o2 <> null then
+            // compare feature coordinates and feature properties
+            try
+                let actual = toFeatureArray o1 |> Array.distinct
+
+                let expected = toFeatureArray o2 |> Array.distinct
+
+                diffs <- diffs + (compareFeatureArrays expected actual)
+            with
+            | ex -> fprintfn stderr "compareFeatureArrays: %s" ex.Message
         else
             diffs <- diffs + 1
             fprintfn stderr "%s" (sprintf "ValuesDifferent %s: '%A' '%A'" name o1 o2)
