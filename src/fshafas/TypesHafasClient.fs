@@ -231,7 +231,7 @@ and Geometry =
 
 and Feature =
     { ``type``: string option
-      properties: obj
+      properties: U3<Station, Stop, Location> option
       geometry: Geometry }
 
 and FeatureCollection =

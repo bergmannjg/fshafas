@@ -80,7 +80,8 @@ let case1OfU2TypeVals =
 
 let transformTypeVals =
     [| "*", "icon", "Icon option"
-       "*", "``type``", "string option" |]
+       "*", "``type``", "string option"
+       "Feature", "properties", "U3<Station, Stop, Location> option" |]
 
 let transformTypeDefns =
     [| "ScheduledDays", "IndexMap<string, bool>"

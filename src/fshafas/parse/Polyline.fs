@@ -20,12 +20,9 @@ module internal Polyline =
             match ppLocRefL
                   |> Array.tryFind (fun pLocRefL -> pLocRefL.ppIdx = i)
                 with
-            | Some pLocRefL ->
-                match Common.getElementAt pLocRefL.locX ctx.common.locations with
-                | Some (U3.Case2 s) -> s :> obj
-                | _ -> obj ()
-            | None -> obj ()
-        | None -> obj ()
+            | Some pLocRefL -> Common.getElementAt pLocRefL.locX ctx.common.locations
+            | None -> None
+        | None -> None
 
     let parsePolyline (ctx: Context) (poly: FsHafas.Raw.RawPoly) : FsHafas.Client.FeatureCollection =
         let features =

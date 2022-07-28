@@ -27,11 +27,15 @@ module Parser =
           firstClass = false }
 
 #if !FABLE_COMPILER
-    let Deserialize<'a> (response: string) =
+    let Deserialize<'a> (response: string, acceptEmptyObjectAsNullValue: bool) =
         Serializer.addConverters (
             [| FsHafas.Api.Converter.UnionConverter<ProductTypeMode>()
                FsHafas.Api.Converter.U2EraseConverter<Station, Stop>(
                    FsHafas.Api.Converter.UnionCaseSelection.ByTagName "type"
+               )
+               FsHafas.Api.Converter.OptionU3EraseConverter<Station, Stop, Location>(
+                   FsHafas.Api.Converter.UnionCaseSelection.ByTagName "type",
+                   acceptEmptyObjectAsNullValue
                )
                FsHafas.Api.Converter.U3EraseConverter<Hint, Status, Warning>(
                    FsHafas.Api.Converter.UnionCaseSelection.ByTagName "type"

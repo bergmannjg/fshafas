@@ -5,6 +5,9 @@ open NUnit.Framework
 open FsHafas.Client
 open FsHafas.Reflect.Compare
 
+// feature properties with empty json object '{}' are parsed as Option.None, see Converter.OptionU3EraseConverter
+let acceptEmptyObjectAsNullValue = true
+
 let checkEqual (actual: obj) (expected: obj) =
     let mutable diffs = 0
 
@@ -22,72 +25,42 @@ let checkEqual (actual: obj) (expected: obj) =
             let arr = o :?> Feature []
             arr
         else
-            [||]
+            raise (NUnit.Framework.AssertionException("Feature[] expected")) 
 
-    let convertToStop (o: obj) : obj =
-        try
-            if o = null then
-                null
-            else if o.GetType().Name = "JsonElement" then
-                let e = o :?> System.Text.Json.JsonElement
+    let equalFeatureProperties (expected: obj) (actual: obj) =
+        let mutable diffs = 0
 
-                match e.TryGetProperty("type") with
-                | true, p when p.GetString() = "stop" -> FsHafas.Api.Parser.Deserialize<Stop>(e.GetRawText()) :> obj
-                | _ -> null
-            else if o.GetType().Name = "FSharpOption`1"
-                    && o.GetType().GenericTypeArguments.[0].Name = "Stop" then
-                let s = o :?> Stop option
+        let printTypesDifferent (name: string) (o1: obj) (t1: Type) (o2: obj) (t2: Type) =
+            diffs <- diffs + 1
+            fprintfn stderr "%s" (sprintf "FeatureProperties TypesDifferent %s: '%A' '%A'" name t1.Name t2.Name)
 
-                match s with
-                | Some s when s.``type``.IsSome && s.``type``.Value = "stop" -> s :> obj
-                | _ -> null
-            else if o.GetType().Name = "Stop" then
-                o
-            else
-                null
-        with
-        | ex ->
-            fprintfn stderr "deserializeJsonElement: %s" ex.Message
-            null
+        let printValuesDifferent (name: string) (o1: obj) (o2: obj) =
+            diffs <- diffs + 1
+            fprintfn stderr "%s" (sprintf "FeatureProperties ValuesDifferent %s: '%A' '%A'" name o1 o2)
 
-    let equalFeatureProperties (expectedX: obj) (actualX: obj) =
-        let expected = convertToStop expectedX
-        let actual = convertToStop actualX
+        let evt: CompareEvent =
+            { onTypesDifferent = printTypesDifferent
+              onValuesDifferent = printValuesDifferent }
 
-        let isEmptyObj (o: obj) =
-            o = null || o.ToString() = (obj ()).ToString()
+        compare evt actual expected
 
-        if expected = null && (isEmptyObj actual) then
-            true
-        else if expected <> null && actual <> null then
-            let typ1 = actual.GetType()
-            let typ2 = expected.GetType()
-
-            if typ1.Name = "Stop" && typ2.Name = "Stop" then
-                let p1 = actual :?> Stop
-                let p2 = expected :?> Stop
-                if p1.id = p2.id then true else false
-            else
-                false
-        else
-            false
+        diffs = 0
 
     let compareFeatureArrays (expected: Feature []) (actual: Feature []) =
-        let diffs =
+        let notFound =
             expected
             |> Array.filter (fun f1 ->
                 not (
                     actual
                     |> Array.exists (fun f2 ->
-                        f1.geometry.coordinates.[0] = f2.geometry.coordinates.[0]
-                        && f1.geometry.coordinates.[1] = f2.geometry.coordinates.[1]
+                        f1.geometry = f2.geometry
                         && equalFeatureProperties f1.properties f2.properties)
                 ))
 
-        if diffs.Length > 0 then
-            fprintfn stderr "diffs: %A" diffs
+        if notFound.Length > 0 then
+            fprintfn stderr "notFound: %A" notFound
 
-        diffs.Length
+        notFound.Length
 
     let printValuesDifferent (name: string) (o1: obj) (o2: obj) =
         if name = "id"
@@ -111,15 +84,17 @@ let checkEqual (actual: obj) (expected: obj) =
                 && (sprintf "%A" o1) = "Some false" then // ignore None = Some false
             ()
         else if name = "features" && o1 <> null && o2 <> null then
-            // compare feature coordinates and feature properties
+            // compare feature geometry and feature properties
             try
-                let actual = toFeatureArray o1 |> Array.distinct
+                let actual = toFeatureArray o1
 
-                let expected = toFeatureArray o2 |> Array.distinct
+                let expected = toFeatureArray o2
 
                 diffs <- diffs + (compareFeatureArrays expected actual)
             with
-            | ex -> fprintfn stderr "compareFeatureArrays: %s" ex.Message
+            | ex ->
+                diffs <- diffs + 1 
+                fprintfn stderr "compareFeatureArrays: %s" ex.Message
         else
             diffs <- diffs + 1
             fprintfn stderr "%s" (sprintf "ValuesDifferent %s: '%A' '%A'" name o1 o2)
@@ -135,7 +110,8 @@ let checkEqual (actual: obj) (expected: obj) =
 let testRunner (jsonRaw: string) (jsonResult: string) (loader: FsHafas.Raw.RawResult -> string -> obj * obj) =
 
     try
-        let rawResponse = FsHafas.Api.Parser.Deserialize<FsHafas.Raw.RawResponse>(jsonRaw)
+        let rawResponse =
+            FsHafas.Api.Parser.Deserialize<FsHafas.Raw.RawResponse>(jsonRaw, acceptEmptyObjectAsNullValue)
 
         let svcResL = Option.defaultValue [||] rawResponse.svcResL
 
@@ -170,7 +146,7 @@ let loadLocations (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
     let response =
-        FsHafas.Api.Parser.Deserialize<U3<Station, Stop, Location> []>(expectedJson)
+        FsHafas.Api.Parser.Deserialize<U3<Station, Stop, Location> []>(expectedJson, acceptEmptyObjectAsNullValue)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
 
@@ -178,7 +154,7 @@ let loadLocations (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
 let loadJourneys (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let options =
-        FsHafas.Api.Parser.Deserialize<JourneysOptions>(Fixture.jsonJouneysResponse ())
+        FsHafas.Api.Parser.Deserialize<JourneysOptions>(Fixture.jsonJouneysResponse (), acceptEmptyObjectAsNullValue)
 
     let parsedResponse =
         FsHafas.Api.Parser.parseJourneysFromResult
@@ -191,7 +167,8 @@ let loadJourneys (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
     Assert.That(parsedResponse.journeys.IsSome, Is.EqualTo(true))
 
-    let response = FsHafas.Api.Parser.Deserialize<Journeys>(expectedJson)
+    let response =
+        FsHafas.Api.Parser.Deserialize<Journeys>(expectedJson, acceptEmptyObjectAsNullValue)
 
     Assert.That(response.journeys.IsSome, Is.EqualTo(true))
 
@@ -211,7 +188,8 @@ let loadJourneyArray (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
-    let response = FsHafas.Api.Parser.Deserialize<Journey []>(expectedJson)
+    let response =
+        FsHafas.Api.Parser.Deserialize<Journey []>(expectedJson, acceptEmptyObjectAsNullValue)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
     Assert.AreEqual(response.Length, parsedResponse.Length)
@@ -223,7 +201,8 @@ let loadTrip (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let parsedResponse =
         FsHafas.Api.Parser.parseTripFromResult (loadDbProfile ()) res.journey FsHafas.Api.Parser.defaultOptions res
 
-    let response = FsHafas.Api.Parser.Deserialize<Trip>(expectedJson)
+    let response =
+        FsHafas.Api.Parser.Deserialize<Trip>(expectedJson, acceptEmptyObjectAsNullValue)
 
     (parsedResponse :> obj, response :> obj)
 
@@ -240,7 +219,8 @@ let loadDepartures (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
-    let response = FsHafas.Api.Parser.Deserialize<Alternative []>(expectedJson)
+    let response =
+        FsHafas.Api.Parser.Deserialize<Alternative []>(expectedJson, acceptEmptyObjectAsNullValue)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
 
@@ -275,7 +255,8 @@ let loadReachableFrom (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
-    let response = FsHafas.Api.Parser.Deserialize<Duration []>(expectedJson)
+    let response =
+        FsHafas.Api.Parser.Deserialize<Duration []>(expectedJson, acceptEmptyObjectAsNullValue)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
     Assert.That(parsedResponse.Length, Is.EqualTo(response.Length))
@@ -288,7 +269,7 @@ let loadReachableFrom (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
 let loadNearby (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let options =
-        FsHafas.Api.Parser.Deserialize<NearByOptions>(Fixture.jsonNearbyOptions ())
+        FsHafas.Api.Parser.Deserialize<NearByOptions>(Fixture.jsonNearbyOptions (), acceptEmptyObjectAsNullValue)
 
     let parsedResponse =
         FsHafas.Api.Parser.parseLocationsFromResult
@@ -300,7 +281,7 @@ let loadNearby (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
     let response =
-        FsHafas.Api.Parser.Deserialize<U3<Station, Stop, Location> []>(expectedJson)
+        FsHafas.Api.Parser.Deserialize<U3<Station, Stop, Location> []>(expectedJson, acceptEmptyObjectAsNullValue)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
 
@@ -312,7 +293,8 @@ let loadRadar (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
-    let response = FsHafas.Api.Parser.Deserialize<Movement []>(expectedJson)
+    let response =
+        FsHafas.Api.Parser.Deserialize<Movement []>(expectedJson, acceptEmptyObjectAsNullValue)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
 
@@ -324,7 +306,8 @@ let loadLines (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
-    let response = FsHafas.Api.Parser.Deserialize<Line []>(expectedJson)
+    let response =
+        FsHafas.Api.Parser.Deserialize<Line []>(expectedJson, acceptEmptyObjectAsNullValue)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
 
@@ -336,11 +319,100 @@ let loadWarnings (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
-    let response = FsHafas.Api.Parser.Deserialize<Warning []>(expectedJson)
+    let response =
+        FsHafas.Api.Parser.Deserialize<Warning []>(expectedJson, acceptEmptyObjectAsNullValue)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
 
     (parsedResponse :> obj, response :> obj)
+
+[<Test>]
+let TestFeatureParser () =
+    let jsonPropertiesAsEmptyObject =
+        """
+{
+    "type": "Feature",
+    "properties": {},
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            10.007,
+            53.55371
+        ]
+    }
+}
+"""
+
+    let feature0 =
+        FsHafas.Api.Parser.Deserialize<Feature>(jsonPropertiesAsEmptyObject, acceptEmptyObjectAsNullValue)
+
+    Assert.IsTrue(feature0.properties.IsNone)
+
+    let jsonPropertiesAsNull =
+        """
+{
+    "type": "Feature",
+    "properties": null,
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            10.007,
+            53.55371
+        ]
+    }
+}
+"""
+
+    let feature1 =
+        FsHafas.Api.Parser.Deserialize<Feature>(jsonPropertiesAsNull, acceptEmptyObjectAsNullValue)
+
+    Assert.IsTrue(feature1.properties.IsNone)
+
+    let jsonPropertiesAsStop =
+        """
+{
+    "type": "Feature",
+    "properties": {
+        "type": "stop",
+        "id": "8002549",
+        "name": "Hamburg Hbf",
+        "location": {
+            "type": "location",
+            "id": "8002549",
+            "latitude": 53.553533,
+            "longitude": 10.00636
+        },
+        "products": {
+            "nationalExpress": true,
+            "national": true,
+            "regionalExp": true,
+            "regional": true,
+            "suburban": true,
+            "bus": true,
+            "ferry": false,
+            "subway": true,
+            "tram": false,
+            "taxi": false
+        }
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            10.007,
+            53.55371
+        ]
+    }
+}
+"""
+
+    let feature2 =
+        FsHafas.Api.Parser.Deserialize<Feature>(jsonPropertiesAsStop, acceptEmptyObjectAsNullValue)
+
+    Assert.IsTrue(feature2.properties.IsSome)
+
+    match feature2.properties.Value with
+    | U3.Case2 s when s.``type``.IsSome -> Assert.AreEqual(s.``type``.Value, "stop")
+    | _ -> raise (NUnit.Framework.AssertionException("U3.Case2 Stop expected"))
 
 [<Test>]
 let TestLocations () =
