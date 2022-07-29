@@ -404,9 +404,9 @@ module Db =
     let private formatLoyaltyCard (data: LoyaltyCard) =
         let cls = data.``class`` |> Option.defaultValue 2
 
-        match data.``type``, data.discount with
-        | Some ``type``, Some discount ->
-            if ``type`` = "Bahncard" then
+        match data.discount with
+        | Some discount ->
+            if data.``type`` = "Bahncard" then
                 if discount = 25 then
                     if cls = 1 then 1 else 2
                 else if discount = 50 then

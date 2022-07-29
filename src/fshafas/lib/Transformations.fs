@@ -313,7 +313,7 @@ module Default =
           language = Some "de" }
 
     let Location: Location =
-        { ``type`` = Some "location"
+        { ``type`` = LocationType.Location
           id = None
           name = None
           poi = None
@@ -324,7 +324,7 @@ module Default =
           distance = None }
 
     let Stop: Stop =
-        { ``type`` = Some "stop"
+        { ``type`` = StopType.Stop
           id = None
           name = None
           location = None
@@ -340,7 +340,7 @@ module Default =
           distance = None }
 
     let Station: Station =
-        { ``type`` = Some "station"
+        { ``type`` = StationType.Station
           id = None
           name = None
           station = None
@@ -484,7 +484,7 @@ module Default =
           destination = None }
 
     let Journey: Journey =
-        { ``type`` = Some "journey"
+        { ``type`` = JourneyType.Journey
           legs = [||]
           refreshToken = None
           remarks = None
@@ -499,7 +499,7 @@ module Default =
           realtimeDataFrom = None }
 
     let Line: FsHafas.Client.Line =
-        { ``type`` = Some "line"
+        { ``type`` = LineType.Line
           id = None
           name = None
           adminCode = None
@@ -519,7 +519,7 @@ module Default =
           productName = None }
 
     let Warning: Warning =
-        { ``type`` = Some "warning"
+        { ``type`` = WarningType.Warning
           id = None
           icon = None
           summary = None

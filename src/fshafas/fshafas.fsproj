@@ -58,7 +58,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FSharp.SystemTextJson" Version="0.16.6" />
+    <PackageReference Include="FSharp.SystemTextJson" Version="0.19.13" />
     <PackageReference Include="Polyliner.Net" Version="1.0.2" />
     <PackageReference Include="FSlugify" Version="1.1.0" />
     <PackageReference Include="NodaTime" Version="3.0.5" />

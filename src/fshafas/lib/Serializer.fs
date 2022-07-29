@@ -16,7 +16,8 @@ let addConverters (deserializeConverters: JsonConverter array) =
             JsonFSharpConverter(
                 JsonUnionEncoding.InternalTag
                 ||| JsonUnionEncoding.UnwrapRecordCases
-                ||| JsonUnionEncoding.UnwrapOption,
+                ||| JsonUnionEncoding.UnwrapOption
+                ||| JsonUnionEncoding.UnwrapFieldlessTags,
                 unionTagName = "type",
                 unionTagCaseInsensitive = true
             )

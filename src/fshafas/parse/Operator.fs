@@ -8,7 +8,7 @@ module internal Operator =
     let private slug (s: string) = Slug.slugify s
 
     let defaultOperator: FsHafas.Client.Operator =
-        { ``type`` = Some "operator"
+        { ``type`` = OperatorType.Operator
           id = ""
           name = "" }
 

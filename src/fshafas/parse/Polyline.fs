@@ -11,7 +11,7 @@ module internal Polyline =
     let round (f: float) = System.Math.Round(f, 5)
 
     let defaultFeatureCollection: FsHafas.Client.FeatureCollection =
-        { ``type`` = Some "FeatureCollection"
+        { ``type`` = FeatureCollectionType.FeatureCollection
           features = Array.empty }
 
     let private getStop (ctx: Context) (p: FsHafas.Raw.RawPoly) (i: int) =
@@ -28,10 +28,10 @@ module internal Polyline =
         let features =
             FsHafas.Extensions.PolylineEx.polylineDecode poly.crdEncYX
             |> Seq.mapi<_, FsHafas.Client.Feature> (fun i p ->
-                { ``type`` = Some "Feature"
+                { ``type`` = FeatureType.Feature
                   properties = getStop ctx poly i
                   geometry =
-                    { ``type`` = Some "Point"
+                    { ``type`` = GeometryType.Point
                       coordinates = [| (round p.[1]); (round p.[0]) |] } })
             |> Seq.toArray
 

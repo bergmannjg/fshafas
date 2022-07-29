@@ -203,7 +203,7 @@ let applyJourneyOption (option: JourneyOption) (journeysOptions: JourneysOptions
         { journeysOptions with
             loyaltyCard =
                 Some(
-                    { ``type`` = Some "Bahncard"
+                    { ``type`` = "Bahncard"
                       discount = Some discount
                       ``class`` = Some cls }
                 ) }

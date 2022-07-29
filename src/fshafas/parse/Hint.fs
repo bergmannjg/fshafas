@@ -6,14 +6,14 @@ module internal Hint =
     open FsHafas.Endpoint
 
     let defaultHint: Hint =
-        { ``type`` = Some "hint"
+        { ``type`` = HintType.Hint
           code = None
           summary = None
           text = ""
           tripId = None }
 
     let defaultStatus: Status =
-        { ``type`` = Some "status"
+        { ``type`` = HintType.Status
           code = None
           summary = None
           text = ""

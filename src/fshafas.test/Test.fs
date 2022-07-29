@@ -25,7 +25,7 @@ let checkEqual (actual: obj) (expected: obj) =
             let arr = o :?> Feature []
             arr
         else
-            raise (NUnit.Framework.AssertionException("Feature[] expected")) 
+            raise (NUnit.Framework.AssertionException("Feature[] expected"))
 
     let equalFeatureProperties (expected: obj) (actual: obj) =
         let mutable diffs = 0
@@ -93,7 +93,7 @@ let checkEqual (actual: obj) (expected: obj) =
                 diffs <- diffs + (compareFeatureArrays expected actual)
             with
             | ex ->
-                diffs <- diffs + 1 
+                diffs <- diffs + 1
                 fprintfn stderr "compareFeatureArrays: %s" ex.Message
         else
             diffs <- diffs + 1
@@ -411,8 +411,27 @@ let TestFeatureParser () =
     Assert.IsTrue(feature2.properties.IsSome)
 
     match feature2.properties.Value with
-    | U3.Case2 s when s.``type``.IsSome -> Assert.AreEqual(s.``type``.Value, "stop")
+    | U3.Case2 s -> Assert.AreEqual("Stop", s.``type``.ToString())
     | _ -> raise (NUnit.Framework.AssertionException("U3.Case2 Stop expected"))
+
+    let jsonPropertiesAsUndefined =
+        """
+{
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            10.007,
+            53.55371
+        ]
+    }
+}
+"""
+
+    let feature3 =
+        FsHafas.Api.Parser.Deserialize<Feature>(jsonPropertiesAsUndefined, acceptEmptyObjectAsNullValue)
+
+    Assert.IsTrue(feature3.properties.IsNone)
 
 [<Test>]
 let TestLocations () =

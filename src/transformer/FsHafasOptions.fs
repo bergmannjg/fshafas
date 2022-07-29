@@ -21,6 +21,31 @@ open Fable.Core.JS
 
 """
 
+let postlude = """and [<StringEnum>] LocationType = | [<CompiledName "location">] Location
+
+and [<StringEnum>] StationType = | [<CompiledName "station">] Station
+
+and [<StringEnum>] StopType = | [<CompiledName "stop">] Stop
+
+and [<StringEnum>] LineType = | [<CompiledName "line">] Line
+
+and [<StringEnum>] JourneyType = | [<CompiledName "journey">] Journey
+
+and [<StringEnum>] RouteType = | [<CompiledName "route">] Route
+
+and [<StringEnum>] RegionType = | [<CompiledName "region">] Region
+
+and [<StringEnum>] ScheduleType = | [<CompiledName "schedule">] Schedule
+
+and [<StringEnum>] OperatorType = | [<CompiledName "operator">] Operator
+
+and [<StringEnum>] GeometryType = | [<CompiledName "Point">] Point
+
+and [<StringEnum>] FeatureType = | [<CompiledName "Feature">] Feature
+
+and [<StringEnum>] FeatureCollectionType = | [<CompiledName "featureCollection">] FeatureCollection
+"""
+
 let transformType str =
     if str = "ReadonlyArray" then "array"
     else if str = "ResizeArray" then "array"
@@ -41,7 +66,7 @@ let escapeIdent str =
     else
         str
 
-let excludeTypes = [| "ReadonlyArray"; "IExports" |]
+let excludeTypes = [| "ReadonlyArray"; "IExports"; "FeatureProperties" |]
 
 let memberTypes = [| "Profile"; "HafasClient" |]
 
@@ -80,7 +105,22 @@ let case1OfU2TypeVals =
 
 let transformTypeVals =
     [| "*", "icon", "Icon option"
-       "*", "``type``", "string option"
+       "Location", "``type``", "LocationType"
+       "Station", "``type``", "StationType"
+       "Stop", "``type``", "StopType"
+       "Line", "``type``", "LineType"
+       "Journey", "``type``", "JourneyType"
+       "Hint", "``type``", "HintType"
+       "Status", "``type``", "HintType"
+       "Warning", "``type``", "WarningType"
+       "Route", "``type``", "RouteType"
+       "Region", "``type``", "RegionType"
+       "Schedule", "``type``", "ScheduleType"
+       "Operator", "``type``", "OperatorType"
+       "Geometry", "``type``", "GeometryType"
+       "Feature", "``type``", "FeatureType"
+       "FeatureCollection", "``type``", "FeatureCollectionType"
+       "IcoCrd", "``type``", "string option"
        "Feature", "properties", "U3<Station, Stop, Location> option" |]
 
 let transformTypeDefns =
@@ -127,7 +167,7 @@ let toMemberType (name: string) = Array.contains name memberTypes
 
 let options: Transformer.TransformerOptions =
     { prelude = Some prelude
-      postlude = None
+      postlude = Some postlude
       useRecursiveTypes = true
       escapeIdent = escapeIdent
       transformType = transformType

@@ -42,7 +42,7 @@ and Profile =
 
 /// A location object is used by other items to indicate their locations.
 and Location =
-    { ``type``: string option
+    { ``type``: LocationType
       id: string option
       name: string option
       poi: bool option
@@ -70,7 +70,7 @@ and ReisezentrumOpeningHours =
 /// Whereas a stop usually specifies a location, a station often is a broader area
 /// that may span across multiple levels or buildings.
 and Station =
-    { ``type``: string option
+    { ``type``: StationType
       id: string option
       name: string option
       station: Station option
@@ -93,7 +93,7 @@ and Ids = IndexMap<string, string>
 /// A stop is a single small point or structure at which vehicles stop.
 /// A stop always belongs to a station. It may for example be a sign, a basic shelter or a railway platform.
 and Stop =
-    { ``type``: string option
+    { ``type``: StopType
       id: string option
       name: string option
       location: Location option
@@ -110,14 +110,14 @@ and Stop =
 
 /// A region is a group of stations, for example a metropolitan area or a geographical or cultural region.
 and Region =
-    { ``type``: string option
+    { ``type``: RegionType
       id: string
       name: string
       /// station ids
       stations: array<string> }
 
 and Line =
-    { ``type``: string option
+    { ``type``: LineType
       id: string option
       name: string option
       adminCode: string option
@@ -139,7 +139,7 @@ and Line =
 
 /// A route represents a single set of stations, of a single line.
 and Route =
-    { ``type``: string option
+    { ``type``: RouteType
       id: string
       line: string
       mode: ProductTypeMode
@@ -159,7 +159,7 @@ and ArrivalDeparture =
 /// This one tries to balance the amount of data and consumability.
 /// It is specifically geared towards urban public transport, with frequent trains and homogenous travels.
 and Schedule =
-    { ``type``: string option
+    { ``type``: ScheduleType
       id: string
       route: string
       mode: ProductTypeMode
@@ -168,19 +168,19 @@ and Schedule =
       starts: array<string> }
 
 and Operator =
-    { ``type``: string option
+    { ``type``: OperatorType
       id: string
       name: string }
 
 and Hint =
-    { ``type``: string option
+    { ``type``: HintType
       code: string option
       summary: string option
       text: string
       tripId: string option }
 
 and Status =
-    { ``type``: string option
+    { ``type``: HintType
       code: string option
       summary: string option
       text: string
@@ -206,7 +206,7 @@ and Event =
       sections: array<string> option }
 
 and Warning =
-    { ``type``: string option
+    { ``type``: WarningType
       id: string option
       icon: Icon option
       summary: string option
@@ -226,16 +226,16 @@ and Warning =
       toStops: array<U3<Station, Stop, Location>> option }
 
 and Geometry =
-    { ``type``: string option
+    { ``type``: GeometryType
       coordinates: array<float> }
 
 and Feature =
-    { ``type``: string option
+    { ``type``: FeatureType
       properties: U3<Station, Stop, Location> option
       geometry: Geometry }
 
 and FeatureCollection =
-    { ``type``: string option
+    { ``type``: FeatureCollectionType
       features: array<Feature> }
 
 /// A stopover represents a vehicle stopping at a stop/station at a specific time.
@@ -371,7 +371,7 @@ and ScheduledDays = IndexMap<string, bool>
 /// A journey is a computed set of directions to get from A to B at a specific time.
 /// It would typically be the result of a route planning algorithm.
 and Journey =
-    { ``type``: string option
+    { ``type``: JourneyType
       legs: array<Leg>
       refreshToken: string option
       remarks: array<U3<Hint, Status, Warning>> option
@@ -411,7 +411,7 @@ and ServerInfo =
       realtimeDataUpdatedAt: int option }
 
 and LoyaltyCard =
-    { ``type``: string option
+    { ``type``: string
       discount: int option
       ``class``: int option }
 
@@ -636,7 +636,7 @@ and RadarOptions =
       ``when``: DateTime option }
 
 and Filter =
-    { ``type``: string option
+    { ``type``: string
       mode: string
       value: string }
 
@@ -744,3 +744,27 @@ and [<StringEnum>] HintType =
 and [<StringEnum>] WarningType =
     | [<CompiledName "status">] Status
     | [<CompiledName "warning">] Warning
+
+and [<StringEnum>] LocationType = | [<CompiledName "location">] Location
+
+and [<StringEnum>] StationType = | [<CompiledName "station">] Station
+
+and [<StringEnum>] StopType = | [<CompiledName "stop">] Stop
+
+and [<StringEnum>] LineType = | [<CompiledName "line">] Line
+
+and [<StringEnum>] JourneyType = | [<CompiledName "journey">] Journey
+
+and [<StringEnum>] RouteType = | [<CompiledName "route">] Route
+
+and [<StringEnum>] RegionType = | [<CompiledName "region">] Region
+
+and [<StringEnum>] ScheduleType = | [<CompiledName "schedule">] Schedule
+
+and [<StringEnum>] OperatorType = | [<CompiledName "operator">] Operator
+
+and [<StringEnum>] GeometryType = | [<CompiledName "Point">] Point
+
+and [<StringEnum>] FeatureType = | [<CompiledName "Feature">] Feature
+
+and [<StringEnum>] FeatureCollectionType = | [<CompiledName "featureCollection">] FeatureCollection
