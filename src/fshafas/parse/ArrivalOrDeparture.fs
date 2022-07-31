@@ -14,7 +14,7 @@ module internal ArrivalOrDeparture =
         (d: FsHafas.Raw.RawJny)
         : FsHafas.Client.Alternative =
 
-        let (locX, xTimeS, xTimeR, xTZOffset, xCncl, xPlatfS, xPlatfR, xPltfS, xPltfR) =
+        let (locX, xTimeS, xTimeR, xTZOffset, xCncl, xPlatfS, xPlatfR, xPltfS, xPltfR, xProgType) =
             if ``type`` = DEP then
                 let dep = RawDep.FromRawStopL d.stbStop.Value
 
@@ -26,7 +26,8 @@ module internal ArrivalOrDeparture =
                  dep.dPlatfS,
                  dep.dPlatfR,
                  dep.dPltfS,
-                 dep.dPltfR)
+                 dep.dPltfR,
+                 dep.dProgType)
             else
                 let arr = RawArr.FromRawStopL d.stbStop.Value
 
@@ -38,7 +39,8 @@ module internal ArrivalOrDeparture =
                  arr.aPlatfS,
                  arr.aPlatfR,
                  arr.aPltfS,
-                 arr.aPltfR)
+                 arr.aPltfR,
+                 arr.aProgType)
 
         let stop =
             Common.getElementAtSome locX ctx.common.locations
@@ -58,6 +60,8 @@ module internal ArrivalOrDeparture =
         let platfR = matchPlatfS xPlatfR xPltfR
 
         let plt = ctx.profile.parsePlatform ctx platfS platfR xCncl
+
+        let prognosisType = ctx.profile.parsePrognosisType ctx xProgType
 
         let filter (s: FsHafas.Client.StopOver) =
             match s.passBy with
@@ -121,6 +125,7 @@ module internal ArrivalOrDeparture =
             platform = plt.platform
             plannedPlatform = plt.plannedPlatform
             prognosedPlatform = plt.prognosedPlatform
+            prognosisType = prognosisType
             direction = d.dirTxt
             provenance = None
             line = Common.getElementAt d.prodX ctx.common.lines

@@ -238,6 +238,10 @@ and FeatureCollection =
     { ``type``: FeatureCollectionType
       features: array<Feature> }
 
+and [<StringEnum>] PrognosisType =
+    | [<CompiledName "prognosed">] Prognosed
+    | [<CompiledName "calculated">] Calculated
+
 /// A stopover represents a vehicle stopping at a stop/station at a specific time.
 and StopOver =
     { stop: U2<Station, Stop> option
@@ -259,7 +263,9 @@ and StopOver =
       plannedArrivalPlatform: string option
       remarks: array<U3<Hint, Status, Warning>> option
       passBy: bool option
-      cancelled: bool option }
+      cancelled: bool option
+      departurePrognosisType: PrognosisType option
+      arrivalPrognosisType: PrognosisType option }
 
 /// Trip – a vehicle stopping at a set of stops at specific times
 and Trip =
@@ -326,7 +332,8 @@ and Alternative =
       polyline: FeatureCollection option
       currentTripPosition: Location option
       origin: U3<Station, Stop, Location> option
-      destination: U3<Station, Stop, Location> option }
+      destination: U3<Station, Stop, Location> option
+      prognosisType: PrognosisType option }
 
 /// Leg of journey
 and Leg =
@@ -364,7 +371,10 @@ and Leg =
       alternatives: array<Alternative> option
       polyline: FeatureCollection option
       remarks: array<U3<Hint, Status, Warning>> option
-      currentLocation: Location option }
+      currentLocation: Location option
+      departurePrognosisType: PrognosisType option
+      arrivalPrognosisType: PrognosisType option
+      checkin: bool option }
 
 and ScheduledDays = IndexMap<string, bool>
 

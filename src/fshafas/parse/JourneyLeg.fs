@@ -253,7 +253,9 @@ module internal JourneyLeg =
                         remarks = remarks
                         currentLocation = currentLocation
                         cycle = cycle
-                        alternatives = alternatives })
+                        alternatives = alternatives
+                        arrivalPrognosisType = ctx.profile.parsePrognosisType ctx pt.arr.aProgType
+                        departurePrognosisType = ctx.profile.parsePrognosisType ctx pt.dep.dProgType })
 
         { leg with
             origin = origin

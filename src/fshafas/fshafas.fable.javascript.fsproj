@@ -52,6 +52,7 @@
     <Compile Include="parse/Stopover.fs" />
     <Compile Include="parse/ProductsBitmask.fs" />
     <Compile Include="parse/Warning.fs" />
+    <Compile Include="parse/PrognosisType.fs" />
     <Compile Include="Parser.fs" />
     <Compile Include="Profile.fs" />
     <Compile Include="HafasAsyncClient.fs" />

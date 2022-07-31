@@ -59,7 +59,8 @@ type Profile
         parseWhen,
         parseDateTime,
         parseBitmask,
-        parseWarning
+        parseWarning,
+        parsePrognosisType
     ) =
     member val salt: string = "" with get, set
     member val cfg: FsHafas.Raw.Cfg option = None with get, set
@@ -119,6 +120,9 @@ type Profile
 
     member val parseBitmask: Context -> int -> FsHafas.Client.Products = parseBitmask with get, set
     member val parseWarning: Context -> FsHafas.Raw.RawHim -> FsHafas.Client.Warning = parseWarning with get, set
+
+    member val parsePrognosisType: Context -> string option -> FsHafas.Client.PrognosisType option =
+        parsePrognosisType with get, set
 
     member val _locale = locale with get, set
     member val _timezone = timezone with get, set

@@ -18,16 +18,13 @@ const svvProfile = require('hafas-client/p/svv')
 const sbbProfile = require('hafas-client/p/sbb')
 const geolib = require('geolib');
 
-const { fshafas } = require('fs-hafas-client')
-
-const fsclient = fshafas.createClient('db')
 const jsclient = createClient(dbProfile, 'agent')
 const bvgClient = createClient(bvgProfile, 'agent')
 const svvClient = createClient(svvProfile, 'agent')
 
 var myArgs = process.argv.slice(2);
 
-const client = myArgs.indexOf("--fshafas") > 0 ? fsclient : jsclient;
+const client = jsclient;
 
 const locations = () => {
     const options = { results: 3, linesOfStops: true };
@@ -208,9 +205,8 @@ EOF
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fs-hafas-client": "file:../src/fshafas.fable.package/fs-hafas-client-1.1.0.tgz",
     "google-polyline": "^1.0.3",
-    "hafas-client": "^5.24.0",
+    "hafas-client": "^5.25.0",
     "isomorphic-fetch": "^2.2.1",
     "md5": "^2.3.0",
     "slugg": "^1.2.1"

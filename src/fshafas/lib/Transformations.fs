@@ -391,7 +391,10 @@ module Default =
           alternatives = None
           polyline = None
           remarks = None
-          currentLocation = None }
+          currentLocation = None
+          departurePrognosisType = None
+          arrivalPrognosisType = None
+          checkin = None }
 
     let StopOver: StopOver =
         { stop = None
@@ -411,7 +414,9 @@ module Default =
           plannedArrivalPlatform = None
           remarks = None
           passBy = None
-          cancelled = None }
+          cancelled = None
+          departurePrognosisType = None
+          arrivalPrognosisType = None }
 
     let Trip: Trip =
         { id = ""
@@ -481,7 +486,8 @@ module Default =
           polyline = None
           currentTripPosition = None
           origin = None
-          destination = None }
+          destination = None
+          prognosisType = None }
 
     let Journey: Journey =
         { ``type`` = JourneyType.Journey
