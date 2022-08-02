@@ -1,6 +1,6 @@
 {
   "name": "fs-hafas-client",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "",
   "main": "fshafas.bundle.js",
   "types": "fshafas.bundle.d.ts",
@@ -15,7 +15,7 @@
   "dependencies": {
     "google-polyline": "^1.0.3",
     "isomorphic-fetch": "^2.2.1",
-    "luxon": "^1.26.0",
+    "luxon": "^2.3.0",
     "md5": "^2.3.0",
     "slugg": "^1.2.1"
   }

@@ -8,7 +8,7 @@ Related:
 
 * [hafas-client](https://github.com/public-transport/hafas-client) JavaScript client for HAFAS public transport APIs,
 * [FPTF](https://github.com/public-transport/friendly-public-transport-format) Friendly Public Transport Format,
-* [@types/hafas-client](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/743f4c8d5d8af49dfb635a31a8720f7bde5b823f/types/hafas-client/index.d.ts) Type definitions for hafas-client 5.24.0.
+* [@types/hafas-client](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/743f4c8d5d8af49dfb635a31a8720f7bde5b823f/types/hafas-client/index.d.ts) Type definitions for hafas-client 5.25.0.
 
 ## Example
 

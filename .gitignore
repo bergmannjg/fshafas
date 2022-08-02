@@ -44,4 +44,5 @@ src/examples/analyzejourneys/calendar.csv
 src/examples/cli/*.py
 *.pyc
 src/examples/fshafas.fable.node/package-lock.json
+src/examples/cli/package-lock.json
 src/transformer.test/TestResults/Ionide.trx

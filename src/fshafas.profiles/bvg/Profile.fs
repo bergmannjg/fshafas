@@ -67,16 +67,16 @@ module Bvg =
               ``type`` = "IPA"
               name = "FahrInfo" }
           ext = "BVG.1"
-          ver = "1.21"
+          ver = "1.44"
           auth =
             { ``type`` = "AID"
-              aid = "Mz0YdF9Fgx0Mb9" } }
+              aid = "YoJ05NartnanEGCj" } }
 
     let profile = FsHafas.Api.Profile.defaultProfile ()
 
     profile._locale <- "de-DE"
     profile._timezone <- "Europe/Berlin"
-    profile._endpoint <- "https://bvg.hafas.cloud/bin/mgate.exe"
+    profile._endpoint <- "https://bvg-apps-ext.hafas.de/bin/mgate.exe"
     profile.salt <- ""
     profile.cfg <- Some { polyEnc = "GPA"; rtMode = None }
     profile.baseRequest <- Some req

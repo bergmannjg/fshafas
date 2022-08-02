@@ -5,12 +5,12 @@
     "main": "dist/index.js",
     "type": "module",
     "dependencies": {
-        "fs-hafas-client": "https://github.com/bergmannjg/fshafas/releases/download/1.5.1/fs-hafas-client-1.5.1.tgz",
-        "hafas-client": "5.24.1"
+        "fs-hafas-client": "file:../../fshafas.javascript.package/fs-hafas-client-1.6.0.tgz",
+        "hafas-client": "5.25.0"
     },
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "@types/hafas-client": "^5.24.0"
+        "@types/hafas-client": "^5.25.0"
     }
 }

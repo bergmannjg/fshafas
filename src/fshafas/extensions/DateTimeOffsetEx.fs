@@ -6,13 +6,20 @@ module internal DateTimeOffsetEx =
     open Fable.Core
 #endif
 
-#if FABLE_JS && !WEBPACK
-    [<Import("default", from = "luxon")>]
+#if FABLE_JS
+    [<Import("DateTime", from = "luxon")>]
+#endif
+#if FABLE_JS
+    [<Emit("DateTime.fromObject({ year: $1, month: $2, day: $3})")>]
+    let OffsetFromObject (year: int) (month: int) (day: int) : obj = jsNative
 #endif
 
 #if FABLE_JS
-    [<Emit("luxon.DateTime.fromObject({ year: $1, month: $2, day: $3}).setZone(new luxon.IANAZone($4)).offset")>]
-    let OffsetFromObject (year: int) (month: int) (day: int) (zone: string) : int = jsNative
+    [<Import("IANAZone", from = "luxon")>]
+#endif
+#if FABLE_JS
+    [<Emit("$1.setZone(new IANAZone($2)).offset")>]
+    let SetZone (dt: obj) (zone: string) : int = jsNative
 #endif
 
 #if FABLE_PY
@@ -117,7 +124,7 @@ module internal DateTimeOffsetEx =
         let GetDateTimeInZone (year: int, month: int, day: int, hour: int, minute: int, seconds: int, zoneId: string) =
 
 #if FABLE_JS
-            let tzOffset = OffsetFromObject year month day zoneId
+            let tzOffset = SetZone (OffsetFromObject year month day) zoneId
 
             System.DateTimeOffset(year, month, day, hour, minute, seconds, System.TimeSpan(tzOffset / 60, 0, 0))
 #else

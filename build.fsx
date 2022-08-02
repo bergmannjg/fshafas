@@ -121,7 +121,7 @@ Target.create "BuildFableWebpackNodeDev" (fun _ ->
     DotNet.exec
         (DotNet.Options.withWorkingDirectory "./src/fshafas.javascript.package")
         "fable"
-        "./fshafas.fable.javascript.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode development --devtool source-map --config ./webpack.node.config.js"
+        "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode development --devtool source-map --config ./webpack.node.config.js"
     |> ignore
 
     Npm.exec "pack fs-hafas-client/" (fun o ->
@@ -332,13 +332,9 @@ Target.create "PublishPythonProjToLocalNuGetFeed" (fun _ ->
 
     let home = Environment.environVar "HOME"
 
-    Shell.cleanDir (
-        home
-        + "/.nuget/packages/fshafas.python/"
-        + version
-    )
+    Shell.cleanDir (home + "/.nuget/packages/fshafas.python/")
 
-    Shell.cleanDir (home + "/local.packages/fshafas.python/" + version)
+    Shell.cleanDir (home + "/local.packages/fshafas.python/")
 
     run
         "./src/fshafas/"
@@ -361,17 +357,9 @@ Target.create "PublishPythonProjToLocalNuGetFeed" (fun _ ->
 
     let home = Environment.environVar "HOME"
 
-    Shell.cleanDir (
-        home
-        + "/.nuget/packages/fshafas.profiles.python/"
-        + version
-    )
+    Shell.cleanDir (home + "/.nuget/packages/fshafas.profiles.python/")
 
-    Shell.cleanDir (
-        home
-        + "/local.packages/fshafas.profiles.python/"
-        + version
-    )
+    Shell.cleanDir (home + "/local.packages/fshafas.profiles.python/")
 
     run
         "./src/fshafas.profiles/"

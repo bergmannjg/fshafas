@@ -21,7 +21,8 @@ open Fable.Core.JS
 
 """
 
-let postlude = """and [<StringEnum>] LocationType = | [<CompiledName "location">] Location
+let postlude =
+    """and [<StringEnum>] LocationType = | [<CompiledName "location">] Location
 
 and [<StringEnum>] StationType = | [<CompiledName "station">] Station
 
@@ -66,7 +67,10 @@ let escapeIdent str =
     else
         str
 
-let excludeTypes = [| "ReadonlyArray"; "IExports"; "FeatureProperties" |]
+let excludeTypes =
+    [| "ReadonlyArray"
+       "IExports"
+       "FeatureProperties" |]
 
 let memberTypes = [| "Profile"; "HafasClient" |]
 

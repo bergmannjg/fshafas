@@ -10,7 +10,7 @@
     "fable-loader": "^2.1.9",
     "google-polyline": "^1.0.3",
     "isomorphic-fetch": "^2.2.1",
-    "luxon": "^1.26.0",
+    "luxon": "^2.3.0",
     "md5": "^2.3.0",
     "slugg": "^1.2.1",
     "webpack": "^5.22.0",
