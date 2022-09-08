@@ -24,13 +24,16 @@ build.fsx.lock
 
 hafas-client.d.ts
 fs-hafas-client-*.tgz
+fs-hafas-profiles-*.tgz
 fshafas.bundle.js
 fshafas.bundle.js.map
 fshafas.bundle.js.LICENSE.txt
 fshafas.web.bundle.js
+profiles.bundle.js
+profiles.bundle.js.map
+profiles.bundle.js.LICENSE.txt
 
-src/fshafas.fable.web/wwwroot/js/site.js
-src/fshafas.fable.web/wwwroot/js/lib/
+src/examples/fshafas.fable.web/wwwroot/js/lib/
 
 x.txt
 
@@ -46,3 +49,5 @@ src/examples/cli/*.py
 src/examples/fshafas.fable.node/package-lock.json
 src/examples/cli/package-lock.json
 src/transformer.test/TestResults/Ionide.trx
+
+src/examples/fshafas.fable.web/wwwroot/js/site.js

@@ -49,7 +49,7 @@ module Bvg =
              short = "R"
              ``default`` = true } |]
 
-    let formatStation (id: string) =
+    let private formatStation (id: string) =
         if
             Regex.IsMatch(id, @"^\d{6,}$")
             && (id.Length = 7 || id.Length = 9 || id.Length = 12)

@@ -205,14 +205,8 @@ EOF
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "google-polyline": "^1.0.3",
-    "hafas-client": "^5.25.0",
-    "isomorphic-fetch": "^2.2.1",
-    "md5": "^2.3.0",
-    "slugg": "^1.2.1"
-  },
-  "devDependencies": {
-    "@types/hafas-client": "^5.12.0"
+    "geolib": "^3.3.1",
+    "hafas-client": "^5.25.0"
   }
 }
 EOF
@@ -226,10 +220,17 @@ fi
 PATH2FIXTURES="../src/fshafas.test/fixtures"
 
 METHODS=('locations' 'journeys' 'journeysFromTrip' 'trip' 'departures' 'nearby' 'reachableFrom' 'radar' 'remarks' 'lines' 'serverInfo')
- 
+
 for METHOD in "${METHODS[@]}"; do
-  if [ ! -f "${PATH2FIXTURES}/db-${METHOD}-response.json" ]; then
-    DEBUG=hafas-client node index.js ${METHOD} &> x.txt
+  if [ ${METHOD} == "lines" ] || [ ${METHOD} == "remarks" ]
+  then
+    PROFILE='svv'
+  else
+    PROFILE='db'
+   fi
+
+  if [ ! -f "${PATH2FIXTURES}/${PROFILE}-${METHOD}-response.json" ]; then
+    DEBUG=hafas-client node index.js ${METHOD} ${PROFILE} &> x.txt
 
     if [ ${METHOD} = "trip" ]; then
             # cause of journeys request
@@ -239,20 +240,21 @@ for METHOD in "${METHODS[@]}"; do
             # cause of journeys request
         	sed -i '1,2d' x.txt 
     fi
-    head -n 1 x.txt > ${PATH2FIXTURES}/db-${METHOD}-options.json
 
-    head -n 2 x.txt | tail -1 > ${PATH2FIXTURES}/db-${METHOD}-raw-request.json
+    if test "$(wc -l < x.txt)" -eq 4
+    then
+      head -n 1 x.txt > ${PATH2FIXTURES}/${PROFILE}-${METHOD}-options.json
 
-    head -n 3 x.txt | tail -1 > ${PATH2FIXTURES}/db-${METHOD}-raw-response.json
+      head -n 2 x.txt | tail -1 > ${PATH2FIXTURES}/${PROFILE}-${METHOD}-raw-request.json
 
-    head -n 4 x.txt | tail -1 > ${PATH2FIXTURES}/db-${METHOD}-response.json
+      head -n 3 x.txt | tail -1 > ${PATH2FIXTURES}/${PROFILE}-${METHOD}-raw-response.json
+
+      head -n 4 x.txt | tail -1 > ${PATH2FIXTURES}/${PROFILE}-${METHOD}-response.json
+    else
+        echo "unexpected output: $( wc -l < x.txt) lines"
+        cat x.txt
+    fi
   else
     echo "skip ${METHOD}"
   fi
 done
-
-if [ "$1" = "--fshafas" ]; then
-    for METHOD in "${METHODS[@]}"; do
-        node index.js ${METHOD} --fshafas
-    done
-fi

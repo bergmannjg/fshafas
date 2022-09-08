@@ -226,7 +226,7 @@ module Db =
               code = "intercity-2"
               summary = "Intercity 2" }) |]
 
-    let codesByText =
+    let private codesByText =
         [| ("journey cancelled", "journey-cancelled")
            ("stop cancelled", "stop-cancelled")
            ("signal failure", "signal-failure")
@@ -293,14 +293,14 @@ module Db =
                 name = p.addName }
         | None -> parsed
 
-    let loadFactors =
+    let private loadFactors =
         [| ""
            "low-to-medium"
            "high"
            "very-high"
            "exceptionally-high" |]
 
-    let parseLoadFactor (opt: FsHafas.Endpoint.Options) (tcocL: RawTcoc []) (tcocX: int []) : string option =
+    let private parseLoadFactor (opt: FsHafas.Endpoint.Options) (tcocL: RawTcoc []) (tcocX: int []) : string option =
         let cls =
             if opt.firstClass then
                 "FIRST"
@@ -314,7 +314,12 @@ module Db =
         | Some tcoc when tcoc.r.IsSome -> Some(loadFactors.[tcoc.r.Value])
         | _ -> None
 
-    let parseJourneyLegWithLoadFactor (parsed: Leg) (ctx: FsHafas.Endpoint.Context) (pt: RawSec) (date: string) : Leg =
+    let private parseJourneyLegWithLoadFactor
+        (parsed: Leg)
+        (ctx: FsHafas.Endpoint.Context)
+        (pt: RawSec)
+        (date: string)
+        : Leg =
         let tcocX =
             match pt.jny with
             | Some jny ->
@@ -336,7 +341,11 @@ module Db =
 
         | _ -> parsed
 
-    let parseArrOrDepWithLoadFactor (parsed: Alternative) (ctx: FsHafas.Endpoint.Context) (d: RawJny) : Alternative =
+    let private parseArrOrDepWithLoadFactor
+        (parsed: Alternative)
+        (ctx: FsHafas.Endpoint.Context)
+        (d: RawJny)
+        : Alternative =
         let tcocX =
             match d.stbStop with
             | Some stbStop ->
@@ -376,13 +385,13 @@ module Db =
             | _ -> parsed
         | _ -> parsed
 
-    let formatStation (id: string) =
+    let private formatStation (id: string) =
         if Regex.IsMatch(id, @"^\d{6,}$") then
             id
         else
             raise (System.ArgumentException("station id: " + id))
 
-    let bikeFltr: JnyFltr =
+    let private bikeFltr: JnyFltr =
         { ``type`` = "BC"
           mode = "INC"
           value = None
@@ -417,7 +426,7 @@ module Db =
                 0
         | _ -> 0
 
-    let ageGroupFromAge (age: int option) =
+    let private ageGroupFromAge (age: int option) =
         match age with
         | Some age ->
             if age < 6 then "B"
@@ -427,7 +436,7 @@ module Db =
             else "S"
         | None -> "E"
 
-    let transformJourneysQuery (opt: JourneysOptions option) (q: TripSearchRequest) : TripSearchRequest =
+    let private transformJourneysQuery (opt: JourneysOptions option) (q: TripSearchRequest) : TripSearchRequest =
         let bike = getOptionValue opt (fun v -> v.bike) Default.JourneysOptions
 
         let firstClass = getOptionValue opt (fun v -> v.firstClass) Default.JourneysOptions
@@ -496,27 +505,27 @@ module Db =
     profile.formatStation <- formatStation
     profile.transformJourneysQuery <- transformJourneysQuery
 
-    let defaultParseJourney = profile.parseJourney
+    let private defaultParseJourney = profile.parseJourney
 
     profile.parseJourney <-
         (fun (ctx: FsHafas.Endpoint.Context) (p: RawOutCon) -> parseJourneyWithPrice (defaultParseJourney ctx p) p)
 
-    let defaultParseJourneyLeg = profile.parseJourneyLeg
+    let private defaultParseJourneyLeg = profile.parseJourneyLeg
 
     profile.parseJourneyLeg <-
         (fun (ctx: FsHafas.Endpoint.Context) (pt: RawSec) (date: string) ->
             parseJourneyLegWithLoadFactor (defaultParseJourneyLeg ctx pt date) ctx pt date)
 
-    let defaultParseDeparture = profile.parseDeparture
+    let private defaultParseDeparture = profile.parseDeparture
 
     profile.parseDeparture <-
         (fun (ctx: FsHafas.Endpoint.Context) (pt: RawJny) ->
             parseArrOrDepWithLoadFactor (defaultParseDeparture ctx pt) ctx pt)
 
-    let defaultParseHint = profile.parseHint
+    let private defaultParseHint = profile.parseHint
     profile.parseHint <- (fun (ctx: FsHafas.Endpoint.Context) (p: RawRem) -> parseHint (defaultParseHint ctx p) p)
 
-    let defaultParseLine = profile.parseLine
+    let private defaultParseLine = profile.parseLine
 
     profile.parseLine <-
         (fun (ctx: FsHafas.Endpoint.Context) (p: RawProd) -> parseLineWithAdditionalName (defaultParseLine ctx p) p)

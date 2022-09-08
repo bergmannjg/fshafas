@@ -1,8 +1,8 @@
 namespace FsHafas.Api
 
 open FsHafas.Parser
-open FsHafas.Client
 
+/// <summary>Default profile to build profiles for endpoints.</summary>
 module Profile =
 
     let defaultProfile () =

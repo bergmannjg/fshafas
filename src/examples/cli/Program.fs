@@ -63,9 +63,9 @@ OPTIONS:
 
 let toProfile s =
     match s with
-    | "Db" -> FsHafas.Profiles.Db.profile
-    | "Bvg" -> FsHafas.Profiles.Bvg.profile
-    | "Svv" -> FsHafas.Profiles.Svv.profile
+    | "db" -> FsHafas.Profiles.Db.profile
+    | "bvg" -> FsHafas.Profiles.Bvg.profile
+    | "svv" -> FsHafas.Profiles.Svv.profile
     | x -> failwithf "%s is out of range" x
 
 let parse (args: string list) =

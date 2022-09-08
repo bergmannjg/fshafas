@@ -38,16 +38,16 @@ let jsonRadarResponse () =
     File.ReadAllText(path + "db-radar-response.json")
 
 let jsonLinesRawResponse () =
-    File.ReadAllText(path + "db-lines-raw-response.json")
+    File.ReadAllText(path + "svv-lines-raw-response.json")
 
 let jsonLinesResponse () =
-    File.ReadAllText(path + "db-lines-response.json")
+    File.ReadAllText(path + "svv-lines-response.json")
 
 let jsonRemarksRawResponse () =
-    File.ReadAllText(path + "db-remarks-raw-response.json")
+    File.ReadAllText(path + "svv-remarks-raw-response.json")
 
 let jsonRemarksResponse () =
-    File.ReadAllText(path + "db-remarks-response.json")
+    File.ReadAllText(path + "svv-remarks-response.json")
 
 let jsonTripRawResponse () =
     File.ReadAllText(path + "db-trip-raw-response.json")

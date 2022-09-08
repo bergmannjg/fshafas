@@ -8,11 +8,12 @@ The F# library compiles to dotnet and (via [Fable](https://github.com/fable-comp
 
 ## Interfaces
 
-The library exposes  3 interfaces:
+The library exposes 4 interfaces:
 
 - a [direct (`raw`) interface](reference/fshafas-api-hafasrawclient.html) to the hafas endpoints,
 - a [F# async based interface](reference/fshafas-api-hafasasyncclient.html) corresponding to hafas-client api,
-- a [JS promise based interface](reference/fshafas-client-hafasclient.html) corresponding to the TS [Type definitions](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/hafas-client/index.d.ts) for hafas-client.
+- a [JS promise based interface](reference/fshafas-client-hafasclient.html) corresponding to the TS [Type definitions](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/hafas-client/index.d.ts) for hafas-client,
+- an interface to build [profiles](reference/fshafas-api-profile.html) for endpoints.
 
 The library compiles via Fable to a webpack module with [this](https://github.com/bergmannjg/fshafas/blob/main/src/fshafas.javascript.package/fs-hafas-client/fshafas.bundle.d.ts) TS Type definition.
 

@@ -73,7 +73,7 @@ and RawHim =
       eDate: string option
       eTime: string option
       cat: int option
-      pubChL: array<PubCh>
+      pubChL: array<PubCh> option
       edgeRefL: array<int> option
       regionRefL: array<int> option
       catRefL: array<int> option

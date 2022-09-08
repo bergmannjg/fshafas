@@ -1,12 +1,13 @@
 import { fshafas } from 'fs-hafas-client';
 import { Journey, Leg } from 'fs-hafas-client/hafas-client';
+import { profiles } from 'fs-hafas-profiles';
 
 import createClient from 'hafas-client';
 import dbProfile from 'hafas-client/p/db/index.js';
 
 const myArgs = process.argv.slice(2);
 
-const client = myArgs.indexOf("--hafas") > 0 ? createClient(dbProfile, 'agent') : fshafas.createClient(fshafas.dbProfile);
+const client = myArgs.indexOf("--hafas") > 0 ? createClient(dbProfile, 'agent') : fshafas.createClient(profiles.getProfile('db'));
 
 if (myArgs.indexOf("--debug") > 0) {
     fshafas.setDebug();

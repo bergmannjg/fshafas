@@ -24,6 +24,7 @@ open Fake.Core.Xml
 open System.Text.RegularExpressions
 
 let release = ReleaseNotes.load "RELEASE_NOTES.md"
+let releaseProfiles = ReleaseNotes.load "RELEASE_NOTES_Profiles.md"
 
 let projectFiles = !! "src/*/*.*proj"
 
@@ -49,20 +50,6 @@ Target.create "BuildDocs" (fun _ ->
     |> ignore)
 
 Target.create "ReleaseDocs" (fun _ ->
-    Shell.cleanDir "gh-pages"
-    let url = "https://github.com/bergmannjg/fshafas.git"
-    Git.Repository.cloneSingleBranch "" url "gh-pages" "gh-pages"
-
-    Git.Repository.fullclean "gh-pages"
-
-    Shell.copyRecursive "output/fshafas" "gh-pages" true
-    |> printfn "%A"
-
-    Git.Staging.stageAll "gh-pages"
-    Git.Commit.exec "gh-pages" (sprintf "Update generated documentation %s" release.AssemblyVersion)
-    Git.Branches.pushBranch "gh-pages" url "gh-pages")
-
-Target.create "ReleaseDocsForce" (fun _ ->
     Shell.cleanDir "gh-pages"
     let url = "https://github.com/bergmannjg/fshafas.git"
     Git.Repository.init "gh-pages" false false
@@ -95,46 +82,47 @@ Target.create "Test" (fun _ ->
     DotNet.exec id "test" "src/fshafas.test/fshafastest.fsproj"
     |> checkResult "Test failed")
 
+let CheckReleaseVersion (file: string) (version: string) =
+    let config = JsonSerializer.Deserialize(File.readAsString (file))
+
+    if version <> config.version then
+        raise (System.Exception(sprintf "config version, exptected: %s, actual: %s" version config.version))
+
 Target.create "CheckReleaseVersion" (fun _ ->
-    let configStr =
-        File.readAsString ("src/fshafas.javascript.package/fs-hafas-client/package.json")
+    CheckReleaseVersion "src/fshafas.javascript.package/fs-hafas-client/package.json" release.AssemblyVersion
 
-    let config = JsonSerializer.Deserialize(configStr)
-
-    if release.AssemblyVersion <> config.version then
-        raise (
-            System.Exception(sprintf "config version, exptected: %s, actual: %s" release.AssemblyVersion config.version)
-        ))
+    CheckReleaseVersion
+        "src/fshafas.profiles.javascript.package/fs-hafas-profiles/package.json"
+        releaseProfiles.AssemblyVersion)
 
 Target.create "BuildFableWebpackNode" (fun _ ->
     Shell.cleanDir ("./src/fshafas.javascript.package/build")
+    let mode = Environment.environVarOrDefault "webpack.mode" "production"
 
-    DotNet.exec
-        (DotNet.Options.withWorkingDirectory "./src/fshafas.javascript.package")
-        "fable"
-        "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode production --no-devtool --config ./webpack.node.config.js"
+    let args =
+        "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode "
+        + mode
+        + " --no-devtool --config ./webpack.node.config.js"
+
+    DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.javascript.package") "fable" args
+    |> checkResult "BuldFableWebpack failed"
+
+    Shell.cleanDir ("./src/fshafas.profiles.javascript.package/build")
+
+    DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.profiles.javascript.package") "fable" args
     |> checkResult "BuldFableWebpack failed")
-
-Target.create "BuildFableWebpackNodeDev" (fun _ ->
-    Shell.cleanDir ("./src/fshafas.javascript.package/build")
-
-    DotNet.exec
-        (DotNet.Options.withWorkingDirectory "./src/fshafas.javascript.package")
-        "fable"
-        "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode development --devtool source-map --config ./webpack.node.config.js"
-    |> ignore
-
-    Npm.exec "pack fs-hafas-client/" (fun o ->
-        { o with
-            NpmFilePath = "/usr/bin/npm"
-            WorkingDirectory = "./src/fshafas.javascript.package/" })
-    |> ignore)
 
 Target.create "BuildFableWebpackWebDev" (fun _ ->
     DotNet.exec
         (DotNet.Options.withWorkingDirectory "./src/fshafas.javascript.package")
         "fable"
-        "./fshafas.fable.javascript.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode development --config ./webpack.web.config.js"
+        "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode development --config ./webpack.web.config.js"
+    |> ignore
+
+    DotNet.exec
+        (DotNet.Options.withWorkingDirectory "./src/fshafas.profiles.javascript.package")
+        "fable"
+        "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode development --config ./webpack.web.config.js"
     |> ignore)
 
 Target.create "BuildFableNpmPack" (fun _ ->
@@ -142,27 +130,22 @@ Target.create "BuildFableNpmPack" (fun _ ->
         { o with
             NpmFilePath = "/usr/bin/npm"
             WorkingDirectory = "./src/fshafas.javascript.package/" })
-    |> ignore)
+    |> ignore
 
-Target.create "BuildFableNpmPackDev" (fun _ ->
-    Npm.exec "pack fs-hafas-client/" (fun o ->
+    Npm.exec "pack fs-hafas-profiles/" (fun o ->
         { o with
             NpmFilePath = "/usr/bin/npm"
-            WorkingDirectory = "./src/fshafas.javascript.package/" })
+            WorkingDirectory = "./src/fshafas.profiles.javascript.package/" })
     |> ignore)
 
 Target.create "CopyWebBundle" (fun _ ->
     Shell.copy
         "src/examples/fshafas.fable.web/wwwroot/js/lib/"
-        [ "src/fshafas.javascript.package/fs-hafas-client-web/fshafas.web.bundle.js" ]
-
-    Shell.copy
-        "src/examples/fshafas.fable.web/wwwroot/js/lib/"
-        [ "src/fshafas.javascript.package/fs-hafas-client/hafas-client.d.ts" ]
-
-    Shell.copy
-        "src/examples/fshafas.fable.web/wwwroot/js/lib/"
-        [ "src/fshafas.javascript.package/fs-hafas-client-web/fshafas.web.bundle.d.ts" ])
+        [ "src/fshafas.javascript.package/fs-hafas-client-web/fshafas.web.bundle.js"
+          "src/fshafas.javascript.package/fs-hafas-client/hafas-client.d.ts"
+          "src/fshafas.javascript.package/fs-hafas-client-web/fshafas.web.bundle.d.ts"
+          "src/fshafas.profiles.javascript.package/fs-hafas-profiles-web/profiles.web.bundle.js"
+          "src/fshafas.profiles.javascript.package/fs-hafas-profiles-web/profiles.web.bundle.d.ts" ])
 
 let run workingDirectory file arguments =
     use __ = Trace.traceTask file ""
@@ -231,75 +214,57 @@ let runWithResult workingDirectory file arguments =
 Target.create "CompileTypeScript" (fun _ ->
     run "./src/examples/fshafas.fable.web/wwwroot/js/" "tsc" ("--target ES2015 --noImplicitAny" + " site.ts"))
 
-Target.create "PublishToLocalNuGetFeed" (fun _ ->
-    let version = release.AssemblyVersion
+let PublishToLocalNuGetFeed (version: string) (srcDir: string) (fsproj: string) (nugetDir: string) (nugetPkg: string) =
     let versionParameter = "/p:Version=\"" + version + "\""
 
-    DotNet.exec
-        id
-        "pack"
-        (versionParameter
-         + " "
-         + "src/fshafas/fshafas.fable.javascript.fsproj")
+    DotNet.exec id "pack" (versionParameter + " " + srcDir + "/" + fsproj)
     |> checkResult "pack failed"
 
     let home = Environment.environVar "HOME"
 
     Shell.cleanDir (
         home
-        + "/.nuget/packages/fshafas.javascript/"
+        + "/.nuget/packages/"
+        + nugetDir
+        + "/"
         + version
     )
 
     Shell.cleanDir (
         home
-        + "/local.packages/fshafas.javascript/"
+        + "/local.packages/"
+        + nugetDir
+        + "/"
         + version
     )
 
     run
-        "./src/fshafas/"
+        ("./" + srcDir + "/")
         "/usr/local/bin/nuget.exe"
         ("add"
-         + " bin/Debug/FsHafas.JavaScript."
+         + " bin/Debug/"
+         + nugetPkg
+         + "."
          + version
          + ".nupkg"
          + " -source "
          + home
          + "/local.packages -expand")
 
-    DotNet.exec
-        id
-        "pack"
-        (versionParameter
-         + " "
-         + "src/fshafas.profiles/fshafas.profiles.fable.javascript.fsproj")
-    |> checkResult "pack failed"
+Target.create "PublishToLocalNuGetFeed" (fun _ ->
+    PublishToLocalNuGetFeed
+        release.AssemblyVersion
+        "src/fshafas"
+        "fshafas.fable.javascript.fsproj"
+        "fshafas.javascript"
+        "FsHafas.JavaScript"
 
-    let home = Environment.environVar "HOME"
-
-    Shell.cleanDir (
-        home
-        + "/.nuget/packages/fshafas.profiles.javascript/"
-        + version
-    )
-
-    Shell.cleanDir (
-        home
-        + "/local.packages/fshafas.profiles.javascript/"
-        + version
-    )
-
-    run
-        "./src/fshafas.profiles/"
-        "/usr/local/bin/nuget.exe"
-        ("add"
-         + " bin/Debug/FsHafas.Profiles.JavaScript."
-         + version
-         + ".nupkg"
-         + " -source "
-         + home
-         + "/local.packages -expand"))
+    PublishToLocalNuGetFeed
+        releaseProfiles.AssemblyVersion
+        "src/fshafas.profiles"
+        "fshafas.profiles.fable.javascript.fsproj"
+        "fshafas.profiles.javascript"
+        "FsHafas.Profiles.JavaScript")
 
 let getPyVersion (file: string) =
     let setup = File.readAsString file
@@ -580,14 +545,6 @@ Target.create "Docs" ignore
 ==> "BuildFableWebpackNode"
 ==> "BuildFableNpmPack"
 ==> "JavaScript"
-
-"BuildLib"
-==> "Test"
-==> "CheckReleaseVersion"
-==> "PublishToLocalNuGetFeed"
-==> "BuildFableWebpackNodeDev"
-==> "BuildFableNpmPackDev"
-==> "Debug"
 
 "BuildLib"
 ==> "Test"
