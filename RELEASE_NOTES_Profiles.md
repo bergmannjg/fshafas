@@ -3,4 +3,4 @@
 ## 1.0.0
 
 * initial release
-* corresponds to fshafas version 1.6.0
+* corresponds to fshafas version 1.7.0

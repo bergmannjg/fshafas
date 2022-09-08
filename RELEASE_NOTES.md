@@ -40,3 +40,7 @@
 ## 1.6.0
 
 * corresponds to hafas-client version 5.25.0
+
+## 1.7.0
+
+* add separate fshafas profiles javascript package

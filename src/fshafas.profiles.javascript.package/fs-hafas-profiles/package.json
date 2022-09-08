@@ -13,6 +13,6 @@
   "author": "Jürgen Bergmann",
   "license": "ISC",
   "dependencies": {
-    "fs-hafas-client": "^1.6.0"
+    "fs-hafas-client": "^1.7.0"
   }
 }
