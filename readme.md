@@ -28,9 +28,9 @@ hafas-client TS types, JS Program | <= [fable](https://github.com/fable-compiler
 
 ## Compilation to Python
 
-Compilation to Python with **dotnet fable-py** is an alpha phase using version 4.0.0-alpha-032. All currently missing features have a comment **workaround**.
+Compilation to Python with **dotnet fable --lang Python** uses a prerelease version of fable 4. All currently missing features have a comment **workaround**.
 
-Current status when running *src/examples/cli/Program.fs* with fable and fable-py (task *build.sh -t CompareJsPyResult*):
+Current status when running *src/examples/cli/Program.fs* with fable (task *build.sh -t CompareJsPyResult*):
 
 |Interface method|Status|
 |---|---|

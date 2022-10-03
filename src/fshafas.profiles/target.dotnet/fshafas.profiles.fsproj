@@ -5,13 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="bvg/Profile.fs" />
-    <Compile Include="db/Profile.fs" />
-    <Compile Include="svv/Profile.fs" />
+    <Compile Include="../bvg/Profile.fs" />
+    <Compile Include="../db/Profile.fs" />
+    <Compile Include="../svv/Profile.fs" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../fshafas/fshafas.fsproj">
+    <ProjectReference Include="../../fshafas/target.dotnet/fshafas.fsproj">
       <Name>JsonRpcClient.fsproj</Name>
     </ProjectReference>
   </ItemGroup>

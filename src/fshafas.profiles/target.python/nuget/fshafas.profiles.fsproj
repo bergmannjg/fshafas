@@ -1,16 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>FsHafas.Profiles.JavaScript</PackageId>
+    <PackageId>FsHafas.Profiles.Python</PackageId>
     <Authors>J. Bergmann</Authors>
     <PackageTags>fable fsharp</PackageTags>
   </PropertyGroup>
   <PropertyGroup>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Fable.Core" Version="3.1.5" />
-  </ItemGroup>
   <PropertyGroup>
     <DefineConstants>FABLE_COMPILER</DefineConstants>
   </PropertyGroup>
@@ -18,13 +15,5 @@
     <Compile Include="bvg/Profile.fs" />
     <Compile Include="db/Profile.fs" />
     <Compile Include="svv/Profile.fs" />
-  </ItemGroup>
-    <ItemGroup>
-    <ProjectReference Include="../fshafas/fshafas.fable.javascript.fsproj">
-      <Name>JsonRpcClient.fsproj</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fshafas.profiles.fable.javascript.fsproj; **\*.fs" PackagePath="fable" />
   </ItemGroup>
 </Project>

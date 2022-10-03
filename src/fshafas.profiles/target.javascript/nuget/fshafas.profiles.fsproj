@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>FsHafas.Profiles.JavaScript</PackageId>
+    <Authors>J. Bergmann</Authors>
+    <PackageTags>fable fsharp</PackageTags>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants>FABLE_COMPILER</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="bvg/Profile.fs" />
+    <Compile Include="db/Profile.fs" />
+    <Compile Include="svv/Profile.fs" />
+  </ItemGroup>
+</Project>

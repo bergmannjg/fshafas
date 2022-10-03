@@ -1,6 +1,6 @@
 {
   "name": "fs-hafas-profiles",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "profiles.bundle.js",
   "types": "profiles.bundle.d.ts",
@@ -13,6 +13,6 @@
   "author": "Jürgen Bergmann",
   "license": "ISC",
   "dependencies": {
-    "fs-hafas-client": "^1.7.0"
+    "fs-hafas-client": "^1.8.0"
   }
 }

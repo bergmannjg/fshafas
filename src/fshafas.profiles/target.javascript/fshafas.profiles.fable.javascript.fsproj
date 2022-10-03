@@ -1,30 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>FsHafas.Profiles.Python</PackageId>
+    <PackageId>FsHafas.Profiles.JavaScript</PackageId>
     <Authors>J. Bergmann</Authors>
     <PackageTags>fable fsharp</PackageTags>
   </PropertyGroup>
   <PropertyGroup>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Fable.Core.Experimental" Version="4.0.0-alpha-032" />
-  </ItemGroup>
   <PropertyGroup>
     <DefineConstants>FABLE_COMPILER</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="bvg/Profile.fs" />
-    <Compile Include="db/Profile.fs" />
-    <Compile Include="svv/Profile.fs" />
+    <Compile Include="../bvg/Profile.fs" />
+    <Compile Include="../db/Profile.fs" />
+    <Compile Include="../svv/Profile.fs" />
   </ItemGroup>
     <ItemGroup>
-    <ProjectReference Include="../fshafas/fshafas.fable.python.fsproj">
+    <ProjectReference Include="../../fshafas/target.javascript/fshafas.fable.javascript.fsproj">
       <Name>JsonRpcClient.fsproj</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fshafas.profiles.fable.python.fsproj; **\*.fs" PackagePath="fable" />
+    <Content Include="nuget\fshafas.profiles.fsproj; ..\**\*.fs" PackagePath="fable" />
   </ItemGroup>
+  <Import Project="../../../.props/Fable.props" />
 </Project>

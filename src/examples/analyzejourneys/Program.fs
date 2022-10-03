@@ -129,8 +129,9 @@ let getJourney
                             None
                         else
                             Some
-                                { ``type`` = Some "Bahncard"
-                                  discount = Some discount }
+                                { ``type`` = "Bahncard"
+                                  discount = Some discount
+                                  ``class`` = Some 2 }
                     polylines = Some true }
 
             return!

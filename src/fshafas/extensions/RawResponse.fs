@@ -27,7 +27,7 @@ module internal RawResponseEx =
         | Error decodingError -> failwith (sprintf "was unable to decode: %s. Reason: %s" json decodingError)
 #else
 #if FABLE_PY
-    // see https://github.com/fable-compiler/Fable/blob/beyond/src/Fable.Transforms/Python/Prelude.fs
+    // see https://github.com/fable-compiler/Fable/blob/main/src/Fable.Transforms/Python/Prelude.fs
     let private dashify (separator: string) (input: string) =
         Regex.Replace(
             input,

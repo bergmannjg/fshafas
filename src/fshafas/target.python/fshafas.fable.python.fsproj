@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>FsHafas.Python</PackageId>
+    <Authors>J. Bergmann</Authors>
+    <PackageTags>fable fsharp</PackageTags>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants>FABLE_COMPILER;FABLE_PY</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../lib/Slug.fs" />
+    <Compile Include="../UnionTypes.fs" />
+    <Compile Include="../ExtraTypes.fs" />
+    <Compile Include="../TypesRawHafasClient.fs" />
+    <Compile Include="../TypesHafasClient.fs" />
+    <Compile Include="../Context.fs" />
+    <Compile Include="../extensions/ArrayEx.fs" />
+    <Compile Include="../extensions/Convert.fs" />
+    <Compile Include="../extensions/DateTimeEx.fs" />
+    <Compile Include="../extensions/DateTimeOffsetEx.fs" />
+    <Compile Include="../extensions/PolylineEx.fs" />
+    <Compile Include="../extensions/RawRequestEx.fs" />
+    <Compile Include="../extensions/RawResponse.fs" />
+    <Compile Include="../lib/Transformations.fs" />
+    <Compile Include="../lib/Request.fs" />
+    <Compile Include="../HafasRawClient.fs" />
+    <Compile Include="../format/FormatRequest.fs" />
+    <Compile Include="../parse/DateTime.fs" />
+    <Compile Include="../parse/When.fs" />
+    <Compile Include="../parse/Icon.fs" />
+    <Compile Include="../parse/Common.fs" />
+    <Compile Include="../parse/ArrivalOrDeparture.fs" />
+    <Compile Include="../parse/Hint.fs" />
+    <Compile Include="../parse/Location.fs" />
+    <Compile Include="../parse/Line.fs" />
+    <Compile Include="../parse/Movement.fs" />
+    <Compile Include="../parse/Polyline.fs" />
+    <Compile Include="../parse/Journey.fs" />
+    <Compile Include="../parse/JourneyLeg.fs" />
+    <Compile Include="../parse/Operator.fs" />
+    <Compile Include="../parse/Trip.fs" />
+    <Compile Include="../parse/Stopover.fs" />
+    <Compile Include="../parse/ProductsBitmask.fs" />
+    <Compile Include="../parse/Warning.fs" />
+    <Compile Include="../parse/PrognosisType.fs" />
+    <Compile Include="../Parser.fs" />
+    <Compile Include="../Profile.fs" />
+    <Compile Include="../HafasAsyncClient.fs" />
+    <Compile Include="../Print.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="nuget/fshafas.fsproj; ..\**\*.fs" PackagePath="fable" />
+  </ItemGroup>
+  <Import Project="../../../.props/Fable.Python.props" />
+</Project>

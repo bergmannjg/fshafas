@@ -311,10 +311,6 @@ let refreshJourney (refreshToken: string) =
 module internal DateTimeEx =
     open Fable.Core
 
-    // workaround: missing code year
-    [<Emit("$0.year")>]
-    let year (dt: obj) : int = jsNative
-
     // workaround: missing code month
     [<Emit("$0.month")>]
     let month (dt: obj) : int = jsNative
@@ -327,17 +323,9 @@ module internal DateTimeEx =
     [<Emit("$0.hour")>]
     let hour (dt: obj) : int = jsNative
 
-    // workaround: missing code minute
-    [<Emit("$0.minute")>]
-    let minute (dt: obj) : int = jsNative
-
-    // workaround: missing code second
-    [<Emit("$0.second")>]
-    let second (dt: obj) : int = jsNative
-
 let dateOfCurrentHour () =
     let dt = System.DateTime.Now
-    System.DateTime(DateTimeEx.year (dt), DateTimeEx.month (dt), DateTimeEx.day (dt), DateTimeEx.hour (dt), 0, 0)
+    System.DateTime(dt.Year, DateTimeEx.month (dt), DateTimeEx.day (dt), DateTimeEx.hour (dt), 0, 0)
 
 #else
 
@@ -511,6 +499,6 @@ let main argv =
 #endif
         argv |> Array.toList |> parse |> List.iter run
     with
-    | e -> printfn "main error: %s" e.Message
+    | e -> printfn "main error: %s %A" e.Message e.StackTrace
 
     0

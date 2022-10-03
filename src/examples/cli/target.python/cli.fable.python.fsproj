@@ -17,4 +17,5 @@
   <PropertyGroup>
     <RestoreSources>$(RestoreSources);$(HOME)/local.packages</RestoreSources>
   </PropertyGroup>
+  <Import Project="../../../../.props/Fable.Python.props" />
 </Project>

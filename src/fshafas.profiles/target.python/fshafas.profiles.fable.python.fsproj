@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>FsHafas.Profiles.Python</PackageId>
+    <Authors>J. Bergmann</Authors>
+    <PackageTags>fable fsharp</PackageTags>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants>FABLE_COMPILER</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../bvg/Profile.fs" />
+    <Compile Include="../db/Profile.fs" />
+    <Compile Include="../svv/Profile.fs" />
+  </ItemGroup>
+    <ItemGroup>
+    <ProjectReference Include="../../fshafas/target.python/fshafas.fable.python.fsproj">
+      <Name>JsonRpcClient.fsproj</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="nuget/fshafas.profiles.fsproj; ..\**\*.fs" PackagePath="fable" />
+  </ItemGroup>
+  <Import Project="../../../.props/Fable.Python.props" />
+</Project>

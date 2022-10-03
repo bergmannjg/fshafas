@@ -51,3 +51,6 @@ src/examples/cli/package-lock.json
 src/transformer.test/TestResults/Ionide.trx
 
 src/examples/fshafas.fable.web/wwwroot/js/site.js
+
+src/examples/cli/target.python/*.py
+src/examples/cli/target.javascript/*.js

@@ -44,3 +44,7 @@
 ## 1.7.0
 
 * add separate fshafas profiles javascript package
+
+## 1.8.0
+
+* use Fable 4 Theta Release

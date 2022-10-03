@@ -3,7 +3,7 @@
   "isRoot": true,
   "tools": {
     "fable": {
-      "version": "3.7.5",
+      "version": "4.0.0-theta-010",
       "commands": [
         "fable"
       ]
@@ -18,12 +18,6 @@
       "version": "4.7.0",
       "commands": [
         "fantomas"
-      ]
-    },
-    "fable-py": {
-      "version": "4.0.0-alpha-032",
-      "commands": [
-        "fable-py"
       ]
     },
     "fsdocs-tool": {

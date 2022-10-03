@@ -2,18 +2,21 @@
 
 ## Run with dotnet
 
+* cd target.dotnet
 * **run**: dotnet run --project cli.fsproj -- --help
 
 ## Run with node
 
+* cd target.javascript
 * npm install
 * **build**: dotnet fable cli.fable.javascript.fsproj -o build
-* **run**: node build/Program.js --help
+* **run**: node Program.js --help
 
 ## Run with python
 
+* cd target.python
 * pip install -r requirements.txt
-* **build**: dotnet fable-py cli.fable.python.fsproj
+* **build**: dotnet fable cli.fable.python.fsproj --lang Python
 * **run**: python3 program.py --help
 
 ## Usage

@@ -68,10 +68,10 @@ Target.create "ReleaseDocs" (fun _ ->
     |> checkResultUnit "git push failed")
 
 Target.create "BuildLib" (fun _ ->
-    DotNet.exec id "build" "src/fshafas/fshafas.fsproj"
+    DotNet.exec id "build" "src/fshafas/target.dotnet/fshafas.fsproj"
     |> checkResult "buildLib failed"
 
-    DotNet.exec id "build" "src/fshafas.profiles/fshafas.profiles.fsproj"
+    DotNet.exec id "build" "src/fshafas.profiles/target.dotnet/fshafas.profiles.fsproj"
     |> checkResult "buildLib failed")
 
 Target.create "BuildWebApp" (fun _ ->
@@ -254,14 +254,14 @@ let PublishToLocalNuGetFeed (version: string) (srcDir: string) (fsproj: string) 
 Target.create "PublishToLocalNuGetFeed" (fun _ ->
     PublishToLocalNuGetFeed
         release.AssemblyVersion
-        "src/fshafas"
+        "src/fshafas/target.javascript"
         "fshafas.fable.javascript.fsproj"
         "fshafas.javascript"
         "FsHafas.JavaScript"
 
     PublishToLocalNuGetFeed
         releaseProfiles.AssemblyVersion
-        "src/fshafas.profiles"
+        "src/fshafas.profiles/target.javascript"
         "fshafas.profiles.fable.javascript.fsproj"
         "fshafas.profiles.javascript"
         "FsHafas.Profiles.JavaScript")
@@ -285,57 +285,19 @@ Target.create "PublishPythonProjToLocalNuGetFeed" (fun _ ->
         + "-alpha-"
         + versionSuffix
 
-    let versionParameter = "/p:Version=\"" + version + "\""
+    PublishToLocalNuGetFeed
+        version
+        "src/fshafas/target.python"
+        "fshafas.fable.python.fsproj"
+        "fshafas.python"
+        "FsHafas.Python"
 
-    DotNet.exec
-        id
-        "pack"
-        (versionParameter
-         + " "
-         + "src/fshafas/fshafas.fable.python.fsproj")
-    |> checkResult "pack failed"
-
-    let home = Environment.environVar "HOME"
-
-    Shell.cleanDir (home + "/.nuget/packages/fshafas.python/")
-
-    Shell.cleanDir (home + "/local.packages/fshafas.python/")
-
-    run
-        "./src/fshafas/"
-        "/usr/local/bin/nuget.exe"
-        ("add"
-         + " bin/Debug/FsHafas.Python."
-         + version
-         + ".nupkg"
-         + " -source "
-         + home
-         + "/local.packages -expand")
-
-    DotNet.exec
-        id
-        "pack"
-        (versionParameter
-         + " "
-         + "src/fshafas.profiles/fshafas.profiles.fable.python.fsproj")
-    |> checkResult "pack failed"
-
-    let home = Environment.environVar "HOME"
-
-    Shell.cleanDir (home + "/.nuget/packages/fshafas.profiles.python/")
-
-    Shell.cleanDir (home + "/local.packages/fshafas.profiles.python/")
-
-    run
-        "./src/fshafas.profiles/"
-        "/usr/local/bin/nuget.exe"
-        ("add"
-         + " bin/Debug/FsHafas.Profiles.Python."
-         + version
-         + ".nupkg"
-         + " -source "
-         + home
-         + "/local.packages -expand"))
+    PublishToLocalNuGetFeed
+        version
+        "src/fshafas.profiles/target.python"
+        "fshafas.profiles.fable.python.fsproj"
+        "fshafas.profiles.python"
+        "FsHafas.Profiles.Python")
 
 Target.create "InstallPythonPackage" (fun _ ->
     let projDir = "src/fshafas.python.package/"
@@ -355,7 +317,7 @@ Target.create "BuildPythonPackage" (fun _ ->
     let projDir = "src/fshafas.python.package/"
     Shell.cleanDir (projDir + "fable_modules/")
 
-    DotNet.exec id "fable-py" (projDir + "fshafas.fsproj")
+    DotNet.exec id "fable" (projDir + "fshafas.fsproj" + " " + "--lang Python")
     |> ignore
 
     Shell.cleanDir (projDir + "fshafas/fable_modules/")
@@ -381,7 +343,7 @@ let replaceRuntimeMgs (s: string) =
 
 let compareNetJsResult (method: string) (args: string) =
     let resultJs =
-        runWithResult "./src/examples/cli/" "node" ("build/Program.js" + " --" + method + " " + args)
+        runWithResult "./src/examples/cli/target.javascript/" "node" ("Program.js" + " --" + method + " " + args)
         |> replaceRuntimeMgs
 
     Trace.trace resultJs
@@ -391,7 +353,7 @@ let compareNetJsResult (method: string) (args: string) =
 
     let resultNet =
         runWithResult
-            "./src/examples/cli/"
+            "./src/examples/cli/target.dotnet"
             "dotnet"
             ("run --project cli.fsproj -- "
              + " --"
@@ -410,7 +372,7 @@ let compareNetJsResult (method: string) (args: string) =
 
 let compareJsPyResult (method: string) (args: string) =
     let resultJs =
-        runWithResult "./src/examples/cli/" "node" ("build/Program.js" + " --" + method + " " + args)
+        runWithResult "./src/examples/cli/target.javascript/" "node" ("Program.js" + " --" + method + " " + args)
         |> replaceRuntimeMgs
 
     Trace.trace resultJs
@@ -419,7 +381,7 @@ let compareJsPyResult (method: string) (args: string) =
     System.IO.File.WriteAllText(jsFile, resultJs)
 
     let resultPy =
-        runWithResult "./src/examples/cli/" "python3" ("program.py" + " --" + method + " " + args)
+        runWithResult "./src/examples/cli/target.python/" "python3" ("program.py" + " --" + method + " " + args)
         |> replaceRuntimeMgs
 
     Trace.trace resultPy
@@ -446,17 +408,22 @@ Target.create "CompareJsPyResult" (fun _ ->
     Shell.mkdir "./tmp"
     Shell.cleanDir "./tmp"
 
-    Shell.cleanDir "./src/examples/cli/build"
+    Shell.cleanDir "./src/examples/cli/target.javascript/build"
 
     DotNet.exec
-        (DotNet.Options.withWorkingDirectory "./src/examples/cli")
+        (DotNet.Options.withWorkingDirectory "./src/examples/cli/target.javascript")
         "fable"
         "./cli.fable.javascript.fsproj -o build"
     |> ignore
 
-    Shell.cleanDir "./src/examples/cli/fable_modules"
+    Shell.cleanDir "./src/examples/cli/target.python/fable_modules"
 
-    DotNet.exec (DotNet.Options.withWorkingDirectory "./src/examples/cli") "fable-py" "./cli.fable.python.fsproj"
+    DotNet.exec
+        (DotNet.Options.withWorkingDirectory "./src/examples/cli/target.python")
+        "fable"
+        ("./cli.fable.python.fsproj"
+         + " "
+         + "--lang Python")
     |> ignore
 
     let results =
@@ -471,10 +438,10 @@ Target.create "CompareNetJsResult" (fun _ ->
     Shell.mkdir "./tmp"
     Shell.cleanDir "./tmp"
 
-    Shell.cleanDir "./src/examples/cli/build"
+    Shell.cleanDir "./src/examples/cli/target.javascript/build"
 
     DotNet.exec
-        (DotNet.Options.withWorkingDirectory "./src/examples/cli")
+        (DotNet.Options.withWorkingDirectory "./src/examples/cli/target.javascript")
         "fable"
         "./cli.fable.javascript.fsproj -o build"
     |> ignore
