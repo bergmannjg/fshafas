@@ -1,6 +1,0 @@
-<Project>
-  <ItemGroup>
-    <PackageReference Include="Fable.Core" Version="4.0.0-theta-004" />
-    <PackageReference Include="Fable.SimpleJson.Python" Version="1.6.0" />
-  </ItemGroup>
-</Project>

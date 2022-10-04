@@ -3,7 +3,7 @@
 open System.Text.Json
 open System.Text.Json.Serialization
 
-let deserializeOptions = JsonSerializerOptions()
+let deserializeOptions = JsonSerializerOptions(IgnoreNullValues = true)
 
 let serializeOptions = JsonSerializerOptions(IgnoreNullValues = true)
 

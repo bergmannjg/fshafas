@@ -1,17 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <ProjectReference Include="../../fshafas/target.dotnet/fshafas.fsproj"/>
-    <ProjectReference Include="../../fshafas.profiles/target.dotnet/fshafas.profiles.fsproj"/>
+    <ProjectReference Include="../../fshafas/target.dotnet/fshafas.fsproj" />
+    <ProjectReference Include="../../fshafas.profiles/target.dotnet/fshafas.profiles.fsproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="FSharp.Core" Version="6.0.6" />
-  </ItemGroup>
-
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>

@@ -1,5 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -11,7 +11,6 @@
     <FsDocsLicenseLink>https://github.com/bergmannjg/fshafas/blob/main/LICENSE.md</FsDocsLicenseLink>
     <FsDocsReleaseNotesLink>https://github.com/bergmannjg/fshafas/blob/main/RELEASE_NOTES.md</FsDocsReleaseNotesLink>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="../lib/Serializer.fs" />
     <Compile Include="../lib/Slug.fs" />
@@ -57,12 +56,5 @@
     <Compile Include="../HafasClient.fs" />
     <Compile Include="../Print.fs" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="FSharp.SystemTextJson" Version="0.19.13" />
-    <PackageReference Include="Polyliner.Net" Version="1.0.2" />
-    <PackageReference Include="FSlugify" Version="1.1.0" />
-    <PackageReference Include="NodaTime" Version="3.0.5" />
-  </ItemGroup>
-
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>

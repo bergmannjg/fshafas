@@ -1,0 +1,31 @@
+framework: auto-detect
+storage: none
+source https://api.nuget.org/v3/index.json
+
+nuget FSharp.SystemTextJson
+nuget Polyliner.Net
+nuget FSlugify
+nuget NodaTime
+
+nuget Fable.Core >= 4 prerelease
+nuget Fable.Fetch
+nuget Fable.SimpleJson.Python
+nuget Thoth.Json
+
+nuget FSharp.Data
+nuget Argu
+nuget AspNetCore.Proxy
+
+nuget Microsoft.NET.Test.Sdk
+nuget NUnit
+nuget NUnit3TestAdapter
+nuget coverlet.collector
+
+nuget FSharp.Compiler.Service
+
+source ~/local.packages
+
+nuget FsHafas.JavaScript
+nuget FsHafas.Profiles.JavaScript
+nuget FsHafas.Python
+nuget FsHafas.Profiles.Python

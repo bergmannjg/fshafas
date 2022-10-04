@@ -1,20 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Program.fs" />
   </ItemGroup>
-
   <ItemGroup>
-     <ProjectReference Include="../../fshafas/target.dotnet/fshafas.fsproj"/>
-     <ProjectReference Include="../../fshafas.profiles/target.dotnet/fshafas.profiles.fsproj"/>
-     <PackageReference Include="FSharp.SystemTextJson" Version="0.19.13" />
-     <PackageReference Include="FSharp.Data" Version="4.2.2" />
-     <PackageReference Include="Argu" Version="6.1.1" />
+    <ProjectReference Include="../../fshafas/target.dotnet/fshafas.fsproj" />
+    <ProjectReference Include="../../fshafas.profiles/target.dotnet/fshafas.profiles.fsproj" />
   </ItemGroup>
-
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>

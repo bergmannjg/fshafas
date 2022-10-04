@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -5,14 +6,11 @@
   <ItemGroup>
     <Compile Include="Lib.fs" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="FsHafas.JavaScript" Version="*" />
-  </ItemGroup>
   <PropertyGroup>
     <DefineConstants>FABLE_COMPILER;FABLE_JS</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <RestoreSources>$(RestoreSources);$(HOME)/local.packages</RestoreSources>
   </PropertyGroup>
-  <Import Project="../../.props/Fable.props" />
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

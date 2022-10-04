@@ -54,3 +54,8 @@ src/examples/fshafas.fable.web/wwwroot/js/site.js
 
 src/examples/cli/target.python/*.py
 src/examples/cli/target.javascript/*.js
+
+#Paket dependency manager
+.paket/
+paket-files/
+packages/

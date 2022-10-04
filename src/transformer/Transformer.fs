@@ -35,14 +35,18 @@ let private parse fileName text =
     else
         parseFileResults.ParseTree
 
-let private toString (lid: LongIdent) =
+let private SynLongIdentToString (synlid: SynLongIdent) =
+    let (SynLongIdent (lid, _, _)) = synlid
+    String.Join(".", lid |> List.map (fun ident -> ident.idText))
+
+let private LongIdentToString (lid: LongIdent) =
     String.Join(".", lid |> List.map (fun ident -> ident.idText))
 
 let rec private visitSnyType synType options =
     match synType with
     | SynType.LongIdent (longIdentWithDots) ->
-        let (LongIdentWithDots (id, _)) = longIdentWithDots
-        options.transformType (toString id)
+        let (SynLongIdent (id, _, _)) = longIdentWithDots
+        options.transformType (LongIdentToString id)
     | SynType.Tuple (_, elementTypes, _) ->
         let line = List()
 
@@ -50,7 +54,7 @@ let rec private visitSnyType synType options =
             visitSnyType elementType options |> line.Add
 
         "(" + (line |> String.concat ",") + ")"
-    | SynType.Fun (argType, returnType, _) ->
+    | SynType.Fun (argType, returnType, _, _) ->
         let strargType = visitSnyType argType options
         let strreturnType = visitSnyType returnType options
         strargType + "->" + strreturnType
@@ -80,7 +84,7 @@ let rec private visitSnyType synType options =
     | _ -> failwith (sprintf " - not supported SynType: %A" synType)
 
 let private visitValSig (typename: string) slotSig options =
-    let (SynValSig (_, id, _, synType, _, _, _, xmlDoc, _, _, _, _)) = slotSig
+    let (SynValSig (_, synid, _, synType, _, _, _, xmlDoc, _, _, _, _)) = slotSig
     let xmldoc = xmlDoc.ToXmlDoc(false, None)
 
     let line = List()
@@ -91,6 +95,7 @@ let private visitValSig (typename: string) slotSig options =
 
     line.AddRange lines
 
+    let (SynIdent (id, _)) = synid
     let escText = options.escapeIdent id.idText
 
     let strsynTypeOrg = visitSnyType synType options
@@ -128,12 +133,12 @@ let getAttribute (attributes: SynAttributes) =
 
 let hasAttribute (name: string) (attributes: SynAttributes) =
     match getAttribute attributes with
-    | Some attr when (toString attr.TypeName.Lid) = name -> true
+    | Some attr when (SynLongIdentToString attr.TypeName) = name -> true
     | _ -> false
 
 let getAttributeValue (name: string) (defValue: string) (attributes: SynAttributes) =
     match getAttribute attributes with
-    | Some attr when (toString attr.TypeName.Lid) = name ->
+    | Some attr when (SynLongIdentToString attr.TypeName) = name ->
         match attr.ArgExpr with
         | SynExpr.Const (c, _) ->
             match c with
@@ -148,7 +153,8 @@ let private visitSimple simpleRepr useCompiledNameAttr options =
     match simpleRepr with
     | SynTypeDefnSimpleRepr.Union (_, cases, _) ->
         for case in cases do
-            let (SynUnionCase (attributes, id, _, _, _, _, _)) = case
+            let (SynUnionCase (attributes, synid, _, _, _, _, _)) = case
+            let (SynIdent (id, _)) = synid
 
             let compiledNameAttr =
                 if useCompiledNameAttr then
@@ -186,7 +192,7 @@ let private visitTypeDefn typeDefn options =
 
     let strMembers =
         match typeRepr with
-        | SynTypeDefnRepr.ObjectModel (_, members, _) -> visitTypeMembers (toString id) members options
+        | SynTypeDefnRepr.ObjectModel (_, members, _) -> visitTypeMembers (LongIdentToString id) members options
         | SynTypeDefnRepr.Simple (simpleRepr, _) -> visitSimple simpleRepr useCompiledNameAttr options
         | _ -> failwith (sprintf " - not supported SynTypeDefnRepr: %A" typeRepr)
 
@@ -196,7 +202,7 @@ let private visitTypeDefn typeDefn options =
             && strMembers.[0].StartsWith "|"
         )
 
-    let transform = options.transformsTypeDefn (toString id)
+    let transform = options.transformsTypeDefn (LongIdentToString id)
 
     let typeSymbol () =
         if options.useRecursiveTypes && hasFirstType then
@@ -206,10 +212,10 @@ let private visitTypeDefn typeDefn options =
             "type"
 
     if (transform.IsSome) then
-        sprintf "%s %s = %s" (typeSymbol ()) (toString id) transform.Value
+        sprintf "%s %s = %s" (typeSymbol ()) (LongIdentToString id) transform.Value
         |> lines.Add
-    else if (options.toMemberType (toString id)) then
-        sprintf "%s %s = " (typeSymbol ()) (toString id)
+    else if (options.toMemberType (LongIdentToString id)) then
+        sprintf "%s %s = " (typeSymbol ()) (LongIdentToString id)
         |> lines.Add
 
         for strMember in strMembers do
@@ -230,8 +236,8 @@ let private visitTypeDefn typeDefn options =
     else
         ()
 
-        if not (options.excludesType (toString id)) then
-            (sprintf "%s %s%s = " (typeSymbol ()) stringEnumAttr (toString id))
+        if not (options.excludesType (LongIdentToString id)) then
+            (sprintf "%s %s%s = " (typeSymbol ()) stringEnumAttr (LongIdentToString id))
             + (if isRecord then "{" else "")
             |> lines.Add
 
@@ -250,7 +256,7 @@ let rec private visitDeclarations decls options =
         match declaration with
         | SynModuleDecl.Open (SynOpenDeclTarget.ModuleOrNamespace (longDotId, _), range) ->
             if options.prelude.IsNone then
-                lines.Add(sprintf "open %s" (toString longDotId))
+                lines.Add(sprintf "open %s" (LongIdentToString longDotId))
         | SynModuleDecl.Types (typeDefns, range) ->
             for typeDefn in typeDefns do
                 lines.AddRange(visitTypeDefn typeDefn options)
@@ -265,10 +271,11 @@ let private visitModulesAndNamespaces modulesOrNss options =
     let lines = List()
 
     for moduleOrNs in modulesOrNss do
-        let (SynModuleOrNamespace (lid, isRec, isMod, decls, xml, attrs, _, m)) = moduleOrNs
+        let (SynModuleOrNamespace (lid, isRec, isMod, decls, xml, attrs, _, m, _)) =
+            moduleOrNs
 
         if options.prelude.IsNone then
-            lines.Add(sprintf "module %s" (toString lid))
+            lines.Add(sprintf "module %s" (LongIdentToString lid))
 
         lines.AddRange(visitDeclarations decls options)
 

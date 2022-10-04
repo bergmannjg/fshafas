@@ -1,19 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="../bvg/Profile.fs" />
     <Compile Include="../db/Profile.fs" />
     <Compile Include="../svv/Profile.fs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="../../fshafas/target.dotnet/fshafas.fsproj">
-      <Name>JsonRpcClient.fsproj</Name>
+      <Name>fshafas.fsproj</Name>
     </ProjectReference>
   </ItemGroup>
-
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>

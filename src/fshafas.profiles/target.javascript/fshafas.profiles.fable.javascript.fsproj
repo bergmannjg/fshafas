@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -16,7 +17,7 @@
     <Compile Include="../db/Profile.fs" />
     <Compile Include="../svv/Profile.fs" />
   </ItemGroup>
-    <ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="../../fshafas/target.javascript/fshafas.fable.javascript.fsproj">
       <Name>JsonRpcClient.fsproj</Name>
     </ProjectReference>
@@ -24,5 +25,5 @@
   <ItemGroup>
     <Content Include="nuget\fshafas.profiles.fsproj; ..\**\*.fs" PackagePath="fable" />
   </ItemGroup>
-  <Import Project="../../../.props/Fable.props" />
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>

@@ -25,6 +25,12 @@
       "commands": [
         "fsdocs"
       ]
+    },
+    "paket": {
+      "version": "7.1.5",
+      "commands": [
+        "paket"
+      ]
     }
   }
 }
