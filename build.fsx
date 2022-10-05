@@ -78,8 +78,34 @@ Target.create "BuildWebApp" (fun _ ->
     DotNet.exec id "build" "src/examples/fshafas.fable.web/fsHafasWeb.fsproj"
     |> checkResult "buildLib failed")
 
-Target.create "Test" (fun _ ->
+Target.create "Test.FsHafas" (fun _ ->
     DotNet.exec id "test" "src/fshafas.test/fshafastest.fsproj"
+    |> checkResult "Test failed")
+
+Target.create "Test.JavaScript.Package" (fun _ ->
+    DotNet.exec (DotNet.Options.withWorkingDirectory "src/examples/cli/target.dotnet") "build" "cli.fsproj"
+    |> checkResult "Build failed"
+
+    DotNet.exec
+        (DotNet.Options.withWorkingDirectory "src/examples/cli/target.javascript")
+        "fable"
+        "cli.fable.javascript.fsproj -o build"
+    |> checkResult "Build failed"
+
+    DotNet.exec id "test" "src/fshafas.package.test/fshafaspackagetest.fsproj --filter DotnetEqualsToJavaScript"
+    |> checkResult "Test failed")
+
+Target.create "Test.Python.Package" (fun _ ->
+    DotNet.exec (DotNet.Options.withWorkingDirectory "src/examples/cli/target.dotnet") "build" "cli.fsproj"
+    |> checkResult "Build failed"
+
+    DotNet.exec
+        (DotNet.Options.withWorkingDirectory "src/examples/cli/target.python")
+        "fable"
+        "cli.fable.python.fsproj --lang Python"
+    |> checkResult "Build failed"
+
+    DotNet.exec id "test" "src/fshafas.package.test/fshafaspackagetest.fsproj --filter DotnetEqualsToPython"
     |> checkResult "Test failed")
 
 let CheckReleaseVersion (file: string) (version: string) =
@@ -251,7 +277,7 @@ let PublishToLocalNuGetFeed (version: string) (srcDir: string) (fsproj: string) 
          + home
          + "/local.packages -expand")
 
-Target.create "PublishToLocalNuGetFeed" (fun _ ->
+Target.create "PublishJavaScriptToLocalNuGetFeed" (fun _ ->
     PublishToLocalNuGetFeed
         release.AssemblyVersion
         "src/fshafas/target.javascript"
@@ -277,7 +303,7 @@ let getPyVersion (file: string) =
     else
         ""
 
-Target.create "PublishPythonProjToLocalNuGetFeed" (fun _ ->
+Target.create "PublishPythonToLocalNuGetFeed" (fun _ ->
     let versionSuffix = getPyVersion "src/fshafas.python.package/setup.py"
 
     let version =
@@ -328,132 +354,6 @@ Target.create "BuildPythonPackage" (fun _ ->
     Shell.Exec("python3", "-m build " + projDir)
     |> ignore)
 
-let replaceRuntimeMgs (s: string) =
-    let replace (pattern: string) (s: string) = Regex.Replace(s, pattern, "")
-
-    s
-    |> replace "reg, replacement.*\n"
-    |> replace "HH\n"
-    |> replace "mm\n"
-    |> replace "ss\n"
-    |> replace "MM\n"
-    |> replace "dd\n"
-    |> replace "yyyy\n"
-    |> replace "currentLocation.*\n"
-
-let compareNetJsResult (method: string) (args: string) =
-    let resultJs =
-        runWithResult "./src/examples/cli/target.javascript/" "node" ("Program.js" + " --" + method + " " + args)
-        |> replaceRuntimeMgs
-
-    Trace.trace resultJs
-
-    let jsFile = "./tmp/" + method + "-js.txt"
-    System.IO.File.WriteAllText(jsFile, resultJs)
-
-    let resultNet =
-        runWithResult
-            "./src/examples/cli/target.dotnet"
-            "dotnet"
-            ("run --project cli.fsproj -- "
-             + " --"
-             + method
-             + " "
-             + args)
-        |> replaceRuntimeMgs
-
-    Trace.trace resultNet
-
-    let netFile = "./tmp/" + method + "-net.txt"
-    System.IO.File.WriteAllText(netFile, resultNet)
-
-    let ok = runWithFailureResult "." "diff" (netFile + " " + jsFile)
-    (method, ok)
-
-let compareJsPyResult (method: string) (args: string) =
-    let resultJs =
-        runWithResult "./src/examples/cli/target.javascript/" "node" ("Program.js" + " --" + method + " " + args)
-        |> replaceRuntimeMgs
-
-    Trace.trace resultJs
-
-    let jsFile = "./tmp/" + method + "-js.txt"
-    System.IO.File.WriteAllText(jsFile, resultJs)
-
-    let resultPy =
-        runWithResult "./src/examples/cli/target.python/" "python3" ("program.py" + " --" + method + " " + args)
-        |> replaceRuntimeMgs
-
-    Trace.trace resultPy
-
-    let pyFile = "./tmp/" + method + "-py.txt"
-    System.IO.File.WriteAllText(pyFile, resultPy)
-
-    let ok = runWithFailureResult "." "diff" (pyFile + " " + jsFile)
-
-    (method, ok)
-
-let tests =
-    [| ("locations", "Hannover")
-       ("stop", "8000152")
-       ("journeys", "8000152 8000036")
-       ("journeysfromtrip", "8002549 8000261 8000207")
-       ("departures", "8000036")
-       ("trips", "\"ICE 1001\"")
-       ("nearby", "13.078028 54.308438")
-       ("reachablefrom", "13.078028 54.308438")
-       ("radar", "52.039421 8.522777 52.019421 8.542777") |]
-
-Target.create "CompareJsPyResult" (fun _ ->
-    Shell.mkdir "./tmp"
-    Shell.cleanDir "./tmp"
-
-    Shell.cleanDir "./src/examples/cli/target.javascript/build"
-
-    DotNet.exec
-        (DotNet.Options.withWorkingDirectory "./src/examples/cli/target.javascript")
-        "fable"
-        "./cli.fable.javascript.fsproj -o build"
-    |> ignore
-
-    Shell.cleanDir "./src/examples/cli/target.python/fable_modules"
-
-    DotNet.exec
-        (DotNet.Options.withWorkingDirectory "./src/examples/cli/target.python")
-        "fable"
-        ("./cli.fable.python.fsproj"
-         + " "
-         + "--lang Python")
-    |> ignore
-
-    let results =
-        tests
-        |> Array.map (fun (m, a) -> compareJsPyResult m a)
-        |> Array.map (fun (m, r) -> sprintf "|%s|%s|" m (if r then "ok" else "failed"))
-        |> String.concat "\n"
-
-    System.IO.File.WriteAllText("./tmp/results.txt", results))
-
-Target.create "CompareNetJsResult" (fun _ ->
-    Shell.mkdir "./tmp"
-    Shell.cleanDir "./tmp"
-
-    Shell.cleanDir "./src/examples/cli/target.javascript/build"
-
-    DotNet.exec
-        (DotNet.Options.withWorkingDirectory "./src/examples/cli/target.javascript")
-        "fable"
-        "./cli.fable.javascript.fsproj -o build"
-    |> ignore
-
-    let results =
-        tests
-        |> Array.map (fun (m, a) -> compareNetJsResult m a)
-        |> Array.map (fun (m, r) -> sprintf "|%s|%s|" m (if r then "ok" else "failed"))
-        |> String.concat "\n"
-
-    System.IO.File.WriteAllText("./tmp/results.txt", results))
-
 let sourceFiles =
     !! "src/**/*.fs" ++ "src/**/*.fsi" ++ "build.fsx"
     -- "src/**/obj/**/*.fs"
@@ -500,25 +400,35 @@ Target.create "Web" ignore
 
 Target.create "Docs" ignore
 
+Target.create "Test" ignore
+
 "BuildLib"
 ==> "Test"
 ==> "CheckFormat"
 ==> "Default"
 
 "BuildLib"
-==> "Test"
+==> "Test.FsHafas"
 ==> "CheckReleaseVersion"
-==> "PublishToLocalNuGetFeed"
+==> "PublishJavaScriptToLocalNuGetFeed"
 ==> "BuildFableWebpackNode"
 ==> "BuildFableNpmPack"
 ==> "JavaScript"
 
 "BuildLib"
-==> "Test"
-==> "PublishPythonProjToLocalNuGetFeed"
+==> "Test.FsHafas"
+==> "PublishPythonToLocalNuGetFeed"
 ==> "BuildPythonPackage"
 ==> "InstallPythonPackage"
 ==> "Python"
+
+"BuildLib"
+==> "Test.FsHafas"
+==> "PublishJavaScriptToLocalNuGetFeed"
+==> "Test.JavaScript.Package"
+==> "PublishPythonToLocalNuGetFeed"
+==> "Test.Python.Package"
+==> "Test"
 
 "BuildLib" ==> "BuildDocs" ==> "Docs"
 

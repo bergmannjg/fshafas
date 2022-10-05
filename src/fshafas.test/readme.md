@@ -1,5 +1,7 @@
 # Test
 
+Test that the JSON output of the fshafas api methods and the correspondind hafas-client api methods are equal.
+
 ## Test Fixtures
 
 Every method of the HafasClient type has a test fixture of json files:

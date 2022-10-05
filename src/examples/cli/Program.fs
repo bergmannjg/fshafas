@@ -335,6 +335,16 @@ let dateOfCurrentHour () =
 
 #endif
 
+#if FABLE_PY
+open Fable.Core
+
+// workaround: error in Array.sortBy
+[<Emit("sorted($1, key=$0)")>]
+let sortBy (key: 'a -> 'b) (arr: array<'a>) : array<'a> = jsNative
+#else
+let sortBy (key: 'a -> 'b) (arr: array<'a>) : array<'a> = Array.sortBy key arr
+#endif
+
 let departures (name: string) =
     use client = new Api.HafasAsyncClient(profile)
 
@@ -348,7 +358,14 @@ let departures (name: string) =
         | Some loc ->
             let! departures = client.AsyncDepartures loc (Some options)
 
-            FsHafas.Printf.Short.Alternatives departures
+            let sorted =
+                departures
+                |> sortBy (fun dep ->
+                    match dep.``when``, dep.stop with
+                    | Some w, Some (U2.Case2 s) when s.name.IsSome -> w + s.name.Value
+                    | _ -> "")
+
+            FsHafas.Printf.Short.Alternatives sorted
             |> printfn "%s"
         | _ -> ()
     }
