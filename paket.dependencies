@@ -1,3 +1,4 @@
+version 6.2.1
 framework: auto-detect
 storage: none
 source https://api.nuget.org/v3/index.json
@@ -29,3 +30,20 @@ nuget FsHafas.JavaScript
 nuget FsHafas.Profiles.JavaScript
 nuget FsHafas.Python
 nuget FsHafas.Profiles.Python
+
+// [ FAKE GROUP ]
+group Fake
+    framework: net6.0
+    storage: none
+    source https://api.nuget.org/v3/index.json
+
+    nuget FSharp.Core >= 6.0.0
+    nuget Fake.Runtime >= 5.23.0
+    nuget Fake.DotNet.Cli
+    nuget Fake.DotNet.MsBuild
+    nuget Fake.JavaScript.Npm
+    nuget Fake.IO.FileSystem
+    nuget Fake.Tools.Git
+    nuget Fake.Core.Xml
+    nuget Fake.Core.ReleaseNotes
+    nuget Fake.Core.Target

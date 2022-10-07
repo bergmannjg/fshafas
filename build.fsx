@@ -1,13 +1,7 @@
-#r "paket:
-nuget FSharp.SystemTextJson
-nuget Fake.DotNet.Cli
-nuget Fake.DotNet.MsBuild
-nuget Fake.JavaScript.Npm
-nuget Fake.IO.FileSystem
-nuget Fake.Tools.Git
-nuget Fake.Core.Xml
-nuget Fake.Core.ReleaseNotes
-nuget Fake.Core.Target //"
+#if FAKE
+#r "paket: groupref Fake //"
+#endif
+
 #load "./.fake/build.fsx/intellisense.fsx"
 
 open Fake.Core
@@ -18,9 +12,6 @@ open Fake.IO.Globbing.Operators
 open Fake.JavaScript
 open Fake.DotNet
 open System
-open System.Text.Json
-open System.Text.Json.Serialization
-open Fake.Core.Xml
 open System.Text.RegularExpressions
 
 let release = ReleaseNotes.load "RELEASE_NOTES.md"
@@ -45,6 +36,9 @@ let checkResultUnit (msg: string) (res: ProcessResult<unit>) = if res.ExitCode <
 
 Target.create "BuildDocs" (fun _ ->
     Shell.cleanDir ".fsdocs"
+
+    DotNet.exec id "build" "src/fshafas/fshafas.fsproj"
+    |> checkResult "buildLib failed"
 
     DotNet.exec id "fsdocs" "build --clean --input src/fshafas/docs --output output/fshafas"
     |> ignore)
@@ -108,11 +102,20 @@ Target.create "Test.Python.Package" (fun _ ->
     DotNet.exec id "test" "src/fshafas.package.test/fshafaspackagetest.fsproj --filter DotnetEqualsToPython"
     |> checkResult "Test failed")
 
-let CheckReleaseVersion (file: string) (version: string) =
-    let config = JsonSerializer.Deserialize(File.readAsString (file))
+let getVersion (s: string) =
+    let rx = new Regex(@"""version"":\s*""([^""]+)")
+    let m = rx.Match(s)
 
-    if version <> config.version then
-        raise (System.Exception(sprintf "config version, exptected: %s, actual: %s" version config.version))
+    if m.Success then
+        m.Groups.[1].Value
+    else
+        ""
+
+let CheckReleaseVersion (file: string) (exptectedVersion: string) =
+    let version = getVersion (File.readAsString (file))
+
+    if exptectedVersion <> version then
+        raise (System.Exception(sprintf "config version, exptected: %s, actual: %s" exptectedVersion version))
 
 Target.create "CheckReleaseVersion" (fun _ ->
     CheckReleaseVersion "src/fshafas.javascript.package/fs-hafas-client/package.json" release.AssemblyVersion
