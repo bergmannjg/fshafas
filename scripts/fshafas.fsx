@@ -1,11 +1,11 @@
 // examples using HafasAsyncClient
 
-// use arg '--fsi-server-input-codepage:28591' for unicode characters
 #r "nuget:FSharp.SystemTextJson"
 #r "nuget:Polyliner.Net"
 #r "nuget:FSlugify"
 #r "nuget:NodaTime"
-#r "../src/fshafas/bin/Debug/net5.0/fshafas.dll"
+#r "../src/fshafas/target.dotnet/bin/Debug/net6.0/fshafas.dll"
+#r "../src/fshafas.profiles/target.dotnet/bin/Debug/net6.0/fshafas.profiles.dll"
 
 open FsHafas
 open FsHafas.Client
@@ -20,10 +20,10 @@ let id =
     match fsi.CommandLineArgs
           |> Array.tryFind (fun (arg: string) -> arg.StartsWith("--ProfileId."))
           |> Option.map (fun s -> s.Replace("--ProfileId.", "")) with
-    | Some "Db" -> ProfileId.Db
-    | Some "Bvg" -> ProfileId.Bvg
-    | Some "Svv" -> ProfileId.Svv
-    | _ -> ProfileId.Db
+    | Some "Db" -> FsHafas.Profiles.Db.profile
+    | Some "Bvg" -> FsHafas.Profiles.Bvg.profile
+    | Some "Svv" -> FsHafas.Profiles.Svv.profile
+    | _ -> FsHafas.Profiles.Db.profile
 
 let args =
     fsi.CommandLineArgs
@@ -79,7 +79,7 @@ let departures (name: string) =
     use client = new Api.HafasAsyncClient(id)
 
     async {
-        let! departures = client.AsyncDepartures(U2.Case1 name) None
+        let! departures = client.AsyncDepartures(U4.Case1 name) None
 
         FsHafas.Printf.Short.Alternatives departures
         |> printfn "%s"

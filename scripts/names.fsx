@@ -3,7 +3,7 @@
 #r "nuget:Polyliner.Net"
 #r "nuget:FSlugify"
 #r "nuget:NodaTime"
-#r "../src/fshafas/bin/Debug/net6.0/fshafas.dll"
+#r "../src/fshafas/target.dotnet/bin/Debug/net6.0/fshafas.dll"
 
 open System
 open System.Reflection
