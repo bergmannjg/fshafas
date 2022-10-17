@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='fshafas',
-    version='0.0.12',
+    version='0.0.13',
     description='python client for HAFAS public transport APIs',
     long_description=open('package.readme.md').read(),
     long_description_content_type="text/markdown",
@@ -26,6 +26,8 @@ setup(
         'fshafas/fable_modules/fs_hafas_python/extensions',
         'fshafas/fable_modules/fs_hafas_profiles_python/db',
         'fshafas/fable_modules/fs_hafas_profiles_python/bvg',
+        'fshafas/fable_modules/fs_hafas_profiles_python/oebb',
+        'fshafas/fable_modules/fs_hafas_profiles_python/rejseplanen',
         'fshafas/fable_modules/fable_simple_json_python',
         'fshafas/fable_modules/fable_python/stdlib',
         'fshafas/fable_modules/fable_library',

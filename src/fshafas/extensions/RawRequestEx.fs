@@ -1,9 +1,13 @@
 namespace FsHafas.Extensions
 
-open FsHafas.Client
+#if !FABLE_COMPILER
+open FsHafas.Api
+#endif
+
 open FsHafas.Raw
 
 #if FABLE_COMPILER
+open FsHafas.Client
 open Fable.Core
 open Fable.Core.JsInterop
 #endif
@@ -93,13 +97,18 @@ module internal RawRequestEx =
             let client = Json.serialize request.client
             let auth = Json.serialize request.auth
 
+            let ext =
+                match request.ext with
+                | Some ext -> sprintf "\"ext\":\"%s\"," ext
+                | None -> ""
+
             let json =
                 sprintf
-                    "{\"lang\":\"%s\", \"svcReqL\":%s, \"client\":%s, \"ext\":\"%s\", \"ver\":\"%s\", \"auth\":%s}"
+                    "{\"lang\":\"%s\", \"svcReqL\":%s, \"client\":%s, %s\"ver\":\"%s\", \"auth\":%s}"
                     request.lang
                     svcreql
                     client
-                    request.ext
+                    ext
                     request.ver
                     auth
 

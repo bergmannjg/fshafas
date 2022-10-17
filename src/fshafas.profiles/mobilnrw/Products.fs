@@ -1,0 +1,61 @@
+namespace FsHafas.Profiles.MobilNrwConfig
+
+module internal Products =
+
+    open FsHafas.Client
+
+    let products: ProductType [] =
+        [| { id = "regional-train"
+             mode = Train
+             name = "regional train"
+             short = "regional train"
+             bitmasks = [| 8 |]
+             ``default`` = true }
+           { id = "urban-train"
+             mode = Train
+             name = "urban train"
+             short = "urban train"
+             bitmasks = [| 16 |]
+             ``default`` = true }
+           { id = "subway"
+             mode = Train
+             name = "subway"
+             short = "subway"
+             bitmasks = [| 128 |]
+             ``default`` = true }
+           { id = "tram"
+             mode = Train
+             name = "tram"
+             short = "tram"
+             bitmasks = [| 256 |]
+             ``default`` = true }
+           { id = "bus"
+             mode = Bus
+             name = "bus"
+             short = "bus"
+             bitmasks = [| 32 |]
+             ``default`` = true }
+           { id = "dial-a-ride"
+             mode = Taxi
+             name = "dial-a-ride"
+             short = "dial-a-ride"
+             bitmasks = [| 512 |]
+             ``default`` = true }
+           { id = "long-distance-train"
+             mode = Train
+             name = "long-distance train"
+             short = "long-distance train"
+             bitmasks = [| 4 |]
+             ``default`` = true }
+           { id = "express-train"
+             mode = Train
+             name = "ICE"
+             short = "ICE"
+             bitmasks = [| 1 |]
+             ``default`` = true }
+           { id = "ec-ic"
+             mode = Train
+             name = "EC/IC"
+             short = "EC/IC"
+             bitmasks = [| 2 |]
+             ``default`` = true } |]

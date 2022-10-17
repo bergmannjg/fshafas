@@ -8,7 +8,15 @@ open Fable.Core.JsInterop
 #endif
 
 /// <summary>Direct (`raw`) interface to the hafas endpoints</summary>
-type HafasRawClient(endpoint: string, salt: string, cfg: FsHafas.Raw.Cfg, baseRequest: RawRequest) =
+type HafasRawClient
+    (
+        endpoint: string,
+        addChecksum: bool,
+        addMicMac: bool,
+        salt: string,
+        cfg: FsHafas.Raw.Cfg,
+        baseRequest: RawRequest
+    ) =
 
     let toException (ex: HafasError) =
 #if FABLE_JS
@@ -47,7 +55,7 @@ type HafasRawClient(endpoint: string, salt: string, cfg: FsHafas.Raw.Cfg, baseRe
         log "request:" json
 
         async {
-            let! result = httpClient.PostAsync endpoint salt json
+            let! result = httpClient.PostAsync endpoint addChecksum addMicMac salt json
 
             log "response:" result
 

@@ -5,6 +5,7 @@ open NUnit.Framework
 open FsHafas.Client
 open FsHafas.Reflect.Compare
 
+
 // feature properties with empty json object '{}' are parsed as Option.None, see Converter.OptionU3EraseConverter
 let acceptEmptyObjectAsNullValue = true
 
@@ -35,8 +36,9 @@ let checkEqual (actual: obj) (expected: obj) =
             fprintfn stderr "%s" (sprintf "FeatureProperties TypesDifferent %s: '%A' '%A'" name t1.Name t2.Name)
 
         let printValuesDifferent (name: string) (o1: obj) (o2: obj) =
-            diffs <- diffs + 1
-            fprintfn stderr "%s" (sprintf "FeatureProperties ValuesDifferent %s: '%A' '%A'" name o1 o2)
+            if o1 <> null && o2 <> null then
+                diffs <- diffs + 1
+                fprintfn stderr "%s" (sprintf "FeatureProperties ValuesDifferent %s: '%A' '%A'" name o1 o2)
 
         let evt: CompareEvent =
             { onTypesDifferent = printTypesDifferent
@@ -77,6 +79,8 @@ let checkEqual (actual: obj) (expected: obj) =
                 && o1 = null
                 && o2 <> null
                 && (sprintf "%A" o2) = "Some [||]" then // ignore None = Some [||]
+            ()
+        else if name = "remarks" && o1 <> null && o2 = null then
             ()
         else if name = "transfer"
                 && o1 <> null
@@ -133,12 +137,29 @@ let testRunner (jsonRaw: string) (jsonResult: string) (loader: FsHafas.Raw.RawRe
     | :? NUnit.Framework.AssertionException as ex -> ()
 
 let loadDbProfile () = FsHafas.Profiles.Db.profile
+let loadOebbProfile () = FsHafas.Profiles.Oebb.profile
 let loadSvvProfile () = FsHafas.Profiles.Svv.profile
+let loadRejseplanenProfile () = FsHafas.Profiles.Rejseplanen.profile
+let loadSaarFahrplanProfile () = FsHafas.Profiles.SaarFahrplan.profile
 
-let loadLocations (res: FsHafas.Raw.RawResult) (expectedJson: string) =
+let loadProfile (p: string) =
+    if p = "db" then
+        loadDbProfile ()
+    else if p = "oebb" then
+        loadOebbProfile ()
+    else if p = "svv" then
+        loadSvvProfile ()
+    else if p = "rejseplanen" then
+        loadRejseplanenProfile ()
+    else if p = "saarfahrplan" then
+        loadSaarFahrplanProfile ()
+    else
+        raise (Exception("profile " + p + " unkown"))
+
+let loadLocations (profile: FsHafas.Endpoint.Profile) (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let parsedResponse =
         FsHafas.Api.Parser.parseLocationsFromResult
-            (loadDbProfile ())
+            profile
             res.``match``.Value.locL
             FsHafas.Api.Parser.defaultOptions
             res
@@ -152,13 +173,18 @@ let loadLocations (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
     (parsedResponse :> obj, response :> obj)
 
-let loadJourneys (res: FsHafas.Raw.RawResult) (expectedJson: string) =
+let loadJourneys
+    (profile: FsHafas.Endpoint.Profile)
+    (jouneysOptions: string)
+    (res: FsHafas.Raw.RawResult)
+    (expectedJson: string)
+    =
     let options =
-        FsHafas.Api.Parser.Deserialize<JourneysOptions>(Fixture.jsonJouneysResponse (), acceptEmptyObjectAsNullValue)
+        FsHafas.Api.Parser.Deserialize<JourneysOptions>(jouneysOptions, acceptEmptyObjectAsNullValue)
 
     let parsedResponse =
         FsHafas.Api.Parser.parseJourneysFromResult
-            (loadDbProfile ())
+            profile
             res.outConL
             { FsHafas.Api.Parser.defaultOptions with
                 scheduledDays = options.scheduledDays |> Option.defaultValue false
@@ -326,6 +352,10 @@ let loadWarnings (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
     (parsedResponse :> obj, response :> obj)
 
+let getLocationData () = Fixture.getFileData "locations"
+
+let getJourneyData () = Fixture.getFileData "journeys"
+
 [<Test>]
 let TestFeatureParser () =
     let jsonPropertiesAsEmptyObject =
@@ -433,13 +463,16 @@ let TestFeatureParser () =
 
     Assert.IsTrue(feature3.properties.IsNone)
 
-[<Test>]
-let TestLocations () =
-    testRunner (Fixture.jsonLocationsRawResponse ()) (Fixture.jsonLocationsResponse ()) loadLocations
+[<TestCaseSource(nameof (getLocationData))>]
+let TestLocations (fixtureData: Fixture.FixturyData) =
+    testRunner fixtureData.rawResponse fixtureData.response (loadLocations (loadProfile (fixtureData.profile)))
 
-[<Test>]
-let TestJourneys () =
-    testRunner (Fixture.jsonJouneysRawResponse ()) (Fixture.jsonJouneysResponse ()) loadJourneys
+[<TestCaseSource(nameof (getJourneyData))>]
+let TestJourneys (fixtureData: Fixture.FixturyData) =
+    testRunner
+        fixtureData.rawResponse
+        fixtureData.response
+        (loadJourneys (loadProfile (fixtureData.profile)) fixtureData.options)
 
 [<Test>]
 let TestTrip () =

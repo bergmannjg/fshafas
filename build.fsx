@@ -124,7 +124,7 @@ Target.create "CheckReleaseVersion" (fun _ ->
         "src/fshafas.profiles.javascript.package/fs-hafas-profiles/package.json"
         releaseProfiles.AssemblyVersion)
 
-Target.create "BuildFableWebpackNode" (fun _ ->
+Target.create "BuildJavaScriptPackageForNode" (fun _ ->
     Shell.cleanDir ("./src/fshafas.javascript.package/build")
     let mode = Environment.environVarOrDefault "webpack.mode" "production"
 
@@ -141,7 +141,7 @@ Target.create "BuildFableWebpackNode" (fun _ ->
     DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.profiles.javascript.package") "fable" args
     |> checkResult "BuldFableWebpack failed")
 
-Target.create "BuildFableWebpackWebDev" (fun _ ->
+Target.create "BuildJavaScriptPackageForWeb" (fun _ ->
     DotNet.exec
         (DotNet.Options.withWorkingDirectory "./src/fshafas.javascript.package")
         "fable"
@@ -154,7 +154,7 @@ Target.create "BuildFableWebpackWebDev" (fun _ ->
         "./fshafas.fable.fsproj --typedArrays false --define WEBPACK --outDir ./build --run webpack --mode development --config ./webpack.web.config.js"
     |> ignore)
 
-Target.create "BuildFableNpmPack" (fun _ ->
+Target.create "PackJavaScriptPackage" (fun _ ->
     Npm.exec "pack fs-hafas-client/" (fun o ->
         { o with
             NpmFilePath = "/usr/bin/npm"
@@ -243,21 +243,49 @@ let runWithResult workingDirectory file arguments =
 Target.create "CompileTypeScript" (fun _ ->
     run "./src/examples/fshafas.fable.web/wwwroot/js/" "tsc" ("--target ES2015 --noImplicitAny" + " site.ts"))
 
+let CreateFableFsProjFile (srcDir: string) (file: string) (fsproj: string) =
+    let items =
+        System.IO.File.ReadAllLines file
+        |> Array.filter (fun line -> line.Contains "Compile")
+        |> Array.map (fun line -> line.Replace("../", ""))
+
+    let defineConstants =
+        System.IO.File.ReadAllLines file
+        |> Array.filter (fun line -> line.Contains "DefineConstants")
+        |> (fun lines ->
+            if lines.Length = 1 then
+                lines.[0]
+            else
+                "    <DefineConstants>FABLE_COMPILER</DefineConstants>")
+
+    let content =
+        $"""<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+{defineConstants}
+  </PropertyGroup>
+  <ItemGroup>
+{String.concat "\n" items}
+  </ItemGroup>
+</Project>"""
+
+    System.IO.File.WriteAllText(srcDir + "/nuget/" + fsproj, content)
+
 let PublishToLocalNuGetFeed (version: string) (srcDir: string) (fsproj: string) (nugetDir: string) (nugetPkg: string) =
     let versionParameter = "/p:Version=\"" + version + "\""
+
+    if srcDir.Contains "profiles" then
+        CreateFableFsProjFile srcDir (srcDir + "/../files.props") "fshafas.profiles.fsproj"
+    else
+        CreateFableFsProjFile srcDir (srcDir + "/" + fsproj) "fshafas.fsproj"
 
     DotNet.exec id "pack" (versionParameter + " " + srcDir + "/" + fsproj)
     |> checkResult "pack failed"
 
     let home = Environment.environVar "HOME"
-
-    Shell.cleanDir (
-        home
-        + "/.nuget/packages/"
-        + nugetDir
-        + "/"
-        + version
-    )
 
     Shell.cleanDir (
         home
@@ -279,6 +307,17 @@ let PublishToLocalNuGetFeed (version: string) (srcDir: string) (fsproj: string) 
          + " -source "
          + home
          + "/local.packages -expand")
+
+    Shell.cleanDir (
+        home
+        + "/.nuget/packages/"
+        + nugetDir
+        + "/"
+        + version
+    )
+
+    DotNet.exec id "paket" ("update " + nugetDir)
+    |> ignore
 
 Target.create "PublishJavaScriptToLocalNuGetFeed" (fun _ ->
     PublishToLocalNuGetFeed
@@ -406,7 +445,7 @@ Target.create "Docs" ignore
 Target.create "Test" ignore
 
 "BuildLib"
-==> "Test"
+==> "Test.FsHafas"
 ==> "CheckFormat"
 ==> "Default"
 
@@ -414,8 +453,8 @@ Target.create "Test" ignore
 ==> "Test.FsHafas"
 ==> "CheckReleaseVersion"
 ==> "PublishJavaScriptToLocalNuGetFeed"
-==> "BuildFableWebpackNode"
-==> "BuildFableNpmPack"
+==> "BuildJavaScriptPackageForNode"
+==> "PackJavaScriptPackage"
 ==> "JavaScript"
 
 "BuildLib"
@@ -435,7 +474,7 @@ Target.create "Test" ignore
 
 "BuildLib" ==> "BuildDocs" ==> "Docs"
 
-"BuildFableWebpackWebDev"
+"BuildJavaScriptPackageForWeb"
 ==> "CopyWebBundle"
 ==> "CompileTypeScript"
 ==> "BuildWebApp"

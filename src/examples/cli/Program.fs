@@ -65,6 +65,10 @@ let toProfile s =
     match s with
     | "db" -> FsHafas.Profiles.Db.profile
     | "bvg" -> FsHafas.Profiles.Bvg.profile
+    | "mobilnrw" -> FsHafas.Profiles.MobilNrw.profile
+    | "oebb" -> FsHafas.Profiles.Oebb.profile
+    | "rejseplanen" -> FsHafas.Profiles.Rejseplanen.profile
+    | "saarfahrplan" -> FsHafas.Profiles.SaarFahrplan.profile
     | "svv" -> FsHafas.Profiles.Svv.profile
     | x -> failwithf "%s is out of range" x
 

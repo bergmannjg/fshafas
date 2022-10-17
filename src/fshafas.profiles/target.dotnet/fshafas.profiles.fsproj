@@ -3,11 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="../bvg/Profile.fs" />
-    <Compile Include="../db/Profile.fs" />
-    <Compile Include="../svv/Profile.fs" />
-  </ItemGroup>
+  <Import Project="..\files.props" />
   <ItemGroup>
     <ProjectReference Include="../../fshafas/target.dotnet/fshafas.fsproj">
       <Name>fshafas.fsproj</Name>

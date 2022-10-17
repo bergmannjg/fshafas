@@ -1,0 +1,1623 @@
+{
+    "earlierRef": "2|OB|MT#11#166127#166127#166169#166169#0#0#5#166108#1#-2147483646#0#1#2|PDH#5b84bb3e5cd78017cc595961487a12d4|RD#4042022|RT#82800|US#1",
+    "laterRef": "2|OF|MT#11#166142#166142#166194#166194#0#0#5#166128#2#-2147483646#0#1#2|PDH#5b84bb3e5cd78017cc595961487a12d4|RD#4042022|RT#82800|US#1",
+    "journeys": [
+        {
+            "type": "journey",
+            "legs": [
+                {
+                    "origin": {
+                        "type": "stop",
+                        "id": "8000323",
+                        "name": "Saarbrücken Hbf",
+                        "location": {
+                            "type": "location",
+                            "id": "8000323",
+                            "latitude": 49.241066,
+                            "longitude": 6.991019
+                        },
+                        "products": {
+                            "nationalExpress": false,
+                            "national": false,
+                            "interregional": false,
+                            "regional": false,
+                            "suburban": false,
+                            "subway": false,
+                            "saarbahn": false,
+                            "bus": false,
+                            "watercraft": false,
+                            "onCall": false,
+                            "school-bus": true
+                        }
+                    },
+                    "destination": {
+                        "type": "stop",
+                        "id": "8000189",
+                        "name": "Kaiserslautern Hbf",
+                        "location": {
+                            "type": "location",
+                            "id": "8000189",
+                            "latitude": 49.436141,
+                            "longitude": 7.768721
+                        },
+                        "products": {
+                            "nationalExpress": false,
+                            "national": false,
+                            "interregional": false,
+                            "regional": false,
+                            "suburban": false,
+                            "subway": false,
+                            "saarbahn": false,
+                            "bus": false,
+                            "watercraft": false,
+                            "onCall": true,
+                            "school-bus": true
+                        }
+                    },
+                    "departure": "2022-04-04T08:47:00+02:00",
+                    "plannedDeparture": "2022-04-04T08:47:00+02:00",
+                    "departureDelay": null,
+                    "arrival": "2022-04-04T09:29:00+02:00",
+                    "plannedArrival": "2022-04-04T09:29:00+02:00",
+                    "arrivalDelay": null,
+                    "reachable": true,
+                    "polyline": {
+                        "type": "FeatureCollection",
+                        "features": [
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "type": "stop",
+                                    "id": "8000323",
+                                    "name": "Saarbrücken Hbf",
+                                    "location": {
+                                        "type": "location",
+                                        "id": "8000323",
+                                        "latitude": 49.241066,
+                                        "longitude": 6.991019
+                                    },
+                                    "products": {
+                                        "nationalExpress": false,
+                                        "national": false,
+                                        "interregional": false,
+                                        "regional": false,
+                                        "suburban": false,
+                                        "subway": false,
+                                        "saarbahn": false,
+                                        "bus": false,
+                                        "watercraft": false,
+                                        "onCall": false,
+                                        "school-bus": true
+                                    }
+                                },
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        6.99102,
+                                        49.24107
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "type": "stop",
+                                    "id": "8005649",
+                                    "name": "St. Ingbert",
+                                    "location": {
+                                        "type": "location",
+                                        "id": "8005649",
+                                        "latitude": 49.274712,
+                                        "longitude": 7.110863
+                                    },
+                                    "products": {
+                                        "nationalExpress": false,
+                                        "national": false,
+                                        "interregional": false,
+                                        "regional": false,
+                                        "suburban": false,
+                                        "subway": false,
+                                        "saarbahn": false,
+                                        "bus": false,
+                                        "watercraft": false,
+                                        "onCall": false,
+                                        "school-bus": true
+                                    }
+                                },
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        7.11086,
+                                        49.27471
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "type": "stop",
+                                    "id": "8000176",
+                                    "name": "Homburg (Saar) Hbf",
+                                    "location": {
+                                        "type": "location",
+                                        "id": "8000176",
+                                        "latitude": 49.328081,
+                                        "longitude": 7.337032
+                                    },
+                                    "products": {
+                                        "nationalExpress": false,
+                                        "national": false,
+                                        "interregional": false,
+                                        "regional": false,
+                                        "suburban": false,
+                                        "subway": false,
+                                        "saarbahn": false,
+                                        "bus": false,
+                                        "watercraft": false,
+                                        "onCall": true,
+                                        "school-bus": true
+                                    }
+                                },
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        7.33703,
+                                        49.32808
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "type": "stop",
+                                    "id": "8003515",
+                                    "name": "Landstuhl",
+                                    "location": {
+                                        "type": "location",
+                                        "id": "8003515",
+                                        "latitude": 49.416292,
+                                        "longitude": 7.565933
+                                    },
+                                    "products": {
+                                        "nationalExpress": false,
+                                        "national": false,
+                                        "interregional": false,
+                                        "regional": false,
+                                        "suburban": false,
+                                        "subway": false,
+                                        "saarbahn": false,
+                                        "bus": false,
+                                        "watercraft": false,
+                                        "onCall": true,
+                                        "school-bus": true
+                                    }
+                                },
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        7.56593,
+                                        49.41629
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "type": "stop",
+                                    "id": "8000189",
+                                    "name": "Kaiserslautern Hbf",
+                                    "location": {
+                                        "type": "location",
+                                        "id": "8000189",
+                                        "latitude": 49.436141,
+                                        "longitude": 7.768721
+                                    },
+                                    "products": {
+                                        "nationalExpress": false,
+                                        "national": false,
+                                        "interregional": false,
+                                        "regional": false,
+                                        "suburban": false,
+                                        "subway": false,
+                                        "saarbahn": false,
+                                        "bus": false,
+                                        "watercraft": false,
+                                        "onCall": true,
+                                        "school-bus": true
+                                    }
+                                },
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        7.76872,
+                                        49.43614
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    "tripId": "1|12806|0|80|4042022",
+                    "line": {
+                        "type": "line",
+                        "id": "re1",
+                        "fahrtNr": "4100",
+                        "name": "RE1",
+                        "public": true,
+                        "adminCode": "800640",
+                        "productName": "RE",
+                        "mode": "bus",
+                        "product": "school-bus",
+                        "operator": {
+                            "type": "operator",
+                            "id": "db-regio-ag-mitte-suwex",
+                            "name": "DB Regio AG Mitte SÜWEX"
+                        }
+                    },
+                    "direction": "Kaiserslautern Hbf",
+                    "arrivalPlatform": "8",
+                    "plannedArrivalPlatform": "8",
+                    "arrivalPrognosisType": "prognosed",
+                    "departurePlatform": "3",
+                    "plannedDeparturePlatform": "3",
+                    "departurePrognosisType": "prognosed",
+                    "stopovers": [
+                        {
+                            "stop": {
+                                "type": "stop",
+                                "id": "8000323",
+                                "name": "Saarbrücken Hbf",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8000323",
+                                    "latitude": 49.241066,
+                                    "longitude": 6.991019
+                                },
+                                "products": {
+                                    "nationalExpress": false,
+                                    "national": false,
+                                    "interregional": false,
+                                    "regional": false,
+                                    "suburban": false,
+                                    "subway": false,
+                                    "saarbahn": false,
+                                    "bus": false,
+                                    "watercraft": false,
+                                    "onCall": false,
+                                    "school-bus": true
+                                }
+                            },
+                            "arrival": null,
+                            "plannedArrival": null,
+                            "arrivalDelay": null,
+                            "arrivalPlatform": null,
+                            "arrivalPrognosisType": null,
+                            "plannedArrivalPlatform": null,
+                            "departure": "2022-04-04T08:47:00+02:00",
+                            "plannedDeparture": "2022-04-04T08:47:00+02:00",
+                            "departureDelay": null,
+                            "departurePlatform": null,
+                            "departurePrognosisType": null,
+                            "plannedDeparturePlatform": null
+                        },
+                        {
+                            "stop": {
+                                "type": "stop",
+                                "id": "8005649",
+                                "name": "St. Ingbert",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8005649",
+                                    "latitude": 49.274712,
+                                    "longitude": 7.110863
+                                },
+                                "products": {
+                                    "nationalExpress": false,
+                                    "national": false,
+                                    "interregional": false,
+                                    "regional": false,
+                                    "suburban": false,
+                                    "subway": false,
+                                    "saarbahn": false,
+                                    "bus": false,
+                                    "watercraft": false,
+                                    "onCall": false,
+                                    "school-bus": true
+                                }
+                            },
+                            "arrival": "2022-04-04T08:57:00+02:00",
+                            "plannedArrival": "2022-04-04T08:57:00+02:00",
+                            "arrivalDelay": null,
+                            "arrivalPlatform": null,
+                            "arrivalPrognosisType": null,
+                            "plannedArrivalPlatform": null,
+                            "departure": "2022-04-04T08:57:00+02:00",
+                            "plannedDeparture": "2022-04-04T08:57:00+02:00",
+                            "departureDelay": null,
+                            "departurePlatform": null,
+                            "departurePrognosisType": null,
+                            "plannedDeparturePlatform": null
+                        },
+                        {
+                            "stop": {
+                                "type": "stop",
+                                "id": "8000176",
+                                "name": "Homburg (Saar) Hbf",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8000176",
+                                    "latitude": 49.328081,
+                                    "longitude": 7.337032
+                                },
+                                "products": {
+                                    "nationalExpress": false,
+                                    "national": false,
+                                    "interregional": false,
+                                    "regional": false,
+                                    "suburban": false,
+                                    "subway": false,
+                                    "saarbahn": false,
+                                    "bus": false,
+                                    "watercraft": false,
+                                    "onCall": true,
+                                    "school-bus": true
+                                }
+                            },
+                            "arrival": "2022-04-04T09:08:00+02:00",
+                            "plannedArrival": "2022-04-04T09:08:00+02:00",
+                            "arrivalDelay": null,
+                            "arrivalPlatform": null,
+                            "arrivalPrognosisType": null,
+                            "plannedArrivalPlatform": null,
+                            "departure": "2022-04-04T09:09:00+02:00",
+                            "plannedDeparture": "2022-04-04T09:09:00+02:00",
+                            "departureDelay": null,
+                            "departurePlatform": null,
+                            "departurePrognosisType": null,
+                            "plannedDeparturePlatform": null
+                        },
+                        {
+                            "stop": {
+                                "type": "stop",
+                                "id": "8003515",
+                                "name": "Landstuhl",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8003515",
+                                    "latitude": 49.416292,
+                                    "longitude": 7.565933
+                                },
+                                "products": {
+                                    "nationalExpress": false,
+                                    "national": false,
+                                    "interregional": false,
+                                    "regional": false,
+                                    "suburban": false,
+                                    "subway": false,
+                                    "saarbahn": false,
+                                    "bus": false,
+                                    "watercraft": false,
+                                    "onCall": true,
+                                    "school-bus": true
+                                }
+                            },
+                            "arrival": "2022-04-04T09:18:00+02:00",
+                            "plannedArrival": "2022-04-04T09:18:00+02:00",
+                            "arrivalDelay": null,
+                            "arrivalPlatform": null,
+                            "arrivalPrognosisType": null,
+                            "plannedArrivalPlatform": null,
+                            "departure": "2022-04-04T09:19:00+02:00",
+                            "plannedDeparture": "2022-04-04T09:19:00+02:00",
+                            "departureDelay": null,
+                            "departurePlatform": null,
+                            "departurePrognosisType": null,
+                            "plannedDeparturePlatform": null
+                        },
+                        {
+                            "stop": {
+                                "type": "stop",
+                                "id": "8000189",
+                                "name": "Kaiserslautern Hbf",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8000189",
+                                    "latitude": 49.436141,
+                                    "longitude": 7.768721
+                                },
+                                "products": {
+                                    "nationalExpress": false,
+                                    "national": false,
+                                    "interregional": false,
+                                    "regional": false,
+                                    "suburban": false,
+                                    "subway": false,
+                                    "saarbahn": false,
+                                    "bus": false,
+                                    "watercraft": false,
+                                    "onCall": true,
+                                    "school-bus": true
+                                }
+                            },
+                            "arrival": "2022-04-04T09:29:00+02:00",
+                            "plannedArrival": "2022-04-04T09:29:00+02:00",
+                            "arrivalDelay": null,
+                            "arrivalPlatform": null,
+                            "arrivalPrognosisType": "prognosed",
+                            "plannedArrivalPlatform": null,
+                            "departure": null,
+                            "plannedDeparture": null,
+                            "departureDelay": null,
+                            "departurePlatform": null,
+                            "departurePrognosisType": null,
+                            "plannedDeparturePlatform": null
+                        }
+                    ],
+                    "cycle": {
+                        "min": 900,
+                        "max": 3600,
+                        "nr": 4
+                    },
+                    "alternatives": [
+                        {
+                            "tripId": "1|9781|0|80|4042022",
+                            "line": {
+                                "type": "line",
+                                "id": "rb70",
+                                "fahrtNr": "12521",
+                                "name": "RB70",
+                                "public": true,
+                                "adminCode": "8015A1",
+                                "productName": "RB",
+                                "mode": "bus",
+                                "product": "school-bus",
+                                "operator": {
+                                    "type": "operator",
+                                    "id": "db-regio-ag-mitte",
+                                    "name": "DB Regio AG Mitte"
+                                }
+                            },
+                            "direction": "Kaiserslautern Hbf",
+                            "when": "2022-04-04T09:02:00+02:00",
+                            "plannedWhen": "2022-04-04T09:02:00+02:00",
+                            "delay": null
+                        },
+                        {
+                            "tripId": "1|12828|0|80|4042022",
+                            "line": {
+                                "type": "line",
+                                "id": "re1",
+                                "fahrtNr": "4102",
+                                "name": "RE1",
+                                "public": true,
+                                "adminCode": "800640",
+                                "productName": "RE",
+                                "mode": "bus",
+                                "product": "school-bus",
+                                "operator": {
+                                    "type": "operator",
+                                    "id": "db-regio-ag-mitte-suwex",
+                                    "name": "DB Regio AG Mitte SÜWEX"
+                                }
+                            },
+                            "direction": "Mannheim Hbf",
+                            "when": "2022-04-04T09:47:00+02:00",
+                            "plannedWhen": "2022-04-04T09:47:00+02:00",
+                            "delay": null
+                        },
+                        {
+                            "tripId": "1|9785|0|80|4042022",
+                            "line": {
+                                "type": "line",
+                                "id": "rb70",
+                                "fahrtNr": "12523",
+                                "name": "RB70",
+                                "public": true,
+                                "adminCode": "8015A1",
+                                "productName": "RB",
+                                "mode": "bus",
+                                "product": "school-bus",
+                                "operator": {
+                                    "type": "operator",
+                                    "id": "db-regio-ag-mitte",
+                                    "name": "DB Regio AG Mitte"
+                                }
+                            },
+                            "direction": "Kaiserslautern Hbf",
+                            "when": "2022-04-04T10:02:00+02:00",
+                            "plannedWhen": "2022-04-04T10:02:00+02:00",
+                            "delay": null
+                        },
+                        {
+                            "tripId": "1|9787|0|80|4042022",
+                            "line": {
+                                "type": "line",
+                                "id": "rb70",
+                                "fahrtNr": "12525",
+                                "name": "RB70",
+                                "public": true,
+                                "adminCode": "8015A1",
+                                "productName": "RB",
+                                "mode": "bus",
+                                "product": "school-bus",
+                                "operator": {
+                                    "type": "operator",
+                                    "id": "db-regio-ag-mitte",
+                                    "name": "DB Regio AG Mitte"
+                                }
+                            },
+                            "direction": "Kaiserslautern Hbf",
+                            "when": "2022-04-04T11:02:00+02:00",
+                            "plannedWhen": "2022-04-04T11:02:00+02:00",
+                            "delay": null
+                        }
+                    ]
+                }
+            ],
+            "refreshToken": "¶HKI¶T$A=1@O=Saarbrücken Hbf@L=8000323@a=128@$A=1@O=Kaiserslautern Hbf@L=8000189@a=128@$202204040847$202204040929$     RE1$$1$$$$$$¶KRCC¶#VE#1#",
+            "cycle": {
+                "min": 900
+            }
+        },
+        {
+            "type": "journey",
+            "legs": [
+                {
+                    "origin": {
+                        "type": "stop",
+                        "id": "8000323",
+                        "name": "Saarbrücken Hbf",
+                        "location": {
+                            "type": "location",
+                            "id": "8000323",
+                            "latitude": 49.241066,
+                            "longitude": 6.991019
+                        },
+                        "products": {
+                            "nationalExpress": false,
+                            "national": false,
+                            "interregional": false,
+                            "regional": false,
+                            "suburban": false,
+                            "subway": false,
+                            "saarbahn": false,
+                            "bus": false,
+                            "watercraft": false,
+                            "onCall": false,
+                            "school-bus": true
+                        }
+                    },
+                    "destination": {
+                        "type": "stop",
+                        "id": "8000189",
+                        "name": "Kaiserslautern Hbf",
+                        "location": {
+                            "type": "location",
+                            "id": "8000189",
+                            "latitude": 49.436141,
+                            "longitude": 7.768721
+                        },
+                        "products": {
+                            "nationalExpress": false,
+                            "national": false,
+                            "interregional": false,
+                            "regional": false,
+                            "suburban": false,
+                            "subway": false,
+                            "saarbahn": false,
+                            "bus": false,
+                            "watercraft": false,
+                            "onCall": true,
+                            "school-bus": true
+                        }
+                    },
+                    "departure": "2022-04-04T09:02:00+02:00",
+                    "plannedDeparture": "2022-04-04T09:02:00+02:00",
+                    "departureDelay": null,
+                    "arrival": "2022-04-04T09:54:00+02:00",
+                    "plannedArrival": "2022-04-04T09:54:00+02:00",
+                    "arrivalDelay": null,
+                    "reachable": true,
+                    "polyline": {
+                        "type": "FeatureCollection",
+                        "features": [
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "type": "stop",
+                                    "id": "8000323",
+                                    "name": "Saarbrücken Hbf",
+                                    "location": {
+                                        "type": "location",
+                                        "id": "8000323",
+                                        "latitude": 49.241066,
+                                        "longitude": 6.991019
+                                    },
+                                    "products": {
+                                        "nationalExpress": false,
+                                        "national": false,
+                                        "interregional": false,
+                                        "regional": false,
+                                        "suburban": false,
+                                        "subway": false,
+                                        "saarbahn": false,
+                                        "bus": false,
+                                        "watercraft": false,
+                                        "onCall": false,
+                                        "school-bus": true
+                                    }
+                                },
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        6.99102,
+                                        49.24107
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "type": "stop",
+                                    "id": "8005332",
+                                    "name": "Scheidt (Saar)",
+                                    "location": {
+                                        "type": "location",
+                                        "id": "8005332",
+                                        "latitude": 49.244014,
+                                        "longitude": 7.057089
+                                    },
+                                    "products": {
+                                        "nationalExpress": false,
+                                        "national": false,
+                                        "interregional": false,
+                                        "regional": false,
+                                        "suburban": false,
+                                        "subway": false,
+                                        "saarbahn": false,
+                                        "bus": false,
+                                        "watercraft": false,
+                                        "onCall": false,
+                                        "school-bus": true
+                                    }
+                                },
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        7.05709,
+                                        49.24402
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "type": "stop",
+                                    "id": "8005044",
+                                    "name": "Rentrisch",
+                                    "location": {
+                                        "type": "location",
+                                        "id": "8005044",
+                                        "latitude": 49.259763,
+                                        "longitude": 7.079068
+                                    },
+                                    "products": {
+                                        "nationalExpress": false,
+                                        "national": false,
+                                        "interregional": false,
+                                        "regional": false,
+                                        "suburban": false,
+                                        "subway": false,
+                                        "saarbahn": false,
+                                        "bus": false,
+                                        "watercraft": false,
+                                        "onCall": false,
+                                        "school-bus": true
+                                    }
+                                },
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        7.07907,
+                                        49.25977
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "type": "stop",
+                                    "id": "8005649",
+                                    "name": "St. Ingbert",
+                                    "location": {
+                                        "type": "location",
+                                        "id": "8005649",
+                                        "latitude": 49.274712,
+                                        "longitude": 7.110863
+                                    },
+                                    "products": {
+                                        "nationalExpress": false,
+                                        "national": false,
+                                        "interregional": false,
+                                        "regional": false,
+                                        "suburban": false,
+                                        "subway": false,
+                                        "saarbahn": false,
+                                        "bus": false,
+                                        "watercraft": false,
+                                        "onCall": false,
+                                        "school-bus": true
+                                    }
+                                },
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        7.11086,
+                                        49.27471
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "type": "stop",
+                                    "id": "8003294",
+                                    "name": "Kirkel",
+                                    "location": {
+                                        "type": "location",
+                                        "id": "8003294",
+                                        "latitude": 49.285994,
+                                        "longitude": 7.225727
+                                    },
+                                    "products": {
+                                        "nationalExpress": false,
+                                        "national": false,
+                                        "interregional": false,
+                                        "regional": false,
+                                        "suburban": false,
+                                        "subway": false,
+                                        "saarbahn": false,
+                                        "bus": false,
+                                        "watercraft": false,
+                                        "onCall": false,
+                                        "school-bus": true
+                                    }
+                                },
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        7.22573,
+                                        49.286
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "type": "stop",
+                                    "id": "8003684",
+                                    "name": "Limbach (b Homburg,Saar)",
+                                    "location": {
+                                        "type": "location",
+                                        "id": "8003684",
+                                        "latitude": 49.312485,
+                                        "longitude": 7.280022
+                                    },
+                                    "products": {
+                                        "nationalExpress": false,
+                                        "national": false,
+                                        "interregional": false,
+                                        "regional": false,
+                                        "suburban": false,
+                                        "subway": false,
+                                        "saarbahn": false,
+                                        "bus": false,
+                                        "watercraft": false,
+                                        "onCall": false,
+                                        "school-bus": true
+                                    }
+                                },
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        7.28002,
+                                        49.31249
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "type": "stop",
+                                    "id": "8000176",
+                                    "name": "Homburg (Saar) Hbf",
+                                    "location": {
+                                        "type": "location",
+                                        "id": "8000176",
+                                        "latitude": 49.328081,
+                                        "longitude": 7.337032
+                                    },
+                                    "products": {
+                                        "nationalExpress": false,
+                                        "national": false,
+                                        "interregional": false,
+                                        "regional": false,
+                                        "suburban": false,
+                                        "subway": false,
+                                        "saarbahn": false,
+                                        "bus": false,
+                                        "watercraft": false,
+                                        "onCall": true,
+                                        "school-bus": true
+                                    }
+                                },
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        7.33703,
+                                        49.32808
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "type": "stop",
+                                    "id": "8001200",
+                                    "name": "Bruchmühlbach-Miesau",
+                                    "location": {
+                                        "type": "location",
+                                        "id": "8001200",
+                                        "latitude": 49.385343,
+                                        "longitude": 7.443976
+                                    },
+                                    "products": {
+                                        "nationalExpress": false,
+                                        "national": false,
+                                        "interregional": false,
+                                        "regional": false,
+                                        "suburban": false,
+                                        "subway": false,
+                                        "saarbahn": false,
+                                        "bus": false,
+                                        "watercraft": false,
+                                        "onCall": true,
+                                        "school-bus": true
+                                    }
+                                },
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        7.44398,
+                                        49.38535
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "type": "stop",
+                                    "id": "8002655",
+                                    "name": "Hauptstuhl",
+                                    "location": {
+                                        "type": "location",
+                                        "id": "8002655",
+                                        "latitude": 49.401973,
+                                        "longitude": 7.490945
+                                    },
+                                    "products": {
+                                        "nationalExpress": false,
+                                        "national": false,
+                                        "interregional": false,
+                                        "regional": false,
+                                        "suburban": false,
+                                        "subway": false,
+                                        "saarbahn": false,
+                                        "bus": false,
+                                        "watercraft": false,
+                                        "onCall": true,
+                                        "school-bus": true
+                                    }
+                                },
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        7.49095,
+                                        49.40198
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "type": "stop",
+                                    "id": "8003515",
+                                    "name": "Landstuhl",
+                                    "location": {
+                                        "type": "location",
+                                        "id": "8003515",
+                                        "latitude": 49.416292,
+                                        "longitude": 7.565933
+                                    },
+                                    "products": {
+                                        "nationalExpress": false,
+                                        "national": false,
+                                        "interregional": false,
+                                        "regional": false,
+                                        "suburban": false,
+                                        "subway": false,
+                                        "saarbahn": false,
+                                        "bus": false,
+                                        "watercraft": false,
+                                        "onCall": true,
+                                        "school-bus": true
+                                    }
+                                },
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        7.56593,
+                                        49.41629
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "type": "stop",
+                                    "id": "8003257",
+                                    "name": "Kindsbach",
+                                    "location": {
+                                        "type": "location",
+                                        "id": "8003257",
+                                        "latitude": 49.419367,
+                                        "longitude": 7.612839
+                                    },
+                                    "products": {
+                                        "nationalExpress": false,
+                                        "national": false,
+                                        "interregional": false,
+                                        "regional": false,
+                                        "suburban": false,
+                                        "subway": false,
+                                        "saarbahn": false,
+                                        "bus": false,
+                                        "watercraft": false,
+                                        "onCall": true,
+                                        "school-bus": true
+                                    }
+                                },
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        7.61284,
+                                        49.41937
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "type": "stop",
+                                    "id": "8000189",
+                                    "name": "Kaiserslautern Hbf",
+                                    "location": {
+                                        "type": "location",
+                                        "id": "8000189",
+                                        "latitude": 49.436141,
+                                        "longitude": 7.768721
+                                    },
+                                    "products": {
+                                        "nationalExpress": false,
+                                        "national": false,
+                                        "interregional": false,
+                                        "regional": false,
+                                        "suburban": false,
+                                        "subway": false,
+                                        "saarbahn": false,
+                                        "bus": false,
+                                        "watercraft": false,
+                                        "onCall": true,
+                                        "school-bus": true
+                                    }
+                                },
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [
+                                        7.76872,
+                                        49.43614
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    "tripId": "1|9781|0|80|4042022",
+                    "line": {
+                        "type": "line",
+                        "id": "rb70",
+                        "fahrtNr": "12521",
+                        "name": "RB70",
+                        "public": true,
+                        "adminCode": "8015A1",
+                        "productName": "RB",
+                        "mode": "bus",
+                        "product": "school-bus",
+                        "operator": {
+                            "type": "operator",
+                            "id": "db-regio-ag-mitte",
+                            "name": "DB Regio AG Mitte"
+                        }
+                    },
+                    "direction": "Kaiserslautern Hbf",
+                    "arrivalPlatform": "8",
+                    "plannedArrivalPlatform": "8",
+                    "arrivalPrognosisType": "prognosed",
+                    "departurePlatform": "3",
+                    "plannedDeparturePlatform": "3",
+                    "departurePrognosisType": "prognosed",
+                    "stopovers": [
+                        {
+                            "stop": {
+                                "type": "stop",
+                                "id": "8000323",
+                                "name": "Saarbrücken Hbf",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8000323",
+                                    "latitude": 49.241066,
+                                    "longitude": 6.991019
+                                },
+                                "products": {
+                                    "nationalExpress": false,
+                                    "national": false,
+                                    "interregional": false,
+                                    "regional": false,
+                                    "suburban": false,
+                                    "subway": false,
+                                    "saarbahn": false,
+                                    "bus": false,
+                                    "watercraft": false,
+                                    "onCall": false,
+                                    "school-bus": true
+                                }
+                            },
+                            "arrival": null,
+                            "plannedArrival": null,
+                            "arrivalDelay": null,
+                            "arrivalPlatform": null,
+                            "arrivalPrognosisType": null,
+                            "plannedArrivalPlatform": null,
+                            "departure": "2022-04-04T09:02:00+02:00",
+                            "plannedDeparture": "2022-04-04T09:02:00+02:00",
+                            "departureDelay": null,
+                            "departurePlatform": null,
+                            "departurePrognosisType": "prognosed",
+                            "plannedDeparturePlatform": null
+                        },
+                        {
+                            "stop": {
+                                "type": "stop",
+                                "id": "8005332",
+                                "name": "Scheidt (Saar)",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8005332",
+                                    "latitude": 49.244014,
+                                    "longitude": 7.057089
+                                },
+                                "products": {
+                                    "nationalExpress": false,
+                                    "national": false,
+                                    "interregional": false,
+                                    "regional": false,
+                                    "suburban": false,
+                                    "subway": false,
+                                    "saarbahn": false,
+                                    "bus": false,
+                                    "watercraft": false,
+                                    "onCall": false,
+                                    "school-bus": true
+                                }
+                            },
+                            "arrival": "2022-04-04T09:08:00+02:00",
+                            "plannedArrival": "2022-04-04T09:08:00+02:00",
+                            "arrivalDelay": null,
+                            "arrivalPlatform": null,
+                            "arrivalPrognosisType": null,
+                            "plannedArrivalPlatform": null,
+                            "departure": "2022-04-04T09:08:00+02:00",
+                            "plannedDeparture": "2022-04-04T09:08:00+02:00",
+                            "departureDelay": null,
+                            "departurePlatform": null,
+                            "departurePrognosisType": null,
+                            "plannedDeparturePlatform": null
+                        },
+                        {
+                            "stop": {
+                                "type": "stop",
+                                "id": "8005044",
+                                "name": "Rentrisch",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8005044",
+                                    "latitude": 49.259763,
+                                    "longitude": 7.079068
+                                },
+                                "products": {
+                                    "nationalExpress": false,
+                                    "national": false,
+                                    "interregional": false,
+                                    "regional": false,
+                                    "suburban": false,
+                                    "subway": false,
+                                    "saarbahn": false,
+                                    "bus": false,
+                                    "watercraft": false,
+                                    "onCall": false,
+                                    "school-bus": true
+                                }
+                            },
+                            "arrival": "2022-04-04T09:10:00+02:00",
+                            "plannedArrival": "2022-04-04T09:10:00+02:00",
+                            "arrivalDelay": null,
+                            "arrivalPlatform": null,
+                            "arrivalPrognosisType": null,
+                            "plannedArrivalPlatform": null,
+                            "departure": "2022-04-04T09:11:00+02:00",
+                            "plannedDeparture": "2022-04-04T09:11:00+02:00",
+                            "departureDelay": null,
+                            "departurePlatform": null,
+                            "departurePrognosisType": null,
+                            "plannedDeparturePlatform": null
+                        },
+                        {
+                            "stop": {
+                                "type": "stop",
+                                "id": "8005649",
+                                "name": "St. Ingbert",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8005649",
+                                    "latitude": 49.274712,
+                                    "longitude": 7.110863
+                                },
+                                "products": {
+                                    "nationalExpress": false,
+                                    "national": false,
+                                    "interregional": false,
+                                    "regional": false,
+                                    "suburban": false,
+                                    "subway": false,
+                                    "saarbahn": false,
+                                    "bus": false,
+                                    "watercraft": false,
+                                    "onCall": false,
+                                    "school-bus": true
+                                }
+                            },
+                            "arrival": "2022-04-04T09:14:00+02:00",
+                            "plannedArrival": "2022-04-04T09:14:00+02:00",
+                            "arrivalDelay": null,
+                            "arrivalPlatform": null,
+                            "arrivalPrognosisType": null,
+                            "plannedArrivalPlatform": null,
+                            "departure": "2022-04-04T09:14:00+02:00",
+                            "plannedDeparture": "2022-04-04T09:14:00+02:00",
+                            "departureDelay": null,
+                            "departurePlatform": null,
+                            "departurePrognosisType": null,
+                            "plannedDeparturePlatform": null
+                        },
+                        {
+                            "stop": {
+                                "type": "stop",
+                                "id": "8003294",
+                                "name": "Kirkel",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8003294",
+                                    "latitude": 49.285994,
+                                    "longitude": 7.225727
+                                },
+                                "products": {
+                                    "nationalExpress": false,
+                                    "national": false,
+                                    "interregional": false,
+                                    "regional": false,
+                                    "suburban": false,
+                                    "subway": false,
+                                    "saarbahn": false,
+                                    "bus": false,
+                                    "watercraft": false,
+                                    "onCall": false,
+                                    "school-bus": true
+                                }
+                            },
+                            "arrival": "2022-04-04T09:19:00+02:00",
+                            "plannedArrival": "2022-04-04T09:19:00+02:00",
+                            "arrivalDelay": null,
+                            "arrivalPlatform": null,
+                            "arrivalPrognosisType": null,
+                            "plannedArrivalPlatform": null,
+                            "departure": "2022-04-04T09:19:00+02:00",
+                            "plannedDeparture": "2022-04-04T09:19:00+02:00",
+                            "departureDelay": null,
+                            "departurePlatform": null,
+                            "departurePrognosisType": null,
+                            "plannedDeparturePlatform": null
+                        },
+                        {
+                            "stop": {
+                                "type": "stop",
+                                "id": "8003684",
+                                "name": "Limbach (b Homburg,Saar)",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8003684",
+                                    "latitude": 49.312485,
+                                    "longitude": 7.280022
+                                },
+                                "products": {
+                                    "nationalExpress": false,
+                                    "national": false,
+                                    "interregional": false,
+                                    "regional": false,
+                                    "suburban": false,
+                                    "subway": false,
+                                    "saarbahn": false,
+                                    "bus": false,
+                                    "watercraft": false,
+                                    "onCall": false,
+                                    "school-bus": true
+                                }
+                            },
+                            "arrival": "2022-04-04T09:23:00+02:00",
+                            "plannedArrival": "2022-04-04T09:23:00+02:00",
+                            "arrivalDelay": null,
+                            "arrivalPlatform": null,
+                            "arrivalPrognosisType": null,
+                            "plannedArrivalPlatform": null,
+                            "departure": "2022-04-04T09:23:00+02:00",
+                            "plannedDeparture": "2022-04-04T09:23:00+02:00",
+                            "departureDelay": null,
+                            "departurePlatform": null,
+                            "departurePrognosisType": null,
+                            "plannedDeparturePlatform": null
+                        },
+                        {
+                            "stop": {
+                                "type": "stop",
+                                "id": "8000176",
+                                "name": "Homburg (Saar) Hbf",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8000176",
+                                    "latitude": 49.328081,
+                                    "longitude": 7.337032
+                                },
+                                "products": {
+                                    "nationalExpress": false,
+                                    "national": false,
+                                    "interregional": false,
+                                    "regional": false,
+                                    "suburban": false,
+                                    "subway": false,
+                                    "saarbahn": false,
+                                    "bus": false,
+                                    "watercraft": false,
+                                    "onCall": true,
+                                    "school-bus": true
+                                }
+                            },
+                            "arrival": "2022-04-04T09:27:00+02:00",
+                            "plannedArrival": "2022-04-04T09:27:00+02:00",
+                            "arrivalDelay": null,
+                            "arrivalPlatform": null,
+                            "arrivalPrognosisType": null,
+                            "plannedArrivalPlatform": null,
+                            "departure": "2022-04-04T09:28:00+02:00",
+                            "plannedDeparture": "2022-04-04T09:28:00+02:00",
+                            "departureDelay": null,
+                            "departurePlatform": null,
+                            "departurePrognosisType": null,
+                            "plannedDeparturePlatform": null
+                        },
+                        {
+                            "stop": {
+                                "type": "stop",
+                                "id": "8001200",
+                                "name": "Bruchmühlbach-Miesau",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8001200",
+                                    "latitude": 49.385343,
+                                    "longitude": 7.443976
+                                },
+                                "products": {
+                                    "nationalExpress": false,
+                                    "national": false,
+                                    "interregional": false,
+                                    "regional": false,
+                                    "suburban": false,
+                                    "subway": false,
+                                    "saarbahn": false,
+                                    "bus": false,
+                                    "watercraft": false,
+                                    "onCall": true,
+                                    "school-bus": true
+                                }
+                            },
+                            "arrival": "2022-04-04T09:33:00+02:00",
+                            "plannedArrival": "2022-04-04T09:33:00+02:00",
+                            "arrivalDelay": null,
+                            "arrivalPlatform": null,
+                            "arrivalPrognosisType": null,
+                            "plannedArrivalPlatform": null,
+                            "departure": "2022-04-04T09:34:00+02:00",
+                            "plannedDeparture": "2022-04-04T09:34:00+02:00",
+                            "departureDelay": null,
+                            "departurePlatform": null,
+                            "departurePrognosisType": null,
+                            "plannedDeparturePlatform": null
+                        },
+                        {
+                            "stop": {
+                                "type": "stop",
+                                "id": "8002655",
+                                "name": "Hauptstuhl",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8002655",
+                                    "latitude": 49.401973,
+                                    "longitude": 7.490945
+                                },
+                                "products": {
+                                    "nationalExpress": false,
+                                    "national": false,
+                                    "interregional": false,
+                                    "regional": false,
+                                    "suburban": false,
+                                    "subway": false,
+                                    "saarbahn": false,
+                                    "bus": false,
+                                    "watercraft": false,
+                                    "onCall": true,
+                                    "school-bus": true
+                                }
+                            },
+                            "arrival": "2022-04-04T09:36:00+02:00",
+                            "plannedArrival": "2022-04-04T09:36:00+02:00",
+                            "arrivalDelay": null,
+                            "arrivalPlatform": null,
+                            "arrivalPrognosisType": null,
+                            "plannedArrivalPlatform": null,
+                            "departure": "2022-04-04T09:37:00+02:00",
+                            "plannedDeparture": "2022-04-04T09:37:00+02:00",
+                            "departureDelay": null,
+                            "departurePlatform": null,
+                            "departurePrognosisType": null,
+                            "plannedDeparturePlatform": null
+                        },
+                        {
+                            "stop": {
+                                "type": "stop",
+                                "id": "8003515",
+                                "name": "Landstuhl",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8003515",
+                                    "latitude": 49.416292,
+                                    "longitude": 7.565933
+                                },
+                                "products": {
+                                    "nationalExpress": false,
+                                    "national": false,
+                                    "interregional": false,
+                                    "regional": false,
+                                    "suburban": false,
+                                    "subway": false,
+                                    "saarbahn": false,
+                                    "bus": false,
+                                    "watercraft": false,
+                                    "onCall": true,
+                                    "school-bus": true
+                                }
+                            },
+                            "arrival": "2022-04-04T09:40:00+02:00",
+                            "plannedArrival": "2022-04-04T09:40:00+02:00",
+                            "arrivalDelay": null,
+                            "arrivalPlatform": null,
+                            "arrivalPrognosisType": null,
+                            "plannedArrivalPlatform": null,
+                            "departure": "2022-04-04T09:41:00+02:00",
+                            "plannedDeparture": "2022-04-04T09:41:00+02:00",
+                            "departureDelay": null,
+                            "departurePlatform": null,
+                            "departurePrognosisType": null,
+                            "plannedDeparturePlatform": null
+                        },
+                        {
+                            "stop": {
+                                "type": "stop",
+                                "id": "8003257",
+                                "name": "Kindsbach",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8003257",
+                                    "latitude": 49.419367,
+                                    "longitude": 7.612839
+                                },
+                                "products": {
+                                    "nationalExpress": false,
+                                    "national": false,
+                                    "interregional": false,
+                                    "regional": false,
+                                    "suburban": false,
+                                    "subway": false,
+                                    "saarbahn": false,
+                                    "bus": false,
+                                    "watercraft": false,
+                                    "onCall": true,
+                                    "school-bus": true
+                                }
+                            },
+                            "arrival": "2022-04-04T09:44:00+02:00",
+                            "plannedArrival": "2022-04-04T09:44:00+02:00",
+                            "arrivalDelay": null,
+                            "arrivalPlatform": null,
+                            "arrivalPrognosisType": null,
+                            "plannedArrivalPlatform": null,
+                            "departure": "2022-04-04T09:44:00+02:00",
+                            "plannedDeparture": "2022-04-04T09:44:00+02:00",
+                            "departureDelay": null,
+                            "departurePlatform": null,
+                            "departurePrognosisType": null,
+                            "plannedDeparturePlatform": null
+                        },
+                        {
+                            "stop": {
+                                "type": "stop",
+                                "id": "8000189",
+                                "name": "Kaiserslautern Hbf",
+                                "location": {
+                                    "type": "location",
+                                    "id": "8000189",
+                                    "latitude": 49.436141,
+                                    "longitude": 7.768721
+                                },
+                                "products": {
+                                    "nationalExpress": false,
+                                    "national": false,
+                                    "interregional": false,
+                                    "regional": false,
+                                    "suburban": false,
+                                    "subway": false,
+                                    "saarbahn": false,
+                                    "bus": false,
+                                    "watercraft": false,
+                                    "onCall": true,
+                                    "school-bus": true
+                                }
+                            },
+                            "arrival": "2022-04-04T09:54:00+02:00",
+                            "plannedArrival": "2022-04-04T09:54:00+02:00",
+                            "arrivalDelay": null,
+                            "arrivalPlatform": null,
+                            "arrivalPrognosisType": "prognosed",
+                            "plannedArrivalPlatform": null,
+                            "departure": null,
+                            "plannedDeparture": null,
+                            "departureDelay": null,
+                            "departurePlatform": null,
+                            "departurePrognosisType": null,
+                            "plannedDeparturePlatform": null
+                        }
+                    ],
+                    "cycle": {
+                        "min": 900,
+                        "max": 3600,
+                        "nr": 4
+                    },
+                    "alternatives": [
+                        {
+                            "tripId": "1|12828|0|80|4042022",
+                            "line": {
+                                "type": "line",
+                                "id": "re1",
+                                "fahrtNr": "4102",
+                                "name": "RE1",
+                                "public": true,
+                                "adminCode": "800640",
+                                "productName": "RE",
+                                "mode": "bus",
+                                "product": "school-bus",
+                                "operator": {
+                                    "type": "operator",
+                                    "id": "db-regio-ag-mitte-suwex",
+                                    "name": "DB Regio AG Mitte SÜWEX"
+                                }
+                            },
+                            "direction": "Mannheim Hbf",
+                            "when": "2022-04-04T09:47:00+02:00",
+                            "plannedWhen": "2022-04-04T09:47:00+02:00",
+                            "delay": null
+                        },
+                        {
+                            "tripId": "1|9785|0|80|4042022",
+                            "line": {
+                                "type": "line",
+                                "id": "rb70",
+                                "fahrtNr": "12523",
+                                "name": "RB70",
+                                "public": true,
+                                "adminCode": "8015A1",
+                                "productName": "RB",
+                                "mode": "bus",
+                                "product": "school-bus",
+                                "operator": {
+                                    "type": "operator",
+                                    "id": "db-regio-ag-mitte",
+                                    "name": "DB Regio AG Mitte"
+                                }
+                            },
+                            "direction": "Kaiserslautern Hbf",
+                            "when": "2022-04-04T10:02:00+02:00",
+                            "plannedWhen": "2022-04-04T10:02:00+02:00",
+                            "delay": null
+                        },
+                        {
+                            "tripId": "1|9787|0|80|4042022",
+                            "line": {
+                                "type": "line",
+                                "id": "rb70",
+                                "fahrtNr": "12525",
+                                "name": "RB70",
+                                "public": true,
+                                "adminCode": "8015A1",
+                                "productName": "RB",
+                                "mode": "bus",
+                                "product": "school-bus",
+                                "operator": {
+                                    "type": "operator",
+                                    "id": "db-regio-ag-mitte",
+                                    "name": "DB Regio AG Mitte"
+                                }
+                            },
+                            "direction": "Kaiserslautern Hbf",
+                            "when": "2022-04-04T11:02:00+02:00",
+                            "plannedWhen": "2022-04-04T11:02:00+02:00",
+                            "delay": null
+                        },
+                        {
+                            "tripId": "1|12843|0|80|4042022",
+                            "line": {
+                                "type": "line",
+                                "id": "re1",
+                                "fahrtNr": "4106",
+                                "name": "RE1",
+                                "public": true,
+                                "adminCode": "800640",
+                                "productName": "RE",
+                                "mode": "bus",
+                                "product": "school-bus",
+                                "operator": {
+                                    "type": "operator",
+                                    "id": "db-regio-ag-mitte-suwex",
+                                    "name": "DB Regio AG Mitte SÜWEX"
+                                }
+                            },
+                            "direction": "Mannheim Hbf",
+                            "when": "2022-04-04T11:47:00+02:00",
+                            "plannedWhen": "2022-04-04T11:47:00+02:00",
+                            "delay": null
+                        }
+                    ]
+                }
+            ],
+            "refreshToken": "¶HKI¶T$A=1@O=Saarbrücken Hbf@L=8000323@a=128@$A=1@O=Kaiserslautern Hbf@L=8000189@a=128@$202204040902$202204040954$    RB70$$1$$$$$$¶KRCC¶#VE#1#",
+            "cycle": {
+                "min": 900
+            }
+        }
+    ],
+    "realtimeDataFrom": 1665563935
+}

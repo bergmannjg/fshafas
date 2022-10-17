@@ -8,68 +8,6 @@ module Db =
     open FsHafas.Endpoint
     open FsHafas.Raw
 
-    let private products: ProductType [] =
-        [| { id = "nationalExpress"
-             mode = ProductTypeMode.Train
-             bitmasks = [| 1 |]
-             name = "InterCityExpress"
-             short = "ICE"
-             ``default`` = true }
-           { id = "national"
-             mode = ProductTypeMode.Train
-             bitmasks = [| 2 |]
-             name = "InterCity & EuroCity"
-             short = "IC/EC"
-             ``default`` = true }
-           { id = "regionalExp"
-             mode = ProductTypeMode.Train
-             bitmasks = [| 4 |]
-             name = "RegionalExpress & InterRegio"
-             short = "RE/IR"
-             ``default`` = true }
-           { id = "regional"
-             mode = ProductTypeMode.Train
-             bitmasks = [| 8 |]
-             name = "Regio"
-             short = "RB"
-             ``default`` = true }
-           { id = "suburban"
-             mode = ProductTypeMode.Train
-             bitmasks = [| 16 |]
-             name = "S-Bahn"
-             short = "S"
-             ``default`` = true }
-           { id = "bus"
-             mode = ProductTypeMode.Bus
-             bitmasks = [| 32 |]
-             name = "Bus"
-             short = "B"
-             ``default`` = true }
-           { id = "ferry"
-             mode = ProductTypeMode.Watercraft
-             bitmasks = [| 64 |]
-             name = "Ferry"
-             short = "F"
-             ``default`` = true }
-           { id = "subway"
-             mode = ProductTypeMode.Train
-             bitmasks = [| 128 |]
-             name = "U-Bahn"
-             short = "U"
-             ``default`` = true }
-           { id = "tram"
-             mode = ProductTypeMode.Train
-             bitmasks = [| 256 |]
-             name = "Tram"
-             short = "T"
-             ``default`` = true }
-           { id = "taxi"
-             mode = ProductTypeMode.Taxi
-             bitmasks = [| 512 |]
-             name = "Group Taxi"
-             short = "Taxi"
-             ``default`` = true } |]
-
     type private HintByCode =
         { ``type``: string
           code: string
@@ -370,10 +308,10 @@ module Db =
     let private parseJourneyWithPrice (parsed: Journey) (raw: RawOutCon) : Journey =
         match raw.trfRes with
         | Some trfRes when
-            trfRes.fareSetL.Length > 0
-            && trfRes.fareSetL.[0].fareL.Length > 0
+            trfRes.fareSetL.IsSome && trfRes.fareSetL.Value.Length > 0
+            && trfRes.fareSetL.Value.[0].fareL.Length > 0
             ->
-            match trfRes.fareSetL.[0].fareL.[0].price with
+            match trfRes.fareSetL.Value.[0].fareL.[0].price with
             | Some price when price.amount.IsSome && price.amount.Value > 0 ->
                 { parsed with
                     price =
@@ -468,34 +406,21 @@ module Db =
             trfReq = Some trfReq
             jnyFltrL = jnyFltrL }
 
-    let private req: RawRequest =
-        { lang = "de"
-          svcReqL = [||]
-          client =
-            { id = "DB"
-              v = "21120000"
-              ``type`` = "AND"
-              name = "DB Navigator" }
-          ext = "DB.R21.12.a"
-          ver = "1.34"
-          auth =
-            { ``type`` = "AID"
-              aid = "n91dB8Z77MLdoR0K" } }
-
     let profile = FsHafas.Api.Profile.defaultProfile ()
 
     profile._locale <- "de-DE"
     profile._timezone <- "Europe/Berlin"
     profile._endpoint <- "https://reiseauskunft.bahn.de/bin/mgate.exe"
     profile.salt <- "bdI8UVj40K5fvxwf"
+    profile.addChecksum <- true
 
     profile.cfg <-
         Some
             { polyEnc = "GPA"
               rtMode = Some "HYBRID" }
 
-    profile.baseRequest <- Some req
-    profile._products <- products
+    profile.baseRequest <- Some DbConfig.Request.request
+    profile._products <- DbConfig.Products.products
     profile._trip <- Some true
     profile._radar <- Some true
     profile._tripsByName <- Some true

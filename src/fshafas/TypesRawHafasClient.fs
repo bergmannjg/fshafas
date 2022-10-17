@@ -256,7 +256,9 @@ and RawFareSet =
 
 and RawTrfRes =
     { statusCode: string option
-      fareSetL: array<RawFareSet> }
+      fareSetL: array<RawFareSet> option }
+
+and RawRecon = { ctx: string option }
 
 and RawOutCon =
     { cid: string
@@ -279,6 +281,7 @@ and RawOutCon =
       sotCtxt: RawSotCtxt option
       cksum: string
       msgL: array<RawMsg> option
+      recon: RawRecon option
       freq: RawFreq option }
 
 and RawItem =
@@ -598,6 +601,6 @@ and RawRequest =
     { lang: string
       svcReqL: array<SvcReq>
       client: RawRequestClient
-      ext: string
+      ext: string option
       ver: string
       auth: RawRequestAuth }

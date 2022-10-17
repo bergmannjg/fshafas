@@ -14,30 +14,61 @@ if [ ! -d "./test-fixtures" ]; then
 const createClient = require('hafas-client')
 const dbProfile = require('hafas-client/p/db')
 const bvgProfile = require('hafas-client/p/bvg')
+const mobilnrwProfile = require('hafas-client/p/mobil-nrw')
+const oebbProfile = require('hafas-client/p/oebb')
+const saarfahrplanProfile = require('hafas-client/p/saarfahrplan')
+const rejseplanenProfile = require('hafas-client/p/rejseplanen')
 const svvProfile = require('hafas-client/p/svv')
-const sbbProfile = require('hafas-client/p/sbb')
 const geolib = require('geolib');
-
-const jsclient = createClient(dbProfile, 'agent')
-const bvgClient = createClient(bvgProfile, 'agent')
-const svvClient = createClient(svvProfile, 'agent')
 
 var myArgs = process.argv.slice(2);
 
-const client = jsclient;
+let client = createClient(dbProfile, 'agent');
+
+let journeys_from = { type: 'stop', id: '8002549' };
+let journeys_to = '8000107';
+
+switch (myArgs[1]) {
+    case 'bvg':
+        client = createClient(bvgProfile, 'agent');
+        break;
+    case 'mobilnrw':
+        client = createClient(mobilnrwProfile, 'agent');
+        break;
+    case 'saarfahrplan':
+        client = createClient(saarfahrplanProfile, 'agent');
+        journeys_from = { type: 'stop', id: '8000323' };
+        journeys_to = '8000189';
+        break;
+    case 'oebb':
+        client = createClient(oebbProfile, 'agent');
+        journeys_from = { type: 'stop', id: '1290401' };
+        journeys_to = '8100108';
+        break;
+    case 'rejseplanen':
+        client = createClient(rejseplanenProfile, 'agent');
+        journeys_from = { type: 'stop', id: '8600626' };
+        journeys_to = '8024313';
+        break;
+    case 'svv':
+        client = createClient(svvProfile, 'agent');
+        break;
+}
 
 const locations = () => {
     const options = { results: 3, linesOfStops: true };
     console.log(JSON.stringify(options));
-    client.locations('Hannover', options)
+    client.locations('Hamburg Hbf', options)
         .then(result => { console.log(JSON.stringify(result)); })
         .catch(console.error);
 }
 
 const journeys = () => {
-    const options = { results: 1, stopovers: false, scheduledDays: false, remarks: false };
+    const now = new Date();
+    const dt = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 20);
+    const options = { results: 2, stopovers: true, polylines: true, scheduledDays: false, remarks: false, departure: dt.toISOString() };
     console.log(JSON.stringify(options));
-    client.journeys({ type: 'stop', id: '8002549' }, '8000261', options)
+    client.journeys(journeys_from, journeys_to, options)
         .then(result => { console.log(JSON.stringify(result)); })
         .catch(err =>
             console.error(err));
@@ -206,7 +237,7 @@ EOF
   "license": "ISC",
   "dependencies": {
     "geolib": "^3.3.1",
-    "hafas-client": "^5.25.0"
+    "hafas-client": "^5.26.1"
   }
 }
 EOF
@@ -219,15 +250,12 @@ fi
 
 PATH2FIXTURES="../src/fshafas.test/fixtures"
 
-METHODS=('locations' 'journeys' 'journeysFromTrip' 'trip' 'departures' 'nearby' 'reachableFrom' 'radar' 'remarks' 'lines' 'serverInfo')
+METHODS=('db:locations' 'db:journeys' 'oebb:journeys' 'saarfahrplan:journeys' 'rejseplanen:journeys' 'db:journeysFromTrip' 'db:trip' 'db:departures' 'db:nearby' 'db:reachableFrom' 'db:radar' 'svv:remarks' 'svv:lines' 'db:serverInfo')
 
-for METHOD in "${METHODS[@]}"; do
-  if [ ${METHOD} == "lines" ] || [ ${METHOD} == "remarks" ]
-  then
-    PROFILE='svv'
-  else
-    PROFILE='db'
-   fi
+for PROFILE_METHOD in "${METHODS[@]}"; do
+  readarray -d : -t strarr < <(printf '%s' "$PROFILE_METHOD")
+  PROFILE=${strarr[0]}
+  METHOD=${strarr[1]}
 
   if [ ! -f "${PATH2FIXTURES}/${PROFILE}-${METHOD}-response.json" ]; then
     DEBUG=hafas-client node index.js ${METHOD} ${PROFILE} &> x.txt
@@ -255,6 +283,6 @@ for METHOD in "${METHODS[@]}"; do
         cat x.txt
     fi
   else
-    echo "skip ${METHOD}"
+    echo "skip ${PROFILE} ${METHOD}"
   fi
 done

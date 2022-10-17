@@ -48,3 +48,7 @@
 ## 1.8.0
 
 * use Fable 4 Theta Release
+
+## 1.9.0
+
+* fix RawRequest

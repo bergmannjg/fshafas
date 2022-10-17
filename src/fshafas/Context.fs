@@ -63,6 +63,8 @@ type Profile
         parsePrognosisType
     ) =
     member val salt: string = "" with get, set
+    member val addChecksum: bool = false with get, set
+    member val addMicMac: bool = false with get, set
     member val cfg: FsHafas.Raw.Cfg option = None with get, set
     member val baseRequest: FsHafas.Raw.RawRequest option = None with get, set
     member val journeysOutFrwd: bool = false with get, set

@@ -21,9 +21,9 @@ module internal Request =
 
         let log msg o = FsHafas.Client.Log.Print msg o
 
-        let getMd5 (json: string) (salt: string) =
+        let getMd5 (s: string) =
 
-            let bytes = (System.Text.Encoding.UTF8.GetBytes(json + salt))
+            let bytes = (System.Text.Encoding.UTF8.GetBytes(s))
 
             md5 (bytes)
 
@@ -31,12 +31,16 @@ module internal Request =
 
         member __.Dispose() = ()
 
-        member __.PostAsync (url: string) (salt: string) (json: string) =
+        member __.PostAsync (url: string) (addChecksum: bool) (addMicMac: bool) (salt: string) (json: string) =
 
             let urlchecksum =
-                if salt.Length > 0 then
-                    let checksum = getMd5 json salt
+                if addChecksum && salt.Length > 0 then
+                    let checksum = getMd5 (json + salt)
                     url + "?checksum=" + checksum
+                else if addMicMac && salt.Length > 0 then
+                    let mic = getMd5 json
+                    let mac = getMd5 (mic + salt)
+                    url + "?mic=" + mic + "&mac=" + mac
                 else
                     url
 
@@ -110,16 +114,20 @@ module internal Request =
 
         let log msg o = FsHafas.Client.Log.Print msg o
 
-        let getMd5 (json: string) (salt: string) = hexdigest (md5 (toBytes (json + salt)))
+        let getMd5 (s: string) = hexdigest (md5 (toBytes s))
 
         member __.Dispose() = ()
 
-        member __.PostAsync (url: string) (salt: string) (json: string) =
+        member __.PostAsync (url: string) (addChecksum: bool) (addMicMac: bool) (salt: string) (json: string) =
 
             let urlchecksum =
-                if salt.Length > 0 then
-                    let checksum = getMd5 json salt
+                if addChecksum && salt.Length > 0 then
+                    let checksum = getMd5 (json + salt)
                     url + "?checksum=" + checksum
+                else if addMicMac && salt.Length > 0 then
+                    let mic = getMd5 json
+                    let mac = getMd5 (mic + salt)
+                    url + "?mic=" + mic + "&mac=" + mac
                 else
                     url
 
@@ -162,29 +170,31 @@ module internal Request =
 
         let client = new Http.HttpClient(createHandler ())
 
-        let md5 (data: byte array) : string =
-            use md5 = MD5.Create()
-
-            (StringBuilder(), md5.ComputeHash(data))
-            ||> Array.fold (fun sb b -> sb.Append(b.ToString("x2")))
+        let toHex (data: byte array) : string =
+            data
+            |> Array.fold (fun (sb: StringBuilder) b -> sb.Append(b.ToString("x2"))) (StringBuilder())
             |> string
 
-        let getMd5 (json: string) (salt: string) =
-            let bytes = System.Text.Encoding.UTF8.GetBytes(json + salt)
+        let md5 (s: string) : byte array =
+            use md5 = MD5.Create()
 
-            let hash = md5 bytes
+            md5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(s))
 
-            hash
+        let getMd5 (s: string) = s |> md5 |> toHex
 
         member __.Dispose() = client.Dispose()
 
-        member __.PostAsync (url: string) (salt: string) (json: string) =
+        member __.PostAsync (url: string) (addChecksum: bool) (addMicMac: bool) (salt: string) (json: string) =
             async {
 
                 let urlchecksum =
-                    if salt.Length > 0 then
-                        let checksum = getMd5 json salt
+                    if addChecksum && salt.Length > 0 then
+                        let checksum = getMd5 (json + salt)
                         url + "?checksum=" + checksum
+                    else if addMicMac && salt.Length > 0 then
+                        let mic = getMd5 json
+                        let mac = getMd5 (mic + salt)
+                        url + "?mic=" + mic + "&mac=" + mac
                     else
                         url
 

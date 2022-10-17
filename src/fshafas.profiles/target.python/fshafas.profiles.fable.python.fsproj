@@ -12,11 +12,7 @@
   <PropertyGroup>
     <DefineConstants>FABLE_COMPILER</DefineConstants>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="../bvg/Profile.fs" />
-    <Compile Include="../db/Profile.fs" />
-    <Compile Include="../svv/Profile.fs" />
-  </ItemGroup>
+  <Import Project="..\files.props" />
   <ItemGroup>
     <ProjectReference Include="../../fshafas/target.python/fshafas.fable.python.fsproj">
       <Name>JsonRpcClient.fsproj</Name>

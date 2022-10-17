@@ -26,10 +26,18 @@ let runProc filename args startDir =
         let p = new Process(StartInfo = procStartInfo)
         p.OutputDataReceived.AddHandler(DataReceivedEventHandler(outputHandler outputs.Add))
         p.ErrorDataReceived.AddHandler(DataReceivedEventHandler(outputHandler errors.Add))
-        let started = p.Start()
+        p.Start() |> ignore
         p.BeginOutputReadLine()
         p.BeginErrorReadLine()
         let exited = p.WaitForExit(10 * 1000)
+
+        if not exited then
+            p.Start() |> ignore
+            p.BeginOutputReadLine()
+            p.BeginErrorReadLine()
+            let exited = p.WaitForExit(10 * 1000)
+            if not exited then errors.Add("timeout")
+
         timer.Stop()
         printfn "Finished %s after %A milliseconds" filename timer.ElapsedMilliseconds
 

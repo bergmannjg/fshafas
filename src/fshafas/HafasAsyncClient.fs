@@ -19,7 +19,14 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
         | None -> raise (System.ArgumentException("profile.baseRequest"))
 
     let httpClient =
-        FsHafas.Api.HafasRawClient((profile :> FsHafas.Client.Profile).endpoint, profile.salt, cfg, baseRequest)
+        FsHafas.Api.HafasRawClient(
+            (profile :> FsHafas.Client.Profile).endpoint,
+            profile.addChecksum,
+            profile.addMicMac,
+            profile.salt,
+            cfg,
+            baseRequest
+        )
 
     let enabled (value: bool option) =
         match value with

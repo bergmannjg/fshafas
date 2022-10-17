@@ -62,9 +62,17 @@ module internal Journey =
                 | _ -> None
             | None -> None
 
+        let refreshToken =
+            match j.ctxRecon with
+            | Some _ -> j.ctxRecon
+            | None ->
+                match j.recon with
+                | Some recon -> recon.ctx
+                | None -> None
+
         { Default.Journey with
             legs = legs
-            refreshToken = j.ctxRecon
+            refreshToken = refreshToken
             remarks = remarks
             scheduledDays = scheduledDays
             cycle = cycle }

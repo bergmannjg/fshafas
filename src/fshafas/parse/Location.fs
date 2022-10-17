@@ -92,16 +92,28 @@ module internal Location =
                     else
                         None
 
-                (l,
-                 U3.Case2(
-                     { Default.Stop with
-                         id = id
-                         name = name
-                         location = location
-                         lines = lines
-                         products = products
-                         distance = distance }
-                 ))
+                if l.isMainMast.IsSome && l.isMainMast.Value then
+                    (l,
+                     U3.Case1(
+                         { Default.Station with
+                             id = id
+                             name = name
+                             location = location
+                             lines = lines
+                             products = products
+                             distance = distance }
+                     ))
+                else
+                    (l,
+                     U3.Case2(
+                         { Default.Stop with
+                             id = id
+                             name = name
+                             location = location
+                             lines = lines
+                             products = products
+                             distance = distance }
+                     ))
             else
                 let address =
                     if ``type`` = "A" then

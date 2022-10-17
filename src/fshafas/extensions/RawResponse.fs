@@ -1,5 +1,9 @@
 namespace FsHafas.Extensions
 
+#if !FABLE_COMPILER
+open FsHafas.Api
+#endif
+
 open FsHafas.Raw
 
 #if FABLE_COMPILER
