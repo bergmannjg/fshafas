@@ -5,8 +5,8 @@
     "main": "dist/index.js",
     "type": "module",
     "dependencies": {
-        "fs-hafas-client": "file:../../fshafas.javascript.package/fs-hafas-client-1.6.0.tgz",
-        "fs-hafas-profiles": "file:../../fshafas.profiles.javascript.package/fs-hafas-profiles-1.0.0.tgz",
+        "fs-hafas-client": "file:../../fshafas.javascript.package/fs-hafas-client-1.9.0.tgz",
+        "fs-hafas-profiles": "file:../../fshafas.profiles.javascript.package/fs-hafas-profiles-1.2.0.tgz",
         "hafas-client": "5.25.0"
     },
     "author": "",
