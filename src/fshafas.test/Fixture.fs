@@ -10,36 +10,19 @@ type FixturyData =
 
 let private path = "../../../fixtures/"
 
-let getFileData (method: string) : FixturyData [] =
-    Directory.GetFiles(path, "*-" + method + "-*response.json")
-    |> Array.map (fun f -> (FileInfo(f).Name.Split('-')[0], FileInfo(f).Name))
-    |> Array.groupBy (fun (p, _) -> p)
-    |> Array.choose (fun (k, l) ->
-        let rawResponse =
-            l
-            |> Array.tryFind (fun (_, f) -> f.Contains("-raw-response"))
+let getFilePath (method: string) : string [] =
+    Directory.GetFiles(path, "*-" + method + "-response.json")
 
-        let response =
-            l
-            |> Array.tryFind (fun (_, f) -> f.Contains(method + "-response"))
+let getFileData (path: string) : FixturyData =
+    let profile = FileInfo(path).Name.Split('-')[0]
+    let response = path
+    let rawResponse = response.Replace("-response", "-raw-response")
+    let options = response.Replace("-response", "-options")
 
-        let optionsFile = path + k + "-" + method + "-options.json"
-
-        let options =
-            if File.Exists(optionsFile) then
-                File.ReadAllText(optionsFile)
-            else
-                raise (System.Exception(optionsFile + " not found"))
-
-        match rawResponse, response with
-        | Some (_, rawResponse), Some (_, response) ->
-            Some(
-                { profile = k
-                  rawResponse = File.ReadAllText(path + rawResponse)
-                  response = File.ReadAllText(path + response)
-                  options = options }
-            )
-        | _ -> None)
+    { profile = profile
+      rawResponse = File.ReadAllText(rawResponse)
+      response = File.ReadAllText(response)
+      options = File.ReadAllText(options) }
 
 let jsonDeparturesRawResponse () =
     File.ReadAllText(path + "db-departures-raw-response.json")

@@ -352,9 +352,9 @@ let loadWarnings (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
     (parsedResponse :> obj, response :> obj)
 
-let getLocationData () = Fixture.getFileData "locations"
+let getLocationData () = Fixture.getFilePath "locations"
 
-let getJourneyData () = Fixture.getFileData "journeys"
+let getJourneyData () = Fixture.getFilePath "journeys"
 
 [<Test>]
 let TestFeatureParser () =
@@ -464,11 +464,14 @@ let TestFeatureParser () =
     Assert.IsTrue(feature3.properties.IsNone)
 
 [<TestCaseSource(nameof (getLocationData))>]
-let TestLocations (fixtureData: Fixture.FixturyData) =
+let TestLocations (path: string) =
+    let fixtureData = Fixture.getFileData path
     testRunner fixtureData.rawResponse fixtureData.response (loadLocations (loadProfile (fixtureData.profile)))
 
 [<TestCaseSource(nameof (getJourneyData))>]
-let TestJourneys (fixtureData: Fixture.FixturyData) =
+let TestJourneys (path: string) =
+    let fixtureData = Fixture.getFileData path
+
     testRunner
         fixtureData.rawResponse
         fixtureData.response
