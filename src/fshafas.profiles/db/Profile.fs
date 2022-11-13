@@ -308,7 +308,8 @@ module Db =
     let private parseJourneyWithPrice (parsed: Journey) (raw: RawOutCon) : Journey =
         match raw.trfRes with
         | Some trfRes when
-            trfRes.fareSetL.IsSome && trfRes.fareSetL.Value.Length > 0
+            trfRes.fareSetL.IsSome
+            && trfRes.fareSetL.Value.Length > 0
             && trfRes.fareSetL.Value.[0].fareL.Length > 0
             ->
             match trfRes.fareSetL.Value.[0].fareL.[0].price with
