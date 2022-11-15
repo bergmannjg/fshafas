@@ -243,7 +243,7 @@ let journeys (from: string, ``to``: string, someOptions: string option) =
                 products = (products ())
                 stopovers = None
                 polylines = Some true
-                scheduledDays = Some false }
+                scheduledDays = Some true }
 
     async {
         let! fromLoc = getLocation client from

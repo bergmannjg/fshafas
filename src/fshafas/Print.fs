@@ -226,6 +226,21 @@ module Short =
         printfnS ident "jouney:" (Some "")
         + Legs ident journey.legs true
 
+    let private scheduledDaysIdent (ident: int) (scheduledDays: ScheduledDays option) =
+        match scheduledDays with
+        | Some scheduledDays when scheduledDays.Keys.Length > 0 ->
+            printfnS
+                ident
+                "scheduledDays: "
+                (Some(
+                    scheduledDays.Keys.[0]
+                    + " "
+                    + scheduledDays.Keys.[scheduledDays.Keys.Length - 1]
+                ))
+        | _ -> ""
+
+    let ScheduledDays (scheduledDays: ScheduledDays option) = scheduledDaysIdent 0 scheduledDays
+
     let Journey (ident: int) (journey: Journey) =
         let short = true
 
@@ -252,6 +267,7 @@ module Short =
         + Legs ident journey.legs short
         + price
         + distS ()
+        + scheduledDaysIdent (ident + 2) journey.scheduledDays
         + match short, journey.refreshToken with
           | false, Some refreshToken -> printfnS (ident + 2) "refreshToken: '" (Some(refreshToken + "'"))
           | _ -> ""
