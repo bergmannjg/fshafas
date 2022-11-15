@@ -19,7 +19,8 @@ type CliArguments =
     | JourneysWithOptions of from: string * ``to``: string * options: string
     | JourneysFromTrip of tripId: string * stopover: string * departure: string * newToId: string
     | Departures of name: string
-    | Trips of name: string
+    | Trip of name: string
+    | TripsByName of name: string
     | Nearby of lon: float * lat: float
     | ReachableFrom of lon: float * lat: float
     | Radar of north: float * west: float * south: float * east: float
@@ -33,7 +34,7 @@ let printHelp () =
     """
 USAGE: cli.exe [--help] [--locations <name>] [--stop <id>] [--journeys <from> <to>]
                [--journeysfromtrip <fromId> <toId> <newToId>]
-               [--departures <name>] [--trips <name>] [--nearby <lon> <lat>] [--reachablefrom <lon> <lat>]
+               [--departures <name>] [--tripsbyname <name>] [--nearby <lon> <lat>] [--reachablefrom <lon> <lat>]
                [--radar <north> <west> <south> <east>] [--lines <name>] [--serverinfo] [--profile <db|bvg|svv>] [--debug]
 
 OPTIONS:
@@ -47,7 +48,8 @@ OPTIONS:
     --journeysfromtrip <tripId> <prevStopId> <prevStopDepature> <newToId>
                           get journeys from  <prevStopId> of trip <tripId> to new target <newToId>.
     --departures <name>   get Departures, e.g. Hannover.
-    --trips <name>        get Trips, e.g. ICE 1001.
+    --trip <tripId>       get Trip for <tripId>.
+    --tripsbyname <name>  get Trips, e.g. ICE1001.
     --nearby <lon> <lat>  get Nearby, e.g. 13.078028 54.308438.
     --reachablefrom <lon> <lat>
                           get ReachableFrom, e.g. 13.078028 54.308438.
@@ -81,7 +83,8 @@ let parse (args: string list) =
        |> Option.orElseWith (fun () -> value2ToArg "--journeys" Journeys args))
       value4ToArg "--journeysfromtrip" JourneysFromTrip args
       valueToArg "--departures" Departures args
-      valueToArg "--trips" Trips args
+      valueToArg "--trip" Trip args
+      valueToArg "--tripsbyname" TripsByName args
       value2ToArg "--nearby" (fun (lon, lat) -> Nearby(float lon, float lat)) args
       value2ToArg "--reachablefrom" (fun (lon, lat) -> ReachableFrom(float lon, float lat)) args
       value4ToArg "--radar" (fun (n, w, s, e) -> Radar(float n, float w, float s, float e)) args
@@ -375,7 +378,17 @@ let departures (name: string) =
     }
     |> AsyncRun
 
-let trips (name: string) =
+let trip (id: string) =
+    use client = new Api.HafasAsyncClient(profile)
+
+    async {
+        let! trip = client.AsyncTrip id "" None
+
+        FsHafas.Printf.Short.Trip trip |> printfn "%s"
+    }
+    |> AsyncRun
+
+let tripsByName (name: string) =
     use client = new Api.HafasAsyncClient(profile)
 
     async {
@@ -504,7 +517,8 @@ let run (arg: CliArguments) =
     | Stop v -> stop v
     | JourneysFromTrip (f, t, d, n) -> journeysFromTrip (f, t, d, n)
     | Departures v -> departures v
-    | Trips v -> trips v
+    | Trip v -> trip v
+    | TripsByName v -> tripsByName v
     | Nearby (lon, lat) -> nearby (lon, lat)
     | ReachableFrom (lon, lat) -> reachableFrom (lon, lat)
     | Radar (n, w, s, e) -> radar (n, w, s, e)

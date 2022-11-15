@@ -192,7 +192,9 @@ module Short =
               + printfnS ident "loadFactor: " leg.loadFactor
               + Remarks ident leg.remarks
 
-    let private Trip (ident: int) (trip: Trip) =
+    let Trip (trip: Trip) =
+        let ident = 0
+
         match trip.origin with
         | Some (U3.Case2 s) -> printfS ident "origin: " (Some "") + Stop 0 s
         | Some (U3.Case1 s) -> printfS ident "origin: " (Some "") + Station 0 s
@@ -327,7 +329,7 @@ module Short =
         |> Array.fold (fun s a -> s + Alternative 0 a) ""
 
     let Trips (trips: Trip []) =
-        trips |> Array.fold (fun s t -> s + Trip 0 t) ""
+        trips |> Array.fold (fun s t -> s + Trip t) ""
 
     let Warnings (warnings: Warning []) =
         warnings
