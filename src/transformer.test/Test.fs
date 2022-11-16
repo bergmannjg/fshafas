@@ -256,3 +256,47 @@ and [<StringEnum>] HintType =
     with
     | :? NUnit.Framework.AssertionException as ex -> ()
 
+[<Test>]
+let TestInherit () =
+    let source =
+        """
+// ts2fable 0.7.1
+module rec HafasClientTypes
+open System
+open Fable.Core
+open Fable.Core.JS
+
+type ReadonlyArray<'T> = System.Collections.Generic.IReadOnlyList<'T>
+
+type [<AllowNullLiteral>] IRealtimeDataUpdatedAt =
+    abstract realtimeDataUpdatedAt: float option with get, set
+
+type [<AllowNullLiteral>] LinesWithRealtimeData =
+    inherit IRealtimeDataUpdatedAt
+    abstract lines: ReadonlyArray<string> option with get, set
+"""
+
+    let expected =
+        """module HafasClientTypes
+open System
+open Fable.Core
+open Fable.Core.JS
+type LinesWithRealtimeData = {
+    realtimeDataUpdatedAt: int option
+    lines: array<string> option
+}
+
+"""
+
+    let options: Transformer.TransformerOptions =
+        { FsHafasOptions.options with
+            prelude = None
+            postlude = None }
+
+    try
+        System.IO.File.WriteAllText("source.fs", source)
+        Transformer.transform "source.fs" "transformed.fs" options
+        let text = System.IO.File.ReadAllText("transformed.fs")
+        Assert.AreEqual(expected, text)
+    with
+    | :? NUnit.Framework.AssertionException as ex -> ()

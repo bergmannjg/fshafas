@@ -21,6 +21,8 @@ type TransformerOptions =
       transformsTypeVal: string -> string -> string option
       transformsTypeDefn: string -> string option }
 
+let mutable private types: Map<string, string List> = Map.empty
+
 let private parse fileName text =
     let checker = FSharpChecker.Create()
 
@@ -120,6 +122,13 @@ let private visitTypeMembers (typename: string) members options =
     for m in members do
         match m with
         | SynMemberDefn.AbstractSlot (slotSig, _, _) -> line.AddRange(visitValSig typename slotSig options)
+        | SynMemberDefn.Inherit (baseType, _, _) ->
+            let name = visitSnyType baseType options
+
+            match types |> Map.tryFind name with
+            | Some members -> line.AddRange(members)
+            | None -> ()
+
         | _ -> failwith (sprintf " - not supported SynMemberDefn: %A" m)
 
     line
@@ -195,6 +204,8 @@ let private visitTypeDefn typeDefn options =
         | SynTypeDefnRepr.ObjectModel (_, members, _) -> visitTypeMembers (LongIdentToString id) members options
         | SynTypeDefnRepr.Simple (simpleRepr, _) -> visitSimple simpleRepr useCompiledNameAttr options
         | _ -> failwith (sprintf " - not supported SynTypeDefnRepr: %A" typeRepr)
+
+    types <- types.Add((LongIdentToString id), strMembers)
 
     let isRecord =
         not (
@@ -284,6 +295,7 @@ let private visitModulesAndNamespaces modulesOrNss options =
 let transform (fromFile: string) (toFile: string) (options: TransformerOptions) =
     let sw = new StreamWriter(path = toFile)
     sw.AutoFlush <- true
+    types <- Map.empty
     hasFirstType <- false
 
     let tree = parse fromFile (SourceText.ofString (File.ReadAllText fromFile))

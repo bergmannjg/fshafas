@@ -33,7 +33,15 @@ mv index.d.ts node_modules/@types/hafas-client/index.d.ts
 
 npx ts2fable node_modules/@types/hafas-client/index.d.ts HafasClientTypes.fs
 
+sed -i '/jsNative/d' HafasClientTypes.fs
+
 dotnet run --project ./Transformer.fsproj FsHafas HafasClientTypes.fs ../../src/fshafas/TypesHafasClient.fs
+
+if [ $? -ne 0 ] 
+then 
+  exit 1 
+fi
+
 dotnet fantomas ../../src/fshafas/TypesHafasClient.fs
 
 rm -f HafasClientTypes.fs

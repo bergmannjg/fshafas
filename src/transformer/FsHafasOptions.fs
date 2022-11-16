@@ -70,7 +70,8 @@ let escapeIdent str =
 let excludeTypes =
     [| "ReadonlyArray"
        "IExports"
-       "FeatureProperties" |]
+       "FeatureProperties"
+       "IRealtimeDataUpdatedAt" |]
 
 let memberTypes = [| "Profile"; "HafasClient" |]
 
