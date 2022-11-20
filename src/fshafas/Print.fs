@@ -118,12 +118,22 @@ module Short =
             |> Array.fold (fun s r -> s + Remark (ident + 2) r) ""
         | None -> ""
 
-    let private ProductOfLeg (ident: int) (leg: Leg) =
-        match leg.line with
+    let private ProductOfLine (ident: int) (line: Line option) =
+        match line with
         | Some line ->
-            match line.product with
-            | Some product -> printfnS ident "product: " (Some product)
-            | None -> ""
+            match line.product, line.name, line.matchId with
+            | Some product, Some name, Some matchId ->
+                printfnS
+                    ident
+                    "product: "
+                    (Some(
+                        product
+                        + ", '"
+                        + name
+                        + "', linenumber "
+                        + matchId
+                    ))
+            | _ -> ""
         | None -> ""
 
     let StopOverStop (ident: int) (so: StopOver) =
@@ -180,7 +190,7 @@ module Short =
           | None -> ""
 
         + if short then
-              ProductOfLeg ident leg
+              ProductOfLine ident leg.line
               + printfnS ident "loadFactor: " leg.loadFactor
           else
               match leg.line with
@@ -188,25 +198,57 @@ module Short =
               | _ -> ""
               + printfnB ident "walking: " leg.walking
               + printfnB ident "transfer: " leg.transfer
-              + ProductOfLeg ident leg
+              + ProductOfLine ident leg.line
               + printfnS ident "loadFactor: " leg.loadFactor
               + Remarks ident leg.remarks
 
-    let Trip (trip: Trip) =
-        let ident = 0
+    let private scheduledDaysIdent
+        (ident: int)
+        (scheduledDaysSummary: string option)
+        (scheduledDays: ScheduledDays option)
+        =
+        match scheduledDaysSummary, scheduledDays with
+        | Some scheduledDaysSummary, _ -> printfnS ident "scheduledDays: " (Some scheduledDaysSummary)
+        | _, Some scheduledDays when scheduledDays.Keys.Length > 0 ->
+            let keys = scheduledDays.Keys
 
-        match trip.origin with
-        | Some (U3.Case2 s) -> printfS ident "origin: " (Some "") + Stop 0 s
-        | Some (U3.Case1 s) -> printfS ident "origin: " (Some "") + Station 0 s
+            match keys |> Array.tryFind (fun k -> scheduledDays.[k]),
+                  keys
+                  |> Array.tryFindBack (fun k -> scheduledDays.[k])
+                with
+            | Some first, Some last ->
+                printfnS
+                    ident
+                    "scheduledDays: "
+                    (Some(
+                        first
+                        + " "
+                        + last
+                    ))
+            | _ -> ""
         | _ -> ""
+
+    let Trip (trip: Trip) =
+        let ident = 2
+
+        printfnS 0 "trip:" (Some "")
+        + printfnS ident "id: " (Some trip.id)
+        + match trip.origin with
+          | Some (U3.Case2 s) -> printfS ident "origin: " (Some "") + Stop 0 s
+          | Some (U3.Case1 s) -> printfS ident "origin: " (Some "") + Station 0 s
+          | _ -> ""
         + match trip.destination with
           | Some (U3.Case2 s) -> printfS ident "destination: " (Some "") + Stop 0 s
           | _ -> ""
         + printfnS ident "departure: " trip.departure
         + printfnS ident "arrival: " trip.arrival
         + printfnArrL ident "stopovers: " trip.stopovers
+        + StopOvers ident trip.stopovers
+        + scheduledDaysIdent ident None trip.scheduledDays
         + match trip.line with
-          | Some (line) when line.name.IsSome -> printfnS ident "Line: " line.name
+          | Some (line) ->
+              printfS ident "Line: " line.name
+              + printfnS 0 ", linenumber: " line.matchId
           | _ -> ""
         + printfnB ident "cancelled: " trip.cancelled
         + printfnB ident "walking: " trip.walking
@@ -226,20 +268,7 @@ module Short =
         printfnS ident "jouney:" (Some "")
         + Legs ident journey.legs true
 
-    let private scheduledDaysIdent (ident: int) (scheduledDays: ScheduledDays option) =
-        match scheduledDays with
-        | Some scheduledDays when scheduledDays.Keys.Length > 0 ->
-            printfnS
-                ident
-                "scheduledDays: "
-                (Some(
-                    scheduledDays.Keys.[0]
-                    + " "
-                    + scheduledDays.Keys.[scheduledDays.Keys.Length - 1]
-                ))
-        | _ -> ""
-
-    let ScheduledDays (scheduledDays: ScheduledDays option) = scheduledDaysIdent 0 scheduledDays
+    let ScheduledDays (scheduledDays: ScheduledDays option) = scheduledDaysIdent 0 None scheduledDays
 
     let Journey (ident: int) (journey: Journey) =
         let short = true
@@ -267,7 +296,7 @@ module Short =
         + Legs ident journey.legs short
         + price
         + distS ()
-        + scheduledDaysIdent (ident + 2) journey.scheduledDays
+        + scheduledDaysIdent (ident + 2) None journey.scheduledDays
         + match short, journey.refreshToken with
           | false, Some refreshToken -> printfnS (ident + 2) "refreshToken: '" (Some(refreshToken + "'"))
           | _ -> ""

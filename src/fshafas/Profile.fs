@@ -31,5 +31,6 @@ module Profile =
             DateTime.parseDateTime,
             ProductsBitmask.parseBitmask,
             Warning.parseWarning,
-            PrognosisType.parsePrognosisType
+            PrognosisType.parsePrognosisType,
+            ScheduledDays.parseScheduledDays
         )

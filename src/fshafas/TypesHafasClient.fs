@@ -118,6 +118,7 @@ and Region =
 
 and Line =
     { ``type``: LineType
+      matchId: string option
       id: string option
       name: string option
       adminCode: string option
@@ -302,7 +303,8 @@ and Trip =
       cycle: Cycle option
       alternatives: array<Alternative> option
       polyline: FeatureCollection option
-      remarks: array<U3<Hint, Status, Warning>> option }
+      remarks: array<U3<Hint, Status, Warning>> option
+      scheduledDays: ScheduledDays option }
 
 and Price =
     { amount: float
@@ -526,6 +528,8 @@ and TripOptions =
       entrances: bool option
       /// parse & expose hints & warnings?
       remarks: bool option
+      /// parse which days each journey is valid on
+      scheduledDays: bool option
       /// Language of the results
       language: string option }
 
@@ -582,6 +586,8 @@ and RefreshJourneyOptions =
       entrances: bool option
       /// parse & expose hints & warnings?
       remarks: bool option
+      /// parse & expose dates the journey is valid on?
+      scheduledDays: bool option
       /// language
       language: string option }
 
@@ -657,7 +663,7 @@ and TripsByNameOptions =
       untilWhen: DateTime option
       onlyCurrentlyRunning: bool option
       products: Products option
-      currentlyStoppingAt: obj option
+      currentlyStoppingAt: string option
       lineName: string option
       operatorNames: array<string> option
       additionalFilters: array<Filter> option }

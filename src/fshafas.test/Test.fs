@@ -70,6 +70,12 @@ let checkEqual (actual: obj) (expected: obj) =
            && o2 <> null
            && o1.ToString().Replace("-", "").ToLower() = o2.ToString().Replace("-", "").ToLower() then // ignore ids
             ()
+        else if name = "matchId" then // ignore
+            ()
+        else if name = "scheduledDays" then // ignore
+            ()
+        else if name = "scheduledDaysSummary" then // ignore
+            ()
         else if name = "distance"
                 && o1 = null
                 && o2 <> null

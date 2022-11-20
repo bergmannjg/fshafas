@@ -217,7 +217,19 @@ module internal Format =
 
         let language = getOptionValue opt (fun v -> Some "de") Default.TripsByNameOptions
 
-        language, { input = lineName; date = date }
+        let filters: FsHafas.Raw.JnyFltr [] =
+            match maybeGetOptionValue opt (fun v -> v.operatorNames) with
+            | Some operatorNames when operatorNames.Length > 0 ->
+                [| { ``type`` = "OP"
+                     mode = "INC"
+                     value = Some operatorNames.[0]
+                     meta = None } |]
+            | _ -> [||]
+
+        language,
+        { input = lineName
+          date = date
+          jnyFltrL = filters }
 
     let locDetailsRequest
         (profile: FsHafas.Endpoint.Profile)

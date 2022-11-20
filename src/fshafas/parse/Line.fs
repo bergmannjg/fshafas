@@ -28,10 +28,10 @@ module internal Line =
                 | Some name -> slug name
                 | None -> None
 
-        let (fahrtNr, adminCode, catOut) =
+        let (fahrtNr, adminCode, catOut, matchId) =
             match p.prodCtx with
-            | Some (prodCtx) -> (prodCtx.num, prodCtx.admin, prodCtx.catOut)
-            | None -> (None, None, None)
+            | Some (prodCtx) -> (prodCtx.num, prodCtx.admin, prodCtx.catOut, prodCtx.matchId)
+            | None -> (None, None, None, None)
 
         let productName =
             match catOut with
@@ -60,6 +60,7 @@ module internal Line =
             id = id
             fahrtNr = fahrtNr
             adminCode = adminCode
+            matchId = matchId
             name = name
             product = productid
             productName = productName

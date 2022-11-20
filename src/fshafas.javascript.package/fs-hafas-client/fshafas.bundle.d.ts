@@ -1,4 +1,4 @@
-import type { HafasClient } from './hafas-client'
+import type { HafasClient, Profile } from './hafas-client'
 
 export const fshafas: FsHafas
 

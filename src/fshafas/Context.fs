@@ -60,7 +60,8 @@ type Profile
         parseDateTime,
         parseBitmask,
         parseWarning,
-        parsePrognosisType
+        parsePrognosisType,
+        parseScheduledDays
     ) =
     member val salt: string = "" with get, set
     member val addChecksum: bool = false with get, set
@@ -125,6 +126,9 @@ type Profile
 
     member val parsePrognosisType: Context -> string option -> FsHafas.Client.PrognosisType option =
         parsePrognosisType with get, set
+
+    member val parseScheduledDays: Context -> FsHafas.Raw.RawSDays -> FsHafas.Client.ScheduledDays option =
+        parseScheduledDays with get, set
 
     member val _locale = locale with get, set
     member val _timezone = timezone with get, set

@@ -86,7 +86,8 @@ module internal ToTrip =
           cycle = l.cycle
           alternatives = l.alternatives
           polyline = l.polyline
-          remarks = l.remarks }
+          remarks = l.remarks
+          scheduledDays = None }
 
 module internal U2StationStop =
 
@@ -175,6 +176,7 @@ module Default =
           subStops = Some true
           entrances = Some true
           remarks = Some true
+          scheduledDays = None
           language = Some "de" }
 
     let LinesOptions: LinesOptions = { language = Some "de" }
@@ -205,6 +207,7 @@ module Default =
           subStops = None
           entrances = None
           remarks = None
+          scheduledDays = None
           language = Some "de" }
 
     let TripsByNameOptions: TripsByNameOptions =
@@ -452,7 +455,8 @@ module Default =
           cycle = None
           alternatives = None
           polyline = None
-          remarks = None }
+          remarks = None
+          scheduledDays = None }
 
     let Movement: Movement =
         { direction = None
@@ -509,6 +513,7 @@ module Default =
           id = None
           name = None
           adminCode = None
+          matchId = None
           fahrtNr = None
           additionalName = None
           product = None

@@ -1068,7 +1068,7 @@ NUGET
       Fable.Core (>= 3.1.6)
       FSharp.Core (>= 4.7.2)
   remote: ~/local.packages
-    FsHafas.JavaScript (1.9.0)
+    FsHafas.JavaScript (1.9.1)
       Fable.Core (>= 4.0.0-theta-005)
       Fable.Fetch (>= 2.6)
       Thoth.Json (>= 7.0)

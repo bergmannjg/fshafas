@@ -36,7 +36,12 @@ module internal Trip =
 #endif
             let leg = ctx.profile.parseJourneyLeg ctx rawSecL date
 
+            let scheduledDays =
+                match j.sDaysL with
+                | Some sDaysL when sDaysL.Length > 0 -> ctx.profile.parseScheduledDays ctx sDaysL.[0] // todo: parse array
+                | _ -> None
+
             match leg.tripId with
-            | Some tripId -> ToTrip.FromLeg tripId leg
+            | Some tripId -> { ToTrip.FromLeg tripId leg with scheduledDays = scheduledDays }
             | _ -> raise (System.ArgumentException("parseTrip failed"))
         | _ -> raise (System.ArgumentException("parseTrip failed"))

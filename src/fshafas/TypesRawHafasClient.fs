@@ -164,6 +164,8 @@ and RawAni =
 and RawSDays =
     { fLocX: int option
       tLocX: int option
+      fLocIdx: int option
+      tLocIdx: int option
       sDaysR: string option
       sDaysI: string option
       sDaysB: string option }
@@ -544,7 +546,11 @@ and TripSearchRequest =
       outFrwd: bool
       trfReq: TrfReq option }
 
-and JourneyMatchRequest = { input: string; date: string option }
+and JourneyMatchRequest =
+    { input: string
+      date: string option
+      jnyFltrL: array<JnyFltr> }
+
 and RawcCrd = { x: int; y: int }
 
 and RawRing =

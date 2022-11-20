@@ -25,6 +25,10 @@ if [ "$1" = "remote" ]; then
 else
     cp ../../../forks/hafas-client/index.d.ts .
 fi
+
+# add new fields
+sed -i 's/type: .line.;/type: \x27line\x27;\n        matchId?: string;/' index.d.ts
+
 cp index.d.ts ../../src/fshafas.javascript.package/fs-hafas-client/hafas-client.d.ts
 mkdir node_modules/@types
 mkdir node_modules/@types/hafas-client

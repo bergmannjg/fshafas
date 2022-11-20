@@ -392,9 +392,35 @@ let tripsByName (name: string) =
     use client = new Api.HafasAsyncClient(profile)
 
     async {
-        let! trips = client.AsyncTripsByName name None
+        let! trips =
+            client.AsyncTripsByName
+                name
+                (Some
+                    { Default.TripsByNameOptions with
+                        ``when`` = Some(System.DateTime(2022, 12, 11))
+                        operatorNames = Some [| "DB Fernverkehr AG" |] })
 
         FsHafas.Printf.Short.Trips trips |> printfn "%s"
+
+        trips
+        |> Array.map (fun t ->
+            match t.origin, t.destination, t.line with
+            | Some (U3.Case2 origin), Some (U3.Case2 destination), Some line ->
+                origin.name, destination.name, line.matchId, t.plannedDeparture
+            | _ -> (None, None, None, None))
+        |> Array.groupBy (fun (o, d, m, _) -> (o, d, m))
+        |> Array.iter (fun ((o, d, m), l) ->
+            let departures =
+                l
+                |> Array.map (fun (_, _, _, d) -> d)
+                |> Array.choose id
+                |> Array.map (fun d -> d.Substring(11, 8))
+                |> Array.distinct
+
+            match o, d, m with
+            | Some o, Some d, Some m -> printfn "%s %s %s %s" o d m (String.concat "," departures)
+            | _ -> ())
+        |> ignore
     }
     |> AsyncRun
 

@@ -9,22 +9,6 @@ module internal Journey =
         [| 0..7 |]
         |> Array.map (fun x -> 1 <<< (7 - x) |> byte)
 
-    let private parseScheduledDays (ctx: Context) (sDays: string) (year: int) =
-
-        let mutable dt = System.DateTime(year, 1, 1)
-
-        FsHafas.Extensions.ConvertEx.FromHexString sDays
-        |> Seq.fold
-            (fun (m: IndexMap<string, bool>) d ->
-                bytes
-                |> Array.fold
-                    (fun (m: IndexMap<string, bool>) b ->
-                        m.Item(dt.ToString("yyyy-MM-dd")) <- d &&& b <> 0uy
-                        dt <- FsHafas.Extensions.DateTimeEx.addDays (dt, 1)
-                        m)
-                    m)
-            (IndexMap<string, bool>(false))
-
     let parseJourney (ctx: Context) (j: FsHafas.Raw.RawOutCon) : Journey =
         let legs =
             j.secL
@@ -39,10 +23,8 @@ module internal Journey =
                 None
 
         let scheduledDays =
-            match ctx.opt.scheduledDays, j.sDays.sDaysB with
-            | true, Some sDaysB ->
-                parseScheduledDays ctx sDaysB (j.date.Substring(0, 4) |> int)
-                |> Some
+            match ctx.opt.scheduledDays with
+            | true -> ctx.profile.parseScheduledDays ctx j.sDays
             | _ -> None
 
         let cycle =
