@@ -53,6 +53,6 @@
 
 * fix RawRequest
 
-## 1.9.1
+## 2.0.0
 
-* add matchId
+* corresponds to hafas-client version 6.0.0

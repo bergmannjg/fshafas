@@ -36,6 +36,7 @@
     <Compile Include="parse/When.fs" />
     <Compile Include="parse/Icon.fs" />
     <Compile Include="parse/Common.fs" />
+    <Compile Include="parse/ScheduledDays.fs" />
     <Compile Include="parse/ArrivalOrDeparture.fs" />
     <Compile Include="parse/Hint.fs" />
     <Compile Include="parse/Location.fs" />

@@ -11,15 +11,16 @@ if [ ! -d "./test-fixtures" ]; then
 
   cat << EOF > index.js
 // created with script 'create-test-fixtures.sh'
-const createClient = require('hafas-client')
-const dbProfile = require('hafas-client/p/db')
-const bvgProfile = require('hafas-client/p/bvg')
-const mobilnrwProfile = require('hafas-client/p/mobil-nrw')
-const oebbProfile = require('hafas-client/p/oebb')
-const saarfahrplanProfile = require('hafas-client/p/saarfahrplan')
-const rejseplanenProfile = require('hafas-client/p/rejseplanen')
-const svvProfile = require('hafas-client/p/svv')
-const geolib = require('geolib');
+import { createClient } from 'hafas-client'
+import { profile as dbProfile } from 'hafas-client/p/db/index.js'
+import { profile as bvgProfile } from 'hafas-client/p/bvg/index.js'
+import { profile as mobilnrwProfile } from 'hafas-client/p/mobil-nrw/index.js'
+import { profile as oebbProfile } from 'hafas-client/p/oebb/index.js'
+import { profile as saarfahrplanProfile } from 'hafas-client/p/saarfahrplan/index.js'
+import { profile as rejseplanenProfile } from 'hafas-client/p/rejseplanen/index.js'
+import { profile as svvProfile } from 'hafas-client/p/svv/index.js'
+import { profile as sncbProfile } from 'hafas-client/p/sncb/index.js'
+import geolib from 'geolib'
 
 var myArgs = process.argv.slice(2);
 

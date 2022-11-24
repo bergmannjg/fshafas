@@ -216,15 +216,7 @@ module Short =
                   keys
                   |> Array.tryFindBack (fun k -> scheduledDays.[k])
                 with
-            | Some first, Some last ->
-                printfnS
-                    ident
-                    "scheduledDays: "
-                    (Some(
-                        first
-                        + " "
-                        + last
-                    ))
+            | Some first, Some last -> printfnS ident "scheduledDays: " (Some(first + " " + last))
             | _ -> ""
         | _ -> ""
 
@@ -301,13 +293,12 @@ module Short =
           | false, Some refreshToken -> printfnS (ident + 2) "refreshToken: '" (Some(refreshToken + "'"))
           | _ -> ""
 
-    let private JourneyItems (ident: int) (journeys: Journey []) =
-        journeys
-        |> Array.fold (fun s j -> s + Journey ident j) ""
-
     let Journeys (journeys: Journeys) =
-        journeys.journeys
-        |> Option.fold (fun s value -> s + JourneyItems 0 value) ""
+        match journeys.journeys with
+        | Some journeys ->
+            journeys
+            |> Array.fold (fun s j -> s + Journey 0 j) ""
+        | None -> ""
 
     let private U2StationStop (ident: int) (location: U2<Station, Stop> option) =
         match location with

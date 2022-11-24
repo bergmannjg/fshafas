@@ -31,15 +31,6 @@ async {
 |> Async.RunSynchronously
 ```
 
-### HafasClient with F\# (compiles to JavaScript and runs with Node.js)
-
-```fsharp
-let client = FsHafas.Api.HafasClient(FsHafas.Profiles.Db.profile) :> FsHafas.Client.HafasClient
-
-client.locations "Hannover" (Some { Default.LocationsOptions with results = Some 3 })
-|> Promise.iter (FsHafas.Printf.Short.Locations >> printfn "%s")
-```
-
 ### HafasAsyncClient with C\#
 
 ```csharp
@@ -51,15 +42,16 @@ using (var client = new FsHafas.Api.HafasAsyncClient(FsHafas.Profiles.Db.profile
 }
 ```
 
-### Using the FsHafas webpack module in JavaScript (example with [hafas-client library](https://github.com/public-transport/hafas-client))
+### Using the FsHafas package in JavaScript (example with [hafas-client library](https://github.com/public-transport/hafas-client))
 
 ```js
 const createClient = require('hafas-client');
 const dbProfile = require('hafas-client/p/db');
 
-import { fshafas } from "fs-hafas-client";
+import { fshafas } from 'fs-hafas-client';
+import { profiles } from 'fs-hafas-profiles';
 
-const client = choose ? fshafas.createClient(fshafas.dbProfile) : createClient(dbProfile, 'agent');
+const client = choose ? fshafas.createClient(profiles.getProfile('db')) : createClient(dbProfile, 'agent');
 
 const locations = () => {
     client.locations('Hannover', { results: 3, linesOfStops: true })
@@ -73,11 +65,11 @@ const locations = () => {
 ```py
 import asyncio
 import sys
-from fshafas.fable_modules.fs_hafas_profiles_python.db.profile import profile
-from fshafas.hafas_client import HafasClient
+from fshafas import HafasClient
+from fshafas.profiles import db_profile 
 
 async def main(argv) -> int:
-    with HafasClient(profile) as client:
+    with HafasClient(db_profile) as client:
         journeys = await client.journeys(argv[0], argv[1])
         for j in journeys.journeys:
             for l in j.legs:

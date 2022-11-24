@@ -1,14 +1,17 @@
 {
   "name": "fs-hafas-client",
-  "version": "1.9.1",
+  "version": "2.0.0",
   "description": "",
-  "main": "fshafas.bundle.js",
-  "types": "fshafas.bundle.d.ts",
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
   "files": [
-		"fshafas.bundle.js",
-		"fshafas.bundle.d.ts",
+		"index.js",
+		"index.d.ts",
 		"hafas-client.d.ts",
-    "fshafas.bundle.js.LICENSE.txt"
+    "Lib.js",
+    "fable_modules/**/*"
+
 	],
   "author": "Jürgen Bergmann",
   "license": "ISC",

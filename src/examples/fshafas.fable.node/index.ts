@@ -1,9 +1,8 @@
+import { Journey, Leg, Trip, ScheduledDays, TripWithRealtimeData } from 'hafas-client';
 import { fshafas } from 'fs-hafas-client';
-import { Journey, Leg, Trip, ScheduledDays } from 'fs-hafas-client/hafas-client';
 import { profiles } from 'fs-hafas-profiles';
-
-import createClient from 'hafas-client';
-import dbProfile from 'hafas-client/p/db/index.js';
+import { createClient } from 'hafas-client';
+import { profile as dbProfile } from 'hafas-client/p/db/index.js';
 
 const myArgs = process.argv.slice(2);
 
@@ -30,9 +29,9 @@ async function tripsByName(name: string) {
     try {
         if (client.tripsByName) {
             const result = await client.tripsByName(name, {})
-            result
+            result.trips
                 .forEach((t: Trip) => {
-                    console.log(t.origin?.name, t.destination?.name, t.line?.name, t.line?.matchId);
+                    console.log(t.origin?.name, t.destination?.name, t.line?.name);
                 });
         }
     } catch (error) {
@@ -43,8 +42,8 @@ async function tripsByName(name: string) {
 async function trip(id: string) {
     try {
         if (client.trip) {
-            const t: Trip = await client.trip(id, "x", {})
-            console.log(t.origin?.name, t.destination?.name, t.line?.name, t.line?.matchId);
+            const { trip }: TripWithRealtimeData = await client.trip(id, {})
+            console.log(trip.origin?.name, trip.destination?.name, trip.line?.name);
         }
     } catch (error) {
         console.error(error);

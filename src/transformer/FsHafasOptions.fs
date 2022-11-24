@@ -71,7 +71,7 @@ let excludeTypes =
     [| "ReadonlyArray"
        "IExports"
        "FeatureProperties"
-       "IRealtimeDataUpdatedAt" |]
+       "RealtimeDataUpdatedAt" |]
 
 let memberTypes = [| "Profile"; "HafasClient" |]
 

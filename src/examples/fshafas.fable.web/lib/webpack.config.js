@@ -18,10 +18,10 @@ module.exports = {
     outputModule: true
   },
   target: "web",
-  entry: './build/Profiles.js',
+  mode: "production",
+  entry: './index.js',
   output: {
-    path: path.join(__dirname, "./fs-hafas-profiles-web"),
-    filename: 'profiles.web.bundle.js',
+    filename: 'bundle.js',
     library: {
       type: 'module'
     }

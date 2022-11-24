@@ -193,15 +193,15 @@ and IcoCrd =
       ``type``: string option }
 
 and Edge =
-    { fromLoc: U3<Station, Stop, Location> option
-      toLoc: U3<Station, Stop, Location> option
+    { fromLocation: U3<Station, Stop, Location> option
+      toLocation: U3<Station, Stop, Location> option
       icon: Icon option
       dir: int option
       icoCrd: IcoCrd option }
 
 and Event =
-    { fromLoc: U3<Station, Stop, Location> option
-      toLoc: U3<Station, Stop, Location> option
+    { fromLocation: U3<Station, Stop, Location> option
+      toLocation: U3<Station, Stop, Location> option
       start: string option
       ``end``: string option
       sections: array<string> option }
@@ -306,6 +306,22 @@ and Trip =
       remarks: array<U3<Hint, Status, Warning>> option
       scheduledDays: ScheduledDays option }
 
+and TripWithRealtimeData =
+    { realtimeDataUpdatedAt: int option
+      trip: Trip }
+
+and TripsWithRealtimeData =
+    { realtimeDataUpdatedAt: int option
+      trips: array<Trip> }
+
+and WarningsWithRealtimeData =
+    { realtimeDataUpdatedAt: int option
+      remarks: array<Warning> }
+
+and LinesWithRealtimeData =
+    { realtimeDataUpdatedAt: int option
+      lines: array<Line> option }
+
 and Price =
     { amount: float
       currency: string
@@ -336,6 +352,14 @@ and Alternative =
       origin: U3<Station, Stop, Location> option
       destination: U3<Station, Stop, Location> option
       prognosisType: PrognosisType option }
+
+and Departures =
+    { realtimeDataUpdatedAt: int option
+      departures: array<Alternative> }
+
+and Arrivals =
+    { realtimeDataUpdatedAt: int option
+      arrivals: array<Alternative> }
 
 /// Leg of journey
 and Leg =
@@ -392,14 +416,22 @@ and Journey =
       scheduledDays: ScheduledDays option }
 
 and Journeys =
-    { earlierRef: string option
+    { realtimeDataUpdatedAt: int option
+      earlierRef: string option
       laterRef: string option
-      journeys: array<Journey> option
-      realtimeDataFrom: int option }
+      journeys: array<Journey> option }
+
+and JourneyWithRealtimeData =
+    { realtimeDataUpdatedAt: int option
+      journey: Journey }
 
 and Duration =
     { duration: int
       stations: array<U3<Station, Stop, Location>> }
+
+and DurationsWithRealtimeData =
+    { realtimeDataUpdatedAt: int option
+      reachable: array<Duration> }
 
 and Frame =
     { origin: U2<Stop, Location>
@@ -415,12 +447,16 @@ and Movement =
       frames: array<Frame> option
       polyline: FeatureCollection option }
 
+and Radar =
+    { realtimeDataUpdatedAt: int option
+      movements: array<Movement> option }
+
 and ServerInfo =
-    { hciVersion: string option
+    { realtimeDataUpdatedAt: int option
+      hciVersion: string option
       timetableStart: string option
       timetableEnd: string option
-      serverTime: string option
-      realtimeDataUpdatedAt: int option }
+      serverTime: string option }
 
 and LoyaltyCard =
     { ``type``: string
@@ -698,25 +734,21 @@ and HafasClient =
             Promise<Journeys>
 
     /// refreshes a Journey
-    abstract member refreshJourney: string -> RefreshJourneyOptions option -> Promise<Journey>
+    abstract member refreshJourney: string -> RefreshJourneyOptions option -> Promise<JourneyWithRealtimeData>
     /// Refetch information about a trip
-    abstract member trip: string -> string -> TripOptions option -> Promise<Trip>
+    abstract member trip: string -> TripOptions option -> Promise<TripWithRealtimeData>
 
     /// Retrieves departures
     abstract member departures:
-        U4<string, Station, Stop, Location> -> DeparturesArrivalsOptions option -> Promise<array<Alternative>>
+        U4<string, Station, Stop, Location> -> DeparturesArrivalsOptions option -> Promise<Departures>
 
     /// Retrieves arrivals
     abstract member arrivals:
-        U4<string, Station, Stop, Location> -> DeparturesArrivalsOptions option -> Promise<array<Alternative>>
+        U4<string, Station, Stop, Location> -> DeparturesArrivalsOptions option -> Promise<Arrivals>
 
     /// Retrieves journeys from trip id to station
     abstract member journeysFromTrip:
-        string ->
-        StopOver ->
-        U4<string, Station, Stop, Location> ->
-        JourneysFromTripOptions option ->
-            Promise<array<Journey>>
+        string -> StopOver -> U4<string, Station, Stop, Location> -> JourneysFromTripOptions option -> Promise<Journeys>
 
     /// Retrieves locations or stops
     abstract member locations: string -> LocationsOptions option -> Promise<array<U3<Station, Stop, Location>>>
@@ -725,15 +757,15 @@ and HafasClient =
     /// Retrieves nearby stops from location
     abstract member nearby: Location -> NearByOptions option -> Promise<array<U3<Station, Stop, Location>>>
     /// Retrieves stations reachable within a certain time from a location
-    abstract member reachableFrom: Location -> ReachableFromOptions option -> Promise<array<Duration>>
+    abstract member reachableFrom: Location -> ReachableFromOptions option -> Promise<DurationsWithRealtimeData>
     /// Retrieves all vehicles currently in an area.
-    abstract member radar: BoundingBox -> RadarOptions option -> Promise<array<Movement>>
+    abstract member radar: BoundingBox -> RadarOptions option -> Promise<Radar>
     /// Retrieves trips by name.
-    abstract member tripsByName: string -> TripsByNameOptions option -> Promise<array<Trip>>
+    abstract member tripsByName: string -> TripsByNameOptions option -> Promise<TripsWithRealtimeData>
     /// Fetches all remarks known to the HAFAS endpoint
-    abstract member remarks: RemarksOptions option -> Promise<array<Warning>>
+    abstract member remarks: RemarksOptions option -> Promise<WarningsWithRealtimeData>
     /// Fetches all lines known to the HAFAS endpoint
-    abstract member lines: string -> LinesOptions option -> Promise<array<Line>>
+    abstract member lines: string -> LinesOptions option -> Promise<LinesWithRealtimeData>
     /// Fetches meta information from the HAFAS endpoint
     abstract member serverInfo: ServerOptions option -> Promise<ServerInfo>
 

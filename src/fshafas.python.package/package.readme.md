@@ -8,7 +8,7 @@ Related:
 
 * [hafas-client](https://github.com/public-transport/hafas-client) JavaScript client for HAFAS public transport APIs,
 * [FPTF](https://github.com/public-transport/friendly-public-transport-format) Friendly Public Transport Format,
-* [@types/hafas-client](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/743f4c8d5d8af49dfb635a31a8720f7bde5b823f/types/hafas-client/index.d.ts) Type definitions for hafas-client 5.25.0.
+* [@types/hafas-client](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/743f4c8d5d8af49dfb635a31a8720f7bde5b823f/types/hafas-client/index.d.ts) Type definitions for hafas-client.
 
 ## Example
 
@@ -17,11 +17,11 @@ Retrieve journeys:
 ```py
 import asyncio
 import sys
-from fshafas.fable_modules.fs_hafas_profiles_python.db.profile import profile
-from fshafas.hafas_client import HafasClient
+from fshafas import HafasClient
+from fshafas.profiles import db_profile 
 
 async def main(argv) -> int:
-    with HafasClient(profile) as client:
+    with HafasClient(db_profile) as client:
         journeys = await client.journeys(argv[0], argv[1])
         for j in journeys.journeys:
             for l in j.legs:

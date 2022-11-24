@@ -74,7 +74,10 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
                     (Parser.parseCommon profile (MergeOptions.JourneysOptions Parser.defaultOptions opt) common res)
         }
 
-    member __.AsyncRefreshJourney (refreshToken: string) (opt: RefreshJourneyOptions option) : Async<Journey> =
+    member __.AsyncRefreshJourney
+        (refreshToken: string)
+        (opt: RefreshJourneyOptions option)
+        : Async<JourneyWithRealtimeData> =
 
         async {
             if enabled (profile :> FsHafas.Client.Profile).refreshJourney then
@@ -83,7 +86,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
 
                 return Parser.parseJourney outConl (Parser.parseCommon profile Parser.defaultOptions common res)
             else
-                return Default.Journey
+                return Default.JourneyWithRealtimeData
         }
 
     member __.AsyncJourneysFromTrip
@@ -91,7 +94,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
         (previousStopOver: StopOver)
         (``to``: U4<string, Station, Stop, Location>)
         (opt: JourneysFromTripOptions option)
-        : Async<array<Journey>> =
+        : Async<Journeys> =
 
         async {
             if
@@ -104,32 +107,39 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
                     )
 
                 return
-                    Parser.parseJourneysArray
-                        outConl
-                        (Parser.parseCommon
-                            profile
-                            (MergeOptions.JourneysFromTripOptions Parser.defaultOptions opt)
-                            common
-                            res)
+                    { Default.Journeys with
+                        journeys =
+                            Parser.parseJourneysArray
+                                outConl
+                                (Parser.parseCommon
+                                    profile
+                                    (MergeOptions.JourneysFromTripOptions Parser.defaultOptions opt)
+                                    common
+                                    res)
+                            |> Some
+                        realtimeDataUpdatedAt = Parser.parseRealtimeDataUpdatedAt res }
             else
-                return [||]
+                return Default.Journeys
         }
 
-    member __.AsyncTrip (id: string) (name: string) (opt: TripOptions option) : Async<Trip> =
+    member __.AsyncTrip (id: string) (opt: TripOptions option) : Async<TripWithRealtimeData> =
 
         async {
             if enabled (profile :> FsHafas.Client.Profile).trip then
-                let! (common, res, journey) = httpClient.AsyncJourneyDetails(Format.tripRequest profile id name opt)
+                let! (common, res, journey) = httpClient.AsyncJourneyDetails(Format.tripRequest profile id "" opt)
 
-                return Parser.parseTrip journey (Parser.parseCommon profile Parser.defaultOptions common res)
+                return
+                    { Default.TripWithRealtimeData with
+                        trip = Parser.parseTrip journey (Parser.parseCommon profile Parser.defaultOptions common res)
+                        realtimeDataUpdatedAt = Parser.parseRealtimeDataUpdatedAt res }
             else
-                return Default.Trip
+                return Default.TripWithRealtimeData
         }
 
     member __.AsyncDepartures
         (name: U4<string, Station, Stop, Location>)
         (opt: DeparturesArrivalsOptions option)
-        : Async<array<Alternative>> =
+        : Async<Departures> =
         async {
             let ``type`` = FsHafas.Parser.ArrivalOrDeparture.DEP
 
@@ -137,16 +147,18 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
                 httpClient.AsyncStationBoard(Format.stationBoardRequest profile ``type`` name opt)
 
             return
-                Parser.parseDeparturesArrivals
-                    ``type``
-                    journey
-                    (Parser.parseCommon profile Parser.defaultOptions common res)
+                { departures =
+                    Parser.parseDeparturesArrivals
+                        ``type``
+                        journey
+                        (Parser.parseCommon profile Parser.defaultOptions common res)
+                  realtimeDataUpdatedAt = Parser.parseRealtimeDataUpdatedAt res }
         }
 
     member __.AsyncArrivals
         (name: U4<string, Station, Stop, Location>)
         (opt: DeparturesArrivalsOptions option)
-        : Async<array<Alternative>> =
+        : Async<Arrivals> =
         async {
             let ``type`` = FsHafas.Parser.ArrivalOrDeparture.ARR
 
@@ -154,10 +166,12 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
                 httpClient.AsyncStationBoard(Format.stationBoardRequest profile ``type`` name opt)
 
             return
-                Parser.parseDeparturesArrivals
-                    ``type``
-                    journey
-                    (Parser.parseCommon profile Parser.defaultOptions common res)
+                { arrivals =
+                    Parser.parseDeparturesArrivals
+                        ``type``
+                        journey
+                        (Parser.parseCommon profile Parser.defaultOptions common res)
+                  realtimeDataUpdatedAt = Parser.parseRealtimeDataUpdatedAt res }
         }
 
     member __.AsyncLocations (name: string) (opt: LocationsOptions option) : Async<array<U3<Station, Stop, Location>>> =
@@ -190,57 +204,78 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
                     (Parser.parseCommon profile (MergeOptions.NearByOptions Parser.defaultOptions opt) common res)
         }
 
-    member __.AsyncReachableFrom (l: Location) (opt: ReachableFromOptions option) : Async<array<Duration>> =
+    member __.AsyncReachableFrom (l: Location) (opt: ReachableFromOptions option) : Async<DurationsWithRealtimeData> =
 
         async {
             if enabled (profile :> FsHafas.Client.Profile).reachableFrom then
                 let! (common, res, locL) = httpClient.AsyncLocGeoReach(Format.locGeoReachRequest profile l opt)
 
-                return Parser.parseDurations locL (Parser.parseCommon profile Parser.defaultOptions common res)
+                return
+                    { Default.DurationsWithRealtimeData with
+                        reachable =
+                            Parser.parseDurations locL (Parser.parseCommon profile Parser.defaultOptions common res)
+                        realtimeDataUpdatedAt = Parser.parseRealtimeDataUpdatedAt res }
             else
-                return Array.empty
+                return Default.DurationsWithRealtimeData
         }
 
-    member __.AsyncRadar (rect: BoundingBox) (opt: RadarOptions option) : Async<array<Movement>> =
+    member __.AsyncRadar (rect: BoundingBox) (opt: RadarOptions option) : Async<Radar> =
 
         async {
             if enabled (profile :> FsHafas.Client.Profile).radar then
                 let! (common, res, jnyL) = httpClient.AsyncJourneyGeoPos(Format.journeyGeoPosRequest profile rect opt)
 
-                return Parser.parseMovements jnyL (Parser.parseCommon profile Parser.defaultOptions common res)
+                return
+                    { Default.Radar with
+                        movements =
+                            Parser.parseMovements jnyL (Parser.parseCommon profile Parser.defaultOptions common res)
+                            |> Some
+                        realtimeDataUpdatedAt = Parser.parseRealtimeDataUpdatedAt res }
             else
-                return Array.empty
+                return Default.Radar
         }
 
-    member __.AsyncTripsByName (lineName: string) (opt: TripsByNameOptions option) : Async<array<Trip>> =
+    member __.AsyncTripsByName (lineName: string) (opt: TripsByNameOptions option) : Async<TripsWithRealtimeData> =
         async {
             if enabled (profile :> FsHafas.Client.Profile).tripsByName then
                 let! (common, res, journey) =
                     httpClient.AsyncJourneyMatch(Format.journeyMatchRequest profile lineName opt)
 
-                return Parser.parseTrips journey (Parser.parseCommon profile Parser.defaultOptions common res)
+                return
+                    { Default.TripsWithRealtimeData with
+                        trips = Parser.parseTrips journey (Parser.parseCommon profile Parser.defaultOptions common res)
+                        realtimeDataUpdatedAt = Parser.parseRealtimeDataUpdatedAt res }
             else
-                return Array.empty
+                return Default.TripsWithRealtimeData
         }
 
-    member __.AsyncRemarks(opt: RemarksOptions option) : Async<array<Warning>> =
+    member __.AsyncRemarks(opt: RemarksOptions option) : Async<WarningsWithRealtimeData> =
         async {
             if enabled (profile :> FsHafas.Client.Profile).remarks then
                 let! (common, res, msgL) = httpClient.AsyncHimSearch(Format.himSearchRequest profile opt)
 
-                return Parser.parseWarnings msgL (Parser.parseCommon profile Parser.defaultOptions common res)
+                return
+                    { Default.WarningsWithRealtimeData with
+                        remarks =
+                            Parser.parseWarnings msgL (Parser.parseCommon profile Parser.defaultOptions common res)
+                        realtimeDataUpdatedAt = Parser.parseRealtimeDataUpdatedAt res }
             else
-                return Array.empty
+                return Default.WarningsWithRealtimeData
         }
 
-    member __.AsyncLines (query: string) (opt: LinesOptions option) : Async<array<Line>> =
+    member __.AsyncLines (query: string) (opt: LinesOptions option) : Async<LinesWithRealtimeData> =
         async {
             if enabled (profile :> FsHafas.Client.Profile).lines then
                 let! (common, res, lineL) = httpClient.AsyncLineMatch(Format.lineMatchRequest profile query opt)
 
-                return Parser.parseLines lineL (Parser.parseCommon profile Parser.defaultOptions common res)
+                return
+                    { Default.LinesWithRealtimeData with
+                        lines =
+                            Parser.parseLines lineL (Parser.parseCommon profile Parser.defaultOptions common res)
+                            |> Some
+                        realtimeDataUpdatedAt = Parser.parseRealtimeDataUpdatedAt res }
             else
-                return Array.empty
+                return Default.LinesWithRealtimeData
         }
 
     member __.AsyncServerInfo(opt: ServerOptions option) : Async<ServerInfo> =

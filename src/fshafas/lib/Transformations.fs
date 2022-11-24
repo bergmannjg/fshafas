@@ -11,7 +11,7 @@ module internal RawDep =
     open FsHafas.Client
 
     let FromRawStopL (s: FsHafas.Raw.RawStop) : FsHafas.Raw.RawDep =
-        { locX = Some s.locX
+        { locX = s.locX
           idx = s.idx
           dProdX = s.dProdX
           dPlatfS = s.dPlatfS
@@ -32,7 +32,7 @@ module internal RawArr =
     open FsHafas.Client
 
     let FromRawStopL (s: FsHafas.Raw.RawStop) : FsHafas.Raw.RawArr =
-        { locX = Some s.locX
+        { locX = s.locX
           idx = s.idx
           aPlatfS = s.aPlatfS
           aOutR = s.aOutR
@@ -458,6 +458,22 @@ module Default =
           remarks = None
           scheduledDays = None }
 
+    let TripWithRealtimeData: TripWithRealtimeData =
+        { trip = Trip
+          realtimeDataUpdatedAt = None }
+
+    let TripsWithRealtimeData: TripsWithRealtimeData =
+        { trips = [||]
+          realtimeDataUpdatedAt = None }
+
+    let WarningsWithRealtimeData: WarningsWithRealtimeData =
+        { remarks = [||]
+          realtimeDataUpdatedAt = None }
+
+    let LinesWithRealtimeData: LinesWithRealtimeData =
+        { lines = None
+          realtimeDataUpdatedAt = None }
+
     let Movement: Movement =
         { direction = None
           tripId = None
@@ -502,11 +518,23 @@ module Default =
           cycle = None
           scheduledDays = None }
 
+    let JourneyWithRealtimeData: JourneyWithRealtimeData =
+        { journey = Journey
+          realtimeDataUpdatedAt = None }
+
     let Journeys: Journeys =
         { earlierRef = None
           laterRef = None
           journeys = None
-          realtimeDataFrom = None }
+          realtimeDataUpdatedAt = None }
+
+    let DurationsWithRealtimeData: DurationsWithRealtimeData =
+        { reachable = [||]
+          realtimeDataUpdatedAt = None }
+
+    let Radar: Radar =
+        { movements = None
+          realtimeDataUpdatedAt = None }
 
     let Line: FsHafas.Client.Line =
         { ``type`` = LineType.Line

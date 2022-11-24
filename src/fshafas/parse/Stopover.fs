@@ -29,7 +29,7 @@ module internal Stopover =
 
     let parseStopover (ctx: Context) (st: FsHafas.Raw.RawStop) (date: string) : FsHafas.Client.StopOver =
         let stop =
-            Common.getElementAt st.locX ctx.common.locations
+            Common.getElementAtSome st.locX ctx.common.locations
             |> U2StationStop.FromSomeU3StationStopLocation
 
         let dep = ctx.profile.parseWhen ctx date st.dTimeS st.dTimeR st.dTZOffset st.dCncl
@@ -89,7 +89,7 @@ module internal Stopover =
         | Some (stopL) ->
             stopL
             |> Array.filter (fun s ->
-                (Common.getElementAt s.locX ctx.common.locations)
+                (Common.getElementAtSome s.locX ctx.common.locations)
                     .IsSome)
             |> Array.map (fun s -> ctx.profile.parseStopover ctx s date)
             |> Some

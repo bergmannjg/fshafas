@@ -101,7 +101,7 @@ and RawRem =
       jid: string option }
 
 and RawStop =
-    { locX: int
+    { locX: int option
       idx: int option
       dProdX: int option
       dInR: bool option

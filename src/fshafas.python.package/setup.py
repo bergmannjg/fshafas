@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='fshafas',
-    version='0.0.13',
+    version='0.0.20',
     description='python client for HAFAS public transport APIs',
     long_description=open('package.readme.md').read(),
     long_description_content_type="text/markdown",
@@ -13,12 +13,13 @@ setup(
     author="Jürgen Bergmann",
     author_email="jbergmann@posteo.de",
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Programming Language :: Python :: 3.8',
     ],
     packages=[
         'fshafas',
+        'fshafas/profiles',
         'fshafas/fable_modules/fs_hafas_python',
         'fshafas/fable_modules/fs_hafas_python/format',
         'fshafas/fable_modules/fs_hafas_python/parse',

@@ -101,14 +101,13 @@ type HafasClient(profile: FsHafas.Client.Profile) =
             client.AsyncRefreshJourney refreshToken opt
 #endif
 
-        member __.trip (id: string) (name: string) (opt: TripOptions option) =
+        member __.trip (id: string) (opt: TripOptions option) =
 #if FABLE_COMPILER
             validateString id
 
-            client.AsyncTrip id name opt
-            |> Async.StartAsPromise
+            client.AsyncTrip id opt |> Async.StartAsPromise
 #else
-            client.AsyncTrip id name opt
+            client.AsyncTrip id opt
 #endif
 
         member __.departures (id: U4<string, Station, Stop, Location>) (opt: DeparturesArrivalsOptions option) =

@@ -268,11 +268,11 @@ open Fable.Core.JS
 
 type ReadonlyArray<'T> = System.Collections.Generic.IReadOnlyList<'T>
 
-type [<AllowNullLiteral>] IRealtimeDataUpdatedAt =
+type [<AllowNullLiteral>] RealtimeDataUpdatedAt =
     abstract realtimeDataUpdatedAt: float option with get, set
 
 type [<AllowNullLiteral>] LinesWithRealtimeData =
-    inherit IRealtimeDataUpdatedAt
+    inherit RealtimeDataUpdatedAt
     abstract lines: ReadonlyArray<string> option with get, set
 """
 

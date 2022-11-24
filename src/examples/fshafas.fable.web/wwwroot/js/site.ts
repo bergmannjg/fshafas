@@ -1,5 +1,4 @@
-﻿import * as fshafas from "./lib/fshafas.web.bundle.js";
-import * as profiles from "./lib/profiles.web.bundle.js";
+﻿import { createClient } from "./lib/bundle.js";
 
 // fshafas.setDebug();
 
@@ -11,7 +10,7 @@ interface LocationResult {
 }
 
 const locations = async (profile: 'db' | 'bvg', name: string) => {
-    const client = fshafas.createClient(profiles.getProfile(profile));
+    const client = createClient(profile);
     const result = await client.locations(name, { results: 5 });
     let arr: LocationResult[] = [];
     result.forEach(x => {
@@ -32,7 +31,7 @@ interface JourneyResult {
 }
 
 const journeys = async (profile: 'db' | 'bvg', from: string, to: string) => {
-    const client = fshafas.createClient(profiles.getProfile(profile));
+    const client = createClient(profile);
     const locationsFrom = await client.locations(from, { results: 1 });
     const locationsTo = await client.locations(to, { results: 1 });
     const arr: JourneyResult[] = [];

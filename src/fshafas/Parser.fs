@@ -74,6 +74,19 @@ module Parser =
             ctx |> Some
         | _ -> None
 
+    let private parseRealtimeDataUpdatedAtFromPlanrtTS (planrtTS: string option) =
+        match planrtTS with
+        | Some planrtTS ->
+            match System.Int32.TryParse planrtTS with
+            | true, i -> Some i
+            | false, _ -> None
+        | None -> None
+
+    let parseRealtimeDataUpdatedAt (res: FsHafas.Raw.RawResult option) =
+        match res with
+        | Some res -> parseRealtimeDataUpdatedAtFromPlanrtTS res.planrtTS
+        | None -> None
+
     let internal parseLocation (locL: FsHafas.Raw.RawLoc option) (ctx: Context option) =
         match ctx, locL with
         | Some (ctx), Some (locL) ->
@@ -106,7 +119,11 @@ module Parser =
         (options: Options)
         (res: FsHafas.Raw.RawResult)
         =
-        parseMovements jnyL (parseCommon profile options res.common (Some res))
+        { Default.Radar with
+            movements =
+                parseMovements jnyL (parseCommon profile options res.common (Some res))
+                |> Some
+            realtimeDataUpdatedAt = parseRealtimeDataUpdatedAtFromPlanrtTS res.planrtTS }
 
     let private addToMap (m: Map<int, array<int>>) (p: FsHafas.Raw.RawPos) =
         if m.ContainsKey p.dur then
@@ -138,12 +155,15 @@ module Parser =
         (options: Options)
         (res: FsHafas.Raw.RawResult)
         =
-        parseDurations posL (parseCommon profile options res.common (Some res))
+        { Default.DurationsWithRealtimeData with
+            reachable = parseDurations posL (parseCommon profile options res.common (Some res))
+            realtimeDataUpdatedAt = parseRealtimeDataUpdatedAtFromPlanrtTS res.planrtTS }
 
     let internal parseJourney (outConL: FsHafas.Raw.RawOutCon [] option) (ctx: Context option) =
         match ctx, outConL with
-        | Some (ctx), Some (outConL) when outConL.Length > 0 -> ctx.profile.parseJourney ctx outConL.[0]
-        | _ -> Default.Journey
+        | Some (ctx), Some (outConL) when outConL.Length > 0 ->
+            { Default.JourneyWithRealtimeData with journey = ctx.profile.parseJourney ctx outConL.[0] }
+        | _ -> Default.JourneyWithRealtimeData
 
     let internal parseJourneysArray (outConL: FsHafas.Raw.RawOutCon [] option) (ctx: Context option) =
         match ctx, outConL with
@@ -169,13 +189,12 @@ module Parser =
             let journeys =
                 outConL
                 |> Array.map (fun o -> ctx.profile.parseJourney ctx o)
-                |> Some
 
             { Default.Journeys with
                 earlierRef = ctx.res.outCtxScrB
                 laterRef = ctx.res.outCtxScrF
-                realtimeDataFrom = ctx.res.planrtTS |> Option.map (fun p -> p |> int)
-                journeys = journeys }
+                realtimeDataUpdatedAt = parseRealtimeDataUpdatedAtFromPlanrtTS ctx.res.planrtTS
+                journeys = Some journeys }
         | _ -> Default.Journeys
 
     let parseJourneysFromResult
@@ -197,7 +216,9 @@ module Parser =
         (options: Options)
         (res: FsHafas.Raw.RawResult)
         =
-        parseTrip journey (parseCommon profile options res.common (Some res))
+        { Default.TripWithRealtimeData with
+            trip = parseTrip journey (parseCommon profile options res.common (Some res))
+            realtimeDataUpdatedAt = parseRealtimeDataUpdatedAtFromPlanrtTS res.planrtTS }
 
     let internal parseTrips (journeys: FsHafas.Raw.RawJny [] option) (ctx: Context option) =
         match ctx, journeys with
@@ -241,7 +262,11 @@ module Parser =
         (options: Options)
         (res: FsHafas.Raw.RawResult)
         =
-        parseLines lines (parseCommon profile options res.common (Some res))
+        { Default.LinesWithRealtimeData with
+            lines =
+                parseLines lines (parseCommon profile options res.common (Some res))
+                |> Some
+            realtimeDataUpdatedAt = parseRealtimeDataUpdatedAtFromPlanrtTS res.planrtTS }
 
     let internal parseWarnings (msgL: FsHafas.Raw.RawHim [] option) (ctx: Context option) =
         match ctx, msgL with
@@ -256,7 +281,9 @@ module Parser =
         (options: Options)
         (res: FsHafas.Raw.RawResult)
         =
-        parseWarnings msgL (parseCommon profile options res.common (Some res))
+        { Default.WarningsWithRealtimeData with
+            remarks = parseWarnings msgL (parseCommon profile options res.common (Some res))
+            realtimeDataUpdatedAt = parseRealtimeDataUpdatedAtFromPlanrtTS res.planrtTS }
 
     let ParseIsoString (datetime: string) =
         let year = datetime.Substring(0, 4) |> int
@@ -322,8 +349,9 @@ module Parser =
         (jnyL: FsHafas.Raw.RawJny [] option)
         (options: Options)
         (res: FsHafas.Raw.RawResult)
-        =
-        parseDeparturesArrivals ``type`` jnyL (parseCommon profile options res.common (Some res))
+        : Departures =
+        { departures = parseDeparturesArrivals ``type`` jnyL (parseCommon profile options res.common (Some res))
+          realtimeDataUpdatedAt = parseRealtimeDataUpdatedAtFromPlanrtTS res.planrtTS }
 
     let internal parseServerInfo (res: FsHafas.Raw.RawResult option) (ctx: Context option) =
         match ctx, res with
@@ -339,5 +367,5 @@ module Parser =
                 timetableStart = res.fpB
                 timetableEnd = res.fpE
                 serverTime = serverTime
-                realtimeDataUpdatedAt = res.planrtTS |> Option.map (fun p -> p |> int) }
+                realtimeDataUpdatedAt = parseRealtimeDataUpdatedAtFromPlanrtTS res.planrtTS }
         | _ -> raise (System.ArgumentException("ServerInfo failed"))

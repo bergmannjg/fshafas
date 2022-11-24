@@ -80,6 +80,8 @@ module internal Location =
                             longitude = lon
                             latitude = lat })
 
+                let isMeta = l.meta
+
                 let products =
                     l.pCls
                     |> Option.map (fun pCls -> ctx.profile.parseBitmask ctx pCls)
@@ -101,6 +103,7 @@ module internal Location =
                              location = location
                              lines = lines
                              products = products
+                             isMeta = isMeta
                              distance = distance }
                      ))
                 else
@@ -112,6 +115,7 @@ module internal Location =
                              location = location
                              lines = lines
                              products = products
+                             isMeta = isMeta
                              distance = distance }
                      ))
             else
@@ -164,8 +168,10 @@ module internal Location =
                         name = stop.name
                         location = stop.location
                         products = stop.products
+                        isMeta = stop.isMeta
                         lines = stop.lines }
                     |> Some
+                | (_, U3.Case1 station) -> Some station
                 | _ -> None
             | Some mMastLocX when mMastLocX < commonLocations.Length ->
                 match commonLocations.[mMastLocX] with
@@ -175,8 +181,10 @@ module internal Location =
                         name = stop.name
                         location = stop.location
                         products = stop.products
+                        isMeta = stop.isMeta
                         lines = stop.lines }
                     |> Some
+                | (U3.Case1 station) -> Some station
                 | _ -> None
             | _ -> None
 

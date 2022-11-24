@@ -64,3 +64,5 @@ src/fshafas.profiles/target.python/nuget/fshafas.profiles.fsproj
 src/fshafas/target.javascript/nuget/fshafas.fsproj
 src/fshafas/target.python/nuget/fshafas.fsproj
 src/transformer/HafasClientTypes.fs
+src/fshafas.javascript.package/fs-hafas-client/Lib.js
+src/fshafas.profiles.javascript.package/fs-hafas-profiles/Profiles.js

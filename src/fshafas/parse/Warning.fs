@@ -6,8 +6,8 @@ module internal Warning =
     open FsHafas.Endpoint
 
     let private parseMsgEdge (ctx: Context) (e: FsHafas.Raw.RawHimMsgEdge) : FsHafas.Client.Edge =
-        { fromLoc = Common.getElementAtSome e.fLocX ctx.common.locations
-          toLoc = Common.getElementAtSome e.tLocX ctx.common.locations
+        { fromLocation = Common.getElementAtSome e.fLocX ctx.common.locations
+          toLocation = Common.getElementAtSome e.tLocX ctx.common.locations
           dir = e.dir
           icoCrd =
             Some
@@ -17,8 +17,8 @@ module internal Warning =
           icon = Common.getElementAtSome e.icoX ctx.common.icons }
 
     let private parseMsgEvent (ctx: Context) (e: FsHafas.Raw.RawHimMsgEvent) : FsHafas.Client.Event =
-        { fromLoc = Common.getElementAtSome e.fLocX ctx.common.locations
-          toLoc = Common.getElementAtSome e.tLocX ctx.common.locations
+        { fromLocation = Common.getElementAtSome e.fLocX ctx.common.locations
+          toLocation = Common.getElementAtSome e.tLocX ctx.common.locations
           start = ctx.profile.parseDateTime ctx e.fDate (Some e.fTime) None
           ``end`` = ctx.profile.parseDateTime ctx e.tDate (Some e.tTime) None
           sections = Some Array.empty }

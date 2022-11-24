@@ -288,15 +288,10 @@ let journeysFromTrip (tripId: string, stopover: string, departure: string, newTo
                             previousStopover
                             newToLoc
                             (Some { Default.JourneysFromTripOptions with stopovers = Some true })
-                | _ -> return [||]
+                | _ -> return Default.Journeys
             }
 
-        Printf.Short.Journeys
-            { earlierRef = None
-              laterRef = None
-              journeys = Some journeys
-              realtimeDataFrom = None }
-        |> printfn "%s"
+        Printf.Short.Journeys journeys |> printfn "%s"
     }
     |> AsyncRun
 
@@ -308,7 +303,7 @@ let refreshJourney (refreshToken: string) =
     async {
         let! journey = client.AsyncRefreshJourney refreshToken None
 
-        FsHafas.Printf.Short.Journey 0 journey
+        FsHafas.Printf.Short.Journey 0 journey.journey
         |> printfn "%s"
     }
     |> AsyncRun
@@ -366,7 +361,7 @@ let departures (name: string) =
             let! departures = client.AsyncDepartures loc (Some options)
 
             let sorted =
-                departures
+                departures.departures
                 |> sortBy (fun dep ->
                     match dep.``when``, dep.stop with
                     | Some w, Some (U2.Case2 s) when s.name.IsSome -> w + s.name.Value
@@ -382,9 +377,10 @@ let trip (id: string) =
     use client = new Api.HafasAsyncClient(profile)
 
     async {
-        let! trip = client.AsyncTrip id "" None
+        let! trip = client.AsyncTrip id None
 
-        FsHafas.Printf.Short.Trip trip |> printfn "%s"
+        FsHafas.Printf.Short.Trip trip.trip
+        |> printfn "%s"
     }
     |> AsyncRun
 
@@ -400,9 +396,10 @@ let tripsByName (name: string) =
                         ``when`` = Some(System.DateTime(2022, 12, 11))
                         operatorNames = Some [| "DB Fernverkehr AG" |] })
 
-        FsHafas.Printf.Short.Trips trips |> printfn "%s"
+        FsHafas.Printf.Short.Trips trips.trips
+        |> printfn "%s"
 
-        trips
+        trips.trips
         |> Array.map (fun t ->
             match t.origin, t.destination, t.line with
             | Some (U3.Case2 origin), Some (U3.Case2 destination), Some line ->
@@ -459,7 +456,7 @@ let reachableFrom (lon: float, lat: float) =
                         maxTransfers = Some 0
                         maxDuration = Some 10 })
 
-        FsHafas.Printf.Short.Durations durations
+        FsHafas.Printf.Short.Durations durations.reachable
         |> printfn "%s"
     }
     |> AsyncRun
@@ -481,7 +478,7 @@ let radar (n: float, w: float, s: float, e: float) =
                         frames = Some 10
                         products = (trains ()) })
 
-        FsHafas.Printf.Short.Movements movements
+        FsHafas.Printf.Short.Movements(Option.defaultValue [||] movements.movements)
         |> printfn "%s"
     }
     |> AsyncRun
@@ -503,7 +500,7 @@ let remarks () =
     async {
         let! warnings = client.AsyncRemarks None
 
-        FsHafas.Printf.Short.Warnings warnings
+        FsHafas.Printf.Short.Warnings warnings.remarks
         |> printfn "%s"
     }
     |> AsyncRun
@@ -514,7 +511,8 @@ let lines (name: string) =
     async {
         let! lines = client.AsyncLines name None
 
-        FsHafas.Printf.Short.Lines lines |> printfn "%s"
+        FsHafas.Printf.Short.Lines(Option.defaultValue [||] lines.lines)
+        |> printfn "%s"
     }
     |> AsyncRun
 
