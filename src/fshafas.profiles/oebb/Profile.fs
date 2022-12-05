@@ -8,7 +8,7 @@ module Oebb =
     profile._timezone <- "Europe/Vienna"
     profile._endpoint <- "https://fahrplan.oebb.at/bin/mgate.exe"
     profile.salt <- ""
-    profile.cfg <- Some { polyEnc = "GPA"; rtMode = None }
+    profile.cfg <- Some { polyEnc = Some "GPA"; rtMode = None }
     profile.baseRequest <- Some OebbConfig.Request.request
     profile._products <- OebbConfig.Products.products
     profile.departuresGetPasslist <- false

@@ -203,7 +203,8 @@ module internal Format =
           getPasslist = stopovers
           getPolyline = polylines
           getTariff = tickets
-          ctxRecon = Some refreshToken }
+          ctxRecon = None
+          outReconL = Some [| { ctx = Some refreshToken } |] }
 
     let journeyMatchRequest
         (profile: FsHafas.Endpoint.Profile)

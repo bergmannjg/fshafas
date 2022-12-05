@@ -417,8 +417,8 @@ module Db =
 
     profile.cfg <-
         Some
-            { polyEnc = "GPA"
-              rtMode = Some "HYBRID" }
+            { polyEnc = None
+              rtMode = Some "REALTIME" }
 
     profile.baseRequest <- Some DbConfig.Request.request
     profile._products <- DbConfig.Products.products

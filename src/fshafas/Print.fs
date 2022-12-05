@@ -298,9 +298,9 @@ module Short =
         + price
         + distS ()
         + scheduledDaysIdent (ident + 2) None journey.scheduledDays
-        + match short, journey.refreshToken with
-          | false, Some refreshToken -> printfnS (ident + 2) "refreshToken: '" (Some(refreshToken + "'"))
-          | _ -> ""
+        + match journey.refreshToken with
+          | Some refreshToken -> printfnS (ident + 2) "refreshToken: '" (Some(refreshToken + "'"))
+          | None -> ""
 
     let Journeys (journeys: Journeys) =
         match journeys.journeys with

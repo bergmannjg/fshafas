@@ -15,6 +15,7 @@ open Arguments
 type CliArguments =
     | Locations of name: string
     | Stop of id: string
+    | RefreshJourney of token: string
     | Journeys of from: string * ``to``: string
     | JourneysWithOptions of from: string * ``to``: string * options: string
     | JourneysFromTrip of tripId: string * stopover: string * departure: string * newToId: string
@@ -78,6 +79,7 @@ let parse (args: string list) =
     [ valueToArg "--profile" (toProfile >> Profile) args
       flagToArg "--debug" Debug args
       valueToArg "--locations" Locations args
+      valueToArg "--refreshjourney" RefreshJourney args
       valueToArg "--stop" Stop args
       (value3ToArg "--journeys" JourneysWithOptions args
        |> Option.orElseWith (fun () -> value2ToArg "--journeys" Journeys args))
@@ -536,6 +538,7 @@ let run (arg: CliArguments) =
     | Debug -> Log.Debug <- true
     | Profile p -> profile <- p
     | Locations v -> locations v
+    | RefreshJourney v -> refreshJourney v
     | Journeys (f, t) -> journeys (f, t, None)
     | JourneysWithOptions (f, t, o) -> journeys (f, t, Some o)
     | Stop v -> stop v

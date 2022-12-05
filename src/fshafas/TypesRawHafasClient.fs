@@ -450,7 +450,7 @@ and RawResponse =
       svcResL: array<SvcRes> option }
 
 and Cfg =
-    { polyEnc: string
+    { polyEnc: string option
       rtMode: string option }
 
 and Loc =
@@ -508,7 +508,8 @@ and ReconstructionRequest =
       getPasslist: bool
       getPolyline: bool
       getTariff: bool
-      ctxRecon: string option }
+      ctxRecon: string option
+      outReconL: array<RawRecon> option }
 
 and LocData =
     { loc: Loc

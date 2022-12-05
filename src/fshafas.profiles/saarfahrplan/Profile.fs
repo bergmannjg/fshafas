@@ -9,7 +9,7 @@ module SaarFahrplan =
     profile._endpoint <- "https://saarfahrplan.de/bin/mgate.exe"
     profile.salt <- "HJtlubisvxiJxss"
     profile.addMicMac <- true
-    profile.cfg <- Some { polyEnc = "GPA"; rtMode = None }
+    profile.cfg <- Some { polyEnc = Some "GPA"; rtMode = None }
     profile.baseRequest <- Some SaarFahrplanConfig.Request.request
     profile._products <- SaarFahrplanConfig.Products.products
     profile._trip <- Some true

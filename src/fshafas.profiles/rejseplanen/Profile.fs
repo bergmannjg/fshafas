@@ -8,7 +8,7 @@ module Rejseplanen =
     profile._timezone <- "Europe/Copenhagen"
     profile._endpoint <- "https://mobilapps.rejseplanen.dk/bin/iphone.exe"
     profile.salt <- ""
-    profile.cfg <- Some { polyEnc = "GPA"; rtMode = None }
+    profile.cfg <- Some { polyEnc = Some "GPA"; rtMode = None }
     profile.baseRequest <- Some RejseplanenConfig.Request.request
     profile._products <- RejseplanenConfig.Products.products
     profile.departuresGetPasslist <- false

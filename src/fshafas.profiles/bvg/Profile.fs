@@ -8,7 +8,7 @@ module Bvg =
     profile._timezone <- "Europe/Berlin"
     profile._endpoint <- "https://bvg-apps-ext.hafas.de/bin/mgate.exe"
     profile.salt <- ""
-    profile.cfg <- Some { polyEnc = "GPA"; rtMode = None }
+    profile.cfg <- Some { polyEnc = Some "GPA"; rtMode = None }
     profile.baseRequest <- Some BvgConfig.Request.request
     profile._products <- BvgConfig.Products.products
     profile._trip <- Some true

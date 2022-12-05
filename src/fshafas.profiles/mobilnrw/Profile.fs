@@ -8,7 +8,7 @@ module MobilNrw =
     profile._timezone <- "Europe/Berlin"
     profile._endpoint <- "https://nrw.hafas.de/bin/mgate.exe"
     profile.salt <- ""
-    profile.cfg <- Some { polyEnc = "GPA"; rtMode = None }
+    profile.cfg <- Some { polyEnc = Some "GPA"; rtMode = None }
     profile.baseRequest <- Some MobilNrwConfig.Request.request
     profile._products <- MobilNrwConfig.Products.products
     profile._trip <- Some true
