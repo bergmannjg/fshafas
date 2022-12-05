@@ -136,7 +136,7 @@ type Profile
     member val _products: ProductType [] = [||] with get, set
     member val _trip = None with get, set
     member val _radar = None with get, set
-    member val _refreshJourney = None with get, set
+    member val _refreshJourney = Some true with get, set
     member val _journeysFromTrip = None with get, set
     member val _reachableFrom = None with get, set
     member val _journeysWalkingSpeed = None with get, set
