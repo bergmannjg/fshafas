@@ -245,7 +245,8 @@ and [<StringEnum>] PrognosisType =
 
 /// A stopover represents a vehicle stopping at a stop/station at a specific time.
 and StopOver =
-    { stop: U2<Station, Stop> option
+    { additionalStop: bool option
+      stop: U2<Station, Stop> option
       /// null, if last stopOver of trip
       departure: string option
       departureDelay: int option

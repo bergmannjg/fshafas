@@ -148,8 +148,17 @@ module Short =
         | Some (U2.Case1 s) -> printfS ident "origin: " (Some "") + Station 0 s
         | _ -> ""
         + match so.departure with
-          | Some departure -> printfnS ident "departure: " so.departure
-          | None -> printfnS ident "arrival: " so.arrival
+          | Some _ -> printfnS ident "departure: " so.departure
+          | None ->
+              match so.arrival with
+              | Some _ -> printfnS ident "arrival: " so.arrival
+              | None -> ""
+        + match so.additionalStop with
+          | Some additionalStop when additionalStop -> printfnS ident "additionalStop: " (Some "true")
+          | _ -> ""
+        + match so.cancelled with
+          | Some cancelled when cancelled -> printfnS ident "cancelled: " (Some "true")
+          | _ -> ""
 
     let private StopOvers (ident: int) (stopOvers: StopOver [] option) =
         match stopOvers with
@@ -176,7 +185,7 @@ module Short =
           | _ -> ""
         + printfnS ident "departure: " leg.departure
         + printfnS ident "arrival: " leg.arrival
-        + if short then
+        + if not short then
               ""
           else
               StopOvers ident leg.stopovers

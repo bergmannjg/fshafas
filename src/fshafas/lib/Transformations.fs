@@ -419,7 +419,8 @@ module Default =
           passBy = None
           cancelled = None
           departurePrognosisType = None
-          arrivalPrognosisType = None }
+          arrivalPrognosisType = None
+          additionalStop = None }
 
     let Trip: Trip =
         { id = ""

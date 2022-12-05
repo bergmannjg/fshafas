@@ -18,3 +18,7 @@
 
 * corresponds to fshafas version 2.0.0
 * corresponds to hafas-client version 6.0.0
+
+## 2.0.1
+
+* corresponds to fshafas version 2.0.1

@@ -133,7 +133,8 @@ and RawStop =
       aProgType: string option
       ``type``: string option
       msgL: array<RawMsg> option
-      remL: array<RawRem> option }
+      remL: array<RawRem> option
+      isAdd: bool option }
 
 and PpLocRef = { ppIdx: int; locX: int }
 

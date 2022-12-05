@@ -25,7 +25,8 @@ module internal Stopover =
           passBy = None
           cancelled = None
           departurePrognosisType = None
-          arrivalPrognosisType = None }
+          arrivalPrognosisType = None
+          additionalStop = None }
 
     let parseStopover (ctx: Context) (st: FsHafas.Raw.RawStop) (date: string) : FsHafas.Client.StopOver =
         let stop =
@@ -78,7 +79,8 @@ module internal Stopover =
             remarks = Common.msgLToRemarks ctx st.msgL
             passBy = passBy
             arrivalPrognosisType = ctx.profile.parsePrognosisType ctx st.aProgType
-            departurePrognosisType = ctx.profile.parsePrognosisType ctx st.dProgType }
+            departurePrognosisType = ctx.profile.parsePrognosisType ctx st.dProgType
+            additionalStop = st.isAdd }
 
     let parseStopovers
         (ctx: Context)

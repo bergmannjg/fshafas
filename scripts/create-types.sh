@@ -27,7 +27,8 @@ else
 fi
 
 # add new fields
-sed -i 's/type: .line.;/type: \x27line\x27;\n        matchId?: string;/' index.d.ts
+sed -i 's/type: .line.;/type: \x27line\x27;\n    matchId?: string;/' index.d.ts
+sed -i 's/interface StopOver {/interface StopOver {\n    additionalStop?: boolean;/' index.d.ts
 
 cp index.d.ts ../../src/fshafas.javascript.package/fs-hafas-client/hafas-client.d.ts
 cp index.d.ts ../../src/fshafas.profiles.javascript.package/fs-hafas-profiles/hafas-client.d.ts

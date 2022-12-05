@@ -239,7 +239,7 @@ let journeys (from: string, ``to``: string, someOptions: string option) =
         | Some options -> getJourneyOptions options
         | None ->
             { Default.JourneysOptions with
-                results = Some 1
+                results = Some 4
                 products = (products ())
                 stopovers = None
                 polylines = Some true

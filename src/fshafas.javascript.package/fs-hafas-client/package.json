@@ -1,6 +1,6 @@
 {
   "name": "fs-hafas-client",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "",
   "type": "module",
   "main": "index.js",
@@ -17,7 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "google-polyline": "^1.0.3",
-    "isomorphic-fetch": "^2.2.1",
+    "isomorphic-fetch": "^3.0.0",
     "luxon": "^2.3.0",
     "md5": "^2.3.0",
     "slugg": "^1.2.1"

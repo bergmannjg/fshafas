@@ -44,6 +44,8 @@ let runProc filename args startDir =
         let cleanOut l =
             l
             |> Seq.filter (fun o -> String.IsNullOrEmpty o |> not)
+            |> Seq.filter (fun o -> o.Contains "ExperimentalWarning" |> not)
+            |> Seq.filter (fun o -> o.Contains "node --trace-warnings" |> not)
 
         cleanOut outputs, cleanOut errors
     with

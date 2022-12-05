@@ -124,13 +124,13 @@ Target.create "BuildJavaScriptPackage" (fun _ ->
     Shell.cleanDir ("./src/fshafas.javascript.package/fs-hafas-client/fable_modules")
 
     let argsClient =
-        "./fshafas.fable.fsproj --typedArrays false --outDir ./fs-hafas-client"
+        "./fshafas.fable.fsproj --typedArrays false --noCache --outDir ./fs-hafas-client"
 
     DotNet.exec (DotNet.Options.withWorkingDirectory "./src/fshafas.javascript.package") "fable" argsClient
     |> checkResult "BuldFableWebpack failed"
 
     let argsProfile =
-        "./fshafas.fable.fsproj --typedArrays false --outDir ./fs-hafas-profiles"
+        "./fshafas.fable.fsproj --typedArrays false --noCache --outDir ./fs-hafas-profiles"
 
     Shell.cleanDir ("./src/fshafas.profiles.javascript.package/build")
 

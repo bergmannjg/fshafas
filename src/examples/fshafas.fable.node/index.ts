@@ -1,4 +1,4 @@
-import { Journey, Leg, Trip, ScheduledDays, TripWithRealtimeData } from 'hafas-client';
+import { Journey, Leg, Trip, ScheduledDays, TripWithRealtimeData } from 'fs-hafas-client/hafas-client.js';
 import { fshafas } from 'fs-hafas-client';
 import { profiles } from 'fs-hafas-profiles';
 import { createClient } from 'hafas-client';

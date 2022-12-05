@@ -39,6 +39,10 @@ let DotnetEqualsToSource (prefix: string) (args: string) (source: string -> seq<
     Assert.True(neterrors |> Seq.isEmpty)
 
     let (outputs, errors) = source args
+
+    if not (Seq.isEmpty errors) then
+        fprintfn stderr "errors: %A" errors
+
     Assert.True(errors |> Seq.isEmpty)
 
     dump "net" args netoutputs

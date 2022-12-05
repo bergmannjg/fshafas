@@ -3,7 +3,7 @@
   "type": "module",
   "dependencies": {
     "google-polyline": "^1.0.3",
-    "isomorphic-fetch": "^2.2.1",
+    "isomorphic-fetch": "^3.0.0",
     "luxon": "^2.3.0",
     "md5": "^2.3.0",
     "slugg": "^1.2.1"
