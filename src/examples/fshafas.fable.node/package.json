@@ -5,8 +5,8 @@
     "main": "dist/index.js",
     "type": "module",
     "dependencies": {
-        "fs-hafas-client": "file:../../fshafas.javascript.package/fs-hafas-client-2.0.1.tgz",
-        "fs-hafas-profiles": "file:../../fshafas.profiles.javascript.package/fs-hafas-profiles-2.0.1.tgz",
+        "fs-hafas-client": "https://github.com/bergmannjg/fshafas/releases/download/2.1.0/fs-hafas-client-2.1.0.tgz",
+        "fs-hafas-profiles": "https://github.com/bergmannjg/fshafas/releases/download/2.1.0/fs-hafas-profiles-2.1.0.tgz",
         "hafas-client": "^6.0.0"
     },
     "devDependencies": {

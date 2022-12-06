@@ -1,6 +1,6 @@
 {
   "name": "fs-hafas-client",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "",
   "type": "module",
   "main": "index.js",
@@ -11,7 +11,6 @@
 		"hafas-client.d.ts",
     "Lib.js",
     "fable_modules/**/*"
-
 	],
   "author": "Jürgen Bergmann",
   "license": "ISC",
