@@ -104,9 +104,15 @@ module internal Format =
               field = "S" } }
 
     let private makeLocLTypeS (profile: FsHafas.Endpoint.Profile) (id: string) : FsHafas.Raw.Loc =
+        let k =
+            if System.Text.RegularExpressions.Regex.IsMatch(id, @"^\d{6,}$") then
+                "L"
+            else
+                "O"
+
         { ``type`` = "S"
           name = None
-          lid = Some("A=1@L=" + (profile.formatStation id) + "@") }
+          lid = Some($"A=1@" + k + "=" + id + "@") }
 
     let private makeLoclTypeA (location: FsHafas.Client.Location) : FsHafas.Raw.Loc =
         let x =
