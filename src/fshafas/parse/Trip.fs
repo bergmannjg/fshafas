@@ -20,6 +20,7 @@ module internal Trip =
                   dep = RawDep.FromRawStopL stopL.[0]
                   arr = RawArr.FromRawStopL stopL.[stopL.Length - 1]
                   jny = Some j
+                  parJnyL = None
                   resState = None
                   resRecommendation = None
                   gis = None }

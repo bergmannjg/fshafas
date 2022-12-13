@@ -23,12 +23,14 @@ and RawDep =
       dProgType: string option
       dTrnCmpSX: RawTrnCmpSX option
       dTZOffset: int option
+      msgL: array<RawMsg> option
       ``type``: string option
       dTimeR: string option
       dCncl: bool option
       dPltfS: RawPltf option
       dPlatfR: string option
-      dPltfR: RawPltf option }
+      dPltfR: RawPltf option
+      dPlatfCh: bool option }
 
 and RawArr =
     { locX: int option
@@ -38,6 +40,7 @@ and RawArr =
       aTimeS: string option
       aProgType: string option
       aTZOffset: int option
+      msgL: array<RawMsg> option
       ``type``: string option
       aTimeR: string option
       aCncl: bool option
@@ -84,6 +87,8 @@ and RawHim =
 and RawMsg =
     { ``type``: string
       remX: int option
+      sty: string option
+      txtC: RawRGB option
       fLocX: int option
       tLocX: int option
       fIdx: int option
@@ -114,6 +119,7 @@ and RawStop =
       dPltfS: RawPltf option
       dPlatfR: string option
       dPltfR: RawPltf option
+      dPlatfCh: bool option
       dProgType: string option
       dDirTxt: string option
       dDirFlg: string option
@@ -172,7 +178,12 @@ and RawSDays =
       sDaysB: string option }
 
 and RawPolyG = { polyXL: array<int> }
-and RawCrd = { x: int; y: int; z: int option }
+
+and RawCrd =
+    { x: int
+      y: int
+      z: int option
+      floor: int option }
 
 and RawFreq =
     { jnyL: array<RawJny> option
@@ -200,7 +211,12 @@ and RawJny =
       ani: RawAni option
       pos: RawCrd option
       freq: RawFreq option
-      prodL: array<RawProd> option }
+      prodL: array<RawProdRef> option
+      dirL: array<RawDirRef> option
+      sumLDrawStyleX: int option
+      resLDrawStyleX: int option
+      trainStartDate: string option
+      durS: string option }
 
 and RawGis =
     { dist: int option
@@ -218,6 +234,7 @@ and RawSec =
       dep: RawDep
       arr: RawArr
       jny: RawJny option
+      parJnyL: array<RawJny> option
       resState: string option
       resRecommendation: string option
       gis: RawGis option }
@@ -230,7 +247,8 @@ and RawSotCtxt =
       pLocX: int option
       reqMode: string
       sectX: int option
-      calcTime: string }
+      calcTime: string
+      tName: string option }
 
 and Content = { ``type``: string; content: string }
 and ExtCont = { content: Content }
@@ -245,9 +263,14 @@ and RawPrice = { amount: int option }
 
 and RawFare =
     { price: RawPrice option
+      desc: string option
       isFromPrice: bool option
+      isPartPrice: bool option
+      retPriceIsCompletePrice: bool option
+      retPrice: int option
       isBookable: bool option
       isUpsell: bool option
+      verbundName: string option
       targetCtx: string option
       buttonText: string option
       name: string option
@@ -267,6 +290,8 @@ and RawOutCon =
     { cid: string
       date: string
       dur: string
+      durS: string option
+      durR: string option
       chg: int
       sDays: RawSDays
       dep: RawDep
@@ -285,6 +310,8 @@ and RawOutCon =
       cksum: string
       msgL: array<RawMsg> option
       recon: RawRecon option
+      intvlSubscr: string option
+      originType: string option
       freq: RawFreq option }
 
 and RawItem =
@@ -332,6 +359,7 @@ and RawProdCtx =
       catIn: string option
       catCode: string option
       admin: string option
+      addName: string option
       lineId: string option }
 
 and RawOp = { name: string; icoX: int }
@@ -344,10 +372,12 @@ and RawProd =
       prodCtx: RawProdCtx option
       cls: int option
       line: string option
-      addName: string option
-      fLocX: int option
+      addName: string option }
+
+and RawProdRef =
+    { fLocX: int option
       tLocX: int option
-      prodX: int option
+      prodX: int
       fIdx: int option
       tIdx: int option }
 
@@ -362,6 +392,14 @@ and RawIco =
       bg: RawRGB option }
 
 and RawDir = { txt: string; flg: string option }
+
+and RawDirRef =
+    { dirX: int option
+      fLocX: int option
+      tLocX: int option
+      fIdx: int option
+      tIdx: int option }
+
 and RawTcoc = { c: string; r: int option }
 and RawHimMsgCat = { id: int }
 
@@ -443,6 +481,7 @@ and SvcRes =
 
 and RawResponse =
     { ver: string
+      ext: string option
       lang: string
       id: string option
       err: string option
