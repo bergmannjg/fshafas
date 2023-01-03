@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants>FABLE_COMPILER</DefineConstants>
+  </PropertyGroup>  <ItemGroup>
+    <Compile Include="Print.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Hafas.Client.Bindings" Version="1.0.0" />
+  </ItemGroup>
+  <PropertyGroup>
+    <RestoreSources>$(RestoreSources);$(HOME)/local.packages</RestoreSources>
+  </PropertyGroup>
+ <Import Project="..\..\..\.paket\Paket.Restore.targets" />
+</Project>

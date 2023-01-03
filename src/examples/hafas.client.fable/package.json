@@ -1,0 +1,8 @@
+{
+    "private": true,
+    "type": "module",
+    "dependencies": {
+      "hafas-client": "^6.0.0"
+    }
+  }
+  

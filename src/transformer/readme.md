@@ -1,6 +1,6 @@
 # Transform F# interface types to record types
 
-Transform F# interface types from the ts2fable generated [file](https://github.com/bergmannjg/hafas-client-fable/blob/master/src/HafasClientTypes.fs) to record types in this [file](../Types-Hafas.fs).
+Transform F# interface types from the ts2fable generated file to record types.
 
 ## Example
 
@@ -43,7 +43,7 @@ type [<AllowNullLiteral>] Station =
     abstract distance: float option with get, set
 ```
 
-and this is tranformed with [transformer](./src/transformer) to the following F# record type
+and this is tranformed with [Transformer](./Transformer.fs) to the following F# record type
 
 ```fsharp
 type Station =
