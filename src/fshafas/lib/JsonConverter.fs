@@ -11,7 +11,7 @@ module internal Converter =
     open System.Text.Json.Serialization
     open System.Text.Json
 
-    let private emptyJsonObject = "{}"
+    let emptyJsonObject = "{}"
 
     type UnionValueConverter<'a>() =
         inherit JsonConverter<'a>()
@@ -153,7 +153,7 @@ module internal Converter =
     type U3EraseConverter<'S, 'T, 'U>(uc: UnionCaseSelection) =
         inherit JsonConverterFactory()
 
-        override this.CanConvert(t: Type) : bool =
+        override this.CanConvert(t: Type) : bool = 
             t.IsGenericType
             && t.GetGenericTypeDefinition() = typedefof<U3<'S, 'T, 'U>>
 

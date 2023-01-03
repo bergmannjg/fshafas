@@ -156,7 +156,7 @@ module internal Location =
         (i: int)
         (l: FsHafas.Raw.RawLoc)
         (locations: (FsHafas.Raw.RawLoc * U3<FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>) [])
-        (commonLocations: U3<FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location> [])
+        (commonLocations: StationStopLocation [])
         =
         let station =
             match l.mMastLocX with
@@ -175,7 +175,7 @@ module internal Location =
                 | _ -> None
             | Some mMastLocX when mMastLocX < commonLocations.Length ->
                 match commonLocations.[mMastLocX] with
-                | U3.Case2 stop ->
+                | StationStopLocation.Stop stop ->
                     { Default.Station with
                         id = stop.id
                         name = stop.name
@@ -184,7 +184,7 @@ module internal Location =
                         isMeta = stop.isMeta
                         lines = stop.lines }
                     |> Some
-                | (U3.Case1 station) -> Some station
+                | (StationStopLocation.Station station) -> Some station
                 | _ -> None
             | _ -> None
 
@@ -204,3 +204,8 @@ module internal Location =
             match u3 with
             | U3.Case3 l when l.latitude = None || l.longitude = None -> false
             | _ -> true)
+        |> Array.map (fun x ->
+            match x with
+            | U3.Case1 s -> StationStopLocation.Station s
+            | U3.Case2 s -> StationStopLocation.Stop s
+            | U3.Case3 s -> StationStopLocation.Location s)

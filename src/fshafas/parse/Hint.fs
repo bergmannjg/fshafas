@@ -19,7 +19,7 @@ module internal Hint =
           text = ""
           tripId = None }
 
-    let parseHint (ctx: Context) (h: FsHafas.Raw.RawRem) : U3<Hint, Status, Warning> option =
+    let parseHint (ctx: Context) (h: FsHafas.Raw.RawRem) : HintStatusWarning option =
         let text =
             match h.txtN with
             | Some txtN -> txtN.Trim()
@@ -34,20 +34,20 @@ module internal Hint =
         let trim (s: string option) = s |> Option.map (fun s -> s.Trim())
 
         if h.``type`` = "M" then
-            U3<Hint, Status, Warning>.Case2
+            HintStatusWarning.Status
                 ({ defaultStatus with
                     text = text
                     summary = h.txtS |> trim
                     code = code })
             |> Some
         else if "AI".Contains h.``type`` then
-            U3<Hint, Status, Warning>.Case1
+            HintStatusWarning.Hint
                 ({ defaultHint with
                     text = text
                     code = code })
             |> Some
         else if "DURNYQP".Contains h.``type`` then
-            U3<Hint, Status, Warning>.Case2
+            HintStatusWarning.Status
                 ({ defaultStatus with
                     text = text
                     code = code })

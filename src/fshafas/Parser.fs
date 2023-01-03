@@ -3,8 +3,119 @@ namespace FsHafas.Api
 open FsHafas.Parser
 open FsHafas.Client
 
+#if !FABLE_COMPILER
+module internal ConverterEx =
+
+    open System
+    open System.Text.Json.Serialization
+    open System.Text.Json
+
+    open Converter
+
+    type HintStatusWarningValueConverter(uc: UnionCaseSelection, acceptEmptyObjectAsNullValue: bool) =
+        inherit JsonConverter<HintStatusWarning>()
+
+        let converter = U3EraseValueConverter<Hint, Status, Warning>(uc)
+
+        override this.Read(reader: byref<Utf8JsonReader>, _typ: Type, options: JsonSerializerOptions) =
+            match converter.Read(&reader, _typ, options) with
+            | (U3.Case1 s) -> (HintStatusWarning.Hint s)
+            | (U3.Case2 s) -> (HintStatusWarning.Status s)
+            | (U3.Case3 s) -> (HintStatusWarning.Warning s)
+
+        override this.Write(writer: Utf8JsonWriter, value: HintStatusWarning, options: JsonSerializerOptions) =
+            raise (System.NotImplementedException(""))
+
+    type HintStatusWarningConverter(uc: UnionCaseSelection, acceptEmptyObjectAsNullValue: bool) =
+        inherit JsonConverterFactory()
+
+        override this.CanConvert(t: Type) : bool = t.Name = "HintStatusWarning"
+
+        override this.CreateConverter(typeToConvert: Type, _options: JsonSerializerOptions) : JsonConverter =
+            Activator.CreateInstance(typedefof<HintStatusWarningValueConverter>, uc, acceptEmptyObjectAsNullValue)
+            :?> JsonConverter
+
+    type StationStopValueConverter(uc: UnionCaseSelection, acceptEmptyObjectAsNullValue: bool) =
+        inherit JsonConverter<StationStop>()
+
+        let converter = U2EraseValueConverter<Station, Stop>(uc)
+
+        override this.Read(reader: byref<Utf8JsonReader>, _typ: Type, options: JsonSerializerOptions) =
+            match converter.Read(&reader, _typ, options) with
+            | (U2.Case1 s) -> (StationStop.Station s)
+            | (U2.Case2 s) -> (StationStop.Stop s)
+
+        override this.Write(writer: Utf8JsonWriter, value: StationStop, options: JsonSerializerOptions) =
+            raise (System.NotImplementedException(""))
+
+    type StationStopConverter(uc: UnionCaseSelection, acceptEmptyObjectAsNullValue: bool) =
+        inherit JsonConverterFactory()
+
+        override this.CanConvert(t: Type) : bool = t.Name = "StationStop"
+
+        override this.CreateConverter(typeToConvert: Type, _options: JsonSerializerOptions) : JsonConverter =
+            Activator.CreateInstance(typedefof<StationStopValueConverter>, uc, acceptEmptyObjectAsNullValue)
+            :?> JsonConverter
+
+    type StopLocationValueConverter(uc: UnionCaseSelection, acceptEmptyObjectAsNullValue: bool) =
+        inherit JsonConverter<StopLocation>()
+
+        let converter = U2EraseValueConverter<Stop, Location>(uc)
+
+        override this.Read(reader: byref<Utf8JsonReader>, _typ: Type, options: JsonSerializerOptions) =
+            match converter.Read(&reader, _typ, options) with
+            | (U2.Case1 s) -> (StopLocation.Stop s)
+            | (U2.Case2 s) -> (StopLocation.Location s)
+
+        override this.Write(writer: Utf8JsonWriter, value: StopLocation, options: JsonSerializerOptions) =
+            raise (System.NotImplementedException(""))
+
+    type StopLocationConverter(uc: UnionCaseSelection, acceptEmptyObjectAsNullValue: bool) =
+        inherit JsonConverterFactory()
+
+        override this.CanConvert(t: Type) : bool = t.Name = "StopLocation"
+
+        override this.CreateConverter(typeToConvert: Type, _options: JsonSerializerOptions) : JsonConverter =
+            Activator.CreateInstance(typedefof<StopLocationValueConverter>, uc, acceptEmptyObjectAsNullValue)
+            :?> JsonConverter
+
+    type StationStopLocationOptionValueConverter(uc: UnionCaseSelection, acceptEmptyObjectAsNullValue: bool) =
+        inherit JsonConverter<StationStopLocation option>()
+
+        let converter =
+            OptionU3EraseValueConverter<Station, Stop, Location>(uc, acceptEmptyObjectAsNullValue)
+
+        override this.Read(reader: byref<Utf8JsonReader>, _typ: Type, options: JsonSerializerOptions) =
+            match converter.Read(&reader, _typ, options) with
+            | Some (U3.Case1 s) -> Some(StationStopLocation.Station s)
+            | Some (U3.Case2 s) -> Some(StationStopLocation.Stop s)
+            | Some (U3.Case3 s) -> Some(StationStopLocation.Location s)
+            | None -> None
+
+        override this.Write(writer: Utf8JsonWriter, value: StationStopLocation option, options: JsonSerializerOptions) =
+            raise (System.NotImplementedException(""))
+
+    type StationStopLocationOptionConverter(uc: UnionCaseSelection, acceptEmptyObjectAsNullValue: bool) =
+        inherit JsonConverterFactory()
+
+        override this.CanConvert(t: Type) : bool =
+            t.IsGenericType
+            && t.Name = "FSharpOption`1"
+            && t.GenericTypeArguments.[0].Name = "StationStopLocation"
+
+        override this.CreateConverter(typeToConvert: Type, _options: JsonSerializerOptions) : JsonConverter =
+            Activator.CreateInstance(
+                typedefof<StationStopLocationOptionValueConverter>,
+                uc,
+                acceptEmptyObjectAsNullValue
+            )
+            :?> JsonConverter
+#endif
+
 /// <exclude>Parser</exclude>
 module Parser =
+
+    open System
 
     open FsHafas.Endpoint
 
@@ -30,15 +141,22 @@ module Parser =
     let Deserialize<'a> (response: string, acceptEmptyObjectAsNullValue: bool) =
         Serializer.addConverters (
             [| FsHafas.Api.Converter.UnionConverter<ProductTypeMode>()
-               FsHafas.Api.Converter.U2EraseConverter<Station, Stop>(
-                   FsHafas.Api.Converter.UnionCaseSelection.ByTagName "type"
-               )
-               FsHafas.Api.Converter.OptionU3EraseConverter<Station, Stop, Location>(
-                   FsHafas.Api.Converter.UnionCaseSelection.ByTagName "type",
+               FsHafas.Api.Converter.U2EraseConverter<Station, Stop>(Converter.UnionCaseSelection.ByTagName "type")
+               ConverterEx.HintStatusWarningConverter(
+                   Converter.UnionCaseSelection.ByTagName "type",
                    acceptEmptyObjectAsNullValue
                )
-               FsHafas.Api.Converter.U3EraseConverter<Hint, Status, Warning>(
-                   FsHafas.Api.Converter.UnionCaseSelection.ByTagName "type"
+               ConverterEx.StationStopConverter(
+                   Converter.UnionCaseSelection.ByTagName "type",
+                   acceptEmptyObjectAsNullValue
+               )
+               ConverterEx.StopLocationConverter(
+                   Converter.UnionCaseSelection.ByTagName "type",
+                   acceptEmptyObjectAsNullValue
+               )
+               ConverterEx.StationStopLocationOptionConverter(
+                   Converter.UnionCaseSelection.ByTagName "type",
+                   acceptEmptyObjectAsNullValue
                )
                FsHafas.Api.Converter.IndexMapConverter<string, bool>(false) |]
         )
@@ -93,7 +211,7 @@ module Parser =
             let locs = [| locL |] |> ctx.profile.parseLocations ctx
 
             locs.[0]
-        | _ -> U3.Case3 Default.Location
+        | _ -> StationStopLocation.Location Default.Location
 
     let internal parseLocations (locL: FsHafas.Raw.RawLoc [] option) (ctx: Context option) =
         match locL, ctx with

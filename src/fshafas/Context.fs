@@ -15,9 +15,9 @@ type Options =
 
 type CommonData =
     { operators: FsHafas.Client.Operator []
-      locations: U3<Station, Stop, Location> []
+      locations: StationStopLocation []
       lines: FsHafas.Client.Line []
-      hints: (U3<FsHafas.Client.Hint, FsHafas.Client.Status, FsHafas.Client.Warning> option) []
+      hints: (HintStatusWarning option) []
       icons: Icon []
       polylines: FeatureCollection [] }
 
@@ -46,7 +46,7 @@ type Profile
         parseHint,
         parseIcon,
         parsePolyline,
-        parseLocations: Context -> FsHafas.Raw.RawLoc [] -> U3<Station, Stop, Location> [],
+        parseLocations: Context -> FsHafas.Raw.RawLoc [] -> StationStopLocation [],
         parseLine,
         parseJourney,
         parseJourneyLeg,
@@ -85,14 +85,14 @@ type Profile
 
     member val parseHint: Context
         -> FsHafas.Raw.RawRem
-        -> U3<FsHafas.Client.Hint, FsHafas.Client.Status, FsHafas.Client.Warning> option = parseHint with get, set
+        -> HintStatusWarning option = parseHint with get, set
 
     member val parseIcon: Context -> FsHafas.Raw.RawIco -> Icon option = parseIcon with get, set
 
     member val parsePolyline: Context -> FsHafas.Raw.RawPoly -> FsHafas.Client.FeatureCollection =
         parsePolyline with get, set
 
-    member val parseLocations: Context -> FsHafas.Raw.RawLoc [] -> U3<Station, Stop, Location> [] =
+    member val parseLocations: Context -> FsHafas.Raw.RawLoc [] -> StationStopLocation [] =
         parseLocations with get, set
 
     member val parseLine: Context -> FsHafas.Raw.RawProd -> FsHafas.Client.Line = parseLine with get, set

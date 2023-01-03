@@ -136,11 +136,11 @@ let getLocation (client: Api.HafasAsyncClient) (name: string) =
         else
             let! locations = client.AsyncLocations name (Some Default.LocationsOptions)
 
-            let toU4 (u3: U3<Station, Stop, Location>) =
+            let toU4 (u3: StationStopLocation) =
                 match u3 with
-                | U3.Case1 station -> U4.Case2 station
-                | U3.Case2 stop -> U4.Case3 stop
-                | U3.Case3 location -> U4.Case4 location
+                | StationStopLocation.Station station -> U4.Case2 station
+                | StationStopLocation.Stop stop -> U4.Case3 stop
+                | StationStopLocation.Location location -> U4.Case4 location
 
             return (locations |> Array.tryPick (toU4 >> Some))
     }
@@ -281,7 +281,7 @@ let journeysFromTrip (tripId: string, stopover: string, departure: string, newTo
 
                     let previousStopover: StopOver =
                         { Default.StopOver with
-                            stop = Some(U2.Case2 stop)
+                            stop = Some(StationStop.Stop stop)
                             departure = Some departure }
 
                     return!
@@ -366,7 +366,7 @@ let departures (name: string) =
                 departures.departures
                 |> sortBy (fun dep ->
                     match dep.``when``, dep.stop with
-                    | Some w, Some (U2.Case2 s) when s.name.IsSome -> w + s.name.Value
+                    | Some w, Some (StationStop.Stop s) when s.name.IsSome -> w + s.name.Value
                     | _ -> "")
 
             FsHafas.Printf.Short.Alternatives sorted
@@ -404,7 +404,7 @@ let tripsByName (name: string) =
         trips.trips
         |> Array.map (fun t ->
             match t.origin, t.destination, t.line with
-            | Some (U3.Case2 origin), Some (U3.Case2 destination), Some line ->
+            | Some (StationStopLocation.Stop origin), Some (StationStopLocation.Stop destination), Some line ->
                 origin.name, destination.name, line.matchId, t.plannedDeparture
             | _ -> (None, None, None, None))
         |> Array.groupBy (fun (o, d, m, _) -> (o, d, m))

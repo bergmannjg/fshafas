@@ -45,6 +45,24 @@ and [<StringEnum>] GeometryType = | [<CompiledName "Point">] Point
 and [<StringEnum>] FeatureType = | [<CompiledName "Feature">] Feature
 
 and [<StringEnum>] FeatureCollectionType = | [<CompiledName "featureCollection">] FeatureCollection
+
+and [<TypeScriptTaggedUnion("type")>] StationStopLocation =
+    | Station of Station
+    | Stop of Stop
+    | Location of Location
+
+and [<TypeScriptTaggedUnion("type")>] StationStop =
+    | Station of Station
+    | Stop of Stop
+
+and [<TypeScriptTaggedUnion("type")>] StopLocation =
+    | Stop of Stop
+    | Location of Location
+
+and [<TypeScriptTaggedUnion("type")>] HintStatusWarning =
+    | Hint of Hint
+    | Status of Status
+    | Warning of Warning
 """
 
 let transformType str =
@@ -126,7 +144,7 @@ let transformTypeVals =
        "Feature", "``type``", "FeatureType"
        "FeatureCollection", "``type``", "FeatureCollectionType"
        "IcoCrd", "``type``", "string option"
-       "Feature", "properties", "U3<Station, Stop, Location> option" |]
+       "Feature", "properties", "StationStopLocation option" |]
 
 let transformTypeDefns =
     [| "ScheduledDays", "IndexMap<string, bool>"

@@ -176,7 +176,7 @@ let loadLocations (profile: FsHafas.Endpoint.Profile) (res: FsHafas.Raw.RawResul
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
     let response =
-        FsHafas.Api.Parser.Deserialize<U3<Station, Stop, Location> []>(expectedJson, acceptEmptyObjectAsNullValue)
+        FsHafas.Api.Parser.Deserialize<StationStopLocation []>(expectedJson, acceptEmptyObjectAsNullValue)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
 
@@ -251,11 +251,11 @@ let loadDepartures (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
     (parsedResponse :> obj, response :> obj)
 
-let idOfU3StationStopLocation (location: U3<Station, Stop, Location>) =
+let idOfU3StationStopLocation (location: StationStopLocation) =
     match location with
-    | U3.Case3 l -> l.id
-    | U3.Case2 s -> s.id
-    | U3.Case1 s -> s.id
+    | StationStopLocation.Location l -> l.id
+    | StationStopLocation.Station s -> s.id
+    | StationStopLocation.Stop s -> s.id
     |> Option.defaultValue ""
 
 let sortDurations (durations: Duration []) : Duration [] =
@@ -306,7 +306,7 @@ let loadNearby (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
     let response =
-        FsHafas.Api.Parser.Deserialize<U3<Station, Stop, Location> []>(expectedJson, acceptEmptyObjectAsNullValue)
+        FsHafas.Api.Parser.Deserialize<StationStopLocation []>(expectedJson, acceptEmptyObjectAsNullValue)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
 
@@ -440,7 +440,7 @@ let TestFeatureParser () =
     Assert.IsTrue(feature2.properties.IsSome)
 
     match feature2.properties.Value with
-    | U3.Case2 s -> Assert.AreEqual("Stop", s.``type``.ToString())
+    | StationStopLocation.Stop s -> Assert.AreEqual("Stop", s.``type``.ToString())
     | _ -> raise (NUnit.Framework.AssertionException("U3.Case2 Stop expected"))
 
     let jsonPropertiesAsUndefined =

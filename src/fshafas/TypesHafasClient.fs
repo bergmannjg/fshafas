@@ -82,7 +82,7 @@ and Station =
       regions: array<string> option
       facilities: Facilities option
       reisezentrumOpeningHours: ReisezentrumOpeningHours option
-      stops: array<U3<Station, Stop, Location>> option
+      stops: array<StationStopLocation> option
       entrances: array<Location> option
       transitAuthority: string option
       distance: int option }
@@ -193,15 +193,15 @@ and IcoCrd =
       ``type``: string option }
 
 and Edge =
-    { fromLocation: U3<Station, Stop, Location> option
-      toLocation: U3<Station, Stop, Location> option
+    { fromLocation: StationStopLocation option
+      toLocation: StationStopLocation option
       icon: Icon option
       dir: int option
       icoCrd: IcoCrd option }
 
 and Event =
-    { fromLocation: U3<Station, Stop, Location> option
-      toLocation: U3<Station, Stop, Location> option
+    { fromLocation: StationStopLocation option
+      toLocation: StationStopLocation option
       start: string option
       ``end``: string option
       sections: array<string> option }
@@ -223,8 +223,8 @@ and Warning =
       company: string option
       categories: array<int> option
       affectedLines: array<Line> option
-      fromStops: array<U3<Station, Stop, Location>> option
-      toStops: array<U3<Station, Stop, Location>> option }
+      fromStops: array<StationStopLocation> option
+      toStops: array<StationStopLocation> option }
 
 and Geometry =
     { ``type``: GeometryType
@@ -232,7 +232,7 @@ and Geometry =
 
 and Feature =
     { ``type``: FeatureType
-      properties: U3<Station, Stop, Location> option
+      properties: StationStopLocation option
       geometry: Geometry }
 
 and FeatureCollection =
@@ -246,7 +246,7 @@ and [<StringEnum>] PrognosisType =
 /// A stopover represents a vehicle stopping at a stop/station at a specific time.
 and StopOver =
     { additionalStop: bool option
-      stop: U2<Station, Stop> option
+      stop: StationStop option
       /// null, if last stopOver of trip
       departure: string option
       departureDelay: int option
@@ -263,7 +263,7 @@ and StopOver =
       arrivalPlatform: string option
       prognosedArrivalPlatform: string option
       plannedArrivalPlatform: string option
-      remarks: array<U3<Hint, Status, Warning>> option
+      remarks: array<HintStatusWarning> option
       passBy: bool option
       cancelled: bool option
       departurePrognosisType: PrognosisType option
@@ -272,8 +272,8 @@ and StopOver =
 /// Trip – a vehicle stopping at a set of stops at specific times
 and Trip =
     { id: string
-      origin: U3<Station, Stop, Location> option
-      destination: U3<Station, Stop, Location> option
+      origin: StationStopLocation option
+      destination: StationStopLocation option
       departure: string option
       plannedDeparture: string option
       prognosedArrival: string option
@@ -304,7 +304,7 @@ and Trip =
       cycle: Cycle option
       alternatives: array<Alternative> option
       polyline: FeatureCollection option
-      remarks: array<U3<Hint, Status, Warning>> option
+      remarks: array<HintStatusWarning> option
       scheduledDays: ScheduledDays option }
 
 and TripWithRealtimeData =
@@ -333,7 +333,7 @@ and Alternative =
       direction: string option
       location: Location option
       line: Line option
-      stop: U2<Station, Stop> option
+      stop: StationStop option
       ``when``: string option
       plannedWhen: string option
       prognosedWhen: string option
@@ -341,7 +341,7 @@ and Alternative =
       platform: string option
       plannedPlatform: string option
       prognosedPlatform: string option
-      remarks: array<U3<Hint, Status, Warning>> option
+      remarks: array<HintStatusWarning> option
       cancelled: bool option
       loadFactor: string option
       provenance: string option
@@ -350,8 +350,8 @@ and Alternative =
       frames: array<Frame> option
       polyline: FeatureCollection option
       currentTripPosition: Location option
-      origin: U3<Station, Stop, Location> option
-      destination: U3<Station, Stop, Location> option
+      origin: StationStopLocation option
+      destination: StationStopLocation option
       prognosisType: PrognosisType option }
 
 and Departures =
@@ -365,8 +365,8 @@ and Arrivals =
 /// Leg of journey
 and Leg =
     { tripId: string option
-      origin: U3<Station, Stop, Location> option
-      destination: U3<Station, Stop, Location> option
+      origin: StationStopLocation option
+      destination: StationStopLocation option
       departure: string option
       plannedDeparture: string option
       prognosedArrival: string option
@@ -397,7 +397,7 @@ and Leg =
       cycle: Cycle option
       alternatives: array<Alternative> option
       polyline: FeatureCollection option
-      remarks: array<U3<Hint, Status, Warning>> option
+      remarks: array<HintStatusWarning> option
       currentLocation: Location option
       departurePrognosisType: PrognosisType option
       arrivalPrognosisType: PrognosisType option
@@ -411,7 +411,7 @@ and Journey =
     { ``type``: JourneyType
       legs: array<Leg>
       refreshToken: string option
-      remarks: array<U3<Hint, Status, Warning>> option
+      remarks: array<HintStatusWarning> option
       price: Price option
       cycle: Cycle option
       scheduledDays: ScheduledDays option }
@@ -428,15 +428,15 @@ and JourneyWithRealtimeData =
 
 and Duration =
     { duration: int
-      stations: array<U3<Station, Stop, Location>> }
+      stations: array<StationStopLocation> }
 
 and DurationsWithRealtimeData =
     { realtimeDataUpdatedAt: int option
       reachable: array<Duration> }
 
 and Frame =
-    { origin: U2<Stop, Location>
-      destination: U2<Stop, Location>
+    { origin: StopLocation
+      destination: StopLocation
       t: int option }
 
 and Movement =
@@ -752,11 +752,11 @@ and HafasClient =
         string -> StopOver -> U4<string, Station, Stop, Location> -> JourneysFromTripOptions option -> Promise<Journeys>
 
     /// Retrieves locations or stops
-    abstract member locations: string -> LocationsOptions option -> Promise<array<U3<Station, Stop, Location>>>
+    abstract member locations: string -> LocationsOptions option -> Promise<array<StationStopLocation>>
     /// Retrieves information about a stop
-    abstract member stop: U2<string, Stop> -> StopOptions option -> Promise<U3<Station, Stop, Location>>
+    abstract member stop: U2<string, Stop> -> StopOptions option -> Promise<StationStopLocation>
     /// Retrieves nearby stops from location
-    abstract member nearby: Location -> NearByOptions option -> Promise<array<U3<Station, Stop, Location>>>
+    abstract member nearby: Location -> NearByOptions option -> Promise<array<StationStopLocation>>
     /// Retrieves stations reachable within a certain time from a location
     abstract member reachableFrom: Location -> ReachableFromOptions option -> Promise<DurationsWithRealtimeData>
     /// Retrieves all vehicles currently in an area.
@@ -817,3 +817,21 @@ and [<StringEnum>] GeometryType = | [<CompiledName "Point">] Point
 and [<StringEnum>] FeatureType = | [<CompiledName "Feature">] Feature
 
 and [<StringEnum>] FeatureCollectionType = | [<CompiledName "featureCollection">] FeatureCollection
+
+and [<TypeScriptTaggedUnion("type")>] StationStopLocation =
+    | Station of Station
+    | Stop of Stop
+    | Location of Location
+
+and [<TypeScriptTaggedUnion("type")>] StationStop =
+    | Station of Station
+    | Stop of Stop
+
+and [<TypeScriptTaggedUnion("type")>] StopLocation =
+    | Stop of Stop
+    | Location of Location
+
+and [<TypeScriptTaggedUnion("type")>] HintStatusWarning =
+    | Hint of Hint
+    | Status of Status
+    | Warning of Warning

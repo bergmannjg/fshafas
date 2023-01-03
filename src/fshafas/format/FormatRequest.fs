@@ -528,8 +528,8 @@ module internal Format =
 
         let prevStopId =
             match previousStopover.stop with
-            | Some (U2.Case1 station) when station.id.IsSome -> station.id.Value
-            | Some (U2.Case2 stop) when stop.id.IsSome -> stop.id.Value
+            | Some (StationStop.Station station) when station.id.IsSome -> station.id.Value
+            | Some (StationStop.Stop stop) when stop.id.IsSome -> stop.id.Value
             | _ -> raise (System.ArgumentException("previousStopover.stop must be a valid stop or station."))
 
         let depAtPrevStop =

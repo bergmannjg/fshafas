@@ -216,10 +216,10 @@ module Db =
         else
             parsed
 
-    let private parseHint (parsed: U3<Hint, Status, Warning> option) (h: RawRem) : U3<Hint, Status, Warning> option =
+    let private parseHint (parsed: HintStatusWarning option) (h: RawRem) : HintStatusWarning option =
         match parsed with
-        | Some (U3.Case1 parsedHint) -> U3.Case1(parseHintByCode parsedHint h) |> Some
-        | Some (U3.Case2 parsedStatus) -> U3.Case2(parseStatusByCode parsedStatus h) |> Some
+        | Some (HintStatusWarning.Hint parsedHint) -> HintStatusWarning.Hint(parseHintByCode parsedHint h) |> Some
+        | Some (HintStatusWarning.Status parsedStatus) -> HintStatusWarning.Status(parseStatusByCode parsedStatus h) |> Some
         | _ -> parsed
 
 

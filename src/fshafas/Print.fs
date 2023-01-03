@@ -90,7 +90,7 @@ module Short =
         + match alternative.stop with
           | Some stop ->
               match stop with
-              | U2.Case2 s -> printfS ident "stop: " (Some "") + Stop 0 s
+              | StationStop.Stop s -> printfS ident "stop: " (Some "") + Stop 0 s
               | _ -> ""
           | _ -> ""
 
@@ -100,10 +100,10 @@ module Short =
         else
             ""
 
-    let private Remark (ident: int) (remark: U3<Hint, Status, Warning>) =
+    let private Remark (ident: int) (remark: HintStatusWarning) =
         match remark with
-        | U3.Case1 hint -> printfnS ident "hint: " (Some hint.text)
-        | U3.Case2 status -> printfnS ident "status: " (Some status.text)
+        | HintStatusWarning.Hint hint -> printfnS ident "hint: " (Some hint.text)
+        | HintStatusWarning.Status status -> printfnS ident "status: " (Some status.text)
         | _ -> ""
 
     let private Warning (ident: int) (w: Warning) =
@@ -111,7 +111,7 @@ module Short =
         + printfnS (ident + 2) "validFrom: " w.validFrom
         + printfnS (ident + 2) "validUntil: " w.validUntil
 
-    let private Remarks (ident: int) (remarks: array<U3<Hint, Status, Warning>> option) =
+    let private Remarks (ident: int) (remarks: array<HintStatusWarning> option) =
         match remarks with
         | Some remarks ->
             remarks
@@ -138,14 +138,14 @@ module Short =
 
     let StopOverStop (ident: int) (so: StopOver) =
         match so.stop with
-        | Some (U2.Case2 s) -> printfS ident "" (Some "") + Stop 0 s
-        | Some (U2.Case1 s) -> printfS ident "" (Some "") + Station 0 s
+        | Some (StationStop.Stop s) -> printfS ident "" (Some "") + Stop 0 s
+        | Some (StationStop.Station s) -> printfS ident "" (Some "") + Station 0 s
         | _ -> ""
 
     let StopOver (ident: int) (so: StopOver) =
         match so.stop with
-        | Some (U2.Case2 s) -> printfS ident "origin: " (Some "") + Stop 0 s
-        | Some (U2.Case1 s) -> printfS ident "origin: " (Some "") + Station 0 s
+        | Some (StationStop.Stop s) -> printfS ident "origin: " (Some "") + Stop 0 s
+        | Some (StationStop.Station s) -> printfS ident "origin: " (Some "") + Station 0 s
         | _ -> ""
         + match so.departure with
           | Some _ -> printfnS ident "departure: " so.departure
@@ -176,12 +176,12 @@ module Short =
     let private Leg (ident: int) (leg: Leg) (short: bool) =
         printfnS ident "tripId: " leg.tripId
         + match leg.origin with
-          | Some (U3.Case3 l) -> printfS ident "origin: " (Some "") + Location 0 l
-          | Some (U3.Case2 s) -> printfS ident "origin: " (Some "") + Stop 0 s
-          | Some (U3.Case1 s) -> printfS ident "origin: " (Some "") + Station 0 s
+          | Some (StationStopLocation.Location l) -> printfS ident "origin: " (Some "") + Location 0 l
+          | Some (StationStopLocation.Stop s) -> printfS ident "origin: " (Some "") + Stop 0 s
+          | Some (StationStopLocation.Station s) -> printfS ident "origin: " (Some "") + Station 0 s
           | _ -> ""
         + match leg.destination with
-          | Some (U3.Case2 s) -> printfS ident "destination: " (Some "") + Stop 0 s
+          | Some (StationStopLocation.Stop s) -> printfS ident "destination: " (Some "") + Stop 0 s
           | _ -> ""
         + printfnS ident "departure: " leg.departure
         + printfnS ident "arrival: " leg.arrival
@@ -235,11 +235,11 @@ module Short =
         printfnS 0 "trip:" (Some "")
         + printfnS ident "id: " (Some trip.id)
         + match trip.origin with
-          | Some (U3.Case2 s) -> printfS ident "origin: " (Some "") + Stop 0 s
-          | Some (U3.Case1 s) -> printfS ident "origin: " (Some "") + Station 0 s
+          | Some (StationStopLocation.Stop s) -> printfS ident "origin: " (Some "") + Stop 0 s
+          | Some (StationStopLocation.Station s) -> printfS ident "origin: " (Some "") + Station 0 s
           | _ -> ""
         + match trip.destination with
-          | Some (U3.Case2 s) -> printfS ident "destination: " (Some "") + Stop 0 s
+          | Some (StationStopLocation.Stop s) -> printfS ident "destination: " (Some "") + Stop 0 s
           | _ -> ""
         + printfnS ident "departure: " trip.departure
         + printfnS ident "arrival: " trip.arrival
@@ -315,10 +315,10 @@ module Short =
         | Some (U2.Case2 s) -> Stop (ident + 2) s
         | _ -> ""
 
-    let U3StationStopLocation (ident: int) (location: U3<Station, Stop, Location>) =
+    let U3StationStopLocation (ident: int) (location: StationStopLocation) =
         match location with
-        | U3.Case3 l -> Location (ident + 2) l
-        | U3.Case2 s -> Stop (ident + 2) s
+        | StationStopLocation.Location l -> Location (ident + 2) l
+        | StationStopLocation.Stop s -> Stop (ident + 2) s
         | _ -> ""
 
     let Duration (ident: int) (duration: Duration) =
@@ -353,7 +353,7 @@ module Short =
            else
                "")
 
-    let Locations (locations: U3<Station, Stop, Location> []) =
+    let Locations (locations: StationStopLocation []) =
         locations
         |> Array.fold (fun s j -> s + U3StationStopLocation 0 j) ""
 

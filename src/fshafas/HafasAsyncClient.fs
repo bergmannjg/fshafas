@@ -174,7 +174,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
                   realtimeDataUpdatedAt = Parser.parseRealtimeDataUpdatedAt res }
         }
 
-    member __.AsyncLocations (name: string) (opt: LocationsOptions option) : Async<array<U3<Station, Stop, Location>>> =
+    member __.AsyncLocations (name: string) (opt: LocationsOptions option) : Async<array<StationStopLocation>> =
 
         async {
             let! (common, res, locL) = httpClient.AsyncLocMatch(Format.locationRequest profile name opt)
@@ -185,7 +185,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
                     (Parser.parseCommon profile (MergeOptions.LocationsOptions Parser.defaultOptions opt) common res)
         }
 
-    member __.AsyncStop (stop: U2<string, Stop>) (opt: StopOptions option) : Async<U3<Station, Stop, Location>> =
+    member __.AsyncStop (stop: U2<string, Stop>) (opt: StopOptions option) : Async<StationStopLocation> =
 
         async {
             let! (common, res, locL) = httpClient.AsyncLocDetails(Format.locDetailsRequest profile stop opt)
@@ -193,7 +193,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
             return Parser.parseLocation locL (Parser.parseCommon profile Parser.defaultOptions common res)
         }
 
-    member __.AsyncNearby (l: Location) (opt: NearByOptions option) : Async<array<U3<Station, Stop, Location>>> =
+    member __.AsyncNearby (l: Location) (opt: NearByOptions option) : Async<array<StationStopLocation>> =
 
         async {
             let! (common, res, locL) = httpClient.AsyncLocGeoPos(Format.locGeoPosRequest profile l opt)

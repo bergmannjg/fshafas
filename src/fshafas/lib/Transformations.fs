@@ -106,13 +106,13 @@ module internal U2StationStop =
             |> Some
         | _ -> None
 
-    let FromSomeU3StationStopLocation (u3: U3<Station, Stop, Location> option) =
+    let FromSomeU3StationStopLocation (u3: StationStopLocation option) =
         match u3 with
-        | Some (U3.Case1 s) ->
-            U2<FsHafas.Client.Station, FsHafas.Client.Stop>.Case1 s
+        | Some (StationStopLocation.Station s) ->
+            StationStop.Station s
             |> Some
-        | Some (U3.Case2 s) ->
-            U2<FsHafas.Client.Station, FsHafas.Client.Stop>.Case2 s
+        | Some (StationStopLocation.Stop s) ->
+            StationStop.Stop s
             |> Some
         | _ -> None
 
@@ -130,13 +130,13 @@ module internal U2StopLocation =
             |> Some
         | _ -> None
 
-    let FromSomeU3StationStopLocation (u3: U3<Station, Stop, Location> option) =
+    let FromSomeU3StationStopLocation (u3: StationStopLocation option) =
         match u3 with
-        | Some (U3.Case2 s) ->
-            U2<FsHafas.Client.Stop, FsHafas.Client.Location>.Case1 s
+        | Some (StationStopLocation.Stop s) ->
+            StopLocation.Stop s
             |> Some
-        | Some (U3.Case3 s) ->
-            U2<FsHafas.Client.Stop, FsHafas.Client.Location>.Case2 s
+        | Some (StationStopLocation.Location s) ->
+            StopLocation.Location s
             |> Some
         | _ -> None
 

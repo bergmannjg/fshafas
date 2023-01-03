@@ -61,3 +61,7 @@
 
 * add field StopOver additionalStop
 * fix reconstructionRequest
+
+## 2.2.0
+
+* add TypeScriptTaggedUnion

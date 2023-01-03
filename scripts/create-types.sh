@@ -51,6 +51,13 @@ fi
 
 dotnet fantomas ../../src/fshafas/TypesHafasClient.fs
 
+sed -i 's/U3<Station, Stop, Location>/StationStopLocation/' ../../src/fshafas/TypesHafasClient.fs
+sed -i 's/U2<Station, Stop>/StationStop/' ../../src/fshafas/TypesHafasClient.fs
+sed -i 's/U2<Stop, Location>/StopLocation/' ../../src/fshafas/TypesHafasClient.fs
+sed -i 's/U3<Hint, Status, Warning>/HintStatusWarning/' ../../src/fshafas/TypesHafasClient.fs
+
+dotnet fantomas ../../src/fshafas/TypesHafasClient.fs
+
 rm -f HafasClientTypes.fs
 
 # import raw hafas-client types
