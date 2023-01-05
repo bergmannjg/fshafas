@@ -83,12 +83,12 @@ let journeydata (path: string) (dtFrom: System.DateTime) (dtTo: System.DateTime)
     |> Seq.toArray
     |> Array.sortBy (fun x -> x.dtStart)
 
-let getIdOfFirstStop (arr: U3<Station, Stop, Location> array) =
-    let test (u3: U3<Station, Stop, Location>) =
+let getIdOfFirstStop (arr: StationStopLocation array) =
+    let test (u3: StationStopLocation) =
         match u3 with
-        | U3.Case1 station -> station.id
-        | U3.Case2 stop -> stop.id
-        | U3.Case3 _ -> None
+        | StationStopLocation.Station station -> station.id
+        | StationStopLocation.Stop stop -> stop.id
+        | StationStopLocation.Location _ -> None
 
     arr |> Array.tryPick test
 

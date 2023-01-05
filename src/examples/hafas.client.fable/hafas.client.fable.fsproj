@@ -3,14 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup>
-    <DefineConstants>FABLE_COMPILER</DefineConstants>
-  </PropertyGroup>  <ItemGroup>
+  <ItemGroup>
     <Compile Include="Print.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Hafas.Client.Bindings" Version="1.0.0" />
+    <PackageReference Include="Hafas.Client.Bindings" Version="6.0.0" />
   </ItemGroup>
   <PropertyGroup>
     <RestoreSources>$(RestoreSources);$(HOME)/local.packages</RestoreSources>

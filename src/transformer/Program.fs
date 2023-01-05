@@ -9,6 +9,7 @@ let main argv =
             match target with
             | "FsHafas" -> FsHafasOptions.options
             | "RawHafas" -> RawHafasOptions.options
+            | "HafasClient" -> HafasClientOptions.options
             | _ -> failwith "unknown target"
 
         Transformer.transform fromFile toFile options

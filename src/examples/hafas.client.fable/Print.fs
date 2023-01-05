@@ -6,7 +6,7 @@ namespace Printf
 
 module Short =
 
-    open HafasClient.Types
+    open HafasClient
 
     let private nl = "\n"
 
@@ -56,7 +56,7 @@ module Short =
         | _ -> ""
 
     let private printNameId (ident: int) (name: string option) (id: string option) =
-        printfS ident "" name + printfS ident "(" id
+        printfS ident "" name + printfS 1 "(" id
 
     let private Location (ident: int) (location: Location) =
         match location.name, location.address with
@@ -65,16 +65,37 @@ module Short =
             printNameId ident location.address location.id
             + " "
         | _ -> ""
-        + printLonLat ident location.longitude location.latitude
+        + printLonLat 1 location.longitude location.latitude
         + nl
         + printDistance (ident + 2) location.distance
+
+    let private Directions (ident: int) (directions: string [] option) =
+        match directions with
+        | Some (directions) ->
+            directions
+            |> Array.fold (fun s j -> s + printfnS (ident + 2) "" (Some j)) ""
+        | None -> ""
+
+    let private Line (ident: int) (l: Line) =
+        printfnS ident "name: " l.name
+        + printfnArrL ident "directions: " l.directions
+        + Directions (ident + 2) l.directions
+
+    let Lines (lines: Line []) =
+        lines |> Array.fold (fun s t -> s + Line 0 t) ""
 
     let private Stop (ident: int) (stop: Stop) =
         printNameId ident stop.name stop.id
         + match stop.location with
-          | Some (location) ->
-              " "
-              + printLonLat ident location.longitude location.latitude
+          | Some (location) -> printLonLat 1 location.longitude location.latitude
+          | None -> ""
+        + match stop.lines with
+          | Some (lines) ->
+              nl
+              + printfS (ident + 2) "" (Some "lines: ")
+              + (lines
+                 |> Array.choose (fun line -> line.name)
+                 |> String.concat ", ")
           | None -> ""
         + nl
         + printDistance (ident + 2) stop.distance
@@ -326,18 +347,6 @@ module Short =
         + (duration.stations
            |> Array.fold (fun s j -> s + U3StationStopLocation (ident + 2) j) "")
 
-    let private Directions (ident: int) (directions: string [] option) =
-        match directions with
-        | Some (directions) ->
-            directions
-            |> Array.fold (fun s j -> s + printfnS (ident + 2) "" (Some j)) ""
-        | None -> ""
-
-    let private Line (ident: int) (l: Line) =
-        printfnS ident "name: " l.name
-        + printfnArrL ident "directions: " l.directions
-        + Directions (ident + 2) l.directions
-
     let private Movement (ident: int) (m: Movement) (withStopovers: bool) =
         printfnS ident "tripId: " m.tripId
         + printfnS ident "direction: " m.direction
@@ -379,6 +388,3 @@ module Short =
     let Warnings (warnings: Warning []) =
         warnings
         |> Array.fold (fun s t -> s + Warning 0 t) ""
-
-    let Lines (lines: Line []) =
-        lines |> Array.fold (fun s t -> s + Line 0 t) ""

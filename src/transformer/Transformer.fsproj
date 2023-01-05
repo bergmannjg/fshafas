@@ -8,6 +8,7 @@
     <Compile Include="Transformer.fs" />
     <Compile Include="FsHafasOptions.fs" />
     <Compile Include="RawHafasOptions.fs" />
+    <Compile Include="HafasClientOptions.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />

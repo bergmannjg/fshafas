@@ -1,5 +1,17 @@
-# Hafas-client bindings
+# Hafas-client Fable bindings
 
-Bindings for [hafas-client](https://github.com/public-transport/hafas-client) and [hafas-client-types](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/hafas-client/index.d.ts)
+Fable bindings for [hafas-client](https://github.com/public-transport/hafas-client) and [hafas-client-types](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/hafas-client/index.d.ts)
 
-The file [TypesHafasClient.fs](./TypesHafasClient.fs) is generated from the hafas-client TypeScript type definitions.
+## Usage
+
+```f#
+open Fable.Core
+open HafasClient
+
+promise {
+    let client = createClient (getProfile ProfileId.Db)
+    let! result = client.locations "Hannover" None
+    printfn "%A" result
+}
+|> Promise.start
+```

@@ -42,21 +42,43 @@ npx ts2fable node_modules/@types/hafas-client/index.d.ts HafasClientTypes.fs
 
 sed -i '/jsNative/d' HafasClientTypes.fs
 
-dotnet run --project ./Transformer.fsproj FsHafas HafasClientTypes.fs ../../src/fshafas/TypesHafasClient.fs
+TARGET="../../src/fshafas/TypesHafasClient.fs"
+
+dotnet run --project ./Transformer.fsproj FsHafas HafasClientTypes.fs ${TARGET}
 
 if [ $? -ne 0 ] 
 then 
   exit 1 
 fi
 
-dotnet fantomas ../../src/fshafas/TypesHafasClient.fs
+dotnet fantomas ${TARGET}
 
-sed -i 's/U3<Station, Stop, Location>/StationStopLocation/' ../../src/fshafas/TypesHafasClient.fs
-sed -i 's/U2<Station, Stop>/StationStop/' ../../src/fshafas/TypesHafasClient.fs
-sed -i 's/U2<Stop, Location>/StopLocation/' ../../src/fshafas/TypesHafasClient.fs
-sed -i 's/U3<Hint, Status, Warning>/HintStatusWarning/' ../../src/fshafas/TypesHafasClient.fs
+# todo: add to transformer
+sed -i 's/U3<Station, Stop, Location>/StationStopLocation/' ${TARGET}
+sed -i 's/U2<Station, Stop>/StationStop/' ${TARGET}
+sed -i 's/U2<Stop, Location>/StopLocation/' ${TARGET}
+sed -i 's/U3<Hint, Status, Warning>/HintStatusWarning/' ${TARGET}
 
-dotnet fantomas ../../src/fshafas/TypesHafasClient.fs
+dotnet fantomas ${TARGET}
+
+TARGET="../../src/hafas.client.bindings/TypesHafasClient.fs"
+
+dotnet run --project ./Transformer.fsproj HafasClient HafasClientTypes.fs ${TARGET}
+
+if [ $? -ne 0 ] 
+then 
+  exit 1 
+fi
+
+dotnet fantomas ${TARGET}
+
+# todo: add to transformer
+sed -i 's/U3<Station, Stop, Location>/StationStopLocation/' ${TARGET}
+sed -i 's/U2<Station, Stop>/StationStop/' ${TARGET}
+sed -i 's/U2<Stop, Location>/StopLocation/' ${TARGET}
+sed -i 's/U3<Hint, Status, Warning>/HintStatusWarning/' ${TARGET}
+
+dotnet fantomas ${TARGET}
 
 rm -f HafasClientTypes.fs
 
