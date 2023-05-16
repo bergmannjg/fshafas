@@ -1,3 +1,5 @@
 python-slugify
 requests
 polyline
+python-dateutil
+six

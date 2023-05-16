@@ -108,12 +108,8 @@ module internal U2StationStop =
 
     let FromSomeU3StationStopLocation (u3: StationStopLocation option) =
         match u3 with
-        | Some (StationStopLocation.Station s) ->
-            StationStop.Station s
-            |> Some
-        | Some (StationStopLocation.Stop s) ->
-            StationStop.Stop s
-            |> Some
+        | Some (StationStopLocation.Station s) -> StationStop.Station s |> Some
+        | Some (StationStopLocation.Stop s) -> StationStop.Stop s |> Some
         | _ -> None
 
 module internal U2StopLocation =
@@ -132,12 +128,8 @@ module internal U2StopLocation =
 
     let FromSomeU3StationStopLocation (u3: StationStopLocation option) =
         match u3 with
-        | Some (StationStopLocation.Stop s) ->
-            StopLocation.Stop s
-            |> Some
-        | Some (StationStopLocation.Location s) ->
-            StopLocation.Location s
-            |> Some
+        | Some (StationStopLocation.Stop s) -> StopLocation.Stop s |> Some
+        | Some (StationStopLocation.Location s) -> StopLocation.Location s |> Some
         | _ -> None
 
 module internal MergeOptions =

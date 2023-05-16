@@ -138,12 +138,14 @@ Target.create "BuildJavaScriptPackage" (fun _ ->
     |> checkResult "BuldFableWebpack failed")
 
 Target.create "PackJavaScriptPackage" (fun _ ->
+    Shell.rm "./src/fshafas.javascript.package/fs-hafas-client/fable_modules/.gitignore"
     Npm.exec "pack fs-hafas-client/" (fun o ->
         { o with
             NpmFilePath = "/usr/bin/npm"
             WorkingDirectory = "./src/fshafas.javascript.package/" })
     |> ignore
 
+    Shell.rm "./src/fshafas.profiles.javascript.package/fs-hafas-profiles/fable_modules/.gitignore"
     Npm.exec "pack fs-hafas-profiles/" (fun o ->
         { o with
             NpmFilePath = "/usr/bin/npm"
@@ -340,13 +342,13 @@ Target.create "InstallPythonPackage" (fun _ ->
 
     Shell.cleanDir (projDir + "fshafas.egg-info/")
 
-    Shell.Exec("python3", "-m pip uninstall -y fshafas")
+    Shell.Exec("python3.9", "-m pip uninstall -y fshafas")
     |> ignore
 
     let version = getPyVersion "src/fshafas.python.package/setup.py"
     let wheel = "dist/fshafas-" + version + "-py3-none-any.whl"
 
-    Shell.Exec("python3", "-m pip install " + projDir + wheel)
+    Shell.Exec("python3.9", "-m pip install " + projDir + wheel)
     |> ignore)
 
 Target.create "BuildPythonPackage" (fun _ ->
@@ -361,7 +363,7 @@ Target.create "BuildPythonPackage" (fun _ ->
     Shell.mv (projDir + "fable_modules/") (projDir + "fshafas")
     Shell.Exec("bash", "fixes.sh", projDir) |> ignore
 
-    Shell.Exec("python3", "-m build " + projDir)
+    Shell.Exec("python3.9", "-m build " + projDir)
     |> ignore)
 
 let sourceFiles =

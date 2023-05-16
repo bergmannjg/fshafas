@@ -29,9 +29,6 @@ type U3<'a, 'b, 'c> = Fable.Core.U3<'a, 'b, 'c>
 type U4<'a, 'b, 'c, 'd> = Fable.Core.U4<'a, 'b, 'c, 'd>
 #endif
 
-#if FABLE_COMPILER
-[<Erase>]
-#endif
 type U14<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n> =
     | Case1 of 'a
     | Case2 of 'b

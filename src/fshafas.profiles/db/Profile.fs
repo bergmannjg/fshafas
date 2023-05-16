@@ -218,8 +218,12 @@ module Db =
 
     let private parseHint (parsed: HintStatusWarning option) (h: RawRem) : HintStatusWarning option =
         match parsed with
-        | Some (HintStatusWarning.Hint parsedHint) -> HintStatusWarning.Hint(parseHintByCode parsedHint h) |> Some
-        | Some (HintStatusWarning.Status parsedStatus) -> HintStatusWarning.Status(parseStatusByCode parsedStatus h) |> Some
+        | Some (HintStatusWarning.Hint parsedHint) ->
+            HintStatusWarning.Hint(parseHintByCode parsedHint h)
+            |> Some
+        | Some (HintStatusWarning.Status parsedStatus) ->
+            HintStatusWarning.Status(parseStatusByCode parsedStatus h)
+            |> Some
         | _ -> parsed
 
 

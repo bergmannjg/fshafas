@@ -818,6 +818,7 @@ and [<StringEnum>] FeatureType = | [<CompiledName "Feature">] Feature
 
 and [<StringEnum>] FeatureCollectionType = | [<CompiledName "featureCollection">] FeatureCollection
 
+#if FABLE_JS
 and [<TypeScriptTaggedUnion("type")>] StationStopLocation =
     | Station of Station
     | Stop of Stop
@@ -835,3 +836,22 @@ and [<TypeScriptTaggedUnion("type")>] HintStatusWarning =
     | Hint of Hint
     | Status of Status
     | Warning of Warning
+#else
+and StationStopLocation =
+    | Station of Station
+    | Stop of Stop
+    | Location of Location
+
+and StationStop =
+    | Station of Station
+    | Stop of Stop
+
+and StopLocation =
+    | Stop of Stop
+    | Location of Location
+
+and HintStatusWarning =
+    | Hint of Hint
+    | Status of Status
+    | Warning of Warning
+#endif

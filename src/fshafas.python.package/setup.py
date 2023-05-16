@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='fshafas',
-    version='0.0.22',
+    version='0.0.23',
     description='python client for HAFAS public transport APIs',
     long_description=open('package.readme.md').read(),
     long_description_content_type="text/markdown",
@@ -15,7 +15,7 @@ setup(
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
-        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
     ],
     packages=[
         'fshafas',
@@ -39,5 +39,5 @@ setup(
         'polyline',
         'jsonpickle'
     ],
-    python_requires='>=3.8',
+    python_requires='>=3.9',
 )

@@ -11,7 +11,7 @@ open Fable.Core.JS
 type Promise<'T> = Async<'T>
 
 [<AttributeUsage(AttributeTargets.Class)>]
-type TypeScriptTaggedUnionAttribute(key:string) =
+type TypeScriptTaggedUnionAttribute(key: string) =
     inherit Attribute()
 
 [<AttributeUsage(AttributeTargets.Class)>]

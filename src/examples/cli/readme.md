@@ -17,7 +17,7 @@
 * cd target.python
 * pip install -r requirements.txt
 * **build**: dotnet fable cli.fable.python.fsproj --lang Python
-* **run**: python3 program.py --help
+* **run**: python3.9 program.py --help
 
 ## Usage
 

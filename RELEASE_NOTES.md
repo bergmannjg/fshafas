@@ -65,3 +65,7 @@
 ## 2.2.0
 
 * add TypeScriptTaggedUnion
+
+## 2.3.0
+
+* use Fable 4 stable release

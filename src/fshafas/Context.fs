@@ -83,17 +83,14 @@ type Profile
     member val parseDeparture: Context -> FsHafas.Raw.RawJny -> FsHafas.Client.Alternative =
         parseDeparture with get, set
 
-    member val parseHint: Context
-        -> FsHafas.Raw.RawRem
-        -> HintStatusWarning option = parseHint with get, set
+    member val parseHint: Context -> FsHafas.Raw.RawRem -> HintStatusWarning option = parseHint with get, set
 
     member val parseIcon: Context -> FsHafas.Raw.RawIco -> Icon option = parseIcon with get, set
 
     member val parsePolyline: Context -> FsHafas.Raw.RawPoly -> FsHafas.Client.FeatureCollection =
         parsePolyline with get, set
 
-    member val parseLocations: Context -> FsHafas.Raw.RawLoc [] -> StationStopLocation [] =
-        parseLocations with get, set
+    member val parseLocations: Context -> FsHafas.Raw.RawLoc [] -> StationStopLocation [] = parseLocations with get, set
 
     member val parseLine: Context -> FsHafas.Raw.RawProd -> FsHafas.Client.Line = parseLine with get, set
     member val parseJourney: Context -> FsHafas.Raw.RawOutCon -> FsHafas.Client.Journey = parseJourney with get, set

@@ -28,7 +28,7 @@ hafas-client TS types, JS Program | <= [fable](https://github.com/fable-compiler
 
 ## Compilation to Python
 
-Compilation to Python with **dotnet fable --lang Python** uses a prerelease version of fable 4. All currently missing features have a comment **workaround**.
+Compilation to Python with **dotnet fable --lang Python** uses fable 4. All currently missing features have a comment **workaround**.
 
 ## Building
 
@@ -60,14 +60,12 @@ There are several packages generated in the build process.
 
 The nuget packages are generated from the [fshafas](src/fshafas) projects and can be used with the dotnet tool.
 
-* fshafas and fshafas.profiles nuget packages:
-  * *dotnet build* compiles a F# program to dotnet
 * fshafas.javascript and fshafas.javascript.profiles nuget packages:
   * the nuget package contains the F# source files and the JavaScrript specific project file
-  * *dotnet fable* compiles a F# program to a JavaScript program
+  * *dotnet fable --lang JavaScript* compiles a F# program to a JavaScript program
 * fshafas.python and fshafas.python.profiles nuget packages:
   * the nuget package contains the F# source files and the Python specific project file
-  * *dotnet fable-py* compiles a F# program to a Python program.
+  * *dotnet fable --lang Python* compiles a F# program to a Python program.
 
 #### npm package
 

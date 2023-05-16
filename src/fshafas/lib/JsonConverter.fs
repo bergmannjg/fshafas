@@ -153,7 +153,7 @@ module internal Converter =
     type U3EraseConverter<'S, 'T, 'U>(uc: UnionCaseSelection) =
         inherit JsonConverterFactory()
 
-        override this.CanConvert(t: Type) : bool = 
+        override this.CanConvert(t: Type) : bool =
             t.IsGenericType
             && t.GetGenericTypeDefinition() = typedefof<U3<'S, 'T, 'U>>
 

@@ -34,23 +34,26 @@ module internal Hint =
         let trim (s: string option) = s |> Option.map (fun s -> s.Trim())
 
         if h.``type`` = "M" then
-            HintStatusWarning.Status
-                ({ defaultStatus with
+            HintStatusWarning.Status(
+                { defaultStatus with
                     text = text
                     summary = h.txtS |> trim
-                    code = code })
+                    code = code }
+            )
             |> Some
         else if "AI".Contains h.``type`` then
-            HintStatusWarning.Hint
-                ({ defaultHint with
+            HintStatusWarning.Hint(
+                { defaultHint with
                     text = text
-                    code = code })
+                    code = code }
+            )
             |> Some
         else if "DURNYQP".Contains h.``type`` then
-            HintStatusWarning.Status
-                ({ defaultStatus with
+            HintStatusWarning.Status(
+                { defaultStatus with
                     text = text
-                    code = code })
+                    code = code }
+            )
             |> Some
         else
             None

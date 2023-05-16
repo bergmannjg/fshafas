@@ -8,10 +8,10 @@ nuget Polyliner.Net
 nuget FSlugify
 nuget NodaTime
 
-nuget Fable.Core >= 4 prerelease
+nuget Fable.Core >= 4
 nuget Fable.Fetch
 nuget Fable.SimpleJson.Python
-nuget Thoth.Json
+nuget Thoth.Json >= 10.0
 
 nuget FSharp.Data
 nuget Argu
