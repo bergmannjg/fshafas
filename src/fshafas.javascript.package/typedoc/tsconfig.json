@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "skipLibCheck": true,
+        "allowJs": false,
+        "allowSyntheticDefaultImports": true,
+        "isolatedModules": true,
+        "moduleResolution": "node",
+        "noEmit": true,
+        "strict": true,
+        "target": "ES6"
+    },
+    "include": [
+        "hafas-client.d.ts"
+    ]
+}

@@ -24,12 +24,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '6.0.x'
-      - name: Checkout
-        uses: actions/checkout@v3
       - name: Setup dotnet tools
         run: dotnet tool restore
       - name: build fshafas
@@ -40,8 +43,13 @@ jobs:
           dotnet add src/fshafas/fshafas.fsproj package FSlugify
           dotnet add src/fshafas/fshafas.fsproj package NodaTime
           dotnet build src/fshafas/fshafas.fsproj
-      - name: build docs
+      - name: build f# docs
         run: dotnet fsdocs build --clean --input src/fshafas/docs --output output/fshafas
+      - name: build js docs
+        run: |
+          cd src/fshafas.javascript.package/typedoc
+          curl -o hafas-client.d.ts https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/types/hafas-client/index.d.ts
+          npx --yes typedoc --out ../../../output/fshafas/js --name "JavaScript Hafas Client" --disableSources hafas-client.d.ts
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload artifact
