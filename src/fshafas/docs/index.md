@@ -4,7 +4,7 @@ Ths is a port of the JavaScript [hafas-client library](https://github.com/public
 
 The hafas endpoints Db, Bvg and Svv are supported.
 
-The F# library compiles to dotnet and (via [Fable](https://github.com/fable-compiler/Fable)) to JavaScript and Python.
+The F# library compiles to dotnet and (via [Fable](https://github.com/fable-compiler/Fable)) to [JavaScript](./js) and Python.
 
 ## Interfaces
 
