@@ -57,5 +57,8 @@
   <ItemGroup>
     <Content Include="nuget/fshafas.fsproj; ..\**\*.fs" PackagePath="fable" />
   </ItemGroup>
+  <PropertyGroup>
+    <PaketDisableGlobalRestore>true</PaketDisableGlobalRestore>
+  </PropertyGroup>
   <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>

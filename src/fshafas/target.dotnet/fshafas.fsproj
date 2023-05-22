@@ -54,5 +54,8 @@
     <Compile Include="../HafasClient.fs" />
     <Compile Include="../Print.fs" />
   </ItemGroup>
+  <PropertyGroup>
+    <PaketDisableGlobalRestore>true</PaketDisableGlobalRestore>
+  </PropertyGroup>
   <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>

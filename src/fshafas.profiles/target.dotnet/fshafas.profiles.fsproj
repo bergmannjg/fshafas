@@ -9,5 +9,8 @@
       <Name>fshafas.fsproj</Name>
     </ProjectReference>
   </ItemGroup>
+  <PropertyGroup>
+    <PaketDisableGlobalRestore>true</PaketDisableGlobalRestore>
+  </PropertyGroup>
   <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>

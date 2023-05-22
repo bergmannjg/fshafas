@@ -11,5 +11,8 @@
     <Compile Include="HafasClientOptions.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
+  <PropertyGroup>
+    <PaketDisableGlobalRestore>true</PaketDisableGlobalRestore>
+  </PropertyGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

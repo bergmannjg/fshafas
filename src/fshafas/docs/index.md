@@ -4,7 +4,7 @@ Ths is a port of the JavaScript [hafas-client library](https://github.com/public
 
 The hafas endpoints Db, Bvg and Svv are supported.
 
-The F# library compiles to dotnet and (via [Fable](https://github.com/fable-compiler/Fable)) to [JavaScript](./js) and Python.
+The F# library compiles to dotnet and (via [Fable](https://github.com/fable-compiler/Fable)) to [JavaScript](./js) and [Python](./py).
 
 ## Interfaces
 
@@ -40,42 +40,4 @@ using (var client = new FsHafas.Api.HafasAsyncClient(FsHafas.Profiles.Db.profile
 
     Console.WriteLine(FsHafas.Printf.Short.Locations(locations));
 }
-```
-
-### Using the FsHafas package in JavaScript (example with [hafas-client library](https://github.com/public-transport/hafas-client))
-
-```js
-const createClient = require('hafas-client');
-const dbProfile = require('hafas-client/p/db');
-
-import { fshafas } from 'fs-hafas-client';
-import { profiles } from 'fs-hafas-profiles';
-
-const client = choose ? fshafas.createClient(profiles.getProfile('db')) : createClient(dbProfile, 'agent');
-
-const locations = () => {
-    client.locations('Hannover', { results: 3, linesOfStops: true })
-        .then(result => { console.log(JSON.stringify(result)); })
-        .catch(console.error);
-}
-```
-
-### Using the FsHafas python package
-
-```py
-import asyncio
-import sys
-from fshafas import HafasClient
-from fshafas.profiles import db_profile 
-
-async def main(argv) -> int:
-    with HafasClient(db_profile) as client:
-        journeys = await client.journeys(argv[0], argv[1])
-        for j in journeys.journeys:
-            for l in j.legs:
-                print(l.origin.name, l.destination.name, l.departure)
-    return 0
-
-if __name__ == "__main__":
-    asyncio.run(main(sys.argv[1:]))
 ```

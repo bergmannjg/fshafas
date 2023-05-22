@@ -14,7 +14,7 @@ from .fable_modules.fs_hafas_python.types_hafas_client import (Profile, IndexMap
 from .fable_modules.fs_hafas_python.hafas_async_client import (HafasAsyncClient_productsOfMode, HafasAsyncClient, HafasAsyncClient__AsyncLocations, HafasAsyncClient__AsyncJourneys, HafasAsyncClient__AsyncJourneysFromTrip, HafasAsyncClient__AsyncRefreshJourney,
                                                                HafasAsyncClient__AsyncDepartures, HafasAsyncClient__AsyncArrivals, HafasAsyncClient__AsyncTripsByName, HafasAsyncClient__AsyncNearby, HafasAsyncClient__AsyncReachableFrom, HafasAsyncClient__AsyncRadar, HafasAsyncClient__AsyncStop, HafasAsyncClient__AsyncLines)
 from .fable_modules.fs_hafas_python.context import (
-    Profile as Profile_1)
+    Profile as InternalProfile)
 from .fable_modules.fs_hafas_python.lib.transformations import (
     Default_LocationsOptions, Default_JourneysOptions, Default_Location, Default_DeparturesArrivalsOptions)
 
@@ -23,7 +23,7 @@ from .fable_modules.fs_hafas_python.lib.transformations import (
 
 def _checkProfileType(profile: Any):
     # check, if profile is from fshafas.fable_modules.fs_hafas_profiles_python classes
-    if not isinstance(profile, Profile_1):
+    if not isinstance(profile, InternalProfile):
         raise TypeError(
             "argument profile: type from fshafas.fable_modules.fs_hafas_profiles_python expected ")
 
@@ -45,6 +45,7 @@ class HafasClient(IDisposable):
         return await start_as_task(singleton.Delay(generate))
 
     async def journeys(self, _from: Union[str, Station, Stop, Location], _to: Union[str, Station, Stop, Location], opt: Optional[JourneysOptions] = None) -> Journeys:
+        """Get journeys between locations."""
         if opt is None:
             opt = Default_JourneysOptions
 
@@ -61,6 +62,7 @@ class HafasClient(IDisposable):
         return await self._journeys(_from, _to, opt)
 
     async def departures(self, name: Union[str, Station, Stop, Location], opt: Optional[DeparturesArrivalsOptions]=None) -> Departures:
+        """Query the next departures at a station."""
         if (opt is not None and not isinstance(opt, DeparturesArrivalsOptions)):
             raise TypeError(
                 "argument opt: type DeparturesArrivalsOptions expected")
@@ -74,6 +76,7 @@ class HafasClient(IDisposable):
         return await start_as_task(singleton.Delay(generate))
 
     async def arrivals(self, name: Union[str, Station, Stop, Location], opt: Optional[DeparturesArrivalsOptions]=None) -> Arrivals:
+        """Query the next arrivals at a station."""
         if (opt is not None and not isinstance(opt, DeparturesArrivalsOptions)):
             raise TypeError(
                 "argument opt: type DeparturesArrivalsOptions expected")
@@ -87,6 +90,7 @@ class HafasClient(IDisposable):
         return await start_as_task(singleton.Delay(generate))
 
     async def locations(self, name: str, opt: Optional[LocationsOptions]=None) -> List[StationStopLocation]:
+        """Find stations, POIs and addresses."""
         if opt is None:
             opt = Default_LocationsOptions
 
@@ -105,6 +109,7 @@ class HafasClient(IDisposable):
         return await start_as_task(singleton.Delay(generate))
 
     async def nearby(self, l: Location, opt: Optional[NearByOptions]=None) -> List[StationStopLocation]:
+        """Show stations & POIs around."""
         if (not isinstance(l, Location)):
             raise TypeError("argument l: type Location expected")
 
@@ -120,6 +125,7 @@ class HafasClient(IDisposable):
         return await start_as_task(singleton.Delay(generate))
 
     async def radar(self, rect: BoundingBox, opt: Optional[RadarOptions]=None) -> Radar:
+        """Find all vehicles currently in a certain area."""
         if (not isinstance(rect, BoundingBox)):
             raise TypeError("argument rect: type BoundingBox expected")
 
@@ -132,6 +138,7 @@ class HafasClient(IDisposable):
         return await start_as_task(singleton.Delay(generate))
 
     async def tripsByName(self, name: str, opt: Optional[TripsByNameOptions]=None) -> TripsWithRealtimeData:
+        """ Get all trips matching a name."""
         if (not isinstance(name, str)):
             raise TypeError("argument name: type string expected")
 

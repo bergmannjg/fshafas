@@ -26,7 +26,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: |
+          python3.9 -m pip install sphinx
+          python3.9 -m pip install wheel
+          python3.9 -m pip install polyline
+          python3.9 -m pip install jsonpickle
+          python3.9 -m pip install furo
+          python3.9 -m pip install pytz --upgrade
+          python3.9 -m pip install tzdata --upgrade
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
           node-version: 18
       - name: Setup .NET
@@ -36,20 +50,28 @@ jobs:
       - name: Setup dotnet tools
         run: dotnet tool restore
       - name: build fshafas
-        run: |
-          sed -i '/Paket.Restore.targets/d' src/fshafas/fshafas.fsproj
-          dotnet add src/fshafas/fshafas.fsproj package FSharp.SystemTextJson
-          dotnet add src/fshafas/fshafas.fsproj package Polyliner.Net
-          dotnet add src/fshafas/fshafas.fsproj package FSlugify
-          dotnet add src/fshafas/fshafas.fsproj package NodaTime
-          dotnet build src/fshafas/fshafas.fsproj
+        run: dotnet build src/fshafas/fshafas.fsproj
       - name: build f# docs
         run: dotnet fsdocs build --clean --input src/fshafas/docs --output output/fshafas
       - name: build js docs
         run: |
           cd src/fshafas.javascript.package/typedoc
-          curl -o hafas-client.d.ts https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/types/hafas-client/index.d.ts
-          npx --yes typedoc --out ../../../output/fshafas/js --name "JavaScript Hafas Client" --disableSources hafas-client.d.ts
+          wget -O hafas-client.d.ts https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/types/hafas-client/index.d.ts
+          npx --yes typedoc --out ../../../output/fshafas/js --name "FsHafas-JavaScript" --disableSources hafas-client.d.ts
+      - name: load python package
+        run: |
+          version=$(grep '##' RELEASE_NOTES.md | tail -n 1 | sed 's/## //')
+          cd src/fshafas.python.package
+          pyversion=$(grep 'version=' setup.py | sed 's/version=//' | sed "s/[ ',]*//g")
+          wget https://github.com/bergmannjg/fshafas/releases/download/${version}/fshafas-${pyversion}-py3-none-any.whl
+          python3.9 -m wheel unpack fshafas-${pyversion}-py3-none-any.whl
+          cp -r fshafas-${pyversion}/fshafas/fable_modules/ fshafas/
+      - name: build python docs
+        run: |
+          cd src/fshafas.python.package/docs
+          make html
+          mkdir ../../../output/fshafas/py
+          cp -r _build/html/*  ../../../output/fshafas/py
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload artifact

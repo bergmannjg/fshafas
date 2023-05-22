@@ -1,6 +1,7 @@
 # Hafas Client in F\#
 
-Ths is a port of the JavaScript [hafas-client library](https://github.com/public-transport/hafas-client) to F#.
+Ths is a port of the JavaScript [hafas-client library](https://github.com/public-transport/hafas-client) to F#,
+a client for [HAFAS](https://de.wikipedia.org/wiki/HAFAS) public transport APIs.
 
 The hafas endpoints Db, Bvg and Svv are supported.
 
