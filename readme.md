@@ -31,6 +31,12 @@ hafas-client TS types, JS Program | <= [fable](https://github.com/fable-compiler
 
 Compilation to Python with **dotnet fable --lang Python** uses fable 4. All currently missing features have a comment **workaround**.
 
+## Documentation
+
+* [docs](https://bergmannjg.github.io/fshafas/) for the fshafas F# library
+* [docs](https://bergmannjg.github.io/fshafas/js) for the fshafas JavaScript package
+* [docs](https://bergmannjg.github.io/fshafas/py) for the fshafas Python package
+
 ## Building
 
 ### Requirements
