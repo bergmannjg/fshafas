@@ -104,6 +104,12 @@ type HafasRawClient
             return (res.common, Some res, res.outConL)
         }
 
+    member __.AsyncBestPriceSearch(lang: string, tripSearchRequest: TripSearchRequest) =
+        async {
+            let! res = asyncPost (makeRequest "BestPriceSearch" lang (U14.Case2 tripSearchRequest))
+            return (res.common, Some res, res.outConL)
+        }
+
     member __.AsyncJourneyDetails(lang: string, journeyDetailsRequest: JourneyDetailsRequest) =
         async {
             let! res = asyncPost (makeRequest "JourneyDetails" lang (U14.Case3 journeyDetailsRequest))

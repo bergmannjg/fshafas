@@ -26,6 +26,11 @@ async def main(argv: List[str]) -> int:
                 journeys = await client.journeys(argv[1], argv[2], Default_JourneysOptions)
                 print(printJourneys(journeys))
 
+        if len(argv) >= 3 and argv[0].startswith("--bestprices"):
+            with HafasClient(db_profile) as client:
+                journeys = await client.bestprices(argv[1], argv[2], Default_JourneysOptions)
+                print(printJourneys(journeys))
+
         if len(argv) >= 2 and argv[0] == "--departures":
             with HafasClient(db_profile) as client:
                 departures = await client.departures(argv[1], Default_DeparturesArrivalsOptions)

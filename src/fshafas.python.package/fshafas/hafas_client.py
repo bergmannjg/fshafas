@@ -11,7 +11,7 @@ from .fable_modules.fable_library.util import (
     create_atom, ignore, structural_hash, string_hash)
 from .fable_modules.fs_hafas_python.types_hafas_client import (Profile, IndexMap_2, Station, Stop, Location, StationStopLocation, ProductType, JourneysOptions, Journeys, RefreshJourneyOptions, Journey, StopOver, JourneysFromTripOptions, TripOptions, Trip, DeparturesArrivalsOptions,
                                                                TripsWithRealtimeData, Departures, Arrivals, LocationsOptions, StopOptions, Location, NearByOptions, ReachableFromOptions, Duration, BoundingBox, RadarOptions, Radar, TripsByNameOptions, RemarksOptions, Warning, LinesOptions, Line, ServerOptions, ServerInfo)
-from .fable_modules.fs_hafas_python.hafas_async_client import (HafasAsyncClient_productsOfMode, HafasAsyncClient, HafasAsyncClient__AsyncLocations, HafasAsyncClient__AsyncJourneys, HafasAsyncClient__AsyncJourneysFromTrip, HafasAsyncClient__AsyncRefreshJourney,
+from .fable_modules.fs_hafas_python.hafas_async_client import (HafasAsyncClient_productsOfMode, HafasAsyncClient, HafasAsyncClient__AsyncLocations, HafasAsyncClient__AsyncJourneys, HafasAsyncClient__AsyncBestPrices, HafasAsyncClient__AsyncJourneysFromTrip, HafasAsyncClient__AsyncRefreshJourney,
                                                                HafasAsyncClient__AsyncDepartures, HafasAsyncClient__AsyncArrivals, HafasAsyncClient__AsyncTripsByName, HafasAsyncClient__AsyncNearby, HafasAsyncClient__AsyncReachableFrom, HafasAsyncClient__AsyncRadar, HafasAsyncClient__AsyncStop, HafasAsyncClient__AsyncLines)
 from .fable_modules.fs_hafas_python.context import (
     Profile as InternalProfile)
@@ -60,6 +60,28 @@ class HafasClient(IDisposable):
                 _to= to_locs[0].fields[0].id
 
         return await self._journeys(_from, _to, opt)
+
+    async def bestprices(self, _from: str,  _to: str, opt: Optional[JourneysOptions]=None) -> Journeys:
+        """Get best prices for journeys."""
+        if (opt is not None and not isinstance(opt, JourneysOptions)):
+            raise TypeError(
+                "argument opt: type JourneysOptions expected")
+
+        if (not _from.isdigit()):
+            raise TypeError(
+                "argument _from: station id expected")
+
+        if (not _to.isdigit()):
+            raise TypeError(
+                "argument _to: station id expected")
+
+        def generate() -> Async[Journeys]:
+            def bind(_arg1: Journeys) -> Async[Journeys]:
+                return singleton.Return(_arg1)
+
+            return singleton.Bind(HafasAsyncClient__AsyncBestPrices(self.asyncClient, _from, _to, opt), bind)
+
+        return await start_as_task(singleton.Delay(generate))
 
     async def departures(self, name: Union[str, Station, Stop, Location], opt: Optional[DeparturesArrivalsOptions]=None) -> Departures:
         """Query the next departures at a station."""

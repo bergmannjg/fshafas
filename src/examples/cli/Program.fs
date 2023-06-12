@@ -17,6 +17,7 @@ type CliArguments =
     | Stop of id: string
     | RefreshJourney of token: string
     | Journeys of from: string * ``to``: string
+    | BestPrices of from: string * ``to``: string
     | JourneysWithOptions of from: string * ``to``: string * options: string
     | JourneysFromTrip of tripId: string * stopover: string * departure: string * newToId: string
     | Departures of name: string
@@ -81,6 +82,7 @@ let parse (args: string list) =
       valueToArg "--locations" Locations args
       valueToArg "--refreshjourney" RefreshJourney args
       valueToArg "--stop" Stop args
+      value2ToArg "--bestprices" BestPrices args
       (value3ToArg "--journeys" JourneysWithOptions args
        |> Option.orElseWith (fun () -> value2ToArg "--journeys" Journeys args))
       value4ToArg "--journeysfromtrip" JourneysFromTrip args
@@ -256,6 +258,40 @@ let journeys (from: string, ``to``: string, someOptions: string option) =
             let! journeys = client.AsyncJourneys fromLoc toLoc (Some options)
 
             Printf.Short.Journeys journeys |> printfn "%s"
+        | _ -> ()
+    }
+    |> AsyncRun
+
+let bestPrices (from: string, ``to``: string, someOptions: string option) =
+    use client = new Api.HafasAsyncClient(profile)
+
+    let options =
+        { Default.JourneysOptions with
+            departure = Some(System.DateTime.Now.AddDays(1))
+            results = Some -1
+            products = (products ())
+            stopovers = None }
+
+    async {
+        let! fromLoc = getLocation client from
+        let! toLoc = getLocation client ``to``
+
+        match fromLoc, toLoc with
+        | Some fromLoc, Some toLoc ->
+            let! journeys = client.AsyncBestPrices fromLoc toLoc (Some options)
+
+            match journeys.journeys with
+            | Some j ->
+                Printf.Short.Journeys
+                    { journeys with
+                        journeys =
+                            Some(
+                                j
+                                |> Array.filter (fun x -> x.price.IsSome)
+                                |> Array.sortBy (fun x -> x.price.Value)
+                            ) }
+                |> printfn "%s"
+            | None -> ()
         | _ -> ()
     }
     |> AsyncRun
@@ -540,6 +576,7 @@ let run (arg: CliArguments) =
     | Locations v -> locations v
     | RefreshJourney v -> refreshJourney v
     | Journeys (f, t) -> journeys (f, t, None)
+    | BestPrices (f, t) -> bestPrices (f, t, None)
     | JourneysWithOptions (f, t, o) -> journeys (f, t, Some o)
     | Stop v -> stop v
     | JourneysFromTrip (f, t, d, n) -> journeysFromTrip (f, t, d, n)

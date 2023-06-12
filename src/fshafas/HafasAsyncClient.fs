@@ -74,6 +74,26 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
                     (Parser.parseCommon profile (MergeOptions.JourneysOptions Parser.defaultOptions opt) common res)
         }
 
+    // minimal support for BestPriceSearch, see https://github.com/public-transport/hafas-client/issues/291
+    // todo: parse outDaySegL in FsHafas.Raw.RawResult
+    member __.AsyncBestPrices
+        (from: U4<string, Station, Stop, Location>)
+        (``to``: U4<string, Station, Stop, Location>)
+        (opt: JourneysOptions option)
+        : Async<Journeys> =
+
+        async {
+            if profile._endpoint.Contains "reiseauskunft.bahn.de" then // guess db profile
+                let! (common, res, outConl) = httpClient.AsyncBestPriceSearch(Format.journeyRequest profile from ``to`` opt)
+
+                return
+                    Parser.parseJourneys
+                        outConl
+                        (Parser.parseCommon profile (MergeOptions.JourneysOptions Parser.defaultOptions opt) common res)
+            else
+                return Default.Journeys
+        }
+
     member __.AsyncRefreshJourney
         (refreshToken: string)
         (opt: RefreshJourneyOptions option)

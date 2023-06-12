@@ -1,3 +1,3 @@
-import { createClient, setDebug } from "./Lib.js";
+import { createClient, setDebug, bestprices } from "./Lib.js";
 
-export const fshafas = { createClient, setDebug };
+export const fshafas = { createClient, setDebug, bestprices};

@@ -23,8 +23,8 @@ module internal Journey =
                 None
 
         let scheduledDays =
-            match ctx.opt.scheduledDays with
-            | true -> ctx.profile.parseScheduledDays ctx j.sDays
+            match ctx.opt.scheduledDays, j.sDays with
+            | true, Some sDays -> ctx.profile.parseScheduledDays ctx sDays
             | _ -> None
 
         let cycle =

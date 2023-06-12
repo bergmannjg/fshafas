@@ -30,3 +30,7 @@
 ## 2.3.0
 
 * corresponds to fshafas version 2.3.0
+
+## 2.4.0
+
+* corresponds to fshafas version 2.4.0

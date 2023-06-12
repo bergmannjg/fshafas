@@ -293,7 +293,7 @@ and RawOutCon =
       durS: string option
       durR: string option
       chg: int
-      sDays: RawSDays
+      sDays: RawSDays option
       dep: RawDep
       arr: RawArr
       secL: array<RawSec>

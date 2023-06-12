@@ -69,3 +69,7 @@
 ## 2.3.0
 
 * use Fable 4 stable release
+
+## 2.4.0
+
+* minimal support for BestPriceSearch

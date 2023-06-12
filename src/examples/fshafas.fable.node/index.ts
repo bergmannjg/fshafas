@@ -80,6 +80,33 @@ async function journeys(from: string, to: string) {
     }
 }
 
+function addDays(date: Date, days: number): Date {
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+}
+
+async function bestprices(from: string, to: string, days: number) {
+    try {
+        const fromStops = await client.locations(from, { results: 1 });
+        const toStops = await client.locations(to, { results: 1 });
+        if (fromStops.length > 0 && fromStops[0].id && toStops.length > 0 && toStops[0].id) {
+            const result = await fshafas.bestprices(profiles.getProfile('db'), fromStops[0].id, toStops[0].id, { departure: addDays(new Date(), days) })
+            result.journeys?.forEach((j: Journey) => {
+                if (j.price) {
+                    console.log('departure:', j.legs[0].plannedDeparture, 'price: ', j.price?.amount);
+                }
+            });
+        }
+    } catch (error: any) {
+        if (error.isHafasError) {
+            console.error('hafas error:', error);
+        } else {
+            console.error('error:', error);
+        }
+    }
+}
+
 switch (myArgs[0]) {
     case 'locations':
         myArgs[1] && locations(myArgs[1]);
@@ -92,6 +119,9 @@ switch (myArgs[0]) {
         break;
     case 'journeys':
         myArgs[1] && myArgs[2] && journeys(myArgs[1], myArgs[2]);
+        break;
+    case 'bestprices':
+        myArgs[1] && myArgs[2] && parseInt(myArgs[3]) >= 0 && bestprices(myArgs[1], myArgs[2], parseInt(myArgs[3]));
         break;
     default:
         console.log('unkown argument: ', myArgs[0]);
