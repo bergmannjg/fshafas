@@ -411,6 +411,13 @@ module Db =
             trfReq = Some trfReq
             jnyFltrL = jnyFltrL }
 
+    let private transformReq (req: FsHafas.Raw.RawRequest) : FsHafas.Raw.RawRequest =
+        if (req.svcReqL.Length > 0
+            && req.svcReqL.[0].meth = "LocDetails") then
+            { req with ver = "1.16" } // LocDetails seems broken with ver >1.16, all other methods work
+        else
+            req
+
     let profile = FsHafas.Api.Profile.defaultProfile ()
 
     profile._locale <- "de-DE"
@@ -434,6 +441,10 @@ module Db =
     profile.journeysOutFrwd <- true
     profile.formatStation <- formatStation
     profile.transformJourneysQuery <- transformJourneysQuery
+
+    let private defaultTransformReq = profile.transformReq
+
+    profile.transformReq <- (fun (req: FsHafas.Raw.RawRequest) -> transformReq (defaultTransformReq req))
 
     let private defaultParseJourney = profile.parseJourney
 

@@ -25,6 +25,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
             profile.addMicMac,
             profile.salt,
             cfg,
+            profile.transformReq,
             baseRequest
         )
 

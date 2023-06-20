@@ -182,6 +182,21 @@ let loadLocations (profile: FsHafas.Endpoint.Profile) (res: FsHafas.Raw.RawResul
 
     (parsedResponse :> obj, response :> obj)
 
+let loadLocation (profile: FsHafas.Endpoint.Profile) (res: FsHafas.Raw.RawResult) (expectedJson: string) =
+    let parsedResponse =
+        FsHafas.Api.Parser.parseLocationsFromResult
+            profile
+            res.locL
+            FsHafas.Api.Parser.defaultOptions
+            res
+
+    Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
+
+    let response =
+        FsHafas.Api.Parser.Deserialize<StationStopLocation>(expectedJson, acceptEmptyObjectAsNullValue)
+
+    (parsedResponse.[0] :> obj, response :> obj)
+
 let loadJourneys
     (profile: FsHafas.Endpoint.Profile)
     (jouneysOptions: string)
@@ -507,3 +522,7 @@ let TestWarnings () =
 [<Test>]
 let TestJourneysFromTrip () =
     testRunner (Fixture.jsonJourneysFromTripRawResponse ()) (Fixture.jsonJourneysFromTripResponse ()) loadJourneyArray
+
+[<Test>]
+let TestStop () =
+    testRunner (Fixture.jsonStopRawResponse ()) (Fixture.jsonStopResponse ()) (loadLocation (loadDbProfile ()))

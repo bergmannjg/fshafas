@@ -15,6 +15,7 @@ type HafasRawClient
         addMicMac: bool,
         salt: string,
         cfg: FsHafas.Raw.Cfg,
+        transformReq: FsHafas.Raw.RawRequest -> FsHafas.Raw.RawRequest,
         baseRequest: RawRequest
     ) =
 
@@ -44,9 +45,11 @@ type HafasRawClient
               meth = meth
               req = parameters }
 
-        { baseRequest with
-            lang = lang
-            svcReqL = [| svcReqL |] }
+        transformReq (
+            { baseRequest with
+                lang = lang
+                svcReqL = [| svcReqL |] }
+        )
 
     let asyncPost (request: RawRequest) : Async<RawResult> =
 

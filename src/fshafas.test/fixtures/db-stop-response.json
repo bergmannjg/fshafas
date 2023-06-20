@@ -1,0 +1,669 @@
+{
+    "type": "stop",
+    "id": "8000152",
+    "name": "Hannover Hbf",
+    "location": {
+        "type": "location",
+        "id": "8000152",
+        "latitude": 52.377079,
+        "longitude": 9.741763
+    },
+    "products": {
+        "nationalExpress": true,
+        "national": true,
+        "regionalExpress": true,
+        "regional": true,
+        "suburban": true,
+        "bus": true,
+        "ferry": false,
+        "subway": false,
+        "tram": true,
+        "taxi": false
+    },
+    "entrances": [
+        {
+            "type": "location",
+            "id": "608000152",
+            "latitude": 52.376359,
+            "longitude": 9.739632
+        },
+        {
+            "type": "location",
+            "id": "668000152",
+            "latitude": 52.37813,
+            "longitude": 9.742887
+        },
+        {
+            "type": "location",
+            "id": "658000152",
+            "latitude": 52.376296,
+            "longitude": 9.740756
+        },
+        {
+            "type": "location",
+            "id": "648000152",
+            "latitude": 52.376638,
+            "longitude": 9.741188
+        },
+        {
+            "type": "location",
+            "id": "638000152",
+            "latitude": 52.376539,
+            "longitude": 9.740145
+        },
+        {
+            "type": "location",
+            "id": "628000152",
+            "latitude": 52.376009,
+            "longitude": 9.741277
+        },
+        {
+            "type": "location",
+            "id": "618000152",
+            "latitude": 52.375721,
+            "longitude": 9.741224
+        },
+        {
+            "type": "location",
+            "id": "8089194",
+            "latitude": 52.378912,
+            "longitude": 9.741907
+        },
+        {
+            "type": "location",
+            "id": "600638430",
+            "latitude": 52.37813,
+            "longitude": 9.742887
+        },
+        {
+            "type": "location",
+            "id": "660638430",
+            "latitude": 52.376296,
+            "longitude": 9.740756
+        },
+        {
+            "type": "location",
+            "id": "650638430",
+            "latitude": 52.376638,
+            "longitude": 9.741188
+        },
+        {
+            "type": "location",
+            "id": "640638430",
+            "latitude": 52.376539,
+            "longitude": 9.740145
+        },
+        {
+            "type": "location",
+            "id": "630638430",
+            "latitude": 52.376009,
+            "longitude": 9.741277
+        },
+        {
+            "type": "location",
+            "id": "620638430",
+            "latitude": 52.375721,
+            "longitude": 9.741224
+        },
+        {
+            "type": "location",
+            "id": "610638430",
+            "latitude": 52.376359,
+            "longitude": 9.739632
+        },
+        {
+            "type": "location",
+            "id": "600638429",
+            "latitude": 52.37813,
+            "longitude": 9.742887
+        },
+        {
+            "type": "location",
+            "id": "660638429",
+            "latitude": 52.376296,
+            "longitude": 9.740756
+        },
+        {
+            "type": "location",
+            "id": "650638429",
+            "latitude": 52.376638,
+            "longitude": 9.741188
+        },
+        {
+            "type": "location",
+            "id": "640638429",
+            "latitude": 52.376539,
+            "longitude": 9.740145
+        },
+        {
+            "type": "location",
+            "id": "630638429",
+            "latitude": 52.376009,
+            "longitude": 9.741277
+        },
+        {
+            "type": "location",
+            "id": "620638429",
+            "latitude": 52.375721,
+            "longitude": 9.741224
+        },
+        {
+            "type": "location",
+            "id": "610638429",
+            "latitude": 52.376359,
+            "longitude": 9.739632
+        },
+        {
+            "type": "location",
+            "id": "600638428",
+            "latitude": 52.37813,
+            "longitude": 9.742887
+        },
+        {
+            "type": "location",
+            "id": "660638428",
+            "latitude": 52.376296,
+            "longitude": 9.740756
+        },
+        {
+            "type": "location",
+            "id": "650638428",
+            "latitude": 52.376638,
+            "longitude": 9.741188
+        },
+        {
+            "type": "location",
+            "id": "640638428",
+            "latitude": 52.376539,
+            "longitude": 9.740145
+        },
+        {
+            "type": "location",
+            "id": "630638428",
+            "latitude": 52.376009,
+            "longitude": 9.741277
+        },
+        {
+            "type": "location",
+            "id": "620638428",
+            "latitude": 52.375721,
+            "longitude": 9.741224
+        },
+        {
+            "type": "location",
+            "id": "610638428",
+            "latitude": 52.376359,
+            "longitude": 9.739632
+        },
+        {
+            "type": "location",
+            "id": "600638427",
+            "latitude": 52.37813,
+            "longitude": 9.742887
+        },
+        {
+            "type": "location",
+            "id": "660638427",
+            "latitude": 52.376296,
+            "longitude": 9.740756
+        },
+        {
+            "type": "location",
+            "id": "650638427",
+            "latitude": 52.376638,
+            "longitude": 9.741188
+        },
+        {
+            "type": "location",
+            "id": "640638427",
+            "latitude": 52.376539,
+            "longitude": 9.740145
+        },
+        {
+            "type": "location",
+            "id": "630638427",
+            "latitude": 52.376009,
+            "longitude": 9.741277
+        },
+        {
+            "type": "location",
+            "id": "620638427",
+            "latitude": 52.375721,
+            "longitude": 9.741224
+        },
+        {
+            "type": "location",
+            "id": "610638427",
+            "latitude": 52.376359,
+            "longitude": 9.739632
+        }
+    ],
+    "lines": [
+        {
+            "type": "line",
+            "id": "ice",
+            "fahrtNr": null,
+            "name": "ICE",
+            "public": true,
+            "productName": "ICE",
+            "mode": "train",
+            "product": "nationalExpress"
+        },
+        {
+            "type": "line",
+            "id": "ec",
+            "fahrtNr": null,
+            "name": "EC",
+            "public": true,
+            "productName": "EC",
+            "mode": "train",
+            "product": "national"
+        },
+        {
+            "type": "line",
+            "id": "ic",
+            "fahrtNr": null,
+            "name": "IC",
+            "public": true,
+            "productName": "IC",
+            "mode": "train",
+            "product": "national"
+        },
+        {
+            "type": "line",
+            "id": "nj",
+            "fahrtNr": null,
+            "name": "NJ",
+            "public": true,
+            "productName": "NJ",
+            "mode": "train",
+            "product": "national"
+        },
+        {
+            "type": "line",
+            "id": "flx",
+            "fahrtNr": null,
+            "name": "FLX",
+            "public": true,
+            "productName": "DPF",
+            "mode": "train",
+            "product": "regionalExpress"
+        },
+        {
+            "type": "line",
+            "id": "uex",
+            "fahrtNr": null,
+            "name": "UEX",
+            "public": true,
+            "productName": "DPF",
+            "mode": "train",
+            "product": "regionalExpress"
+        },
+        {
+            "type": "line",
+            "id": "bus",
+            "fahrtNr": null,
+            "name": "Bus",
+            "public": true,
+            "productName": "Bus",
+            "mode": "train",
+            "product": "regional"
+        },
+        {
+            "type": "line",
+            "id": "3-r0-ev",
+            "fahrtNr": null,
+            "name": "Bus EV",
+            "public": true,
+            "productName": "Bus",
+            "mode": "train",
+            "product": "regional"
+        },
+        {
+            "type": "line",
+            "id": "3-r0-re30",
+            "fahrtNr": null,
+            "name": "Bus RE30",
+            "public": true,
+            "productName": "Bus",
+            "mode": "train",
+            "product": "regional"
+        },
+        {
+            "type": "line",
+            "id": "eno",
+            "fahrtNr": null,
+            "name": "ENO",
+            "public": true,
+            "productName": "DPN",
+            "mode": "train",
+            "product": "regional"
+        },
+        {
+            "type": "line",
+            "id": "me",
+            "fahrtNr": null,
+            "name": "ME",
+            "public": true,
+            "productName": "DPN",
+            "mode": "train",
+            "product": "regional"
+        },
+        {
+            "type": "line",
+            "id": "rb",
+            "fahrtNr": null,
+            "name": "RB",
+            "public": true,
+            "productName": "DPN",
+            "mode": "train",
+            "product": "regional"
+        },
+        {
+            "type": "line",
+            "id": "re",
+            "fahrtNr": null,
+            "name": "RE",
+            "public": true,
+            "productName": "RE",
+            "mode": "train",
+            "product": "regional"
+        },
+        {
+            "type": "line",
+            "id": "wfb",
+            "fahrtNr": null,
+            "name": "WFB",
+            "public": true,
+            "productName": "DPN",
+            "mode": "train",
+            "product": "regional"
+        },
+        {
+            "type": "line",
+            "id": "erx",
+            "fahrtNr": null,
+            "name": "erx",
+            "public": true,
+            "productName": "DPN",
+            "mode": "train",
+            "product": "regional"
+        },
+        {
+            "type": "line",
+            "id": "4-tdhs-1",
+            "fahrtNr": null,
+            "name": "S 1",
+            "public": true,
+            "productName": "DPS",
+            "mode": "train",
+            "product": "suburban"
+        },
+        {
+            "type": "line",
+            "id": "4-tdhs-2",
+            "fahrtNr": null,
+            "name": "S 2",
+            "public": true,
+            "productName": "DPS",
+            "mode": "train",
+            "product": "suburban"
+        },
+        {
+            "type": "line",
+            "id": "4-tdhs-3",
+            "fahrtNr": null,
+            "name": "S 3",
+            "public": true,
+            "productName": "DPS",
+            "mode": "train",
+            "product": "suburban"
+        },
+        {
+            "type": "line",
+            "id": "4-tdhs-4",
+            "fahrtNr": null,
+            "name": "S 4",
+            "public": true,
+            "productName": "DPS",
+            "mode": "train",
+            "product": "suburban"
+        },
+        {
+            "type": "line",
+            "id": "4-tdhs-5",
+            "fahrtNr": null,
+            "name": "S 5",
+            "public": true,
+            "productName": "DPS",
+            "mode": "train",
+            "product": "suburban"
+        },
+        {
+            "type": "line",
+            "id": "4-tdhs-6",
+            "fahrtNr": null,
+            "name": "S 6",
+            "public": true,
+            "productName": "DPS",
+            "mode": "train",
+            "product": "suburban"
+        },
+        {
+            "type": "line",
+            "id": "4-tdhs-7",
+            "fahrtNr": null,
+            "name": "S 7",
+            "public": true,
+            "productName": "DPS",
+            "mode": "train",
+            "product": "suburban"
+        },
+        {
+            "type": "line",
+            "id": "4-tdhs-21",
+            "fahrtNr": null,
+            "name": "S 21",
+            "public": true,
+            "productName": "DPS",
+            "mode": "train",
+            "product": "suburban"
+        },
+        {
+            "type": "line",
+            "id": "4-tdhs-51",
+            "fahrtNr": null,
+            "name": "S 51",
+            "public": true,
+            "productName": "DPS",
+            "mode": "train",
+            "product": "suburban"
+        },
+        {
+            "type": "line",
+            "id": "5-webueb-121",
+            "fahrtNr": null,
+            "name": "Bus 121",
+            "public": true,
+            "productName": "Bus",
+            "mode": "bus",
+            "product": "bus"
+        },
+        {
+            "type": "line",
+            "id": "5-webueb-128",
+            "fahrtNr": null,
+            "name": "Bus 128",
+            "public": true,
+            "productName": "Bus",
+            "mode": "bus",
+            "product": "bus"
+        },
+        {
+            "type": "line",
+            "id": "5-webueb-134",
+            "fahrtNr": null,
+            "name": "Bus 134",
+            "public": true,
+            "productName": "Bus",
+            "mode": "bus",
+            "product": "bus"
+        },
+        {
+            "type": "line",
+            "id": "5-webrbg-170",
+            "fahrtNr": null,
+            "name": "Bus 170",
+            "public": true,
+            "productName": "Bus",
+            "mode": "bus",
+            "product": "bus"
+        },
+        {
+            "type": "line",
+            "id": "5-webrbg-300",
+            "fahrtNr": null,
+            "name": "Bus 300",
+            "public": true,
+            "productName": "Bus",
+            "mode": "bus",
+            "product": "bus"
+        },
+        {
+            "type": "line",
+            "id": "5-webrbg-500",
+            "fahrtNr": null,
+            "name": "Bus 500",
+            "public": true,
+            "productName": "Bus",
+            "mode": "bus",
+            "product": "bus"
+        },
+        {
+            "type": "line",
+            "id": "5-webrbg-700",
+            "fahrtNr": null,
+            "name": "Bus 700",
+            "public": true,
+            "productName": "Bus",
+            "mode": "bus",
+            "product": "bus"
+        },
+        {
+            "type": "line",
+            "id": "5-webrbg-900",
+            "fahrtNr": null,
+            "name": "Bus 900",
+            "public": true,
+            "productName": "Bus",
+            "mode": "bus",
+            "product": "bus"
+        },
+        {
+            "type": "line",
+            "id": "5-webuet-e10",
+            "fahrtNr": null,
+            "name": "Bus E10",
+            "public": true,
+            "productName": "Bus",
+            "mode": "bus",
+            "product": "bus"
+        },
+        {
+            "type": "line",
+            "id": "8-webuet-1",
+            "fahrtNr": null,
+            "name": "STR 1",
+            "public": true,
+            "productName": "STR",
+            "mode": "train",
+            "product": "tram"
+        },
+        {
+            "type": "line",
+            "id": "8-webuet-2",
+            "fahrtNr": null,
+            "name": "STR 2",
+            "public": true,
+            "productName": "STR",
+            "mode": "train",
+            "product": "tram"
+        },
+        {
+            "type": "line",
+            "id": "8-webuet-3",
+            "fahrtNr": null,
+            "name": "STR 3",
+            "public": true,
+            "productName": "STR",
+            "mode": "train",
+            "product": "tram"
+        },
+        {
+            "type": "line",
+            "id": "8-webuet-7",
+            "fahrtNr": null,
+            "name": "STR 7",
+            "public": true,
+            "productName": "STR",
+            "mode": "train",
+            "product": "tram"
+        },
+        {
+            "type": "line",
+            "id": "8-webuet-8",
+            "fahrtNr": null,
+            "name": "STR 8",
+            "public": true,
+            "productName": "STR",
+            "mode": "train",
+            "product": "tram"
+        },
+        {
+            "type": "line",
+            "id": "8-webuet-9",
+            "fahrtNr": null,
+            "name": "STR 9",
+            "public": true,
+            "productName": "STR",
+            "mode": "train",
+            "product": "tram"
+        },
+        {
+            "type": "line",
+            "id": "8-webuet-10",
+            "fahrtNr": null,
+            "name": "STR 10",
+            "public": true,
+            "productName": "STR",
+            "mode": "train",
+            "product": "tram"
+        },
+        {
+            "type": "line",
+            "id": "8-webuet-17",
+            "fahrtNr": null,
+            "name": "STR 17",
+            "public": true,
+            "productName": "STR",
+            "mode": "train",
+            "product": "tram"
+        },
+        {
+            "type": "line",
+            "id": "8-webuet-18",
+            "fahrtNr": null,
+            "name": "STR 18",
+            "public": true,
+            "productName": "STR",
+            "mode": "train",
+            "product": "tram"
+        }
+    ],
+    "grids": [
+        {
+            "title": "Facilities",
+            "rows": []
+        }
+    ]
+}

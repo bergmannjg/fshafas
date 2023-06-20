@@ -74,3 +74,10 @@ let jsonJourneysFromTripRawResponse () =
 
 let jsonJourneysFromTripResponse () =
     File.ReadAllText(path + "db-journeysFromTrip-response.json")
+
+let jsonStopRawResponse () =
+    File.ReadAllText(path + "db-stop-raw-response.json")
+
+let jsonStopResponse () =
+    File.ReadAllText(path + "db-stop-response.json")
+

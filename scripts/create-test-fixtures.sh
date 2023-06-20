@@ -19,7 +19,6 @@ import { profile as oebbProfile } from 'hafas-client/p/oebb/index.js'
 import { profile as saarfahrplanProfile } from 'hafas-client/p/saarfahrplan/index.js'
 import { profile as rejseplanenProfile } from 'hafas-client/p/rejseplanen/index.js'
 import { profile as svvProfile } from 'hafas-client/p/svv/index.js'
-import { profile as sncbProfile } from 'hafas-client/p/sncb/index.js'
 import geolib from 'geolib'
 
 var myArgs = process.argv.slice(2);
@@ -59,15 +58,23 @@ switch (myArgs[1]) {
 const locations = () => {
     const options = { results: 3, linesOfStops: true };
     console.log(JSON.stringify(options));
-    client.locations('Hamburg Hbf', options)
+    client.locations('Brügge', options)
+        .then(result => { console.log(JSON.stringify(result)); })
+        .catch(console.error);
+}
+
+const stop = () => {
+    const options = { linesOfStops: true };
+    console.log(JSON.stringify(options));
+    client.stop('8000152', options)
         .then(result => { console.log(JSON.stringify(result)); })
         .catch(console.error);
 }
 
 const journeys = () => {
     const now = new Date();
-    const dt = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 20);
-    const options = { results: 2, stopovers: true, polylines: true, scheduledDays: false, remarks: false, departure: dt.toISOString() };
+    const dt = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 8, 20);
+    const options = { results: 2, stopovers: false, polylines: false, scheduledDays: false, remarks: false, departure: dt.toISOString() };
     console.log(JSON.stringify(options));
     client.journeys(journeys_from, journeys_to, options)
         .then(result => { console.log(JSON.stringify(result)); })
@@ -113,7 +120,7 @@ const trip = () => {
 }
 
 const departures = () => {
-    const options = { duration: 20, linesOfStops: true };
+    const options = { duration: 120, linesOfStops: true, direction: '8010338' };
     console.log(JSON.stringify(options));
     client.departures({ type: 'stop', id: '8010338' }, options)
         .then(result => { console.log(JSON.stringify(result)); })
@@ -164,22 +171,22 @@ const radar = () => {
 }
 
 const lines = () => {
-    const options = { };
+    const options = {};
     console.log(JSON.stringify(options));
-    svvClient.lines('S1', options)
+    client.lines('S1', options)
         .then(result => { console.log(JSON.stringify(result)); })
         .catch(console.error);
 }
 
 const remarks = () => {
-    const options = { };
+    const options = {};
     console.log(JSON.stringify(options));
-    svvClient.remarks(options)
+    client.remarks(options)
         .then(result => { console.log(JSON.stringify(result)); })
         .catch(console.error);
 }
 const serverInfo = () => {
-    const options = { };
+    const options = {};
     console.log(JSON.stringify(options));
     client.serverInfo(options)
         .then(result => { console.log(JSON.stringify(result)); })
@@ -198,6 +205,9 @@ switch (myArgs[0]) {
         break;
     case 'trip':
         trip();
+        break;
+    case 'stop':
+        stop();
         break;
     case 'departures':
         departures();
@@ -228,21 +238,6 @@ switch (myArgs[0]) {
 }
 EOF
 
-  cat << EOF > package.json
-{
-  "name": "test-fixtures",
-  "version": "1.0.0",
-  "description": "create test-fixtures",
-  "main": "index.js",
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "geolib": "^3.3.1",
-    "hafas-client": "^5.26.1"
-  }
-}
-EOF
-
   npm install
 
 else
@@ -251,7 +246,7 @@ fi
 
 PATH2FIXTURES="../src/fshafas.test/fixtures"
 
-METHODS=('db:locations' 'db:journeys' 'oebb:journeys' 'saarfahrplan:journeys' 'rejseplanen:journeys' 'db:journeysFromTrip' 'db:trip' 'db:departures' 'db:nearby' 'db:reachableFrom' 'db:radar' 'svv:remarks' 'svv:lines' 'db:serverInfo')
+METHODS=('db:locations' 'db:journeys' 'db:stop' 'oebb:journeys' 'saarfahrplan:journeys' 'rejseplanen:journeys' 'db:journeysFromTrip' 'db:trip' 'db:departures' 'db:nearby' 'db:reachableFrom' 'db:radar' 'svv:remarks' 'svv:lines' 'db:serverInfo')
 
 for PROFILE_METHOD in "${METHODS[@]}"; do
   readarray -d : -t strarr < <(printf '%s' "$PROFILE_METHOD")

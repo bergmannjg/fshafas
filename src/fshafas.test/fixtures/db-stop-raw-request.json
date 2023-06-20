@@ -1,0 +1,1 @@
+{"lang":"en","svcReqL":[{"meth":"LocDetails","req":{"locL":[{"type":"S","lid":"A=1@L=8000152@"}]},"cfg":{"rtMode":"REALTIME"}}],"client":{"type":"AND","id":"DB","v":21120000,"name":"DB Navigator"},"ext":"DB.R21.12.a","ver":"1.16","auth":{"type":"AID","aid":"n91dB8Z77MLdoR0K"}}
