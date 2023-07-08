@@ -262,12 +262,21 @@ let journeys (from: string, ``to``: string, someOptions: string option) =
     }
     |> AsyncRun
 
+#if FABLE_PY
+    // workaround: missing code addDays
+[<Import("timedelta", from = "datetime")>]
+[<Emit("$1+timedelta(days=$2)")>]
+let addDays (dt: System.DateTime, h: int) : System.DateTime = jsNative
+#else
+let addDays (dt: System.DateTime, h: int) : System.DateTime = dt.AddDays(h)
+#endif
+
 let bestPrices (from: string, ``to``: string, someOptions: string option) =
     use client = new Api.HafasAsyncClient(profile)
 
     let options =
         { Default.JourneysOptions with
-            departure = Some(System.DateTime.Now.AddDays(1))
+            departure = Some(addDays(System.DateTime.Now, 1))
             results = Some -1
             products = (products ())
             stopovers = None }
