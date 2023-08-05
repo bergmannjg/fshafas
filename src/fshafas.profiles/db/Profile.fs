@@ -369,18 +369,25 @@ module Db =
                 0
         | _ -> 0
 
-    let private ageGroupFromAge (age: int option) =
-        match age with
-        | Some age ->
-            if age < 6 then "B"
-            else if age < 15 then "K"
-            else if age < 27 then "Y"
-            else if age < 65 then "E"
-            else "S"
-        | None -> "E"
+    let private ageGroupFromAge (age: int) =
+        if age < 6 then "B"
+        else if age < 15 then "K"
+        else if age < 27 then "Y"
+        else if age < 65 then "E"
+        else "S"
+
+    let private transformCfg (routingMode: RoutingMode option) (cfg: FsHafas.Raw.Cfg) : FsHafas.Raw.Cfg =
+        match routingMode with
+        | Some routingMode -> { cfg with rtMode = Some(routingMode.ToString()) }
+        | None -> { cfg with rtMode = Some(RoutingMode.REALTIME.ToString()) }
 
     let private transformJourneysQuery (opt: JourneysOptions option) (q: TripSearchRequest) : TripSearchRequest =
         let bike = getOptionValue opt (fun v -> v.bike) Default.JourneysOptions
+
+        if opt.IsSome
+           && opt.Value.age.IsSome
+           && opt.Value.ageGroup.IsSome then
+            raise (System.ArgumentException("opt.age and opt.ageGroup are mutually exclusive."))
 
         let firstClass = getOptionValue opt (fun v -> v.firstClass) Default.JourneysOptions
 
@@ -399,11 +406,10 @@ module Db =
             { jnyCl = if firstClass then 1 else 2
               tvlrProf =
                 [| { ``type`` =
-                       (ageGroupFromAge (
-                           match opt with
-                           | Some opt -> opt.age
-                           | None -> None
-                       ))
+                       (match opt with
+                        | Some opt when opt.age.IsSome -> ageGroupFromAge opt.age.Value
+                        | Some opt when opt.ageGroup.IsSome -> opt.ageGroup.Value.ToString()
+                        | _ -> "E")
                      redtnCard = redtnCard } |]
               cType = "PK" }
 
@@ -426,10 +432,7 @@ module Db =
     profile.salt <- "bdI8UVj40K5fvxwf"
     profile.addChecksum <- true
 
-    profile.cfg <-
-        Some
-            { polyEnc = None
-              rtMode = Some "REALTIME" }
+    profile.cfg <- Some { polyEnc = Some "GPA"; rtMode = None }
 
     profile.baseRequest <- Some DbConfig.Request.request
     profile._products <- DbConfig.Products.products
@@ -441,6 +444,7 @@ module Db =
     profile.journeysOutFrwd <- true
     profile.formatStation <- formatStation
     profile.transformJourneysQuery <- transformJourneysQuery
+    profile.transformCfg <- transformCfg
 
     let private defaultTransformReq = profile.transformReq
 

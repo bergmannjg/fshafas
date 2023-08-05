@@ -51,13 +51,11 @@ then
   exit 1 
 fi
 
-dotnet fantomas ${TARGET}
-
 # todo: add to transformer
-sed -i 's/U3<Station, Stop, Location>/StationStopLocation/' ${TARGET}
-sed -i 's/U2<Station, Stop>/StationStop/' ${TARGET}
-sed -i 's/U2<Stop, Location>/StopLocation/' ${TARGET}
-sed -i 's/U3<Hint, Status, Warning>/HintStatusWarning/' ${TARGET}
+sed -i 's/U3<Station,Stop,Location>/StationStopLocation/' ${TARGET}
+sed -i 's/U2<Station,Stop>/StationStop/' ${TARGET}
+sed -i 's/U2<Stop,Location>/StopLocation/' ${TARGET}
+sed -i 's/U3<Hint,Status,Warning>/HintStatusWarning/' ${TARGET}
 
 dotnet fantomas ${TARGET}
 
@@ -70,13 +68,11 @@ then
   exit 1 
 fi
 
-dotnet fantomas ${TARGET}
-
 # todo: add to transformer
-sed -i 's/U3<Station, Stop, Location>/StationStopLocation/' ${TARGET}
-sed -i 's/U2<Station, Stop>/StationStop/' ${TARGET}
-sed -i 's/U2<Stop, Location>/StopLocation/' ${TARGET}
-sed -i 's/U3<Hint, Status, Warning>/HintStatusWarning/' ${TARGET}
+sed -i 's/U3<Station,Stop,Location>/StationStopLocation/' ${TARGET}
+sed -i 's/U2<Station,Stop>/StationStop/' ${TARGET}
+sed -i 's/U2<Stop,Location>/StopLocation/' ${TARGET}
+sed -i 's/U3<Hint,Status,Warning>/HintStatusWarning/' ${TARGET}
 
 dotnet fantomas ${TARGET}
 

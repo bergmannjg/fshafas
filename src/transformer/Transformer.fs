@@ -19,7 +19,8 @@ type TransformerOptions =
       isIntegerTypeVal: string -> string -> bool
       isCase1OfU2TypeVals: string -> string -> bool
       transformsTypeVal: string -> string -> string option
-      transformsTypeDefn: string -> string option }
+      transformsTypeDefn: string -> string option
+      getIntersectionTypes: string -> string [] }
 
 let mutable private types: Map<string, string List> = Map.empty
 
@@ -215,6 +216,8 @@ let private visitTypeDefn typeDefn options =
 
     let transform = options.transformsTypeDefn (LongIdentToString id)
 
+    let intersectionTypes = options.getIntersectionTypes (LongIdentToString id)
+
     let typeSymbol () =
         if options.useRecursiveTypes && hasFirstType then
             "and"
@@ -225,6 +228,21 @@ let private visitTypeDefn typeDefn options =
     if (transform.IsSome) then
         sprintf "%s %s = %s" (typeSymbol ()) (LongIdentToString id) transform.Value
         |> lines.Add
+    else if intersectionTypes.Length > 0 then
+        (sprintf "%s %s%s = " (typeSymbol ()) stringEnumAttr (LongIdentToString id))
+        + "{"
+        |> lines.Add
+
+        for intersectionType in intersectionTypes do
+            if types.ContainsKey intersectionType then
+                let strMembers = types[intersectionType]
+                for strMember in strMembers do
+                    sprintf "    %s" strMember |> lines.Add
+
+            ()
+
+        sprintf "}" |> lines.Add
+
     else if (options.toMemberType (LongIdentToString id)) then
         sprintf "%s %s = " (typeSymbol ()) (LongIdentToString id)
         |> lines.Add

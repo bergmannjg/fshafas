@@ -459,10 +459,82 @@ and ServerInfo =
       timetableEnd: string option
       serverTime: string option }
 
+and JourneysOptionsCommon =
+    { /// departure date, undefined corresponds to Date.Now
+      departure: DateTime option
+      /// arrival date, departure and arrival are mutually exclusive.
+      arrival: DateTime option
+      /// earlierThan, use {@link Journeys#earlierRef}, earlierThan and departure/arrival are mutually exclusive.
+      earlierThan: string option
+      /// laterThan, use {@link Journeys#laterRef}, laterThan and departure/arrival are mutually exclusive.
+      laterThan: string option
+      /// how many search results?
+      results: int option
+      /// let journeys pass this station
+      via: string option
+      /// return stations on the way?
+      stopovers: bool option
+      /// Maximum nr of transfers. Default: Let HAFAS decide.
+      transfers: int option
+      /// minimum time for a single transfer in minutes
+      transferTime: int option
+      /// 'none', 'partial' or 'complete'
+      accessibility: string option
+      /// only bike-friendly journeys
+      bike: bool option
+      products: Products option
+      /// return tickets? only available with some profiles
+      tickets: bool option
+      /// return a shape for each leg?
+      polylines: bool option
+      /// parse & expose sub-stops of stations?
+      subStops: bool option
+      /// parse & expose entrances of stops/stations?
+      entrances: bool option
+      /// parse & expose hints & warnings?
+      remarks: bool option
+      /// 'slow', 'normal', 'fast'
+      walkingSpeed: string option
+      /// start with walking
+      startWithWalking: bool option
+      /// language to get results in
+      language: string option
+      /// parse which days each journey is valid on
+      scheduledDays: bool option
+      ``when``: DateTime option }
+
 and LoyaltyCard =
     { ``type``: string
       discount: int option
       ``class``: int option }
+
+and [<StringEnum>] AgeGroup =
+    | [<CompiledName "B">] B
+    | [<CompiledName "K">] K
+    | [<CompiledName "Y">] Y
+    | [<CompiledName "E">] E
+    | [<CompiledName "S">] S
+
+and [<StringEnum>] RoutingMode =
+    | [<CompiledName "OFF">] OFF
+    | [<CompiledName "INFOS">] INFOS
+    | [<CompiledName "FULL">] FULL
+    | [<CompiledName "REALTIME">] REALTIME
+    | [<CompiledName "SERVER_DEFAULT">] SERVER_DEFAULT
+    | [<CompiledName "HYBRID">] HYBRID
+
+/// JourneysOptions specific to Db Profile
+and JourneysOptionsDbProfile =
+    { /// firstClass
+      firstClass: bool option
+      /// ageGroup
+      ageGroup: AgeGroup option
+      /// age
+      age: int option
+      /// LoyaltyCard
+      loyaltyCard: LoyaltyCard option
+      /// RoutingMode
+      routingMode: RoutingMode option }
 
 and JourneysOptions =
     { /// departure date, undefined corresponds to Date.Now
@@ -506,13 +578,17 @@ and JourneysOptions =
       language: string option
       /// parse which days each journey is valid on
       scheduledDays: bool option
+      ``when``: DateTime option
       /// firstClass
       firstClass: bool option
+      /// ageGroup
+      ageGroup: AgeGroup option
       /// age
       age: int option
       /// LoyaltyCard
       loyaltyCard: LoyaltyCard option
-      ``when``: DateTime option }
+      /// RoutingMode
+      routingMode: RoutingMode option }
 
 and JourneysFromTripOptions =
     { /// return stations on the way?

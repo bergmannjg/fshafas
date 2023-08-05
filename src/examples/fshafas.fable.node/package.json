@@ -7,10 +7,10 @@
     "dependencies": {
         "fs-hafas-client": "https://github.com/bergmannjg/fshafas/releases/download/2.4.0/fs-hafas-client-2.4.0.tgz",
         "fs-hafas-profiles": "https://github.com/bergmannjg/fshafas/releases/download/2.4.0/fs-hafas-profiles-2.4.0.tgz",
-        "hafas-client": "^6.0.4"
+        "hafas-client": "^6.1.0"
     },
     "devDependencies": {
-        "@types/hafas-client": "^6.0.0",
+        "@types/hafas-client": "^6.1.0",
         "@types/node": "^20.1.2"
     },
     "author": "",

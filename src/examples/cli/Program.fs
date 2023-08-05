@@ -247,7 +247,8 @@ let journeys (from: string, ``to``: string, someOptions: string option) =
                 products = (products ())
                 stopovers = None
                 polylines = Some true
-                scheduledDays = Some true }
+                scheduledDays = Some true
+                routingMode = Some RoutingMode.REALTIME }
 
     async {
         let! fromLoc = getLocation client from

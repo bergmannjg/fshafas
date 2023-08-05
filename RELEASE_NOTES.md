@@ -73,3 +73,7 @@
 ## 2.4.0
 
 * minimal support for BestPriceSearch
+
+## 2.5.0
+
+* corresponds to hafas-client version 6.1.0

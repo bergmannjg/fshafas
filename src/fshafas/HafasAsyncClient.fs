@@ -67,7 +67,9 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
         : Async<Journeys> =
 
         async {
-            let! (common, res, outConl) = httpClient.AsyncTripSearch(Format.journeyRequest profile from ``to`` opt)
+            let! (common, res, outConl) =
+                httpClient.AsyncTripSearch (Format.journeyRequest profile from ``to`` opt) (fun cfg ->
+                    profile.transformCfg (opt |> Option.bind (fun v -> v.routingMode)) cfg)
 
             return
                 Parser.parseJourneys
@@ -85,7 +87,8 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
 
         async {
             if profile._endpoint.Contains "reiseauskunft.bahn.de" then // guess db profile
-                let! (common, res, outConl) = httpClient.AsyncBestPriceSearch(Format.journeyRequest profile from ``to`` opt)
+                let! (common, res, outConl) =
+                    httpClient.AsyncBestPriceSearch(Format.journeyRequest profile from ``to`` opt)
 
                 return
                     Parser.parseJourneys

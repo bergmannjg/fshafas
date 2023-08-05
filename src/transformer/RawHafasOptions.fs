@@ -89,4 +89,5 @@ let options: Transformer.TransformerOptions =
       isIntegerTypeVal = fun _ _ -> false
       isCase1OfU2TypeVals = fun _ _ -> false
       transformsTypeVal = transformsTypeVal
-      transformsTypeDefn = transformsTypeDefn }
+      transformsTypeDefn = transformsTypeDefn
+      getIntersectionTypes = fun _ -> [||] }

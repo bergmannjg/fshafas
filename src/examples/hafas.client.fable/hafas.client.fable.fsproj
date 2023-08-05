@@ -8,8 +8,11 @@
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Hafas.Client.Bindings" Version="6.0.0" />
+    <PackageReference Include="Hafas.Client.Bindings" Version="6.1.0" />
   </ItemGroup>
+  <PropertyGroup>
+    <DefineConstants>FABLE_COMPILER;FABLE_JS</DefineConstants>
+  </PropertyGroup>  
   <PropertyGroup>
     <RestoreSources>$(RestoreSources);$(HOME)/local.packages</RestoreSources>
   </PropertyGroup>

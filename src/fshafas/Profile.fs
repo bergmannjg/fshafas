@@ -9,6 +9,7 @@ module Profile =
         FsHafas.Endpoint.Profile(
             "de-DE",
             "Europe/Berlin",
+            (fun _ c-> c),
             id,
             id,
             (fun _ q -> q),

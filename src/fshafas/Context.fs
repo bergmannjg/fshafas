@@ -38,6 +38,7 @@ type Profile
     (
         locale,
         timezone,
+        transformCfg,
         transformReq,
         formatStation,
         transformJourneysQuery,
@@ -72,6 +73,7 @@ type Profile
     member val journeysOutFrwd: bool = false with get, set
     member val departuresGetPasslist: bool = true with get, set
     member val departuresStbFltrEquiv: bool = true with get, set
+    member val transformCfg: FsHafas.Client.RoutingMode option -> FsHafas.Raw.Cfg -> FsHafas.Raw.Cfg = transformCfg with get, set
     member val transformReq: FsHafas.Raw.RawRequest -> FsHafas.Raw.RawRequest = transformReq with get, set
     member val formatStation: string -> string = formatStation with get, set
 

@@ -60,7 +60,7 @@ module internal Location =
                 (Some(Coordinate.toFloat (crd.x)), Some(Coordinate.toFloat (crd.y)))
             | _ ->
                 match lid.X, lid.Y with
-                | Some X, Some Y -> (Some(Coordinate.toFloat X), Some(Coordinate.toFloat Y))
+                | Some x, Some y -> (Some(Coordinate.toFloat x), Some(Coordinate.toFloat y))
                 | _ -> (None, None)
 
         let distance =

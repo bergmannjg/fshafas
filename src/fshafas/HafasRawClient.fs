@@ -35,7 +35,8 @@ type HafasRawClient
 
     let httpClient = Request.HttpClient()
 
-    let makeRequest
+    let makeConfiguredRequest
+        (cfg: FsHafas.Raw.Cfg)
         (meth: string)
         (lang: string)
         (parameters: U14<LocMatchRequest, TripSearchRequest, JourneyDetailsRequest, StationBoardRequest, ReconstructionRequest, JourneyMatchRequest, LocGeoPosRequest, LocGeoReachRequest, LocDetailsRequest, JourneyGeoPosRequest, HimSearchRequest, LineMatchRequest, ServerInfoRequest, SearchOnTripRequest>)
@@ -50,6 +51,13 @@ type HafasRawClient
                 lang = lang
                 svcReqL = [| svcReqL |] }
         )
+
+    let makeRequest
+        (meth: string)
+        (lang: string)
+        (parameters: U14<LocMatchRequest, TripSearchRequest, JourneyDetailsRequest, StationBoardRequest, ReconstructionRequest, JourneyMatchRequest, LocGeoPosRequest, LocGeoReachRequest, LocDetailsRequest, JourneyGeoPosRequest, HimSearchRequest, LineMatchRequest, ServerInfoRequest, SearchOnTripRequest>)
+        : RawRequest =
+        makeConfiguredRequest cfg meth lang parameters
 
     let asyncPost (request: RawRequest) : Async<RawResult> =
 
@@ -101,9 +109,9 @@ type HafasRawClient
             | _ -> return (None, None, None)
         }
 
-    member __.AsyncTripSearch(lang: string, tripSearchRequest: TripSearchRequest) =
+    member __.AsyncTripSearch(lang: string, tripSearchRequest: TripSearchRequest) (transformCfg: FsHafas.Raw.Cfg -> FsHafas.Raw.Cfg) =
         async {
-            let! res = asyncPost (makeRequest "TripSearch" lang (U14.Case2 tripSearchRequest))
+            let! res = asyncPost (makeConfiguredRequest (transformCfg cfg) "TripSearch" lang (U14.Case2 tripSearchRequest))
             return (res.common, Some res, res.outConL)
         }
 

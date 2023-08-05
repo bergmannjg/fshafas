@@ -250,8 +250,10 @@ module Default =
           language = Some "de"
           scheduledDays = Some false
           firstClass = Some false
+          ageGroup = None
           age = None
           loyaltyCard = None
+          routingMode = None
           ``when`` = None }
 
     let JourneysFromTripOptions: JourneysFromTripOptions =

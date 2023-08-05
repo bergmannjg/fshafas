@@ -208,6 +208,12 @@ let excludesType (name: string) = Array.contains name excludeTypes
 
 let toMemberType (name: string) = Array.contains name memberTypes
 
+let getIntersectionTypes (name: string) =
+    if name = "JourneysOptions" then
+        [| "JourneysOptionsCommon"; "JourneysOptionsDbProfile" |]
+    else
+        [||]
+
 let options: Transformer.TransformerOptions =
     { prelude = Some prelude
       postlude = Some postlude
@@ -219,4 +225,5 @@ let options: Transformer.TransformerOptions =
       isIntegerTypeVal = isIntegerTypeVal
       isCase1OfU2TypeVals = isCase1OfU2TypeVals
       transformsTypeVal = transformsTypeVal
-      transformsTypeDefn = transformsTypeDefn }
+      transformsTypeDefn = transformsTypeDefn
+      getIntersectionTypes = getIntersectionTypes }

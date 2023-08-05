@@ -40,7 +40,9 @@ let JourneysOptions: JourneysOptions =
       scheduledDays = Some false
       firstClass = Some false
       age = None
+      ageGroup = None
       loyaltyCard = None
+      routingMode = None
       ``when`` = None }
 
 let DeparturesArrivalsOptions: DeparturesArrivalsOptions =
