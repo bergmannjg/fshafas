@@ -34,6 +34,20 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
         | Some value -> value
         | None -> false
 
+    let runAsyncAllowNoMatch (computation: Async<'T>) : Async<'T option> =
+        async {
+            match! computation |> Async.Catch with
+            | Choice1Of2 r -> return Some r
+            | Choice2Of2 ext ->
+                match ext with
+                | :? (HafasError) as ex ->
+                    if ex.code = HafasError.CodeNoMatch then
+                        return None
+                    else
+                        return raise ex
+                | e -> return raise e
+        }
+
     interface IDisposable with
         member __.Dispose() = httpClient.Dispose()
 
@@ -150,7 +164,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
 
         async {
             if enabled (profile :> FsHafas.Client.Profile).trip then
-                let! (common, res, journey) = httpClient.AsyncJourneyDetails(Format.tripRequest profile id "" opt)
+                let! (common, res, journey) = httpClient.AsyncJourneyDetails(Format.tripRequest profile id opt)
 
                 return
                     { Default.TripWithRealtimeData with
@@ -262,13 +276,16 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
     member __.AsyncTripsByName (lineName: string) (opt: TripsByNameOptions option) : Async<TripsWithRealtimeData> =
         async {
             if enabled (profile :> FsHafas.Client.Profile).tripsByName then
-                let! (common, res, journey) =
-                    httpClient.AsyncJourneyMatch(Format.journeyMatchRequest profile lineName opt)
-
-                return
-                    { Default.TripsWithRealtimeData with
-                        trips = Parser.parseTrips journey (Parser.parseCommon profile Parser.defaultOptions common res)
-                        realtimeDataUpdatedAt = Parser.parseRealtimeDataUpdatedAt res }
+                match!
+                    runAsyncAllowNoMatch (httpClient.AsyncJourneyMatch(Format.journeyMatchRequest profile lineName opt))
+                    with
+                | Some (common, res, journey) ->
+                    return
+                        { Default.TripsWithRealtimeData with
+                            trips =
+                                Parser.parseTrips journey (Parser.parseCommon profile Parser.defaultOptions common res)
+                            realtimeDataUpdatedAt = Parser.parseRealtimeDataUpdatedAt res }
+                | None -> return Default.TripsWithRealtimeData
             else
                 return Default.TripsWithRealtimeData
         }

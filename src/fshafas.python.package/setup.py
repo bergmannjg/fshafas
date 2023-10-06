@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='fshafas',
-    version='0.0.25',
+    version='0.0.26',
     description='python client for HAFAS public transport APIs',
     long_description=open('package.readme.md').read(),
     long_description_content_type="text/markdown",

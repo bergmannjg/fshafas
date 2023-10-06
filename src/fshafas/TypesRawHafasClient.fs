@@ -506,11 +506,7 @@ and LocMatchInput =
 
 and LocMatchRequest = { input: LocMatchInput }
 and LineMatchRequest = { input: string }
-
-and JourneyDetailsRequest =
-    { jid: string
-      name: string
-      getPolyline: bool }
+and JourneyDetailsRequest = { jid: string; getPolyline: bool }
 
 and JnyFltr =
     { ``type``: string
@@ -533,14 +529,18 @@ and StationBoardRequest =
       time: string
       stbLoc: Loc
       jnyFltrL: array<JnyFltr>
-      dur: int }
+      dur: int
+      dirLoc: Loc option
+      maxJny: int option }
 
 and HimSearchRequest =
     { himFltrL: array<JnyFltr>
-      getPolyline: bool
-      maxNum: int
-      dateB: string
-      timeB: string }
+      getPolyline: bool option
+      maxNum: int option
+      dateB: string option
+      timeB: string option
+      dateE: string option
+      timeE: string option }
 
 and ReconstructionRequest =
     { getIST: bool
@@ -590,6 +590,12 @@ and TripSearchRequest =
 and JourneyMatchRequest =
     { input: string
       date: string option
+      time: string option
+      dateB: string option
+      timeB: string option
+      dateE: string option
+      timeE: string option
+      onlyCR: bool option
       jnyFltrL: array<JnyFltr> }
 
 and RawcCrd = { x: int; y: int }

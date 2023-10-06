@@ -77,3 +77,7 @@
 ## 2.5.0
 
 * corresponds to hafas-client version 6.1.0
+
+## 2.6.0
+
+* fix raw api requests

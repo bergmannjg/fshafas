@@ -294,7 +294,6 @@ and Trip =
       operator: float option
       direction: string option
       line: Line option
-      reachable: bool option
       cancelled: bool option
       walking: bool option
       loadFactor: string option
@@ -305,6 +304,10 @@ and Trip =
       alternatives: array<Alternative> option
       polyline: FeatureCollection option
       remarks: array<HintStatusWarning> option
+      currentLocation: Location option
+      departurePrognosisType: PrognosisType option
+      arrivalPrognosisType: PrognosisType option
+      checkin: bool option
       scheduledDays: ScheduledDays option }
 
 and TripWithRealtimeData =

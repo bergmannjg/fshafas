@@ -30,6 +30,7 @@ type Log() =
 
 and HafasError(code: string, msg: string) =
     inherit Exception(msg)
+    static member CodeNoMatch = "NO_MATCH"
     member e.code = code
     member e.isHafasError = true
 

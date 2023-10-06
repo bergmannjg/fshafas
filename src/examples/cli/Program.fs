@@ -20,6 +20,7 @@ type CliArguments =
     | BestPrices of from: string * ``to``: string
     | JourneysWithOptions of from: string * ``to``: string * options: string
     | JourneysFromTrip of tripId: string * stopover: string * departure: string * newToId: string
+    | Arrivals of name: string
     | Departures of name: string
     | Trip of name: string
     | TripsByName of name: string
@@ -50,6 +51,7 @@ OPTIONS:
     --journeysfromtrip <tripId> <prevStopId> <prevStopDepature> <newToId>
                           get journeys from  <prevStopId> of trip <tripId> to new target <newToId>.
     --departures <name>   get Departures, e.g. Hannover.
+    --arrivals <name>     get Arrivals, e.g. Hannover.
     --trip <tripId>       get Trip for <tripId>.
     --tripsbyname <name>  get Trips, e.g. ICE1001.
     --nearby <lon> <lat>  get Nearby, e.g. 13.078028 54.308438.
@@ -86,6 +88,7 @@ let parse (args: string list) =
       (value3ToArg "--journeys" JourneysWithOptions args
        |> Option.orElseWith (fun () -> value2ToArg "--journeys" Journeys args))
       value4ToArg "--journeysfromtrip" JourneysFromTrip args
+      valueToArg "--arrivals" Arrivals args
       valueToArg "--departures" Departures args
       valueToArg "--trip" Trip args
       valueToArg "--tripsbyname" TripsByName args
@@ -264,7 +267,7 @@ let journeys (from: string, ``to``: string, someOptions: string option) =
     |> AsyncRun
 
 #if FABLE_PY
-    // workaround: missing code addDays
+// workaround: missing code addDays
 [<Import("timedelta", from = "datetime")>]
 [<Emit("$1+timedelta(days=$2)")>]
 let addDays (dt: System.DateTime, h: int) : System.DateTime = jsNative
@@ -277,7 +280,7 @@ let bestPrices (from: string, ``to``: string, someOptions: string option) =
 
     let options =
         { Default.JourneysOptions with
-            departure = Some(addDays(System.DateTime.Now, 1))
+            departure = Some(addDays (System.DateTime.Now, 1))
             results = Some -1
             products = (products ())
             stopovers = None }
@@ -421,6 +424,32 @@ let departures (name: string) =
     }
     |> AsyncRun
 
+let arrivals (name: string) =
+    use client = new Api.HafasAsyncClient(profile)
+
+    let options =
+        { Default.DeparturesArrivalsOptions with ``when`` = Some((dateOfCurrentHour ()).AddHours(1)) }
+
+    async {
+        let! loc = getLocation client name
+
+        match loc with
+        | Some loc ->
+            let! arrivals = client.AsyncArrivals loc (Some options)
+
+            let sorted =
+                arrivals.arrivals
+                |> sortBy (fun dep ->
+                    match dep.``when``, dep.stop with
+                    | Some w, Some (StationStop.Stop s) when s.name.IsSome -> w + s.name.Value
+                    | _ -> "")
+
+            FsHafas.Printf.Short.Alternatives sorted
+            |> printfn "%s"
+        | _ -> ()
+    }
+    |> AsyncRun
+
 let trip (id: string) =
     use client = new Api.HafasAsyncClient(profile)
 
@@ -441,7 +470,7 @@ let tripsByName (name: string) =
                 name
                 (Some
                     { Default.TripsByNameOptions with
-                        ``when`` = Some(System.DateTime(2022, 12, 11))
+                        ``when`` = Some(System.DateTime.Now)
                         operatorNames = Some [| "DB Fernverkehr AG" |] })
 
         FsHafas.Printf.Short.Trips trips.trips
@@ -591,6 +620,7 @@ let run (arg: CliArguments) =
     | Stop v -> stop v
     | JourneysFromTrip (f, t, d, n) -> journeysFromTrip (f, t, d, n)
     | Departures v -> departures v
+    | Arrivals v -> arrivals v
     | Trip v -> trip v
     | TripsByName v -> tripsByName v
     | Nearby (lon, lat) -> nearby (lon, lat)

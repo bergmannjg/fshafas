@@ -84,9 +84,28 @@ module Short =
         + nl
         + printDistance (ident + 2) station.distance
 
+    let private ProductOfLine (ident: int) (line: Line option) =
+        match line with
+        | Some line ->
+            match line.product, line.name, line.matchId with
+            | Some product, Some name, Some matchId ->
+                printfnS
+                    ident
+                    "product: "
+                    (Some(
+                        product
+                        + ", '"
+                        + name
+                        + "', linenumber "
+                        + matchId
+                    ))
+            | _ -> ""
+        | None -> ""
+
     let private Alternative (ident: int) (alternative: Alternative) =
         printfnS ident "direction: " alternative.direction
         + printfnS ident "when: " alternative.``when``
+        + ProductOfLine ident alternative.line
         + match alternative.stop with
           | Some stop ->
               match stop with
@@ -116,24 +135,6 @@ module Short =
         | Some remarks ->
             remarks
             |> Array.fold (fun s r -> s + Remark (ident + 2) r) ""
-        | None -> ""
-
-    let private ProductOfLine (ident: int) (line: Line option) =
-        match line with
-        | Some line ->
-            match line.product, line.name, line.matchId with
-            | Some product, Some name, Some matchId ->
-                printfnS
-                    ident
-                    "product: "
-                    (Some(
-                        product
-                        + ", '"
-                        + name
-                        + "', linenumber "
-                        + matchId
-                    ))
-            | _ -> ""
         | None -> ""
 
     let StopOverStop (ident: int) (so: StopOver) =
@@ -251,6 +252,14 @@ module Short =
               printfS ident "Line: " line.name
               + printfnS 0 ", linenumber: " line.matchId
           | _ -> ""
+        + match trip.currentLocation with
+          | Some (location) ->
+              (String.replicate ident " ")
+              + "currentLocation: "
+              + printLonLat 0 location.longitude location.latitude
+              + nl
+          | None -> ""
+
         + printfnB ident "cancelled: " trip.cancelled
         + printfnB ident "walking: " trip.walking
         + printfnB ident "transfer: " trip.transfer

@@ -164,14 +164,6 @@ module internal Format =
         let duration =
             getOptionValue opt (fun v -> v.duration) Default.DeparturesArrivalsOptions
 
-        let stopovers =
-            profile.departuresGetPasslist
-            && getOptionValue opt (fun v -> v.stopovers) Default.DeparturesArrivalsOptions
-
-        let includeRelatedStations =
-            profile.departuresStbFltrEquiv
-            && getOptionValue opt (fun v -> v.includeRelatedStations) Default.DeparturesArrivalsOptions
-
         let products =
             getOptionValue opt (fun v -> v.products) Default.DeparturesArrivalsOptions
 
@@ -186,7 +178,11 @@ module internal Format =
           time = time
           stbLoc = makeLocType profile name
           jnyFltrL = filters
-          dur = duration }
+          dur = duration
+          dirLoc =
+            maybeGetOptionValue opt (fun v -> v.direction)
+            |> Option.map (makeLocLTypeS profile)
+          maxJny = maybeGetOptionValue opt (fun v -> v.results) }
 
     let reconstructionRequest
         (profile: FsHafas.Endpoint.Profile)
@@ -222,9 +218,38 @@ module internal Format =
             maybeGetOptionValue opt (fun v -> v.``when``)
             |> Option.map formatDate
 
+        let time =
+            maybeGetOptionValue opt (fun v -> v.``when``)
+            |> Option.map formatTime
+
+        let dateB =
+            maybeGetOptionValue opt (fun v -> v.fromWhen)
+            |> Option.map formatDate
+
+        let timeB =
+            maybeGetOptionValue opt (fun v -> v.fromWhen)
+            |> Option.map formatTime
+
+        let dateE =
+            maybeGetOptionValue opt (fun v -> v.untilWhen)
+            |> Option.map formatDate
+
+        let timeE =
+            maybeGetOptionValue opt (fun v -> v.untilWhen)
+            |> Option.map formatTime
+
         let language = getOptionValue opt (fun v -> Some "de") Default.TripsByNameOptions
 
-        let filters: FsHafas.Raw.JnyFltr [] =
+        let linefilters: FsHafas.Raw.JnyFltr [] =
+            match maybeGetOptionValue opt (fun v -> v.lineName) with
+            | Some lineName ->
+                [| { ``type`` = "LINE"
+                     mode = "INC"
+                     value = Some lineName
+                     meta = None } |]
+            | _ -> [||]
+
+        let opfilters: FsHafas.Raw.JnyFltr [] =
             match maybeGetOptionValue opt (fun v -> v.operatorNames) with
             | Some operatorNames when operatorNames.Length > 0 ->
                 [| { ``type`` = "OP"
@@ -233,9 +258,17 @@ module internal Format =
                      meta = None } |]
             | _ -> [||]
 
+        let filters: FsHafas.Raw.JnyFltr [] = Array.append linefilters opfilters
+
         language,
         { input = lineName
           date = date
+          time = time
+          dateB = dateB
+          timeB = timeB
+          dateE = dateE
+          timeE = timeE
+          onlyCR = maybeGetOptionValue opt (fun v -> v.onlyCurrentlyRunning)
           jnyFltrL = filters }
 
     let locDetailsRequest
@@ -378,7 +411,6 @@ module internal Format =
     let tripRequest
         (profile: FsHafas.Endpoint.Profile)
         (id: string)
-        (name: string)
         (opt: FsHafas.Client.TripOptions option)
         : string * FsHafas.Raw.JourneyDetailsRequest =
 
@@ -386,10 +418,7 @@ module internal Format =
 
         let language = getOptionValue opt (fun v -> v.language) Default.TripOptions
 
-        language,
-        { jid = id
-          name = name
-          getPolyline = polyline }
+        language, { jid = id; getPolyline = polyline }
 
     let lineMatchRequest
         (profile: FsHafas.Endpoint.Profile)
@@ -431,10 +460,12 @@ module internal Format =
 
         language,
         { himFltrL = filters
-          getPolyline = polylines
-          maxNum = results
-          dateB = date
-          timeB = time }
+          getPolyline = Some polylines
+          maxNum = Some results
+          dateB = Some date
+          timeB = Some time
+          dateE = None
+          timeE = None }
 
     let journeyRequest
         (profile: FsHafas.Endpoint.Profile)
