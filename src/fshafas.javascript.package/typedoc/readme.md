@@ -1,4 +1,4 @@
-FsHafas-JavaScript is a client for the [HAFAS](https://de.wikipedia.org/wiki/HAFAS>) public transport APIs.
+FsHafas-JavaScript is a client for the [HAFAS](https://de.wikipedia.org/wiki/HAFAS) public transport APIs.
 It is generated (via [Fable](https://github.com/fable-compiler/Fable>))
 by the [fshafas](https://github.com/bergmannjg/fshafas/) F# library.
 
