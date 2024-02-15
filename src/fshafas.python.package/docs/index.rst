@@ -40,7 +40,7 @@ Get journeys between locations and print start station, end station and departur
 
 .. code:: shell
 
-    python3.9 example.py Hamburg Berlin
+    python3.10 example.py Hamburg Berlin
 
 Installation
 ------------

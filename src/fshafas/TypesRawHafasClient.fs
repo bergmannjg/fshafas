@@ -347,7 +347,8 @@ and RawLoc =
       isMainMast: bool option
       meta: bool option
       dist: int option
-      dur: int option }
+      dur: int option
+      gidL: array<string> option }
 
 and RawProdCtx =
     { name: string option

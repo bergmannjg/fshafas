@@ -420,7 +420,7 @@ module Default =
           cancelled = None
           departurePrognosisType = None
           arrivalPrognosisType = None
-          additionalStop = None }
+          additional = None}
 
     let Trip: Trip =
         { id = ""

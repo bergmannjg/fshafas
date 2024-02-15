@@ -42,3 +42,7 @@
 ## 2.6.0
 
 * corresponds to fshafas version 2.6.0
+
+## 2.7.0
+
+* corresponds to fshafas version 2.7.0

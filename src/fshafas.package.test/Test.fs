@@ -19,7 +19,7 @@ let callJavaScript (args: string) =
     runProc "node" ("Program.js " + args) (Some(cliDirectory + "/target.javascript"))
 
 let callPython (args: string) =
-    runProc ("python") ("program.py " + args) (Some(cliDirectory + "/target.python"))
+    runProc ("python3.10") ("program.py " + args) (Some(cliDirectory + "/target.python"))
 
 let args () =
     [| "--locations Hannover"

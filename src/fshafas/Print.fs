@@ -154,8 +154,8 @@ module Short =
               match so.arrival with
               | Some _ -> printfnS ident "arrival: " so.arrival
               | None -> ""
-        + match so.additionalStop with
-          | Some additionalStop when additionalStop -> printfnS ident "additionalStop: " (Some "true")
+        + match so.additional with
+          | Some additional when additional -> printfnS ident "additional: " (Some "true")
           | _ -> ""
         + match so.cancelled with
           | Some cancelled when cancelled -> printfnS ident "cancelled: " (Some "true")

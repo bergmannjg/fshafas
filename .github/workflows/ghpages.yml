@@ -25,26 +25,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.10'
       - name: Install dependencies
         run: |
-          python3.9 -m pip install sphinx
-          python3.9 -m pip install wheel
-          python3.9 -m pip install polyline
-          python3.9 -m pip install jsonpickle
-          python3.9 -m pip install furo
-          python3.9 -m pip install pytz --upgrade
-          python3.9 -m pip install tzdata --upgrade
+          python3.10 -m pip install sphinx
+          python3.10 -m pip install wheel
+          python3.10 -m pip install polyline
+          python3.10 -m pip install jsonpickle
+          python3.10 -m pip install furo
+          python3.10 -m pip install pytz --upgrade
+          python3.10 -m pip install tzdata --upgrade
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '6.0.x'
       - name: Setup dotnet tools
@@ -64,7 +64,7 @@ jobs:
           cd src/fshafas.python.package
           pyversion=$(grep 'version=' setup.py | sed 's/version=//' | sed "s/[ ',]*//g")
           wget https://github.com/bergmannjg/fshafas/releases/download/${version}/fshafas-${pyversion}-py3-none-any.whl
-          python3.9 -m wheel unpack fshafas-${pyversion}-py3-none-any.whl
+          python3.10 -m wheel unpack fshafas-${pyversion}-py3-none-any.whl
           cp -r fshafas-${pyversion}/fshafas/fable_modules/ fshafas/
       - name: build python docs
         run: |
@@ -73,9 +73,9 @@ jobs:
           mkdir ../../../output/fshafas/py
           cp -r _build/html/*  ../../../output/fshafas/py
       - name: Setup Pages
-        uses: actions/configure-pages@v2
+        uses: actions/configure-pages@v4
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './output/fshafas'
 

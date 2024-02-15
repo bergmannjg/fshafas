@@ -256,8 +256,7 @@ and [<StringEnum>] PrognosisType =
 
 /// A stopover represents a vehicle stopping at a stop/station at a specific time.
 and StopOver =
-    { additionalStop: bool option
-      stop: StationStop option
+    { stop: StationStop option
       /// null, if last stopOver of trip
       departure: string option
       departureDelay: int option
@@ -278,7 +277,8 @@ and StopOver =
       passBy: bool option
       cancelled: bool option
       departurePrognosisType: PrognosisType option
-      arrivalPrognosisType: PrognosisType option }
+      arrivalPrognosisType: PrognosisType option
+      additional: bool option }
 
 /// Trip – a vehicle stopping at a set of stops at specific times
 and Trip =

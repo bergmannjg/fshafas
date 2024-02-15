@@ -342,13 +342,13 @@ Target.create "InstallPythonPackage" (fun _ ->
 
     Shell.cleanDir (projDir + "fshafas.egg-info/")
 
-    Shell.Exec("python3.9", "-m pip uninstall -y fshafas")
+    Shell.Exec("python3.10", "-m pip uninstall -y fshafas")
     |> ignore
 
     let version = getPyVersion "src/fshafas.python.package/setup.py"
     let wheel = "dist/fshafas-" + version + "-py3-none-any.whl"
 
-    Shell.Exec("python3.9", "-m pip install " + projDir + wheel)
+    Shell.Exec("python3.10", "-m pip install " + projDir + wheel)
     |> ignore)
 
 Target.create "BuildPythonPackage" (fun _ ->
@@ -363,7 +363,7 @@ Target.create "BuildPythonPackage" (fun _ ->
     Shell.mv (projDir + "fable_modules/") (projDir + "fshafas")
     Shell.Exec("bash", "fixes.sh", projDir) |> ignore
 
-    Shell.Exec("python3.9", "-m build " + projDir)
+    Shell.Exec("python3.10", "-m build " + projDir)
     |> ignore)
 
 let sourceFiles =
