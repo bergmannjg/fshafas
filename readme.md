@@ -49,7 +49,6 @@ Run `./build.sh` or `./build.cmd` at the root folder.
 
 ### Targets
 
-* *BuildLib*: compile to dotnet dll,
 * *Test*: compile to dotnet dll and run tests,
 * *JavaScript*: compile to JavaScript and build npm package
 * *Python*: compile to Python and build Python package

@@ -9,5 +9,8 @@
   <PropertyGroup>
     <DefineConstants>FABLE_COMPILER;FABLE_JS</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup>
+    <RestoreSources>$(RestoreSources);$(HOME)/local.packages</RestoreSources>
+  </PropertyGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

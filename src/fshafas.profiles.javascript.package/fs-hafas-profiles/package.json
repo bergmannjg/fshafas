@@ -1,7 +1,7 @@
 {
   "name": "fs-hafas-profiles",
-  "version": "2.7.0",
-  "description": "",
+  "version": "2.8.0",
+  "description": "fshafas",
   "type": "module",
   "main": "index.js",
   "types": "index.d.ts",
@@ -9,12 +9,12 @@
 		"index.js",
 		"index.d.ts",
 		"hafas-client.d.ts",
-    "Profiles.js",
-    "fable_modules/**/*"
+        "Profiles.js",
+        "fable_modules"
 	],
   "author": "Jürgen Bergmann",
   "license": "ISC",
   "dependencies": {
-    "fs-hafas-client": "^2.7.0"
+    "fs-hafas-client": "^2.8.0"
   }
 }

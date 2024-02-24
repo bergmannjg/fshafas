@@ -53,8 +53,10 @@ let rec private visitSnyType synType options =
     | SynType.Tuple (_, elementTypes, _) ->
         let line = List()
 
-        for (_, elementType) in elementTypes do
-            visitSnyType elementType options |> line.Add
+        for elementType in elementTypes do
+            match elementType with 
+            | SynTupleTypeSegment.Type elementType -> visitSnyType elementType options |> line.Add
+            | _ -> ()
 
         "(" + (line |> String.concat ",") + ")"
     | SynType.Fun (argType, returnType, _, _) ->
@@ -62,6 +64,7 @@ let rec private visitSnyType synType options =
         let strreturnType = visitSnyType returnType options
         strargType + "->" + strreturnType
     | SynType.Paren (innerType, _) -> visitSnyType innerType options
+    | SynType.SignatureParameter (_, _, _, innerType, _) -> visitSnyType innerType options
     | SynType.App (typeName, _, typeArgs, _, _, _, _) ->
         let strtypeName = visitSnyType typeName options
         let line = List()
@@ -122,7 +125,7 @@ let private visitTypeMembers (typename: string) members options =
 
     for m in members do
         match m with
-        | SynMemberDefn.AbstractSlot (slotSig, _, _) -> line.AddRange(visitValSig typename slotSig options)
+        | SynMemberDefn.AbstractSlot (slotSig, _, _, _) -> line.AddRange(visitValSig typename slotSig options)
         | SynMemberDefn.Inherit (baseType, _, _) ->
             let name = visitSnyType baseType options
 
@@ -285,7 +288,7 @@ let rec private visitDeclarations decls options =
         match declaration with
         | SynModuleDecl.Open (SynOpenDeclTarget.ModuleOrNamespace (longDotId, _), range) ->
             if options.prelude.IsNone then
-                lines.Add(sprintf "open %s" (LongIdentToString longDotId))
+                lines.Add(sprintf "open %s" (SynLongIdentToString longDotId))
         | SynModuleDecl.Types (typeDefns, range) ->
             for typeDefn in typeDefns do
                 lines.AddRange(visitTypeDefn typeDefn options)
@@ -320,7 +323,7 @@ let transform (fromFile: string) (toFile: string) (options: TransformerOptions) 
 
     match tree with
     | ParsedInput.ImplFile (implFile) ->
-        let (ParsedImplFileInput (fn, script, name, _, _, modules, _, _)) = implFile
+        let (ParsedImplFileInput (fn, script, name, _, _, modules, _, _, _)) = implFile
 
         let lines = visitModulesAndNamespaces modules options
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants>FABLE_COMPILER</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="bvg/Request.fs" />
+    <Compile Include="bvg/Products.fs" />
+    <Compile Include="bvg/Profile.fs" />
+    <Compile Include="db/Request.fs" />
+    <Compile Include="db/Products.fs" />
+    <Compile Include="db/Profile.fs" />
+    <Compile Include="mobilnrw/Request.fs" />
+    <Compile Include="mobilnrw/Products.fs" />
+    <Compile Include="mobilnrw/Profile.fs" />
+    <Compile Include="oebb/Request.fs" />
+    <Compile Include="oebb/Products.fs" />
+    <Compile Include="oebb/Profile.fs" />
+    <Compile Include="rejseplanen/Request.fs" />
+    <Compile Include="rejseplanen/Products.fs" />
+    <Compile Include="rejseplanen/Profile.fs" />
+    <Compile Include="saarfahrplan/Request.fs" />
+    <Compile Include="saarfahrplan/Products.fs" />
+    <Compile Include="saarfahrplan/Profile.fs" />
+    <Compile Include="svv/Request.fs" />
+    <Compile Include="svv/Products.fs" />
+    <Compile Include="svv/Profile.fs" />
+  </ItemGroup>
+  <Import Project="..\..\..\..\.paket\Paket.Restore.targets" />
+</Project>

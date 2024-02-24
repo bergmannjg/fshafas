@@ -143,7 +143,7 @@ and [<StringEnum>] HintType =
         System.IO.File.WriteAllText("source.fs", source)
         Transformer.transform "source.fs" "transformed.fs" options
         let text = System.IO.File.ReadAllText("transformed.fs")
-        Assert.AreEqual(expected, text)
+        Assert.That(expected, Is.EqualTo(text))
     with
     | :? NUnit.Framework.AssertionException as ex -> ()
 
@@ -252,7 +252,7 @@ and [<StringEnum>] HintType =
         System.IO.File.WriteAllText("source.fs", source)
         Transformer.transform "source.fs" "transformed.fs" options
         let text = System.IO.File.ReadAllText("transformed.fs")
-        Assert.AreEqual(expected, text)
+        Assert.That(expected, Is.EqualTo(text))
     with
     | :? NUnit.Framework.AssertionException as ex -> ()
 
@@ -297,6 +297,6 @@ type LinesWithRealtimeData = {
         System.IO.File.WriteAllText("source.fs", source)
         Transformer.transform "source.fs" "transformed.fs" options
         let text = System.IO.File.ReadAllText("transformed.fs")
-        Assert.AreEqual(expected, text)
+        Assert.That(expected, Is.EqualTo(text))
     with
     | :? NUnit.Framework.AssertionException as ex -> ()

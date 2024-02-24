@@ -86,3 +86,7 @@
 
 * corresponds to hafas-client version 6.2.0
 * rename field StopOver additionalStop to additional
+
+## 2.8.0
+
+* update to dotnet 8.0

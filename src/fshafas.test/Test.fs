@@ -238,7 +238,7 @@ let loadJourneyArray (res: FsHafas.Raw.RawResult) (expectedJson: string) =
         FsHafas.Api.Parser.Deserialize<Journeys>(expectedJson, acceptEmptyObjectAsNullValue)
 
     Assert.That(response.journeys.Value.Length > 0, Is.EqualTo(true))
-    Assert.AreEqual(response.journeys.Value.Length, parsedResponse.journeys.Value.Length)
+    Assert.That(response.journeys.Value.Length, Is.EqualTo(parsedResponse.journeys.Value.Length))
 
     // legs may differ
     (skipLegs (parsedResponse.journeys.Value) :> obj, skipLegs (response.journeys.Value) :> obj)
@@ -336,7 +336,7 @@ let loadRadar (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let response =
         FsHafas.Api.Parser.Deserialize<Radar>(expectedJson, acceptEmptyObjectAsNullValue)
 
-    Assert.AreEqual(response.movements.Value.Length, parsedResponse.movements.Value.Length)
+    Assert.That(response.movements.Value.Length, Is.EqualTo(parsedResponse.movements.Value.Length))
 
     (parsedResponse :> obj, response :> obj)
 
@@ -390,7 +390,7 @@ let TestFeatureParser () =
     let feature0 =
         FsHafas.Api.Parser.Deserialize<Feature>(jsonPropertiesAsEmptyObject, acceptEmptyObjectAsNullValue)
 
-    Assert.IsTrue(feature0.properties.IsNone)
+    Assert.That(feature0.properties.IsNone)
 
     let jsonPropertiesAsNull =
         """
@@ -410,7 +410,7 @@ let TestFeatureParser () =
     let feature1 =
         FsHafas.Api.Parser.Deserialize<Feature>(jsonPropertiesAsNull, acceptEmptyObjectAsNullValue)
 
-    Assert.IsTrue(feature1.properties.IsNone)
+    Assert.That(feature1.properties.IsNone)
 
     let jsonPropertiesAsStop =
         """
@@ -452,10 +452,10 @@ let TestFeatureParser () =
     let feature2 =
         FsHafas.Api.Parser.Deserialize<Feature>(jsonPropertiesAsStop, acceptEmptyObjectAsNullValue)
 
-    Assert.IsTrue(feature2.properties.IsSome)
+    Assert.That(feature2.properties.IsSome)
 
     match feature2.properties.Value with
-    | StationStopLocation.Stop s -> Assert.AreEqual("Stop", s.``type``.ToString())
+    | StationStopLocation.Stop s -> Assert.That("Stop", Is.EqualTo(s.``type``.ToString()))
     | _ -> raise (NUnit.Framework.AssertionException("U3.Case2 Stop expected"))
 
     let jsonPropertiesAsUndefined =
@@ -475,7 +475,7 @@ let TestFeatureParser () =
     let feature3 =
         FsHafas.Api.Parser.Deserialize<Feature>(jsonPropertiesAsUndefined, acceptEmptyObjectAsNullValue)
 
-    Assert.IsTrue(feature3.properties.IsNone)
+    Assert.That(feature3.properties.IsNone)
 
 [<TestCaseSource(nameof (getLocationData))>]
 let TestLocations (path: string) =

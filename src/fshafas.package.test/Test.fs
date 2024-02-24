@@ -36,21 +36,21 @@ let DotnetEqualsToSource (prefix: string) (args: string) (source: string -> seq<
     printfn "test: %s" args
 
     let (netoutputs, neterrors) = callDotnet args
-    Assert.True(neterrors |> Seq.isEmpty)
+    Assert.That(neterrors |> Seq.isEmpty)
 
     let (outputs, errors) = source args
 
     if not (Seq.isEmpty errors) then
         fprintfn stderr "errors: %A" errors
 
-    Assert.True(errors |> Seq.isEmpty)
+    Assert.That(errors |> Seq.isEmpty)
 
     dump "net" args netoutputs
     dump prefix args outputs
 
-    Assert.True(netoutputs |> Seq.length > 0)
-    Assert.True(outputs |> Seq.length > 0)
-    Assert.AreEqual(netoutputs |> Seq.length, outputs |> Seq.length)
+    Assert.That(netoutputs |> Seq.length > 0)
+    Assert.That(outputs |> Seq.length > 0)
+    Assert.That(netoutputs |> Seq.length, Is.EqualTo(outputs |> Seq.length))
 
     let comparer (a: string) (b: string) =
         // ignore realtime data
@@ -65,7 +65,7 @@ let DotnetEqualsToSource (prefix: string) (args: string) (source: string -> seq<
 
             compareTo
 
-    Assert.AreEqual(0, (netoutputs, outputs) ||> Seq.compareWith comparer)
+    Assert.That(0, Is.EqualTo((netoutputs, outputs) ||> Seq.compareWith comparer))
 
 [<TestCaseSource(nameof (args))>]
 let DotnetEqualsToJavaScript (args: string) =
