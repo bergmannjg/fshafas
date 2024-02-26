@@ -78,7 +78,7 @@ let checkVersionInFile (version: string) (file: string) =
           |> Array.exists (fun line -> line.Contains("\"version\": \"" + version))
         with
     | true -> ()
-    | false -> raise (System.ArgumentException($"version not found in file {file}"))
+    | false -> raise (System.ArgumentException($"version {version} not found in file {file}"))
 
 let buildJavascript (version: string) =
     checkVersionInFile version "src/fshafas.javascript.package/fs-hafas-client/package.json"
@@ -144,7 +144,24 @@ let buildPythonNupkg (version: string) =
         "fshafas.profiles.python"
         "FsHafas.Profiles.Python"
 
-let buildPython () =
+let checkPythonVersionInFile (version: string) (file: string) =
+    let splits = version.Split [| '-' |]
+
+    let version =
+        if splits.Length = 3 then
+            splits.[2]
+        else
+            version
+
+    match File.ReadAllLines file
+          |> Array.exists (fun line -> line.Contains("version='" + version + "'"))
+        with
+    | true -> ()
+    | false -> raise (System.ArgumentException($"version {version} not found in file {file}"))
+
+let buildPython (version: string) =
+    checkPythonVersionInFile version "src/fshafas.python.package/setup.py"
+
     delete "src/fshafas.python.package/fable_modules"
 
     dotnet

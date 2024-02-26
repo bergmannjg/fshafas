@@ -44,7 +44,7 @@ let main argv =
                     buildDotnet ()
                     testDotnet ()
                     buildPythonNupkg version_python
-                    buildPython ()
+                    buildPython version_python
 
                 else if depends argv [ "Python.Test" ] then
                     buildDotnet ()
