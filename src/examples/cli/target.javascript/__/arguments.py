@@ -48,19 +48,19 @@ def Entry_argValue(key: str, args: FSharpList[str]) -> str | None:
 def Entry_tryFlag(flag: str, args: FSharpList[str]) -> bool | None:
     match_value: str | None = Entry_argValue(flag, args)
     if match_value is None:
-        class ObjectExpr751:
+        class ObjectExpr754:
             @property
             def Equals(self) -> Callable[[str, str], bool]:
-                def _arrow750(x: str, y: str) -> bool:
+                def _arrow753(x: str, y: str) -> bool:
                     return x == y
 
-                return _arrow750
+                return _arrow753
 
             @property
             def GetHashCode(self) -> Callable[[str], int]:
                 return string_hash
 
-        if contains(flag, args, ObjectExpr751()):
+        if contains(flag, args, ObjectExpr754()):
             return True
 
         else: 
@@ -70,14 +70,14 @@ def Entry_tryFlag(flag: str, args: FSharpList[str]) -> bool | None:
     else: 
         match_value_1: tuple[bool, bool]
         out_arg: bool = False
-        def _arrow752(__unit: None=None, flag: Any=flag, args: Any=args) -> bool:
+        def _arrow755(__unit: None=None, flag: Any=flag, args: Any=args) -> bool:
             return out_arg
 
-        def _arrow753(v: bool, flag: Any=flag, args: Any=args) -> None:
+        def _arrow756(v: bool, flag: Any=flag, args: Any=args) -> None:
             nonlocal out_arg
             out_arg = v
 
-        match_value_1 = (try_parse(match_value, FSharpRef(_arrow752, _arrow753)), out_arg)
+        match_value_1 = (try_parse(match_value, FSharpRef(_arrow755, _arrow756)), out_arg)
         if match_value_1[0]:
             return match_value_1[1]
 

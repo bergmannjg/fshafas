@@ -25,11 +25,7 @@ module internal Hint =
             | Some txtN -> txtN.Trim()
             | None -> ""
 
-        let code =
-            if h.code <> "" then
-                Some h.code
-            else
-                None
+        let code = if h.code <> "" then Some h.code else None
 
         let trim (s: string option) = s |> Option.map (fun s -> s.Trim())
 

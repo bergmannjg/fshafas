@@ -25,25 +25,15 @@ let transformType str =
     else str
 
 let escapeIdent str =
-    if str = "type" then
-        "``" + str + "``"
-    else if str = "match" then
-        "``" + str + "``"
-    else if str = "default" then
-        "``" + str + "``"
-    else if str = "when" then
-        "``" + str + "``"
-    else if str = "public" then
-        "``" + str + "``"
-    else if str = "to" then
-        "``" + str + "``"
-    else
-        str
+    if str = "type" then "``" + str + "``"
+    else if str = "match" then "``" + str + "``"
+    else if str = "default" then "``" + str + "``"
+    else if str = "when" then "``" + str + "``"
+    else if str = "public" then "``" + str + "``"
+    else if str = "to" then "``" + str + "``"
+    else str
 
-let excludeTypes =
-    [| "ReadonlyArray"
-       "IExports"
-       "HafasClient" |]
+let excludeTypes = [| "ReadonlyArray"; "IExports"; "HafasClient" |]
 
 let transformTypeVals =
     [| "r", "int option"

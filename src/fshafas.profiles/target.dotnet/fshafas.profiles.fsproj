@@ -2,6 +2,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
+    <RepositoryUrl>https://github.com/bergmannjg/fshafas</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageId>FsHafas.Profiles</PackageId>
+    <Authors>J. Bergmann</Authors>
+    <PackageTags>fsharp</PackageTags>
   </PropertyGroup>
   <Import Project="..\files.props" />
   <ItemGroup>

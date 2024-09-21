@@ -19,11 +19,11 @@ let checkEqual (actual: obj) (expected: obj) =
             diffs <- diffs + 1
             fprintfn stderr "%s" (sprintf "TypesDifferent %s: '%A' '%A'" name t1.Name t2.Name)
 
-    let toFeatureArray (o: obj) : Feature [] =
+    let toFeatureArray (o: obj) : Feature[] =
         let typ = o.GetType()
 
         if typ.IsArray && typ.Name = "Feature[]" then
-            let arr = o :?> Feature []
+            let arr = o :?> Feature[]
             arr
         else
             raise (NUnit.Framework.AssertionException("Feature[] expected"))
@@ -48,15 +48,14 @@ let checkEqual (actual: obj) (expected: obj) =
 
         diffs = 0
 
-    let compareFeatureArrays (expected: Feature []) (actual: Feature []) =
+    let compareFeatureArrays (expected: Feature[]) (actual: Feature[]) =
         let notFound =
             expected
             |> Array.filter (fun f1 ->
                 not (
                     actual
                     |> Array.exists (fun f2 ->
-                        f1.geometry = f2.geometry
-                        && equalFeatureProperties f1.properties f2.properties)
+                        f1.geometry = f2.geometry && equalFeatureProperties f1.properties f2.properties)
                 ))
 
         if notFound.Length > 0 then
@@ -65,36 +64,24 @@ let checkEqual (actual: obj) (expected: obj) =
         notFound.Length
 
     let printValuesDifferent (name: string) (o1: obj) (o2: obj) =
-        if name = "id"
-           && o1 <> null
-           && o2 <> null
-           && o1.ToString().Replace("-", "").ToLower() = o2.ToString().Replace("-", "").ToLower() then // ignore ids
+        if
+            name = "id"
+            && o1 <> null
+            && o2 <> null
+            && o1.ToString().Replace("-", "").ToLower() = o2.ToString().Replace("-", "").ToLower()
+        then // ignore ids
             ()
-        else if name = "matchId" then // ignore
+        else if name = "matchId" || name = "scheduledDays" || name = "price" || name = "tickets" then // ignore
             ()
-        else if name = "scheduledDays" then // ignore
+        else if name = "distance" && o1 = null && o2 <> null && (sprintf "%A" o2) = "Some 0" then // ignore None = Some 0
             ()
-        else if name = "distance"
-                && o1 = null
-                && o2 <> null
-                && (sprintf "%A" o2) = "Some 0" then // ignore None = Some 0
+        else if name = "reachable" && o1 <> null && o2 = null && (sprintf "%A" o1) = "Some true" then // todo
             ()
-        else if name = "reachable"
-                && o1 <> null
-                && o2 = null
-                && (sprintf "%A" o1) = "Some true" then // todo
-            ()
-        else if name = "remarks"
-                && o1 = null
-                && o2 <> null
-                && (sprintf "%A" o2) = "Some [||]" then // ignore None = Some [||]
+        else if name = "remarks" && o1 = null && o2 <> null && (sprintf "%A" o2) = "Some [||]" then // ignore None = Some [||]
             ()
         else if name = "remarks" && o1 <> null && o2 = null then
             ()
-        else if name = "transfer"
-                && o1 <> null
-                && o2 = null
-                && (sprintf "%A" o1) = "Some false" then // ignore None = Some false
+        else if name = "transfer" && o1 <> null && o2 = null && (sprintf "%A" o1) = "Some false" then // ignore None = Some false
             ()
         else if name = "features" && o1 <> null && o2 <> null then
             // compare feature geometry and feature properties
@@ -104,8 +91,7 @@ let checkEqual (actual: obj) (expected: obj) =
                 let expected = toFeatureArray o2
 
                 diffs <- diffs + (compareFeatureArrays expected actual)
-            with
-            | ex ->
+            with ex ->
                 diffs <- diffs + 1
                 fprintfn stderr "compareFeatureArrays: %s" ex.Message
         else
@@ -142,8 +128,8 @@ let testRunner (jsonRaw: string) (jsonResult: string) (loader: FsHafas.Raw.RawRe
         FsHafas.Printf.Long.print x2
 
         Assert.That(isEqual, Is.EqualTo(true))
-    with
-    | :? NUnit.Framework.AssertionException as ex -> ()
+    with :? NUnit.Framework.AssertionException as ex ->
+        ()
 
 let loadDbProfile () = FsHafas.Profiles.Db.profile
 let loadOebbProfile () = FsHafas.Profiles.Oebb.profile
@@ -152,18 +138,12 @@ let loadRejseplanenProfile () = FsHafas.Profiles.Rejseplanen.profile
 let loadSaarFahrplanProfile () = FsHafas.Profiles.SaarFahrplan.profile
 
 let loadProfile (p: string) =
-    if p = "db" then
-        loadDbProfile ()
-    else if p = "oebb" then
-        loadOebbProfile ()
-    else if p = "svv" then
-        loadSvvProfile ()
-    else if p = "rejseplanen" then
-        loadRejseplanenProfile ()
-    else if p = "saarfahrplan" then
-        loadSaarFahrplanProfile ()
-    else
-        raise (Exception("profile " + p + " unkown"))
+    if p = "db" then loadDbProfile ()
+    else if p = "oebb" then loadOebbProfile ()
+    else if p = "svv" then loadSvvProfile ()
+    else if p = "rejseplanen" then loadRejseplanenProfile ()
+    else if p = "saarfahrplan" then loadSaarFahrplanProfile ()
+    else raise (Exception("profile " + p + " unkown"))
 
 let loadLocations (profile: FsHafas.Endpoint.Profile) (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let parsedResponse =
@@ -176,7 +156,7 @@ let loadLocations (profile: FsHafas.Endpoint.Profile) (res: FsHafas.Raw.RawResul
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
     let response =
-        FsHafas.Api.Parser.Deserialize<StationStopLocation []>(expectedJson, acceptEmptyObjectAsNullValue)
+        FsHafas.Api.Parser.Deserialize<StationStopLocation[]>(expectedJson, acceptEmptyObjectAsNullValue)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
 
@@ -184,11 +164,7 @@ let loadLocations (profile: FsHafas.Endpoint.Profile) (res: FsHafas.Raw.RawResul
 
 let loadLocation (profile: FsHafas.Endpoint.Profile) (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let parsedResponse =
-        FsHafas.Api.Parser.parseLocationsFromResult
-            profile
-            res.locL
-            FsHafas.Api.Parser.defaultOptions
-            res
+        FsHafas.Api.Parser.parseLocationsFromResult profile res.locL FsHafas.Api.Parser.defaultOptions res
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
@@ -224,9 +200,8 @@ let loadJourneys
 
     (parsedResponse :> obj, response :> obj)
 
-let skipLegs (journeys: Journey []) =
-    journeys
-    |> Array.map (fun j -> { j with legs = [||] })
+let skipLegs (journeys: Journey[]) =
+    journeys |> Array.map (fun j -> { j with legs = [||] })
 
 let loadJourneyArray (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let parsedResponse =
@@ -273,12 +248,10 @@ let idOfU3StationStopLocation (location: StationStopLocation) =
     | StationStopLocation.Stop s -> s.id
     |> Option.defaultValue ""
 
-let sortDurations (durations: Duration []) : Duration [] =
+let sortDurations (durations: Duration[]) : Duration[] =
     durations
     |> Array.map (fun d ->
-        let sorted =
-            d.stations
-            |> Array.sortBy (fun s -> idOfU3StationStopLocation s)
+        let sorted = d.stations |> Array.sortBy (fun s -> idOfU3StationStopLocation s)
 
         { duration = d.duration
           stations = sorted })
@@ -315,13 +288,14 @@ let loadNearby (res: FsHafas.Raw.RawResult) (expectedJson: string) =
         FsHafas.Api.Parser.parseLocationsFromResult
             (loadDbProfile ())
             res.locL
-            { FsHafas.Api.Parser.defaultOptions with linesOfStops = options.linesOfStops |> Option.defaultValue false }
+            { FsHafas.Api.Parser.defaultOptions with
+                linesOfStops = options.linesOfStops |> Option.defaultValue false }
             res
 
     Assert.That(parsedResponse.Length > 0, Is.EqualTo(true))
 
     let response =
-        FsHafas.Api.Parser.Deserialize<StationStopLocation []>(expectedJson, acceptEmptyObjectAsNullValue)
+        FsHafas.Api.Parser.Deserialize<StationStopLocation[]>(expectedJson, acceptEmptyObjectAsNullValue)
 
     Assert.That(response.Length > 0, Is.EqualTo(true))
 

@@ -40,9 +40,7 @@ module internal RawResponseEx =
                 if m.Value.Length = 1 then
                     m.Value.ToLowerInvariant()
                 else
-                    m.Value.Substring(0, 1)
-                    + separator
-                    + m.Value.Substring(1, 1).ToLowerInvariant()
+                    m.Value.Substring(0, 1) + separator + m.Value.Substring(1, 1).ToLowerInvariant()
         )
 
     let private toDashed (xs: string list) = Some(dashify "_" (List.last xs))
@@ -54,8 +52,7 @@ module internal RawResponseEx =
             |> SimpleJson.parseNative
             |> SimpleJson.mapKeysByPath toDashed
             |> Json.convertFromJsonAs<RawResponse>
-        with
-        | e ->
+        with e ->
             printf "error decode: %s" e.Message
             raise (System.Exception(e.Message))
 

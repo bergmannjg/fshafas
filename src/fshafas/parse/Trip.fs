@@ -43,6 +43,8 @@ module internal Trip =
                 | _ -> None
 
             match leg.tripId with
-            | Some tripId -> { ToTrip.FromLeg tripId leg with scheduledDays = scheduledDays }
+            | Some tripId ->
+                { ToTrip.FromLeg tripId leg with
+                    scheduledDays = scheduledDays }
             | _ -> raise (System.ArgumentException("parseTrip failed"))
         | _ -> raise (System.ArgumentException("parseTrip failed"))

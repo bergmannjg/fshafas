@@ -55,7 +55,8 @@ jobs:
       - name: build js docs
         run: |
           cd src/fshafas.javascript.package/typedoc
-          wget -O hafas-client.d.ts https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/types/hafas-client/index.d.ts
+          # wget -O hafas-client.d.ts https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/types/hafas-client/index.d.ts
+          wget -O hafas-client.d.ts https://raw.githubusercontent.com/bergmannjg/hafas-client/refs/heads/add-types-in-jsdoc/index.d.ts
           npx --yes typedoc --out ../../../output/fshafas/js --name "FsHafas-JavaScript" --disableSources hafas-client.d.ts
       - name: load python package
         run: |

@@ -29,18 +29,21 @@ let runProc filename args startDir =
         p.Start() |> ignore
         p.BeginOutputReadLine()
         p.BeginErrorReadLine()
-        if not (p.WaitForExit(60 * 1000))
-        then fprintfn stderr "error: process not exited after 60 seconds"
 
-        let cleanOut (l : Collections.Generic.List<string>) =
+        if not (p.WaitForExit(60 * 1000)) then
+            fprintfn stderr "error: process not exited after 60 seconds"
+
+        let cleanOut (l: Collections.Generic.List<string>) =
             l
             |> Seq.filter (fun o -> String.IsNullOrEmpty o |> not)
             |> Seq.filter (fun o -> o.Contains "npm notice" |> not)
             |> Seq.filter (fun o -> o.Contains "warning:" |> not)
             |> Seq.toList
 
-        cleanOut outputs, cleanOut errors
-    with
-    | ex ->
-        fprintfn stderr "error: %s" ex.Message
+        let toError (l: Collections.Generic.List<string>) =
+            l |> Seq.filter (fun o -> not (isNull o) && o.Contains "error FS") |> Seq.toList
+
+        cleanOut outputs, List.append (cleanOut errors) (toError outputs)
+    with ex ->
+        fprintfn stderr "error: %s %s" ex.Message ex.StackTrace
         (Seq.empty |> Seq.toList, [ ex.Message ])

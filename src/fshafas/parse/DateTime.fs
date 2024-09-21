@@ -13,7 +13,7 @@ module internal DateTime =
         : (System.DateTime option * string option) =
         try
             match time with
-            | Some (time) ->
+            | Some(time) ->
                 let time6, daysOffset =
                     if time.Length > 6 then
                         (time.Substring(time.Length - 6, 6), time.Substring(0, 2) |> float)
@@ -28,17 +28,14 @@ module internal DateTime =
                 let seconds = time6.Substring(4, 2) |> int
 
                 let dto =
-                    FsHafas
-                        .Extensions
-                        .DateTimeOffsetEx
+                    FsHafas.Extensions.DateTimeOffsetEx
                         .parseDateTimeWithOffset(profile, year, month, day, hour, minute, seconds, tzOffset)
                         .AddDays(daysOffset)
 
                 (Some dto.DateTime, Some(FsHafas.Extensions.DateTimeOffsetEx.ToIsoString dto))
             | None -> (None, None)
 
-        with
-        | ex ->
+        with ex ->
             printfn "parseDateTimeEx: %A" ex
             (None, None)
 

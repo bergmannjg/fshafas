@@ -20,7 +20,7 @@ type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
         and set s b = jsNative
 
     [<Emit("(Object.keys($0))")>]
-    member __.Keys: 's [] = jsNative
+    member __.Keys: 's[] = jsNative
 
 /// A ProductType relates to how a means of transport "works" in local context.
 /// Example: Even though S-Bahn and U-Bahn in Berlin are both trains, they have different operators, service patterns,
@@ -81,22 +81,24 @@ and ReisezentrumOpeningHours =
 /// Whereas a stop usually specifies a location, a station often is a broader area
 /// that may span across multiple levels or buildings.
 and Station =
-    { ``type``: StationType
-      id: string option
-      name: string option
-      station: Station option
-      location: Location option
-      products: Products option
-      lines: array<Line> option
-      isMeta: bool option
-      /// region ids
-      regions: array<string> option
-      facilities: Facilities option
-      reisezentrumOpeningHours: ReisezentrumOpeningHours option
-      stops: array<StationStopLocation> option
-      entrances: array<Location> option
-      transitAuthority: string option
-      distance: int option }
+    {
+        ``type``: StationType
+        id: string option
+        name: string option
+        station: Station option
+        location: Location option
+        products: Products option
+        lines: array<Line> option
+        isMeta: bool option
+        /// region ids
+        regions: array<string> option
+        facilities: Facilities option
+        reisezentrumOpeningHours: ReisezentrumOpeningHours option
+        stops: array<StationStopLocation> option
+        entrances: array<Location> option
+        transitAuthority: string option
+        distance: int option
+    }
 
 /// Ids of a Stop, i.e. dhid as 'DELFI Haltestellen ID'
 and Ids = IndexMap<string, string>
@@ -112,6 +114,7 @@ and Stop =
       products: Products option
       lines: array<Line> option
       isMeta: bool option
+      facilities: Facilities option
       reisezentrumOpeningHours: ReisezentrumOpeningHours option
       ids: Ids option
       loadFactor: string option
@@ -121,42 +124,48 @@ and Stop =
 
 /// A region is a group of stations, for example a metropolitan area or a geographical or cultural region.
 and Region =
-    { ``type``: RegionType
-      id: string
-      name: string
-      /// station ids
-      stations: array<string> }
+    {
+        ``type``: RegionType
+        id: string
+        name: string
+        /// station ids
+        stations: array<string>
+    }
 
 and Line =
-    { ``type``: LineType
-      matchId: string option
-      id: string option
-      name: string option
-      adminCode: string option
-      fahrtNr: string option
-      additionalName: string option
-      product: string option
-      ``public``: bool option
-      mode: ProductTypeMode option
-      /// routes ids
-      routes: array<string> option
-      operator: Operator option
-      express: bool option
-      metro: bool option
-      night: bool option
-      nr: int option
-      symbol: string option
-      directions: array<string> option
-      productName: string option }
+    {
+        ``type``: LineType
+        matchId: string option
+        id: string option
+        name: string option
+        adminCode: string option
+        fahrtNr: string option
+        additionalName: string option
+        product: string option
+        ``public``: bool option
+        mode: ProductTypeMode option
+        /// routes ids
+        routes: array<string> option
+        operator: Operator option
+        express: bool option
+        metro: bool option
+        night: bool option
+        nr: int option
+        symbol: string option
+        directions: array<string> option
+        productName: string option
+    }
 
 /// A route represents a single set of stations, of a single line.
 and Route =
-    { ``type``: RouteType
-      id: string
-      line: string
-      mode: ProductTypeMode
-      /// stop ids
-      stops: array<string> }
+    {
+        ``type``: RouteType
+        id: string
+        line: string
+        mode: ProductTypeMode
+        /// stop ids
+        stops: array<string>
+    }
 
 and Cycle =
     { min: int option
@@ -171,13 +180,15 @@ and ArrivalDeparture =
 /// This one tries to balance the amount of data and consumability.
 /// It is specifically geared towards urban public transport, with frequent trains and homogenous travels.
 and Schedule =
-    { ``type``: ScheduleType
-      id: string
-      route: string
-      mode: ProductTypeMode
-      sequence: array<ArrivalDeparture>
-      /// array of Unix timestamps
-      starts: array<string> }
+    {
+        ``type``: ScheduleType
+        id: string
+        route: string
+        mode: ProductTypeMode
+        sequence: array<ArrivalDeparture>
+        /// array of Unix timestamps
+        starts: array<string>
+    }
 
 and Operator =
     { ``type``: OperatorType
@@ -256,29 +267,31 @@ and [<StringEnum>] PrognosisType =
 
 /// A stopover represents a vehicle stopping at a stop/station at a specific time.
 and StopOver =
-    { stop: StationStop option
-      /// null, if last stopOver of trip
-      departure: string option
-      departureDelay: int option
-      prognosedDeparture: string option
-      plannedDeparture: string option
-      departurePlatform: string option
-      prognosedDeparturePlatform: string option
-      plannedDeparturePlatform: string option
-      /// null, if first stopOver of trip
-      arrival: string option
-      arrivalDelay: int option
-      prognosedArrival: string option
-      plannedArrival: string option
-      arrivalPlatform: string option
-      prognosedArrivalPlatform: string option
-      plannedArrivalPlatform: string option
-      remarks: array<HintStatusWarning> option
-      passBy: bool option
-      cancelled: bool option
-      departurePrognosisType: PrognosisType option
-      arrivalPrognosisType: PrognosisType option
-      additional: bool option }
+    {
+        stop: StationStop option
+        /// null, if last stopOver of trip
+        departure: string option
+        departureDelay: int option
+        prognosedDeparture: string option
+        plannedDeparture: string option
+        departurePlatform: string option
+        prognosedDeparturePlatform: string option
+        plannedDeparturePlatform: string option
+        /// null, if first stopOver of trip
+        arrival: string option
+        arrivalDelay: int option
+        prognosedArrival: string option
+        plannedArrival: string option
+        arrivalPlatform: string option
+        prognosedArrivalPlatform: string option
+        plannedArrivalPlatform: string option
+        remarks: array<HintStatusWarning> option
+        passBy: bool option
+        cancelled: bool option
+        departurePrognosisType: PrognosisType option
+        arrivalPrognosisType: PrognosisType option
+        additional: bool option
+    }
 
 /// Trip – a vehicle stopping at a set of stops at specific times
 and Trip =
@@ -339,8 +352,22 @@ and LinesWithRealtimeData =
 
 and Price =
     { amount: float
-      currency: string
+      currency: string option
       hint: string option }
+
+and PriceObj =
+    {
+        /// amount in cents of currency
+        amount: float
+    }
+
+and Ticket =
+    {
+        name: string
+        priceObj: PriceObj option
+        /// *bahn.de* URL to the tickets, see {@link JourneysOptionsDbProfile.generateUnreliableTicketUrls}
+        url: string option
+    }
 
 and Alternative =
     { tripId: string
@@ -427,6 +454,7 @@ and Journey =
       refreshToken: string option
       remarks: array<HintStatusWarning> option
       price: Price option
+      tickets: array<Ticket> option
       cycle: Cycle option
       scheduledDays: ScheduledDays option }
 
@@ -474,48 +502,50 @@ and ServerInfo =
       serverTime: string option }
 
 and JourneysOptionsCommon =
-    { /// departure date, undefined corresponds to Date.Now
-      departure: DateTime option
-      /// arrival date, departure and arrival are mutually exclusive.
-      arrival: DateTime option
-      /// earlierThan, use {@link Journeys#earlierRef}, earlierThan and departure/arrival are mutually exclusive.
-      earlierThan: string option
-      /// laterThan, use {@link Journeys#laterRef}, laterThan and departure/arrival are mutually exclusive.
-      laterThan: string option
-      /// how many search results?
-      results: int option
-      /// let journeys pass this station
-      via: string option
-      /// return stations on the way?
-      stopovers: bool option
-      /// Maximum nr of transfers. Default: Let HAFAS decide.
-      transfers: int option
-      /// minimum time for a single transfer in minutes
-      transferTime: int option
-      /// 'none', 'partial' or 'complete'
-      accessibility: string option
-      /// only bike-friendly journeys
-      bike: bool option
-      products: Products option
-      /// return tickets? only available with some profiles
-      tickets: bool option
-      /// return a shape for each leg?
-      polylines: bool option
-      /// parse & expose sub-stops of stations?
-      subStops: bool option
-      /// parse & expose entrances of stops/stations?
-      entrances: bool option
-      /// parse & expose hints & warnings?
-      remarks: bool option
-      /// 'slow', 'normal', 'fast'
-      walkingSpeed: string option
-      /// start with walking
-      startWithWalking: bool option
-      /// language to get results in
-      language: string option
-      /// parse which days each journey is valid on
-      scheduledDays: bool option
-      ``when``: DateTime option }
+    {
+        /// departure date, undefined corresponds to Date.Now
+        departure: DateTime option
+        /// arrival date, departure and arrival are mutually exclusive.
+        arrival: DateTime option
+        /// earlierThan, use {@link Journeys#earlierRef}, earlierThan and departure/arrival are mutually exclusive.
+        earlierThan: string option
+        /// laterThan, use {@link Journeys#laterRef}, laterThan and departure/arrival are mutually exclusive.
+        laterThan: string option
+        /// how many search results?
+        results: int option
+        /// let journeys pass this station
+        via: string option
+        /// return stations on the way?
+        stopovers: bool option
+        /// Maximum nr of transfers. Default: Let HAFAS decide.
+        transfers: int option
+        /// minimum time for a single transfer in minutes
+        transferTime: int option
+        /// 'none', 'partial' or 'complete'
+        accessibility: string option
+        /// only bike-friendly journeys
+        bike: bool option
+        products: Products option
+        /// return tickets? only available with some profiles
+        tickets: bool option
+        /// return a shape for each leg?
+        polylines: bool option
+        /// parse & expose sub-stops of stations?
+        subStops: bool option
+        /// parse & expose entrances of stops/stations?
+        entrances: bool option
+        /// parse & expose hints & warnings?
+        remarks: bool option
+        /// 'slow', 'normal', 'fast'
+        walkingSpeed: string option
+        /// start with walking
+        startWithWalking: bool option
+        /// language to get results in
+        language: string option
+        /// parse which days each journey is valid on
+        scheduledDays: bool option
+        ``when``: DateTime option
+    }
 
 and LoyaltyCard =
     { ``type``: string
@@ -539,220 +569,246 @@ and [<StringEnum>] RoutingMode =
 
 /// JourneysOptions specific to Db Profile
 and JourneysOptionsDbProfile =
-    { /// firstClass
-      firstClass: bool option
-      /// ageGroup
-      ageGroup: AgeGroup option
-      /// age
-      age: int option
-      /// LoyaltyCard
-      loyaltyCard: LoyaltyCard option
-      /// RoutingMode
-      routingMode: RoutingMode option }
+    {
+        /// firstClass
+        firstClass: bool option
+        /// ageGroup
+        ageGroup: AgeGroup option
+        /// age
+        age: int option
+        /// LoyaltyCard
+        loyaltyCard: LoyaltyCard option
+        /// RoutingMode
+        routingMode: RoutingMode option
+        /// try to generate *bahn.de* URLs to the tickets
+        generateUnreliableTicketUrls: bool option
+    }
 
 and JourneysOptions =
-    { /// departure date, undefined corresponds to Date.Now
-      departure: DateTime option
-      /// arrival date, departure and arrival are mutually exclusive.
-      arrival: DateTime option
-      /// earlierThan, use {@link Journeys#earlierRef}, earlierThan and departure/arrival are mutually exclusive.
-      earlierThan: string option
-      /// laterThan, use {@link Journeys#laterRef}, laterThan and departure/arrival are mutually exclusive.
-      laterThan: string option
-      /// how many search results?
-      results: int option
-      /// let journeys pass this station
-      via: string option
-      /// return stations on the way?
-      stopovers: bool option
-      /// Maximum nr of transfers. Default: Let HAFAS decide.
-      transfers: int option
-      /// minimum time for a single transfer in minutes
-      transferTime: int option
-      /// 'none', 'partial' or 'complete'
-      accessibility: string option
-      /// only bike-friendly journeys
-      bike: bool option
-      products: Products option
-      /// return tickets? only available with some profiles
-      tickets: bool option
-      /// return a shape for each leg?
-      polylines: bool option
-      /// parse & expose sub-stops of stations?
-      subStops: bool option
-      /// parse & expose entrances of stops/stations?
-      entrances: bool option
-      /// parse & expose hints & warnings?
-      remarks: bool option
-      /// 'slow', 'normal', 'fast'
-      walkingSpeed: string option
-      /// start with walking
-      startWithWalking: bool option
-      /// language to get results in
-      language: string option
-      /// parse which days each journey is valid on
-      scheduledDays: bool option
-      ``when``: DateTime option
-      /// firstClass
-      firstClass: bool option
-      /// ageGroup
-      ageGroup: AgeGroup option
-      /// age
-      age: int option
-      /// LoyaltyCard
-      loyaltyCard: LoyaltyCard option
-      /// RoutingMode
-      routingMode: RoutingMode option }
+    {
+        /// departure date, undefined corresponds to Date.Now
+        departure: DateTime option
+        /// arrival date, departure and arrival are mutually exclusive.
+        arrival: DateTime option
+        /// earlierThan, use {@link Journeys#earlierRef}, earlierThan and departure/arrival are mutually exclusive.
+        earlierThan: string option
+        /// laterThan, use {@link Journeys#laterRef}, laterThan and departure/arrival are mutually exclusive.
+        laterThan: string option
+        /// how many search results?
+        results: int option
+        /// let journeys pass this station
+        via: string option
+        /// return stations on the way?
+        stopovers: bool option
+        /// Maximum nr of transfers. Default: Let HAFAS decide.
+        transfers: int option
+        /// minimum time for a single transfer in minutes
+        transferTime: int option
+        /// 'none', 'partial' or 'complete'
+        accessibility: string option
+        /// only bike-friendly journeys
+        bike: bool option
+        products: Products option
+        /// return tickets? only available with some profiles
+        tickets: bool option
+        /// return a shape for each leg?
+        polylines: bool option
+        /// parse & expose sub-stops of stations?
+        subStops: bool option
+        /// parse & expose entrances of stops/stations?
+        entrances: bool option
+        /// parse & expose hints & warnings?
+        remarks: bool option
+        /// 'slow', 'normal', 'fast'
+        walkingSpeed: string option
+        /// start with walking
+        startWithWalking: bool option
+        /// language to get results in
+        language: string option
+        /// parse which days each journey is valid on
+        scheduledDays: bool option
+        ``when``: DateTime option
+        /// firstClass
+        firstClass: bool option
+        /// ageGroup
+        ageGroup: AgeGroup option
+        /// age
+        age: int option
+        /// LoyaltyCard
+        loyaltyCard: LoyaltyCard option
+        /// RoutingMode
+        routingMode: RoutingMode option
+        /// try to generate *bahn.de* URLs to the tickets
+        generateUnreliableTicketUrls: bool option
+    }
 
 and JourneysFromTripOptions =
-    { /// return stations on the way?
-      stopovers: bool option
-      /// minimum time for a single transfer in minutes
-      transferTime: int option
-      /// 'none', 'partial' or 'complete'
-      accessibility: string option
-      /// return tickets?
-      tickets: bool option
-      /// return leg shapes?
-      polylines: bool option
-      /// parse & expose sub-stops of stations?
-      subStops: bool option
-      /// parse & expose entrances of stops/stations?
-      entrances: bool option
-      /// parse & expose hints & warnings?
-      remarks: bool option
-      /// products
-      products: Products option }
+    {
+        /// return stations on the way?
+        stopovers: bool option
+        /// minimum time for a single transfer in minutes
+        transferTime: int option
+        /// 'none', 'partial' or 'complete'
+        accessibility: string option
+        /// return tickets?
+        tickets: bool option
+        /// return leg shapes?
+        polylines: bool option
+        /// parse & expose sub-stops of stations?
+        subStops: bool option
+        /// parse & expose entrances of stops/stations?
+        entrances: bool option
+        /// parse & expose hints & warnings?
+        remarks: bool option
+        /// products
+        products: Products option
+    }
 
 and LocationsOptions =
-    { /// find only exact matches?
-      fuzzy: bool option
-      /// how many search results?
-      results: int option
-      /// return stops/stations?
-      stops: bool option
-      /// return addresses
-      addresses: bool option
-      /// points of interest
-      poi: bool option
-      /// parse & expose sub-stops of stations?
-      subStops: bool option
-      /// parse & expose entrances of stops/stations?
-      entrances: bool option
-      /// parse & expose lines at each stop/station?
-      linesOfStops: bool option
-      /// Language of the results
-      language: string option }
+    {
+        /// find only exact matches?
+        fuzzy: bool option
+        /// how many search results?
+        results: int option
+        /// return stops/stations?
+        stops: bool option
+        /// return addresses
+        addresses: bool option
+        /// points of interest
+        poi: bool option
+        /// parse & expose sub-stops of stations?
+        subStops: bool option
+        /// parse & expose entrances of stops/stations?
+        entrances: bool option
+        /// parse & expose lines at each stop/station?
+        linesOfStops: bool option
+        /// Language of the results
+        language: string option
+    }
 
 and TripOptions =
-    { /// return stations on the way?
-      stopovers: bool option
-      /// return a shape for the trip?
-      polyline: bool option
-      /// parse & expose sub-stops of stations?
-      subStops: bool option
-      /// parse & expose entrances of stops/stations?
-      entrances: bool option
-      /// parse & expose hints & warnings?
-      remarks: bool option
-      /// parse which days each journey is valid on
-      scheduledDays: bool option
-      /// Language of the results
-      language: string option }
+    {
+        /// return stations on the way?
+        stopovers: bool option
+        /// return a shape for the trip?
+        polyline: bool option
+        /// parse & expose sub-stops of stations?
+        subStops: bool option
+        /// parse & expose entrances of stops/stations?
+        entrances: bool option
+        /// parse & expose hints & warnings?
+        remarks: bool option
+        /// parse which days each journey is valid on
+        scheduledDays: bool option
+        /// Language of the results
+        language: string option
+    }
 
 and StopOptions =
-    { /// parse & expose lines at the stop/station?
-      linesOfStops: bool option
-      /// parse & expose sub-stops of stations?
-      subStops: bool option
-      /// parse & expose entrances of stops/stations?
-      entrances: bool option
-      /// parse & expose hints & warnings?
-      remarks: bool option
-      /// Language of the results
-      language: string option }
+    {
+        /// parse & expose lines at the stop/station?
+        linesOfStops: bool option
+        /// parse & expose sub-stops of stations?
+        subStops: bool option
+        /// parse & expose entrances of stops/stations?
+        entrances: bool option
+        /// parse & expose hints & warnings?
+        remarks: bool option
+        /// Language of the results
+        language: string option
+    }
 
 and DeparturesArrivalsOptions =
-    { /// departure date, undefined corresponds to Date.Now
-      ``when``: DateTime option
-      /// only show departures heading to this station
-      direction: string option
-      /// filter by line ID
-      line: string option
-      /// show departures for the next n minutes
-      duration: int option
-      /// max. number of results; `null` means "whatever HAFAS wants"
-      results: int option
-      /// parse & expose sub-stops of stations?
-      subStops: bool option
-      /// parse & expose entrances of stops/stations?
-      entrances: bool option
-      /// parse & expose lines at the stop/station?
-      linesOfStops: bool option
-      /// parse & expose hints & warnings?
-      remarks: bool option
-      /// fetch & parse previous/next stopovers?
-      stopovers: bool option
-      /// departures at related stations
-      includeRelatedStations: bool option
-      /// products
-      products: Products option
-      /// language
-      language: string option }
+    {
+        /// departure date, undefined corresponds to Date.Now
+        ``when``: DateTime option
+        /// only show departures heading to this station
+        direction: string option
+        /// filter by line ID
+        line: string option
+        /// show departures for the next n minutes
+        duration: int option
+        /// max. number of results; `null` means "whatever HAFAS wants"
+        results: int option
+        /// parse & expose sub-stops of stations?
+        subStops: bool option
+        /// parse & expose entrances of stops/stations?
+        entrances: bool option
+        /// parse & expose lines at the stop/station?
+        linesOfStops: bool option
+        /// parse & expose hints & warnings?
+        remarks: bool option
+        /// fetch & parse previous/next stopovers?
+        stopovers: bool option
+        /// departures at related stations
+        includeRelatedStations: bool option
+        /// products
+        products: Products option
+        /// language
+        language: string option
+    }
 
 and RefreshJourneyOptions =
-    { /// return stations on the way?
-      stopovers: bool option
-      /// return a shape for each leg?
-      polylines: bool option
-      /// return tickets? only available with some profiles
-      tickets: bool option
-      /// parse & expose sub-stops of stations?
-      subStops: bool option
-      /// parse & expose entrances of stops/stations?
-      entrances: bool option
-      /// parse & expose hints & warnings?
-      remarks: bool option
-      /// parse & expose dates the journey is valid on?
-      scheduledDays: bool option
-      /// language
-      language: string option }
+    {
+        /// return stations on the way?
+        stopovers: bool option
+        /// return a shape for each leg?
+        polylines: bool option
+        /// return tickets? only available with some profiles
+        tickets: bool option
+        /// parse & expose sub-stops of stations?
+        subStops: bool option
+        /// parse & expose entrances of stops/stations?
+        entrances: bool option
+        /// parse & expose hints & warnings?
+        remarks: bool option
+        /// parse & expose dates the journey is valid on?
+        scheduledDays: bool option
+        /// try to generate *bahn.de* URLs to the tickets
+        generateUnreliableTicketUrls: bool option
+        /// language
+        language: string option
+    }
 
 and NearByOptions =
-    { /// maximum number of results
-      results: int option
-      /// maximum walking distance in meters
-      distance: int option
-      /// return points of interest?
-      poi: bool option
-      /// return stops/stations?
-      stops: bool option
-      /// products
-      products: Products option
-      /// parse & expose sub-stops of stations?
-      subStops: bool option
-      /// parse & expose entrances of stops/stations?
-      entrances: bool option
-      /// parse & expose lines at each stop/station?
-      linesOfStops: bool option
-      /// language
-      language: string option }
+    {
+        /// maximum number of results
+        results: int option
+        /// maximum walking distance in meters
+        distance: int option
+        /// return points of interest?
+        poi: bool option
+        /// return stops/stations?
+        stops: bool option
+        /// products
+        products: Products option
+        /// parse & expose sub-stops of stations?
+        subStops: bool option
+        /// parse & expose entrances of stops/stations?
+        entrances: bool option
+        /// parse & expose lines at each stop/station?
+        linesOfStops: bool option
+        /// language
+        language: string option
+    }
 
 and ReachableFromOptions =
-    { /// when
-      ``when``: DateTime option
-      /// maximum of transfers
-      maxTransfers: int option
-      /// maximum travel duration in minutes, pass `null` for infinite
-      maxDuration: int option
-      /// products
-      products: Products option
-      /// parse & expose sub-stops of stations?
-      subStops: bool option
-      /// parse & expose entrances of stops/stations?
-      entrances: bool option
-      /// return leg shapes?
-      polylines: bool option }
+    {
+        /// when
+        ``when``: DateTime option
+        /// maximum of transfers
+        maxTransfers: int option
+        /// maximum travel duration in minutes, pass `null` for infinite
+        maxDuration: int option
+        /// products
+        products: Products option
+        /// parse & expose sub-stops of stations?
+        subStops: bool option
+        /// parse & expose entrances of stops/stations?
+        entrances: bool option
+        /// return leg shapes?
+        polylines: bool option
+    }
 
 and BoundingBox =
     { north: float
@@ -761,22 +817,24 @@ and BoundingBox =
       east: float }
 
 and RadarOptions =
-    { /// maximum number of vehicles
-      results: int option
-      /// nr of frames to compute
-      frames: int option
-      /// optionally an object of booleans
-      products: Products option
-      /// compute frames for the next n seconds
-      duration: int option
-      /// parse & expose sub-stops of stations?
-      subStops: bool option
-      /// parse & expose entrances of stops/stations?
-      entrances: bool option
-      /// return a shape for the trip?
-      polylines: bool option
-      /// when
-      ``when``: DateTime option }
+    {
+        /// maximum number of vehicles
+        results: int option
+        /// nr of frames to compute
+        frames: int option
+        /// optionally an object of booleans
+        products: Products option
+        /// compute frames for the next n seconds
+        duration: int option
+        /// parse & expose sub-stops of stations?
+        subStops: bool option
+        /// parse & expose entrances of stops/stations?
+        entrances: bool option
+        /// return a shape for the trip?
+        polylines: bool option
+        /// when
+        ``when``: DateTime option
+    }
 
 and Filter =
     { ``type``: string
@@ -784,37 +842,45 @@ and Filter =
       value: string }
 
 and TripsByNameOptions =
-    { /// departure date, undefined corresponds to Date.Now
-      ``when``: DateTime option
-      fromWhen: DateTime option
-      untilWhen: DateTime option
-      onlyCurrentlyRunning: bool option
-      products: Products option
-      currentlyStoppingAt: string option
-      lineName: string option
-      operatorNames: array<string> option
-      additionalFilters: array<Filter> option }
+    {
+        /// departure date, undefined corresponds to Date.Now
+        ``when``: DateTime option
+        fromWhen: DateTime option
+        untilWhen: DateTime option
+        onlyCurrentlyRunning: bool option
+        products: Products option
+        currentlyStoppingAt: string option
+        lineName: string option
+        operatorNames: array<string> option
+        additionalFilters: array<Filter> option
+    }
 
 and RemarksOptions =
-    { from: DateTime option
-      ``to``: DateTime option
-      /// maximum number of remarks
-      results: int option
-      products: Products option
-      /// return leg shapes? (not supported by all endpoints)
-      polylines: bool option
-      /// Language of the results
-      language: string option }
+    {
+        from: DateTime option
+        ``to``: DateTime option
+        /// maximum number of remarks
+        results: int option
+        products: Products option
+        /// return leg shapes? (not supported by all endpoints)
+        polylines: bool option
+        /// Language of the results
+        language: string option
+    }
 
 and LinesOptions =
-    { /// Language of the results
-      language: string option }
+    {
+        /// Language of the results
+        language: string option
+    }
 
 and ServerOptions =
-    { /// versionInfo
-      versionInfo: bool option
-      /// Language of the results
-      language: string option }
+    {
+        /// versionInfo
+        versionInfo: bool option
+        /// Language of the results
+        language: string option
+    }
 
 and HafasClient =
     /// Retrieves journeys
@@ -909,20 +975,20 @@ and [<StringEnum>] FeatureType = | [<CompiledName "Feature">] Feature
 and [<StringEnum>] FeatureCollectionType = | [<CompiledName "featureCollection">] FeatureCollection
 
 #if FABLE_JS
-and [<TypeScriptTaggedUnion("type")>] StationStopLocation =
+and [<Erase>] StationStopLocation =
     | Station of Station
     | Stop of Stop
     | Location of Location
 
-and [<TypeScriptTaggedUnion("type")>] StationStop =
+and [<Erase>] StationStop =
     | Station of Station
     | Stop of Stop
 
-and [<TypeScriptTaggedUnion("type")>] StopLocation =
+and [<Erase>] StopLocation =
     | Stop of Stop
     | Location of Location
 
-and [<TypeScriptTaggedUnion("type")>] HintStatusWarning =
+and [<Erase>] HintStatusWarning =
     | Hint of Hint
     | Status of Status
     | Warning of Warning

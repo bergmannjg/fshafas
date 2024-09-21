@@ -2,7 +2,7 @@
     "private": true,
     "type": "module",
     "dependencies": {
-      "hafas-client": "^6.1.0"
+      "hafas-client": "^6.3.0"
     }
   }
   

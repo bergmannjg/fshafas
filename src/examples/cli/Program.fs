@@ -112,8 +112,7 @@ printfn "%s" (profile :> FsHafas.Client.Profile).locale
 let productsOfId (id: string) =
     let products = Products(false)
 
-    (Api.HafasAsyncClient.productsOfFilter profile (fun p -> p.id = id))
-        .Keys
+    (Api.HafasAsyncClient.productsOfFilter profile (fun p -> p.id = id)).Keys
     |> Array.iter (fun p -> products.[p] <- true)
 
     products |> Some
@@ -122,8 +121,7 @@ let products () =
     let products =
         Api.HafasAsyncClient.productsOfMode profile Client.ProductTypeMode.Train
 
-    (Api.HafasAsyncClient.productsOfMode profile Client.ProductTypeMode.Bus)
-        .Keys
+    (Api.HafasAsyncClient.productsOfMode profile Client.ProductTypeMode.Bus).Keys
     |> Array.iter (fun p -> products.[p] <- true)
 
     products |> Some
@@ -175,14 +173,10 @@ let AsyncRun (computation: Async<unit>) =
 #else
 #if FABLE_PY
 let AsyncRun (computation: Async<unit>) =
-    computation
-    |> AsyncRunCatched
-    |> Async.StartImmediate
+    computation |> AsyncRunCatched |> Async.StartImmediate
 #else
 let AsyncRun (computation: Async<unit>) =
-    computation
-    |> AsyncRunCatched
-    |> Async.RunSynchronously
+    computation |> AsyncRunCatched |> Async.RunSynchronously
 #endif
 #endif
 
@@ -192,6 +186,7 @@ let locations (name: string) =
     async {
         let! locations = client.AsyncLocations name (Some Default.LocationsOptions)
 
+        printfn "found %d locations" locations.Length
         Printf.Short.Locations locations |> printfn "%s"
     }
     |> AsyncRun
@@ -211,9 +206,13 @@ let parseJourneyOptions (args: string list) =
 
 let applyJourneyOption (option: JourneyOption) (journeysOptions: JourneysOptions) =
     match option with
-    | Id id -> { journeysOptions with products = productsOfId id }
-    | Transfers nr -> { journeysOptions with transfers = Some nr }
-    | Bahncard (discount, cls) ->
+    | Id id ->
+        { journeysOptions with
+            products = productsOfId id }
+    | Transfers nr ->
+        { journeysOptions with
+            transfers = Some nr }
+    | Bahncard(discount, cls) ->
         { journeysOptions with
             loyaltyCard =
                 Some(
@@ -224,17 +223,13 @@ let applyJourneyOption (option: JourneyOption) (journeysOptions: JourneysOptions
     | Age age -> { journeysOptions with age = Some age }
 
 let applyJourneyOptions (options: JourneyOption list) =
-    options
-    |> List.fold (fun s o -> applyJourneyOption o s) Default.JourneysOptions
+    options |> List.fold (fun s o -> applyJourneyOption o s) Default.JourneysOptions
 
 let getJourneyOptions (options: string) =
     let l = options.Split([| ':'; ';' |])
 
     if l.Length > 0 then
-        l
-        |> Array.toList
-        |> parseJourneyOptions
-        |> applyJourneyOptions
+        l |> Array.toList |> parseJourneyOptions |> applyJourneyOptions
     else
         Default.JourneysOptions
 
@@ -251,6 +246,7 @@ let journeys (from: string, ``to``: string, someOptions: string option) =
                 stopovers = None
                 polylines = Some true
                 scheduledDays = Some true
+                tickets = Some true
                 routingMode = Some RoutingMode.REALTIME }
 
     async {
@@ -320,13 +316,15 @@ let journeysFromTrip (tripId: string, stopover: string, departure: string, newTo
 
                 let stopoverId =
                     match stopoverLoc with
-                    | Some (U4.Case1 id) -> Some id
-                    | Some (U4.Case3 stop) -> stop.id
+                    | Some(U4.Case1 id) -> Some id
+                    | Some(U4.Case3 stop) -> stop.id
                     | _ -> None
 
                 match stopoverId, newToLoc with
                 | Some stopoverId, Some newToLoc ->
-                    let stop: Stop = { Default.Stop with id = Some stopoverId }
+                    let stop: Stop =
+                        { Default.Stop with
+                            id = Some stopoverId }
 
                     let previousStopover: StopOver =
                         { Default.StopOver with
@@ -338,7 +336,9 @@ let journeysFromTrip (tripId: string, stopover: string, departure: string, newTo
                             tripId
                             previousStopover
                             newToLoc
-                            (Some { Default.JourneysFromTripOptions with stopovers = Some true })
+                            (Some
+                                { Default.JourneysFromTripOptions with
+                                    stopovers = Some true })
                 | _ -> return Default.Journeys
             }
 
@@ -350,12 +350,12 @@ let refreshJourney (refreshToken: string) =
     printfn "refreshJourney: %s" refreshToken
 
     use client = new Api.HafasAsyncClient(profile)
+    let options = Default.RefreshJourneyOptions
 
     async {
-        let! journey = client.AsyncRefreshJourney refreshToken None
+        let! journey = client.AsyncRefreshJourney refreshToken (Some { options with tickets = Some true })
 
-        FsHafas.Printf.Short.Journey 0 journey.journey
-        |> printfn "%s"
+        FsHafas.Printf.Short.Journey 0 journey.journey |> printfn "%s"
     }
     |> AsyncRun
 
@@ -402,7 +402,8 @@ let departures (name: string) =
     use client = new Api.HafasAsyncClient(profile)
 
     let options =
-        { Default.DeparturesArrivalsOptions with ``when`` = Some(dateOfCurrentHour ()) }
+        { Default.DeparturesArrivalsOptions with
+            ``when`` = Some(dateOfCurrentHour ()) }
 
     async {
         let! loc = getLocation client name
@@ -415,11 +416,10 @@ let departures (name: string) =
                 departures.departures
                 |> sortBy (fun dep ->
                     match dep.``when``, dep.stop with
-                    | Some w, Some (StationStop.Stop s) when s.name.IsSome -> w + s.name.Value
+                    | Some w, Some(StationStop.Stop s) when s.name.IsSome -> w + s.name.Value
                     | _ -> "")
 
-            FsHafas.Printf.Short.Alternatives sorted
-            |> printfn "%s"
+            FsHafas.Printf.Short.Alternatives sorted |> printfn "%s"
         | _ -> ()
     }
     |> AsyncRun
@@ -428,7 +428,8 @@ let arrivals (name: string) =
     use client = new Api.HafasAsyncClient(profile)
 
     let options =
-        { Default.DeparturesArrivalsOptions with ``when`` = Some((dateOfCurrentHour ()).AddHours(1)) }
+        { Default.DeparturesArrivalsOptions with
+            ``when`` = Some((dateOfCurrentHour ()).AddHours(1)) }
 
     async {
         let! loc = getLocation client name
@@ -441,11 +442,10 @@ let arrivals (name: string) =
                 arrivals.arrivals
                 |> sortBy (fun dep ->
                     match dep.``when``, dep.stop with
-                    | Some w, Some (StationStop.Stop s) when s.name.IsSome -> w + s.name.Value
+                    | Some w, Some(StationStop.Stop s) when s.name.IsSome -> w + s.name.Value
                     | _ -> "")
 
-            FsHafas.Printf.Short.Alternatives sorted
-            |> printfn "%s"
+            FsHafas.Printf.Short.Alternatives sorted |> printfn "%s"
         | _ -> ()
     }
     |> AsyncRun
@@ -456,8 +456,7 @@ let trip (id: string) =
     async {
         let! trip = client.AsyncTrip id None
 
-        FsHafas.Printf.Short.Trip trip.trip
-        |> printfn "%s"
+        FsHafas.Printf.Short.Trip trip.trip |> printfn "%s"
     }
     |> AsyncRun
 
@@ -473,13 +472,12 @@ let tripsByName (name: string) =
                         ``when`` = Some(System.DateTime.Now)
                         operatorNames = Some [| "DB Fernverkehr AG" |] })
 
-        FsHafas.Printf.Short.Trips trips.trips
-        |> printfn "%s"
+        FsHafas.Printf.Short.Trips trips.trips |> printfn "%s"
 
         trips.trips
         |> Array.map (fun t ->
             match t.origin, t.destination, t.line with
-            | Some (StationStopLocation.Stop origin), Some (StationStopLocation.Stop destination), Some line ->
+            | Some(StationStopLocation.Stop origin), Some(StationStopLocation.Stop destination), Some line ->
                 origin.name, destination.name, line.matchId, t.plannedDeparture
             | _ -> (None, None, None, None))
         |> Array.groupBy (fun (o, d, m, _) -> (o, d, m))
@@ -513,8 +511,7 @@ let nearby (lon: float, lat: float) =
                         distance = Some 5000
                         products = (products ()) })
 
-        FsHafas.Printf.Short.Locations locations
-        |> printfn "%s"
+        FsHafas.Printf.Short.Locations locations |> printfn "%s"
     }
     |> AsyncRun
 
@@ -533,8 +530,7 @@ let reachableFrom (lon: float, lat: float) =
                         maxTransfers = Some 0
                         maxDuration = Some 10 })
 
-        FsHafas.Printf.Short.Durations durations.reachable
-        |> printfn "%s"
+        FsHafas.Printf.Short.Durations durations.reachable |> printfn "%s"
     }
     |> AsyncRun
 
@@ -564,10 +560,14 @@ let stop (name: string) =
     use client = new Api.HafasAsyncClient(profile)
 
     async {
-        let! stop = client.AsyncStop (U2.Case1 name) (Some { Default.StopOptions with linesOfStops = Some true })
+        let! stop =
+            client.AsyncStop
+                (U2.Case1 name)
+                (Some
+                    { Default.StopOptions with
+                        linesOfStops = Some true })
 
-        FsHafas.Printf.Short.U3StationStopLocation 0 stop
-        |> printfn "%s"
+        FsHafas.Printf.Short.U3StationStopLocation 0 stop |> printfn "%s"
     }
     |> AsyncRun
 
@@ -577,8 +577,7 @@ let remarks () =
     async {
         let! warnings = client.AsyncRemarks None
 
-        FsHafas.Printf.Short.Warnings warnings.remarks
-        |> printfn "%s"
+        FsHafas.Printf.Short.Warnings warnings.remarks |> printfn "%s"
     }
     |> AsyncRun
 
@@ -588,8 +587,7 @@ let lines (name: string) =
     async {
         let! lines = client.AsyncLines name None
 
-        FsHafas.Printf.Short.Lines(Option.defaultValue [||] lines.lines)
-        |> printfn "%s"
+        FsHafas.Printf.Short.Lines(Option.defaultValue [||] lines.lines) |> printfn "%s"
     }
     |> AsyncRun
 
@@ -614,18 +612,18 @@ let run (arg: CliArguments) =
     | Profile p -> profile <- p
     | Locations v -> locations v
     | RefreshJourney v -> refreshJourney v
-    | Journeys (f, t) -> journeys (f, t, None)
-    | BestPrices (f, t) -> bestPrices (f, t, None)
-    | JourneysWithOptions (f, t, o) -> journeys (f, t, Some o)
+    | Journeys(f, t) -> journeys (f, t, None)
+    | BestPrices(f, t) -> bestPrices (f, t, None)
+    | JourneysWithOptions(f, t, o) -> journeys (f, t, Some o)
     | Stop v -> stop v
-    | JourneysFromTrip (f, t, d, n) -> journeysFromTrip (f, t, d, n)
+    | JourneysFromTrip(f, t, d, n) -> journeysFromTrip (f, t, d, n)
     | Departures v -> departures v
     | Arrivals v -> arrivals v
     | Trip v -> trip v
     | TripsByName v -> tripsByName v
-    | Nearby (lon, lat) -> nearby (lon, lat)
-    | ReachableFrom (lon, lat) -> reachableFrom (lon, lat)
-    | Radar (n, w, s, e) -> radar (n, w, s, e)
+    | Nearby(lon, lat) -> nearby (lon, lat)
+    | ReachableFrom(lon, lat) -> reachableFrom (lon, lat)
+    | Radar(n, w, s, e) -> radar (n, w, s, e)
     | Lines v -> lines v
     | ServerInfo -> serverInfo ()
     | Help -> printfn "%s" (printHelp ())
@@ -637,7 +635,7 @@ let main argv =
         Api.HafasAsyncClient.initSerializer ()
 #endif
         argv |> Array.toList |> parse |> List.iter run
-    with
-    | e -> printfn "main error: %s %A" e.Message e.StackTrace
+    with e ->
+        printfn "main error: %s %A" e.Message e.StackTrace
 
     0

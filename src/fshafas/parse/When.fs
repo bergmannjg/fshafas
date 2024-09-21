@@ -27,7 +27,7 @@ module internal When =
 
         let delay =
             match dtPrognosed, dtPlanned with
-            | Some (prognosed), Some (planned) -> Some(Convert.ToInt32((prognosed - planned).TotalSeconds))
+            | Some(prognosed), Some(planned) -> Some(Convert.ToInt32((prognosed - planned).TotalSeconds))
             | _ -> None
 
         if (cncl |> Option.exists id) then

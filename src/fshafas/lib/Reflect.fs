@@ -30,8 +30,10 @@ module Traverse =
     and private map (evt: TraverseEvent) (depth: int) (name: string) (o: obj) =
         let typ = o.GetType()
 
-        if typ.GenericTypeArguments.[0].Name = typeof<String>.Name
-           && typ.GenericTypeArguments.[1].Name = typeof<Boolean>.Name then
+        if
+            typ.GenericTypeArguments.[0].Name = typeof<String>.Name
+            && typ.GenericTypeArguments.[1].Name = typeof<Boolean>.Name
+        then
             let map = o :?> Map<string, bool>
             evt.onMapField depth name map
         else
@@ -40,8 +42,10 @@ module Traverse =
     and private indexmap (evt: TraverseEvent) (depth: int) (name: string) (o: obj) =
         let typ = o.GetType()
 
-        if typ.GenericTypeArguments.[0].Name = typeof<String>.Name
-           && typ.GenericTypeArguments.[1].Name = typeof<Boolean>.Name then
+        if
+            typ.GenericTypeArguments.[0].Name = typeof<String>.Name
+            && typ.GenericTypeArguments.[1].Name = typeof<Boolean>.Name
+        then
             let map = o :?> FsHafas.Client.IndexMap<string, bool>
 
             map.Keys
@@ -56,8 +60,7 @@ module Traverse =
         if name.Length > 0 then
             evt.onRecordFieldname depth name typ
 
-        FSharpType.GetRecordFields(typ)
-        |> Array.iter (recordField evt (depth + 1) o)
+        FSharpType.GetRecordFields(typ) |> Array.iter (recordField evt (depth + 1) o)
 
     and private union (evt: TraverseEvent) (depth: int) (name: string) (o: obj) =
         let typ = o.GetType()
@@ -77,55 +80,60 @@ module Traverse =
 
             if isBasicType typ then
                 evt.onField depth name o
-            else
+            else if
 
-            if typ.Name = typeof<Option<_>>.Name then
+                typ.Name = typeof<Option<_>>.Name
+            then
                 option evt depth name o
-            else
+            else if
 
-            if FSharpType.IsRecord(typ) then
+                FSharpType.IsRecord(typ)
+            then
                 record evt depth name o
-            else
+            else if
 
-            if FSharpType.IsUnion(typ) then
+                FSharpType.IsUnion(typ)
+            then
                 union evt depth name o
-            else
+            else if
 
-            if typ.IsArray && typ.Name = typeof<double []>.Name then
-                let arr = o :?> double []
+                typ.IsArray && typ.Name = typeof<double[]>.Name
+            then
+                let arr = o :?> double[]
 
-                arr
-                |> Array.iter (fun e -> common evt depth name e)
-
-                if arr.Length = 0 then
-                    evt.onEmptyArray depth name
-            else
-
-            if typ.IsArray && typ.Name = typeof<int []>.Name then
-                let arr = o :?> int []
-
-                arr
-                |> Array.iter (fun e -> common evt depth name e)
+                arr |> Array.iter (fun e -> common evt depth name e)
 
                 if arr.Length = 0 then
                     evt.onEmptyArray depth name
-            else
+            else if
 
-            if typ.IsArray then
-                let arr = o :?> obj []
+                typ.IsArray && typ.Name = typeof<int[]>.Name
+            then
+                let arr = o :?> int[]
 
-                arr
-                |> Array.iter (fun e -> common evt depth name e)
+                arr |> Array.iter (fun e -> common evt depth name e)
 
                 if arr.Length = 0 then
                     evt.onEmptyArray depth name
-            else
+            else if
 
-            if typ.Name = "FSharpMap`2" then
+                typ.IsArray
+            then
+                let arr = o :?> obj[]
+
+                arr |> Array.iter (fun e -> common evt depth name e)
+
+                if arr.Length = 0 then
+                    evt.onEmptyArray depth name
+            else if
+
+                typ.Name = "FSharpMap`2"
+            then
                 map evt depth name o
-            else
+            else if
 
-            if typ.Name = typeof<FsHafas.Client.IndexMap<_, _>>.Name then
+                typ.Name = typeof<FsHafas.Client.IndexMap<_, _>>.Name
+            then
                 indexmap evt depth name o
             else
                 evt.onUnkownType depth typ name o
@@ -164,8 +172,10 @@ module Compare =
     and private map (evt: CompareEvent) (depth: int) (name: string) (o1: obj) (o2: obj) =
         let typ = o1.GetType()
 
-        if typ.GenericTypeArguments.[0].Name = typeof<String>.Name
-           && typ.GenericTypeArguments.[1].Name = typeof<Boolean>.Name then
+        if
+            typ.GenericTypeArguments.[0].Name = typeof<String>.Name
+            && typ.GenericTypeArguments.[1].Name = typeof<Boolean>.Name
+        then
             let map1 = o1 :?> Map<string, bool>
             let map2 = o2 :?> Map<string, bool>
 
@@ -184,8 +194,10 @@ module Compare =
     and private indexmap (evt: CompareEvent) (depth: int) (name: string) (o1: obj) (o2: obj) =
         let typ = o1.GetType()
 
-        if typ.GenericTypeArguments.[0].Name = typeof<String>.Name
-           && typ.GenericTypeArguments.[1].Name = typeof<Boolean>.Name then
+        if
+            typ.GenericTypeArguments.[0].Name = typeof<String>.Name
+            && typ.GenericTypeArguments.[1].Name = typeof<Boolean>.Name
+        then
             let map1 = o1 :?> FsHafas.Client.IndexMap<string, bool>
 
             let map2 = o2 :?> FsHafas.Client.IndexMap<string, bool>
@@ -229,63 +241,69 @@ module Compare =
 
             if typ1 <> typ2 then
                 evt.onTypesDifferent name o1 typ1 o2 typ2
-            else
+            else if
 
-            if isBasicType typ1 then
+                isBasicType typ1
+            then
                 if o1 <> o2 then
                     evt.onValuesDifferent name o1 o2
-            else
+            else if
 
-            if typ1.Name = typeof<Option<_>>.Name then
+                typ1.Name = typeof<Option<_>>.Name
+            then
                 option evt depth name o1 o2
-            else
+            else if
 
-            if FSharpType.IsRecord(typ1) then
+                FSharpType.IsRecord(typ1)
+            then
                 record evt depth name o1 o2
-            else
+            else if
 
-            if FSharpType.IsUnion(typ1) then
+                FSharpType.IsUnion(typ1)
+            then
                 union evt depth name o1 o2
-            else
+            else if
 
-            if typ1.IsArray && typ1.Name = typeof<double []>.Name then
-                let arr1 = o1 :?> double []
-                let arr2 = o2 :?> double []
-
-                if arr1.Length = arr2.Length then
-                    arr2
-                    |> Array.iter2 (fun e1 e2 -> common evt depth name e1 e2) arr1
-                else
-                    evt.onValuesDifferent name o1 o2
-            else
-
-            if typ1.IsArray && typ1.Name = typeof<int []>.Name then
-                let arr1 = o1 :?> int []
-                let arr2 = o2 :?> int []
+                typ1.IsArray && typ1.Name = typeof<double[]>.Name
+            then
+                let arr1 = o1 :?> double[]
+                let arr2 = o2 :?> double[]
 
                 if arr1.Length = arr2.Length then
-                    arr2
-                    |> Array.iter2 (fun e1 e2 -> common evt depth name e1 e2) arr1
+                    arr2 |> Array.iter2 (fun e1 e2 -> common evt depth name e1 e2) arr1
                 else
                     evt.onValuesDifferent name o1 o2
-            else
+            else if
 
-            if typ1.IsArray then
-                let arr1 = o1 :?> obj []
-                let arr2 = o2 :?> obj []
+                typ1.IsArray && typ1.Name = typeof<int[]>.Name
+            then
+                let arr1 = o1 :?> int[]
+                let arr2 = o2 :?> int[]
 
                 if arr1.Length = arr2.Length then
-                    arr2
-                    |> Array.iter2 (fun e1 e2 -> common evt depth name e1 e2) arr1
+                    arr2 |> Array.iter2 (fun e1 e2 -> common evt depth name e1 e2) arr1
                 else
                     evt.onValuesDifferent name o1 o2
-            else
+            else if
 
-            if typ1.Name = "FSharpMap`2" then
+                typ1.IsArray
+            then
+                let arr1 = o1 :?> obj[]
+                let arr2 = o2 :?> obj[]
+
+                if arr1.Length = arr2.Length then
+                    arr2 |> Array.iter2 (fun e1 e2 -> common evt depth name e1 e2) arr1
+                else
+                    evt.onValuesDifferent name o1 o2
+            else if
+
+                typ1.Name = "FSharpMap`2"
+            then
                 map evt depth name o1 o2
-            else
+            else if
 
-            if typ1.Name = typeof<FsHafas.Client.IndexMap<_, _>>.Name then
+                typ1.Name = typeof<FsHafas.Client.IndexMap<_, _>>.Name
+            then
                 indexmap evt depth name o1 o2
             else
                 fprintfn stderr "%s" (sprintf "common: unkown type %s" typ1.FullName)

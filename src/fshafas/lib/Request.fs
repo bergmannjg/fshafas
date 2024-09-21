@@ -15,7 +15,7 @@ module internal Request =
     let jsWindowLocation () : string = jsNative
 
     [<ImportDefault("md5")>]
-    let md5 (x: byte []) : string = jsNative
+    let md5 (x: byte[]) : string = jsNative
 
     type HttpClient() =
 
@@ -48,9 +48,7 @@ module internal Request =
                 let windowLocation = jsWindowLocation ()
 
                 if windowLocation.Length > 0 then
-                    windowLocation
-                    + "/proxy?url="
-                    + System.Uri.EscapeDataString(urlchecksum)
+                    windowLocation + "/proxy?url=" + System.Uri.EscapeDataString(urlchecksum)
                 else
                     urlchecksum
 
@@ -58,10 +56,11 @@ module internal Request =
 
             let properties =
                 [ RequestProperties.Method HttpMethod.POST
-                  requestHeaders [ ContentType "application/json"
-                                   AcceptEncoding "gzip, br, deflate"
-                                   Accept "application/json"
-                                   UserAgent "agent" ]
+                  requestHeaders
+                      [ ContentType "application/json"
+                        AcceptEncoding "gzip, br, deflate"
+                        Accept "application/json"
+                        UserAgent "agent" ]
                   RequestProperties.Body(fromStringtoJsonBody json) ]
 
             fetch urlEscaped properties
@@ -85,13 +84,13 @@ module internal Request =
     open Fable.Core.JsInterop
 
     [<ImportMember("hashlib")>]
-    let private md5 (x: byte []) : obj = jsNative
+    let private md5 (x: byte[]) : obj = jsNative
 
     [<Emit("$0.hexdigest()")>]
     let private hexdigest (_: obj) : string = jsNative
 
     [<Emit("$0.encode()")>]
-    let private toBytes (_: string) : byte [] = jsNative
+    let private toBytes (_: string) : byte[] = jsNative
 
     [<Import("dumps", from = "json")>]
     [<Emit("dumps($1)")>]
@@ -206,13 +205,9 @@ module internal Request =
                 client.DefaultRequestHeaders.Add("Accept", "application/json")
                 client.DefaultRequestHeaders.Add("user-agent", "agent")
 
-                let! response =
-                    client.PostAsync(urlchecksum, content)
-                    |> Async.AwaitTask
+                let! response = client.PostAsync(urlchecksum, content) |> Async.AwaitTask
 
-                let! body =
-                    response.Content.ReadAsStringAsync()
-                    |> Async.AwaitTask
+                let! body = response.Content.ReadAsStringAsync() |> Async.AwaitTask
 
                 return
                     match response.IsSuccessStatusCode with

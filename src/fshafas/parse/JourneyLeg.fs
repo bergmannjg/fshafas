@@ -24,7 +24,7 @@ module internal JourneyLeg =
           fromIndex: int
           toIndex: int }
 
-    let private getRemarkRange (msg: FsHafas.Raw.RawMsg) (common: CommonData) (stopovers: FsHafas.Client.StopOver []) =
+    let private getRemarkRange (msg: FsHafas.Raw.RawMsg) (common: CommonData) (stopovers: FsHafas.Client.StopOver[]) =
         let fromLoc =
             Common.getElementAtSome msg.fLocX common.locations
             |> U2StationStop.FromSomeU3StationStopLocation
@@ -33,13 +33,9 @@ module internal JourneyLeg =
             Common.getElementAtSome msg.tLocX common.locations
             |> U2StationStop.FromSomeU3StationStopLocation
 
-        let fromIndex =
-            stopovers
-            |> Array.tryFindIndex (fun s -> s.stop = fromLoc)
+        let fromIndex = stopovers |> Array.tryFindIndex (fun s -> s.stop = fromLoc)
 
-        let toIndex =
-            stopovers
-            |> Array.tryFindIndex (fun s -> s.stop = toLoc)
+        let toIndex = stopovers |> Array.tryFindIndex (fun s -> s.stop = toLoc)
 
         match msg.remX, fromIndex, toIndex with
         | Some remX, Some fromIndex, Some toIndex ->
@@ -53,9 +49,9 @@ module internal JourneyLeg =
         | _ -> None
 
     let private getRemarkRanges
-        (msgL: FsHafas.Raw.RawMsg [])
+        (msgL: FsHafas.Raw.RawMsg[])
         (commonData: CommonData)
-        (stopovers: FsHafas.Client.StopOver [])
+        (stopovers: FsHafas.Client.StopOver[])
         =
         msgL
         |> Array.map (fun msg -> getRemarkRange msg commonData stopovers)
@@ -78,17 +74,15 @@ module internal JourneyLeg =
 
     let private applyRemarkRanges
         (commonData: CommonData)
-        (stopovers: FsHafas.Client.StopOver [])
-        (remarkRanges: RemarkRange [])
+        (stopovers: FsHafas.Client.StopOver[])
+        (remarkRanges: RemarkRange[])
         =
         stopovers
         |> Array.mapi (fun i s ->
-            match remarkRanges
-                  |> Array.tryFind (fun r ->
-                      not r.wholeLeg
-                      && r.fromIndex <= i
-                      && r.toIndex >= i)
-                with
+            match
+                remarkRanges
+                |> Array.tryFind (fun r -> not r.wholeLeg && r.fromIndex <= i && r.toIndex >= i)
+            with
             | Some range -> applyRemarkRange range commonData s
             | None -> s)
 
@@ -123,9 +117,7 @@ module internal JourneyLeg =
 
         let arrPl = ctx.profile.parsePlatform ctx aPlatfS aPlatfR pt.arr.aCncl
 
-        if pt.``type`` = "WALK"
-           || pt.``type`` = "TRSF"
-           || pt.``type`` = "DEVI" then
+        if pt.``type`` = "WALK" || pt.``type`` = "TRSF" || pt.``type`` = "DEVI" then
             leg <-
                 { leg with
                     ``public`` = Some true
@@ -143,7 +135,7 @@ module internal JourneyLeg =
 
                 let polyline =
                     match jny.poly with
-                    | Some (value) -> Some(ctx.profile.parsePolyline ctx value)
+                    | Some(value) -> Some(ctx.profile.parsePolyline ctx value)
                     | None ->
                         match jny.polyG with
                         | Some polyG ->
@@ -167,9 +159,7 @@ module internal JourneyLeg =
 
                 let stopoversWithRemarks =
                     match stopovers with
-                    | Some stopovers ->
-                        applyRemarkRanges ctx.common stopovers remarkRanges
-                        |> Some
+                    | Some stopovers -> applyRemarkRanges ctx.common stopovers remarkRanges |> Some
                     | _ -> None
 
                 let msgL =
@@ -231,16 +221,12 @@ module internal JourneyLeg =
                         direction = a.dirTxt
                         ``when`` = parsedWhen |> Option.bind (fun v -> v.``when``)
                         plannedWhen = parsedWhen |> Option.bind (fun v -> v.plannedWhen)
-                        prognosedWhen =
-                            parsedWhen
-                            |> Option.bind (fun v -> v.prognosedWhen)
+                        prognosedWhen = parsedWhen |> Option.bind (fun v -> v.prognosedWhen)
                         delay = parsedWhen |> Option.bind (fun v -> v.delay) }
 
                 let alternatives =
                     jny.freq
-                    |> Option.bind (fun freq ->
-                        freq.jnyL
-                        |> Option.map (Array.map parseAlternative))
+                    |> Option.bind (fun freq -> freq.jnyL |> Option.map (Array.map parseAlternative))
 
                 leg <-
                     { leg with

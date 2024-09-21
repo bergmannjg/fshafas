@@ -17,9 +17,10 @@ module internal Converter =
         inherit JsonConverter<'a>()
 
         static member fromString<'a>(s: string) =
-            match FSharpType.GetUnionCases typeof<'a>
-                  |> Array.filter (fun case -> String.Compare(case.Name, s, StringComparison.OrdinalIgnoreCase) = 0)
-                with
+            match
+                FSharpType.GetUnionCases typeof<'a>
+                |> Array.filter (fun case -> String.Compare(case.Name, s, StringComparison.OrdinalIgnoreCase) = 0)
+            with
             | [| case |] -> Some(FSharpValue.MakeUnion(case, [||]) :?> 'a)
             | _ -> None
 
@@ -38,8 +39,7 @@ module internal Converter =
         override this.CanConvert(t: Type) : bool = t.Name = typedefof<'a>.Name
 
         override this.CreateConverter(typeToConvert: Type, _options: JsonSerializerOptions) : JsonConverter =
-            let converterType =
-                typedefof<UnionValueConverter<_>>.MakeGenericType (typeToConvert)
+            let converterType = typedefof<UnionValueConverter<_>>.MakeGenericType(typeToConvert)
 
             Activator.CreateInstance(converterType) :?> JsonConverter
 
@@ -62,19 +62,18 @@ module internal Converter =
         (value, jsonObject)
 
     let private maybeReadJsonObjectWithStringProperty
-        (
-            reader: byref<Utf8JsonReader>,
-            name: string,
-            acceptEmptyObjectAsNullValue: bool
-        ) =
+        (reader: byref<Utf8JsonReader>, name: string, acceptEmptyObjectAsNullValue: bool)
+        =
         use jsonDocument = JsonDocument.ParseValue(&reader)
 
         let value =
             match jsonDocument.RootElement.TryGetProperty name with
             | true, jsonElement -> jsonElement.GetString()
             | _ ->
-                if acceptEmptyObjectAsNullValue
-                   && jsonDocument.RootElement.GetRawText() = emptyJsonObject then
+                if
+                    acceptEmptyObjectAsNullValue
+                    && jsonDocument.RootElement.GetRawText() = emptyJsonObject
+                then
                     jsonDocument.RootElement.GetRawText()
                 else
                     raise (JsonException("Property not found: " + name))
@@ -94,9 +93,9 @@ module internal Converter =
             | ByTagName unionTagName ->
                 let (value, jsonObject) = readJsonObjectWithStringProperty (&reader, unionTagName)
 
-                if value = typedefof<'S>.Name.ToLower () then
+                if value = typedefof<'S>.Name.ToLower() then
                     U2.Case1(Serializer.Deserialize<'S>(jsonObject))
-                else if value = typedefof<'T>.Name.ToLower () then
+                else if value = typedefof<'T>.Name.ToLower() then
                     U2.Case2(Serializer.Deserialize<'T>(jsonObject))
                 else
                     raise (JsonException("Invalid tag value encoding: " + value))
@@ -111,15 +110,12 @@ module internal Converter =
         inherit JsonConverterFactory()
 
         override this.CanConvert(t: Type) : bool =
-            t.IsGenericType
-            && t.GetGenericTypeDefinition() = typedefof<U2<'S, 'T>>
+            t.IsGenericType && t.GetGenericTypeDefinition() = typedefof<U2<'S, 'T>>
 
         override this.CreateConverter(typeToConvert: Type, _options: JsonSerializerOptions) : JsonConverter =
-            let types =
-                typeToConvert.GetGenericArguments()
-                |> Array.take 2
+            let types = typeToConvert.GetGenericArguments() |> Array.take 2
 
-            let converterType = typedefof<U2EraseValueConverter<'S, 'T>>.MakeGenericType (types)
+            let converterType = typedefof<U2EraseValueConverter<'S, 'T>>.MakeGenericType(types)
 
             Activator.CreateInstance(converterType, uc) :?> JsonConverter
 
@@ -134,11 +130,11 @@ module internal Converter =
             | ByTagName unionTagName ->
                 let (value, jsonObject) = readJsonObjectWithStringProperty (&reader, unionTagName)
 
-                if value = typedefof<'S>.Name.ToLower () then
+                if value = typedefof<'S>.Name.ToLower() then
                     U3.Case1(Serializer.Deserialize<'S>(jsonObject))
-                else if value = typedefof<'T>.Name.ToLower () then
+                else if value = typedefof<'T>.Name.ToLower() then
                     U3.Case2(Serializer.Deserialize<'T>(jsonObject))
-                else if value = typedefof<'U>.Name.ToLower () then
+                else if value = typedefof<'U>.Name.ToLower() then
                     U3.Case3(Serializer.Deserialize<'U>(jsonObject))
                 else
                     raise (JsonException("Invalid tag value encoding: " + value))
@@ -154,16 +150,13 @@ module internal Converter =
         inherit JsonConverterFactory()
 
         override this.CanConvert(t: Type) : bool =
-            t.IsGenericType
-            && t.GetGenericTypeDefinition() = typedefof<U3<'S, 'T, 'U>>
+            t.IsGenericType && t.GetGenericTypeDefinition() = typedefof<U3<'S, 'T, 'U>>
 
         override this.CreateConverter(typeToConvert: Type, _options: JsonSerializerOptions) : JsonConverter =
-            let types =
-                typeToConvert.GetGenericArguments()
-                |> Array.take 3
+            let types = typeToConvert.GetGenericArguments() |> Array.take 3
 
             let converterType =
-                typedefof<U3EraseValueConverter<'S, 'T, 'U>>.MakeGenericType (types)
+                typedefof<U3EraseValueConverter<'S, 'T, 'U>>.MakeGenericType(types)
 
             Activator.CreateInstance(converterType, uc) :?> JsonConverter
 
@@ -171,8 +164,7 @@ module internal Converter =
         inherit JsonConverter<U3<'S, 'T, 'U> option>()
 
         override this.Read(reader: byref<Utf8JsonReader>, _typ: Type, options: JsonSerializerOptions) =
-            if reader.TokenType = JsonTokenType.None
-               || reader.TokenType = JsonTokenType.Null then
+            if reader.TokenType = JsonTokenType.None || reader.TokenType = JsonTokenType.Null then
                 None
             else if reader.TokenType <> JsonTokenType.StartObject then
                 raise (JsonException())
@@ -184,11 +176,11 @@ module internal Converter =
 
                     if value = emptyJsonObject then
                         None
-                    else if value = typedefof<'S>.Name.ToLower () then
+                    else if value = typedefof<'S>.Name.ToLower() then
                         Some(U3.Case1(Serializer.Deserialize<'S>(jsonObject)))
-                    else if value = typedefof<'T>.Name.ToLower () then
+                    else if value = typedefof<'T>.Name.ToLower() then
                         Some(U3.Case2(Serializer.Deserialize<'T>(jsonObject)))
-                    else if value = typedefof<'U>.Name.ToLower () then
+                    else if value = typedefof<'U>.Name.ToLower() then
                         Some(U3.Case3(Serializer.Deserialize<'U>(jsonObject)))
                     else
                         raise (JsonException("Invalid tag value encoding: " + value))
@@ -210,12 +202,10 @@ module internal Converter =
 
         override this.CreateConverter(typeToConvert: Type, _options: JsonSerializerOptions) : JsonConverter =
             let types =
-                typeToConvert.GenericTypeArguments.[0]
-                    .GenericTypeArguments
-                |> Array.take 3
+                typeToConvert.GenericTypeArguments.[0].GenericTypeArguments |> Array.take 3
 
             let converterType =
-                typedefof<OptionU3EraseValueConverter<'S, 'T, 'U>>.MakeGenericType (types)
+                typedefof<OptionU3EraseValueConverter<'S, 'T, 'U>>.MakeGenericType(types)
 
             Activator.CreateInstance(converterType, uc, acceptEmptyObjectAsNullValue) :?> JsonConverter
 
@@ -255,13 +245,11 @@ module internal Converter =
             && t.GetGenericTypeDefinition() = typedefof<U14<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n>>
 
         override this.CreateConverter(typeToConvert: Type, _options: JsonSerializerOptions) : JsonConverter =
-            let types =
-                typeToConvert.GetGenericArguments()
-                |> Array.take 14
+            let types = typeToConvert.GetGenericArguments() |> Array.take 14
 
             let converterType =
-                typedefof<U14EraseValueConverter<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n>>.MakeGenericType
-                    (types)
+                typedefof<U14EraseValueConverter<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n>>
+                    .MakeGenericType(types)
 
             Activator.CreateInstance(converterType, uc) :?> JsonConverter
 
@@ -283,15 +271,11 @@ module internal Converter =
         inherit JsonConverterFactory()
 
         override this.CanConvert(t: Type) : bool =
-            t.IsGenericType
-            && t.GetGenericTypeDefinition() = typedefof<IndexMap<'S, 'T>>
+            t.IsGenericType && t.GetGenericTypeDefinition() = typedefof<IndexMap<'S, 'T>>
 
         override this.CreateConverter(typeToConvert: Type, _options: JsonSerializerOptions) : JsonConverter =
-            let types =
-                typeToConvert.GetGenericArguments()
-                |> Array.take 2
+            let types = typeToConvert.GetGenericArguments() |> Array.take 2
 
-            let converterType =
-                typedefof<IndexMapValueConverter<'S, 'T>>.MakeGenericType (types)
+            let converterType = typedefof<IndexMapValueConverter<'S, 'T>>.MakeGenericType(types)
 
             Activator.CreateInstance(converterType, defaultValue) :?> JsonConverter

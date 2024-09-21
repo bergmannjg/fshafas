@@ -20,6 +20,9 @@ let testDotnet () =
 let buildNupkg (version: string) (srcDir: string) (fsproj: string) (nugetDir: string) (nugetPkg: string) =
     let toDir = HOME + "/local.packages"
 
+    if not (Directory.Exists toDir) then
+        Directory.CreateDirectory(toDir) |> ignore
+
     dotnet
         "pack"
         [ "-c"
@@ -58,6 +61,21 @@ let buildNupkg (version: string) (srcDir: string) (fsproj: string) (nugetDir: st
         + version
     )
 
+let buildDotnetNupkg (version: string) =
+    buildNupkg
+        version
+        "src/fshafas/target.dotnet"
+        "fshafas.fsproj"
+        "fshafas"
+        "FsHafas"
+
+    buildNupkg
+        version
+        "src/fshafas.profiles/target.dotnet"
+        "fshafas.profiles.fsproj"
+        "fshafas.profiles"
+        "FsHafas.Profiles"
+
 let buildJavascriptNupkg (version: string) =
     buildNupkg
         version
@@ -72,6 +90,14 @@ let buildJavascriptNupkg (version: string) =
         "fshafas.profiles.fable.javascript.fsproj"
         "fshafas.profiles.javascript"
         "FsHafas.Profiles.JavaScript"
+
+let buildFableBindingNupkg (version: string) =
+    buildNupkg
+        version
+        "src/hafas.client.bindings"
+        "hafas.client.bindings.fsproj"
+        "hafas.client.bindings"
+        "Hafas.Client.Bindings"
 
 let checkVersionInFile (version: string) (file: string) =
     match File.ReadAllLines file
@@ -126,13 +152,14 @@ let buildJavascriptTest () =
         "fable"
         [ "src/examples/cli/target.javascript/cli.fable.javascript.fsproj"
           "--outDir"
-          "src/examples/cli/target.javascript/build/" ]
+          "src/examples/cli/target.javascript/build/"
+          "--noCache" ]
 
     dotnet
         "test"
         [ "src/fshafas.package.test/fshafaspackagetest.fsproj"
-          "--"
-          "filter DotnetEqualsToJavaScript" ]
+          "--filter"
+          "DotnetEqualsToJavaScript" ]
 
 let buildPythonNupkg (version: string) =
     buildNupkg version "src/fshafas/target.python" "fshafas.fable.python.fsproj" "fshafas.python" "FsHafas.Python"
@@ -162,13 +189,12 @@ let checkPythonVersionInFile (version: string) (file: string) =
 let buildPython (version: string) =
     checkPythonVersionInFile version "src/fshafas.python.package/setup.py"
 
-    delete "src/fshafas.python.package/fable_modules"
-
     dotnet
         "fable"
         [ "src/fshafas.python.package/fshafas.fsproj"
           "--lang"
-          "Python" ]
+          "Python"
+          "--noCache" ]
 
     delete "src/fshafas.python.package/fshafas/fable_modules/"
 
@@ -185,10 +211,11 @@ let buildPythonTest () =
         "fable"
         [ "src/examples/cli/target.javascript/cli.fable.javascript.fsproj"
           "--lang"
-          "Python" ]
+          "Python"
+          "--noCache" ]
 
     dotnet
         "test"
         [ "src/fshafas.package.test/fshafaspackagetest.fsproj"
-          "--"
-          "filter DotnetEqualsToPython" ]
+          "--filter"
+          "DotnetEqualsToPython" ]

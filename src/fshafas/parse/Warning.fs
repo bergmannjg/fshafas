@@ -30,9 +30,7 @@ module internal Warning =
 
     let parseWarning (ctx: Context) (w: FsHafas.Raw.RawHim) : FsHafas.Client.Warning =
 
-        let products =
-            w.prod
-            |> Option.map (fun pCls -> ctx.profile.parseBitmask ctx pCls)
+        let products = w.prod |> Option.map (fun pCls -> ctx.profile.parseBitmask ctx pCls)
 
         let categories =
             w.catRefL

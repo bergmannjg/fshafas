@@ -4,9 +4,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <RepositoryUrl>https://github.com/bergmannjg/fshafas</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageId>FsHafas.JavaScript</PackageId>
+    <PackageId>FsHafas</PackageId>
     <Authors>J. Bergmann</Authors>
-    <PackageTags>fable fsharp</PackageTags>
+    <PackageTags>fsharp</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../lib/Serializer.fs" />

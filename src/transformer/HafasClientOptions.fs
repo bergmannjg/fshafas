@@ -56,20 +56,20 @@ and [<StringEnum>] FeatureType = | [<CompiledName "Feature">] Feature
 and [<StringEnum>] FeatureCollectionType = | [<CompiledName "featureCollection">] FeatureCollection
 
 #if FABLE_JS
-and [<TypeScriptTaggedUnion("type")>] StationStopLocation =
+and [<Erase>] StationStopLocation =
     | Station of Station
     | Stop of Stop
     | Location of Location
 
-and [<TypeScriptTaggedUnion("type")>] StationStop =
+and [<Erase>] StationStop =
     | Station of Station
     | Stop of Stop
 
-and [<TypeScriptTaggedUnion("type")>] StopLocation =
+and [<Erase>] StopLocation =
     | Stop of Stop
     | Location of Location
 
-and [<TypeScriptTaggedUnion("type")>] HintStatusWarning =
+and [<Erase>] HintStatusWarning =
     | Hint of Hint
     | Status of Status
     | Warning of Warning
@@ -99,14 +99,7 @@ let transformType str =
     else if str = "ResizeArray" then "array"
     else str
 
-let escapes =
-    [| "type"
-       "default"
-       "when"
-       "end"
-       "public"
-       "to"
-       "class" |]
+let escapes = [| "type"; "default"; "when"; "end"; "public"; "to"; "class" |]
 
 let escapeIdent str =
     if Array.contains str escapes then
@@ -115,10 +108,7 @@ let escapeIdent str =
         str
 
 let excludeTypes =
-    [| "ReadonlyArray"
-       "IExports"
-       "FeatureProperties"
-       "RealtimeDataUpdatedAt" |]
+    [| "ReadonlyArray"; "IExports"; "FeatureProperties"; "RealtimeDataUpdatedAt" |]
 
 let memberTypes = [| "Profile"; "HafasClient" |]
 
@@ -151,9 +141,7 @@ let integerTypeVals =
        "IcoCrd", "y"
        "RadarOptions", "frames" |]
 
-let case1OfU2TypeVals =
-    [| "DateTime", "float"
-       "string", "float" |]
+let case1OfU2TypeVals = [| "DateTime", "float"; "string", "float" |]
 
 let transformTypeVals =
     [| "*", "icon", "Icon option"
@@ -208,8 +196,7 @@ let isIntegerTypeVal (typename: string) (membername: string) =
     |> Array.exists (fun (t, s) -> (t = "*" || t = typename) && s = membername)
 
 let isCase1OfU2TypeVals (case1: string) (case2: string) =
-    case1OfU2TypeVals
-    |> Array.exists (fun (t, s) -> t = case1 && s = case2)
+    case1OfU2TypeVals |> Array.exists (fun (t, s) -> t = case1 && s = case2)
 
 let transformsTypeDefn (name: string) = transformsType name transformTypeDefns
 

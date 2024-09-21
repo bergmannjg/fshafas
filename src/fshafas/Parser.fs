@@ -87,9 +87,9 @@ module internal ConverterEx =
 
         override this.Read(reader: byref<Utf8JsonReader>, _typ: Type, options: JsonSerializerOptions) =
             match converter.Read(&reader, _typ, options) with
-            | Some (U3.Case1 s) -> Some(StationStopLocation.Station s)
-            | Some (U3.Case2 s) -> Some(StationStopLocation.Stop s)
-            | Some (U3.Case3 s) -> Some(StationStopLocation.Location s)
+            | Some(U3.Case1 s) -> Some(StationStopLocation.Station s)
+            | Some(U3.Case2 s) -> Some(StationStopLocation.Stop s)
+            | Some(U3.Case3 s) -> Some(StationStopLocation.Location s)
             | None -> None
 
         override this.Write(writer: Utf8JsonWriter, value: StationStopLocation option, options: JsonSerializerOptions) =
@@ -181,12 +181,13 @@ module Parser =
         (res: FsHafas.Raw.RawResult option)
         =
         match res, common with
-        | Some (res), Some (common) ->
+        | Some(res), Some(common) ->
             let ctx = createContext profile opt res
 
-            { ctx with common = ctx.profile.parseCommon ctx common }
+            { ctx with
+                common = ctx.profile.parseCommon ctx common }
             |> Some
-        | Some (res), None ->
+        | Some(res), None ->
             let ctx = createContext profile opt res
 
             ctx |> Some
@@ -207,40 +208,38 @@ module Parser =
 
     let internal parseLocation (locL: FsHafas.Raw.RawLoc option) (ctx: Context option) =
         match ctx, locL with
-        | Some (ctx), Some (locL) ->
+        | Some(ctx), Some(locL) ->
             let locs = [| locL |] |> ctx.profile.parseLocations ctx
 
             locs.[0]
         | _ -> StationStopLocation.Location Default.Location
 
-    let internal parseLocations (locL: FsHafas.Raw.RawLoc [] option) (ctx: Context option) =
+    let internal parseLocations (locL: FsHafas.Raw.RawLoc[] option) (ctx: Context option) =
         match locL, ctx with
         | Some locL, Some ctx -> locL |> ctx.profile.parseLocations ctx
         | _ -> Array.empty
 
     let parseLocationsFromResult
         (profile: FsHafas.Endpoint.Profile)
-        (locL: FsHafas.Raw.RawLoc [] option)
+        (locL: FsHafas.Raw.RawLoc[] option)
         (options: Options)
         (res: FsHafas.Raw.RawResult)
         =
         parseLocations locL (parseCommon profile options res.common (Some res))
 
-    let internal parseMovements (jnyL: FsHafas.Raw.RawJny [] option) (ctx: Context option) =
+    let internal parseMovements (jnyL: FsHafas.Raw.RawJny[] option) (ctx: Context option) =
         match ctx, jnyL with
         | Some ctx, Some jnyL -> jnyL |> Array.map (ctx.profile.parseMovement ctx)
         | _ -> Array.empty
 
     let parseMovementsFromResult
         (profile: FsHafas.Endpoint.Profile)
-        (jnyL: FsHafas.Raw.RawJny [] option)
+        (jnyL: FsHafas.Raw.RawJny[] option)
         (options: Options)
         (res: FsHafas.Raw.RawResult)
         =
         { Default.Radar with
-            movements =
-                parseMovements jnyL (parseCommon profile options res.common (Some res))
-                |> Some
+            movements = parseMovements jnyL (parseCommon profile options res.common (Some res)) |> Some
             realtimeDataUpdatedAt = parseRealtimeDataUpdatedAtFromPlanrtTS res.planrtTS }
 
     let private addToMap (m: Map<int, array<int>>) (p: FsHafas.Raw.RawPos) =
@@ -256,9 +255,9 @@ module Parser =
         |> Array.map (fun locx -> Common.getElementAt locx ctx.common.locations)
         |> Array.choose id
 
-    let internal parseDurations (posL: FsHafas.Raw.RawPos []) (ctx: Context option) =
+    let internal parseDurations (posL: FsHafas.Raw.RawPos[]) (ctx: Context option) =
         match ctx with
-        | Some (ctx) ->
+        | Some(ctx) ->
             posL
             |> Array.fold addToMap Map.empty
             |> Map.toArray
@@ -269,7 +268,7 @@ module Parser =
 
     let parseDurationsFromResult
         (profile: FsHafas.Endpoint.Profile)
-        (posL: FsHafas.Raw.RawPos [])
+        (posL: FsHafas.Raw.RawPos[])
         (options: Options)
         (res: FsHafas.Raw.RawResult)
         =
@@ -277,36 +276,33 @@ module Parser =
             reachable = parseDurations posL (parseCommon profile options res.common (Some res))
             realtimeDataUpdatedAt = parseRealtimeDataUpdatedAtFromPlanrtTS res.planrtTS }
 
-    let internal parseJourney (outConL: FsHafas.Raw.RawOutCon [] option) (ctx: Context option) =
+    let internal parseJourney (outConL: FsHafas.Raw.RawOutCon[] option) (ctx: Context option) =
         match ctx, outConL with
-        | Some (ctx), Some (outConL) when outConL.Length > 0 ->
-            { Default.JourneyWithRealtimeData with journey = ctx.profile.parseJourney ctx outConL.[0] }
+        | Some(ctx), Some(outConL) when outConL.Length > 0 ->
+            { Default.JourneyWithRealtimeData with
+                journey = ctx.profile.parseJourney ctx outConL.[0] }
         | _ -> Default.JourneyWithRealtimeData
 
-    let internal parseJourneysArray (outConL: FsHafas.Raw.RawOutCon [] option) (ctx: Context option) =
+    let internal parseJourneysArray (outConL: FsHafas.Raw.RawOutCon[] option) (ctx: Context option) =
         match ctx, outConL with
-        | Some (ctx), Some (outConL) ->
-            let journeys =
-                outConL
-                |> Array.map (fun o -> ctx.profile.parseJourney ctx o)
+        | Some(ctx), Some(outConL) ->
+            let journeys = outConL |> Array.map (fun o -> ctx.profile.parseJourney ctx o)
 
             journeys
         | _ -> [||]
 
     let parseJourneysArrayFromResult
         (profile: FsHafas.Endpoint.Profile)
-        (outConL: FsHafas.Raw.RawOutCon [] option)
+        (outConL: FsHafas.Raw.RawOutCon[] option)
         (options: Options)
         (res: FsHafas.Raw.RawResult)
         =
         parseJourneysArray outConL (parseCommon profile options res.common (Some res))
 
-    let internal parseJourneys (outConL: FsHafas.Raw.RawOutCon [] option) (ctx: Context option) =
+    let internal parseJourneys (outConL: FsHafas.Raw.RawOutCon[] option) (ctx: Context option) =
         match ctx, outConL with
-        | Some (ctx), Some (outConL) ->
-            let journeys =
-                outConL
-                |> Array.map (fun o -> ctx.profile.parseJourney ctx o)
+        | Some(ctx), Some(outConL) ->
+            let journeys = outConL |> Array.map (fun o -> ctx.profile.parseJourney ctx o)
 
             { Default.Journeys with
                 earlierRef = ctx.res.outCtxScrB
@@ -317,7 +313,7 @@ module Parser =
 
     let parseJourneysFromResult
         (profile: FsHafas.Endpoint.Profile)
-        (outConL: FsHafas.Raw.RawOutCon [] option)
+        (outConL: FsHafas.Raw.RawOutCon[] option)
         (options: Options)
         (res: FsHafas.Raw.RawResult)
         =
@@ -325,7 +321,7 @@ module Parser =
 
     let internal parseTrip (journey: FsHafas.Raw.RawJny option) (ctx: Context option) =
         match ctx, journey with
-        | Some (ctx), Some (journey) -> journey |> ctx.profile.parseTrip ctx
+        | Some(ctx), Some(journey) -> journey |> ctx.profile.parseTrip ctx
         | _ -> raise (System.ArgumentException("parseTrip failed"))
 
     let parseTripFromResult
@@ -338,11 +334,9 @@ module Parser =
             trip = parseTrip journey (parseCommon profile options res.common (Some res))
             realtimeDataUpdatedAt = parseRealtimeDataUpdatedAtFromPlanrtTS res.planrtTS }
 
-    let internal parseTrips (journeys: FsHafas.Raw.RawJny [] option) (ctx: Context option) =
+    let internal parseTrips (journeys: FsHafas.Raw.RawJny[] option) (ctx: Context option) =
         match ctx, journeys with
-        | Some (ctx), Some (journeys) ->
-            journeys
-            |> Array.map (fun j -> ctx.profile.parseTrip ctx j)
+        | Some(ctx), Some(journeys) -> journeys |> Array.map (fun j -> ctx.profile.parseTrip ctx j)
         | _ -> raise (System.ArgumentException("parseTrip failed"))
 
     let internal parseLine (l: FsHafas.Raw.RawLine) (ctx: Context) =
@@ -362,40 +356,36 @@ module Parser =
             |> Array.map (fun d -> d.txt)
 
         match Common.getElementAt l.prodX ctx.common.lines with
-        | Some line -> Some { line with directions = Some directions }
+        | Some line ->
+            Some
+                { line with
+                    directions = Some directions }
         | None -> None
 
-    let internal parseLines (lines: FsHafas.Raw.RawLine [] option) (ctx: Context option) =
+    let internal parseLines (lines: FsHafas.Raw.RawLine[] option) (ctx: Context option) =
         match ctx, lines with
-        | Some (ctx), Some (lines) ->
-            lines
-            |> Array.map (fun l -> parseLine l ctx)
-            |> Array.choose id
-        | Some (ctx), None -> Array.empty
+        | Some(ctx), Some(lines) -> lines |> Array.map (fun l -> parseLine l ctx) |> Array.choose id
+        | Some(ctx), None -> Array.empty
         | _ -> raise (System.ArgumentException("parseLines failed"))
 
     let parseLinesFromResult
         (profile: FsHafas.Endpoint.Profile)
-        (lines: FsHafas.Raw.RawLine [] option)
+        (lines: FsHafas.Raw.RawLine[] option)
         (options: Options)
         (res: FsHafas.Raw.RawResult)
         =
         { Default.LinesWithRealtimeData with
-            lines =
-                parseLines lines (parseCommon profile options res.common (Some res))
-                |> Some
+            lines = parseLines lines (parseCommon profile options res.common (Some res)) |> Some
             realtimeDataUpdatedAt = parseRealtimeDataUpdatedAtFromPlanrtTS res.planrtTS }
 
-    let internal parseWarnings (msgL: FsHafas.Raw.RawHim [] option) (ctx: Context option) =
+    let internal parseWarnings (msgL: FsHafas.Raw.RawHim[] option) (ctx: Context option) =
         match ctx, msgL with
-        | Some (ctx), Some (msgL) ->
-            msgL
-            |> Array.map (fun j -> ctx.profile.parseWarning ctx j)
+        | Some(ctx), Some(msgL) -> msgL |> Array.map (fun j -> ctx.profile.parseWarning ctx j)
         | _ -> raise (System.ArgumentException("parseWarnings failed"))
 
     let parseWarningsFromResult
         (profile: FsHafas.Endpoint.Profile)
-        (msgL: FsHafas.Raw.RawHim [] option)
+        (msgL: FsHafas.Raw.RawHim[] option)
         (options: Options)
         (res: FsHafas.Raw.RawResult)
         =
@@ -417,19 +407,11 @@ module Parser =
         let tzOffset = datetime.Substring(20, 2) |> int |> (*) 60
 
         System
-            .DateTimeOffset(
-                year,
-                month,
-                day,
-                hour,
-                minute,
-                0,
-                System.TimeSpan(tzOffset / 60, 0, 0)
-            )
+            .DateTimeOffset(year, month, day, hour, minute, 0, System.TimeSpan(tzOffset / 60, 0, 0))
             .DateTime
 #endif
 
-    let internal parseDeparturesArrivals (``type``: string) (jnyL: FsHafas.Raw.RawJny [] option) (ctx: Context option) =
+    let internal parseDeparturesArrivals (``type``: string) (jnyL: FsHafas.Raw.RawJny[] option) (ctx: Context option) =
 
         let projection =
             fun (d: Alternative) ->
@@ -437,8 +419,7 @@ module Parser =
                     match d.``when`` with
                     | Some v -> ParseIsoString v
                     | None -> System.DateTime.Now
-                with
-                | ex ->
+                with ex ->
                     printfn "%s" ex.Message
                     System.DateTime.Now
 
@@ -454,8 +435,7 @@ module Parser =
                 jnyL
                 |> Array.map (fun jny -> parse ctx jny)
                 |> FsHafas.Extensions.ArrayEx.sortBy projection
-            with
-            | ex ->
+            with ex ->
                 printfn "%s" ex.Message
                 Array.empty
 
@@ -464,7 +444,7 @@ module Parser =
     let parseDeparturesArrivalsFromResult
         (profile: FsHafas.Endpoint.Profile)
         (``type``: string)
-        (jnyL: FsHafas.Raw.RawJny [] option)
+        (jnyL: FsHafas.Raw.RawJny[] option)
         (options: Options)
         (res: FsHafas.Raw.RawResult)
         : Departures =
@@ -473,7 +453,7 @@ module Parser =
 
     let internal parseServerInfo (res: FsHafas.Raw.RawResult option) (ctx: Context option) =
         match ctx, res with
-        | Some (ctx), Some (res) ->
+        | Some(ctx), Some(res) ->
 
             let serverTime =
                 match res.sD with

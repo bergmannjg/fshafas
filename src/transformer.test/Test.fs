@@ -144,8 +144,8 @@ and [<StringEnum>] HintType =
         Transformer.transform "source.fs" "transformed.fs" options
         let text = System.IO.File.ReadAllText("transformed.fs")
         Assert.That(expected, Is.EqualTo(text))
-    with
-    | :? NUnit.Framework.AssertionException as ex -> ()
+    with :? NUnit.Framework.AssertionException as ex ->
+        ()
 
 [<Test>]
 let TestWithoutModule () =
@@ -253,8 +253,8 @@ and [<StringEnum>] HintType =
         Transformer.transform "source.fs" "transformed.fs" options
         let text = System.IO.File.ReadAllText("transformed.fs")
         Assert.That(expected, Is.EqualTo(text))
-    with
-    | :? NUnit.Framework.AssertionException as ex -> ()
+    with :? NUnit.Framework.AssertionException as ex ->
+        ()
 
 [<Test>]
 let TestInherit () =
@@ -298,5 +298,5 @@ type LinesWithRealtimeData = {
         Transformer.transform "source.fs" "transformed.fs" options
         let text = System.IO.File.ReadAllText("transformed.fs")
         Assert.That(expected, Is.EqualTo(text))
-    with
-    | :? NUnit.Framework.AssertionException as ex -> ()
+    with :? NUnit.Framework.AssertionException as ex ->
+        ()

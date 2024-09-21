@@ -22,7 +22,7 @@ module internal Movement =
 
         let frames =
             match m.ani with
-            | Some (ani) ->
+            | Some(ani) ->
                 ani.mSec
                 |> Array.mapi<int, FsHafas.Client.Frame option> (fun i ms ->
 
@@ -49,9 +49,9 @@ module internal Movement =
 
         let polyline =
             match m.ani with
-            | Some (ani) ->
+            | Some(ani) ->
                 match ani.poly with
-                | Some (value) -> Some(ctx.profile.parsePolyline ctx value)
+                | Some(value) -> Some(ctx.profile.parsePolyline ctx value)
                 | None ->
                     match ani.polyG with
                     | Some polyG ->

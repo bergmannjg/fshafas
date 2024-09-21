@@ -4,7 +4,7 @@ module internal Products =
 
     open FsHafas.Client
 
-    let products: ProductType [] =
+    let products: ProductType[] =
         [| { id = "bahn-s-bahn"
              mode = Train
              name = "Bahn & S-Bahn"

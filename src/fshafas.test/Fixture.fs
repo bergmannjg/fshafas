@@ -10,7 +10,7 @@ type FixturyData =
 
 let private path = "../../../fixtures/"
 
-let getFilePath (method: string) : string [] =
+let getFilePath (method: string) : string[] =
     Directory.GetFiles(path, "*-" + method + "-response.json")
 
 let getFileData (path: string) : FixturyData =
@@ -80,4 +80,3 @@ let jsonStopRawResponse () =
 
 let jsonStopResponse () =
     File.ReadAllText(path + "db-stop-response.json")
-

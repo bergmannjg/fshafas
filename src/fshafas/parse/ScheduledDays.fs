@@ -6,9 +6,7 @@ module internal ScheduledDays =
     open FsHafas.Endpoint
     open FsHafas.Raw
 
-    let private bytes =
-        [| 0..7 |]
-        |> Array.map (fun x -> 1 <<< (7 - x) |> byte)
+    let private bytes = [| 0..7 |] |> Array.map (fun x -> 1 <<< (7 - x) |> byte)
 
     let parseScheduledDays (ctx: Context) (sDays: RawSDays) : ScheduledDays option =
         match ctx.res.fpB, sDays.sDaysB with
@@ -20,8 +18,9 @@ module internal ScheduledDays =
 
             FsHafas.Extensions.ConvertEx.FromHexString sDaysB
             |> fun arr -> // trim array
-                match arr |> Array.tryFindIndex (fun b -> b <> 0uy), arr |> Array.tryFindIndexBack (fun b -> b <> 0uy)
-                    with
+                match
+                    arr |> Array.tryFindIndex (fun b -> b <> 0uy), arr |> Array.tryFindIndexBack (fun b -> b <> 0uy)
+                with
                 | Some first, Some last ->
                     if first = 0 && last + 1 = arr.Length then
                         arr

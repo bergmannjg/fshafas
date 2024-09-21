@@ -11,7 +11,7 @@ open Fable.Core.JS
 type Promise<'T> = Async<'T>
 
 [<AttributeUsage(AttributeTargets.Class)>]
-type TypeScriptTaggedUnionAttribute(key: string) =
+type EraseAttribute() =
     inherit Attribute()
 
 [<AttributeUsage(AttributeTargets.Class)>]
@@ -26,7 +26,9 @@ type Log() =
         with get () = debug
         and set (v) = debug <- v
 
-    static member Print (msg: string) (o: obj) = if debug then printfn "%s %A" msg o
+    static member Print (msg: string) (o: obj) =
+        if debug then
+            printfn "%s %A" msg o
 
 and HafasError(code: string, msg: string) =
     inherit Exception(msg)
@@ -46,7 +48,7 @@ type IndexMap<'s, 'b when 's: comparison>(defaultValue: 'b) =
         and set s b = jsNative
 
     [<Emit("(Object.keys($0))")>]
-    member __.Keys: 's [] = jsNative
+    member __.Keys: 's[] = jsNative
 #else
 #if FABLE_PY
 module internal Dict =
@@ -60,7 +62,7 @@ module internal Dict =
     let set (d: obj) (k: obj) (v: obj) : unit = jsNative
 
     [<Emit("list($0)")>]
-    let keys<'a> (d: obj) : 'a [] = jsNative
+    let keys<'a> (d: obj) : 'a[] = jsNative
 
 type IndexMap<'s, 'b when 's :> obj and 'b: equality>(defaultValue: 'b) =
     let dict = Dict.dict ()
@@ -69,10 +71,7 @@ type IndexMap<'s, 'b when 's :> obj and 'b: equality>(defaultValue: 'b) =
         with get (s: 's) =
             let v = Dict.get<'b> dict s
 
-            if (box v) <> null then
-                v
-            else
-                defaultValue
+            if (box v) <> null then v else defaultValue
         and set s b =
             Dict.set dict s b
             ()

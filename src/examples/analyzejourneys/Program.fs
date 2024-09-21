@@ -65,9 +65,7 @@ let rowToJourneydata (dtFrom: System.DateTime) (dtTo: System.DateTime) (row: FSh
 
     let m = subjectRegex.Match subject
 
-    if m.Groups.Count = 3
-       && startdate >= dtFrom
-       && startdate <= dtTo then
+    if m.Groups.Count = 3 && startdate >= dtFrom && startdate <= dtTo then
         Some
             { ifFrom = m.Groups.[1].Value
               idTo = m.Groups.[2].Value
@@ -93,7 +91,9 @@ let getIdOfFirstStop (arr: StationStopLocation array) =
     arr |> Array.tryPick test
 
 let getLocationId (client: Api.HafasAsyncClient) (name: string) =
-    let options = { Default.LocationsOptions with results = Some 3 }
+    let options =
+        { Default.LocationsOptions with
+            results = Some 3 }
 
     async {
         let! locations = client.AsyncLocations name (Some options)
@@ -115,11 +115,7 @@ let getJourney
             let! toId = getLocationId client ``to``
 
             let departure =
-                System
-                    .DateTime
-                    .Today
-                    .AddDays(float incrDays)
-                    .AddHours(float start.Hour)
+                System.DateTime.Today.AddDays(float incrDays).AddHours(float start.Hour)
 
             let options =
                 { Default.JourneysOptions with
@@ -137,7 +133,7 @@ let getJourney
             return!
                 async {
                     match fromId, toId with
-                    | Some (f), Some (t) ->
+                    | Some(f), Some(t) ->
                         let! result = client.AsyncJourneys (U4.Case1 f) (U4.Case1 t) (Some options)
 
                         match result.journeys with
@@ -145,8 +141,7 @@ let getJourney
                         | _ -> return None
                     | _ -> return None
                 }
-        with
-        | ex ->
+        with ex ->
             fprintfn stderr "error:%s" ex.Message
             return None
     }
@@ -169,7 +164,7 @@ let getJourneyInfo (client: Api.HafasAsyncClient) (data: JourneyData) (incrDays:
         | None -> return None
     }
 
-let takeChecked count (array: 'T []) =
+let takeChecked count (array: 'T[]) =
     if count >= array.Length then
         array
     else
@@ -218,15 +213,9 @@ let main argv =
                 }
                 |> Async.RunSynchronously)
 
-        let km =
-            journeyInfo
-            |> Array.choose id
-            |> Array.sumBy (fun j -> j.km)
+        let km = journeyInfo |> Array.choose id |> Array.sumBy (fun j -> j.km)
 
-        let preis =
-            journeyInfo
-            |> Array.choose id
-            |> Array.sumBy (fun j -> j.price)
+        let preis = journeyInfo |> Array.choose id |> Array.sumBy (fun j -> j.price)
 
         printfn
             "options: dtStart %A, dtEnd %A, priceInNDays %i, discount %A, count %i"
@@ -237,7 +226,7 @@ let main argv =
             count
 
         printfn "journeys: %i, %.0f km, %.0f €" journeyInfo.Length km preis
-    with
-    | e -> printfn "%s" e.Message
+    with e ->
+        printfn "%s" e.Message
 
     0

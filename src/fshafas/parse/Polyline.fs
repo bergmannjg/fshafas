@@ -6,7 +6,7 @@ module internal Polyline =
     open FsHafas.Client
     open FsHafas.Endpoint
 
-    let decode (s: string) : float [] [] = [||]
+    let decode (s: string) : float[][] = [||]
 
     let round (f: float) = System.Math.Round(f, 5)
 
@@ -17,9 +17,7 @@ module internal Polyline =
     let private getStop (ctx: Context) (p: FsHafas.Raw.RawPoly) (i: int) =
         match p.ppLocRefL with
         | Some ppLocRefL ->
-            match ppLocRefL
-                  |> Array.tryFind (fun pLocRefL -> pLocRefL.ppIdx = i)
-                with
+            match ppLocRefL |> Array.tryFind (fun pLocRefL -> pLocRefL.ppIdx = i) with
             | Some pLocRefL -> Common.getElementAt pLocRefL.locX ctx.common.locations
             | None -> None
         | None -> None
@@ -35,7 +33,8 @@ module internal Polyline =
                       coordinates = [| (round p.[1]); (round p.[0]) |] } })
             |> Seq.toArray
 
-        { defaultFeatureCollection with features = features }
+        { defaultFeatureCollection with
+            features = features }
 
     let ``calculate distance`` (p1Latitude, p1Longitude) (p2Latitude, p2Longitude) =
         let r = 6371.0 // km
@@ -49,10 +48,7 @@ module internal Polyline =
 
         let a =
             Math.Sin(dLat / 2.0) * Math.Sin(dLat / 2.0)
-            + Math.Sin(dLon / 2.0)
-              * Math.Sin(dLon / 2.0)
-              * Math.Cos(lat1)
-              * Math.Cos(lat2)
+            + Math.Sin(dLon / 2.0) * Math.Sin(dLon / 2.0) * Math.Cos(lat1) * Math.Cos(lat2)
 
         let c = 2.0 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1.0 - a))
 

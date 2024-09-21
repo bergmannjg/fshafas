@@ -31,10 +31,7 @@ let private argValue2 key (args: string list) =
     args
     |> List.windowed 3
     |> List.tryPick (function
-        | [ key2; value1; value2 ] when
-            not (value1.StartsWith("-") || value2.StartsWith("-"))
-            && key = key2
-            ->
+        | [ key2; value1; value2 ] when not (value1.StartsWith("-") || value2.StartsWith("-")) && key = key2 ->
             Some(value1, value2)
         | _ -> None)
 
@@ -43,11 +40,7 @@ let private argValue3 key (args: string list) =
     |> List.windowed 4
     |> List.tryPick (function
         | [ key2; value1; value2; value3 ] when
-            not (
-                value1.StartsWith("-")
-                || value2.StartsWith("-")
-                || value3.StartsWith("-")
-            )
+            not (value1.StartsWith("-") || value2.StartsWith("-") || value3.StartsWith("-"))
             && key = key2
             ->
             Some(value1, value2, value3)
@@ -90,7 +83,4 @@ let value4ToArg (key: string) (mk: string * string * string * string -> 'a) (arg
     | Some v -> mk v |> Some
 
 let flagToArg (key: string) (flag: 'a) (args: string list) =
-    if Entry.flagEnabled key args then
-        flag |> Some
-    else
-        None
+    if Entry.flagEnabled key args then flag |> Some else None

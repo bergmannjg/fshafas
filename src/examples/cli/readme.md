@@ -9,14 +9,14 @@
 
 * cd target.javascript
 * npm install
-* **build**: dotnet fable cli.fable.javascript.fsproj -o build
+* **build**: dotnet fable cli.fable.javascript.fsproj -o build --noCache
 * **run**: node Program.js --help
 
 ## Run with python
 
 * cd target.python
 * pip install -r requirements.txt
-* **build**: dotnet fable cli.fable.python.fsproj --lang Python
+* **build**: dotnet fable cli.fable.python.fsproj --lang Python --noCache
 * **run**: python3.10 program.py --help
 
 ## Usage

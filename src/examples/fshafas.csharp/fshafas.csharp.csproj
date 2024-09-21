@@ -4,9 +4,8 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="../../fshafas/target.dotnet/fshafas.fsproj" />
-    <ProjectReference Include="../../fshafas.profiles/target.dotnet/fshafas.profiles.fsproj" />
-  </ItemGroup>
+  <PropertyGroup>
+    <RestoreSources>$(RestoreSources);$(HOME)/local.packages</RestoreSources>
+  </PropertyGroup>
   <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>

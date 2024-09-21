@@ -65,7 +65,7 @@ module internal ArrivalOrDeparture =
 
         let filter (s: FsHafas.Client.StopOver) =
             match s.passBy with
-            | Some (passBy) -> not passBy
+            | Some(passBy) -> not passBy
             | None -> true
 
         let stopovers =
@@ -87,8 +87,7 @@ module internal ArrivalOrDeparture =
                 | Some prodL, Some common when prodL.Length > 0 && common.locL.IsSome ->
                     let loc = Common.getElementAtSome prodL.[0].tLocX common.locL.Value
 
-                    ctx.profile.parseLocations ctx [| loc.Value |]
-                    |> Array.tryHead
+                    ctx.profile.parseLocations ctx [| loc.Value |] |> Array.tryHead
                 | _ -> None
             else
                 None
@@ -99,8 +98,7 @@ module internal ArrivalOrDeparture =
                 | Some prodL, Some common when prodL.Length > 0 && common.locL.IsSome ->
                     let loc = Common.getElementAtSome prodL.[0].fLocX common.locL.Value
 
-                    ctx.profile.parseLocations ctx [| loc.Value |]
-                    |> Array.tryHead
+                    ctx.profile.parseLocations ctx [| loc.Value |] |> Array.tryHead
                 | _ -> None
             else
                 None

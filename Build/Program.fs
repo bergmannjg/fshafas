@@ -21,12 +21,16 @@ let depends (argv: string array) (deps: string list) =
 [<EntryPoint>]
 let main argv =
     try
-        match getVersion "FsHafas.JavaScript", getVersion "FsHafas.Python" with
-        | Some version, Some version_python ->
+        match getVersion "FsHafas.JavaScript", getVersion "FsHafas.Python", getVersion "Hafas.Client.Bindings" with
+        | Some version, Some version_python, Some version_bindings ->
             if Directory.Exists "Build" && Directory.Exists "src" then
                 if depends argv [ "Test" ] then
                     buildDotnet ()
                     testDotnet ()
+                    buildDotnetNupkg version
+
+                else if depends argv [ "FableBindings" ] then
+                    buildFableBindingNupkg version_bindings
 
                 else if depends argv [ "JavaScript" ] then
                     buildDotnet ()
@@ -37,6 +41,7 @@ let main argv =
                 else if depends argv [ "JavaScript.Test" ] then
                     buildDotnet ()
                     testDotnet ()
+                    buildDotnetNupkg version
                     buildJavascriptNupkg version
                     buildJavascriptTest ()
 
@@ -49,13 +54,14 @@ let main argv =
                 else if depends argv [ "Python.Test" ] then
                     buildDotnet ()
                     testDotnet ()
+                    buildDotnetNupkg version
                     buildPythonNupkg version_python
                     buildPythonTest ()
                 else
-                    printfn "args expected: Test|JavaScript|Python"
+                    printfn "args expected: Test|JavaScript|Python|FableBindings"
             else
                 printfn "please run from project directory"
-        | _, _ -> printfn "version info not found in file paket.dependencies"
+        | _, _, _ -> printfn "version info not found in file paket.dependencies"
     with
     | e -> printfn "error: %s %A" e.Message e.StackTrace
 

@@ -10,8 +10,5 @@ module internal Icon =
         | Some res when res <> "Empty" ->
             Some
                 { ``type`` = res
-                  title =
-                    i.text
-                    |> Option.orElse i.txt
-                    |> Option.orElse i.txtS }
+                  title = i.text |> Option.orElse i.txt |> Option.orElse i.txtS }
         | _ -> None

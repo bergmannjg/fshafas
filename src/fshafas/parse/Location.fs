@@ -22,9 +22,7 @@ module internal Location =
                 |> Array.map (fun s -> (s.[0], s.Substring(2)))
 
             let tryFind (c) =
-                tuples
-                |> Array.tryFind (fun (n, v) -> n = c)
-                |> Option.map (fun (n, v) -> v)
+                tuples |> Array.tryFind (fun (n, v) -> n = c) |> Option.map (fun (n, v) -> v)
 
             let tryParseInt (s: string) =
                 match System.Int32.TryParse s with
@@ -43,7 +41,7 @@ module internal Location =
 
     let private removeLeadingZeros (s: string) = Regex.Replace(s, "^0+", "")
 
-    let private parseLocationPhase1 (ctx: Context) (i: int) (locl: FsHafas.Raw.RawLoc []) =
+    let private parseLocationPhase1 (ctx: Context) (i: int) (locl: FsHafas.Raw.RawLoc[]) =
         let l = locl.[i]
         let lid = parseLid l.lid
 
@@ -56,16 +54,14 @@ module internal Location =
 
         let (lon, lat) =
             match l.crd with
-            | Some (crd) when crd.x > 0 && crd.y > 0 ->
+            | Some(crd) when crd.x > 0 && crd.y > 0 ->
                 (Some(Coordinate.toFloat (crd.x)), Some(Coordinate.toFloat (crd.y)))
             | _ ->
                 match lid.X, lid.Y with
                 | Some x, Some y -> (Some(Coordinate.toFloat x), Some(Coordinate.toFloat y))
                 | _ -> (None, None)
 
-        let distance =
-            l.dist
-            |> Option.bind (fun d -> if d > 0 then Some d else None)
+        let distance = l.dist |> Option.bind (fun d -> if d > 0 then Some d else None)
 
         match l.``type`` with
         | Some ``type`` ->
@@ -82,9 +78,7 @@ module internal Location =
 
                 let isMeta = l.meta
 
-                let products =
-                    l.pCls
-                    |> Option.map (fun pCls -> ctx.profile.parseBitmask ctx pCls)
+                let products = l.pCls |> Option.map (fun pCls -> ctx.profile.parseBitmask ctx pCls)
 
                 let lines =
                     if ctx.opt.linesOfStops then
@@ -119,17 +113,9 @@ module internal Location =
                              distance = distance }
                      ))
             else
-                let address =
-                    if ``type`` = "A" then
-                        Some l.name
-                    else
-                        None
+                let address = if ``type`` = "A" then Some l.name else None
 
-                let name =
-                    if ``type`` <> "A" then
-                        Some l.name
-                    else
-                        None
+                let name = if ``type`` <> "A" then Some l.name else None
 
                 (l,
                  U3.Case3(
@@ -153,11 +139,11 @@ module internal Location =
              ))
 
     let private parseLocationPhase2
-        (ctx: Context)         
+        (ctx: Context)
         (i: int)
         (l: FsHafas.Raw.RawLoc)
-        (locations: (FsHafas.Raw.RawLoc * U3<FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>) [])
-        (commonLocations: StationStopLocation [])
+        (locations: (FsHafas.Raw.RawLoc * U3<FsHafas.Client.Station, FsHafas.Client.Stop, FsHafas.Client.Location>)[])
+        (commonLocations: StationStopLocation[])
         =
         let station =
             match l.mMastLocX with
@@ -212,10 +198,8 @@ module internal Location =
         | (_, location) -> location
 
     /// parse in 2 phases to avoid recursion
-    let parseLocations (ctx: Context) (locL: FsHafas.Raw.RawLoc []) =
-        let locations =
-            locL
-            |> Array.mapi (fun i _ -> parseLocationPhase1 ctx i locL)
+    let parseLocations (ctx: Context) (locL: FsHafas.Raw.RawLoc[]) =
+        let locations = locL |> Array.mapi (fun i _ -> parseLocationPhase1 ctx i locL)
 
         locations
         |> Array.mapi (fun i (l, _) -> parseLocationPhase2 ctx i l locations ctx.common.locations)

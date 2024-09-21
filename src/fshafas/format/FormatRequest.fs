@@ -20,21 +20,13 @@ module internal Format =
         System.DateTime(year, month, day, hour, minute, 0)
 #else
         System
-            .DateTimeOffset(
-                year,
-                month,
-                day,
-                hour,
-                minute,
-                0,
-                System.TimeSpan(tzOffset / 60, 0, 0)
-            )
+            .DateTimeOffset(year, month, day, hour, minute, 0, System.TimeSpan(tzOffset / 60, 0, 0))
             .DateTime
 #endif
 
     let private maybeGetOptionValue<'a, 'b> (opt: 'a option) (getter: 'a -> 'b option) =
         match opt with
-        | Some (value) -> getter value
+        | Some(value) -> getter value
         | None -> None
 
     let private getOptionValue<'a, 'b> (opt: 'a option) (getter: 'a -> 'b option) (defaultOpt: 'a) =
@@ -44,7 +36,7 @@ module internal Format =
             | None -> failwith "getOptionValue: value expected"
 
         match opt with
-        | Some (value) ->
+        | Some(value) ->
             match getter value with
             | Some result -> result
             | None -> defaultValue
@@ -72,7 +64,7 @@ module internal Format =
     let private makeFilters (profile: FsHafas.Endpoint.Profile) (products: FsHafas.Client.Products) =
         let bitmask = formatProductsBitmask profile products
 
-        let filters: FsHafas.Raw.JnyFltr [] =
+        let filters: FsHafas.Raw.JnyFltr[] =
             if bitmask <> 0 then
                 [| { ``type`` = "PROD"
                      mode = "INC"
@@ -117,12 +109,12 @@ module internal Format =
     let private makeLoclTypeA (location: FsHafas.Client.Location) : FsHafas.Raw.Loc =
         let x =
             match location.longitude with
-            | Some (f) -> (Coordinate.fromFloat f)
+            | Some(f) -> (Coordinate.fromFloat f)
             | None -> raise (System.ArgumentException("location.longitude"))
 
         let y =
             match location.latitude with
-            | Some (f) -> (Coordinate.fromFloat f)
+            | Some(f) -> (Coordinate.fromFloat f)
             | None -> raise (System.ArgumentException("location.latitude"))
 
         let xs = x.ToString()
@@ -167,7 +159,7 @@ module internal Format =
         let products =
             getOptionValue opt (fun v -> v.products) Default.DeparturesArrivalsOptions
 
-        let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
+        let filters: FsHafas.Raw.JnyFltr[] = makeFilters profile products
 
         let language =
             getOptionValue opt (fun v -> v.language) Default.DeparturesArrivalsOptions
@@ -201,12 +193,15 @@ module internal Format =
             getOptionValue opt (fun v -> v.language) Default.RefreshJourneyOptions
 
         language,
-        { getIST = true
-          getPasslist = stopovers
-          getPolyline = polylines
-          getTariff = tickets
-          ctxRecon = None
-          outReconL = Some [| { ctx = Some refreshToken } |] }
+        profile.transformRefreshJourneyQuery
+            opt
+            { getIST = true
+              getPasslist = stopovers
+              getPolyline = polylines
+              getTariff = tickets
+              ctxRecon = None
+              outReconL = Some [| { ctx = Some refreshToken } |]
+              trfReq = None }
 
     let journeyMatchRequest
         (profile: FsHafas.Endpoint.Profile)
@@ -214,33 +209,21 @@ module internal Format =
         (opt: FsHafas.Client.TripsByNameOptions option)
         : string * FsHafas.Raw.JourneyMatchRequest =
 
-        let date =
-            maybeGetOptionValue opt (fun v -> v.``when``)
-            |> Option.map formatDate
+        let date = maybeGetOptionValue opt (fun v -> v.``when``) |> Option.map formatDate
 
-        let time =
-            maybeGetOptionValue opt (fun v -> v.``when``)
-            |> Option.map formatTime
+        let time = maybeGetOptionValue opt (fun v -> v.``when``) |> Option.map formatTime
 
-        let dateB =
-            maybeGetOptionValue opt (fun v -> v.fromWhen)
-            |> Option.map formatDate
+        let dateB = maybeGetOptionValue opt (fun v -> v.fromWhen) |> Option.map formatDate
 
-        let timeB =
-            maybeGetOptionValue opt (fun v -> v.fromWhen)
-            |> Option.map formatTime
+        let timeB = maybeGetOptionValue opt (fun v -> v.fromWhen) |> Option.map formatTime
 
-        let dateE =
-            maybeGetOptionValue opt (fun v -> v.untilWhen)
-            |> Option.map formatDate
+        let dateE = maybeGetOptionValue opt (fun v -> v.untilWhen) |> Option.map formatDate
 
-        let timeE =
-            maybeGetOptionValue opt (fun v -> v.untilWhen)
-            |> Option.map formatTime
+        let timeE = maybeGetOptionValue opt (fun v -> v.untilWhen) |> Option.map formatTime
 
         let language = getOptionValue opt (fun v -> Some "de") Default.TripsByNameOptions
 
-        let linefilters: FsHafas.Raw.JnyFltr [] =
+        let linefilters: FsHafas.Raw.JnyFltr[] =
             match maybeGetOptionValue opt (fun v -> v.lineName) with
             | Some lineName ->
                 [| { ``type`` = "LINE"
@@ -249,7 +232,7 @@ module internal Format =
                      meta = None } |]
             | _ -> [||]
 
-        let opfilters: FsHafas.Raw.JnyFltr [] =
+        let opfilters: FsHafas.Raw.JnyFltr[] =
             match maybeGetOptionValue opt (fun v -> v.operatorNames) with
             | Some operatorNames when operatorNames.Length > 0 ->
                 [| { ``type`` = "OP"
@@ -258,7 +241,7 @@ module internal Format =
                      meta = None } |]
             | _ -> [||]
 
-        let filters: FsHafas.Raw.JnyFltr [] = Array.append linefilters opfilters
+        let filters: FsHafas.Raw.JnyFltr[] = Array.append linefilters opfilters
 
         language,
         { input = lineName
@@ -301,16 +284,16 @@ module internal Format =
 
         let products = getOptionValue opt (fun v -> v.products) Default.NearByOptions
 
-        let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
+        let filters: FsHafas.Raw.JnyFltr[] = makeFilters profile products
 
         let x =
             match location.longitude with
-            | Some (f) -> (Coordinate.fromFloat f)
+            | Some(f) -> (Coordinate.fromFloat f)
             | None -> raise (System.ArgumentException("location.longitude"))
 
         let y =
             match location.latitude with
-            | Some (f) -> (Coordinate.fromFloat f)
+            | Some(f) -> (Coordinate.fromFloat f)
             | None -> raise (System.ArgumentException("location.latitude"))
 
         let language = getOptionValue opt (fun v -> v.language) Default.NearByOptions
@@ -344,7 +327,7 @@ module internal Format =
 
         let products = getOptionValue opt (fun v -> v.products) Default.ReachableFromOptions
 
-        let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
+        let filters: FsHafas.Raw.JnyFltr[] = makeFilters profile products
 
         let language = getOptionValue opt (fun v -> Some "de") Default.ReachableFromOptions
 
@@ -382,7 +365,7 @@ module internal Format =
 
         let products = getOptionValue opt (fun v -> v.products) Default.RadarOptions
 
-        let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
+        let filters: FsHafas.Raw.JnyFltr[] = makeFilters profile products
 
         let language = getOptionValue opt (fun v -> Some "de") Default.RadarOptions
 
@@ -454,7 +437,7 @@ module internal Format =
 
         let products = getOptionValue opt (fun v -> v.products) Default.RemarksOptions
 
-        let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
+        let filters: FsHafas.Raw.JnyFltr[] = makeFilters profile products
 
         let language = getOptionValue opt (fun v -> v.language) Default.RemarksOptions
 
@@ -476,10 +459,7 @@ module internal Format =
 
         match opt with
         | Some opt ->
-            if
-                opt.arrival.IsSome
-                && not (profile.journeysOutFrwd)
-            then
+            if opt.arrival.IsSome && not (profile.journeysOutFrwd) then
                 raise (System.ArgumentException("opt.arrival is unsupported"))
 
             if opt.earlierThan.IsSome then
@@ -518,7 +498,7 @@ module internal Format =
 
         let products = getOptionValue opt (fun v -> v.products) Default.JourneysOptions
 
-        let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
+        let filters: FsHafas.Raw.JnyFltr[] = makeFilters profile products
 
         let viaLocL: (FsHafas.Raw.LocViaInput array) option =
             match maybeGetOptionValue opt (fun v -> v.via) with
@@ -543,11 +523,12 @@ module internal Format =
               getPT = true
               getIV = false
               getPolyline = polylines
-              outDate = date
-              outTime = time
-              numF = results
-              outFrwd = outFrwd
-              trfReq = None }
+              outDate = Some date
+              outTime = Some time
+              numF = Some results
+              outFrwd = Some outFrwd
+              trfReq = None
+              ctxScr = None }
 
     let searchOnTripRequest
         (profile: FsHafas.Endpoint.Profile)
@@ -559,8 +540,8 @@ module internal Format =
 
         let prevStopId =
             match previousStopover.stop with
-            | Some (StationStop.Station station) when station.id.IsSome -> station.id.Value
-            | Some (StationStop.Stop stop) when stop.id.IsSome -> stop.id.Value
+            | Some(StationStop.Station station) when station.id.IsSome -> station.id.Value
+            | Some(StationStop.Stop stop) when stop.id.IsSome -> stop.id.Value
             | _ -> raise (System.ArgumentException("previousStopover.stop must be a valid stop or station."))
 
         let depAtPrevStop =
@@ -589,7 +570,7 @@ module internal Format =
         let products =
             getOptionValue opt (fun v -> v.products) Default.JourneysFromTripOptions
 
-        let filters: FsHafas.Raw.JnyFltr [] = makeFilters profile products
+        let filters: FsHafas.Raw.JnyFltr[] = makeFilters profile products
 
         let language = "de"
 

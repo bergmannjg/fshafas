@@ -90,3 +90,8 @@
 ## 2.8.0
 
 * update to dotnet 8.0
+
+## 2.9.0
+
+* corresponds to hafas-client version 6.3.0
+

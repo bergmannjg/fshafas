@@ -19,10 +19,7 @@ module internal Line =
 
         let id =
             match p.prodCtx with
-            | Some (prodCtx) ->
-                prodCtx.lineId
-                |> Option.orElse name
-                |> Option.bind slug
+            | Some(prodCtx) -> prodCtx.lineId |> Option.orElse name |> Option.bind slug
             | None ->
                 match name with
                 | Some name -> slug name
@@ -30,7 +27,7 @@ module internal Line =
 
         let (fahrtNr, adminCode, catOut, matchId) =
             match p.prodCtx with
-            | Some (prodCtx) -> (prodCtx.num, prodCtx.admin, prodCtx.catOut, prodCtx.matchId)
+            | Some(prodCtx) -> (prodCtx.num, prodCtx.admin, prodCtx.catOut, prodCtx.matchId)
             | None -> (None, None, None, None)
 
         let productName =
@@ -47,10 +44,11 @@ module internal Line =
         let (productid, mode) =
             match product with
             | Some kv ->
-                match (ctx.profile :> FsHafas.Client.Profile).products
-                      |> Array.tryFind (fun p -> p.id = kv)
-                    with
-                | Some (product) -> (Some product.id, Some product.mode)
+                match
+                    (ctx.profile :> FsHafas.Client.Profile).products
+                    |> Array.tryFind (fun p -> p.id = kv)
+                with
+                | Some(product) -> (Some product.id, Some product.mode)
                 | None -> (None, None)
             | None -> (None, None)
 

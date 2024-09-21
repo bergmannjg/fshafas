@@ -4,11 +4,13 @@ module internal Common =
 
     open FsHafas.Endpoint
 
-    let private updateOperators (ctx: Context) (ops: FsHafas.Client.Operator []) =
-        { ctx with common = { ctx.common with operators = ops } }
+    let private updateOperators (ctx: Context) (ops: FsHafas.Client.Operator[]) =
+        { ctx with
+            common = { ctx.common with operators = ops } }
 
-    let private updateLines (ctx: Context) (lines: FsHafas.Client.Line []) =
-        { ctx with common = { ctx.common with lines = lines } }
+    let private updateLines (ctx: Context) (lines: FsHafas.Client.Line[]) =
+        { ctx with
+            common = { ctx.common with lines = lines } }
 
     let parseCommon (ctx: Context) (c: FsHafas.Raw.RawCommon) =
         let ctx1 =
@@ -36,7 +38,11 @@ module internal Common =
 
         let locations = ctx2.profile.parseLocations ctx2 (Option.defaultValue [||] c.locL)
 
-        let ctx3 = { ctx2 with common = { ctx2.common with locations = locations } }
+        let ctx3 =
+            { ctx2 with
+                common =
+                    { ctx2.common with
+                        locations = locations } }
 
         let polylines =
             c.polyL
@@ -50,18 +56,15 @@ module internal Common =
           icons = icons
           polylines = polylines }
 
-    let getElementAt<'a> (index: int) (arr: 'a []) =
-        if index < arr.Length then
-            Some arr.[index]
-        else
-            None
+    let getElementAt<'a> (index: int) (arr: 'a[]) =
+        if index < arr.Length then Some arr.[index] else None
 
-    let getElementAtSome<'a> (index: int option) (arr: 'a []) =
+    let getElementAtSome<'a> (index: int option) (arr: 'a[]) =
         match index with
         | Some index when index < arr.Length -> Some arr.[index]
         | _ -> None
 
-    let getArray<'a> (common: FsHafas.Raw.RawCommon option) (getter: FsHafas.Raw.RawCommon -> 'a [] option) =
+    let getArray<'a> (common: FsHafas.Raw.RawCommon option) (getter: FsHafas.Raw.RawCommon -> 'a[] option) =
         match common with
         | Some common ->
             match getter common with
@@ -72,19 +75,16 @@ module internal Common =
     /// map index array to elements of array from RawCommon
     let mapIndexArray<'a>
         (common: FsHafas.Raw.RawCommon option)
-        (getTargetArray: FsHafas.Raw.RawCommon -> 'a [] option)
-        (indexArr: int [] option)
+        (getTargetArray: FsHafas.Raw.RawCommon -> 'a[] option)
+        (indexArr: int[] option)
         =
         let elements = getArray common getTargetArray
 
         match indexArr with
-        | Some arr ->
-            arr
-            |> Array.map (fun i -> getElementAt i elements)
-            |> Array.choose id
+        | Some arr -> arr |> Array.map (fun i -> getElementAt i elements) |> Array.choose id
         | None -> Array.empty
 
-    let appendSomeArray<'a> (arr1: 'a [] option) (arr2: 'a [] option) =
+    let appendSomeArray<'a> (arr1: 'a[] option) (arr2: 'a[] option) =
         match arr1, arr2 with
         | Some arr1, Some arr2 -> Some(Array.append arr1 arr2)
         | Some arr1, None -> Some arr1
@@ -92,7 +92,7 @@ module internal Common =
         | _ -> None
 
     /// map array with index field to elements of target array
-    let mapArray<'a, 'b> (targetArray: 'b []) (getIndex: 'a -> int option) (sourceArray: 'a [] option) =
+    let mapArray<'a, 'b> (targetArray: 'b[]) (getIndex: 'a -> int option) (sourceArray: 'a[] option) =
         let elements = targetArray
 
         match sourceArray with
@@ -102,13 +102,10 @@ module internal Common =
             |> Array.choose id
         | None -> Array.empty
 
-    let toOption<'a> (arr: 'a []) =
-        if arr.Length > 0 then
-            Some arr
-        else
-            None
+    let toOption<'a> (arr: 'a[]) =
+        if arr.Length > 0 then Some arr else None
 
-    let msgLToRemarks (ctx: Context) (msgL: FsHafas.Raw.RawMsg [] option) =
+    let msgLToRemarks (ctx: Context) (msgL: FsHafas.Raw.RawMsg[] option) =
         msgL
         |> mapArray ctx.common.hints (fun x -> x.remX)
         |> Array.choose id

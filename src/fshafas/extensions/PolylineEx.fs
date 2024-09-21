@@ -5,7 +5,7 @@ module internal PolylineEx =
 #if FABLE_COMPILER
     open Fable.Core
 
-    type GooglePolyline = { decode: string -> float [] [] }
+    type GooglePolyline = { decode: string -> float[][] }
 #endif
 
 #if FABLE_JS
@@ -19,7 +19,7 @@ module internal PolylineEx =
 
     [<ImportAll("polyline")>]
     [<Emit("polyline.decode($1)")>]
-    let polylineDecode (_: string) : float [] [] = jsNative
+    let polylineDecode (_: string) : float[][] = jsNative
 
 #else
     open PolylinerNet
@@ -27,7 +27,6 @@ module internal PolylineEx =
     let polyliner = Polyliner()
 
     let polylineDecode (xy: string) =
-        polyliner.Decode xy
-        |> Seq.map (fun p -> [| p.Latitude; p.Longitude |])
+        polyliner.Decode xy |> Seq.map (fun p -> [| p.Latitude; p.Longitude |])
 #endif
 #endif

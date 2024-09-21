@@ -9,11 +9,13 @@ let dump (prefix: string) (args: string) (content: seq<string>) =
 
     if Directory.Exists path then
         File.WriteAllLines(path + prefix + args + ".txt", content)
+    else
+        fprintfn stderr "path: %s not found in %s" path (Directory.GetCurrentDirectory())
 
 let cliDirectory = "../../../../examples/cli"
 
 let callDotnet (args: string) =
-    runProc "dotnet" ("bin/Debug/net6.0/cli.dll " + args) (Some(cliDirectory + "/target.dotnet"))
+    runProc "dotnet" ("bin/Debug/net8.0/cli.dll " + args) (Some(cliDirectory + "/target.dotnet"))
 
 let callJavaScript (args: string) =
     runProc "node" ("Program.js " + args) (Some(cliDirectory + "/target.javascript"))
@@ -54,8 +56,7 @@ let DotnetEqualsToSource (prefix: string) (args: string) (source: string -> seq<
 
     let comparer (a: string) (b: string) =
         // ignore realtime data
-        if a.Contains "currentLocation"
-           && b.Contains "currentLocation" then
+        if a.Contains "currentLocation" && b.Contains "currentLocation" then
             0
         else
             let compareTo = a.CompareTo b

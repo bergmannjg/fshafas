@@ -20,18 +20,19 @@ type TransformerOptions =
       isCase1OfU2TypeVals: string -> string -> bool
       transformsTypeVal: string -> string -> string option
       transformsTypeDefn: string -> string option
-      getIntersectionTypes: string -> string [] }
+      getIntersectionTypes: string -> string[] }
 
 let mutable private types: Map<string, string List> = Map.empty
 
 let private parse fileName text =
     let checker = FSharpChecker.Create()
 
-    let opts = { FSharpParsingOptions.Default with SourceFiles = [| fileName |] }
+    let opts =
+        { FSharpParsingOptions.Default with
+            SourceFiles = [| fileName |] }
 
     let parseFileResults =
-        checker.ParseFile(fileName, text, opts)
-        |> Async.RunSynchronously
+        checker.ParseFile(fileName, text, opts) |> Async.RunSynchronously
 
     if parseFileResults.ParseHadErrors then
         failwith "Something went wrong during parsing!"
@@ -39,7 +40,7 @@ let private parse fileName text =
         parseFileResults.ParseTree
 
 let private SynLongIdentToString (synlid: SynLongIdent) =
-    let (SynLongIdent (lid, _, _)) = synlid
+    let (SynLongIdent(lid, _, _)) = synlid
     String.Join(".", lid |> List.map (fun ident -> ident.idText))
 
 let private LongIdentToString (lid: LongIdent) =
@@ -47,25 +48,25 @@ let private LongIdentToString (lid: LongIdent) =
 
 let rec private visitSnyType synType options =
     match synType with
-    | SynType.LongIdent (longIdentWithDots) ->
-        let (SynLongIdent (id, _, _)) = longIdentWithDots
+    | SynType.LongIdent(longIdentWithDots) ->
+        let (SynLongIdent(id, _, _)) = longIdentWithDots
         options.transformType (LongIdentToString id)
-    | SynType.Tuple (_, elementTypes, _) ->
+    | SynType.Tuple(_, elementTypes, _) ->
         let line = List()
 
         for elementType in elementTypes do
-            match elementType with 
+            match elementType with
             | SynTupleTypeSegment.Type elementType -> visitSnyType elementType options |> line.Add
             | _ -> ()
 
         "(" + (line |> String.concat ",") + ")"
-    | SynType.Fun (argType, returnType, _, _) ->
+    | SynType.Fun(argType, returnType, _, _) ->
         let strargType = visitSnyType argType options
         let strreturnType = visitSnyType returnType options
         strargType + "->" + strreturnType
-    | SynType.Paren (innerType, _) -> visitSnyType innerType options
-    | SynType.SignatureParameter (_, _, _, innerType, _) -> visitSnyType innerType options
-    | SynType.App (typeName, _, typeArgs, _, _, _, _) ->
+    | SynType.Paren(innerType, _) -> visitSnyType innerType options
+    | SynType.SignatureParameter(_, _, _, innerType, _) -> visitSnyType innerType options
+    | SynType.App(typeName, _, typeArgs, _, _, _, _) ->
         let strtypeName = visitSnyType typeName options
         let line = List()
 
@@ -74,34 +75,29 @@ let rec private visitSnyType synType options =
 
         if line.Count = 1 && strtypeName = "option" then
             line.[0] + " option"
-        else if strtypeName = "U2"
-                && line.Count = 2
-                && (options.isCase1OfU2TypeVals line.[0] line.[1]) then
+        else if
+            strtypeName = "U2"
+            && line.Count = 2
+            && (options.isCase1OfU2TypeVals line.[0] line.[1])
+        then
             line.[0]
         else if line.Count > 0 then
-            (options.transformType (
-                strtypeName
-                + "<"
-                + (line |> String.concat ",")
-                + ">"
-            ))
+            (options.transformType (strtypeName + "<" + (line |> String.concat ",") + ">"))
         else
             strtypeName
     | _ -> failwith (sprintf " - not supported SynType: %A" synType)
 
 let private visitValSig (typename: string) slotSig options =
-    let (SynValSig (_, synid, _, synType, _, _, _, xmlDoc, _, _, _, _)) = slotSig
+    let (SynValSig(_, synid, _, synType, _, _, _, xmlDoc, _, _, _, _)) = slotSig
     let xmldoc = xmlDoc.ToXmlDoc(false, None)
 
     let line = List()
 
-    let lines =
-        xmldoc.UnprocessedLines
-        |> Array.map (fun l -> sprintf "///%s" l)
+    let lines = xmldoc.UnprocessedLines |> Array.map (fun l -> sprintf "///%s" l)
 
     line.AddRange lines
 
-    let (SynIdent (id, _)) = synid
+    let (SynIdent(id, _)) = synid
     let escText = options.escapeIdent id.idText
 
     let strsynTypeOrg = visitSnyType synType options
@@ -110,8 +106,7 @@ let private visitValSig (typename: string) slotSig options =
         match options.transformsTypeVal typename escText with
         | Some transform -> transform
         | None ->
-            if strsynTypeOrg.Contains "float"
-               && options.isIntegerTypeVal typename escText then
+            if strsynTypeOrg.Contains "float" && options.isIntegerTypeVal typename escText then
                 strsynTypeOrg.Replace("float", "int")
             else
                 strsynTypeOrg
@@ -125,8 +120,8 @@ let private visitTypeMembers (typename: string) members options =
 
     for m in members do
         match m with
-        | SynMemberDefn.AbstractSlot (slotSig, _, _, _) -> line.AddRange(visitValSig typename slotSig options)
-        | SynMemberDefn.Inherit (baseType, _, _) ->
+        | SynMemberDefn.AbstractSlot(slotSig, _, _, _) -> line.AddRange(visitValSig typename slotSig options)
+        | SynMemberDefn.Inherit(baseType, _, _) ->
             let name = visitSnyType baseType options
 
             match types |> Map.tryFind name with
@@ -138,8 +133,7 @@ let private visitTypeMembers (typename: string) members options =
     line
 
 let getAttribute (attributes: SynAttributes) =
-    if attributes.Length > 0
-       && attributes.[0].Attributes.Length > 0 then
+    if attributes.Length > 0 && attributes.[0].Attributes.Length > 0 then
         Some attributes.[0].Attributes.[0]
     else
         None
@@ -153,9 +147,9 @@ let getAttributeValue (name: string) (defValue: string) (attributes: SynAttribut
     match getAttribute attributes with
     | Some attr when (SynLongIdentToString attr.TypeName) = name ->
         match attr.ArgExpr with
-        | SynExpr.Const (c, _) ->
+        | SynExpr.Const(c, _) ->
             match c with
-            | SynConst.String (s, _, _) -> "[<CompiledName \"" + s + "\">] "
+            | SynConst.String(s, _, _) -> "[<CompiledName \"" + s + "\">] "
             | _ -> ""
         | _ -> ""
     | _ -> "[<CompiledName \"" + defValue + "\">] "
@@ -164,10 +158,10 @@ let private visitSimple simpleRepr useCompiledNameAttr options =
     let line = List()
 
     match simpleRepr with
-    | SynTypeDefnSimpleRepr.Union (_, cases, _) ->
+    | SynTypeDefnSimpleRepr.Union(_, cases, _) ->
         for case in cases do
-            let (SynUnionCase (attributes, synid, _, _, _, _, _)) = case
-            let (SynIdent (id, _)) = synid
+            let (SynUnionCase(attributes, synid, _, _, _, _, _)) = case
+            let (SynIdent(id, _)) = synid
 
             let compiledNameAttr =
                 if useCompiledNameAttr then
@@ -183,9 +177,9 @@ let private visitSimple simpleRepr useCompiledNameAttr options =
 let mutable private hasFirstType = false
 
 let private visitTypeDefn typeDefn options =
-    let (SynTypeDefn (typeInfo, typeRepr, members, range, _, _)) = typeDefn
+    let (SynTypeDefn(typeInfo, typeRepr, members, range, _, _)) = typeDefn
 
-    let (SynComponentInfo (attributes, __, _, id, xmlDoc, _, _, _)) = typeInfo
+    let (SynComponentInfo(attributes, __, _, id, xmlDoc, _, _, _)) = typeInfo
 
     let stringEnumAttr =
         if hasAttribute "StringEnum" attributes then
@@ -198,24 +192,17 @@ let private visitTypeDefn typeDefn options =
     let lines = List()
     let xmlDoc = xmlDoc.ToXmlDoc(false, None)
 
-    lines.AddRange(
-        xmlDoc.UnprocessedLines
-        |> Array.map (fun l -> sprintf "///%s" l)
-    )
+    lines.AddRange(xmlDoc.UnprocessedLines |> Array.map (fun l -> sprintf "///%s" l))
 
     let strMembers =
         match typeRepr with
-        | SynTypeDefnRepr.ObjectModel (_, members, _) -> visitTypeMembers (LongIdentToString id) members options
-        | SynTypeDefnRepr.Simple (simpleRepr, _) -> visitSimple simpleRepr useCompiledNameAttr options
+        | SynTypeDefnRepr.ObjectModel(_, members, _) -> visitTypeMembers (LongIdentToString id) members options
+        | SynTypeDefnRepr.Simple(simpleRepr, _) -> visitSimple simpleRepr useCompiledNameAttr options
         | _ -> failwith (sprintf " - not supported SynTypeDefnRepr: %A" typeRepr)
 
     types <- types.Add((LongIdentToString id), strMembers)
 
-    let isRecord =
-        not (
-            strMembers.Count > 0
-            && strMembers.[0].StartsWith "|"
-        )
+    let isRecord = not (strMembers.Count > 0 && strMembers.[0].StartsWith "|")
 
     let transform = options.transformsTypeDefn (LongIdentToString id)
 
@@ -239,6 +226,7 @@ let private visitTypeDefn typeDefn options =
         for intersectionType in intersectionTypes do
             if types.ContainsKey intersectionType then
                 let strMembers = types[intersectionType]
+
                 for strMember in strMembers do
                     sprintf "    %s" strMember |> lines.Add
 
@@ -247,22 +235,19 @@ let private visitTypeDefn typeDefn options =
         sprintf "}" |> lines.Add
 
     else if (options.toMemberType (LongIdentToString id)) then
-        sprintf "%s %s = " (typeSymbol ()) (LongIdentToString id)
-        |> lines.Add
+        sprintf "%s %s = " (typeSymbol ()) (LongIdentToString id) |> lines.Add
 
         for strMember in strMembers do
             if (strMember.StartsWith("//")) then
                 sprintf "        %s" strMember |> lines.Add
             else
                 let m =
-                    if strMember.Contains "->"
-                       && strMember.EndsWith " option" then
+                    if strMember.Contains "->" && strMember.EndsWith " option" then
                         strMember.Substring(0, strMember.Length - 7) // no optional member functions
                     else
                         strMember
 
-                sprintf "        abstract member %s" m
-                |> lines.Add
+                sprintf "        abstract member %s" m |> lines.Add
 
         lines.Add("       ")
     else
@@ -286,14 +271,14 @@ let rec private visitDeclarations decls options =
 
     for declaration in decls do
         match declaration with
-        | SynModuleDecl.Open (SynOpenDeclTarget.ModuleOrNamespace (longDotId, _), range) ->
+        | SynModuleDecl.Open(SynOpenDeclTarget.ModuleOrNamespace(longDotId, _), range) ->
             if options.prelude.IsNone then
                 lines.Add(sprintf "open %s" (SynLongIdentToString longDotId))
-        | SynModuleDecl.Types (typeDefns, range) ->
+        | SynModuleDecl.Types(typeDefns, range) ->
             for typeDefn in typeDefns do
                 lines.AddRange(visitTypeDefn typeDefn options)
-        | SynModuleDecl.NestedModule (lid, __, decls0, _, _, _) ->
-            let (SynComponentInfo (_, __, _, id, _, _, _, _)) = lid
+        | SynModuleDecl.NestedModule(lid, __, decls0, _, _, _) ->
+            let (SynComponentInfo(_, __, _, id, _, _, _, _)) = lid
             lines.AddRange(visitDeclarations decls0 options)
         | _ -> failwith (sprintf " - not supported SynModuleDecl: %A" declaration)
 
@@ -303,7 +288,7 @@ let private visitModulesAndNamespaces modulesOrNss options =
     let lines = List()
 
     for moduleOrNs in modulesOrNss do
-        let (SynModuleOrNamespace (lid, isRec, isMod, decls, xml, attrs, _, m, _)) =
+        let (SynModuleOrNamespace(lid, isRec, isMod, decls, xml, attrs, _, m, _)) =
             moduleOrNs
 
         if options.prelude.IsNone then
@@ -322,8 +307,8 @@ let transform (fromFile: string) (toFile: string) (options: TransformerOptions) 
     let tree = parse fromFile (SourceText.ofString (File.ReadAllText fromFile))
 
     match tree with
-    | ParsedInput.ImplFile (implFile) ->
-        let (ParsedImplFileInput (fn, script, name, _, _, modules, _, _, _)) = implFile
+    | ParsedInput.ImplFile(implFile) ->
+        let (ParsedImplFileInput(fn, script, name, _, _, modules, _, _, _)) = implFile
 
         let lines = visitModulesAndNamespaces modules options
 

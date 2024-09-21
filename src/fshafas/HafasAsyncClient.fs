@@ -135,10 +135,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
         : Async<Journeys> =
 
         async {
-            if
-                enabled
-                    (profile :> FsHafas.Client.Profile)
-                        .journeysFromTrip then
+            if enabled (profile :> FsHafas.Client.Profile).journeysFromTrip then
                 let! (common, res, outConl) =
                     httpClient.AsyncSearchOnTrip(
                         Format.searchOnTripRequest profile fromTripId previousStopOver ``to`` opt
@@ -278,8 +275,8 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
             if enabled (profile :> FsHafas.Client.Profile).tripsByName then
                 match!
                     runAsyncAllowNoMatch (httpClient.AsyncJourneyMatch(Format.journeyMatchRequest profile lineName opt))
-                    with
-                | Some (common, res, journey) ->
+                with
+                | Some(common, res, journey) ->
                     return
                         { Default.TripsWithRealtimeData with
                             trips =

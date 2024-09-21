@@ -14,12 +14,12 @@ type Options =
       firstClass: bool }
 
 type CommonData =
-    { operators: FsHafas.Client.Operator []
-      locations: StationStopLocation []
-      lines: FsHafas.Client.Line []
-      hints: (HintStatusWarning option) []
-      icons: Icon []
-      polylines: FeatureCollection [] }
+    { operators: FsHafas.Client.Operator[]
+      locations: StationStopLocation[]
+      lines: FsHafas.Client.Line[]
+      hints: (HintStatusWarning option)[]
+      icons: Icon[]
+      polylines: FeatureCollection[] }
 
 type ParsedWhen =
     { ``when``: string option
@@ -42,13 +42,14 @@ type Profile
         transformReq,
         formatStation,
         transformJourneysQuery,
+        transformRefreshJourneyQuery,
         parseCommon,
         parseArrival,
         parseDeparture,
         parseHint,
         parseIcon,
         parsePolyline,
-        parseLocations: Context -> FsHafas.Raw.RawLoc [] -> StationStopLocation [],
+        parseLocations: Context -> FsHafas.Raw.RawLoc[] -> StationStopLocation[],
         parseLine,
         parseJourney,
         parseJourneyLeg,
@@ -73,13 +74,20 @@ type Profile
     member val journeysOutFrwd: bool = false with get, set
     member val departuresGetPasslist: bool = true with get, set
     member val departuresStbFltrEquiv: bool = true with get, set
-    member val transformCfg: FsHafas.Client.RoutingMode option -> FsHafas.Raw.Cfg -> FsHafas.Raw.Cfg = transformCfg with get, set
+
+    member val transformCfg: FsHafas.Client.RoutingMode option -> FsHafas.Raw.Cfg -> FsHafas.Raw.Cfg =
+        transformCfg with get, set
+
     member val transformReq: FsHafas.Raw.RawRequest -> FsHafas.Raw.RawRequest = transformReq with get, set
     member val formatStation: string -> string = formatStation with get, set
 
     member val transformJourneysQuery: FsHafas.Client.JourneysOptions option
         -> FsHafas.Raw.TripSearchRequest
         -> FsHafas.Raw.TripSearchRequest = transformJourneysQuery with get, set
+
+    member val transformRefreshJourneyQuery: FsHafas.Client.RefreshJourneyOptions option
+        -> FsHafas.Raw.ReconstructionRequest
+        -> FsHafas.Raw.ReconstructionRequest = transformRefreshJourneyQuery with get, set
 
     member val parseCommon: Context -> FsHafas.Raw.RawCommon -> CommonData = parseCommon with get, set
     member val parseArrival: Context -> FsHafas.Raw.RawJny -> FsHafas.Client.Alternative = parseArrival with get, set
@@ -94,7 +102,7 @@ type Profile
     member val parsePolyline: Context -> FsHafas.Raw.RawPoly -> FsHafas.Client.FeatureCollection =
         parsePolyline with get, set
 
-    member val parseLocations: Context -> FsHafas.Raw.RawLoc [] -> StationStopLocation [] = parseLocations with get, set
+    member val parseLocations: Context -> FsHafas.Raw.RawLoc[] -> StationStopLocation[] = parseLocations with get, set
 
     member val parseLine: Context -> FsHafas.Raw.RawProd -> FsHafas.Client.Line = parseLine with get, set
     member val parseJourney: Context -> FsHafas.Raw.RawOutCon -> FsHafas.Client.Journey = parseJourney with get, set
@@ -111,7 +119,7 @@ type Profile
     member val parseStopover: Context -> FsHafas.Raw.RawStop -> string -> FsHafas.Client.StopOver =
         parseStopover with get, set
 
-    member val parseStopovers: Context -> FsHafas.Raw.RawStop [] option -> string -> (FsHafas.Client.StopOver [] option) =
+    member val parseStopovers: Context -> FsHafas.Raw.RawStop[] option -> string -> (FsHafas.Client.StopOver[] option) =
         parseStopovers with get, set
 
     member val parseTrip: Context -> FsHafas.Raw.RawJny -> FsHafas.Client.Trip = parseTrip with get, set
@@ -134,7 +142,7 @@ type Profile
     member val _locale = locale with get, set
     member val _timezone = timezone with get, set
     member val _endpoint = "" with get, set
-    member val _products: ProductType [] = [||] with get, set
+    member val _products: ProductType[] = [||] with get, set
     member val _trip = None with get, set
     member val _radar = None with get, set
     member val _refreshJourney = Some true with get, set

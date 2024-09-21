@@ -39,7 +39,23 @@ type HafasRawClient
         (cfg: FsHafas.Raw.Cfg)
         (meth: string)
         (lang: string)
-        (parameters: U14<LocMatchRequest, TripSearchRequest, JourneyDetailsRequest, StationBoardRequest, ReconstructionRequest, JourneyMatchRequest, LocGeoPosRequest, LocGeoReachRequest, LocDetailsRequest, JourneyGeoPosRequest, HimSearchRequest, LineMatchRequest, ServerInfoRequest, SearchOnTripRequest>)
+        (parameters:
+            U14<
+                LocMatchRequest,
+                TripSearchRequest,
+                JourneyDetailsRequest,
+                StationBoardRequest,
+                ReconstructionRequest,
+                JourneyMatchRequest,
+                LocGeoPosRequest,
+                LocGeoReachRequest,
+                LocDetailsRequest,
+                JourneyGeoPosRequest,
+                HimSearchRequest,
+                LineMatchRequest,
+                ServerInfoRequest,
+                SearchOnTripRequest
+             >)
         : RawRequest =
         let svcReqL: SvcReq =
             { cfg = cfg
@@ -55,7 +71,23 @@ type HafasRawClient
     let makeRequest
         (meth: string)
         (lang: string)
-        (parameters: U14<LocMatchRequest, TripSearchRequest, JourneyDetailsRequest, StationBoardRequest, ReconstructionRequest, JourneyMatchRequest, LocGeoPosRequest, LocGeoReachRequest, LocDetailsRequest, JourneyGeoPosRequest, HimSearchRequest, LineMatchRequest, ServerInfoRequest, SearchOnTripRequest>)
+        (parameters:
+            U14<
+                LocMatchRequest,
+                TripSearchRequest,
+                JourneyDetailsRequest,
+                StationBoardRequest,
+                ReconstructionRequest,
+                JourneyMatchRequest,
+                LocGeoPosRequest,
+                LocGeoReachRequest,
+                LocDetailsRequest,
+                JourneyGeoPosRequest,
+                HimSearchRequest,
+                LineMatchRequest,
+                ServerInfoRequest,
+                SearchOnTripRequest
+             >)
         : RawRequest =
         makeConfiguredRequest cfg meth lang parameters
 
@@ -109,9 +141,14 @@ type HafasRawClient
             | _ -> return (None, None, None)
         }
 
-    member __.AsyncTripSearch(lang: string, tripSearchRequest: TripSearchRequest) (transformCfg: FsHafas.Raw.Cfg -> FsHafas.Raw.Cfg) =
+    member __.AsyncTripSearch
+        (lang: string, tripSearchRequest: TripSearchRequest)
+        (transformCfg: FsHafas.Raw.Cfg -> FsHafas.Raw.Cfg)
+        =
         async {
-            let! res = asyncPost (makeConfiguredRequest (transformCfg cfg) "TripSearch" lang (U14.Case2 tripSearchRequest))
+            let! res =
+                asyncPost (makeConfiguredRequest (transformCfg cfg) "TripSearch" lang (U14.Case2 tripSearchRequest))
+
             return (res.common, Some res, res.outConL)
         }
 

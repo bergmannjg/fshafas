@@ -51,7 +51,7 @@ module internal DateTimeOffsetEx =
     type DateTimeOffsetEx(dt: System.DateTime, tzoffsetArg: int option, tzArg: string option) =
         let getDateTime () =
             match tzoffsetArg, tzArg with
-            | Some (tzoffsetArg), _ ->
+            | Some(tzoffsetArg), _ ->
                 mkDateTime
                     (DateTimeEx.year dt)
                     (DateTimeEx.month dt)
@@ -60,7 +60,7 @@ module internal DateTimeOffsetEx =
                     (DateTimeEx.minute dt)
                     (DateTimeEx.second dt)
                     (mktzoffset tzoffsetArg)
-            | _, Some (tz) ->
+            | _, Some(tz) ->
                 mkDateTime
                     (DateTimeEx.year dt)
                     (DateTimeEx.month dt)
@@ -88,38 +88,21 @@ module internal DateTimeOffsetEx =
 
 #if FABLE_PY
     let parseDateTimeWithOffset
-        (
-            profile: FsHafas.Endpoint.Profile,
-            year,
-            month,
-            day,
-            hour,
-            minute,
-            seconds,
-            tzOffset: int option
-        ) : DateTimeOffsetEx =
+        (profile: FsHafas.Endpoint.Profile, year, month, day, hour, minute, seconds, tzOffset: int option)
+        : DateTimeOffsetEx =
         try
             let dt = System.DateTime(year, month, day, hour, minute, seconds)
 
             match tzOffset with
             | Some tzOffset -> DateTimeOffsetEx(dt, Some(tzOffset * 60), None)
             | None -> DateTimeOffsetEx(dt, None, None)
-        with
-        | ex ->
+        with ex ->
             printfn "error parseDateTimeWithOffset: %s" ex.Message
             raise (System.Exception(ex.Message))
 #else
     let parseDateTimeWithOffset
-        (
-            profile: FsHafas.Endpoint.Profile,
-            year,
-            month,
-            day,
-            hour,
-            minute,
-            seconds,
-            tzOffset: int option
-        ) : System.DateTimeOffset =
+        (profile: FsHafas.Endpoint.Profile, year, month, day, hour, minute, seconds, tzOffset: int option)
+        : System.DateTimeOffset =
 
         let GetDateTimeInZone (year: int, month: int, day: int, hour: int, minute: int, seconds: int, zoneId: string) =
 

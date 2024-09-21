@@ -52,8 +52,7 @@ type HafasClient(profile: FsHafas.Client.Profile) =
             raise (System.ArgumentException("string|Stop expected"))
 
     let validateString (v: string) =
-        if jsTypeof v <> "string"
-           || (unbox<string> v).Length = 0 then
+        if jsTypeof v <> "string" || (unbox<string> v).Length = 0 then
             raise (System.ArgumentException("string expected"))
 
     // make Location at runtime
@@ -70,10 +69,12 @@ type HafasClient(profile: FsHafas.Client.Profile) =
             raise (System.ArgumentException("Location expected"))
 
     let validateBoundingBox (v: BoundingBox) =
-        if jsTypeof v.north <> "number"
-           || jsTypeof v.west <> "number"
-           || jsTypeof v.south <> "number"
-           || jsTypeof v.east <> "number" then
+        if
+            jsTypeof v.north <> "number"
+            || jsTypeof v.west <> "number"
+            || jsTypeof v.south <> "number"
+            || jsTypeof v.east <> "number"
+        then
             raise (System.ArgumentException("BoundingBox expected"))
 #endif
 
@@ -95,8 +96,7 @@ type HafasClient(profile: FsHafas.Client.Profile) =
 #if FABLE_COMPILER
             validateString refreshToken
 
-            client.AsyncRefreshJourney refreshToken opt
-            |> Async.StartAsPromise
+            client.AsyncRefreshJourney refreshToken opt |> Async.StartAsPromise
 #else
             client.AsyncRefreshJourney refreshToken opt
 #endif
@@ -112,16 +112,14 @@ type HafasClient(profile: FsHafas.Client.Profile) =
 
         member __.departures (id: U4<string, Station, Stop, Location>) (opt: DeparturesArrivalsOptions option) =
 #if FABLE_COMPILER
-            client.AsyncDepartures (makeCaseOfU4 id) opt
-            |> Async.StartAsPromise
+            client.AsyncDepartures (makeCaseOfU4 id) opt |> Async.StartAsPromise
 #else
             client.AsyncDepartures id opt
 #endif
 
         member __.arrivals (id: U4<string, Station, Stop, Location>) (opt: DeparturesArrivalsOptions option) =
 #if FABLE_COMPILER
-            client.AsyncArrivals (makeCaseOfU4 id) opt
-            |> Async.StartAsPromise
+            client.AsyncArrivals (makeCaseOfU4 id) opt |> Async.StartAsPromise
 #else
             client.AsyncArrivals id opt
 #endif
@@ -143,32 +141,28 @@ type HafasClient(profile: FsHafas.Client.Profile) =
 #if FABLE_COMPILER
             validateString name
 
-            client.AsyncLocations name opt
-            |> Async.StartAsPromise
+            client.AsyncLocations name opt |> Async.StartAsPromise
 #else
             client.AsyncLocations name opt
 #endif
 
         member __.stop (stop: U2<string, Stop>) (opt: StopOptions option) =
 #if FABLE_COMPILER
-            client.AsyncStop (makeCaseOfU2StringStop stop) opt
-            |> Async.StartAsPromise
+            client.AsyncStop (makeCaseOfU2StringStop stop) opt |> Async.StartAsPromise
 #else
             client.AsyncStop stop opt
 #endif
 
         member __.nearby (location: Location) (opt: NearByOptions option) =
 #if FABLE_COMPILER
-            client.AsyncNearby (makeLocation location) opt
-            |> Async.StartAsPromise
+            client.AsyncNearby (makeLocation location) opt |> Async.StartAsPromise
 #else
             client.AsyncNearby location opt
 #endif
 
         member __.reachableFrom (location: Location) (opt: ReachableFromOptions option) =
 #if FABLE_COMPILER
-            client.AsyncReachableFrom (makeLocation location) opt
-            |> Async.StartAsPromise
+            client.AsyncReachableFrom (makeLocation location) opt |> Async.StartAsPromise
 #else
             client.AsyncReachableFrom location opt
 #endif
@@ -185,8 +179,7 @@ type HafasClient(profile: FsHafas.Client.Profile) =
 #if FABLE_COMPILER
             validateString name
 
-            client.AsyncTripsByName name opt
-            |> Async.StartAsPromise
+            client.AsyncTripsByName name opt |> Async.StartAsPromise
 #else
             client.AsyncTripsByName name opt
 #endif
@@ -202,8 +195,7 @@ type HafasClient(profile: FsHafas.Client.Profile) =
 #if FABLE_COMPILER
             validateString query
 
-            client.AsyncLines query opt
-            |> Async.StartAsPromise
+            client.AsyncLines query opt |> Async.StartAsPromise
 #else
             client.AsyncLines query opt
 #endif

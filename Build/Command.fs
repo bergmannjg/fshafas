@@ -6,7 +6,7 @@ open RunProcess
 let printOutputs (cmd: string) (netoutputs: List<string>, neterrors: List<string>) =
     if cmd = "test" then
         netoutputs
-        |> List.filter (fun s -> s.Contains "Passed!")
+        |> List.filter (fun s -> s.Contains "Failed")
         |> List.iter (fun s -> printfn $"{s}")
 
     (netoutputs, neterrors)

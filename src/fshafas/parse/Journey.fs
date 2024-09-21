@@ -5,20 +5,14 @@ module internal Journey =
     open FsHafas.Client
     open FsHafas.Endpoint
 
-    let bytes =
-        [| 0..7 |]
-        |> Array.map (fun x -> 1 <<< (7 - x) |> byte)
+    let bytes = [| 0..7 |] |> Array.map (fun x -> 1 <<< (7 - x) |> byte)
 
     let parseJourney (ctx: Context) (j: FsHafas.Raw.RawOutCon) : Journey =
-        let legs =
-            j.secL
-            |> Array.map (fun l -> ctx.profile.parseJourneyLeg ctx l j.date)
+        let legs = j.secL |> Array.map (fun l -> ctx.profile.parseJourneyLeg ctx l j.date)
 
         let remarks =
             if ctx.opt.remarks then
-                Common.msgLToRemarks ctx j.msgL
-                |> Option.defaultValue Array.empty
-                |> Some
+                Common.msgLToRemarks ctx j.msgL |> Option.defaultValue Array.empty |> Some
             else
                 None
 

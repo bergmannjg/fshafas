@@ -7,7 +7,8 @@ open FsHafas.Client
 ///   <summary>Types of raw hafas api generated from <a href="https://github.com/bergmannjg/hafas-client/blob/add-types-in-jsdoc/types-raw-api.ts">TS types</a></summary>
 /// </namespacedoc>
 
-type RawPltf = { ``type``: string; txt: string }
+type RawPltf =
+    { ``type``: string option; txt: string }
 
 and RawTrnCmpSX =
     { tcM: int option
@@ -252,14 +253,15 @@ and RawSotCtxt =
 
 and Content = { ``type``: string; content: string }
 and ExtCont = { content: Content }
+and RawPrice = { amount: int }
 
 and RawTicket =
     { name: string
       prc: int
       cur: string
-      extCont: ExtCont }
-
-and RawPrice = { amount: int option }
+      extCont: ExtCont
+      price: RawPrice option
+      addData: string option }
 
 and RawFare =
     { price: RawPrice option
@@ -274,11 +276,13 @@ and RawFare =
       targetCtx: string option
       buttonText: string option
       name: string option
-      ticketL: array<RawTicket> option }
+      ticketL: array<RawTicket> option
+      addData: string option }
 
 and RawFareSet =
     { desc: string option
-      fareL: array<RawFare> }
+      fareL: array<RawFare>
+      addData: string option }
 
 and RawTrfRes =
     { statusCode: string option
@@ -501,9 +505,7 @@ and Loc =
 and LocViaInput = { loc: Loc }
 
 and LocMatchInput =
-    { loc: Loc
-      maxLoc: int
-      field: string }
+    { loc: Loc; maxLoc: int; field: string }
 
 and LocMatchRequest = { input: LocMatchInput }
 and LineMatchRequest = { input: string }
@@ -522,7 +524,8 @@ and TvlrProf =
 and TrfReq =
     { jnyCl: int
       tvlrProf: array<TvlrProf>
-      cType: string }
+      cType: string
+      rType: string option }
 
 and StationBoardRequest =
     { ``type``: string
@@ -549,7 +552,8 @@ and ReconstructionRequest =
       getPolyline: bool
       getTariff: bool
       ctxRecon: string option
-      outReconL: array<RawRecon> option }
+      outReconL: array<RawRecon> option
+      trfReq: TrfReq option }
 
 and LocData =
     { loc: Loc
@@ -582,10 +586,11 @@ and TripSearchRequest =
       getPT: bool
       getIV: bool
       getPolyline: bool
-      outDate: string
-      outTime: string
-      numF: int
-      outFrwd: bool
+      outDate: string option
+      outTime: string option
+      ctxScr: string option
+      numF: int option
+      outFrwd: bool option
       trfReq: TrfReq option }
 
 and JourneyMatchRequest =
@@ -641,7 +646,23 @@ and JourneyGeoPosRequest =
 and SvcReq =
     { cfg: Cfg
       meth: string
-      req: U14<LocMatchRequest, TripSearchRequest, JourneyDetailsRequest, StationBoardRequest, ReconstructionRequest, JourneyMatchRequest, LocGeoPosRequest, LocGeoReachRequest, LocDetailsRequest, JourneyGeoPosRequest, HimSearchRequest, LineMatchRequest, ServerInfoRequest, SearchOnTripRequest> }
+      req:
+          U14<
+              LocMatchRequest,
+              TripSearchRequest,
+              JourneyDetailsRequest,
+              StationBoardRequest,
+              ReconstructionRequest,
+              JourneyMatchRequest,
+              LocGeoPosRequest,
+              LocGeoReachRequest,
+              LocDetailsRequest,
+              JourneyGeoPosRequest,
+              HimSearchRequest,
+              LineMatchRequest,
+              ServerInfoRequest,
+              SearchOnTripRequest
+           > }
 
 and RawRequestClient =
     { id: string

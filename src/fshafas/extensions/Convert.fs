@@ -12,7 +12,7 @@ module internal ConvertEx =
     open Fable.Core
 
     [<Emit("bytes.fromhex($0)")>]
-    let FromHexString (s: string) : byte [] = jsNative
+    let FromHexString (s: string) : byte[] = jsNative
 #else
     let FromHexString (s: string) = System.Convert.FromHexString s
 #endif

@@ -84,15 +84,13 @@ module internal Stopover =
 
     let parseStopovers
         (ctx: Context)
-        (stopL: FsHafas.Raw.RawStop [] option)
+        (stopL: FsHafas.Raw.RawStop[] option)
         (date: string)
-        : FsHafas.Client.StopOver [] option =
+        : FsHafas.Client.StopOver[] option =
         match stopL with
-        | Some (stopL) ->
+        | Some(stopL) ->
             stopL
-            |> Array.filter (fun s ->
-                (Common.getElementAtSome s.locX ctx.common.locations)
-                    .IsSome)
+            |> Array.filter (fun s -> (Common.getElementAtSome s.locX ctx.common.locations).IsSome)
             |> Array.map (fun s -> ctx.profile.parseStopover ctx s date)
             |> Some
         | None -> None

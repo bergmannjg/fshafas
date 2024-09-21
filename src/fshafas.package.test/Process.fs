@@ -36,7 +36,9 @@ let runProc filename args startDir =
             p.BeginOutputReadLine()
             p.BeginErrorReadLine()
             let exited = p.WaitForExit(10 * 1000)
-            if not exited then errors.Add("timeout")
+
+            if not exited then
+                errors.Add("timeout")
 
         timer.Stop()
         printfn "Finished %s after %A milliseconds" filename timer.ElapsedMilliseconds
@@ -48,7 +50,6 @@ let runProc filename args startDir =
             |> Seq.filter (fun o -> o.Contains "node --trace-warnings" |> not)
 
         cleanOut outputs, cleanOut errors
-    with
-    | ex ->
+    with ex ->
         fprintfn stderr "error: %s" ex.Message
         (Seq.empty, [ ex.Message ])

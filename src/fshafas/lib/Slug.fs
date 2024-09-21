@@ -21,7 +21,10 @@ module internal Slug =
     open FSlugify.SlugGenerator
 
     let slugify (s: string) : string =
-        FSlugify.SlugGenerator.slugify { DefaultSlugGeneratorOptions with Separator = '-' } s
+        FSlugify.SlugGenerator.slugify
+            { DefaultSlugGeneratorOptions with
+                Separator = '-' }
+            s
 
 #endif
 #endif

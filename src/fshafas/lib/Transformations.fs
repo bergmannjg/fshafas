@@ -89,11 +89,11 @@ module internal ToTrip =
           alternatives = l.alternatives
           polyline = l.polyline
           remarks = l.remarks
-          scheduledDays = None 
+          scheduledDays = None
           currentLocation = l.currentLocation
           departurePrognosisType = l.departurePrognosisType
           arrivalPrognosisType = l.arrivalPrognosisType
-          checkin = l.checkin}
+          checkin = l.checkin }
 
 module internal U2StationStop =
 
@@ -101,18 +101,14 @@ module internal U2StationStop =
 
     let FromU3StationStopLocation (u3: U3<Station, Stop, Location>) =
         match u3 with
-        | U3.Case1 s ->
-            U2<FsHafas.Client.Station, FsHafas.Client.Stop>.Case1 s
-            |> Some
-        | U3.Case2 s ->
-            U2<FsHafas.Client.Station, FsHafas.Client.Stop>.Case2 s
-            |> Some
+        | U3.Case1 s -> U2<FsHafas.Client.Station, FsHafas.Client.Stop>.Case1 s |> Some
+        | U3.Case2 s -> U2<FsHafas.Client.Station, FsHafas.Client.Stop>.Case2 s |> Some
         | _ -> None
 
     let FromSomeU3StationStopLocation (u3: StationStopLocation option) =
         match u3 with
-        | Some (StationStopLocation.Station s) -> StationStop.Station s |> Some
-        | Some (StationStopLocation.Stop s) -> StationStop.Stop s |> Some
+        | Some(StationStopLocation.Station s) -> StationStop.Station s |> Some
+        | Some(StationStopLocation.Stop s) -> StationStop.Stop s |> Some
         | _ -> None
 
 module internal U2StopLocation =
@@ -121,18 +117,14 @@ module internal U2StopLocation =
 
     let FromU3StationStopLocation (u3: U3<Station, Stop, Location>) =
         match u3 with
-        | U3.Case2 s ->
-            U2<FsHafas.Client.Stop, FsHafas.Client.Location>.Case1 s
-            |> Some
-        | U3.Case3 s ->
-            U2<FsHafas.Client.Stop, FsHafas.Client.Location>.Case2 s
-            |> Some
+        | U3.Case2 s -> U2<FsHafas.Client.Stop, FsHafas.Client.Location>.Case1 s |> Some
+        | U3.Case3 s -> U2<FsHafas.Client.Stop, FsHafas.Client.Location>.Case2 s |> Some
         | _ -> None
 
     let FromSomeU3StationStopLocation (u3: StationStopLocation option) =
         match u3 with
-        | Some (StationStopLocation.Stop s) -> StopLocation.Stop s |> Some
-        | Some (StationStopLocation.Location s) -> StopLocation.Location s |> Some
+        | Some(StationStopLocation.Stop s) -> StopLocation.Stop s |> Some
+        | Some(StationStopLocation.Location s) -> StopLocation.Location s |> Some
         | _ -> None
 
 module internal MergeOptions =
@@ -142,7 +134,7 @@ module internal MergeOptions =
 
     let private getOptionValue<'a, 'b> (opt: 'a option) (getter: 'a -> 'b option) (defaultValue: 'b) =
         match opt with
-        | Some (value) ->
+        | Some(value) ->
             match getter value with
             | Some result -> result
             | None -> defaultValue
@@ -156,13 +148,16 @@ module internal MergeOptions =
             firstClass = getOptionValue opt (fun v -> v.firstClass) options.firstClass }
 
     let JourneysFromTripOptions (options: FsHafas.Endpoint.Options) (opt: JourneysFromTripOptions option) =
-        { options with stopovers = getOptionValue opt (fun v -> v.stopovers) options.stopovers }
+        { options with
+            stopovers = getOptionValue opt (fun v -> v.stopovers) options.stopovers }
 
     let LocationsOptions (options: FsHafas.Endpoint.Options) (opt: LocationsOptions option) =
-        { options with linesOfStops = getOptionValue opt (fun v -> v.linesOfStops) options.linesOfStops }
+        { options with
+            linesOfStops = getOptionValue opt (fun v -> v.linesOfStops) options.linesOfStops }
 
     let NearByOptions (options: FsHafas.Endpoint.Options) (opt: NearByOptions option) =
-        { options with linesOfStops = getOptionValue opt (fun v -> v.linesOfStops) options.linesOfStops }
+        { options with
+            linesOfStops = getOptionValue opt (fun v -> v.linesOfStops) options.linesOfStops }
 
 module Default =
 
@@ -206,7 +201,8 @@ module Default =
           entrances = None
           remarks = None
           scheduledDays = None
-          language = Some "de" }
+          language = Some "de"
+          generateUnreliableTicketUrls = Some false }
 
     let TripsByNameOptions: TripsByNameOptions =
         { ``when`` = Some System.DateTime.Now
@@ -257,7 +253,8 @@ module Default =
           age = None
           loyaltyCard = None
           routingMode = None
-          ``when`` = None }
+          ``when`` = None
+          generateUnreliableTicketUrls = Some false }
 
     let JourneysFromTripOptions: JourneysFromTripOptions =
         { stopovers = Some false
@@ -340,7 +337,8 @@ module Default =
           loadFactor = None
           entrances = None
           transitAuthority = None
-          distance = None }
+          distance = None
+          facilities = None }
 
     let Station: Station =
         { ``type`` = StationType.Station
@@ -420,7 +418,7 @@ module Default =
           cancelled = None
           departurePrognosisType = None
           arrivalPrognosisType = None
-          additional = None}
+          additional = None }
 
     let Trip: Trip =
         { id = ""
@@ -520,7 +518,8 @@ module Default =
           remarks = None
           price = None
           cycle = None
-          scheduledDays = None }
+          scheduledDays = None
+          tickets = None }
 
     let JourneyWithRealtimeData: JourneyWithRealtimeData =
         { journey = Journey

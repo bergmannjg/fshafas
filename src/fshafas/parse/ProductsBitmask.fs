@@ -9,9 +9,7 @@ module internal ProductsBitmask =
         (ctx.profile :> FsHafas.Client.Profile).products
         |> Array.fold
             (fun m p ->
-                m.[p.id] <-
-                    p.bitmasks
-                    |> Array.exists (fun b -> b &&& bitmask <> 0)
+                m.[p.id] <- p.bitmasks |> Array.exists (fun b -> b &&& bitmask <> 0)
 
                 m)
             (Products(false))
