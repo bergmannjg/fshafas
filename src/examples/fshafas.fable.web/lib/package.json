@@ -4,8 +4,8 @@
     "description": "",
     "main": "index.js",
     "dependencies": {
-        "fs-hafas-client": "https://github.com/bergmannjg/fshafas/releases/download/2.0.0/fs-hafas-client-2.0.0.tgz",
-        "fs-hafas-profiles": "https://github.com/bergmannjg/fshafas/releases/download/2.0.0/fs-hafas-profiles-2.0.0.tgz",
+        "fs-hafas-client": "https://github.com/bergmannjg/fshafas/releases/download/2.9.0/fs-hafas-client-2.9.0.tgz",
+        "fs-hafas-profiles": "https://github.com/bergmannjg/fshafas/releases/download/2.9.0/fs-hafas-profiles-2.9.0.tgz",
         "@babel/compat-data": "^7.12.13",
         "@babel/core": "^7.12.16",
         "@babel/preset-env": "^7.12.16",
