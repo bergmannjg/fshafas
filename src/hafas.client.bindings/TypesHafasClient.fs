@@ -388,8 +388,6 @@ and Alternative =
       provenance: string option
       previousStopovers: array<StopOver> option
       nextStopovers: array<StopOver> option
-      frames: array<Frame> option
-      polyline: FeatureCollection option
       currentTripPosition: Location option
       origin: StationStopLocation option
       destination: StationStopLocation option
