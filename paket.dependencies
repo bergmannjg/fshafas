@@ -26,10 +26,10 @@ nuget FSharp.Compiler.Service
 
 source ~/local.packages
 
-nuget FsHafas = 2.9.0
-nuget FsHafas.Profiles = 2.9.0
-nuget FsHafas.JavaScript = 2.9.0
-nuget FsHafas.Profiles.JavaScript = 2.9.0
-nuget FsHafas.Python = 2.9.0-beta-0.0.29
-nuget FsHafas.Profiles.Python = 2.9.0-beta-0.0.29
+nuget FsHafas = 2.10.0
+nuget FsHafas.Profiles = 2.10.0
+nuget FsHafas.JavaScript = 2.10.0
+nuget FsHafas.Profiles.JavaScript = 2.10.0
+nuget FsHafas.Python = 2.10.0-beta-0.0.210
+nuget FsHafas.Profiles.Python = 2.10.0-beta-0.0.210
 nuget Hafas.Client.Bindings = 6.3.0

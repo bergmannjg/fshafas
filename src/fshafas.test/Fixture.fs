@@ -25,22 +25,22 @@ let getFileData (path: string) : FixturyData =
       options = File.ReadAllText(options) }
 
 let jsonDeparturesRawResponse () =
-    File.ReadAllText(path + "db-departures-raw-response.json")
+    File.ReadAllText(path + "oebb-departures-raw-response.json")
 
 let jsonDeparturesResponse () =
-    File.ReadAllText(path + "db-departures-response.json")
+    File.ReadAllText(path + "oebb-departures-response.json")
 
 let jsonReachableFromRawResponse () =
-    File.ReadAllText(path + "db-reachableFrom-raw-response.json")
+    File.ReadAllText(path + "oebb-reachableFrom-raw-response.json")
 
 let jsonReachableFromResponse () =
-    File.ReadAllText(path + "db-reachableFrom-response.json")
+    File.ReadAllText(path + "oebb-reachableFrom-response.json")
 
 let jsonRadarRawResponse () =
-    File.ReadAllText(path + "db-radar-raw-response.json")
+    File.ReadAllText(path + "oebb-radar-raw-response.json")
 
 let jsonRadarResponse () =
-    File.ReadAllText(path + "db-radar-response.json")
+    File.ReadAllText(path + "oebb-radar-response.json")
 
 let jsonLinesRawResponse () =
     File.ReadAllText(path + "svv-lines-raw-response.json")
@@ -55,28 +55,28 @@ let jsonRemarksResponse () =
     File.ReadAllText(path + "svv-remarks-response.json")
 
 let jsonTripRawResponse () =
-    File.ReadAllText(path + "db-trip-raw-response.json")
+    File.ReadAllText(path + "oebb-trip-raw-response.json")
 
 let jsonTripResponse () =
-    File.ReadAllText(path + "db-trip-response.json")
+    File.ReadAllText(path + "oebb-trip-response.json")
 
 let jsonNearbyOptions () =
-    File.ReadAllText(path + "db-nearby-options.json")
+    File.ReadAllText(path + "oebb-nearby-options.json")
 
 let jsonNearbyRawResponse () =
-    File.ReadAllText(path + "db-nearby-raw-response.json")
+    File.ReadAllText(path + "oebb-nearby-raw-response.json")
 
 let jsonNearbyResponse () =
-    File.ReadAllText(path + "db-nearby-response.json")
+    File.ReadAllText(path + "oebb-nearby-response.json")
 
 let jsonJourneysFromTripRawResponse () =
-    File.ReadAllText(path + "db-journeysFromTrip-raw-response.json")
+    File.ReadAllText(path + "oebb-journeysFromTrip-raw-response.json")
 
 let jsonJourneysFromTripResponse () =
-    File.ReadAllText(path + "db-journeysFromTrip-response.json")
+    File.ReadAllText(path + "oebb-journeysFromTrip-response.json")
 
 let jsonStopRawResponse () =
-    File.ReadAllText(path + "db-stop-raw-response.json")
+    File.ReadAllText(path + "oebb-stop-raw-response.json")
 
 let jsonStopResponse () =
-    File.ReadAllText(path + "db-stop-response.json")
+    File.ReadAllText(path + "oebb-stop-response.json")

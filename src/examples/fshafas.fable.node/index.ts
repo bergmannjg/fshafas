@@ -2,11 +2,11 @@ import { Journey, Leg, Trip, ScheduledDays, TripWithRealtimeData } from 'fs-hafa
 import { fshafas } from 'fs-hafas-client';
 import { profiles } from 'fs-hafas-profiles';
 import { createClient } from 'hafas-client';
-import { profile as dbProfile } from 'hafas-client/p/db/index.js';
+import { profile as oebbProfile } from 'hafas-client/p/oebb/index.js';
 
 const myArgs = process.argv.slice(2);
 
-const client = myArgs.indexOf("--hafas") > 0 ? createClient(dbProfile, 'agent') : fshafas.createClient(profiles.getProfile('db'));
+const client = myArgs.indexOf("--hafas") > 0 ? createClient(oebbProfile, 'agent') : fshafas.createClient(profiles.getProfile('oebb'));
 
 if (myArgs.indexOf("--debug") > 0) {
     fshafas.setDebug();

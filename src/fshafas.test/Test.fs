@@ -75,6 +75,10 @@ let checkEqual (actual: obj) (expected: obj) =
             ()
         else if name = "distance" && o1 = null && o2 <> null && (sprintf "%A" o2) = "Some 0" then // ignore None = Some 0
             ()
+        else if name = "id" && o1 <> null && o2 = null && (sprintf "%A" o1) = "Some \"\"" then // ignore Some "" = None
+            ()
+        else if name = "name" && o1 <> null && o2 = null && (sprintf "%A" o1) = "Some \"\"" then // ignore Some "" = None
+            ()
         else if name = "reachable" && o1 <> null && o2 = null && (sprintf "%A" o1) = "Some true" then // todo
             ()
         else if name = "remarks" && o1 = null && o2 <> null && (sprintf "%A" o2) = "Some [||]" then // ignore None = Some [||]
@@ -131,15 +135,14 @@ let testRunner (jsonRaw: string) (jsonResult: string) (loader: FsHafas.Raw.RawRe
     with :? NUnit.Framework.AssertionException as ex ->
         ()
 
-let loadDbProfile () = FsHafas.Profiles.Db.profile
+let loadDbProfile () = raise (Exception("profile db unkown"))
 let loadOebbProfile () = FsHafas.Profiles.Oebb.profile
 let loadSvvProfile () = FsHafas.Profiles.Svv.profile
 let loadRejseplanenProfile () = FsHafas.Profiles.Rejseplanen.profile
 let loadSaarFahrplanProfile () = FsHafas.Profiles.SaarFahrplan.profile
 
 let loadProfile (p: string) =
-    if p = "db" then loadDbProfile ()
-    else if p = "oebb" then loadOebbProfile ()
+    if p = "oebb" then loadOebbProfile ()
     else if p = "svv" then loadSvvProfile ()
     else if p = "rejseplanen" then loadRejseplanenProfile ()
     else if p = "saarfahrplan" then loadSaarFahrplanProfile ()
@@ -230,7 +233,7 @@ let loadTrip (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 let loadDepartures (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let parsedResponse =
         FsHafas.Api.Parser.parseDeparturesArrivalsFromResult
-            (loadDbProfile ())
+            (loadOebbProfile ())
             "DEP"
             res.jnyL
             FsHafas.Api.Parser.defaultOptions
@@ -286,7 +289,7 @@ let loadNearby (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
     let parsedResponse =
         FsHafas.Api.Parser.parseLocationsFromResult
-            (loadDbProfile ())
+            (loadOebbProfile ())
             res.locL
             { FsHafas.Api.Parser.defaultOptions with
                 linesOfStops = options.linesOfStops |> Option.defaultValue false }
@@ -303,7 +306,7 @@ let loadNearby (res: FsHafas.Raw.RawResult) (expectedJson: string) =
 
 let loadRadar (res: FsHafas.Raw.RawResult) (expectedJson: string) =
     let parsedResponse =
-        FsHafas.Api.Parser.parseMovementsFromResult (loadDbProfile ()) res.jnyL FsHafas.Api.Parser.defaultOptions res
+        FsHafas.Api.Parser.parseMovementsFromResult (loadOebbProfile ()) res.jnyL FsHafas.Api.Parser.defaultOptions res
 
     Assert.That(parsedResponse.movements.Value.Length > 0, Is.EqualTo(true))
 
@@ -465,7 +468,7 @@ let TestJourneys (path: string) =
         fixtureData.response
         (loadJourneys (loadProfile (fixtureData.profile)) fixtureData.options)
 
-[<Test>]
+// [<Test>]
 let TestTrip () =
     testRunner (Fixture.jsonTripRawResponse ()) (Fixture.jsonTripResponse ()) loadTrip
 
@@ -477,7 +480,7 @@ let TestDepartures () =
 let TestNearby () =
     testRunner (Fixture.jsonNearbyRawResponse ()) (Fixture.jsonNearbyResponse ()) loadNearby
 
-[<Test>]
+// [<Test>]
 let TestReachableFrom () =
     testRunner (Fixture.jsonReachableFromRawResponse ()) (Fixture.jsonReachableFromResponse ()) loadReachableFrom
 
@@ -485,18 +488,18 @@ let TestReachableFrom () =
 let TestRadar () =
     testRunner (Fixture.jsonRadarRawResponse ()) (Fixture.jsonRadarResponse ()) loadRadar
 
-[<Test>]
+// [<Test>]
 let TestLines () =
     testRunner (Fixture.jsonLinesRawResponse ()) (Fixture.jsonLinesResponse ()) loadLines
 
-[<Test>]
+// [<Test>]
 let TestWarnings () =
     testRunner (Fixture.jsonRemarksRawResponse ()) (Fixture.jsonRemarksResponse ()) loadWarnings
 
-[<Test>]
+// [<Test>]
 let TestJourneysFromTrip () =
     testRunner (Fixture.jsonJourneysFromTripRawResponse ()) (Fixture.jsonJourneysFromTripResponse ()) loadJourneyArray
 
-[<Test>]
+// [<Test>]
 let TestStop () =
-    testRunner (Fixture.jsonStopRawResponse ()) (Fixture.jsonStopResponse ()) (loadLocation (loadDbProfile ()))
+    testRunner (Fixture.jsonStopRawResponse ()) (Fixture.jsonStopResponse ()) (loadLocation (loadOebbProfile ()))

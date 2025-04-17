@@ -196,7 +196,7 @@ let main argv =
         Log.Debug <- options.Contains Debug
         Api.HafasAsyncClient.initSerializer ()
 
-        use client = new Api.HafasAsyncClient(FsHafas.Profiles.Db.profile)
+        use client = new Api.HafasAsyncClient(FsHafas.Profiles.Oebb.profile)
 
         let journeyInfo =
             journeydata file dtStart dtEnd

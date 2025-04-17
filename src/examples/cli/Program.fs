@@ -69,7 +69,6 @@ OPTIONS:
 
 let toProfile s =
     match s with
-    | "db" -> FsHafas.Profiles.Db.profile
     | "bvg" -> FsHafas.Profiles.Bvg.profile
     | "mobilnrw" -> FsHafas.Profiles.MobilNrw.profile
     | "oebb" -> FsHafas.Profiles.Oebb.profile
@@ -105,7 +104,7 @@ let maybeArray (choose: ('a -> array<'b>)) option =
     | Some v -> choose v
     | None -> [||]
 
-let mutable profile = FsHafas.Profiles.Db.profile
+let mutable profile = FsHafas.Profiles.Oebb.profile
 
 printfn "%s" (profile :> FsHafas.Client.Profile).locale
 
@@ -306,7 +305,7 @@ let bestPrices (from: string, ``to``: string, someOptions: string option) =
     |> AsyncRun
 
 let journeysFromTrip (tripId: string, stopover: string, departure: string, newTo: string) =
-    use client = new Api.HafasAsyncClient(FsHafas.Profiles.Db.profile)
+    use client = new Api.HafasAsyncClient(FsHafas.Profiles.Oebb.profile)
 
     async {
         let! journeys =

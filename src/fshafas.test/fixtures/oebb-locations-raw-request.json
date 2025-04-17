@@ -1,0 +1,1 @@
+{"lang":"de","svcReqL":[{"cfg":{"polyEnc":"GPA"},"meth":"LocMatch","req":{"input":{"loc":{"type":"ALL","name":"Brügge?"},"maxLoc":3,"field":"S"}}}],"client":{"type":"IPH","id":"OEBB","v":"6030600","name":"oebbPROD-ADHOC"},"ver":"1.41","auth":{"type":"AID","aid":"OWDL4fE4ixNiPBBm"}}

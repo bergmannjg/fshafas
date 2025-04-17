@@ -22,7 +22,7 @@ The library compiles via Fable to a webpack module with [this](https://github.co
 ### HafasAsyncClient with F\#
 
 ```fsharp
-use client = new FsHafas.Api.HafasAsyncClient(FsHafas.Profiles.Db.profile)
+use client = new FsHafas.Api.HafasAsyncClient(FsHafas.Profiles.Oebb.profile)
 async {
     let! locations = client.AsyncLocations "Hannover" (Some Default.LocationsOptions)
 
@@ -34,7 +34,7 @@ async {
 ### HafasAsyncClient with C\#
 
 ```csharp
-using (var client = new FsHafas.Api.HafasAsyncClient(FsHafas.Profiles.Db.profile))
+using (var client = new FsHafas.Api.HafasAsyncClient(FsHafas.Profiles.Oebb.profile))
 {
     var locations = await HafasAsyncClient.toTask(client.AsyncLocations("Hannover", Default.LocationsOptions));
 

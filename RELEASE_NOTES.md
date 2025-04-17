@@ -95,3 +95,7 @@
 
 * corresponds to hafas-client version 6.3.0
 
+## 2.10.0
+
+* remove db profile
+

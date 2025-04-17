@@ -1,0 +1,1 @@
+{"lang":"de","svcReqL":[{"cfg":{"polyEnc":"GPA"},"meth":"LocGeoPos","req":{"ring":{"cCrd":{"x":13078028,"y":54308438},"maxDist":400,"minDist":0},"locFltrL":[{"type":"PROD","mode":"INC","value":"7167"}],"getPOIs":false,"getStops":true,"maxLoc":8}}],"client":{"type":"IPH","id":"OEBB","v":"6030600","name":"oebbPROD-ADHOC"},"ver":"1.45","auth":{"type":"AID","aid":"OWDL4fE4ixNiPBBm"}}

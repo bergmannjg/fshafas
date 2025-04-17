@@ -12,7 +12,6 @@ if [ ! -d "./test-fixtures" ]; then
   cat << EOF > index.js
 // created with script 'create-test-fixtures.sh'
 import { createClient } from 'hafas-client'
-import { profile as dbProfile } from 'hafas-client/p/db/index.js'
 import { profile as bvgProfile } from 'hafas-client/p/bvg/index.js'
 import { profile as mobilnrwProfile } from 'hafas-client/p/mobil-nrw/index.js'
 import { profile as oebbProfile } from 'hafas-client/p/oebb/index.js'
@@ -23,7 +22,7 @@ import geolib from 'geolib'
 
 var myArgs = process.argv.slice(2);
 
-let client = createClient(dbProfile, 'agent');
+let client = createClient(oebbProfile, 'agent');
 
 let journeys_from = { type: 'stop', id: '8002549' };
 let journeys_to = '8000107';
@@ -246,7 +245,7 @@ fi
 
 PATH2FIXTURES="../src/fshafas.test/fixtures"
 
-METHODS=('db:locations' 'db:journeys' 'db:stop' 'oebb:journeys' 'saarfahrplan:journeys' 'rejseplanen:journeys' 'db:journeysFromTrip' 'db:trip' 'db:departures' 'db:nearby' 'db:reachableFrom' 'db:radar' 'svv:remarks' 'svv:lines' 'db:serverInfo')
+METHODS=('oebb:locations' 'oebb:journeys' 'oebb:stop' 'oebb:journeys' 'saarfahrplan:journeys' 'rejseplanen:journeys' 'oebb:departures' 'oebb:nearby' 'oebb:reachableFrom' 'oebb:radar' 'svv:remarks' 'svv:lines' 'oebb:serverInfo')
 
 for PROFILE_METHOD in "${METHODS[@]}"; do
   readarray -d : -t strarr < <(printf '%s' "$PROFILE_METHOD")

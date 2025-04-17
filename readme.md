@@ -3,7 +3,7 @@
 Ths is a port of the JavaScript [hafas-client library](https://github.com/public-transport/hafas-client) to F#,
 a client for [HAFAS](https://de.wikipedia.org/wiki/HAFAS) public transport APIs.
 
-The hafas endpoints Db, Bvg and Svv are supported.
+The hafas endpoints Bvg, Oebb and Svv are supported.
 
 The F# library compiles to dotnet and (via [Fable](https://github.com/fable-compiler/Fable)) to JavaScript  and Python.
 

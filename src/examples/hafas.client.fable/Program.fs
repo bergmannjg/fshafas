@@ -20,7 +20,6 @@ USAGE:
 let toProfileId (p: string) : ProfileId =
     match p.ToLower() with
     | "bvg" -> Bvg
-    | "db" -> Db
     | "oebb" -> Oebb
     | "rejseplanen" -> Rejseplanen
     | "irishrail" -> Irishrail

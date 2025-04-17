@@ -1,6 +1,6 @@
 {
   "name": "fs-hafas-profiles",
-  "version": "2.9.0",
+  "version": "2.10.0",
   "description": "fshafas",
   "type": "module",
   "main": "index.js",
@@ -15,6 +15,6 @@
   "author": "Jürgen Bergmann",
   "license": "ISC",
   "dependencies": {
-    "fs-hafas-client": "^2.9.0"
+    "fs-hafas-client": "^2.10.0"
   }
 }
