@@ -131,7 +131,7 @@ let trains () =
 
     products |> Some
 
-let getLocation (client: Api.HafasAsyncClient) (name: string) =
+let getLocation (client: Api.IAsyncClient) (name: string) =
     async {
         if Regex.IsMatch(name, @"^\d+$") then
             return Some(U4.Case1 name)
@@ -183,7 +183,7 @@ let locations (name: string) =
     use client = new Api.HafasAsyncClient(profile)
 
     async {
-        let! locations = client.AsyncLocations name (Some Default.LocationsOptions)
+        let! locations = (client :> Api.IAsyncClient).AsyncLocations name (Some Default.LocationsOptions)
 
         printfn "found %d locations" locations.Length
         Printf.Short.Locations locations |> printfn "%s"
@@ -254,7 +254,7 @@ let journeys (from: string, ``to``: string, someOptions: string option) =
 
         match fromLoc, toLoc with
         | Some fromLoc, Some toLoc ->
-            let! journeys = client.AsyncJourneys fromLoc toLoc (Some options)
+            let! journeys = (client :> Api.IAsyncClient).AsyncJourneys fromLoc toLoc (Some options)
 
             Printf.Short.Journeys journeys |> printfn "%s"
         | _ -> ()
@@ -286,7 +286,7 @@ let bestPrices (from: string, ``to``: string, someOptions: string option) =
 
         match fromLoc, toLoc with
         | Some fromLoc, Some toLoc ->
-            let! journeys = client.AsyncBestPrices fromLoc toLoc (Some options)
+            let! journeys = (client :> Api.IAsyncClient).AsyncBestPrices fromLoc toLoc (Some options)
 
             match journeys.journeys with
             | Some j ->
@@ -331,7 +331,7 @@ let journeysFromTrip (tripId: string, stopover: string, departure: string, newTo
                             departure = Some departure }
 
                     return!
-                        client.AsyncJourneysFromTrip
+                        (client :> Api.IAsyncClient).AsyncJourneysFromTrip
                             tripId
                             previousStopover
                             newToLoc
@@ -352,7 +352,8 @@ let refreshJourney (refreshToken: string) =
     let options = Default.RefreshJourneyOptions
 
     async {
-        let! journey = client.AsyncRefreshJourney refreshToken (Some { options with tickets = Some true })
+        let! journey =
+            (client :> Api.IAsyncClient).AsyncRefreshJourney refreshToken (Some { options with tickets = Some true })
 
         FsHafas.Printf.Short.Journey 0 journey.journey |> printfn "%s"
     }
@@ -409,7 +410,7 @@ let departures (name: string) =
 
         match loc with
         | Some loc ->
-            let! departures = client.AsyncDepartures loc (Some options)
+            let! departures = (client :> Api.IAsyncClient).AsyncDepartures loc (Some options)
 
             let sorted =
                 departures.departures
@@ -435,7 +436,7 @@ let arrivals (name: string) =
 
         match loc with
         | Some loc ->
-            let! arrivals = client.AsyncArrivals loc (Some options)
+            let! arrivals = (client :> Api.IAsyncClient).AsyncArrivals loc (Some options)
 
             let sorted =
                 arrivals.arrivals
@@ -453,7 +454,7 @@ let trip (id: string) =
     use client = new Api.HafasAsyncClient(profile)
 
     async {
-        let! trip = client.AsyncTrip id None
+        let! trip = (client :> Api.IAsyncClient).AsyncTrip id None
 
         FsHafas.Printf.Short.Trip trip.trip |> printfn "%s"
     }
@@ -464,7 +465,7 @@ let tripsByName (name: string) =
 
     async {
         let! trips =
-            client.AsyncTripsByName
+            (client :> Api.IAsyncClient).AsyncTripsByName
                 name
                 (Some
                     { Default.TripsByNameOptions with
@@ -500,7 +501,7 @@ let nearby (lon: float, lat: float) =
 
     async {
         let! locations =
-            client.AsyncNearby
+            (client :> Api.IAsyncClient).AsyncNearby
                 { Default.Location with
                     latitude = Some lat
                     longitude = Some lon }
@@ -519,7 +520,7 @@ let reachableFrom (lon: float, lat: float) =
 
     async {
         let! durations =
-            client.AsyncReachableFrom
+            (client :> Api.IAsyncClient).AsyncReachableFrom
                 { Default.Location with
                     address = Some "unused"
                     latitude = Some lat
@@ -538,7 +539,7 @@ let radar (n: float, w: float, s: float, e: float) =
 
     async {
         let! movements =
-            client.AsyncRadar
+            (client :> Api.IAsyncClient).AsyncRadar
                 { north = n
                   west = w
                   south = s
@@ -560,7 +561,7 @@ let stop (name: string) =
 
     async {
         let! stop =
-            client.AsyncStop
+            (client :> Api.IAsyncClient).AsyncStop
                 (U2.Case1 name)
                 (Some
                     { Default.StopOptions with
@@ -574,7 +575,7 @@ let remarks () =
     use client = new Api.HafasAsyncClient(profile)
 
     async {
-        let! warnings = client.AsyncRemarks None
+        let! warnings = (client :> Api.IAsyncClient).AsyncRemarks None
 
         FsHafas.Printf.Short.Warnings warnings.remarks |> printfn "%s"
     }
@@ -584,7 +585,7 @@ let lines (name: string) =
     use client = new Api.HafasAsyncClient(profile)
 
     async {
-        let! lines = client.AsyncLines name None
+        let! lines = (client :> Api.IAsyncClient).AsyncLines name None
 
         FsHafas.Printf.Short.Lines(Option.defaultValue [||] lines.lines) |> printfn "%s"
     }
@@ -594,7 +595,7 @@ let serverInfo () =
     use client = new Api.HafasAsyncClient(profile)
 
     async {
-        let! serverInfo = client.AsyncServerInfo None
+        let! serverInfo = (client :> Api.IAsyncClient).AsyncServerInfo None
 
         printfn
             "hciVersion: %A, timetableStart: %A, timetableEnd: %A, serverTime: %A"

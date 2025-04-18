@@ -17,10 +17,7 @@ let addProxies (proxies: IProxiesBuilder) =
     )
 
 let configureApp (app: IApplicationBuilder) =
-    app
-        .UseStaticFiles()
-        .UseRouting()
-        .UseProxies(fun proxies -> proxies |> addProxies |> ignore)
+    app.UseStaticFiles().UseRouting().UseProxies(fun proxies -> proxies |> addProxies |> ignore)
     |> ignore
 
 let configureServices (services: IServiceCollection) = services.AddProxies() |> ignore

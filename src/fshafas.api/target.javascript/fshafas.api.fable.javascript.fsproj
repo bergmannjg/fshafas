@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>FsHafas.Api.JavaScript</PackageId>
+    <Authors>J. Bergmann</Authors>
+    <PackageTags>fable fsharp</PackageTags>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants>FABLE_COMPILER;FABLE_JS</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../UnionTypes.fs" />
+    <Compile Include="../ExtraTypes.fs" />
+    <Compile Include="../TypesHafasClient.fs" />
+    <Compile Include="../TypesAsyncClient.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="nuget/fshafas.fsproj; ..\**\*.fs" PackagePath="fable" />
+  </ItemGroup>
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
+</Project>

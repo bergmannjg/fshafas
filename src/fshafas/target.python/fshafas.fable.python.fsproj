@@ -14,10 +14,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../lib/Slug.fs" />
-    <Compile Include="../UnionTypes.fs" />
-    <Compile Include="../ExtraTypes.fs" />
     <Compile Include="../TypesRawHafasClient.fs" />
-    <Compile Include="../TypesHafasClient.fs" />
     <Compile Include="../Context.fs" />
     <Compile Include="../extensions/ArrayEx.fs" />
     <Compile Include="../extensions/Convert.fs" />
@@ -53,6 +50,11 @@
     <Compile Include="../Profile.fs" />
     <Compile Include="../HafasAsyncClient.fs" />
     <Compile Include="../Print.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../fshafas.api/target.python/fshafas.api.fable.python.fsproj">
+      <Name>fshafas.api.fsproj</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="nuget/fshafas.fsproj; ..\**\*.fs" PackagePath="fable" />

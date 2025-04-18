@@ -10,6 +10,9 @@
     <Compile Include="Test.fs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="../fshafas.api/target.dotnet/fshafas.api.fsproj">
+      <Name>fshafas.api.fsproj</Name>
+    </ProjectReference>
     <ProjectReference Include="../fshafas/target.dotnet/fshafas.fsproj">
       <Name>fshafas.fsproj</Name>
     </ProjectReference>

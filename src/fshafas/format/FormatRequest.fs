@@ -19,9 +19,7 @@ module internal Format =
         // workaround: missing code DateTimeOffset
         System.DateTime(year, month, day, hour, minute, 0)
 #else
-        System
-            .DateTimeOffset(year, month, day, hour, minute, 0, System.TimeSpan(tzOffset / 60, 0, 0))
-            .DateTime
+        System.DateTimeOffset(year, month, day, hour, minute, 0, System.TimeSpan(tzOffset / 60, 0, 0)).DateTime
 #endif
 
     let private maybeGetOptionValue<'a, 'b> (opt: 'a option) (getter: 'a -> 'b option) =

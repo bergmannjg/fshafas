@@ -99,3 +99,6 @@
 
 * remove db profile
 
+## 2.11.0
+
+* add fshafas api

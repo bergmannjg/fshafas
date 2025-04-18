@@ -9,7 +9,8 @@ open FsHafas.Client
 
 /// <summary>JS promise based interface corresponding to hafas-client</summary>
 type HafasClient(profile: FsHafas.Client.Profile) =
-    let client = new FsHafas.Api.HafasAsyncClient(profile :?> FsHafas.Endpoint.Profile)
+    let client =
+        new FsHafas.Api.HafasAsyncClient(profile :?> FsHafas.Endpoint.Profile) :> IAsyncClient
 
 #if FABLE_COMPILER
     [<Emit("typeof $1")>]

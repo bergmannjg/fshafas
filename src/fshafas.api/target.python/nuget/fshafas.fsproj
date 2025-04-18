@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants>FABLE_COMPILER;FABLE_PY</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="UnionTypes.fs" />
+    <Compile Include="ExtraTypes.fs" />
+    <Compile Include="TypesHafasClient.fs" />
+    <Compile Include="TypesAsyncClient.fs" />
+  </ItemGroup>
+  <Import Project="..\..\..\..\.paket\Paket.Restore.targets" />
+</Project>

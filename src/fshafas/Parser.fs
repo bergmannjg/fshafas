@@ -406,9 +406,7 @@ module Parser =
 #else
         let tzOffset = datetime.Substring(20, 2) |> int |> (*) 60
 
-        System
-            .DateTimeOffset(year, month, day, hour, minute, 0, System.TimeSpan(tzOffset / 60, 0, 0))
-            .DateTime
+        System.DateTimeOffset(year, month, day, hour, minute, 0, System.TimeSpan(tzOffset / 60, 0, 0)).DateTime
 #endif
 
     let internal parseDeparturesArrivals (``type``: string) (jnyL: FsHafas.Raw.RawJny[] option) (ctx: Context option) =

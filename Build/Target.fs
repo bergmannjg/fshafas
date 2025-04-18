@@ -7,15 +7,12 @@ open Command
 let HOME = System.Environment.GetEnvironmentVariable "HOME"
 
 let buildDotnet () =
+    dotnet "build" [ "src/fshafas.api/target.dotnet/fshafas.api.fsproj" ]
     dotnet "build" [ "src/fshafas/target.dotnet/fshafas.fsproj" ]
     dotnet "build" [ "src/fshafas.profiles/target.dotnet/fshafas.profiles.fsproj" ]
 
 let testDotnet () =
-    dotnet
-        "test"
-        [ "--verbosity"
-          "q"
-          "src/fshafas.test/fshafastest.fsproj" ]
+    dotnet "test" [ "--verbosity"; "q"; "src/fshafas.test/fshafastest.fsproj" ]
 
 let buildNupkg (version: string) (srcDir: string) (fsproj: string) (nugetDir: string) (nugetPkg: string) =
     let toDir = HOME + "/local.packages"
@@ -23,51 +20,20 @@ let buildNupkg (version: string) (srcDir: string) (fsproj: string) (nugetDir: st
     if not (Directory.Exists toDir) then
         Directory.CreateDirectory(toDir) |> ignore
 
-    dotnet
-        "pack"
-        [ "-c"
-          "Debug"
-          "/p:Version=" + version
-          (srcDir + "/" + fsproj) ]
+    dotnet "pack" [ "-c"; "Debug"; "/p:Version=" + version; (srcDir + "/" + fsproj) ]
 
-    delete (
-        HOME
-        + "/local.packages/"
-        + nugetDir
-        + "/"
-        + version
-    )
+    delete (HOME + "/local.packages/" + nugetDir + "/" + version)
 
-    let nupkgFile =
-        srcDir
-        + "/bin/Debug/"
-        + nugetPkg
-        + "."
-        + version
-        + ".nupkg"
+    let nupkgFile = srcDir + "/bin/Debug/" + nugetPkg + "." + version + ".nupkg"
 
-    nuget
-        "add"
-        [ nupkgFile
-          "-source"
-          toDir
-          "-expand" ]
+    nuget "add" [ nupkgFile; "-source"; toDir; "-expand" ]
 
-    delete (
-        HOME
-        + "/.nuget/packages/"
-        + nugetDir
-        + "/"
-        + version
-    )
+    delete (HOME + "/.nuget/packages/" + nugetDir + "/" + version)
 
 let buildDotnetNupkg (version: string) =
-    buildNupkg
-        version
-        "src/fshafas/target.dotnet"
-        "fshafas.fsproj"
-        "fshafas"
-        "FsHafas"
+    buildNupkg version "src/fshafas.api/target.dotnet" "fshafas.api.fsproj" "fshafas.api" "FsHafas.Api"
+
+    buildNupkg version "src/fshafas/target.dotnet" "fshafas.fsproj" "fshafas" "FsHafas"
 
     buildNupkg
         version
@@ -91,6 +57,14 @@ let buildJavascriptNupkg (version: string) =
         "fshafas.profiles.javascript"
         "FsHafas.Profiles.JavaScript"
 
+    buildNupkg
+        version
+        "src/fshafas.api/target.javascript"
+        "fshafas.api.fable.javascript.fsproj"
+        "fshafas.api.javascript"
+        "FsHafas.Api.JavaScript"
+
+
 let buildFableBindingNupkg (version: string) =
     buildNupkg
         version
@@ -100,9 +74,10 @@ let buildFableBindingNupkg (version: string) =
         "Hafas.Client.Bindings"
 
 let checkVersionInFile (version: string) (file: string) =
-    match File.ReadAllLines file
-          |> Array.exists (fun line -> line.Contains("\"version\": \"" + version))
-        with
+    match
+        File.ReadAllLines file
+        |> Array.exists (fun line -> line.Contains("\"version\": \"" + version))
+    with
     | true -> ()
     | false -> raise (System.ArgumentException($"version {version} not found in file {file}"))
 
@@ -162,6 +137,13 @@ let buildJavascriptTest () =
           "DotnetEqualsToJavaScript" ]
 
 let buildPythonNupkg (version: string) =
+    buildNupkg
+        version
+        "src/fshafas.api/target.python"
+        "fshafas.api.fable.python.fsproj"
+        "fshafas.api.python"
+        "FsHafas.Api.Python"
+
     buildNupkg version "src/fshafas/target.python" "fshafas.fable.python.fsproj" "fshafas.python" "FsHafas.Python"
 
     buildNupkg
@@ -174,27 +156,19 @@ let buildPythonNupkg (version: string) =
 let checkPythonVersionInFile (version: string) (file: string) =
     let splits = version.Split [| '-' |]
 
-    let version =
-        if splits.Length = 3 then
-            splits.[2]
-        else
-            version
+    let version = if splits.Length = 3 then splits.[2] else version
 
-    match File.ReadAllLines file
-          |> Array.exists (fun line -> line.Contains("version='" + version + "'"))
-        with
+    match
+        File.ReadAllLines file
+        |> Array.exists (fun line -> line.Contains("version='" + version + "'"))
+    with
     | true -> ()
     | false -> raise (System.ArgumentException($"version {version} not found in file {file}"))
 
 let buildPython (version: string) =
     checkPythonVersionInFile version "src/fshafas.python.package/setup.py"
 
-    dotnet
-        "fable"
-        [ "src/fshafas.python.package/fshafas.fsproj"
-          "--lang"
-          "Python"
-          "--noCache" ]
+    dotnet "fable" [ "src/fshafas.python.package/fshafas.fsproj"; "--lang"; "Python"; "--noCache" ]
 
     delete "src/fshafas.python.package/fshafas/fable_modules/"
 

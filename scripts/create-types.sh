@@ -41,7 +41,7 @@ npx ts2fable node_modules/@types/hafas-client/index.d.ts HafasClientTypes.fs
 
 sed -i '/jsNative/d' HafasClientTypes.fs
 
-TARGET="../../src/fshafas/TypesHafasClient.fs"
+TARGET="../../src/fshafas.api/TypesHafasClient.fs"
 
 dotnet run --project ./Transformer.fsproj FsHafas HafasClientTypes.fs ${TARGET}
 

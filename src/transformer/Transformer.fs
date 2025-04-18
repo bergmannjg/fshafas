@@ -121,7 +121,7 @@ let private visitTypeMembers (typename: string) members options =
     for m in members do
         match m with
         | SynMemberDefn.AbstractSlot(slotSig, _, _, _) -> line.AddRange(visitValSig typename slotSig options)
-        | SynMemberDefn.Inherit(baseType, _, _) ->
+        | SynMemberDefn.Inherit(Some baseType, _, _, _) ->
             let name = visitSnyType baseType options
 
             match types |> Map.tryFind name with

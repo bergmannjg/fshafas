@@ -1,21 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <RepositoryUrl>https://github.com/bergmannjg/fshafas</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageId>FsHafas.Profiles</PackageId>
+    <PackageId>FsHafas.Api</PackageId>
     <Authors>J. Bergmann</Authors>
     <PackageTags>fsharp</PackageTags>
   </PropertyGroup>
-  <Import Project="..\files.props" />
   <ItemGroup>
-    <ProjectReference Include="../../fshafas.api/target.dotnet/fshafas.api.fsproj">
-      <Name>fshafas.api.fsproj</Name>
-    </ProjectReference>
-    <ProjectReference Include="../../fshafas/target.dotnet/fshafas.fsproj">
-      <Name>fshafas.fsproj</Name>
-    </ProjectReference>
+    <Compile Include="../ExtraTypes.fs" />
+    <Compile Include="../UnionTypes.fs" />
+    <Compile Include="../TypesHafasClient.fs" />
+    <Compile Include="../TypesAsyncClient.fs" />
   </ItemGroup>
   <PropertyGroup>
     <PaketDisableGlobalRestore>true</PaketDisableGlobalRestore>

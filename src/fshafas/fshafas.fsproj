@@ -14,10 +14,7 @@
   <ItemGroup>
     <Compile Include="lib/Serializer.fs" />
     <Compile Include="lib/Slug.fs" />
-    <Compile Include="UnionTypes.fs" />
-    <Compile Include="ExtraTypes.fs" />
     <Compile Include="TypesRawHafasClient.fs" />
-    <Compile Include="TypesHafasClient.fs" />
     <Compile Include="lib/Reflect.fs" />
     <Compile Include="Context.fs" />
     <Compile Include="lib/JsonConverter.fs" />
@@ -56,6 +53,11 @@
     <Compile Include="HafasAsyncClient.fs" />
     <Compile Include="HafasClient.fs" />
     <Compile Include="Print.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../fshafas.api/target.dotnet/fshafas.api.fsproj">
+      <Name>fshafas.fsproj</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <PaketDisableGlobalRestore>true</PaketDisableGlobalRestore>
