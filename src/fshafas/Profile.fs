@@ -5,6 +5,9 @@ open FsHafas.Parser
 /// <summary>Default profile to build profiles for endpoints.</summary>
 module Profile =
 
+    /// endpoint of dummy profile to use db vendo client via {@link FsHafas.Api.HafasClient}.
+    let dbEndpoint = "https://app.vendo.noncd.db.de"
+
     let defaultProfile () =
         FsHafas.Endpoint.Profile(
             "de-DE",

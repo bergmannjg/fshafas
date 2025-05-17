@@ -102,3 +102,7 @@
 ## 2.11.0
 
 * add fshafas api
+
+## 2.12.0
+
+* add dbvendo client

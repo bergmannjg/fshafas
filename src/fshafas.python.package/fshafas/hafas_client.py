@@ -9,38 +9,44 @@ from .fable_modules.fable_library.async_ import (
     start_with_continuations, start_as_task, default_cancellation_token)
 from .fable_modules.fable_library.util import (
     create_atom, ignore, structural_hash, string_hash)
-from .fable_modules.fs_hafas_python.types_hafas_client import (Profile, IndexMap_2, Station, Stop, Location, StationStopLocation, ProductType, JourneysOptions, Journeys, RefreshJourneyOptions, Journey, StopOver, JourneysFromTripOptions, TripOptions, Trip, DeparturesArrivalsOptions,
+from .fable_modules.fs_hafas_api_python.types_hafas_client import (Profile, IndexMap_2, Station, Stop, Location, StationStopLocation, ProductType, JourneysOptions, Journeys, RefreshJourneyOptions, Journey, StopOver, JourneysFromTripOptions, TripOptions, Trip, DeparturesArrivalsOptions,
                                                                TripsWithRealtimeData, Departures, Arrivals, LocationsOptions, StopOptions, Location, NearByOptions, ReachableFromOptions, Duration, BoundingBox, RadarOptions, Radar, TripsByNameOptions, RemarksOptions, Warning, LinesOptions, Line, ServerOptions, ServerInfo)
-from .fable_modules.fs_hafas_python.hafas_async_client import (HafasAsyncClient_productsOfMode, HafasAsyncClient, HafasAsyncClient__AsyncLocations, HafasAsyncClient__AsyncJourneys, HafasAsyncClient__AsyncBestPrices, HafasAsyncClient__AsyncJourneysFromTrip, HafasAsyncClient__AsyncRefreshJourney,
-                                                               HafasAsyncClient__AsyncDepartures, HafasAsyncClient__AsyncArrivals, HafasAsyncClient__AsyncTripsByName, HafasAsyncClient__AsyncNearby, HafasAsyncClient__AsyncReachableFrom, HafasAsyncClient__AsyncRadar, HafasAsyncClient__AsyncStop, HafasAsyncClient__AsyncLines)
+from .fable_modules.fs_hafas_python.hafas_async_client import (HafasAsyncClient_productsOfMode, HafasAsyncClient)
+from .fable_modules.db_vendo_python.db_vendo_async_client import (DbVendoAsyncClient)
 from .fable_modules.fs_hafas_python.context import (
     Profile as InternalProfile)
-from .fable_modules.fs_hafas_python.lib.transformations import (
-    Default_LocationsOptions, Default_JourneysOptions, Default_Location, Default_DeparturesArrivalsOptions)
+from .fable_modules.fs_hafas_api_python.defaults import (
+    LocationsOptions as Default_LocationsOptions, JourneysOptions as Default_JourneysOptions, Location as Default_Location, DeparturesArrivalsOptions as Default_DeparturesArrivalsOptions)
 
 # todo: implement all methods of HafasAsyncClient
 
-
+def _isDbVendoProfile(profile: Any):
+    return profile.endpoint == "https://app.vendo.noncd.db.de"
+    
 def _checkProfileType(profile: Any):
     # check, if profile is from fshafas.fable_modules.fs_hafas_profiles_python classes
-    if not isinstance(profile, InternalProfile):
+    if _isDbVendoProfile(profile): 
+        return
+    elif not isinstance(profile, InternalProfile):
         raise TypeError(
             "argument profile: type from fshafas.fable_modules.fs_hafas_profiles_python expected ")
-
 
 class HafasClient(IDisposable):
     def __init__(self, profile: Profile) -> None:
         _checkProfileType(profile)
 
         self.profile = profile
-        self.asyncClient = HafasAsyncClient(self.profile)
+        if _isDbVendoProfile(profile):
+            self.asyncClient = DbVendoAsyncClient()
+        else:
+            self.asyncClient = HafasAsyncClient(self.profile)
 
     async def _journeys(self, _from: Union[str, Station, Stop, Location], _to: Union[str, Station, Stop, Location], opt: Optional[JourneysOptions] = None) -> Journeys:
         def generate() -> Async[Journeys]:
             def bind(_arg1: Journeys) -> Async[Journeys]:
                 return singleton.Return(_arg1)
 
-            return singleton.Bind(HafasAsyncClient__AsyncJourneys(self.asyncClient, _from, _to, opt), bind)
+            return singleton.Bind(self.asyncClient.AsyncJourneys(_from, _to, opt), bind)
 
         return await start_as_task(singleton.Delay(generate))
 
@@ -79,7 +85,7 @@ class HafasClient(IDisposable):
             def bind(_arg1: Journeys) -> Async[Journeys]:
                 return singleton.Return(_arg1)
 
-            return singleton.Bind(HafasAsyncClient__AsyncBestPrices(self.asyncClient, _from, _to, opt), bind)
+            return singleton.Bind(self.asyncClient.AsyncBestPrices( _from, _to, opt), bind)
 
         return await start_as_task(singleton.Delay(generate))
 
@@ -93,7 +99,7 @@ class HafasClient(IDisposable):
             def bind(_arg1: Departures) -> Async[Departures]:
                 return singleton.Return(_arg1)
 
-            return singleton.Bind(HafasAsyncClient__AsyncDepartures(self.asyncClient, name, opt), bind)
+            return singleton.Bind(self.asyncClient.AsyncDepartures(name, opt), bind)
 
         return await start_as_task(singleton.Delay(generate))
 
@@ -107,7 +113,7 @@ class HafasClient(IDisposable):
             def bind(_arg1: Arrivals) -> Async[Arrivals]:
                 return singleton.Return(_arg1)
 
-            return singleton.Bind(HafasAsyncClient__AsyncArrivals(self.asyncClient, name, opt), bind)
+            return singleton.Bind(self.asyncClient.AsyncArrivals(name, opt), bind)
 
         return await start_as_task(singleton.Delay(generate))
 
@@ -126,7 +132,7 @@ class HafasClient(IDisposable):
             def bind(_arg1: List[Any]) -> Async[List[Any]]:
                 return singleton.Return(_arg1)
 
-            return singleton.Bind(HafasAsyncClient__AsyncLocations(self.asyncClient, name, opt), bind)
+            return singleton.Bind(self.asyncClient.AsyncLocations(name, opt), bind)
 
         return await start_as_task(singleton.Delay(generate))
 
@@ -142,7 +148,7 @@ class HafasClient(IDisposable):
             def bind(_arg1: List[Any]) -> Async[List[Any]]:
                 return singleton.Return(_arg1)
 
-            return singleton.Bind(HafasAsyncClient__AsyncNearby(self.asyncClient, l, opt), bind)
+            return singleton.Bind(self.asyncClient.AsyncNearby(l, opt), bind)
 
         return await start_as_task(singleton.Delay(generate))
 
@@ -155,7 +161,7 @@ class HafasClient(IDisposable):
             def bind(_arg1: Radar) -> Async[Radar]:
                 return singleton.Return(_arg1)
 
-            return singleton.Bind(HafasAsyncClient__AsyncRadar(self.asyncClient, rect, opt), bind)
+            return singleton.Bind(self.asyncClient.AsyncRadar(rect, opt), bind)
 
         return await start_as_task(singleton.Delay(generate))
 
@@ -171,7 +177,7 @@ class HafasClient(IDisposable):
             def bind(_arg1: TripsWithRealtimeData) -> Async[TripsWithRealtimeData]:
                 return singleton.Return(_arg1)
 
-            return singleton.Bind(HafasAsyncClient__AsyncTripsByName(self.asyncClient, name, opt), bind)
+            return singleton.Bind(self.asyncClient.AsyncTripsByName(name, opt), bind)
 
         return await start_as_task(singleton.Delay(generate))
 

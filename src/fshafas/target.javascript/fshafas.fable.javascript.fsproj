@@ -56,6 +56,9 @@
     <ProjectReference Include="../../fshafas.api/target.javascript/fshafas.api.fable.javascript.fsproj">
       <Name>fshafas.api.fsproj</Name>
     </ProjectReference>
+    <ProjectReference Include="../../dbvendo/target.javascript/dbvendo.fable.javascript.fsproj">
+      <Name>dbvendo.fsproj</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="nuget/fshafas.fsproj; ..\**\*.fs" PackagePath="fable" />

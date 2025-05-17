@@ -1,7 +1,8 @@
-version 6.2.1
 framework: auto-detect
 storage: none
 source https://api.nuget.org/v3/index.json
+
+nuget NETStandard.Library
 
 nuget FSharp.SystemTextJson
 nuget Polyliner.Net
@@ -26,11 +27,14 @@ nuget FSharp.Compiler.Service
 
 source ~/local.packages
 
-nuget FsHafas = 2.11.0
-nuget FsHafas.Api = 2.11.0
-nuget FsHafas.Profiles = 2.11.0
-nuget FsHafas.JavaScript = 2.11.0
-nuget FsHafas.Profiles.JavaScript = 2.11.0
-nuget FsHafas.Python = 2.11.0-beta-0.0.211
-nuget FsHafas.Profiles.Python = 2.11.0-beta-0.0.211
+nuget FsHafas = 2.12.0.
+nuget FsHafas.Api = 2.12.0
+nuget DbVendo = 2.12.0
+nuget FsHafas.Profiles = 2.12.0
+nuget FsHafas.JavaScript = 2.12.0
+nuget DbVendo.JavaScript = 2.12.0
+nuget FsHafas.Profiles.JavaScript = 2.12.0
+nuget DbVendo.Python = 2.12.0-beta-0.0.212
+nuget FsHafas.Python = 2.12.0-beta-0.0.212
+nuget FsHafas.Profiles.Python = 2.12.0-beta-0.0.212
 nuget Hafas.Client.Bindings = 6.3.0

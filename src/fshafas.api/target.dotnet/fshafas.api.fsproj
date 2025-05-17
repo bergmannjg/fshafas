@@ -2,16 +2,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RepositoryUrl>https://github.com/bergmannjg/fshafas</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageId>FsHafas.Api</PackageId>
-    <Authors>J. Bergmann</Authors>
     <PackageTags>fsharp</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../ExtraTypes.fs" />
     <Compile Include="../UnionTypes.fs" />
     <Compile Include="../TypesHafasClient.fs" />
+    <Compile Include="../Defaults.fs" />
+    <Compile Include="../Print.fs" />
     <Compile Include="../TypesAsyncClient.fs" />
   </ItemGroup>
   <PropertyGroup>

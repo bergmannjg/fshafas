@@ -102,8 +102,32 @@ module Api =
         | Oebb
         | Rejseplanen
 
-    [<Import("profile as dbProfile", from = "hafas-client/p/db/index.js")>]
-    let dbProfile: Profile = jsNative
+    let private endpoint = "https://app.vendo.noncd.db.de"
+
+    // dummy profile to use db vendo client with dbnav profile
+    let dbProfile: Profile =
+        { new Profile with
+            member _.locale = ""
+            member _.timezone = ""
+            member _.endpoint = endpoint
+            member _.products = [||]
+            member _.trip = None
+            member _.radar = None
+            member _.refreshJourney = None
+            member _.reachableFrom = None
+            member _.journeysWalkingSpeed = None
+            member _.tripsByName = None
+            member _.remarks = None
+            member _.journeysFromTrip = None
+            member _.remarksGetPolyline = None
+            member _.lines = None }
+
+    [<Import("profile as dbnavProfile", from = "db-vendo-client/p/dbnav/index.js")>]
+    let private dbnavProfile: obj = jsNative
+
+    [<Import("createClient as createDbVendoClient", from = "db-vendo-client")>]
+    [<Emit("createDbVendoClient($1, 'db-vendo-client bindings')")>]
+    let private createDbVendoClient (_: obj) : HafasClient = jsNative
 
     [<Import("profile as bvgProfile", from = "hafas-client/p/bvg/index.js")>]
     let bvgProfile: Profile = jsNative
@@ -117,45 +141,46 @@ module Api =
     [<Import("profile as rejseplanenProfile", from = "hafas-client/p/rejseplanen/index.js")>]
     let rejseplanenProfile: Profile = jsNative
 
-    [<Import("createClient as _createClient", from = "hafas-client")>]
-    [<Emit("_createClient($1, 'agent')")>]
-    let private _createClient (_: Profile) : HafasClient = jsNative
+    [<Import("createClient as createHafasClient", from = "hafas-client")>]
+    [<Emit("createHafasClient($1, 'agent')")>]
+    let private createHafasClient (_: Profile) : HafasClient = jsNative
+
+    [<Emit("""function deleteProperties (opt, arr1, arr2) { 
+            arr1.forEach(property => { if (property in opt && !opt[property]) { delete opt[property]; } });
+            arr2.forEach(property => { if (property in opt) { delete opt[property]; } }); 
+            return opt;
+    }""")>]
+    let private deleteProperties () : unit = jsNative
+
+    deleteProperties ()
 
     [<Emit("""{ 
-            const _journeys = $0.journeys;
-            function journeys(f, t, opt) { 
-                $1.forEach(property => { if (property in opt && !opt[property]) { delete opt[property]; } });
-                $2.forEach(property => { if (property in opt) { delete opt[property]; } }); 
-                return _journeys(f, t, opt); 
-            } 
-            $0.journeys = journeys; 
+        const _journeys = $0.journeys;
+        function journeys(f, t, opt) { return _journeys(f, t, (deleteProperties(opt, $1, $2))); } 
+        $0.journeys = journeys; 
     }""")>]
     let private deleteJourneysProperties (_: HafasClient, _: string[], _: string[]) : unit = jsNative
 
     [<Emit("""{ 
-            const _departures = $0.departures;
-            function departures(s, opt) { 
-                $1.forEach(property => { if (property in opt && !opt[property]) { delete opt[property]; } });
-                $2.forEach(property => { if (property in opt) { delete opt[property]; } }); 
-                return _departures(s, opt); 
-            } 
-            $0.departures = departures; 
+        const _departures = $0.departures;
+        function departures(s, opt) { return _departures(s, (deleteProperties(opt, $1, $2))); } 
+        $0.departures = departures; 
     }""")>]
     let private deleteDeparturesProperties (_: HafasClient, _: string[], _: string[]) : unit = jsNative
 
     [<Emit("""{ 
-            const _arrivals = $0.arrivals;
-            function arrivals(s, opt) { 
-                $1.forEach(property => { if (property in opt && !opt[property]) { delete opt[property]; } });
-                $2.forEach(property => { if (property in opt) { delete opt[property]; } }); 
-                return _arrivals(s, opt); 
-            } 
-            $0.arrivals = arrivals; 
+        const _arrivals = $0.arrivals;
+        function arrivals(s, opt) { return _arrivals(s, (deleteProperties(opt, $1, $2))); } 
+        $0.arrivals = arrivals; 
     }""")>]
     let private deleteArrivalsProperties (_: HafasClient, _: string[], _: string[]) : unit = jsNative
 
     let createClient (profile: Profile) : HafasClient =
-        let client = _createClient profile
+        let client =
+            if profile.endpoint = endpoint then
+                createDbVendoClient dbnavProfile
+            else
+                createHafasClient profile
 
         // see https://github.com/public-transport/hafas-client/blob/9f85a9af54c95eed91ce04c7e7fdaabbab30c8f5/index.js#L101
         deleteJourneysProperties (client, [| "departure"; "arrival"; "earlierThan"; "laterThan"; "age" |], [||])

@@ -2,15 +2,19 @@ namespace FsHafas.Api
 
 open FsHafas.Client
 
+/// <namespacedoc>
+///   <summary>Types to build clients for hafas endpoints</summary>
+/// </namespacedoc>
+/// <summary>common F# async based interface for hafas endpoints and db vendo endpoint</summary>
 type IAsyncClient =
     abstract member AsyncJourneys:
-        from: U4<string, Station, Stop, Location> ->
+        frm: U4<string, Station, Stop, Location> ->
         ``to``: U4<string, Station, Stop, Location> ->
         opt: JourneysOptions option ->
             Async<Journeys>
 
     abstract member AsyncBestPrices:
-        from: U4<string, Station, Stop, Location> ->
+        frm: U4<string, Station, Stop, Location> ->
         ``to``: U4<string, Station, Stop, Location> ->
         opt: JourneysOptions option ->
             Async<Journeys>
@@ -49,4 +53,3 @@ type IAsyncClient =
 
     abstract member AsyncLines: query: string -> opt: LinesOptions option -> Async<LinesWithRealtimeData>
     abstract member AsyncServerInfo: opt: ServerOptions option -> Async<ServerInfo>
-

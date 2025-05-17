@@ -2,6 +2,9 @@ namespace FsHafas.Endpoint
 
 open FsHafas.Client
 
+/// <namespacedoc>
+///   <summary>Types to build profiles for endpoints</summary>
+/// </namespacedoc>
 /// <exclude>Options</exclude>
 type Options =
     { remarks: bool

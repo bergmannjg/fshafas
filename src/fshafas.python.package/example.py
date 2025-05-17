@@ -1,7 +1,8 @@
 import asyncio
 import sys
-from fshafas import HafasClient
+from fshafas.hafas_client import (HafasClient)
 from fshafas.profiles import db_profile
+from fshafas.profiles import oebb_profile
 
 async def main(argv) -> int:
     with HafasClient(db_profile) as client:

@@ -49,9 +49,16 @@ jobs:
       - name: Setup dotnet tools
         run: dotnet tool restore
       - name: build fshafas
-        run: dotnet build src/fshafas/fshafas.fsproj
+        run: |
+          dotnet build src/fshafas.api/target.dotnet/fshafas.api.fsproj
+          dotnet build src/dbvendo/target.dotnet/dbvendo.fsproj
+          dotnet build src/fshafas/target.dotnet/fshafas.fsproj
+          dotnet build src/fshafas.profiles/target.dotnet/fshafas.profiles.fsproj
       - name: build f# docs
-        run: dotnet fsdocs build --clean --input src/fshafas/docs --output output/fshafas
+        run: |
+          cd src
+          dotnet build fshafas.docs.fsproj
+          dotnet fsdocs build --clean --input fshafas/docs/ --output ../output/fshafas --projects fshafas.docs.fsproj
       - name: build js docs
         run: |
           cd src/fshafas.javascript.package/typedoc

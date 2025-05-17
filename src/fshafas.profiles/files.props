@@ -4,6 +4,7 @@
     <Compile Include="../bvg/Request.fs" />
     <Compile Include="../bvg/Products.fs" />
     <Compile Include="../bvg/Profile.fs" />
+    <Compile Include="../db/Profile.fs" />
     <Compile Include="../mobilnrw/Request.fs" />
     <Compile Include="../mobilnrw/Products.fs" />
     <Compile Include="../mobilnrw/Profile.fs" />

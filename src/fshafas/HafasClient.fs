@@ -10,7 +10,10 @@ open FsHafas.Client
 /// <summary>JS promise based interface corresponding to hafas-client</summary>
 type HafasClient(profile: FsHafas.Client.Profile) =
     let client =
-        new FsHafas.Api.HafasAsyncClient(profile :?> FsHafas.Endpoint.Profile) :> IAsyncClient
+        if profile.endpoint = "https://app.vendo.noncd.db.de" then // see FsHafas.Profiles.Db.profile
+            new DbVendo.Api.DbVendoAsyncClient() :> IAsyncClient
+        else
+            new FsHafas.Api.HafasAsyncClient(profile :?> FsHafas.Endpoint.Profile) :> IAsyncClient
 
 #if FABLE_COMPILER
     [<Emit("typeof $1")>]

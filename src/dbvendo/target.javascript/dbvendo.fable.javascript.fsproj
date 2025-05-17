@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>DbVendo.JavaScript</PackageId>
+    <Authors>J. Bergmann</Authors>
+    <PackageTags>fable fsharp</PackageTags>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants>FABLE_COMPILER;FABLE_JS</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../TypesRawDbVendoClient.fs" />
+    <Compile Include="../lib/Request.fs" />
+    <Compile Include="../lib/Serializer.fs" />
+    <Compile Include="../Option.fs" />
+    <Compile Include="../Products.fs" />
+    <Compile Include="../FormatRequest.fs" />
+    <Compile Include="../parse/Location.fs" />
+    <Compile Include="../parse/Journey.fs" />
+    <Compile Include="../parse/Trip.fs" />
+    <Compile Include="../parse/Stop.fs" />
+    <Compile Include="../parse/StationBoard.fs" />
+    <Compile Include="../DbVendoAsyncClient.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../fshafas.api/target.javascript/fshafas.api.fable.javascript.fsproj">
+      <Name>fshafas.api.fsproj</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="nuget/dbvendo.fsproj; ..\**\*.fs" PackagePath="fable" />
+  </ItemGroup>
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
+</Project>

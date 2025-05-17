@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <PackageTags>fsharp</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../lib/Serializer.fs" />
+    <Compile Include="../lib/JsonConverter.fs" />
+    <Compile Include="../TypesRawDbVendoClient.fs" />
+    <Compile Include="../lib/Request.fs" />
+    <Compile Include="../Option.fs" />
+    <Compile Include="../Products.fs" />
+    <Compile Include="../FormatRequest.fs" />
+    <Compile Include="../parse/Location.fs" />
+    <Compile Include="../parse/Journey.fs" />
+    <Compile Include="../parse/Trip.fs" />
+    <Compile Include="../parse/Stop.fs" />
+    <Compile Include="../parse/StationBoard.fs" />
+    <Compile Include="../DbVendoAsyncClient.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../fshafas.api/target.dotnet/fshafas.api.fsproj">
+      <Name>fshafas.api.fsproj</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <PaketDisableGlobalRestore>true</PaketDisableGlobalRestore>
+  </PropertyGroup>
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
+</Project>

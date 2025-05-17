@@ -11,11 +11,19 @@ type U3<'a, 'b, 'c> =
     | Case2 of 'b
     | Case3 of 'c
 
+
 type U4<'a, 'b, 'c, 'd> =
     | Case1 of 'a
     | Case2 of 'b
     | Case3 of 'c
     | Case4 of 'd
+
+type U5<'a, 'b, 'c, 'd, 'e> =
+    | Case1 of 'a
+    | Case2 of 'b
+    | Case3 of 'c
+    | Case4 of 'd
+    | Case5 of 'e
 
 #endif
 
@@ -27,6 +35,8 @@ type U2<'a, 'b> = Fable.Core.U2<'a, 'b>
 type U3<'a, 'b, 'c> = Fable.Core.U3<'a, 'b, 'c>
 
 type U4<'a, 'b, 'c, 'd> = Fable.Core.U4<'a, 'b, 'c, 'd>
+
+type U5<'a, 'b, 'c, 'd, 'e> = Fable.Core.U5<'a, 'b, 'c, 'd, 'e>
 #endif
 
 type U14<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n> =

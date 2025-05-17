@@ -9,6 +9,7 @@ open Fable.Core.JsInterop
 
 open FsHafas
 open FsHafas.Client
+open DbVendo.Client
 
 open Arguments
 
@@ -29,7 +30,7 @@ type CliArguments =
     | Radar of north: float * west: float * south: float * east: float
     | Lines of name: string
     | ServerInfo
-    | Profile of FsHafas.Endpoint.Profile
+    | Profile of FsHafas.Client.Profile
     | Debug
     | Help
 
@@ -47,7 +48,7 @@ OPTIONS:
     --journeys <from> <to>
                           get journeys, e.g. Hannover Berlin.
     --journeys <from> <to> <options>
-                          get journeys, e.g. Hannover "Berlin-Spandau" "ProductId:national;Transfers:0".
+                          get journeys, e.g. Hannover "Berlin-Spandau" "ProductId:national;Bahncard:25:2".
     --journeysfromtrip <tripId> <prevStopId> <prevStopDepature> <newToId>
                           get journeys from  <prevStopId> of trip <tripId> to new target <newToId>.
     --departures <name>   get Departures, e.g. Hannover.
@@ -69,6 +70,7 @@ OPTIONS:
 
 let toProfile s =
     match s with
+    | "db" -> FsHafas.Profiles.Db.profile
     | "bvg" -> FsHafas.Profiles.Bvg.profile
     | "mobilnrw" -> FsHafas.Profiles.MobilNrw.profile
     | "oebb" -> FsHafas.Profiles.Oebb.profile
@@ -104,9 +106,16 @@ let maybeArray (choose: ('a -> array<'b>)) option =
     | Some v -> choose v
     | None -> [||]
 
-let mutable profile = FsHafas.Profiles.Oebb.profile
+let mutable profile: FsHafas.Client.Profile = FsHafas.Profiles.Oebb.profile
 
-printfn "%s" (profile :> FsHafas.Client.Profile).locale
+let isDbVendoProfile (profile: FsHafas.Client.Profile) =
+    profile.endpoint = FsHafas.Profiles.Db.profile.endpoint
+
+let createAsyncClient (profile: FsHafas.Client.Profile) : Api.IAsyncClient =
+    if isDbVendoProfile profile then
+        new DbVendo.Api.DbVendoAsyncClient()
+    else
+        new Api.HafasAsyncClient(profile :?> FsHafas.Endpoint.Profile)
 
 let productsOfId (id: string) =
     let products = Products(false)
@@ -154,7 +163,7 @@ let AsyncRunCatched (computation: Async<unit>) =
         | Choice2Of2 ext ->
             match ext with
             | :? (HafasError) as ex -> printfn "hafas error: %s %s" ex.code ex.Message
-            | e -> printfn "error: %s" e.Message
+            | e -> printfn "error: %s %s" e.Message e.StackTrace
 
             return ()
     }
@@ -180,10 +189,10 @@ let AsyncRun (computation: Async<unit>) =
 #endif
 
 let locations (name: string) =
-    use client = new Api.HafasAsyncClient(profile)
+    let client = createAsyncClient (profile)
 
     async {
-        let! locations = (client :> Api.IAsyncClient).AsyncLocations name (Some Default.LocationsOptions)
+        let! locations = client.AsyncLocations name (Some Default.LocationsOptions)
 
         printfn "found %d locations" locations.Length
         Printf.Short.Locations locations |> printfn "%s"
@@ -233,20 +242,23 @@ let getJourneyOptions (options: string) =
         Default.JourneysOptions
 
 let journeys (from: string, ``to``: string, someOptions: string option) =
-    use client = new Api.HafasAsyncClient(profile)
+    let client = createAsyncClient (profile)
 
-    let options =
+    let extraOptions =
         match someOptions with
         | Some options -> getJourneyOptions options
-        | None ->
-            { Default.JourneysOptions with
-                results = Some 4
-                products = (products ())
-                stopovers = None
-                polylines = Some true
-                scheduledDays = Some true
-                tickets = Some true
-                routingMode = Some RoutingMode.REALTIME }
+        | None -> Default.JourneysOptions
+
+    let options =
+        { extraOptions with
+            departure = Some(System.DateTime.Now)
+            results = Some 4
+            products = (products ())
+            stopovers = None
+            polylines = Some true
+            scheduledDays = Some true
+            tickets = Some true
+            routingMode = Some RoutingMode.REALTIME }
 
     async {
         let! fromLoc = getLocation client from
@@ -254,7 +266,7 @@ let journeys (from: string, ``to``: string, someOptions: string option) =
 
         match fromLoc, toLoc with
         | Some fromLoc, Some toLoc ->
-            let! journeys = (client :> Api.IAsyncClient).AsyncJourneys fromLoc toLoc (Some options)
+            let! journeys = client.AsyncJourneys fromLoc toLoc (Some options)
 
             Printf.Short.Journeys journeys |> printfn "%s"
         | _ -> ()
@@ -271,7 +283,7 @@ let addDays (dt: System.DateTime, h: int) : System.DateTime = dt.AddDays(h)
 #endif
 
 let bestPrices (from: string, ``to``: string, someOptions: string option) =
-    use client = new Api.HafasAsyncClient(profile)
+    let client = createAsyncClient (profile)
 
     let options =
         { Default.JourneysOptions with
@@ -286,7 +298,7 @@ let bestPrices (from: string, ``to``: string, someOptions: string option) =
 
         match fromLoc, toLoc with
         | Some fromLoc, Some toLoc ->
-            let! journeys = (client :> Api.IAsyncClient).AsyncBestPrices fromLoc toLoc (Some options)
+            let! journeys = client.AsyncBestPrices fromLoc toLoc (Some options)
 
             match journeys.journeys with
             | Some j ->
@@ -305,7 +317,7 @@ let bestPrices (from: string, ``to``: string, someOptions: string option) =
     |> AsyncRun
 
 let journeysFromTrip (tripId: string, stopover: string, departure: string, newTo: string) =
-    use client = new Api.HafasAsyncClient(FsHafas.Profiles.Oebb.profile)
+    let client = createAsyncClient (FsHafas.Profiles.Oebb.profile)
 
     async {
         let! journeys =
@@ -331,7 +343,7 @@ let journeysFromTrip (tripId: string, stopover: string, departure: string, newTo
                             departure = Some departure }
 
                     return!
-                        (client :> Api.IAsyncClient).AsyncJourneysFromTrip
+                        client.AsyncJourneysFromTrip
                             tripId
                             previousStopover
                             newToLoc
@@ -348,12 +360,11 @@ let journeysFromTrip (tripId: string, stopover: string, departure: string, newTo
 let refreshJourney (refreshToken: string) =
     printfn "refreshJourney: %s" refreshToken
 
-    use client = new Api.HafasAsyncClient(profile)
+    let client = createAsyncClient (profile)
     let options = Default.RefreshJourneyOptions
 
     async {
-        let! journey =
-            (client :> Api.IAsyncClient).AsyncRefreshJourney refreshToken (Some { options with tickets = Some true })
+        let! journey = client.AsyncRefreshJourney refreshToken (Some { options with tickets = Some true })
 
         FsHafas.Printf.Short.Journey 0 journey.journey |> printfn "%s"
     }
@@ -399,7 +410,7 @@ let sortBy (key: 'a -> 'b) (arr: array<'a>) : array<'a> = Array.sortBy key arr
 #endif
 
 let departures (name: string) =
-    use client = new Api.HafasAsyncClient(profile)
+    let client = createAsyncClient (profile)
 
     let options =
         { Default.DeparturesArrivalsOptions with
@@ -410,7 +421,7 @@ let departures (name: string) =
 
         match loc with
         | Some loc ->
-            let! departures = (client :> Api.IAsyncClient).AsyncDepartures loc (Some options)
+            let! departures = client.AsyncDepartures loc (Some options)
 
             let sorted =
                 departures.departures
@@ -425,7 +436,7 @@ let departures (name: string) =
     |> AsyncRun
 
 let arrivals (name: string) =
-    use client = new Api.HafasAsyncClient(profile)
+    let client = createAsyncClient (profile)
 
     let options =
         { Default.DeparturesArrivalsOptions with
@@ -436,7 +447,7 @@ let arrivals (name: string) =
 
         match loc with
         | Some loc ->
-            let! arrivals = (client :> Api.IAsyncClient).AsyncArrivals loc (Some options)
+            let! arrivals = client.AsyncArrivals loc (Some options)
 
             let sorted =
                 arrivals.arrivals
@@ -451,21 +462,21 @@ let arrivals (name: string) =
     |> AsyncRun
 
 let trip (id: string) =
-    use client = new Api.HafasAsyncClient(profile)
+    let client = createAsyncClient (profile)
 
     async {
-        let! trip = (client :> Api.IAsyncClient).AsyncTrip id None
+        let! trip = client.AsyncTrip id None
 
         FsHafas.Printf.Short.Trip trip.trip |> printfn "%s"
     }
     |> AsyncRun
 
 let tripsByName (name: string) =
-    use client = new Api.HafasAsyncClient(profile)
+    let client = createAsyncClient (profile)
 
     async {
         let! trips =
-            (client :> Api.IAsyncClient).AsyncTripsByName
+            client.AsyncTripsByName
                 name
                 (Some
                     { Default.TripsByNameOptions with
@@ -497,11 +508,11 @@ let tripsByName (name: string) =
     |> AsyncRun
 
 let nearby (lon: float, lat: float) =
-    use client = new Api.HafasAsyncClient(profile)
+    let client = createAsyncClient (profile)
 
     async {
         let! locations =
-            (client :> Api.IAsyncClient).AsyncNearby
+            client.AsyncNearby
                 { Default.Location with
                     latitude = Some lat
                     longitude = Some lon }
@@ -516,11 +527,11 @@ let nearby (lon: float, lat: float) =
     |> AsyncRun
 
 let reachableFrom (lon: float, lat: float) =
-    use client = new Api.HafasAsyncClient(profile)
+    let client = createAsyncClient (profile)
 
     async {
         let! durations =
-            (client :> Api.IAsyncClient).AsyncReachableFrom
+            client.AsyncReachableFrom
                 { Default.Location with
                     address = Some "unused"
                     latitude = Some lat
@@ -535,11 +546,11 @@ let reachableFrom (lon: float, lat: float) =
     |> AsyncRun
 
 let radar (n: float, w: float, s: float, e: float) =
-    use client = new Api.HafasAsyncClient(profile)
+    let client = createAsyncClient (profile)
 
     async {
         let! movements =
-            (client :> Api.IAsyncClient).AsyncRadar
+            client.AsyncRadar
                 { north = n
                   west = w
                   south = s
@@ -557,11 +568,11 @@ let radar (n: float, w: float, s: float, e: float) =
     |> AsyncRun
 
 let stop (name: string) =
-    use client = new Api.HafasAsyncClient(profile)
+    let client = createAsyncClient (profile)
 
     async {
         let! stop =
-            (client :> Api.IAsyncClient).AsyncStop
+            client.AsyncStop
                 (U2.Case1 name)
                 (Some
                     { Default.StopOptions with
@@ -572,30 +583,30 @@ let stop (name: string) =
     |> AsyncRun
 
 let remarks () =
-    use client = new Api.HafasAsyncClient(profile)
+    let client = createAsyncClient (profile)
 
     async {
-        let! warnings = (client :> Api.IAsyncClient).AsyncRemarks None
+        let! warnings = client.AsyncRemarks None
 
         FsHafas.Printf.Short.Warnings warnings.remarks |> printfn "%s"
     }
     |> AsyncRun
 
 let lines (name: string) =
-    use client = new Api.HafasAsyncClient(profile)
+    let client = createAsyncClient (profile)
 
     async {
-        let! lines = (client :> Api.IAsyncClient).AsyncLines name None
+        let! lines = client.AsyncLines name None
 
         FsHafas.Printf.Short.Lines(Option.defaultValue [||] lines.lines) |> printfn "%s"
     }
     |> AsyncRun
 
 let serverInfo () =
-    use client = new Api.HafasAsyncClient(profile)
+    let client = createAsyncClient (profile)
 
     async {
-        let! serverInfo = (client :> Api.IAsyncClient).AsyncServerInfo None
+        let! serverInfo = client.AsyncServerInfo None
 
         printfn
             "hciVersion: %A, timetableStart: %A, timetableEnd: %A, serverTime: %A"
@@ -631,9 +642,6 @@ let run (arg: CliArguments) =
 [<EntryPoint>]
 let main argv =
     try
-#if !FABLE_PY
-        Api.HafasAsyncClient.initSerializer ()
-#endif
         argv |> Array.toList |> parse |> List.iter run
     with e ->
         printfn "main error: %s %A" e.Message e.StackTrace

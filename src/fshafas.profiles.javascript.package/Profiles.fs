@@ -3,6 +3,7 @@ module App
 let getProfile (profile: string) =
     match profile.ToLower() with
     | "bvg" -> FsHafas.Profiles.Bvg.profile :> FsHafas.Client.Profile
+    | "db" -> FsHafas.Profiles.Db.profile :> FsHafas.Client.Profile
     | "mobilnrw" -> FsHafas.Profiles.MobilNrw.profile :> FsHafas.Client.Profile
     | "oebb" -> FsHafas.Profiles.Oebb.profile :> FsHafas.Client.Profile
     | "rejseplanen" -> FsHafas.Profiles.Rejseplanen.profile :> FsHafas.Client.Profile

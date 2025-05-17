@@ -55,26 +55,26 @@ module internal RawRequestEx =
 
 #if FABLE_JS
 
-    let private decoderU14
-        : Decoder<
-              U14<
-                  LocMatchRequest,
-                  TripSearchRequest,
-                  JourneyDetailsRequest,
-                  StationBoardRequest,
-                  ReconstructionRequest,
-                  JourneyMatchRequest,
-                  LocGeoPosRequest,
-                  LocGeoReachRequest,
-                  LocDetailsRequest,
-                  JourneyGeoPosRequest,
-                  HimSearchRequest,
-                  LineMatchRequest,
-                  ServerInfoRequest,
-                  SearchOnTripRequest
-               >
-           > =
+    let private decoderU14<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n>
+        : Decoder<U14<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n>> =
         Decode.object (fun get -> raise (System.Exception("nyi")))
+
+    let inline private encoderU14' (u: U14<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n>) =
+        match u with
+        | U14.Case1 r -> r |> Encode.Auto.generateEncoderCached<'a> (caseStrategy = CamelCase)
+        | U14.Case2 r -> r |> Encode.Auto.generateEncoderCached<'b> (caseStrategy = CamelCase)
+        | U14.Case3 r -> r |> Encode.Auto.generateEncoderCached<'c> (caseStrategy = CamelCase)
+        | U14.Case4 r -> r |> Encode.Auto.generateEncoderCached<'d> (caseStrategy = CamelCase)
+        | U14.Case5 r -> r |> Encode.Auto.generateEncoderCached<'e> (caseStrategy = CamelCase)
+        | U14.Case6 r -> r |> Encode.Auto.generateEncoderCached<'f> (caseStrategy = CamelCase)
+        | U14.Case7 r -> r |> Encode.Auto.generateEncoderCached<'g> (caseStrategy = CamelCase)
+        | U14.Case8 r -> r |> Encode.Auto.generateEncoderCached<'h> (caseStrategy = CamelCase)
+        | U14.Case9 r -> r |> Encode.Auto.generateEncoderCached<'i> (caseStrategy = CamelCase)
+        | U14.Case10 r -> r |> Encode.Auto.generateEncoderCached<'j> (caseStrategy = CamelCase)
+        | U14.Case11 r -> r |> Encode.Auto.generateEncoderCached<'k> (caseStrategy = CamelCase)
+        | U14.Case12 r -> r |> Encode.Auto.generateEncoderCached<'l> (caseStrategy = CamelCase)
+        | U14.Case13 r -> r |> Encode.Auto.generateEncoderCached<'m> (caseStrategy = CamelCase)
+        | U14.Case14 r -> r |> Encode.Auto.generateEncoderCached<'n> (caseStrategy = CamelCase)
 
     let private encoderU14
         (u:
@@ -95,50 +95,7 @@ module internal RawRequestEx =
                 SearchOnTripRequest
              >)
         =
-
-        match u with
-        | U14.Case1 r ->
-            r
-            |> Encode.Auto.generateEncoderCached<LocMatchRequest> (caseStrategy = CamelCase)
-        | U14.Case2 r ->
-            r
-            |> Encode.Auto.generateEncoderCached<TripSearchRequest> (caseStrategy = CamelCase)
-        | U14.Case3 r ->
-            r
-            |> Encode.Auto.generateEncoderCached<JourneyDetailsRequest> (caseStrategy = CamelCase)
-        | U14.Case4 r ->
-            r
-            |> Encode.Auto.generateEncoderCached<StationBoardRequest> (caseStrategy = CamelCase)
-        | U14.Case5 r ->
-            r
-            |> Encode.Auto.generateEncoderCached<ReconstructionRequest> (caseStrategy = CamelCase)
-        | U14.Case6 r ->
-            r
-            |> Encode.Auto.generateEncoderCached<JourneyMatchRequest> (caseStrategy = CamelCase)
-        | U14.Case7 r ->
-            r
-            |> Encode.Auto.generateEncoderCached<LocGeoPosRequest> (caseStrategy = CamelCase)
-        | U14.Case8 r ->
-            r
-            |> Encode.Auto.generateEncoderCached<LocGeoReachRequest> (caseStrategy = CamelCase)
-        | U14.Case9 r ->
-            r
-            |> Encode.Auto.generateEncoderCached<LocDetailsRequest> (caseStrategy = CamelCase)
-        | U14.Case10 r ->
-            r
-            |> Encode.Auto.generateEncoderCached<JourneyGeoPosRequest> (caseStrategy = CamelCase)
-        | U14.Case11 r ->
-            r
-            |> Encode.Auto.generateEncoderCached<HimSearchRequest> (caseStrategy = CamelCase)
-        | U14.Case12 r ->
-            r
-            |> Encode.Auto.generateEncoderCached<LineMatchRequest> (caseStrategy = CamelCase)
-        | U14.Case13 r ->
-            r
-            |> Encode.Auto.generateEncoderCached<ServerInfoRequest> (caseStrategy = CamelCase)
-        | U14.Case14 r ->
-            r
-            |> Encode.Auto.generateEncoderCached<SearchOnTripRequest> (caseStrategy = CamelCase)
+        encoderU14' u
 
     let encode (request: RawRequest) =
         let encoder =
@@ -215,23 +172,8 @@ module internal RawRequestEx =
 
 #else
 
-    let private converter =
-        FsHafas.Api.Converter.U14EraseConverter<
-            LocMatchRequest,
-            TripSearchRequest,
-            JourneyDetailsRequest,
-            StationBoardRequest,
-            ReconstructionRequest,
-            JourneyMatchRequest,
-            LocGeoPosRequest,
-            LocGeoReachRequest,
-            LocDetailsRequest,
-            JourneyGeoPosRequest,
-            HimSearchRequest,
-            LineMatchRequest,
-            ServerInfoRequest,
-            SearchOnTripRequest
-         >(
+    let private converter<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n> =
+        FsHafas.Api.Converter.U14EraseConverter<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'l, 'm, 'n>(
             FsHafas.Api.Converter.UnionCaseSelection.Disabled
         )
 

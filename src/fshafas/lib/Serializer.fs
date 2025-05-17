@@ -6,9 +6,11 @@ module Serializer =
     open System.Text.Json
     open System.Text.Json.Serialization
 
-    let deserializeOptions = JsonSerializerOptions(IgnoreNullValues = true)
+    let private deserializeOptions =
+        JsonSerializerOptions(DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull)
 
-    let serializeOptions = JsonSerializerOptions(IgnoreNullValues = true)
+    let private serializeOptions =
+        JsonSerializerOptions(DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull)
 
     let addConverters (deserializeConverters: JsonConverter array) =
         if (deserializeOptions.Converters.Count = 0) then
@@ -35,7 +37,8 @@ module Serializer =
         JsonSerializer.Serialize<'a>(o, serializeOptions)
 
     let SerializeWithConverter<'a> (o: 'a) (converter: JsonConverter) =
-        let serializeOptions = JsonSerializerOptions(IgnoreNullValues = true)
+        let serializeOptions =
+            JsonSerializerOptions(DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull)
 
         serializeOptions.Converters.Add(converter)
         serializeOptions.Converters.Add(JsonFSharpConverter())

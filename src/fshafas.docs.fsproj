@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <RepositoryUrl>https://github.com/bergmannjg/fshafas</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageId>FsHafas</PackageId>
+    <Authors>J. Bergmann</Authors>
+    <PackageTags>fsharp</PackageTags>
+    <FsDocsLicenseLink>https://github.com/bergmannjg/fshafas/blob/main/LICENSE.md</FsDocsLicenseLink>
+    <FsDocsReleaseNotesLink>https://github.com/bergmannjg/fshafas/blob/main/RELEASE_NOTES.md</FsDocsReleaseNotesLink>
+    <PackageProjectUrl>/fshafas/</PackageProjectUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="fshafas.api/ExtraTypes.fs" />
+    <Compile Include="fshafas.api/UnionTypes.fs" />
+    <Compile Include="fshafas.api/TypesHafasClient.fs" />
+    <Compile Include="fshafas.api/Defaults.fs" />
+    <Compile Include="fshafas.api/Print.fs" />
+    <Compile Include="fshafas.api/TypesAsyncClient.fs" />
+
+    <Compile Include="dbvendo//lib/Serializer.fs" />
+    <Compile Include="dbvendo//lib/JsonConverter.fs" />
+    <Compile Include="dbvendo//TypesRawDbVendoClient.fs" />
+    <Compile Include="dbvendo//lib/Request.fs" />
+    <Compile Include="dbvendo//Option.fs" />
+    <Compile Include="dbvendo//Products.fs" />
+    <Compile Include="dbvendo//FormatRequest.fs" />
+    <Compile Include="dbvendo//parse/Location.fs" />
+    <Compile Include="dbvendo//parse/Journey.fs" />
+    <Compile Include="dbvendo//parse/Trip.fs" />
+    <Compile Include="dbvendo//parse/Stop.fs" />
+    <Compile Include="dbvendo//parse/StationBoard.fs" />
+    <Compile Include="dbvendo//DbVendoAsyncClient.fs" />
+
+    <Compile Include="fshafas/lib/Serializer.fs" />
+    <Compile Include="fshafas/lib/Slug.fs" />
+    <Compile Include="fshafas/TypesRawHafasClient.fs" />
+    <Compile Include="fshafas/lib/Reflect.fs" />
+    <Compile Include="fshafas/Context.fs" />
+    <Compile Include="fshafas/lib/JsonConverter.fs" />
+    <Compile Include="fshafas/extensions/ArrayEx.fs" />
+    <Compile Include="fshafas/extensions/Convert.fs" />
+    <Compile Include="fshafas/extensions/DateTimeEx.fs" />
+    <Compile Include="fshafas/extensions/DateTimeOffsetEx.fs" />
+    <Compile Include="fshafas/extensions/PolylineEx.fs" />
+    <Compile Include="fshafas/extensions/RawRequestEx.fs" />
+    <Compile Include="fshafas/extensions/RawResponse.fs" />
+    <Compile Include="fshafas/lib/Transformations.fs" />
+    <Compile Include="fshafas/lib/Request.fs" />
+    <Compile Include="fshafas/HafasRawClient.fs" />
+    <Compile Include="fshafas/format/FormatRequest.fs" />
+    <Compile Include="fshafas/parse/DateTime.fs" />
+    <Compile Include="fshafas/parse/When.fs" />
+    <Compile Include="fshafas/parse/Icon.fs" />
+    <Compile Include="fshafas/parse/Common.fs" />
+    <Compile Include="fshafas/parse/ScheduledDays.fs" />
+    <Compile Include="fshafas/parse/ArrivalOrDeparture.fs" />
+    <Compile Include="fshafas/parse/Hint.fs" />
+    <Compile Include="fshafas/parse/Location.fs" />
+    <Compile Include="fshafas/parse/Line.fs" />
+    <Compile Include="fshafas/parse/Movement.fs" />
+    <Compile Include="fshafas/parse/Polyline.fs" />
+    <Compile Include="fshafas/parse/Journey.fs" />
+    <Compile Include="fshafas/parse/JourneyLeg.fs" />
+    <Compile Include="fshafas/parse/Operator.fs" />
+    <Compile Include="fshafas/parse/Stopover.fs" />
+    <Compile Include="fshafas/parse/Trip.fs" />
+    <Compile Include="fshafas/parse/ProductsBitmask.fs" />
+    <Compile Include="fshafas/parse/Warning.fs" />
+    <Compile Include="fshafas/parse/PrognosisType.fs" />
+    <Compile Include="fshafas/Parser.fs" />
+    <Compile Include="fshafas/Profile.fs" />
+    <Compile Include="fshafas/HafasAsyncClient.fs" />
+    <Compile Include="fshafas/HafasClient.fs" />
+    <Compile Include="fshafas/Print.fs" />
+
+  </ItemGroup>
+  <PropertyGroup>
+    <PaketDisableGlobalRestore>true</PaketDisableGlobalRestore>
+  </PropertyGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
+</Project>

@@ -1,12 +1,16 @@
-import { Journey, Leg, Trip, ScheduledDays, TripWithRealtimeData } from 'fs-hafas-client/hafas-client.js';
+import type { HafasClient, Journey, Leg, Trip, ScheduledDays, TripWithRealtimeData } from 'fs-hafas-client/hafas-client.js';
 import { fshafas } from 'fs-hafas-client';
 import { profiles } from 'fs-hafas-profiles';
-import { createClient } from 'hafas-client';
+import { createClient as hafasClient } from 'hafas-client';
 import { profile as oebbProfile } from 'hafas-client/p/oebb/index.js';
+import { createClient as dbVendoClient } from 'db-vendo-client';
+import { profile as dbnavProfile } from 'db-vendo-client/p/dbnav/index.js'
 
 const myArgs = process.argv.slice(2);
 
-const client = myArgs.indexOf("--hafas") > 0 ? createClient(oebbProfile, 'agent') : fshafas.createClient(profiles.getProfile('oebb'));
+const client: HafasClient = myArgs.indexOf("--hafas") > 0 ? hafasClient(oebbProfile, 'agent')
+    : myArgs.indexOf("--dbvendo") > 0 ? dbVendoClient(dbnavProfile, 'agent')
+        : fshafas.createClient(profiles.getProfile('db'));
 
 if (myArgs.indexOf("--debug") > 0) {
     fshafas.setDebug();
@@ -80,33 +84,6 @@ async function journeys(from: string, to: string) {
     }
 }
 
-function addDays(date: Date, days: number): Date {
-    const result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return result;
-}
-
-async function bestprices(from: string, to: string, days: number) {
-    try {
-        const fromStops = await client.locations(from, { results: 1 });
-        const toStops = await client.locations(to, { results: 1 });
-        if (fromStops.length > 0 && fromStops[0].id && toStops.length > 0 && toStops[0].id) {
-            const result = await fshafas.bestprices(profiles.getProfile('db'), fromStops[0].id, toStops[0].id, { departure: addDays(new Date(), days) })
-            result.journeys?.forEach((j: Journey) => {
-                if (j.price) {
-                    console.log('departure:', j.legs[0].plannedDeparture, 'price: ', j.price?.amount);
-                }
-            });
-        }
-    } catch (error: any) {
-        if (error.isHafasError) {
-            console.error('hafas error:', error);
-        } else {
-            console.error('error:', error);
-        }
-    }
-}
-
 switch (myArgs[0]) {
     case 'locations':
         myArgs[1] && locations(myArgs[1]);
@@ -119,9 +96,6 @@ switch (myArgs[0]) {
         break;
     case 'journeys':
         myArgs[1] && myArgs[2] && journeys(myArgs[1], myArgs[2]);
-        break;
-    case 'bestprices':
-        myArgs[1] && myArgs[2] && parseInt(myArgs[3]) >= 0 && bestprices(myArgs[1], myArgs[2], parseInt(myArgs[3]));
         break;
     default:
         console.log('unkown argument: ', myArgs[0]);

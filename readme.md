@@ -5,14 +5,16 @@ a client for [HAFAS](https://de.wikipedia.org/wiki/HAFAS) public transport APIs.
 
 The hafas endpoints Bvg, Oebb and Svv are supported.
 
+The [db vendo endpoint](https://github.com/public-transport/db-vendo-client) is supported.
+
 The F# library compiles to dotnet and (via [Fable](https://github.com/fable-compiler/Fable)) to JavaScript  and Python.
 
 ## Interfaces
 
 The library exposes  3 interfaces:
 
-1) a direct (`raw`) interface to the hafas endpoints,
-2) a F# async based interface corresponding to hafas-client api,
+1) a F# async based interface to hafas client endpoints,
+2) a F# async based interface to the db vendo endpoint,
 3) a JS promise based interface corresponding to the TS [Type definitions](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/hafas-client/index.d.ts) for hafas-client.
 
 ## Compilation to JavaScript

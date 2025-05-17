@@ -3,8 +3,12 @@ namespace FsHafas.Api
 open System
 open FsHafas.Client
 
-/// <summary>F# async based interface corresponding to hafas-client</summary>
+/// <summary>F# async based interface for hafas endpoints <param>FsHafas.Endpoint.Profile</param> </summary>
 type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
+
+#if !FABLE_COMPILER
+    do Serializer.addConverters ([| Converter.UnionConverter<FsHafas.Client.ProductTypeMode>() |])
+#endif
 
     let log msg o = FsHafas.Client.Log.Print msg o
 
@@ -51,15 +55,8 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
     interface IDisposable with
         member __.Dispose() = httpClient.Dispose()
 
-    static member initSerializer() =
-#if FABLE_COMPILER
-        ()
-#else
-        Serializer.addConverters ([| Converter.UnionConverter<FsHafas.Client.ProductTypeMode>() |])
-#endif
-
-    static member productsOfFilter (profile: FsHafas.Endpoint.Profile) (filter: ProductType -> Boolean) : Products =
-        (profile :> FsHafas.Client.Profile).products
+    static member productsOfFilter (profile: FsHafas.Client.Profile) (filter: ProductType -> Boolean) : Products =
+        profile.products
         |> Array.filter filter
         |> Array.fold
             (fun m p ->
@@ -67,7 +64,7 @@ type HafasAsyncClient(profile: FsHafas.Endpoint.Profile) =
                 m)
             (Products(false))
 
-    static member productsOfMode (profile: FsHafas.Endpoint.Profile) (mode: ProductTypeMode) : Products =
+    static member productsOfMode (profile: FsHafas.Client.Profile) (mode: ProductTypeMode) : Products =
         HafasAsyncClient.productsOfFilter profile (fun p -> p.mode = mode && p.name <> "Tram")
 
 #if !FABLE_COMPILER

@@ -2,7 +2,8 @@
     "private": true,
     "type": "module",
     "dependencies": {
-      "hafas-client": "^6.3.0"
+      "hafas-client": "^6.3.0",
+      "db-vendo-client": "^6.8.2"
     }
   }
   

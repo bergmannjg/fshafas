@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="lib/Serializer.fs" />
+    <Compile Include="lib/JsonConverter.fs" />
+    <Compile Include="TypesRawDbVendoClient.fs" />
+    <Compile Include="lib/Request.fs" />
+    <Compile Include="Option.fs" />
+    <Compile Include="Products.fs" />
+    <Compile Include="FormatRequest.fs" />
+    <Compile Include="parse/Location.fs" />
+    <Compile Include="parse/Journey.fs" />
+    <Compile Include="parse/Trip.fs" />
+    <Compile Include="parse/Stop.fs" />
+    <Compile Include="parse/StationBoard.fs" />
+    <Compile Include="DbVendoAsyncClient.fs" />
+  </ItemGroup>
+  <Import Project="..\..\..\..\.paket\Paket.Restore.targets" />
+</Project>

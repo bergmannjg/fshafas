@@ -10,6 +10,8 @@
     <Compile Include="UnionTypes.fs" />
     <Compile Include="ExtraTypes.fs" />
     <Compile Include="TypesHafasClient.fs" />
+    <Compile Include="Print.fs" />
+    <Compile Include="Defaults.fs" />
     <Compile Include="TypesAsyncClient.fs" />
   </ItemGroup>
   <Import Project="..\..\..\..\.paket\Paket.Restore.targets" />

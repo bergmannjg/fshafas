@@ -8,6 +8,7 @@ let HOME = System.Environment.GetEnvironmentVariable "HOME"
 
 let buildDotnet () =
     dotnet "build" [ "src/fshafas.api/target.dotnet/fshafas.api.fsproj" ]
+    dotnet "build" [ "src/dbvendo/target.dotnet/dbvendo.fsproj" ]
     dotnet "build" [ "src/fshafas/target.dotnet/fshafas.fsproj" ]
     dotnet "build" [ "src/fshafas.profiles/target.dotnet/fshafas.profiles.fsproj" ]
 
@@ -28,12 +29,14 @@ let buildNupkg (version: string) (srcDir: string) (fsproj: string) (nugetDir: st
 
     nuget "add" [ nupkgFile; "-source"; toDir; "-expand" ]
 
-    delete (HOME + "/.nuget/packages/" + nugetDir + "/" + version)
+    delete (HOME + "/.nuget/packages/" + nugetDir)
 
 let buildDotnetNupkg (version: string) =
     buildNupkg version "src/fshafas.api/target.dotnet" "fshafas.api.fsproj" "fshafas.api" "FsHafas.Api"
 
     buildNupkg version "src/fshafas/target.dotnet" "fshafas.fsproj" "fshafas" "FsHafas"
+
+    buildNupkg version "src/dbvendo/target.dotnet" "dbvendo.fsproj" "dbvendo" "DbVendo"
 
     buildNupkg
         version
@@ -64,6 +67,12 @@ let buildJavascriptNupkg (version: string) =
         "fshafas.api.javascript"
         "FsHafas.Api.JavaScript"
 
+    buildNupkg
+        version
+        "src/dbvendo/target.javascript"
+        "dbvendo.fable.javascript.fsproj"
+        "dbvendo.javascript"
+        "DbVendo.JavaScript"
 
 let buildFableBindingNupkg (version: string) =
     buildNupkg
@@ -144,6 +153,8 @@ let buildPythonNupkg (version: string) =
         "fshafas.api.python"
         "FsHafas.Api.Python"
 
+    buildNupkg version "src/dbvendo/target.python" "dbvendo.fable.python.fsproj" "dbvendo.python" "DbVendo.Python"
+
     buildNupkg version "src/fshafas/target.python" "fshafas.fable.python.fsproj" "fshafas.python" "FsHafas.Python"
 
     buildNupkg
@@ -168,11 +179,12 @@ let checkPythonVersionInFile (version: string) (file: string) =
 let buildPython (version: string) =
     checkPythonVersionInFile version "src/fshafas.python.package/setup.py"
 
-    dotnet "fable" [ "src/fshafas.python.package/fshafas.fsproj"; "--lang"; "Python"; "--noCache" ]
-
-    delete "src/fshafas.python.package/fshafas/fable_modules/"
-
-    mv "src/fshafas.python.package/fable_modules/" "src/fshafas.python.package/fshafas/fable_modules/"
+    dotnet
+        "fable"
+        [ "src/fshafas.python.package/fshafas/fshafas.fsproj"
+          "--lang"
+          "Python"
+          "--noCache" ]
 
     exec "./fixes.sh" "src/fshafas.python.package/"
 

@@ -2,10 +2,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RepositoryUrl>https://github.com/bergmannjg/fshafas</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageId>FsHafas</PackageId>
-    <Authors>J. Bergmann</Authors>
     <PackageTags>fsharp</PackageTags>
   </PropertyGroup>
   <ItemGroup>
@@ -54,6 +50,9 @@
   <ItemGroup>
     <ProjectReference Include="../../fshafas.api/target.dotnet/fshafas.api.fsproj">
       <Name>fshafas.api.fsproj</Name>
+    </ProjectReference>
+    <ProjectReference Include="../../dbvendo/target.dotnet/dbvendo.fsproj">
+      <Name>dbvendo.fsproj</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

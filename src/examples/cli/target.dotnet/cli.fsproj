@@ -8,6 +8,20 @@
     <Compile Include="../Arguments.fs" />
     <Compile Include="../Program.fs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../fshafas.api/target.dotnet/fshafas.api.fsproj">
+      <Name>fshafas.api.fsproj</Name>
+    </ProjectReference>
+    <ProjectReference Include="../../../dbvendo/target.dotnet/dbvendo.fsproj">
+      <Name>dbvendo.fsproj</Name>
+    </ProjectReference>
+    <ProjectReference Include="../../../fshafas/target.dotnet/fshafas.fsproj">
+      <Name>fshafas.fsproj</Name>
+    </ProjectReference>
+    <ProjectReference Include="../../../fshafas.profiles/target.dotnet/fshafas.profiles.fsproj">
+      <Name>fshafas.profiles.fsproj</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <RestoreSources>$(RestoreSources);$(HOME)/local.packages</RestoreSources>
   </PropertyGroup>
