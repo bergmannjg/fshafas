@@ -45,6 +45,8 @@ Get journeys between locations and print start station, end station and departur
 Installation
 ------------
 
+Replace x.y.z with current `release <https://github.com/bergmannjg/fshafas/releases>`.
+
 .. code:: shell
 
-    pip install https://github.com/bergmannjg/fshafas/releases/download/2.3.0/fshafas-0.0.23-py3-none-any.whl
+    pip install https://github.com/bergmannjg/fshafas/releases/download/x.y.z/fshafas-0.0.xy-py3-none-any.whl

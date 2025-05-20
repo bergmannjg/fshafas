@@ -48,23 +48,16 @@ jobs:
           dotnet-version: '8.0.x'
       - name: Setup dotnet tools
         run: dotnet tool restore
-      - name: build fshafas
-        run: |
-          dotnet build src/fshafas.api/target.dotnet/fshafas.api.fsproj
-          dotnet build src/dbvendo/target.dotnet/dbvendo.fsproj
-          dotnet build src/fshafas/target.dotnet/fshafas.fsproj
-          dotnet build src/fshafas.profiles/target.dotnet/fshafas.profiles.fsproj
       - name: build f# docs
         run: |
-          cd src
           dotnet build fshafas.docs.fsproj
-          dotnet fsdocs build --clean --input fshafas/docs/ --output ../output/fshafas --projects fshafas.docs.fsproj
+          dotnet fsdocs build --clean --input src/fshafas/docs/ --output ./output/fshafas --projects fshafas.docs.fsproj
       - name: build js docs
         run: |
           cd src/fshafas.javascript.package/typedoc
           # wget -O hafas-client.d.ts https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/types/hafas-client/index.d.ts
           wget -O hafas-client.d.ts https://raw.githubusercontent.com/bergmannjg/hafas-client/refs/heads/add-types-in-jsdoc/index.d.ts
-          npx --yes typedoc --out ../../../output/fshafas/js --name "FsHafas-JavaScript" --disableSources hafas-client.d.ts
+          npx --yes typedoc --out ../../../output/fshafas/js --name "FsHafas-JavaScript" --disableSources hafas-client.d.ts --readme readme.md
       - name: load python package
         run: |
           version=$(grep '##' RELEASE_NOTES.md | tail -n 1 | sed 's/## //')

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <RepositoryUrl>https://github.com/bergmannjg/fshafas</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageId>FsHafas</PackageId>
+    <Authors>J. Bergmann</Authors>
+    <PackageTags>fsharp</PackageTags>
+    <FsDocsLicenseLink>https://github.com/bergmannjg/fshafas/blob/main/LICENSE.md</FsDocsLicenseLink>
+    <FsDocsReleaseNotesLink>https://github.com/bergmannjg/fshafas/blob/main/RELEASE_NOTES.md</FsDocsReleaseNotesLink>
+    <PackageProjectUrl>/fshafas/</PackageProjectUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="src/fshafas.api/ExtraTypes.fs" />
+    <Compile Include="src/fshafas.api/UnionTypes.fs" />
+    <Compile Include="src/fshafas.api/TypesHafasClient.fs" />
+    <Compile Include="src/fshafas.api/Defaults.fs" />
+    <Compile Include="src/fshafas.api/Print.fs" />
+    <Compile Include="src/fshafas.api/TypesAsyncClient.fs" />
+
+    <Compile Include="src/dbvendo/lib/Serializer.fs" />
+    <Compile Include="src/dbvendo/lib/JsonConverter.fs" />
+    <Compile Include="src/dbvendo/TypesRawDbVendoClient.fs" />
+    <Compile Include="src/dbvendo/lib/Request.fs" />
+    <Compile Include="src/dbvendo/Option.fs" />
+    <Compile Include="src/dbvendo/Products.fs" />
+    <Compile Include="src/dbvendo/FormatRequest.fs" />
+    <Compile Include="src/dbvendo/parse/Location.fs" />
+    <Compile Include="src/dbvendo/parse/Journey.fs" />
+    <Compile Include="src/dbvendo/parse/Trip.fs" />
+    <Compile Include="src/dbvendo/parse/Stop.fs" />
+    <Compile Include="src/dbvendo/parse/StationBoard.fs" />
+    <Compile Include="src/dbvendo/DbVendoAsyncClient.fs" />
+
+    <Compile Include="src/fshafas/lib/Serializer.fs" />
+    <Compile Include="src/fshafas/lib/Slug.fs" />
+    <Compile Include="src/fshafas/TypesRawHafasClient.fs" />
+    <Compile Include="src/fshafas/lib/Reflect.fs" />
+    <Compile Include="src/fshafas/Context.fs" />
+    <Compile Include="src/fshafas/lib/JsonConverter.fs" />
+    <Compile Include="src/fshafas/extensions/ArrayEx.fs" />
+    <Compile Include="src/fshafas/extensions/Convert.fs" />
+    <Compile Include="src/fshafas/extensions/DateTimeEx.fs" />
+    <Compile Include="src/fshafas/extensions/DateTimeOffsetEx.fs" />
+    <Compile Include="src/fshafas/extensions/PolylineEx.fs" />
+    <Compile Include="src/fshafas/extensions/RawRequestEx.fs" />
+    <Compile Include="src/fshafas/extensions/RawResponse.fs" />
+    <Compile Include="src/fshafas/lib/Transformations.fs" />
+    <Compile Include="src/fshafas/lib/Request.fs" />
+    <Compile Include="src/fshafas/HafasRawClient.fs" />
+    <Compile Include="src/fshafas/format/FormatRequest.fs" />
+    <Compile Include="src/fshafas/parse/DateTime.fs" />
+    <Compile Include="src/fshafas/parse/When.fs" />
+    <Compile Include="src/fshafas/parse/Icon.fs" />
+    <Compile Include="src/fshafas/parse/Common.fs" />
+    <Compile Include="src/fshafas/parse/ScheduledDays.fs" />
+    <Compile Include="src/fshafas/parse/ArrivalOrDeparture.fs" />
+    <Compile Include="src/fshafas/parse/Hint.fs" />
+    <Compile Include="src/fshafas/parse/Location.fs" />
+    <Compile Include="src/fshafas/parse/Line.fs" />
+    <Compile Include="src/fshafas/parse/Movement.fs" />
+    <Compile Include="src/fshafas/parse/Polyline.fs" />
+    <Compile Include="src/fshafas/parse/Journey.fs" />
+    <Compile Include="src/fshafas/parse/JourneyLeg.fs" />
+    <Compile Include="src/fshafas/parse/Operator.fs" />
+    <Compile Include="src/fshafas/parse/Stopover.fs" />
+    <Compile Include="src/fshafas/parse/Trip.fs" />
+    <Compile Include="src/fshafas/parse/ProductsBitmask.fs" />
+    <Compile Include="src/fshafas/parse/Warning.fs" />
+    <Compile Include="src/fshafas/parse/PrognosisType.fs" />
+    <Compile Include="src/fshafas/Parser.fs" />
+    <Compile Include="src/fshafas/Profile.fs" />
+    <Compile Include="src/fshafas/HafasAsyncClient.fs" />
+    <Compile Include="src/fshafas/HafasClient.fs" />
+    <Compile Include="src/fshafas/Print.fs" />
+
+  </ItemGroup>
+  <PropertyGroup>
+    <PaketDisableGlobalRestore>true</PaketDisableGlobalRestore>
+  </PropertyGroup>
+  <Import Project=".paket\Paket.Restore.targets" />
+</Project>
